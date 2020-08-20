@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "hutosmod:blocks/mystic_earthtop",
+        "side": "hutosmod:blocks/mystic_earthside"
+    }
+}

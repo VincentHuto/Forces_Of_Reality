@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "hutosmod:blocks/nightmare_earthtop",
+        "side": "hutosmod:blocks/nightmare_earthside"
+    }
+}

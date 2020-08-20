@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"": {
+			"model": "hutosmod:block/example_block"
+		}
+	}
+}

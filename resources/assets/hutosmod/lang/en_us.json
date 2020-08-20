@@ -1,3 +1,5 @@
 {
-	"item.hutosmod.example_item": "Example Item"
+	"item.hutosmod.example_item": "Example Item",
+	"block.hutosmod.example_block": "Example Block"
+	
 }
