@@ -1,19 +1,24 @@
-package com.huto.hutosmod.init;
+/*package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
-
+import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
+import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
+import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(HutosMod.MOD_ID)
@@ -29,16 +34,16 @@ public class BlockInit {
 	public static final Block enchanted_ore_mystic = null;
 	public static final Block enchanted_stone = null;
 	public static final Block enchanted_stone_smooth = null;
-	public static final Block morel_mushroom = null;
 	public static final Block mystic_earth = null;
 	public static final Block mystic_media = null;
 	public static final Block mystic_planks = null;
 	public static final Block nightmare_earth = null;
 	public static final Block nightmare_media = null;
-	public static final Block passion_flower = null;
 	public static final Block reversion_catalyst = null;
 	public static final Block runed_obsidian = null;
-	public static final Block singeri_mushroom = null;
+	public static Block morel_mushroom = null;
+	public static Block singeri_mushroom = null;
+	public static Block passion_flower = null;
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
@@ -93,18 +98,30 @@ public class BlockInit {
 				new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(0.7f, 15f).sound(SoundType.SAND))
 						.setRegistryName("nightmare_media"));
 		// Plants
-		event.getRegistry()
-				.register(new Block(Block.Properties.create(Material.PLANTS, MaterialColor.RED).doesNotBlockMovement()
-						.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT))
-								.setRegistryName("morel_mushroom"));
-		event.getRegistry()
-				.register(new Block(Block.Properties.create(Material.PLANTS, MaterialColor.RED).doesNotBlockMovement()
-						.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT))
-								.setRegistryName("singeri_mushroom"));
-		event.getRegistry()
-				.register(new Block(Block.Properties.create(Material.PLANTS, MaterialColor.RED).doesNotBlockMovement()
-						.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT))
-								.setRegistryName("passion_flower"));
+
+		morel_mushroom = new BlockMorelMushroom(Block.Properties.create(Material.PLANTS, MaterialColor.RED)
+				.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT))
+						.setRegistryName("morel_mushroom");
+		event.getRegistry().register(morel_mushroom);
+
+		singeri_mushroom = new BlockSingeriMushroom(Block.Properties.create(Material.PLANTS, MaterialColor.RED)
+				.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT))
+						.setRegistryName("singeri_mushroom");
+		event.getRegistry().register(singeri_mushroom);
+
+		passion_flower = new BlockPassionFlower(Block.Properties.create(Material.PLANTS, MaterialColor.RED)
+				.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT))
+						.setRegistryName("passion_flower");
+		event.getRegistry().register(passion_flower);
+
+		// if(world.isRemote) Basically, Makes the plants see through, similar to isFullblock thing
+		if (FMLEnvironment.dist == Dist.CLIENT) {
+			RenderTypeLookup.setRenderLayer(morel_mushroom, RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(singeri_mushroom, RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(passion_flower, RenderType.getCutout());
+
+		}
+
 	}
 
 	@SubscribeEvent
@@ -169,3 +186,4 @@ public class BlockInit {
 	}
 
 }
+*/

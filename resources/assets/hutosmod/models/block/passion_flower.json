@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "hutosmod:blocks/passion_flower"
+    }
+}

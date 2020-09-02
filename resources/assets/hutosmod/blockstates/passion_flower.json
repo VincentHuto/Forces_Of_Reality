@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "hutosmod:block/passion_flower" }
+        "": { "model": "hutosmod:block/passion_flower" }
     }
 }

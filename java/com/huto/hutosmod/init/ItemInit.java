@@ -2,6 +2,8 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
+import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -43,8 +45,8 @@ public class ItemInit {
 	public static final Item grand_purging_stone = null;
 	public static final Item resonant_fuel = null;
 	public static final Item drying_agent = null;
-	public static final Item repulsion_charm = null;
-	public static final Item attraction_charm = null;
+	public static Item repulsion_charm = null;
+	public static Item attraction_charm = null;
 	public static final Item singeri_soup = null;
 	public static final Item raw_morel_on_a_stick = null;
 	public static final Item cooked_morel_on_a_stick = null;
@@ -123,10 +125,15 @@ public class ItemInit {
 				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("mana_bottle"));
 
 		// Charms
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("attraction_charm"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("repulsion_charm"));
+
+		attraction_charm = new ItemAttractionCharm(new Item.Properties().group(HutosModItemGroup.instance))
+				.setRegistryName("attraction_charm");
+		event.getRegistry().register(attraction_charm);
+		
+		repulsion_charm = new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance))
+				.setRegistryName("repulsion_charm");
+		event.getRegistry().register(repulsion_charm);
+
 
 		// Runes
 		event.getRegistry().register(
