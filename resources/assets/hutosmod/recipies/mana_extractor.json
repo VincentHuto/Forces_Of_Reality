@@ -1,0 +1,44 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "F F",
+        "NCN",
+        "RPR"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "hutosmod:nether_block"
+        },
+        
+        "F":
+        {
+            "item": "hutosmod:energy_focus"
+        },
+        
+         "C":
+        {
+            "item": "hutosmod:mana_crystal"
+        },
+         "R":
+        {
+            "item": "hutosmod:runed_obsidian"
+        },
+         "P":
+        {
+            "item": "hutosmod:mana_powder"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:mana_extractor",
+        "count": 1
+    }
+}

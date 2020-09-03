@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "MMM",
+        "MSM",
+        "MMM"
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "minecraft:stone",
+            "data":0
+        },
+        
+         "M":
+        {
+            "item": "hutosmod:mana_powder"
+        }
+    },
+    
+    "result":
+    {
+        "item": "hutosmod:enchanted_stone",
+        "count": 4
+    }
+}

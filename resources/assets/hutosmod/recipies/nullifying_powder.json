@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:mana_powder"
+        },
+        {
+            "item": "hutosmod:grey_powder"
+        },
+        {
+            "item": "minecraft:redstone"
+        },
+        {
+            "item": "minecraft:gunpowder"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:nullifying_powder",
+        "count": 3
+    }
+}

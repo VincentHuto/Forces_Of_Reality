@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:singeri_mushroom"
+        },
+        {
+            "item": "hutosmod:singeri_mushroom"
+        },
+        {
+            "item": "hutosmod:singeri_mushroom"
+        },
+        {
+            "item": "minecraft:bowl"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:singeri_soup",
+        "count": 1
+    }
+}

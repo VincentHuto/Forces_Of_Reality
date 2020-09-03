@@ -1,0 +1,32 @@
+{
+  "parent": "hutosmod:block/mana_hopper_down",
+      "display": {
+           "thirdperson_righthand": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [0, -0, 0 ],
+            "scale": [ 0.4, 0.4,0.4 ]
+        },
+        "thirdperson_lefthand": {
+               "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0,0 ],
+            "scale": [ 0.4,0.4, 0.4 ]
+        },
+            "firstperson_righthand": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [0, -0, 0 ],
+            "scale": [ 0.4, 0.4,0.4 ]
+        },
+        "leftperson_lefthand": {
+             "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0,0 ],
+            "scale": [ 0.4,0.4, 0.4 ]
+        },
+        
+         "gui": {
+            "rotation": [ 35, 40, 0 ],
+            "translation": [ 0, -1.6, 0],
+            "scale":[ 0.5325, 0.5325, 0.5325]
+            }
+        }
+  
+}

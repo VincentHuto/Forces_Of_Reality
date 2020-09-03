@@ -1,0 +1,33 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ICI",
+		"EWE",
+		"ARA"
+	],
+	"key": {
+		"I": {
+			"item": "hutosmod:channeling_ingot"
+		},
+		"C": {
+			"item": "minecraft:clock"
+		},
+		"E": {
+			"item": "hutosmod:energy_focus"
+		},
+		"W": {
+			"item": "minecraft:log2",
+			"data": 1
+		},
+		"A": {
+			"item": "hutosmod:activated_obsidian"
+		},
+		"R": {
+			"item": "hutosmod:runed_obsidian"
+		}
+	},
+	"result": {
+		"item": "hutosmod:celestial_actuator",
+		"count": 1
+	}
+}

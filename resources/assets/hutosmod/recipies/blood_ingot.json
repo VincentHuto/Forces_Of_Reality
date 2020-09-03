@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "IDI",
+        "RDR",
+        "IDI"
+    ],
+   
+    "key":
+    {
+        "R":
+        {
+            "item": "minecraft:redstone"
+        },
+        
+        "D":
+        {
+            "item": "minecraft:diamond"
+        },
+        
+         "I":
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:null_ingot",
+        "count": 3
+    }
+}

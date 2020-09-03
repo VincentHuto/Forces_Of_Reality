@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"NON",
+		"OPO",
+		"NON"
+	],
+	"key": {
+		"N": {
+			"item": "minecraft:gold_ingot"
+		},
+		"O": {
+			"item": "hutosmod:morel_stem"
+		},
+		"P": {
+			"type": "minecraft:item_nbt",
+			"item": "forge:bucketFilled",
+			"nbt": {
+				"FluidName": "primal_ooze",
+				"Amount": 1000
+			}
+		}
+	},
+	"result": {
+		"item": "hutosmod:reversion_catalyst",
+		"count": 1
+	}
+}

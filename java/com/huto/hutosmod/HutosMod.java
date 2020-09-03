@@ -3,8 +3,8 @@ package com.huto.hutosmod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.huto.hutosmod.init.BlockInitNew;
-import com.huto.hutosmod.init.ItemInitNew;
+import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.ItemInit;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -37,8 +37,8 @@ public class HutosMod {
 		modEventBus.addListener(this::setup);
 		modEventBus.addListener(this::doClientStuff);
 
-		ItemInitNew.ITEMS.register(modEventBus);
-		BlockInitNew.BLOCKS.register(modEventBus);
+		ItemInit.ITEMS.register(modEventBus);
+		BlockInit.BLOCKS.register(modEventBus);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
@@ -48,7 +48,7 @@ public class HutosMod {
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
 		// Automatically Registers BlockItems
 		final IForgeRegistry<Item> registry = event.getRegistry();
-		BlockInitNew.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
+		BlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
 			final Item.Properties properties = new Item.Properties().group(HutosModItemGroup.instance);
 			final BlockItem blockItem = new BlockItem(block, properties);
 			blockItem.setRegistryName(block.getRegistryName());
@@ -77,7 +77,7 @@ public class HutosMod {
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(BlockInitNew.activated_obsidian.get());
+			return new ItemStack(BlockInit.activated_obsidian.get());
 		}
 
 	}

@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:mana_powder"
+        },
+        {
+            "item": "hutosmod:mana_powder"
+        },
+        {
+            "item": "hutosmod:mana_powder"
+        },
+        {
+            "item": "minecraft:stick"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:channeling_rod",
+        "count": 1
+    }
+}

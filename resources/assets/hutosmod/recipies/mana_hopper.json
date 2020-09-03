@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "C C",
+        "CHC",
+        " C "
+    ],
+   
+    "key":
+    {
+        "C":
+        {
+            "item": "hutosmod:channeling_ingot"
+        },
+        
+         "H":
+        {
+            "item": "minecraft:hopper"
+        }
+    },
+    
+    "result":
+    {
+        "item": "hutosmod:mana_hopper",
+        "count": 1
+    }
+}

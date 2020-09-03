@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#g#",
+        "gRg",
+        "#g#"
+    ],
+    "key": {
+        "#": {
+            "item": "hutosmod:phantasmal_pane"
+        },
+        "g": {
+            "item": "minecraft:gold_ingot"
+        },
+        "R": {
+            "item": "hutosmod:nullifying_powder"
+        }
+    },
+    "result": {
+        "item": "hutosmod:energy_focus",
+        "count": 1
+    }
+}

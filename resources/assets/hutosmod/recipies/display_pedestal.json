@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "OOO",
+        " N ",
+        "RAR"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "hutosmod:nether_block"
+        },
+        
+        "O":
+        {
+            "item": "minecraft:obsidian"
+        },
+        
+         "A":
+        {
+            "item": "hutosmod:activated_obsidian"
+        },
+         "R":
+        {
+            "item": "hutosmod:runed_obsidian"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:display_pedestal",
+        "count": 1
+    }
+}

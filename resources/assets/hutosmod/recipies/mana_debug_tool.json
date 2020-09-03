@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "EUE",
+        " C ",
+        " C "
+    ],
+   
+    "key":
+    {
+        "C":
+        {
+            "item": "hutosmod:channeling_ingot"
+        },
+        
+         "U":
+        {
+            "item": "hutosmod:upgrade_blank"
+        },
+         "E":
+        {
+            "item": "hutosmod:essence_drop"
+        }
+    },
+    
+    "result":
+    {
+        "item": "hutosmod:mana_debugtool",
+        "count": 1
+    }
+}

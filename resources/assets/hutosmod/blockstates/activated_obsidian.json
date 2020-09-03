@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "hutosmod:activated_obsidian" }
+        "": { "model": "hutosmod:block/activated_obsidian" }
     }
 }

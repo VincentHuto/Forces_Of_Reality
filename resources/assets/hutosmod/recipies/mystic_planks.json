@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:mystic_log"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:mystic_planks",
+        "count": 4
+    }
+}

@@ -9,136 +9,111 @@ import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@ObjectHolder(HutosMod.MOD_ID)
-@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD)
 public class ItemInit {
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HutosMod.MOD_ID);
 
-	public static final Item example_item = null;
-	public static final Item grey_ingot = null;
-	public static final Item grey_powder = null;
-	public static final Item grey_crystal = null;
-	public static final Item null_ingot = null;
-	public static final Item nullifying_powder = null;
-	public static final Item null_crystal = null;
-	public static final Item null_rod = null;
-	public static final Item channeling_ingot = null;
-	public static final Item mana_powder = null;
-	public static final Item mana_crystal = null;
-	public static final Item channeling_rod = null;
-	public static final Item essence_drop = null;
-	public static final Item karmic_drop = null;
-	public static final Item karmic_bar = null;
-	public static final Item anti_tear = null;
-	public static final Item readied_pane = null;
-	public static final Item phantasmal_pane = null;
-	public static final Item mind_spike = null;
-	public static final Item magatamabead = null;
-	public static final Item enhancedmagatama = null;
-	public static final Item energy_focus = null;
-	public static final Item purging_stone = null;
-	public static final Item grand_purging_stone = null;
-	public static final Item resonant_fuel = null;
-	public static final Item drying_agent = null;
-	public static Item repulsion_charm = null;
-	public static Item attraction_charm = null;
-	public static final Item singeri_soup = null;
-	public static final Item raw_morel_on_a_stick = null;
-	public static final Item cooked_morel_on_a_stick = null;
-	public static final Item mana_bottle = null;
+	// Books
+	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-	@SubscribeEvent
-	public static void registerItems(final RegistryEvent.Register<Item> event) {
-		// Material
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("example_item"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("grey_ingot"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("grey_powder"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("grey_crystal"));
+	// Grey
+	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> grey_powder = ITEMS.register("grey_powder",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> grey_crystal = ITEMS.register("grey_crystal",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	// Channeling
+	public static final RegistryObject<Item> essence_drop = ITEMS.register("essence_drop",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> channeling_ingot = ITEMS.register("channeling_ingot",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> mana_powder = ITEMS.register("mana_powder",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> mana_crystal = ITEMS.register("mana_crystal",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> channeling_rod = ITEMS.register("channeling_rod",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("essence_drop"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("channeling_ingot"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("mana_powder"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("mana_crystal"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("channeling_rod"));
+	// Anti
+	public static final RegistryObject<Item> anti_tear = ITEMS.register("anti_tear",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_ingot = ITEMS.register("null_ingot",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> nullifying_powder = ITEMS.register("nullifying_powder",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_crystal = ITEMS.register("null_crystal",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_rod = ITEMS.register("null_rod",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("anti_tear"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("null_ingot"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("nullifying_powder"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("null_crystal"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("null_rod"));
+	// Karma
+	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("karmic_drop"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("karmic_bar"));
+	// Materials
+	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> phantasmal_pane = ITEMS.register("phantasmal_pane",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> resonant_fuel = ITEMS.register("resonant_fuel",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> magatamabead = ITEMS.register("magatamabead",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> enhancedmagatama = ITEMS.register("enhancedmagatama",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("readied_pane"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("phantasmal_pane"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("drying_agent"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("resonant_fuel"));
+	// Karma
+	public static final RegistryObject<Item> purging_stone = ITEMS.register("purging_stone",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> grand_purging_stone = ITEMS.register("grand_purging_stone",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("magatamabead"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("enhancedmagatama"));
+	// Food
+	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		// Karma
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("purging_stone"));
-		event.getRegistry().register(new Item(new Item.Properties().group(HutosModItemGroup.instance))
-				.setRegistryName("grand_purging_stone"));
+	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		// Food
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("singeri_soup"));
-		event.getRegistry().register(new Item(new Item.Properties().group(HutosModItemGroup.instance))
-				.setRegistryName("raw_morel_on_a_stick"));
-		event.getRegistry()
-				.register(new Item(new Item.Properties().group(HutosModItemGroup.instance)
-						.food(new Food.Builder().hunger(6).saturation(1.5f)
-								.effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build()))
-										.setRegistryName("cooked_morel_on_a_stick"));
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("mana_bottle"));
+	public static final RegistryObject<Item> cooked_morel_on_a_stick = ITEMS.register("cooked_morel_on_a_stick",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).food(new Food.Builder().hunger(6)
+					.saturation(1.5f).effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build())));
+	public static final RegistryObject<Item> mana_bottle = ITEMS.register("mana_bottle",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		// Charms
+	// Charms
+	public static final RegistryObject<Item> attraction_charm = ITEMS.register("attraction_charm",
+			() -> new ItemAttractionCharm(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> repulsion_charm = ITEMS.register("repulsion_charm",
+			() -> new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> storming_agent = ITEMS.register("storming_agent",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-		attraction_charm = new ItemAttractionCharm(new Item.Properties().group(HutosModItemGroup.instance))
-				.setRegistryName("attraction_charm");
-		event.getRegistry().register(attraction_charm);
-		
-		repulsion_charm = new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance))
-				.setRegistryName("repulsion_charm");
-		event.getRegistry().register(repulsion_charm);
+	// Runes
+	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
+	// Tools
 
-		// Runes
-		event.getRegistry().register(
-				new Item(new Item.Properties().group(HutosModItemGroup.instance)).setRegistryName("mind_spike"));
+	// Hands
 
-	}
-
+	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 }

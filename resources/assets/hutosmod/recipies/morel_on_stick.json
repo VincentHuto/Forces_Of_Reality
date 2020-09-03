@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:morel_mushroom"
+        },
+        {
+            "item": "hutosmod:morel_mushroom"
+        },
+        {
+            "item": "hutosmod:morel_mushroom"
+        },
+        {
+            "item": "minecraft:stick"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:raw_morel_on_a_stick",
+        "count": 1
+    }
+}

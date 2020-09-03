@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "NON",
+        "OPO",
+        "NON"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "hutosmod:runed_obsidian"
+        },
+        
+        "O":
+        {
+            "item": "hutosmod:mindfog"
+        },
+        
+         "P":
+        {
+            "item": "hutosmod:anti_tear"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:rune_blank",
+        "count": 1
+    }
+}

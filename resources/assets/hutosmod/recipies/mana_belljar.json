@@ -1,0 +1,37 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "RFR",
+        "S S",
+        "RRR"
+    ],
+   
+    "key":
+    {
+      
+        
+        "F":
+        {
+            "item": "hutosmod:energy_focus"
+        },
+     
+        "S":
+        {
+            "item": "hutosmod:enchanted_stone"
+        },
+         "R":
+        {
+            "item": "hutosmod:runed_obsidian"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:mana_belljar",
+        "count": 1
+    }
+}

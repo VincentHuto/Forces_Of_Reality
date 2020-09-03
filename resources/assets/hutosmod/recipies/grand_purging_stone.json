@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "SSS",
+        "SPS",
+        "SSS"
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "hutosmod:karmic_drop"
+        },
+        
+         "P":
+        {
+            "item": "hutosmod:purging_stone"
+        }
+    },
+    
+    "result":
+    {
+        "item": "hutosmod:grand_purging_stone",
+        "count": 1
+    }
+}

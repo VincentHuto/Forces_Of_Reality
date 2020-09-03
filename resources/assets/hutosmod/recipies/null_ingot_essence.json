@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:anti_tear"
+        },
+        {
+            "item": "hutosmod:anti_tear"
+        },
+        {
+            "item": "hutosmod:anti_tear"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:null_ingot",
+        "count": 1
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:passion_flower"
+        },
+        {
+            "item": "hutosmod:essence_drop"
+        },
+        {
+            "item": "minecraft:glass_bottle"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:mana_bottle",
+        "count": 1
+    }
+}

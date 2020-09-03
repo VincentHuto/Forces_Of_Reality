@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "NFN",
+        "P P",
+        "AAA"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "hutosmod:nether_block"
+        },
+        
+        "F":
+        {
+            "item": "hutosmod:energy_focus"
+        },
+        
+         "P":
+        {
+            "item": "hutosmod:phantasmal_pane"
+        },
+         "A":
+        {
+            "item": "hutosmod:activated_obsidian"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:mana_storagedrum",
+        "count": 1
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "L",
+        "L"
+    ],
+   
+    "key":
+    {
+        "L":
+        {
+            "item": "hutosmod:mystic_log"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:channeling_rod",
+        "count": 3
+    }
+}

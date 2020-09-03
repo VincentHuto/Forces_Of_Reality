@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "hutosmod:enchanted_stone" }
+        "": { "model": "hutosmod:block/enchanted_stone" }
     }
 }
