@@ -13,19 +13,10 @@ import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.trees.OakTree;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD)
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			HutosMod.MOD_ID);
@@ -44,6 +35,9 @@ public class BlockInit {
 					.sound(SoundType.GLASS).notSolid()));
 	public static final RegistryObject<Block> nether_block = BLOCKS.register("nether_block", () -> new Block(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
+			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
+
 	// Mystic
 	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth", () -> new Block(
 			Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).sound(SoundType.GROUND)));
@@ -81,6 +75,10 @@ public class BlockInit {
 	public static final RegistryObject<Block> morel_mushroom = BLOCKS.register("morel_mushroom",
 			() -> new BlockMorelMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> morel_cap = BLOCKS.register("morel_cap", () -> new Block(
+			Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.5f, 15f).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> morel_stem = BLOCKS.register("morel_stem", () -> new Block(
+			Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.5f, 15f).sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> singeri_mushroom = BLOCKS.register("singeri_mushroom",
 			() -> new BlockSingeriMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement()
 					.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
@@ -91,17 +89,4 @@ public class BlockInit {
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 
-	@SubscribeEvent
-	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-		// if(world.isRemote) Basically, Makes the plants see through, similar to
-		// isFullblock thing
-		if (FMLEnvironment.dist == Dist.CLIENT) {
-			RenderTypeLookup.setRenderLayer(display_glass.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(morel_mushroom.get(), RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(singeri_mushroom.get(), RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(passion_flower.get(), RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(mystic_sapling.get(), RenderType.getCutout());
-
-		}
-	}
 }

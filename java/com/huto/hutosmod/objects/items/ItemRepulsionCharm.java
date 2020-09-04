@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -105,9 +104,9 @@ public class ItemRepulsionCharm extends Item {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if (stack.hasTag() && stack.getTag().hasUniqueId(TAG_STATE)) {
 			if (stack.getTag().getBoolean(TAG_STATE)) {
-				tooltip.add(new TranslationTextComponent("State: On").func_240699_a_(TextFormatting.BLUE));
+				tooltip.add(new TranslationTextComponent("State: On").mergeStyle(TextFormatting.BLUE));
 			} else {
-				tooltip.add(new TranslationTextComponent("State: Off").func_240699_a_(TextFormatting.RED));
+				tooltip.add(new TranslationTextComponent("State: Off").mergeStyle(TextFormatting.RED));
 			}
 
 		}

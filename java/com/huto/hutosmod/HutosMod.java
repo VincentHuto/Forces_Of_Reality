@@ -5,11 +5,14 @@ import org.apache.logging.log4j.Logger;
 
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,6 +29,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod("hutosmod")
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD)
 public class HutosMod {
+	@SuppressWarnings("unused")
 	private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "hutosmod";
 	public static HutosMod instance;
@@ -61,6 +65,13 @@ public class HutosMod {
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
+		ItemModelsProperties.func_239418_a_(ItemInit.attraction_charm.get(), new ResourceLocation(MOD_ID, "on"),
+				(stack, world, entity) -> {
+					return entity == null
+							|| !(stack.getItem() instanceof ItemAttractionCharm) && !stack.getTag().getBoolean("state")
+									? 0.0F
+									: 1.0F;
+				});
 	}
 
 	@SubscribeEvent

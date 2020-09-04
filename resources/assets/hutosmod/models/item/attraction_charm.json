@@ -1,6 +1,9 @@
 {
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "hutosmod:items/attraction_charm"
-   }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "hutosmod:items/attraction_charm"
+	},
+    "overrides": [
+    {"predicate": {"hutosmod:on": 1}, "model": "hutosmod:item/attraction_charm_on"}
+  ]
 }
