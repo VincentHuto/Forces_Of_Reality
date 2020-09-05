@@ -37,78 +37,56 @@ public class ItemRepulsionCharm extends Item {
 	}
 
 	public void setState(boolean state) {
-		ItemRepulsionCharm.state = state;
+		ItemAttractionCharm.state = state;
 	}
 
 	@Override
-	public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+
 		if (!stack.hasTag()) {
 			stack.setTag(new CompoundNBT());
 			CompoundNBT compound = stack.getTag();
 			compound.putBoolean(TAG_STATE, false);
 		}
-		CompoundNBT compound = stack.getTag();
+		if (stack.getTag().getBoolean(TAG_STATE)) {
 
-		if (compound.hasUniqueId(TAG_STATE)) {
-			boolean lev = compound.getBoolean(TAG_STATE);
-			compound.putBoolean(TAG_STATE, !lev);
+			repel(worldIn,
+					new AxisAlignedBB(entityIn.getPositionVec().add(-4, -4, -4),
+							entityIn.getPositionVec().add(4, 4, 4)),
+					entityIn.getPositionVec().getX() + 0.5, entityIn.getPositionVec().getY() + 0.5,
+					entityIn.getPositionVec().getZ() + 0.5);
 		}
-		stack.setTag(compound);
-		return super.onItemUseFirst(stack, context);
-	}
-
-	@Override
-	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-//		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-//		if (!stack.hasTag()) {
-//			stack.setTag(new CompoundNBT());
-//			CompoundNBT compound = stack.getTag();
-//			compound.putBoolean(TAG_STATE, false);
-//		}
-//		CompoundNBT compound = stack.getTag();
-
-		// if (compound.hasUniqueId(TAG_STATE)) {
-		// if (compound.getBoolean(TAG_STATE) == true) {
-		repel(worldIn,
-				new AxisAlignedBB(entityIn.getPositionVec().add(-4, -4, -4), entityIn.getPositionVec().add(4, 4, 4)),
-				entityIn.getPositionVec().getX() + 0.5, entityIn.getPositionVec().getY() + 0.5,
-				entityIn.getPositionVec().getZ() + 0.5);
-		// }
-		// }
 
 	}
 
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
-
 		ItemStack stack = context.getPlayer().getHeldItemMainhand();
-
 		if (!stack.hasTag()) {
 			stack.setTag(new CompoundNBT());
 			CompoundNBT compound = stack.getTag();
 			compound.putBoolean(TAG_STATE, false);
 		}
 		CompoundNBT compound = stack.getTag();
-
-		if (compound.hasUniqueId(TAG_STATE)) {
-			boolean lev = compound.getBoolean(TAG_STATE);
-			compound.putBoolean(TAG_STATE, !lev);
+		if (!compound.getBoolean(TAG_STATE)) {
+			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
+		} else {
+			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 		}
 		stack.setTag(compound);
-
 		return super.onItemUse(context);
 	}
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		if (stack.hasTag() && stack.getTag().hasUniqueId(TAG_STATE)) {
+		if (stack.hasTag()) {
 			if (stack.getTag().getBoolean(TAG_STATE)) {
 				tooltip.add(new TranslationTextComponent("State: On").mergeStyle(TextFormatting.BLUE));
 			} else {
 				tooltip.add(new TranslationTextComponent("State: Off").mergeStyle(TextFormatting.RED));
 			}
-
 		}
 	}
 

@@ -7,41 +7,52 @@ import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.HoeItem;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD,value = Dist.CLIENT)
 public class ItemInit {
+
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HutosMod.MOD_ID);
 
 	// Books
-
 	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Grey
-
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> grey_powder = ITEMS.register("grey_powder",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> grey_crystal = ITEMS.register("grey_crystal",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	
 	// Channeling
-
 	public static final RegistryObject<Item> essence_drop = ITEMS.register("essence_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> channeling_ingot = ITEMS.register("channeling_ingot",
@@ -54,7 +65,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Anti
-
 	public static final RegistryObject<Item> anti_tear = ITEMS.register("anti_tear",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> null_ingot = ITEMS.register("null_ingot",
@@ -67,7 +77,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Materials
-
 	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> phantasmal_pane = ITEMS.register("phantasmal_pane",
@@ -82,7 +91,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Karma
-
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
@@ -93,7 +101,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Food
-
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
@@ -108,11 +115,10 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Charms
-
 	public static final RegistryObject<Item> attraction_charm = ITEMS.register("attraction_charm",
-			() -> new ItemAttractionCharm(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemAttractionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> repulsion_charm = ITEMS.register("repulsion_charm",
-			() -> new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
@@ -121,12 +127,10 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Runes
-
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Tools
-
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
@@ -144,7 +148,6 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Armor
-
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
@@ -172,10 +175,47 @@ public class ItemInit {
 					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
 
 	// Hands
-
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
+	
+	@SubscribeEvent
+	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {
+		
+		//Attract Charm
+		ItemModelsProperties.func_239418_a_(attraction_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if(stack.hasTag()) {
+						if (stack.getTag().getBoolean("state")) {
+							return 1;
+						} else {
+							return 0;
+						}
+						}
+						return 0;
+					}
+				});
+		
+		//Repulsion Charm
+		ItemModelsProperties.func_239418_a_(repulsion_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if(stack.hasTag()) {
+						if (stack.getTag().getBoolean("state")) {
+							return 1;
+						} else {
+							return 0;
+						}
+						}
+						return 0;
+					}
+				});
+	}
+
+	
 }

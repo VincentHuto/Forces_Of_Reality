@@ -5,14 +5,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
-import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -65,13 +62,7 @@ public class HutosMod {
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
-		ItemModelsProperties.func_239418_a_(ItemInit.attraction_charm.get(), new ResourceLocation(MOD_ID, "on"),
-				(stack, world, entity) -> {
-					return entity == null
-							|| !(stack.getItem() instanceof ItemAttractionCharm) && !stack.getTag().getBoolean("state")
-									? 0.0F
-									: 1.0F;
-				});
+
 	}
 
 	@SubscribeEvent
