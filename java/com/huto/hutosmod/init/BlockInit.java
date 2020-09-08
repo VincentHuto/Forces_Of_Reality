@@ -13,6 +13,7 @@ import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.trees.OakTree;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,37 +40,48 @@ public class BlockInit {
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 
 	// Mystic
-	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth", () -> new Block(
-			Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).sound(SoundType.GROUND)));
-	public static final RegistryObject<Block> mystic_media = BLOCKS.register("mystic_media", () -> new Block(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> mystic_log = BLOCKS.register("mystic_log", () -> new RotatedPillarBlock(
-			Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).sound(SoundType.GROUND)));
-	public static final RegistryObject<Block> mystic_planks = BLOCKS.register("mystic_planks", () -> new Block(
-			Block.Properties.create(Material.WOOD).hardnessAndResistance(2f, 5f).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> enchanted_stone = BLOCKS.register("enchanted_stone", () -> new Block(
-			Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth",
+			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> mystic_media = BLOCKS.register("mystic_media",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> mystic_log = BLOCKS.register("mystic_log",
+			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
+					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> mystic_planks = BLOCKS.register("mystic_planks",
+			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
+					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> enchanted_stone = BLOCKS.register("enchanted_stone",
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> enchanted_stone_smooth = BLOCKS.register("enchanted_stone_smooth",
-			() -> new Block(
-					Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> enchanted_ore = BLOCKS.register("enchanted_ore", () -> new Block(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).sound(SoundType.STONE)));
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> enchanted_ore = BLOCKS.register("enchanted_ore",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f).harvestLevel(3)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> enchanted_ore_mystic = BLOCKS.register("enchanted_ore_mystic",
-			() -> new Block(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).sound(SoundType.STONE)));
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f).harvestLevel(3)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 
 	// Anti
-	public static final RegistryObject<Block> anti_earth = BLOCKS.register("anti_earth", () -> new Block(
-			Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).sound(SoundType.GROUND)));
-	public static final RegistryObject<Block> anti_log = BLOCKS.register("anti_log", () -> new RotatedPillarBlock(
-			Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).sound(SoundType.GROUND)));
-	public static final RegistryObject<Block> anti_media = BLOCKS.register("anti_media", () -> new Block(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> anti_earth = BLOCKS.register("anti_earth",
+			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> anti_log = BLOCKS.register("anti_log",
+			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
+					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> anti_media = BLOCKS.register("anti_media",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	// Nightmare
-	public static final RegistryObject<Block> nightmare_earth = BLOCKS.register("nightmare_earth", () -> new Block(
-			Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).sound(SoundType.GROUND)));
-	public static final RegistryObject<Block> nightmare_media = BLOCKS.register("nightmare_media", () -> new Block(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> nightmare_earth = BLOCKS.register("nightmare_earth",
+			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> nightmare_media = BLOCKS.register("nightmare_media",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 
 	// Plants
 	public static final RegistryObject<Block> morel_mushroom = BLOCKS.register("morel_mushroom",

@@ -5,7 +5,10 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
+import com.huto.hutosmod.objects.items.ItemSoakingAgent;
+import com.huto.hutosmod.objects.items.ItemStormingAgent;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
@@ -57,6 +60,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> channeling_ingot = ITEMS.register("channeling_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> emanating_ingot = ITEMS.register("emanating_ingot",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> mana_powder = ITEMS.register("mana_powder",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> mana_crystal = ITEMS.register("mana_crystal",
@@ -68,6 +73,8 @@ public class ItemInit {
 	public static final RegistryObject<Item> anti_tear = ITEMS.register("anti_tear",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> null_ingot = ITEMS.register("null_ingot",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> shattered_ingot = ITEMS.register("shattered_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> nullifying_powder = ITEMS.register("nullifying_powder",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -120,11 +127,11 @@ public class ItemInit {
 	public static final RegistryObject<Item> repulsion_charm = ITEMS.register("repulsion_charm",
 			() -> new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemDryingAgent(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSoakingAgent(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> storming_agent = ITEMS.register("storming_agent",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemStormingAgent(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Runes
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",

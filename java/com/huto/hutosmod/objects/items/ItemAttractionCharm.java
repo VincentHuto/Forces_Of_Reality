@@ -5,12 +5,15 @@ import java.util.List;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -55,6 +58,23 @@ public class ItemAttractionCharm extends Item {
 	}
 
 	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		ItemStack stack =playerIn.getHeldItemMainhand();
+		if (!stack.hasTag()) {
+			stack.setTag(new CompoundNBT());
+			CompoundNBT compound = stack.getTag();
+			compound.putBoolean(TAG_STATE, false);
+		}
+		CompoundNBT compound = stack.getTag();
+		if (!compound.getBoolean(TAG_STATE)) {
+			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
+		} else {
+			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
+		}
+		stack.setTag(compound);		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
+	
+/*	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
 		ItemStack stack = context.getPlayer().getHeldItemMainhand();
 		if (!stack.hasTag()) {
@@ -70,7 +90,7 @@ public class ItemAttractionCharm extends Item {
 		}
 		stack.setTag(compound);
 		return super.onItemUse(context);
-	}
+	}*/
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
