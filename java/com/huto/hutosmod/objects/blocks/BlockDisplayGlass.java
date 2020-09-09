@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 
-import com.huto.hutosmod.particles.FlameParticleData;
-
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -159,18 +157,19 @@ public class BlockDisplayGlass extends GlassBlock {
 																		// tick
 			velocityZ = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.z; // how much to increase the z position every
 																		// tick
-
+/*
 			Color tint = getTint(pos);
-			double diameter = getDiameter(pos);
+			double diameter = getDiameter(pos);*/
 
-			FlameParticleData flameParticleData = new FlameParticleData(tint, diameter);
+		/*	FlameParticleData flameParticleData = new FlameParticleData(tint, diameter);
 			worldIn.addParticle(flameParticleData, IGNORE_RANGE_CHECK, xpos, ypos, zpos, velocityX, velocityY,
-					velocityZ);
+					velocityZ);*/
 		}
 	}
 
 	// choose a semi-random colour based on the block's position
 	// the texture has basically no blue in it so we don't bother varying that
+	@SuppressWarnings("unused")
 	private Color getTint(BlockPos blockPos) {
 		Color[] tints = { new Color(1.00f, 1.00f, 1.0f), // no tint (full white)
 				new Color(1.00f, 0.75f, 1.0f), // redder
@@ -187,6 +186,7 @@ public class BlockDisplayGlass extends GlassBlock {
 	}
 
 	// choose a semi-random size based on the block's position
+	@SuppressWarnings("unused")
 	private double getDiameter(BlockPos blockPos) {
 		Random random = new Random(blockPos.hashCode());
 		random.nextDouble();

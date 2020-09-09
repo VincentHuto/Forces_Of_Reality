@@ -5,6 +5,7 @@ import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
+import com.huto.hutosmod.objects.blocks.BlockWandMaker;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -39,6 +40,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 
+	//Tiles
+	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
+	
 	// Mystic
 	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
@@ -47,7 +53,7 @@ public class BlockInit {
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> mystic_log = BLOCKS.register("mystic_log",
-			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
+			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F)
 					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> mystic_planks = BLOCKS.register("mystic_planks",
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
@@ -70,7 +76,10 @@ public class BlockInit {
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
 	public static final RegistryObject<Block> anti_log = BLOCKS.register("anti_log",
-			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
+			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0f)
+					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> anti_planks = BLOCKS.register("anti_planks",
+			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f)
 					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> anti_media = BLOCKS.register("anti_media",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)

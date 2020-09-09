@@ -6,6 +6,7 @@ import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
+import com.huto.hutosmod.objects.items.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
@@ -185,7 +186,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemMakerActivator(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	
 	@SubscribeEvent

@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.tileenties.TileEntityInit;
+import com.huto.hutosmod.particles.init.ParticleInit;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -37,10 +39,10 @@ public class HutosMod {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::setup);
 		modEventBus.addListener(this::doClientStuff);
-
+		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
-
+		TileEntityInit.TILES.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 	}
