@@ -6,18 +6,16 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.objects.tileenties.TileEntityWandMaker;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.particles.init.ParticleInit;
-import com.huto.hutosmod.particles.types.GenericParticle;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -64,11 +62,13 @@ public class BlockWandMaker extends Block implements IActivatable {
 		ItemStack stack = player.getHeldItem(handIn);
 		if (player.isSneaking()) {
 			ModInventoryHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
 			return ActionResultType.SUCCESS;
 		}
 		if (!stack.isEmpty()) {
 			te.addItem(player, stack, handIn);
-
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
 
@@ -87,9 +87,11 @@ public class BlockWandMaker extends Block implements IActivatable {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-				world.addParticle((BasicParticleType) ParticleInit.GENERIC.getParticleType()., randX, randY, randZ,
+/*				world.addParticle(new GenericParticleData(false, 0.0f, 1.0f, 0.0f, 1.0f, 100), pos.getX() + 0.5f,
+							pos.getY() + 0.5f, pos.getZ() + 0.5f, 0.0f, 0.0f, 0.0f);*/
+				world.addParticle((BasicParticleType) ParticleInit.RADIATION.getParticleType(), randX, randY, randZ,
 							0, 0, 0);
-			
+
 				}
 			}
 		}

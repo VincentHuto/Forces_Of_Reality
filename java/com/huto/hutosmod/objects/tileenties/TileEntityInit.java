@@ -12,6 +12,6 @@ public class TileEntityInit {
 	public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister
 			.create(ForgeRegistries.TILE_ENTITIES, HutosMod.MOD_ID);
 
-	public static final RegistryObject<TileEntityType<TileEntityWandMaker>> wand_maker = TILES.register("quarry",
+	public static final RegistryObject<TileEntityType<TileEntityWandMaker>> wand_maker = TILES.register("wand_maker",
 			() -> TileEntityType.Builder.create(TileEntityWandMaker::new, BlockInit.wand_maker.get()).build(null));
 }

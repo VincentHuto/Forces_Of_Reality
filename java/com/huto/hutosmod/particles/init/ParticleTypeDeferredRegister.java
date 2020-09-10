@@ -2,6 +2,8 @@ package com.huto.hutosmod.particles.init;
 
 import java.util.function.Supplier;
 
+import com.huto.hutosmod.particles.types.GenericParticleData;
+
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
@@ -16,6 +18,12 @@ public class ParticleTypeDeferredRegister extends WrappedDeferredRegister<Partic
     public ParticleTypeRegistryObject<BasicParticleType> registerBasicParticle(String name) {
         return register(name, () -> new BasicParticleType(false));
     }
+    
+    public ParticleTypeRegistryObject<GenericParticleData> registerGenericParticle(String name) {
+        return register(name, () -> new GenericParticleData(false));
+    }
+
+    
 
     public <PARTICLE extends IParticleData> ParticleTypeRegistryObject<PARTICLE> register(String name, Supplier<ParticleType<PARTICLE>> sup) {
         return register(name, sup, ParticleTypeRegistryObject::new);

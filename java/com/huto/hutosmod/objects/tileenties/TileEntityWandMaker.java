@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -50,14 +51,10 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 				break;
 			}
 
-		if (did) {
+		if (did)
 			System.out.println("add ITEM");
-			// VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
-
-			return true;
-		} else {
-			return false;
-		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+		return true;
 	}
 
 	@Override

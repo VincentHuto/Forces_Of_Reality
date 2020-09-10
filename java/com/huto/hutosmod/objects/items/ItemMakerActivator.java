@@ -16,7 +16,6 @@ public class ItemMakerActivator extends Item {
 		super(prop);
 	}
 
-	
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
 		ItemStack stack = context.getPlayer().getHeldItem(context.getHand());

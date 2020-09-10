@@ -18,7 +18,7 @@ public class RadiationParticle extends SmokeParticle {
 	public RadiationParticle(ClientWorld world, double posX, double posY, double posZ, double velX, double velY,
 			double velZ, IAnimatedSprite sprite) {
 		super(world, posX, posY, posZ, velX, velY, velZ, 1.0F, sprite);
-		setColor(0.07F, 0.76F, 0.82F);
+		setColor(0.7F, 0.0F, 0.82F);
 	}
 
 	@Override

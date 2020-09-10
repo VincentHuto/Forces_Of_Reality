@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "hutosmod:items/mana_debugtool"
+       "layer0": "hutosmod:items/vibration_debug_tool"
    }
 }

@@ -3,6 +3,8 @@ package com.huto.hutosmod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.huto.hutosmod.capabilities.CapabilityInit;
+import com.huto.hutosmod.events.VibrationEvents;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityInit;
@@ -37,7 +39,7 @@ public class HutosMod {
 		instance = this;
 
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		modEventBus.addListener(this::setup);
+		modEventBus.addListener(this::commonSetup);
 		modEventBus.addListener(this::doClientStuff);
 		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
@@ -45,6 +47,9 @@ public class HutosMod {
 		TileEntityInit.TILES.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
+		// Register Vibration Events
+		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
+
 	}
 
 	@SubscribeEvent
@@ -60,7 +65,9 @@ public class HutosMod {
 		});
 	}
 
-	private void setup(final FMLCommonSetupEvent event) {
+	private void commonSetup(final FMLCommonSetupEvent event) {
+		System.out.println("setting up capabilities");
+		CapabilityInit.init();
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
@@ -72,7 +79,6 @@ public class HutosMod {
 	}
 
 	public static class HutosModItemGroup extends ItemGroup {
-
 		public static final HutosModItemGroup instance = new HutosModItemGroup(ItemGroup.GROUPS.length, "hutosTab");
 
 		public HutosModItemGroup(int index, String label) {
@@ -83,18 +89,5 @@ public class HutosMod {
 		public ItemStack createIcon() {
 			return new ItemStack(BlockInit.activated_obsidian.get());
 		}
-
 	}
-
-	/*
-	 * //THESE TWO METHODS ARE FOR INTERMOD COMPATABLITIY private void
-	 * enqueueIMC(final InterModEnqueueEvent event) { // some example code to
-	 * dispatch IMC to another mod InterModComms.sendTo("examplemod", "helloworld",
-	 * () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";}); }
-	 * 
-	 * private void processIMC(final InterModProcessEvent event) { // some example
-	 * code to receive and process InterModComms from other mods
-	 * LOGGER.info("Got IMC {}", event.getIMCStream().
-	 * map(m->m.getMessageSupplier().get()). collect(Collectors.toList())); }
-	 */
 }

@@ -2,6 +2,7 @@ package com.huto.hutosmod.particles.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.particles.types.GenericParticle;
+import com.huto.hutosmod.particles.types.GenericParticleData;
 import com.huto.hutosmod.particles.types.RadiationParticle;
 
 import net.minecraft.client.Minecraft;
@@ -18,8 +19,8 @@ public class ParticleInit {
 	public static final ParticleTypeDeferredRegister PARTICLE_TYPES = new ParticleTypeDeferredRegister(HutosMod.MOD_ID);
 	
 	
-	public static final ParticleTypeRegistryObject<BasicParticleType> GENERIC = PARTICLE_TYPES
-			.registerBasicParticle("generic");
+	public static final ParticleTypeRegistryObject<GenericParticleData> GENERIC = PARTICLE_TYPES
+			.registerGenericParticle("generic");
 	public static final ParticleTypeRegistryObject<BasicParticleType> RADIATION = PARTICLE_TYPES
 			.registerBasicParticle("radiation");
 

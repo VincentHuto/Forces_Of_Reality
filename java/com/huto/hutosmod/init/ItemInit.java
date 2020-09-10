@@ -5,6 +5,7 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
@@ -37,7 +38,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD,value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ItemInit {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HutosMod.MOD_ID);
@@ -55,7 +56,7 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> grey_crystal = ITEMS.register("grey_crystal",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	
+
 	// Channeling
 	public static final RegistryObject<Item> essence_drop = ITEMS.register("essence_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -187,43 +188,43 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
 			() -> new ItemMakerActivator(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> vibration_debug_tool = ITEMS.register("vibration_debug_tool",
+			() -> new ItemDebugTool(new Item.Properties().group(HutosModItemGroup.instance)));
 
-	
 	@SubscribeEvent
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {
-		
-		//Attract Charm
+
+		// Attract Charm
 		ItemModelsProperties.func_239418_a_(attraction_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if(stack.hasTag()) {
-						if (stack.getTag().getBoolean("state")) {
-							return 1;
-						} else {
-							return 0;
-						}
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
 						}
 						return 0;
 					}
 				});
-		
-		//Repulsion Charm
+
+		// Repulsion Charm
 		ItemModelsProperties.func_239418_a_(repulsion_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if(stack.hasTag()) {
-						if (stack.getTag().getBoolean("state")) {
-							return 1;
-						} else {
-							return 0;
-						}
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
 						}
 						return 0;
 					}
 				});
 	}
 
-	
 }

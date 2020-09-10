@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties;
+package com.huto.hutosmod.objects.tileenties.util;
 
 import javax.annotation.Nullable;
 
