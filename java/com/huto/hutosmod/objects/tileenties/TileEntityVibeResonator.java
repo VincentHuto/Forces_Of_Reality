@@ -7,10 +7,12 @@ import javax.annotation.Nullable;
 
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipes.ModWandRecipies;
-import com.huto.hutosmod.recipes.RecipeWandMaker;
+import com.huto.hutosmod.recipes.ModResonatorRecipies;
+import com.huto.hutosmod.recipes.RecipeResonator;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,18 +23,20 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 
-public class TileEntityWandMaker extends TileManaSimpleInventory implements ITickableTileEntity {
+public class TileEntityVibeResonator extends TileManaSimpleInventory implements ITickableTileEntity {
 	int cooldown = 0;
 	List<ItemStack> lastRecipe = null;
-	RecipeWandMaker currentRecipe;
+	RecipeResonator currentRecipe;
 	int recipeKeepTicks = 0;
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
+	public static EnumEssecenceType resonantState;
 
-	public TileEntityWandMaker() {
-		super(TileEntityInit.wand_maker.get());
+	public TileEntityVibeResonator() {
+		super(TileEntityInit.vibe_resonator.get());
 	}
 
 	@Override
@@ -40,9 +44,34 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 		super.onLoad();
 		this.setMaxMana(300);
 	}
+	
 
-	public RecipeWandMaker getCurrentRecipe() {
-		for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+	public void checkStructure() {
+		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
+		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
+
+		if (blockUnder == BlockInit.enchanted_stone_smooth.get()) {
+			resonantState = EnumEssecenceType.MANA;
+		} else if (blockUnder == BlockInit.activated_obsidian.get()) {
+			resonantState = EnumEssecenceType.KARMIC;
+		} else if (blockUnder == BlockInit.reversion_catalyst.get()) {
+			resonantState = EnumEssecenceType.REVERT;
+		} else if (blockUnder == BlockInit.mind_fog.get()) {
+			resonantState = EnumEssecenceType.GREY;
+		} else if (blockUnder == BlockInit.display_glass.get()) {
+			resonantState = EnumEssecenceType.BOTH;
+		} else {
+			resonantState = EnumEssecenceType.NONE;
+		}
+
+	}
+
+	public EnumEssecenceType getResonantState() {
+		return resonantState;
+	}
+
+	public RecipeResonator getCurrentRecipe() {
+		for (RecipeResonator recipe_ : ModResonatorRecipies.resonatorRecipies) {
 			if (recipe_.matches(itemHandler)) {
 				currentRecipe = recipe_;
 			}
@@ -50,9 +79,9 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 
 		return currentRecipe;
 	}
-	
+
 	public void updateRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+		for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies)
 			if (recipe.matches(itemHandler)) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -61,15 +90,15 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 			}
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 	}
-	
+
 	public boolean hasValidRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+		for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies)
 			if (recipe.matches(itemHandler))
 				return true;
 
 		return false;
 	}
-	
+
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
 		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get())
@@ -164,11 +193,11 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 		if (world.isRemote)
 			return;
 
-		RecipeWandMaker recipe = null;
+		RecipeResonator recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
-			for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+			for (RecipeResonator recipe_ : ModResonatorRecipies.resonatorRecipies) {
 
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;
@@ -176,8 +205,8 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 				}
 			}
 
-		if (recipe != null && manaValue >= recipe.getManaUsage()) {
-			
+		if (recipe != null && manaValue >= recipe.getManaUsage() && getResonantState() == recipe.getRecipeType()) {
+
 			ItemStack output = recipe.getOutput().copy();
 			ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
 			if (world.isRemote) {
@@ -186,8 +215,8 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 			world.addEntity(outputItem);
 			manaValue -= recipe.getManaUsage();
 			currentRecipe = null;
-			world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), SET_COOLDOWN_EVENT, 60);
-			world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), CRAFT_EFFECT_EVENT, 0);
+			world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
+			world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);
 
 			for (int i = 0; i < getSizeInventory(); i++) {
 				ItemStack stack = itemHandler.getStackInSlot(i);

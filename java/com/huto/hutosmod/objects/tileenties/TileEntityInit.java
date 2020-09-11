@@ -14,4 +14,8 @@ public class TileEntityInit {
 
 	public static final RegistryObject<TileEntityType<TileEntityWandMaker>> wand_maker = TILES.register("wand_maker",
 			() -> TileEntityType.Builder.create(TileEntityWandMaker::new, BlockInit.wand_maker.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<TileEntityVibeResonator>> vibe_resonator = TILES
+			.register("vibe_resonator", () -> TileEntityType.Builder
+					.create(TileEntityVibeResonator::new, BlockInit.vibe_resonator.get()).build(null));
 }

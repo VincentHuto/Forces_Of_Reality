@@ -7,10 +7,14 @@ import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
+import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
+import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
+import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
+import com.huto.hutosmod.objects.items.ItemWandGainVibes;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
@@ -45,9 +49,9 @@ public class ItemInit {
 
 	// Books
 	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
@@ -155,7 +159,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> null_sword = ITEMS.register("null_sword",
 			() -> new SwordItem(EnumModToolTiers.NULL, 3, -2.4F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> duality_pick = ITEMS.register("duality_pick",
+			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
 	// Armor
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.HEAD,
@@ -189,7 +195,13 @@ public class ItemInit {
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
 			() -> new ItemMakerActivator(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> vibration_debug_tool = ITEMS.register("vibration_debug_tool",
-			() -> new ItemDebugTool(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemDebugTool(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+
+	// Wands
+	public static final RegistryObject<Item> wand_consume_vibes = ITEMS.register("wand_consume_vibes",
+			() -> new ItemWandConsumeVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> wand_gain_vibes = ITEMS.register("wand_gain_vibes",
+			() -> new ItemWandGainVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	@SubscribeEvent
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {

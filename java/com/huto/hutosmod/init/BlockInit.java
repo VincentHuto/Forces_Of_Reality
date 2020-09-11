@@ -5,6 +5,7 @@ import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
+import com.huto.hutosmod.objects.blocks.BlockVibeResonator;
 import com.huto.hutosmod.objects.blocks.BlockWandMaker;
 
 import net.minecraft.block.AbstractBlock;
@@ -43,7 +44,8 @@ public class BlockInit {
 	//Tiles
 	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+	public static final RegistryObject<Block> vibe_resonator = BLOCKS.register("vibe_resonator", () -> new BlockVibeResonator(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	
 	// Mystic
 	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth",

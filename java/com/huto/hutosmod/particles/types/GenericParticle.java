@@ -1,23 +1,11 @@
 package com.huto.hutosmod.particles.types;
 
-import java.util.Locale;
-
-import com.huto.hutosmod.particles.init.ParticleInit;
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

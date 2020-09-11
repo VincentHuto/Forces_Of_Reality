@@ -57,12 +57,13 @@
 	"item.hutosmod.null_chestplate": "Nullified Curiass",
 	"item.hutosmod.null_leggings": "Nullified Grieves",
 	"item.hutosmod.null_boots": "Nullified Boots",
+	"item.hutosmod.duality_pick": "Pick of Duality",
 	"item.hutosmod.mana_viewer": "Mana Viewer",
 	"item.hutosmod.mysterious_mask": "Mysterious Mask",
 	"item.hutosmod.mystic_tome": "Mystic Tome",
 	"item.hutosmod.elder_tome": "Elder Tome",
-	"item.hutosmod.wand_consume_mana": "Wand of Mana Consumption",
-	"item.hutosmod.wand_gain_mana": "Wand Of Mana Absorption",
+	"item.hutosmod.wand_consume_vibes": "Wand of Vibes Absorption",
+	"item.hutosmod.wand_gain_vibes": "Wand Of Vibes Consumption",
 	"item.hutosmod.wand_fireball": "Wand Of Fireballing",
 	"item.hutosmod.wand_greatfireball": "Wand Of Ghast",
 	"item.hutosmod.wand_sacrifice": "Wand Of Sacrifice",
@@ -131,7 +132,7 @@
 	"block.hutosmod.mind_fog": "Mind Fog",
 	"block.hutosmod.runic_chiselstation": "Rune Chisel Station",
 	"block.hutosmod.mystic_planks": "Mystic Plank",
-	"block.hutosmod.mana_resonator": "Mana Harmonizer",
+	"block.hutosmod.vibe_resonator": "Vibratory Resonator",
 	"block.hutosmod.disappering_block": "Disappering Tile",
 	"block.hutosmod.mana_absorber": "Mana Absorber",
 	"block.hutosmod.wave_gatherer": "Wave Gatherer",
@@ -141,5 +142,7 @@
 	"block.hutosmod.anti_log": "Anti Log",
 	"block.hutosmod.nightmare_earth": "Nightmare Earth",
 	"block.hutosmod.nightmare_media": "Nightmare Media",
-	"block.hutosmod.reversion_catalyst": "Reversion Catalyst"
+	"block.hutosmod.reversion_catalyst": "Reversion Catalyst",
+	"hutosmod.jei.wandmaker": "Wand Maker",
+	"hutosmod.jei.resonator": "Vibrarory Resonator"
 }

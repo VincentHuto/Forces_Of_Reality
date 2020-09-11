@@ -1,7 +1,5 @@
 package com.huto.hutosmod.particles.types;
 
-import java.util.Locale;
-
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
@@ -13,6 +11,7 @@ import net.minecraft.util.registry.Registry;
 
 public class GenericParticleData extends ParticleType<GenericParticleData> implements IParticleData {
 	
+	@SuppressWarnings("deprecation")
 	private static final IParticleData.IDeserializer<GenericParticleData> DESERIALIZER = new IParticleData.IDeserializer<GenericParticleData>() {
 		
 		
@@ -126,6 +125,7 @@ public class GenericParticleData extends ParticleType<GenericParticleData> imple
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getParameters() {
 		System.out.println("t");
 

@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -57,7 +58,7 @@ public class ItemAttractionCharm extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack =playerIn.getHeldItemMainhand();
+		ItemStack stack = playerIn.getHeldItemMainhand();
 		if (!stack.hasTag()) {
 			stack.setTag(new CompoundNBT());
 			CompoundNBT compound = stack.getTag();
@@ -65,30 +66,26 @@ public class ItemAttractionCharm extends Item {
 		}
 		CompoundNBT compound = stack.getTag();
 		if (!compound.getBoolean(TAG_STATE)) {
+			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 		} else {
-			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
-		}
-		stack.setTag(compound);		return super.onItemRightClick(worldIn, playerIn, handIn);
-	}
-	
-/*	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
-		ItemStack stack = context.getPlayer().getHeldItemMainhand();
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-			CompoundNBT compound = stack.getTag();
-			compound.putBoolean(TAG_STATE, false);
-		}
-		CompoundNBT compound = stack.getTag();
-		if (!compound.getBoolean(TAG_STATE)) {
-			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
-		} else {
+			playerIn.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 		}
 		stack.setTag(compound);
-		return super.onItemUse(context);
-	}*/
+		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
+
+	/*
+	 * @Override public ActionResultType onItemUse(ItemUseContext context) {
+	 * ItemStack stack = context.getPlayer().getHeldItemMainhand(); if
+	 * (!stack.hasTag()) { stack.setTag(new CompoundNBT()); CompoundNBT compound =
+	 * stack.getTag(); compound.putBoolean(TAG_STATE, false); } CompoundNBT compound
+	 * = stack.getTag(); if (!compound.getBoolean(TAG_STATE)) {
+	 * compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE)); } else {
+	 * compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE)); }
+	 * stack.setTag(compound); return super.onItemUse(context); }
+	 */
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {

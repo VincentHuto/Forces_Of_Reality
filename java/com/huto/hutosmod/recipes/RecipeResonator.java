@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,19 +14,23 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandler;
 
-public class RecipeWandMaker implements IModRecipe {
+public class RecipeResonator implements IModRecipe {
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final ImmutableList<Ingredient> inputs;
 	private final float mana;
+	private EnumEssecenceType type;
 
-	public RecipeWandMaker(ResourceLocation id, ItemStack output, float mana, Ingredient... inputs) {
+	public RecipeResonator(ResourceLocation id, ItemStack output, float mana, EnumEssecenceType type,
+			Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 16);
 		Preconditions.checkArgument(mana <= 100000);
 		this.id = id;
 		this.output = output;
 		this.inputs = ImmutableList.copyOf(inputs);
 		this.mana = mana;
+		this.type = type;
+
 	}
 
 	public boolean matches(IItemHandler inv) {
@@ -80,9 +85,10 @@ public class RecipeWandMaker implements IModRecipe {
 		}
 		buf.writeItemStack(output, false);
 		buf.writeFloat(mana);
+		buf.writeEnumValue(type);
 	}
 
-	public static RecipeWandMaker read(PacketBuffer buf) {
+	public static RecipeResonator read(PacketBuffer buf) {
 		ResourceLocation id = buf.readResourceLocation();
 		Ingredient[] inputs = new Ingredient[buf.readVarInt()];
 		for (int i = 0; i < inputs.length; i++) {
@@ -90,7 +96,12 @@ public class RecipeWandMaker implements IModRecipe {
 		}
 		ItemStack output = buf.readItemStack();
 		float mana = buf.readFloat();
-		return new RecipeWandMaker(id, output, mana, inputs);
+		EnumEssecenceType type = buf.readEnumValue(EnumEssecenceType.class);
+		return new RecipeResonator(id, output, mana, type, inputs);
+	}
+
+	public EnumEssecenceType getRecipeType() {
+		return type;
 	}
 
 }

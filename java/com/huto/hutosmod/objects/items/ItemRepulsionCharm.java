@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -63,7 +64,7 @@ public class ItemRepulsionCharm extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack =playerIn.getHeldItemMainhand();
+		ItemStack stack = playerIn.getHeldItemMainhand();
 		if (!stack.hasTag()) {
 			stack.setTag(new CompoundNBT());
 			CompoundNBT compound = stack.getTag();
@@ -71,31 +72,27 @@ public class ItemRepulsionCharm extends Item {
 		}
 		CompoundNBT compound = stack.getTag();
 		if (!compound.getBoolean(TAG_STATE)) {
+			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 		} else {
+			playerIn.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 		}
-		stack.setTag(compound);		return super.onItemRightClick(worldIn, playerIn, handIn);
-	}
-	
-	
-/*	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
-		ItemStack stack = context.getPlayer().getHeldItemMainhand();
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-			CompoundNBT compound = stack.getTag();
-			compound.putBoolean(TAG_STATE, false);
-		}
-		CompoundNBT compound = stack.getTag();
-		if (!compound.getBoolean(TAG_STATE)) {
-			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
-		} else {
-			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
-		}
+		
 		stack.setTag(compound);
-		return super.onItemUse(context);
-	}*/
+		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
+
+	/*
+	 * @Override public ActionResultType onItemUse(ItemUseContext context) {
+	 * ItemStack stack = context.getPlayer().getHeldItemMainhand(); if
+	 * (!stack.hasTag()) { stack.setTag(new CompoundNBT()); CompoundNBT compound =
+	 * stack.getTag(); compound.putBoolean(TAG_STATE, false); } CompoundNBT compound
+	 * = stack.getTag(); if (!compound.getBoolean(TAG_STATE)) {
+	 * compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE)); } else {
+	 * compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE)); }
+	 * stack.setTag(compound); return super.onItemUse(context); }
+	 */
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -122,8 +119,8 @@ public class ItemRepulsionCharm extends Item {
 
 				ent.setMotion(r.x / 1.2D / distance, r.y / 1.2D / distance, r.z / 1.2D / distance);
 
-				if (world.isRemote) {
-					for (int countparticles = 0; countparticles <= 10; ++countparticles) {
+				for (int countparticles = 0; countparticles <= 10; ++countparticles) {
+					if (world.isRemote) {
 						ent.world.addParticle(RedstoneParticleData.REDSTONE_DUST,
 								ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
 								ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
@@ -131,6 +128,8 @@ public class ItemRepulsionCharm extends Item {
 								ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
 								0.0D);
 					}
+					ent.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.010f, 0.1F);
+
 				}
 			}
 		}

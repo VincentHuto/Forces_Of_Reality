@@ -3,6 +3,7 @@ package com.huto.hutosmod.capabilities;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.FloatNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -33,6 +34,10 @@ public class VibrationProvider implements ICapabilitySerializable<FloatNBT> {
 		VIBE_CAPA.getStorage().readNBT(VIBE_CAPA,
 				instance.orElseThrow(() -> new IllegalArgumentException("LazyOptional cannot be empty!")), null, nbt);
 
+	}
+
+	public static float getPlayerVibes(PlayerEntity player) {
+		return player.getCapability(VIBE_CAPA).orElseThrow(IllegalStateException::new).getVibes();
 	}
 
 }

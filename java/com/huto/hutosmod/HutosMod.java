@@ -7,8 +7,11 @@ import com.huto.hutosmod.capabilities.CapabilityInit;
 import com.huto.hutosmod.events.VibrationEvents;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.tileenties.TileEntityInit;
 import com.huto.hutosmod.particles.init.ParticleInit;
+import com.huto.hutosmod.recipes.ModResonatorRecipies;
+import com.huto.hutosmod.recipes.ModWandRecipies;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -49,7 +52,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(this);
 		// Register Vibration Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
-
+		PacketHandler.registerChannels();
 	}
 
 	@SubscribeEvent
@@ -68,6 +71,9 @@ public class HutosMod {
 	private void commonSetup(final FMLCommonSetupEvent event) {
 		System.out.println("setting up capabilities");
 		CapabilityInit.init();
+		ModWandRecipies.init();
+		ModResonatorRecipies.init();
+
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {

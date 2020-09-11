@@ -2,8 +2,11 @@ package com.huto.hutosmod.objects.items;
 
 import com.huto.hutosmod.capabilities.IVibrations;
 import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.VibrationPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -11,10 +14,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
-public class ItemDebugTool extends Item {
+public class ItemWandConsumeVibes extends Item {
 
-	public ItemDebugTool(Properties prop) {
+	public ItemWandConsumeVibes(Properties prop) {
 		super(prop);
 	}
 
@@ -23,10 +27,15 @@ public class ItemDebugTool extends Item {
 		if (!worldIn.isRemote) {
 			IVibrations vibes = playerIn.getCapability(VibrationProvider.VIBE_CAPA)
 					.orElseThrow(IllegalStateException::new);
-			playerIn.sendStatusMessage(new StringTextComponent(
-					"Current Resonance: " + TextFormatting.DARK_PURPLE + vibes.getVibes() + "Hz"), false);
-
+			vibes.subtractVibes(10);
+			playerIn.sendStatusMessage(
+					new StringTextComponent("Reduced Resonance to: " + TextFormatting.BLUE + vibes.getVibes() + "Hz"),
+					false);
+			// Sync Packet with server
+			PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+					new VibrationPacketServer(vibes.getVibes()));
 		}
+
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 

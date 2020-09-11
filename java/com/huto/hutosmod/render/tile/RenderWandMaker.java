@@ -1,4 +1,4 @@
-package com.huto.hutosmod.render;
+package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.objects.tileenties.TileEntityWandMaker;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;

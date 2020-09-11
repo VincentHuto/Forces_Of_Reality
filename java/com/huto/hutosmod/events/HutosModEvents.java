@@ -18,7 +18,7 @@ public class HutosModEvents {
 		@SuppressWarnings("unused")
 		World world = entity.getEntityWorld();
 	//	world.setBlockState(entity.getPosition(), BlockInit.nightmare_earth.get().getDefaultState());
-		// entity.addVelocity(0, 2, 0);
+	//	 entity.addVelocity(00, 1000000, 0);
 	}
 /*
 	@SubscribeEvent
