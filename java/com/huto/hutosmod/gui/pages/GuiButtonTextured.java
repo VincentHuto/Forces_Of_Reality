@@ -1,12 +1,10 @@
 package com.huto.hutosmod.gui.pages;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
@@ -56,6 +54,9 @@ public class GuiButtonTextured extends Button {
 	@Override
 	public void renderButton(MatrixStack matrix, int mouseX, int mouseY, float particks) {
 		if (visible) {
+			GlStateManager.enableAlphaTest();
+			GlStateManager.enableBlend();;
+
 			Minecraft.getInstance().getTextureManager().bindTexture(texture);
 			if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || state) {
 				this.isHovered = true;

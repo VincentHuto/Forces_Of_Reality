@@ -10,7 +10,6 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.BlockInit;
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
 import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
 import com.huto.hutosmod.recipes.RecipeResonator;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -97,7 +96,7 @@ public class ResonatorRecipeCategory implements IRecipeCategory<RecipeResonator>
 		overlay.draw(matrixStack);
 
 		matrixStack.translate(25, 90, 0);
-		TileEntityVibeResonator te = new TileEntityVibeResonator();
+		//TileEntityVibeResonator te = new TileEntityVibeResonator();
 		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 		fontRenderer.drawString(matrixStack,
 				"Vibrational Cost: " + TextFormatting.ITALIC + Float.toString(recipe.getManaUsage()), 0,

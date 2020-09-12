@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.huto.hutosmod.capabilities.CapabilityInit;
 import com.huto.hutosmod.events.VibrationEvents;
+import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.PacketHandler;
@@ -77,6 +78,7 @@ public class HutosMod {
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
+		TomePageLib.registerPages();
 
 	}
 

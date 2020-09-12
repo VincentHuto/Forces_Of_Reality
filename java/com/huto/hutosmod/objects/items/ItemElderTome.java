@@ -30,7 +30,7 @@ public class ItemElderTome extends Item {
 
 	@Override
 	public Rarity getRarity(ItemStack par1ItemStack) {
-		return Rarity.UNCOMMON;
+		return Rarity.EPIC;
 	}
 
 }

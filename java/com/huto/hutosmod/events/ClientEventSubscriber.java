@@ -7,8 +7,10 @@ import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderWandMaker;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,6 +43,10 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
 
+	}
+	
+	public static PlayerEntity getClientPlayer() {
+		return Minecraft.getInstance().player;
 	}
 	
 }
