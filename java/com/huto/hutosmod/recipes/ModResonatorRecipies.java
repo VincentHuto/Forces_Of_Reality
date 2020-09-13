@@ -83,7 +83,7 @@ public class ModResonatorRecipies {
 				Ingredient.fromItems(Blocks.STONE));
 		recipeEnchantedEarth = registerRecipe(new ResourceLocation("recipeenchantedearth"),
 				new ItemStack(BlockInit.mystic_earth.get(), 1), 10, EnumEssecenceType.MANA,
-				Ingredient.fromItems(Blocks.GRASS));
+				Ingredient.fromItems(Blocks.GRASS_BLOCK));
 		recipeEnchantedMedia = registerRecipe(new ResourceLocation("recipeenchantedmedia"),
 				new ItemStack(BlockInit.mystic_media.get(), 1), 10, EnumEssecenceType.MANA,
 				Ingredient.fromItems(Blocks.COBBLESTONE));

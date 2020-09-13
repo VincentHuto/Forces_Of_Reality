@@ -68,7 +68,7 @@ public class GuiTomePage extends Screen {
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
 			Minecraft.getInstance().getTextureManager().bindTexture(texture);
-			GuiUtil.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth, guiHeight);
+			GuiUtil.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth-1, guiHeight);
 		}
 		GlStateManager.popMatrix();
 
@@ -77,8 +77,8 @@ public class GuiTomePage extends Screen {
 			GlStateManager.translatef((width / 2) - 40, centerY + 10, 10);
 			GlStateManager.scalef(1, 1, 1);
 			drawString(matrixStack, font, "Pg." + String.valueOf(pageNum + 1), 90, 0, 0000000);
-			drawString(matrixStack, font, title, 0, 0, 8060954);
-			drawString(matrixStack, font, subtitle, 0, 10, 8060954);
+			drawString(matrixStack, font, title, -5, 0, 8060954);
+			drawString(matrixStack, font, subtitle, -5, 10, 8060954);
 		}
 		GlStateManager.popMatrix();
 
@@ -87,10 +87,10 @@ public class GuiTomePage extends Screen {
 			GlStateManager.translatef((width / 2) - 20, centerY + 10, 10);
 			GlStateManager.scalef(0.9f, 1, 1);
 			GlStateManager.translatef(-65f, 25, 0);
-			drawCenteredString(matrixStack, font, I18n.format(text), 175, 0, 10);
-			//drawString(matrixStack, font, I18n.format("title.mystictome.intro.page.2.text"), 0, 10, 8060954);
-
-			// fontRenderer.drawSplitString(text, 0, 0, 175, 0);
+			
+			//drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
+			//Split String(text,x,y,wrapwidth,color)
+			font.func_238418_a_( new StringTextComponent(I18n.format(text)),0,  0, 175, 0);
 		}
 		GlStateManager.popMatrix();
 

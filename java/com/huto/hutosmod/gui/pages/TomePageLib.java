@@ -22,9 +22,11 @@ public class TomePageLib {
 	public static List<GuiTomePage> WandsPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> RunesPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> ElderPageList = new ArrayList<GuiTomePage>();
+	public static List<GuiTomePageTOC> TOCPageList = new ArrayList<GuiTomePageTOC>();
+	public static List<List<GuiTomePage>> ChapterList = new ArrayList<List<GuiTomePage>>();
 
 	// Text Locations
-	public static String INTRO_PAGE_1 = "title.mystictome.intro.page.1";
+	public static String INTRO_PAGE_1 = "title.mystictome.intro.page.1.text";
 	public static String INTRO_PAGE_2 = "title.mystictome.intro.page.2.text";
 	public static String INTRO_PAGE_3 = "title.mystictome.intro.page.3.text";
 	public static String INTRO_PAGE_4 = "title.mystictome.intro.page.4.text";
@@ -67,7 +69,6 @@ public class TomePageLib {
 
 	public static void registerPages() {
 
-		System.out.println("REGISTERING PAEGS");
 		IntroPageList.clear();
 		KarmaPageList.clear();
 		WorldGenPageList.clear();
@@ -77,6 +78,9 @@ public class TomePageLib {
 		WandsPageList.clear();
 		RunesPageList.clear();
 		ElderPageList.clear();
+		TOCPageList.clear();
+		ChapterList.clear();
+
 		// LEXICON PAGES
 
 		// Intro
@@ -148,5 +152,60 @@ public class TomePageLib {
 		// Elder
 		ElderPageList.add(new GuiTomePage(0, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
+
+		// Adding Chapters
+		ChapterList.add(IntroPageList);
+		ChapterList.add(KarmaPageList);
+		ChapterList.add(WorldGenPageList);
+		ChapterList.add(ArmorPageList);
+		ChapterList.add(BlocksPageList);
+		ChapterList.add(GeneratePageList);
+		ChapterList.add(WandsPageList);
+		ChapterList.add(RunesPageList);
+		ChapterList.add(ElderPageList);
+
+		// TOC
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.mana_powder.get())));
 	}
+
+	public static List<GuiTomePage> getIntroPageList() {
+		return IntroPageList;
+	}
+
+	public static List<GuiTomePage> getKarmaPageList() {
+		return KarmaPageList;
+	}
+
+	public static List<GuiTomePage> getWorldGenPageList() {
+		return WorldGenPageList;
+	}
+
+	public static List<GuiTomePage> getArmorPageList() {
+		return ArmorPageList;
+	}
+
+	public static List<GuiTomePage> getBlocksPageList() {
+		return BlocksPageList;
+	}
+
+	public static List<GuiTomePage> getGeneratePageList() {
+		return GeneratePageList;
+	}
+
+	public static List<GuiTomePage> getWandsPageList() {
+		return WandsPageList;
+	}
+
+	public static List<GuiTomePage> getRunesPageList() {
+		return RunesPageList;
+	}
+
+	public static List<GuiTomePage> getElderPageList() {
+		return ElderPageList;
+	}
+
+	public static List<List<GuiTomePage>> getChapterList() {
+		return ChapterList;
+	}
+
 }

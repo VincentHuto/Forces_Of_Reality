@@ -8,11 +8,14 @@ import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
+import com.huto.hutosmod.objects.items.ItemKnapper;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
+import com.huto.hutosmod.objects.items.ItemRune;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
+import com.huto.hutosmod.objects.items.ItemTOCTome;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
 
@@ -27,6 +30,7 @@ import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
@@ -52,7 +56,8 @@ public class ItemInit {
 			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> toc_tome = ITEMS.register("toc_tome",
+			() -> new ItemTOCTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -142,7 +147,47 @@ public class ItemInit {
 	// Runes
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	// Contract Runes
+	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 
+	// Base Runes
+	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_lake = ITEMS.register("rune_lake",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_clawmark = ITEMS.register("rune_clawmark",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_rapture = ITEMS.register("rune_rapture",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_oedon = ITEMS.register("rune_oedon",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_eye = ITEMS.register("rune_eye",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_moon = ITEMS.register("rune_moon",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_beast = ITEMS.register("rune_beast",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	// Tools
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
@@ -161,6 +206,15 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> duality_pick = ITEMS.register("duality_pick",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> duality_axe = ITEMS.register("duality_axe",
+			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	// Knappers
+	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper",
+			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON, new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> obsidian_knapper = ITEMS.register("obsidian_knapper",
+			() -> new ItemKnapper(50f, 1, 0, EnumModToolTiers.NULL,
 					new Item.Properties().group(HutosModItemGroup.instance)));
 	// Armor
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
@@ -202,6 +256,24 @@ public class ItemInit {
 			() -> new ItemWandConsumeVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> wand_gain_vibes = ITEMS.register("wand_gain_vibes",
 			() -> new ItemWandGainVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+
+	// Upgrades
+	public static final RegistryObject<Item> upgrade_wrench = ITEMS.register("upgrade_wrench",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_blank = ITEMS.register("upgrade_blank",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_block = ITEMS.register("upgrade_block",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_player = ITEMS.register("upgrade_player",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_animal = ITEMS.register("upgrade_animal",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_mob = ITEMS.register("upgrade_mob",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_absorber = ITEMS.register("upgrade_absorber",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> upgrade_import = ITEMS.register("upgrade_import",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {

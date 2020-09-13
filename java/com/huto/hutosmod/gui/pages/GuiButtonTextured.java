@@ -15,10 +15,10 @@ public class GuiButtonTextured extends Button {
 	boolean state;
 	protected Button.ITooltip onTooltip;
 	public static ITextComponent text;
-
+	public  Button.IPressable action;
 	public GuiButtonTextured(ResourceLocation texIn, int idIn, int posXIn, int posYIn, int buttonWidthIn,
-			int buttonHeightIn, int uIn, int vIn, Button.ITooltip tooltip, Button.IPressable action) {
-		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, action, tooltip);
+			int buttonHeightIn, int uIn, int vIn, Button.ITooltip tooltip, Button.IPressable actionIn) {
+		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, actionIn, tooltip);
 		this.texture = texIn;
 		this.id = idIn;
 		this.posX = posXIn;
@@ -30,6 +30,7 @@ public class GuiButtonTextured extends Button {
 		this.adjV = vIn + buttonHeightIn;
 		this.newV = vIn;
 		this.onTooltip = tooltip;
+		this.action = actionIn;
 
 	}
 
@@ -87,8 +88,13 @@ public class GuiButtonTextured extends Button {
 
 	}
 
+	public Button.IPressable getAction() {
+		return action;
+	}
 
-	
+	public void setAction(Button.IPressable action) {
+		this.action = action;
+	}
 
 	public int getId() {
 		return id;
