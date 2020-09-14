@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.lwjgl.glfw.GLFW;
-
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.events.ClientEventSubscriber;
+import com.huto.hutosmod.init.ItemInit;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.widget.button.Button.IPressable;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -39,14 +40,14 @@ public class GuiTomePageTOC extends GuiTomePage {
 	public static List<GuiButtonTextured> buttonList = new ArrayList<GuiButtonTextured>();
 
 	ItemStack icon;
-	static EnumTomeCatagories catagory;
+	EnumTomeCatagories catagory;
 	static StringTextComponent titleComponent = new StringTextComponent("");
 
 	@OnlyIn(Dist.CLIENT)
 	public GuiTomePageTOC(EnumTomeCatagories catagoryIn, ItemStack iconIn) {
 		super(0, catagoryIn, "Table of Contents", "", iconIn, "");
 		this.icon = iconIn;
-		GuiTomePageTOC.catagory = catagoryIn;
+		this.catagory = catagoryIn;
 	}
 
 	@SuppressWarnings({ "deprecation" })
@@ -85,9 +86,18 @@ public class GuiTomePageTOC extends GuiTomePage {
 			buttonTitle.renderButton(matrixStack, mouseX, mouseY, 311);
 			buttonCloseTab.renderButton(matrixStack, mouseX, mouseY, 411);
 
-			for (int i = 0; i < buttonList.size(); i++) {
+			for (int i = 1; i < buttonList.size(); i++) {
 				buttonList.get(i).renderButton(matrixStack, mouseX, mouseY, 511);
+				GlStateManager.translatef(0, 0, 10);
+				drawString(matrixStack, font, "Pg." + i, (buttonList.get(i).posX + 2), buttonList.get(i).posY + 2,
+						8060954);
+				drawString(matrixStack, font, getMatchingChapter().get(i).title, (int) (buttonList.get(i).posX + 25),
+						buttonList.get(i).posY + 2, 8060954);
+
 			}
+
+			arrowF.renderButton(matrixStack, mouseX, mouseY, 511);
+			arrowB.renderButton(matrixStack, mouseX, mouseY, 511);
 
 		}
 		GlStateManager.popMatrix();
@@ -99,10 +109,17 @@ public class GuiTomePageTOC extends GuiTomePage {
 			GlStateManager.translatef(3, 3, 0);
 			GlStateManager.scalef(1.9f, 1.7f, 1.9f);
 			RenderHelper.enableStandardItemLighting();
-			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(icon, 0, 0);
+			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(icon, 0, 2);
+			
+			
+			
 		}
 		GlStateManager.popMatrix();
 
+		List<ITextComponent> text = new ArrayList<ITextComponent>();
+		text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
+		func_243308_b(matrixStack, text, centerX, centerY);
+		
 		List<ITextComponent> titlePage = new ArrayList<ITextComponent>();
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));
@@ -117,10 +134,11 @@ public class GuiTomePageTOC extends GuiTomePage {
 	}
 
 	static Minecraft mc = Minecraft.getInstance();
+	static int count = 0;
+	static AtomicInteger atomInt = new AtomicInteger(0);
 
 	@Override
 	protected void init() {
-		AtomicInteger atomInt = new AtomicInteger(0);
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;
 		int sideLoc = left + guiWidth;
@@ -128,6 +146,7 @@ public class GuiTomePageTOC extends GuiTomePage {
 		buttons.clear();
 		buttonList.clear();
 		checkChapter();
+
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
 					buttonUseCheck(buttonTitle);
@@ -138,33 +157,42 @@ public class GuiTomePageTOC extends GuiTomePage {
 					buttonUseCheck(buttonCloseTab);
 				}));
 
-		System.out.println(chapterPages.size());
-
-
 		for (int i = 0; i < chapterPages.size(); i++) {
-			buttonList.add(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 5), (verticalLoc - 190) + (i * 15),
-					163, 14, 5, 228, null, genActionList(chapterPages.size()).get(i)));
-
+			buttonList.add(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 5), (verticalLoc - 210) + (i * 15),
+					163, 14, 5, 228, null, new IPressable() {
+						@Override
+						public void onPress(Button press) {
+							if (press instanceof GuiButtonTextured) {
+								GuiButtonTextured button = (GuiButtonTextured) press;
+								tableButtonCheck((button.getId()));
+							}
+						}
+					}));
 		}
+
 		for (int i = 0; i < buttonList.size(); i++) {
 			this.addButton(buttonList.get(i));
 		}
 
-	}
+		this.addButton(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10,
+				new IPressable() {
+					@Override
+					public void onPress(Button p_onPress_1_) {
+						mc.displayGuiScreen(getMatchingChapter().get(1));
+					}
+				}));
+		this.addButton(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10, new IPressable() {
+			@Override
+			public void onPress(Button p_onPress_1_) {
+				if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
+						.get()) {
+					mc.displayGuiScreen(new GuiTomeTitle(true));
+				} else {
+					mc.displayGuiScreen(new GuiTomeTitle(false));
 
-	static int count = 0;
-	public static List<Button.IPressable> genActionList(int size) {
-		List<Button.IPressable> actionList = new ArrayList<Button.IPressable>();
-		for (int i = 0; i < size; i++) {
-			actionList.add((press) -> {
-				int count2 = count;
-				buttonUseCheck(buttonList.get(count2++).getId());
-				count++;
-
-			});
-		}
-		count = 0;
-		return actionList;
+				}
+			}
+		}));
 
 	}
 
@@ -229,14 +257,13 @@ public class GuiTomePageTOC extends GuiTomePage {
 		return false;
 	}
 
-	public static void buttonUseCheck(int page) {
-		System.out.println("Page" + page);
-		mc.displayGuiScreen(getMatchingChapter().get(page));
+	public void tableButtonCheck(int page) {
+		mc.displayGuiScreen(this.getMatchingChapter().get(page));
 
 	}
 
-	public static List<GuiTomePage> getMatchingChapter() {
-		switch (catagory) {
+	public List<GuiTomePage> getMatchingChapter() {
+		switch (this.catagory) {
 		case INTRO:
 			return TomePageLib.getIntroPageList();
 		case KARMA:

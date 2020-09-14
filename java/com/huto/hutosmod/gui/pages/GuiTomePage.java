@@ -3,6 +3,7 @@ package com.huto.hutosmod.gui.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.hutosmod.HutosMod;
@@ -68,7 +69,7 @@ public class GuiTomePage extends Screen {
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
 			Minecraft.getInstance().getTextureManager().bindTexture(texture);
-			GuiUtil.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth-1, guiHeight);
+			GuiUtil.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth - 1, guiHeight);
 		}
 		GlStateManager.popMatrix();
 
@@ -76,7 +77,7 @@ public class GuiTomePage extends Screen {
 		{
 			GlStateManager.translatef((width / 2) - 40, centerY + 10, 10);
 			GlStateManager.scalef(1, 1, 1);
-			drawString(matrixStack, font, "Pg." + String.valueOf(pageNum + 1), 90, 0, 0000000);
+			drawString(matrixStack, font, "Pg." + pageNum, 90, 0, 0000000);
 			drawString(matrixStack, font, title, -5, 0, 8060954);
 			drawString(matrixStack, font, subtitle, -5, 10, 8060954);
 		}
@@ -87,10 +88,10 @@ public class GuiTomePage extends Screen {
 			GlStateManager.translatef((width / 2) - 20, centerY + 10, 10);
 			GlStateManager.scalef(0.9f, 1, 1);
 			GlStateManager.translatef(-65f, 25, 0);
-			
-			//drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
-			//Split String(text,x,y,wrapwidth,color)
-			font.func_238418_a_( new StringTextComponent(I18n.format(text)),0,  0, 175, 0);
+
+			// drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
+			// Split String(text,x,y,wrapwidth,color)
+			font.func_238418_a_(new StringTextComponent(I18n.format(text)), 0, 0, 175, 0);
 		}
 		GlStateManager.popMatrix();
 
@@ -148,7 +149,7 @@ public class GuiTomePage extends Screen {
 
 			}
 
-			if (pageNum != 0) {
+			if (pageNum > 0) {
 
 				arrowB.renderButton(matrixStack, mouseX, mouseY, 211);
 			}
@@ -449,84 +450,86 @@ public class GuiTomePage extends Screen {
 			switch (button.getId()) {
 			case ARROWB:
 				if (this.catagory == EnumTomeCatagories.INTRO) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
+						System.out.println("TEST");
+
 						mc.displayGuiScreen(TomePageLib.IntroPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.IntroPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.IntroPageList.get((0)));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.EQUIPS) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.ArmorPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.ArmorPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.ArmorPageList.get(0));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.KARMA) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.KarmaPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.KarmaPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.KarmaPageList.get((0)));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.MACHINES) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.BlocksPageList.get((0)));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.GENERATION) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.GeneratePageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.GeneratePageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.GeneratePageList.get((0)));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.WANDS) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.WandsPageList.get((0)));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.WORLDGEN) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((0)));
 						break;
 					}
 				}
 				if (this.catagory == EnumTomeCatagories.RUNES) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.RunesPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.RunesPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.RunesPageList.get((0)));
 						break;
 					}
 				}
 
 				if (this.catagory == EnumTomeCatagories.ELDER) {
-					if (pageNum != 0) {
+					if (pageNum > 0) {
 						mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum - 1)));
 						break;
 					} else {
-						mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum)));
+						mc.displayGuiScreen(TomePageLib.ElderPageList.get((0)));
 						break;
 					}
 				}
@@ -537,8 +540,9 @@ public class GuiTomePage extends Screen {
 
 	public void updateTextBoxes() {
 		if (!textBox.getText().isEmpty()) {
-			if (!textBox.isFocused()) {
-				int searchNum = (Integer.parseInt(textBox.getText()) - 1);
+			if (NumberUtils.isCreatable(textBox.getText())) {
+				int searchNum = (Integer.parseInt(textBox.getText()));
+
 				switch (this.catagory) {
 				case ELDER:
 					if (searchNum < TomePageLib.ElderPageList.size()) {

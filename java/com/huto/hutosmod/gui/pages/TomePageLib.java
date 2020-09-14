@@ -78,79 +78,81 @@ public class TomePageLib {
 		WandsPageList.clear();
 		RunesPageList.clear();
 		ElderPageList.clear();
-		TOCPageList.clear();
 		ChapterList.clear();
-
-		// LEXICON PAGES
+		TOCPageList.clear();
 
 		// Intro
-		IntroPageList.add(new GuiTomePage(0, EnumTomeCatagories.INTRO, "Page 1", "In the Begining",
+
+		IntroPageList.add(new GuiTomePage(1, EnumTomeCatagories.INTRO, "Page 1", "In the Begining",
 				new ItemStack(ItemInit.channeling_ingot.get()), I18n.format(INTRO_PAGE_1)));
-		IntroPageList.add(new GuiTomePage(1, EnumTomeCatagories.INTRO, "Page 2", "Duality of Nature",
+		IntroPageList.add(new GuiTomePage(2, EnumTomeCatagories.INTRO, "Page 2", "Duality of Nature",
 				new ItemStack(ItemInit.magatamabead.get()), I18n.format(INTRO_PAGE_2)));
-		IntroPageList.add(new GuiTomePage(2, EnumTomeCatagories.INTRO, "Page 3", "Cosmic Vibrations",
+		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Page 3", "Cosmic Vibrations",
 				new ItemStack(ItemInit.energy_focus.get()), I18n.format(INTRO_PAGE_3)));
-		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Page 4", "A World of essence",
+		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "Page 4", "A World of essence",
 				new ItemStack(ItemInit.essence_drop.get()), I18n.format(INTRO_PAGE_4)));
-		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "Page 5", "Channeling Basics",
+		IntroPageList.add(new GuiTomePage(5, EnumTomeCatagories.INTRO, "Page 5", "Channeling Basics",
 				new ItemStack(ItemInit.channeling_rod.get()), I18n.format(INTRO_PAGE_5)));
-		IntroPageList.add(new GuiTomePage(5, EnumTomeCatagories.INTRO, "Page 6", "Nullification",
+		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Page 6", "Nullification",
 				new ItemStack(ItemInit.null_crystal.get()), I18n.format(INTRO_PAGE_6)));
-		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Page 7", "The power of vitals",
+		IntroPageList.add(new GuiTomePage(7, EnumTomeCatagories.INTRO, "Page 7", "The Power of vitals",
 				new ItemStack(ItemInit.null_ingot.get()), I18n.format(INTRO_PAGE_7)));
 
 		// Karma
-		KarmaPageList.add(new GuiTomePage(0, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
+
+		KarmaPageList.add(new GuiTomePage(1, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
 				new ItemStack(ItemInit.karmic_drop.get()), I18n.format(KARMA_PAGE_1)));
 
 		// World Gen
-		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
+
+		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
 				new ItemStack(BlockInit.mystic_earth.get()), I18n.format(WORLD_PAGE_1)));
-		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
+		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
 				new ItemStack(BlockInit.mystic_sapling.get()), I18n.format(WORLD_PAGE_2)));
-		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
+		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
 				new ItemStack(BlockInit.mystic_media.get()), I18n.format(WORLD_PAGE_3)));
-		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "Page 4", "Mysterious Mask",
+		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Page 4", "Mysterious Mask",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(WORLD_PAGE_4)));
-		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Page 5", "Nightmares",
+		WorldGenPageList.add(new GuiTomePage(5, EnumTomeCatagories.WORLDGEN, "Page 5", "Nightmares",
 				new ItemStack(BlockInit.nightmare_earth.get()), I18n.format(WORLD_PAGE_5)));
 
 		// Weapons and Armor
-		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
+		ArmorPageList.add(new GuiTomePage(1, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
 				new ItemStack(ItemInit.null_chestplate.get()), I18n.format(EQUIP_PAGE_1)));
 		// Machines
-		BlocksPageList.add(new GuiTomePage(0, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
+		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_3)));
-		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
+		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_4)));
-		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
+		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
 				new ItemStack(BlockInit.vibe_resonator.get()), I18n.format(MACHINE_PAGE_5)));
-		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
+		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_6)));
-		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
+		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
 				new ItemStack(BlockInit.wand_maker.get()), I18n.format(MACHINE_PAGE_8)));
-		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
+		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_7)));
 		// Generate
 		GeneratePageList
-				.add(new GuiTomePage(0, EnumTomeCatagories.GENERATION, "Mana Gathering", "It comes from the air",
+				.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Mana Gathering", "It comes from the air",
 						new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(GENERATION_PAGE_1)));
 		GeneratePageList
-				.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Karmic Altar", "Give some food, get power back",
+				.add(new GuiTomePage(2, EnumTomeCatagories.GENERATION, "Karmic Altar", "Give some food, get power back",
 						new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(GENERATION_PAGE_1)));
-		GeneratePageList.add(new GuiTomePage(2, EnumTomeCatagories.GENERATION, "Wave Generator", "Go with the Flow",
+		GeneratePageList.add(new GuiTomePage(3, EnumTomeCatagories.GENERATION, "Wave Generator", "Go with the Flow",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(GENERATION_PAGE_1)));
 		// Wands & Magic Gloves
-		WandsPageList.add(new GuiTomePage(0, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
+		WandsPageList.add(new GuiTomePage(1, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
 				new ItemStack(ItemInit.wand_consume_vibes.get()), I18n.format(WANDS_PAGE_1)));
 		// Runes
-		RunesPageList.add(new GuiTomePage(0, EnumTomeCatagories.RUNES, "Runes", "More than goodluck",
+
+		RunesPageList.add(new GuiTomePage(1, EnumTomeCatagories.RUNES, "Runes", "More than goodluck",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(RUNES_PAGE_1)));
-		RunesPageList.add(new GuiTomePage(1, EnumTomeCatagories.RUNES, "Runes cont.", "Etching your mind",
+		RunesPageList.add(new GuiTomePage(2, EnumTomeCatagories.RUNES, "Runes cont.", "Etching your mind",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(RUNES_PAGE_2)));
 
 		// Elder
-		ElderPageList.add(new GuiTomePage(0, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
+		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
 
 		// Adding Chapters
@@ -164,8 +166,28 @@ public class TomePageLib {
 		ChapterList.add(RunesPageList);
 		ChapterList.add(ElderPageList);
 
-		// TOC
+		// LEXICON PAGES
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.mana_powder.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.KARMA, new ItemStack(ItemInit.purging_stone.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WORLDGEN, new ItemStack(BlockInit.morel_mushroom.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.EQUIPS, new ItemStack(ItemInit.null_helmet.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.MACHINES, new ItemStack(BlockInit.vibe_resonator.get())));
+		TOCPageList
+				.add(new GuiTomePageTOC(EnumTomeCatagories.GENERATION, new ItemStack(ItemInit.emanating_ingot.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WANDS, new ItemStack(ItemInit.wand_consume_vibes.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.RUNES, new ItemStack(ItemInit.rune_milkweed_c.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.ELDER, new ItemStack(ItemInit.elder_helmet.get())));
+
+		IntroPageList.add(0, TOCPageList.get(0));
+		KarmaPageList.add(0, TOCPageList.get(1));
+		WorldGenPageList.add(0, TOCPageList.get(2));
+		ArmorPageList.add(0, TOCPageList.get(3));
+		BlocksPageList.add(0, TOCPageList.get(4));
+		GeneratePageList.add(0, TOCPageList.get(5));
+		WandsPageList.add(0, TOCPageList.get(6));
+		RunesPageList.add(0, TOCPageList.get(7));
+		ElderPageList.add(0, TOCPageList.get(8));
+
 	}
 
 	public static List<GuiTomePage> getIntroPageList() {

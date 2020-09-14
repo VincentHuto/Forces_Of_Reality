@@ -25,7 +25,7 @@ public class ItemTOCTome extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (worldIn.isRemote) {
-			Minecraft.getInstance().displayGuiScreen(new GuiTomePageTOC(EnumTomeCatagories.INTRO, stack));
+			Minecraft.getInstance().displayGuiScreen(new GuiTomePageTOC(EnumTomeCatagories.WORLDGEN, stack));
 		}
 		return new ActionResult<>(ActionResultType.SUCCESS, stack);
 	}

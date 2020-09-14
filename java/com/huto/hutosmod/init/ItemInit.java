@@ -56,8 +56,9 @@ public class ItemInit {
 			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> toc_tome = ITEMS.register("toc_tome",
-			() -> new ItemTOCTome(new Item.Properties().group(HutosModItemGroup.instance)));
+	//Testing purposes only
+/*	public static final RegistryObject<Item> toc_tome = ITEMS.register("toc_tome",
+			() -> new ItemTOCTome(new Item.Properties().group(HutosModItemGroup.instance)));*/
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
