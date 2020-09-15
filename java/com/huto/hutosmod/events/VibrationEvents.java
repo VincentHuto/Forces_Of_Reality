@@ -5,6 +5,7 @@ import com.huto.hutosmod.capabilities.IVibrations;
 import com.huto.hutosmod.capabilities.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VibrationPacketServer;
+import com.huto.hutosmod.objects.tileenties.TileModVibes;
 import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
 
 import net.minecraft.entity.Entity;
@@ -31,6 +32,9 @@ public class VibrationEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesTile(final AttachCapabilitiesEvent<TileEntity> event) {
 		if (event.getObject() instanceof TileVibeSimpleInventory) {
+			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "vibrations"), new VibrationProvider());
+		}
+		if (event.getObject() instanceof TileModVibes) {
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "vibrations"), new VibrationProvider());
 		}
 	}

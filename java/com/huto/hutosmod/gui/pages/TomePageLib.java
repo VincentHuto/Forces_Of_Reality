@@ -134,12 +134,12 @@ public class TomePageLib {
 		// Generate
 		GeneratePageList
 				.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Mana Gathering", "It comes from the air",
-						new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(GENERATION_PAGE_1)));
+						new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
 		GeneratePageList
 				.add(new GuiTomePage(2, EnumTomeCatagories.GENERATION, "Karmic Altar", "Give some food, get power back",
-						new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(GENERATION_PAGE_1)));
+						new ItemStack(BlockInit.karmic_altar.get()), I18n.format(GENERATION_PAGE_1)));
 		GeneratePageList.add(new GuiTomePage(3, EnumTomeCatagories.GENERATION, "Wave Generator", "Go with the Flow",
-				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(GENERATION_PAGE_1)));
+				new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
 		// Wands & Magic Gloves
 		WandsPageList.add(new GuiTomePage(1, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
 				new ItemStack(ItemInit.wand_consume_vibes.get()), I18n.format(WANDS_PAGE_1)));

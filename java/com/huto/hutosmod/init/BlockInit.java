@@ -2,11 +2,14 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
+import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
+import com.huto.hutosmod.objects.blocks.BlockVibeGatherer;
 import com.huto.hutosmod.objects.blocks.BlockVibeResonator;
 import com.huto.hutosmod.objects.blocks.BlockWandMaker;
+import com.huto.hutosmod.objects.blocks.BlockWaveGatherer;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -45,6 +48,12 @@ public class BlockInit {
 	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> vibe_resonator = BLOCKS.register("vibe_resonator", () -> new BlockVibeResonator(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> wave_gatherer = BLOCKS.register("wave_gatherer", () -> new BlockWaveGatherer(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibe_gatherer = BLOCKS.register("vibe_gatherer", () -> new BlockVibeGatherer(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> karmic_altar = BLOCKS.register("karmic_altar", () -> new BlockKarmicAltar(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	
 	// Mystic

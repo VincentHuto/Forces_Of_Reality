@@ -3,6 +3,7 @@ package com.huto.hutosmod.events;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityInit;
+import com.huto.hutosmod.render.tile.RenderKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderWandMaker;
 
@@ -42,6 +43,7 @@ public class ClientEventSubscriber {
 	public static void clientSetup(FMLClientSetupEvent event) {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_altar.get(), RenderKarmicAltar::new);
 
 	}
 	

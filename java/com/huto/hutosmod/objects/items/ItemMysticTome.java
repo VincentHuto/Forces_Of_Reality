@@ -11,6 +11,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
 public class ItemMysticTome extends Item {
@@ -24,6 +25,8 @@ public class ItemMysticTome extends Item {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (worldIn.isRemote) {
 			Minecraft.getInstance().displayGuiScreen(new GuiTomeTitle(false));
+			playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+
 		}
 		return new ActionResult<>(ActionResultType.SUCCESS, stack);
 	}
