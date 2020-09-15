@@ -11,32 +11,9 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileModMana extends TileEntity {
-	public TileModMana(TileEntityType<?> tileEntityTypeIn) {
+public class TileMod extends TileEntity {
+	public TileMod(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
-	}
-
-	float manaValue = 0.0F;
-	float maxMana = 0.0F;
-
-	public float getMaxMana() {
-		return maxMana;
-	}
-
-	public void setMaxMana(float maxMana) {
-		this.maxMana = maxMana;
-	}
-
-	public float getManaValue() {
-		return manaValue;
-	}
-
-	public void setManaValue(float manaValue) {
-		this.manaValue = manaValue;
-	}
-
-	public void addManaValue(float manaValue) {
-		this.manaValue += manaValue;
 	}
 
 	@Override

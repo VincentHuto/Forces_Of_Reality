@@ -111,5 +111,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> mystic_sapling = BLOCKS.register("mystic_sapling",
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-
+	public static final RegistryObject<Block> anti_sapling = BLOCKS.register("anti_sapling",
+			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
+					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 }

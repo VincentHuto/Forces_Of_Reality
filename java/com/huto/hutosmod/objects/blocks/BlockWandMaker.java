@@ -61,7 +61,8 @@ public class BlockWandMaker extends Block implements IActivatable {
 		TileEntityWandMaker te = (TileEntityWandMaker) worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(handIn);
 		if (player.isSneaking()) {
-			ModInventoryHelper.withdrawFromInventory(te, player);
+			ModInventoryVibeHelper.withdrawFromInventory(te, player);
+			;
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 
 			return ActionResultType.SUCCESS;
@@ -87,9 +88,12 @@ public class BlockWandMaker extends Block implements IActivatable {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-/*				world.addParticle(new GenericParticleData(false, 0.0f, 1.0f, 0.0f, 1.0f, 100), pos.getX() + 0.5f,
-							pos.getY() + 0.5f, pos.getZ() + 0.5f, 0.0f, 0.0f, 0.0f);*/
-				world.addParticle((BasicParticleType) ParticleInit.RADIATION.getParticleType(), randX, randY, randZ,
+					/*
+					 * world.addParticle(new GenericParticleData(false, 0.0f, 1.0f, 0.0f, 1.0f,
+					 * 100), pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 0.0f, 0.0f,
+					 * 0.0f);
+					 */
+					world.addParticle((BasicParticleType) ParticleInit.RADIATION.getParticleType(), randX, randY, randZ,
 							0, 0, 0);
 
 				}

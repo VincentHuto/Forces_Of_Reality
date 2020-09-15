@@ -15,7 +15,6 @@ import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemRune;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
-import com.huto.hutosmod.objects.items.ItemTOCTome;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
 
@@ -56,9 +55,12 @@ public class ItemInit {
 			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
-	//Testing purposes only
-/*	public static final RegistryObject<Item> toc_tome = ITEMS.register("toc_tome",
-			() -> new ItemTOCTome(new Item.Properties().group(HutosModItemGroup.instance)));*/
+	// Testing purposes only
+	/*
+	 * public static final RegistryObject<Item> toc_tome =
+	 * ITEMS.register("toc_tome", () -> new ItemTOCTome(new
+	 * Item.Properties().group(HutosModItemGroup.instance)));
+	 */
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -96,6 +98,20 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Materials
+	// Gems
+	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> gem_ruby = ITEMS.register("gem_ruby",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> gem_onyx = ITEMS.register("gem_onyx",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> gem_sapphire = ITEMS.register("gem_sapphire",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> gem_topaz = ITEMS.register("gem_topaz",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> gem_amethyst = ITEMS.register("gem_amethyst",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
 	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> phantasmal_pane = ITEMS.register("phantasmal_pane",

@@ -64,7 +64,7 @@ public class BlockVibeResonator extends Block implements IActivatable {
 		TileEntityVibeResonator te = (TileEntityVibeResonator) worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(handIn);
 		if (player.isSneaking()) {
-			ModInventoryHelper.withdrawFromInventory(te, player);
+			ModInventoryVibeHelper.withdrawFromInventory(te, player);;
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 
 			return ActionResultType.SUCCESS;
@@ -86,7 +86,6 @@ public class BlockVibeResonator extends Block implements IActivatable {
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
 			boolean isMoving) {
-		System.out.println("Test1");
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te instanceof TileEntityVibeResonator) {
 			((TileEntityVibeResonator) te).checkStructure();
@@ -151,7 +150,6 @@ public class BlockVibeResonator extends Block implements IActivatable {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-		// TODO Auto-generated method stub
 		super.onBlockClicked(state, worldIn, pos, player);
 	}
 

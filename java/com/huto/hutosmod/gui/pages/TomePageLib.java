@@ -82,20 +82,19 @@ public class TomePageLib {
 		TOCPageList.clear();
 
 		// Intro
-
-		IntroPageList.add(new GuiTomePage(1, EnumTomeCatagories.INTRO, "Page 1", "In the Begining",
+		IntroPageList.add(new GuiTomePage(1, EnumTomeCatagories.INTRO, "In the Begining", "It Started Somewhere",
 				new ItemStack(ItemInit.channeling_ingot.get()), I18n.format(INTRO_PAGE_1)));
-		IntroPageList.add(new GuiTomePage(2, EnumTomeCatagories.INTRO, "Page 2", "Duality of Nature",
+		IntroPageList.add(new GuiTomePage(2, EnumTomeCatagories.INTRO, "Duality of Nature", "Yin and Yang",
 				new ItemStack(ItemInit.magatamabead.get()), I18n.format(INTRO_PAGE_2)));
-		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Page 3", "Cosmic Vibrations",
+		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Vibes", "Cosmic Vibrations",
 				new ItemStack(ItemInit.energy_focus.get()), I18n.format(INTRO_PAGE_3)));
-		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "Page 4", "A World of essence",
+		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "A World of Essence", "Only the Essentials",
 				new ItemStack(ItemInit.essence_drop.get()), I18n.format(INTRO_PAGE_4)));
-		IntroPageList.add(new GuiTomePage(5, EnumTomeCatagories.INTRO, "Page 5", "Channeling Basics",
+		IntroPageList.add(new GuiTomePage(5, EnumTomeCatagories.INTRO, "Channeling Basics", "Use the Force",
 				new ItemStack(ItemInit.channeling_rod.get()), I18n.format(INTRO_PAGE_5)));
-		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Page 6", "Nullification",
+		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Nullification", "Counter Attack",
 				new ItemStack(ItemInit.null_crystal.get()), I18n.format(INTRO_PAGE_6)));
-		IntroPageList.add(new GuiTomePage(7, EnumTomeCatagories.INTRO, "Page 7", "The Power of vitals",
+		IntroPageList.add(new GuiTomePage(7, EnumTomeCatagories.INTRO, "Vital Essence", "The Power of Vitals",
 				new ItemStack(ItemInit.null_ingot.get()), I18n.format(INTRO_PAGE_7)));
 
 		// Karma
@@ -105,19 +104,19 @@ public class TomePageLib {
 
 		// World Gen
 
-		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
+		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "The World", "Its all Natural!",
 				new ItemStack(BlockInit.mystic_earth.get()), I18n.format(WORLD_PAGE_1)));
-		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
+		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Plants", "Vibrational Flora",
 				new ItemStack(BlockInit.mystic_sapling.get()), I18n.format(WORLD_PAGE_2)));
-		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
+		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "DreamScape","Page 3" ,
 				new ItemStack(BlockInit.mystic_media.get()), I18n.format(WORLD_PAGE_3)));
-		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Page 4", "Mysterious Mask",
+		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Access", "Mysterious Mask",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(WORLD_PAGE_4)));
-		WorldGenPageList.add(new GuiTomePage(5, EnumTomeCatagories.WORLDGEN, "Page 5", "Nightmares",
+		WorldGenPageList.add(new GuiTomePage(5, EnumTomeCatagories.WORLDGEN, "Nightmares","The Bad Place" ,
 				new ItemStack(BlockInit.nightmare_earth.get()), I18n.format(WORLD_PAGE_5)));
 
 		// Weapons and Armor
-		ArmorPageList.add(new GuiTomePage(1, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
+		ArmorPageList.add(new GuiTomePage(1, EnumTomeCatagories.EQUIPS, "Equipables", "Form AND Function",
 				new ItemStack(ItemInit.null_chestplate.get()), I18n.format(EQUIP_PAGE_1)));
 		// Machines
 		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
@@ -152,7 +151,7 @@ public class TomePageLib {
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(RUNES_PAGE_2)));
 
 		// Elder
-		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
+		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, "The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
 
 		// Adding Chapters

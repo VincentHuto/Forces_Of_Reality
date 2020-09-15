@@ -2,7 +2,6 @@ package com.huto.hutosmod.gui.pages;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.events.ClientEventSubscriber;
@@ -29,19 +28,16 @@ public class GuiTomePageTOC extends GuiTomePage {
 	int guiHeight = 228;
 	int left, top;
 	final int ARROWF = 0, ARROWB = 1, TITLEBUTTON = 2, CLOSEBUTTON = 3;
-
-	GuiButtonArrowForward arrowF;
-	GuiButtonArrowBackward arrowB;
+	GuiButtonBookArrow arrowF;
+	GuiButtonBookArrow arrowB;
 	GuiButtonTextured buttonTitle;
 	GuiButtonTextured buttonCloseTab;
 	GuiButtonTextured buttonTOC;
 	public static List<GuiTomePage> chapterPages = new ArrayList<GuiTomePage>();
 	GuiButtonTextured[] buttonArray = new GuiButtonTextured[chapterPages.size()];
 	public static List<GuiButtonTextured> buttonList = new ArrayList<GuiButtonTextured>();
-
 	ItemStack icon;
 	EnumTomeCatagories catagory;
-	static StringTextComponent titleComponent = new StringTextComponent("");
 
 	@OnlyIn(Dist.CLIENT)
 	public GuiTomePageTOC(EnumTomeCatagories catagoryIn, ItemStack iconIn) {
@@ -110,16 +106,14 @@ public class GuiTomePageTOC extends GuiTomePage {
 			GlStateManager.scalef(1.9f, 1.7f, 1.9f);
 			RenderHelper.enableStandardItemLighting();
 			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(icon, 0, 2);
-			
-			
-			
+
 		}
 		GlStateManager.popMatrix();
 
 		List<ITextComponent> text = new ArrayList<ITextComponent>();
 		text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
 		func_243308_b(matrixStack, text, centerX, centerY);
-		
+
 		List<ITextComponent> titlePage = new ArrayList<ITextComponent>();
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));
@@ -133,10 +127,6 @@ public class GuiTomePageTOC extends GuiTomePage {
 		}
 	}
 
-	static Minecraft mc = Minecraft.getInstance();
-	static int count = 0;
-	static AtomicInteger atomInt = new AtomicInteger(0);
-
 	@Override
 	protected void init() {
 		left = width / 2 - guiWidth / 2;
@@ -146,15 +136,19 @@ public class GuiTomePageTOC extends GuiTomePage {
 		buttons.clear();
 		buttonList.clear();
 		checkChapter();
-
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					buttonUseCheck(buttonTitle);
+					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
+							.get()) {
+						mc.displayGuiScreen(new GuiTomeTitle(true));
+					} else {
+						mc.displayGuiScreen(new GuiTomeTitle(false));
+					}
 				}));
 
 		this.addButton(buttonCloseTab = new GuiButtonTextured(texture, CLOSEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 193, 24, 16, 174, 64, null, (press) -> {
-					buttonUseCheck(buttonCloseTab);
+					this.closeScreen();
 				}));
 
 		for (int i = 0; i < chapterPages.size(); i++) {
@@ -174,31 +168,55 @@ public class GuiTomePageTOC extends GuiTomePage {
 			this.addButton(buttonList.get(i));
 		}
 
-		this.addButton(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10,
-				new IPressable() {
+		this.addButton(arrowF = new GuiButtonBookArrow(ARROWF, left + guiWidth - 18, top + guiHeight - 10, 16, 14, 175,
+				1, new IPressable() {
 					@Override
 					public void onPress(Button p_onPress_1_) {
 						mc.displayGuiScreen(getMatchingChapter().get(1));
 					}
 				}));
-		this.addButton(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10, new IPressable() {
-			@Override
-			public void onPress(Button p_onPress_1_) {
-				if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
-						.get()) {
-					mc.displayGuiScreen(new GuiTomeTitle(true));
-				} else {
-					mc.displayGuiScreen(new GuiTomeTitle(false));
-
-				}
-			}
-		}));
+		this.addButton(
+				arrowB = new GuiButtonBookArrow(ARROWB, left, top + guiHeight - 10, 16, 14, 192, 1, new IPressable() {
+					@Override
+					public void onPress(Button p_onPress_1_) {
+						if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand()
+								.getItem() == ItemInit.elder_tome.get()) {
+							mc.displayGuiScreen(new GuiTomeTitle(true));
+						} else {
+							mc.displayGuiScreen(new GuiTomeTitle(false));
+						}
+					}
+				}));
 
 	}
 
 	@Override
 	public boolean isPauseScreen() {
 		return false;
+	}
+
+	@Override
+	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+		for (IGuiEventListener iguieventlistener : this.getEventListeners()) {
+			if (iguieventlistener.mouseClicked(mouseX, mouseY, mouseButton)) {
+				this.setListener(iguieventlistener);
+				if (mouseButton == 0) {
+					this.setDragging(true);
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void tableButtonCheck(int page) {
+		mc.displayGuiScreen(this.getMatchingChapter().get(page));
+
 	}
 
 	public void checkChapter() {
@@ -234,32 +252,6 @@ public class GuiTomePageTOC extends GuiTomePage {
 			break;
 
 		}
-	}
-
-	@Override
-	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
-		for (IGuiEventListener iguieventlistener : this.getEventListeners()) {
-			if (iguieventlistener.mouseClicked(mouseX, mouseY, mouseButton)) {
-				this.setListener(iguieventlistener);
-				if (mouseButton == 0) {
-					this.setDragging(true);
-				}
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public void tableButtonCheck(int page) {
-		mc.displayGuiScreen(this.getMatchingChapter().get(page));
-
 	}
 
 	public List<GuiTomePage> getMatchingChapter() {

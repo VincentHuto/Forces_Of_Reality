@@ -4,8 +4,11 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 
 public class GuiButtonTextured extends Button {
@@ -15,7 +18,8 @@ public class GuiButtonTextured extends Button {
 	boolean state;
 	protected Button.ITooltip onTooltip;
 	public static ITextComponent text;
-	public  Button.IPressable action;
+	public Button.IPressable action;
+
 	public GuiButtonTextured(ResourceLocation texIn, int idIn, int posXIn, int posYIn, int buttonWidthIn,
 			int buttonHeightIn, int uIn, int vIn, Button.ITooltip tooltip, Button.IPressable actionIn) {
 		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, actionIn, tooltip);
@@ -52,11 +56,13 @@ public class GuiButtonTextured extends Button {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void renderButton(MatrixStack matrix, int mouseX, int mouseY, float particks) {
 		if (visible) {
 			GlStateManager.enableAlphaTest();
-			GlStateManager.enableBlend();;
+			GlStateManager.enableBlend();
+			;
 
 			Minecraft.getInstance().getTextureManager().bindTexture(texture);
 			if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || state) {
@@ -86,6 +92,12 @@ public class GuiButtonTextured extends Button {
 			}
 		}
 
+	}
+
+	// Stops the clicking noise when the page turn button is pressed
+	@Override
+	public void playDownSound(SoundHandler handler) {
+		handler.play(SimpleSound.master(SoundEvents.ITEM_BOOK_PUT, 1.0f, 1F));
 	}
 
 	public Button.IPressable getAction() {

@@ -18,7 +18,6 @@ public class VibrationStorage implements IStorage<IVibrations> {
 	public void readNBT(Capability<IVibrations> capability, IVibrations instance, Direction side, INBT nbt) {
 		   if (!(instance instanceof Vibrations))
 	            throw new IllegalArgumentException("Can not deserialize to an instance that isn't the default implementation");
-
 	        instance.setVibes(((FloatNBT)nbt).getFloat());
 	    }
 }

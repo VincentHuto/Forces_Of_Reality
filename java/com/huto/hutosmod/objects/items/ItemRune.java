@@ -54,7 +54,6 @@ public class ItemRune extends Item {
 		CompoundNBT compound = stack.getTag();
 		compound.putInt(TAG_LEVEL, this.getLevel());
 
-		int lev = compound.getInt(TAG_LEVEL);
 		playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
 		compound.putInt(TAG_LEVEL, level++);
 		stack.setTag(compound);

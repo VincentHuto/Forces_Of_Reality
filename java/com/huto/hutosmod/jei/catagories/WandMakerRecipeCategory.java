@@ -20,10 +20,13 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 public class WandMakerRecipeCategory implements IRecipeCategory<RecipeWandMaker> {
 
@@ -87,6 +90,12 @@ public class WandMakerRecipeCategory implements IRecipeCategory<RecipeWandMaker>
 		GlStateManager.enableAlphaTest();
 		GlStateManager.enableBlend();
 		overlay.draw(matrixStack);
+		matrixStack.translate(25, 90, 0);
+		// TileEntityVibeResonator te = new TileEntityVibeResonator();
+		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
+		fontRenderer.drawString(matrixStack,
+				"Vibrational Cost: " + TextFormatting.ITALIC + Float.toString(recipe.getManaUsage()), 0,
+				(int) (fontRenderer.FONT_HEIGHT), 0);
 		GlStateManager.disableBlend();
 		GlStateManager.disableAlphaTest();
 	}

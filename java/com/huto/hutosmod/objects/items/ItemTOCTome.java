@@ -3,7 +3,6 @@ package com.huto.hutosmod.objects.items;
 
 import com.huto.hutosmod.gui.pages.EnumTomeCatagories;
 import com.huto.hutosmod.gui.pages.GuiTomePageTOC;
-import com.huto.hutosmod.gui.pages.GuiTomeTitle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;

@@ -83,17 +83,6 @@ public class ItemRepulsionCharm extends Item {
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
-	/*
-	 * @Override public ActionResultType onItemUse(ItemUseContext context) {
-	 * ItemStack stack = context.getPlayer().getHeldItemMainhand(); if
-	 * (!stack.hasTag()) { stack.setTag(new CompoundNBT()); CompoundNBT compound =
-	 * stack.getTag(); compound.putBoolean(TAG_STATE, false); } CompoundNBT compound
-	 * = stack.getTag(); if (!compound.getBoolean(TAG_STATE)) {
-	 * compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE)); } else {
-	 * compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE)); }
-	 * stack.setTag(compound); return super.onItemUse(context); }
-	 */
-
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);

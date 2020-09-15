@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.capabilities.IVibrations;
+import com.huto.hutosmod.capabilities.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
@@ -25,7 +27,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityVibeResonator extends TileManaSimpleInventory implements ITickableTileEntity {
+public class TileEntityVibeResonator extends TileVibeSimpleInventory implements ITickableTileEntity {
 	int cooldown = 0;
 	List<ItemStack> lastRecipe = null;
 	RecipeResonator currentRecipe;
@@ -34,6 +36,7 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	public static EnumEssecenceType resonantState;
+	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 
 	public TileEntityVibeResonator() {
 		super(TileEntityInit.vibe_resonator.get());
@@ -42,9 +45,7 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 	@Override
 	public void onLoad() {
 		super.onLoad();
-		this.setMaxMana(300);
 	}
-	
 
 	public void checkStructure() {
 		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
@@ -131,6 +132,8 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 				cooldown--;
 			}
 		}
+		vibes.addVibes(3);
+		System.out.println(vibes.getVibes());
 	}
 
 	@Override
@@ -146,7 +149,6 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
 		return 4;
 	}
 
@@ -190,8 +192,6 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 	}
 
 	public void onWanded(PlayerEntity player, ItemStack wand) {
-		if (world.isRemote)
-			return;
 
 		RecipeResonator recipe = null;
 		if (currentRecipe != null)
@@ -205,7 +205,8 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 				}
 			}
 
-		if (recipe != null && manaValue >= recipe.getManaUsage() && getResonantState() == recipe.getRecipeType()) {
+		if (recipe != null && vibes.getVibes() >= recipe.getManaUsage()
+				&& getResonantState() == recipe.getRecipeType()) {
 
 			ItemStack output = recipe.getOutput().copy();
 			ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
@@ -213,7 +214,7 @@ public class TileEntityVibeResonator extends TileManaSimpleInventory implements 
 				world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 			world.addEntity(outputItem);
-			manaValue -= recipe.getManaUsage();
+			vibes.setVibes(vibes.getVibes() - recipe.getManaUsage());
 			currentRecipe = null;
 			world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
 			world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);

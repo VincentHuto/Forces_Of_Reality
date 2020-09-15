@@ -1,7 +1,7 @@
 
 package com.huto.hutosmod.objects.blocks;
 
-import com.huto.hutosmod.objects.tileenties.TileManaSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +13,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-public class ModInventoryHelper {
+public class ModInventoryVibeHelper {
 
 	public static InvWithLocation getInventoryWithLocation(World world, BlockPos pos) {
 		IItemHandler ret = getInventory(world, pos);
@@ -34,7 +34,7 @@ public class ModInventoryHelper {
 				return ret;
 	}
 
-	public static void dropInventory(TileManaSimpleInventory inv, World world, BlockState state, BlockPos pos) {
+	public static void dropInventory(TileVibeSimpleInventory inv, World world, BlockState state, BlockPos pos) {
 		if(inv != null) {
 			for(int j1 = 0; j1 < inv.getSizeInventory(); ++j1) {
 				ItemStack itemstack = inv.getItemHandler().getStackInSlot(j1);
@@ -47,22 +47,8 @@ public class ModInventoryHelper {
 			world.updateComparatorOutputLevel(pos, state.getBlock());
 		}
 	}
-	
-/*	public static void dropInventory(TileEntitySimpleInventory inv, World world, BlockState state, BlockPos pos) {
-		if(inv != null) {
-			for(int j1 = 0; j1 < inv.getSizeInventory(); ++j1) {
-				ItemStack itemstack = inv.getItemHandler().getStackInSlot(j1);
 
-				if(!itemstack.isEmpty()) {
-					net.minecraft.inventory.InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), itemstack);
-				}
-			}
-
-			world.updateComparatorOutputLevel(pos, state.getBlock());
-		}
-	}*/
-
-	public static void withdrawFromInventory(TileManaSimpleInventory inv, PlayerEntity player) {
+	public static void withdrawFromInventory(TileVibeSimpleInventory inv, PlayerEntity player) {
 		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
 			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
 			if(!stackAt.isEmpty()) {
@@ -74,20 +60,8 @@ public class ModInventoryHelper {
 			}
 		}
 	}
-/*	
-	public static void withdrawFromInventory(TileEntitySimpleInventory inv, EntityPlayer player) {
-		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
-			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
-			if(!stackAt.isEmpty()) {
-				ItemStack copy = stackAt.copy();
-				ItemHandlerHelper.giveItemToPlayer(player, copy);
-				inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
-				player.world.updateComparatorOutputLevel(inv.getPos(), null);
-				break;
-			}
-		}
-	}*/
-	public static void withdrawFromInventoryToInventory(TileManaSimpleInventory inv, IItemHandler inventory) {
+
+	public static void withdrawFromInventoryToInventory(TileVibeSimpleInventory inv, IItemHandler inventory) {
 		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
 			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
 			if(!stackAt.isEmpty()) {

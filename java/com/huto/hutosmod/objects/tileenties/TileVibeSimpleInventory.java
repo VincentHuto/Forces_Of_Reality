@@ -16,26 +16,23 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileManaSimpleInventory extends TileModMana {
+public abstract class TileVibeSimpleInventory extends TileMod {
 
-	public TileManaSimpleInventory(TileEntityType<?> tileEntityTypeIn) {
+	public TileVibeSimpleInventory(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 
 	protected SimpleItemStackHandler itemHandler = createItemHandler();
-	private static final String TAG_MANA = "mana";
 
 	@Override
 	public void readPacketNBT(CompoundNBT par1CompoundNBT) {
 		itemHandler = createItemHandler();
 		itemHandler.deserializeNBT(par1CompoundNBT);
-		manaValue = par1CompoundNBT.getFloat(TAG_MANA);
 	}
 
 	@Override
 	public void writePacketNBT(CompoundNBT par1CompoundNBT) {
 		par1CompoundNBT.merge(itemHandler.serializeNBT());
-		par1CompoundNBT.putFloat(TAG_MANA, manaValue);
 
 	}
 
@@ -100,9 +97,9 @@ public abstract class TileManaSimpleInventory extends TileModMana {
 	protected static class SimpleItemStackHandler extends ItemStackHandler {
 
 		private final boolean allowWrite;
-		private final TileManaSimpleInventory tile;
+		private final TileVibeSimpleInventory tile;
 
-		public SimpleItemStackHandler(TileManaSimpleInventory inv, boolean allowWrite) {
+		public SimpleItemStackHandler(TileVibeSimpleInventory inv, boolean allowWrite) {
 			super(inv.getSizeInventory());
 			this.allowWrite = allowWrite;
 			tile = inv;

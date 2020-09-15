@@ -5,10 +5,12 @@ import com.huto.hutosmod.capabilities.IVibrations;
 import com.huto.hutosmod.capabilities.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VibrationPacketServer;
+import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -25,6 +27,13 @@ public class VibrationEvents {
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "vibrations"), new VibrationProvider());
 		}
 	}
+	
+	@SubscribeEvent
+	public static void attachCapabilitiesTile(final AttachCapabilitiesEvent<TileEntity> event) {
+		if (event.getObject() instanceof TileVibeSimpleInventory) {
+			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "vibrations"), new VibrationProvider());
+		}
+	}
 
 	@SubscribeEvent
 	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
@@ -36,14 +45,14 @@ public class VibrationEvents {
 	}
 
 	public static void playerDeath(PlayerEvent.Clone event) {
-		IVibrations currencyOld = event.getOriginal().getCapability(VibrationProvider.VIBE_CAPA)
+		IVibrations vibesOld = event.getOriginal().getCapability(VibrationProvider.VIBE_CAPA)
 				.orElseThrow(IllegalStateException::new);
-		IVibrations currencyNew = event.getEntity().getCapability(VibrationProvider.VIBE_CAPA)
+		IVibrations vibesNew = event.getEntity().getCapability(VibrationProvider.VIBE_CAPA)
 				.orElseThrow(IllegalStateException::new);
-		currencyNew.setVibes(currencyOld.getVibes() - 20f);
+		vibesNew.setVibes(vibesOld.getVibes() - 20f);
 		((PlayerEntity) event.getEntity()).sendStatusMessage(
 				new StringTextComponent(TextFormatting.ITALIC + "Upon death, your resonance has decreased to: "
-						+ TextFormatting.RED + TextFormatting.ITALIC + currencyNew.getVibes() + "Hz"),
+						+ TextFormatting.RED + TextFormatting.ITALIC + vibesNew.getVibes() + "Hz"),
 				false);
 	}
 }

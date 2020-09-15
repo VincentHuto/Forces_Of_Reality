@@ -5,12 +5,14 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.StringTextComponent;
 
-public class GuiButtonArrowForward extends Button {
+public class GuiButtonBookArrow extends Button {
 
 	final ResourceLocation texture = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/book.png");
 
@@ -20,9 +22,14 @@ public class GuiButtonArrowForward extends Button {
 	int v = 1;
 	public int id;
 
-	public GuiButtonArrowForward(int idIn, int x, int y, Button.IPressable pressedAction) {
-		super(x, y, 16, 14, new StringTextComponent(""), pressedAction);
+	public GuiButtonBookArrow(int idIn, int x, int y, int widthIn, int heightIn, int uIn, int vIn,
+			Button.IPressable pressedAction) {
+		super(x, y, widthIn, heightIn, new StringTextComponent(""), pressedAction);
+		this.buttonWidth = widthIn;
+		this.buttonHeight = heightIn;
 		this.id = idIn;
+		this.u = uIn;
+		this.v =vIn;
 
 	}
 
@@ -45,6 +52,12 @@ public class GuiButtonArrowForward extends Button {
 			}
 			GuiUtil.drawTexturedModalRect(x, y, u, v, width, height);
 		}
+	}
+
+	// Stops the clicking noise when the page turn button is pressed
+	@Override
+	public void playDownSound(SoundHandler handler) {
+		handler.play(SimpleSound.master(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0f, 1F));
 	}
 
 	public int getId() {
