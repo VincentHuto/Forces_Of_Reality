@@ -1,8 +1,6 @@
-package com.huto.hutosmod.events;
+package com.huto.hutosmod.capabilities.vibes;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.capabilities.IVibrations;
-import com.huto.hutosmod.capabilities.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VibrationPacketServer;
 import com.huto.hutosmod.objects.tileenties.TileModVibes;
@@ -43,11 +41,12 @@ public class VibrationEvents {
 	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
 		float amount = VibrationProvider.getPlayerVibes(player);
-		PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new VibrationPacketServer(amount));
+		PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> player), new VibrationPacketServer(amount));
 		player.sendStatusMessage(
 				new StringTextComponent("Welcome! Current Resonance: " + TextFormatting.GOLD + amount + "Hz"), false);
 	}
 
+	@SubscribeEvent
 	public static void playerDeath(PlayerEvent.Clone event) {
 		IVibrations vibesOld = event.getOriginal().getCapability(VibrationProvider.VIBE_CAPA)
 				.orElseThrow(IllegalStateException::new);

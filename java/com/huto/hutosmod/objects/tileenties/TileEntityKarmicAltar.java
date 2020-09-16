@@ -6,8 +6,8 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.huto.hutosmod.capabilities.IVibrations;
-import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
@@ -19,7 +19,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.world.gen.feature.WorldDecoratingHelper;
 
 public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements ITickableTileEntity {
 
@@ -61,10 +60,10 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public int count = 0;
 	boolean consumed = false;
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("unused")
 	@Override
+	
 	public void tick() {
-		
 		Random rand = new Random();
 		double xpos = pos.getX() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
 		double ypos = pos.getY() + 1.3;
@@ -80,7 +79,6 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 				addItem(null, stack, null);
 			}
 
-		// After the cooldown counter is done consume the item and add mana
 		if (cooldown == 0) {
 			if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY) {
 				itemHandler.setStackInSlot(0, ItemStack.EMPTY);
@@ -109,7 +107,6 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 		if (cooldown > 0) {
 			cooldown--;
 		}
-		System.out.println(vibes.getVibes());
 	}
 
 	@Override

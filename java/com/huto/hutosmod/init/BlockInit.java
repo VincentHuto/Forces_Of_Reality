@@ -8,6 +8,7 @@ import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockVibeGatherer;
 import com.huto.hutosmod.objects.blocks.BlockVibeResonator;
+import com.huto.hutosmod.objects.blocks.BlockVirtuousEnchant;
 import com.huto.hutosmod.objects.blocks.BlockWandMaker;
 import com.huto.hutosmod.objects.blocks.BlockWaveGatherer;
 
@@ -55,7 +56,8 @@ public class BlockInit {
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> karmic_altar = BLOCKS.register("karmic_altar", () -> new BlockKarmicAltar(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+	public static final RegistryObject<Block> virtuous_enchanter = BLOCKS.register("virtuous_enchanter", () -> new BlockVirtuousEnchant(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Mystic
 	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)

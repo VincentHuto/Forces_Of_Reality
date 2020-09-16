@@ -70,38 +70,37 @@ public class BlockPassionFlower extends BushBlock implements IGrowable {
 		return state.isOpaqueCube(worldIn, pos);
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.down();
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.isIn(BlockTags.field_242171_aD)) {
-			return true;
-		} else {
-			return worldIn.getLightSubtracted(pos, 0) < 13
-					&& blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
-		}
-	}
+	   public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		      BlockPos blockpos = pos.down();
+		      BlockState blockstate = worldIn.getBlockState(blockpos);
+		      if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		         return true;
+		      } else {
+		         return worldIn.getLightSubtracted(pos, 0) < 13 && blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
+		      }
+		   }
 
-	public boolean grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
-		world.removeBlock(pos, false);
-		ConfiguredFeature<?, ?> configuredfeature;
-		if (this == Blocks.BROWN_MUSHROOM) {
-			configuredfeature = Features.field_243860_bF;
-		} else {
-			if (this != Blocks.RED_MUSHROOM) {
-				world.setBlockState(pos, state, 3);
-				return false;
-			}
+		   public boolean grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
+		      world.removeBlock(pos, false);
+		      ConfiguredFeature<?, ?> configuredfeature;
+		      if (this == Blocks.BROWN_MUSHROOM) {
+		         configuredfeature = Features.HUGE_BROWN_MUSHROOM;
+		      } else {
+		         if (this != Blocks.RED_MUSHROOM) {
+		            world.setBlockState(pos, state, 3);
+		            return false;
+		         }
 
-			configuredfeature = Features.field_243861_bG;
-		}
+		         configuredfeature = Features.HUGE_RED_MUSHROOM;
+		      }
 
-		if (configuredfeature.func_242765_a(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
-			return true;
-		} else {
-			world.setBlockState(pos, state, 3);
-			return false;
-		}
-	}
+		      if (configuredfeature.func_242765_a(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
+		         return true;
+		      } else {
+		         world.setBlockState(pos, state, 3);
+		         return false;
+		      }
+		   }
 
 	/**
 	 * Whether this IGrowable can grow

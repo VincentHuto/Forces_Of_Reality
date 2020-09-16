@@ -1,6 +1,7 @@
 package com.huto.hutosmod.gui.pages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.huto.hutosmod.init.BlockInit;
@@ -66,6 +67,7 @@ public class TomePageLib {
 	public static String KARMA_PAGE_1 = "title.mystictome.karma.page.1.text";
 	// Elder
 	public static String ELDER_PAGE_1 = "title.mystictome.elder.page.1.text";
+	public static String ELDER_PAGE_2 = "title.mystictome.elder.page.2.text";
 
 	public static void registerPages() {
 
@@ -108,11 +110,11 @@ public class TomePageLib {
 				new ItemStack(BlockInit.mystic_earth.get()), I18n.format(WORLD_PAGE_1)));
 		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Plants", "Vibrational Flora",
 				new ItemStack(BlockInit.mystic_sapling.get()), I18n.format(WORLD_PAGE_2)));
-		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "DreamScape","Page 3" ,
+		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "DreamScape", "Page 3",
 				new ItemStack(BlockInit.mystic_media.get()), I18n.format(WORLD_PAGE_3)));
 		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Access", "Mysterious Mask",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(WORLD_PAGE_4)));
-		WorldGenPageList.add(new GuiTomePage(5, EnumTomeCatagories.WORLDGEN, "Nightmares","The Bad Place" ,
+		WorldGenPageList.add(new GuiTomePage(5, EnumTomeCatagories.WORLDGEN, "Nightmares", "The Bad Place",
 				new ItemStack(BlockInit.nightmare_earth.get()), I18n.format(WORLD_PAGE_5)));
 
 		// Weapons and Armor
@@ -132,14 +134,13 @@ public class TomePageLib {
 		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_7)));
 		// Generate
-		GeneratePageList
-				.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Mana Gathering", "It comes from the air",
-						new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
+		GeneratePageList.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Mana Gathering",
+				"It comes from the air", new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
 		GeneratePageList
 				.add(new GuiTomePage(2, EnumTomeCatagories.GENERATION, "Karmic Altar", "Give some food, get power back",
 						new ItemStack(BlockInit.karmic_altar.get()), I18n.format(GENERATION_PAGE_1)));
 		GeneratePageList.add(new GuiTomePage(3, EnumTomeCatagories.GENERATION, "Wave Generator", "Go with the Flow",
-				new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
+				new ItemStack(BlockInit.wave_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
 		// Wands & Magic Gloves
 		WandsPageList.add(new GuiTomePage(1, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
 				new ItemStack(ItemInit.wand_consume_vibes.get()), I18n.format(WANDS_PAGE_1)));
@@ -153,19 +154,14 @@ public class TomePageLib {
 		// Elder
 		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, "The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
+		ElderPageList.add(new GuiTomePage(2, EnumTomeCatagories.ELDER, "Gem Enchanting", "Virtuosity at its finest",
+				new ItemStack(BlockInit.virtuous_enchanter.get()), I18n.format(ELDER_PAGE_2)));
 
-		// Adding Chapters
-		ChapterList.add(IntroPageList);
-		ChapterList.add(KarmaPageList);
-		ChapterList.add(WorldGenPageList);
-		ChapterList.add(ArmorPageList);
-		ChapterList.add(BlocksPageList);
-		ChapterList.add(GeneratePageList);
-		ChapterList.add(WandsPageList);
-		ChapterList.add(RunesPageList);
-		ChapterList.add(ElderPageList);
+		//Adding Chapters
+		Collections.addAll(ChapterList, IntroPageList, KarmaPageList, WorldGenPageList, WorldGenPageList, ArmorPageList,
+				BlocksPageList, GeneratePageList, WandsPageList, RunesPageList, ElderPageList);
 
-		// LEXICON PAGES
+		//TOC PAGES
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.mana_powder.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.KARMA, new ItemStack(ItemInit.purging_stone.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WORLDGEN, new ItemStack(BlockInit.morel_mushroom.get())));
@@ -177,6 +173,7 @@ public class TomePageLib {
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.RUNES, new ItemStack(ItemInit.rune_milkweed_c.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.ELDER, new ItemStack(ItemInit.elder_helmet.get())));
 
+		// Adding the table of contents to each chapter
 		IntroPageList.add(0, TOCPageList.get(0));
 		KarmaPageList.add(0, TOCPageList.get(1));
 		WorldGenPageList.add(0, TOCPageList.get(2));

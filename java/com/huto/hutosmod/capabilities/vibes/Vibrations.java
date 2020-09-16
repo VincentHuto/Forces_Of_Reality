@@ -1,4 +1,4 @@
-package com.huto.hutosmod.capabilities;
+package com.huto.hutosmod.capabilities.vibes;
 
 public class Vibrations implements IVibrations {
 	private float vibes = 0.0F;

@@ -2,7 +2,7 @@ package com.huto.hutosmod.network;
 
 import java.util.function.Supplier;
 
-import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.ServerPlayerEntity;

@@ -1,7 +1,7 @@
 package com.huto.hutosmod.objects.tileenties;
 
-import com.huto.hutosmod.capabilities.IVibrations;
-import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 	public void tick() {
 		if (checkStructure() && vibes.getVibes() < 100) {
 			vibes.addVibes(0.2f);
-			System.out.println(vibes.getVibes());
+			//System.out.println(vibes.getVibes());
 		}
 	}
 

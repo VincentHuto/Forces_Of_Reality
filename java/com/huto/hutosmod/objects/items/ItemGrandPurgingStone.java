@@ -1,9 +1,9 @@
 package com.huto.hutosmod.objects.items;
 
-import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
+import com.huto.hutosmod.capabilities.karma.IKarma;
+import com.huto.hutosmod.capabilities.karma.KarmaProvider;
+import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.VibrationPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -16,23 +16,26 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class ItemWandGainVibes extends Item {
+public class ItemGrandPurgingStone extends Item {
 
-	public ItemWandGainVibes(Properties prop) {
+	public ItemGrandPurgingStone(Properties prop) {
 		super(prop);
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (!worldIn.isRemote) {
-			IVibrations vibes = playerIn.getCapability(VibrationProvider.VIBE_CAPA)
-					.orElseThrow(IllegalStateException::new);
-			vibes.addVibes(10);
-			playerIn.sendStatusMessage(new StringTextComponent(
-					"Increasing Resonance to: " + TextFormatting.RED + vibes.getVibes() + "Hz"), false);
-			// Sync Packet with server
-			PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-					new VibrationPacketServer(vibes.getVibes()));
+			IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
+
+			if (karma.getKarma() != 0) {
+				karma.setKarma(0);
+				playerIn.sendStatusMessage(
+						new StringTextComponent("Reduced Karma to: " + TextFormatting.GOLD + karma.getKarma()), false);
+				// Sync Packet with server
+				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+						new KarmaPacketServer(karma.getKarma()));
+			}
+
 		}
 
 		return super.onItemRightClick(worldIn, playerIn, handIn);

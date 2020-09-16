@@ -30,4 +30,7 @@ public class TileEntityInit {
 			"karmic_altar",
 			() -> TileEntityType.Builder.create(TileEntityKarmicAltar::new, BlockInit.karmic_altar.get()).build(null));
 
+	public static final RegistryObject<TileEntityType<TileEntityVirtuousEnchant>> virtuous_enchanter = TILES
+			.register("virtuous_enchanter", () -> TileEntityType.Builder
+					.create(TileEntityVirtuousEnchant::new, BlockInit.virtuous_enchanter.get()).build(null));
 }

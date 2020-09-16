@@ -1,4 +1,4 @@
-package com.huto.hutosmod.capabilities;
+package com.huto.hutosmod.capabilities.vibes;
 
 public interface IVibrations {
 

@@ -36,7 +36,7 @@ public class BlockMorelMushroom extends BushBlock implements IGrowable {
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (random.nextInt(25) == 0) {
 			int i = 5;
-			//int j = 4;
+			// int j = 4;
 
 			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
 				if (worldIn.getBlockState(blockpos).isIn(this)) {
@@ -73,7 +73,7 @@ public class BlockMorelMushroom extends BushBlock implements IGrowable {
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.isIn(BlockTags.field_242171_aD)) {
+		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
 			return true;
 		} else {
 			return worldIn.getLightSubtracted(pos, 0) < 13
@@ -85,14 +85,14 @@ public class BlockMorelMushroom extends BushBlock implements IGrowable {
 		world.removeBlock(pos, false);
 		ConfiguredFeature<?, ?> configuredfeature;
 		if (this == Blocks.BROWN_MUSHROOM) {
-			configuredfeature = Features.field_243860_bF;
+			configuredfeature = Features.HUGE_BROWN_MUSHROOM;
 		} else {
 			if (this != Blocks.RED_MUSHROOM) {
 				world.setBlockState(pos, state, 3);
 				return false;
 			}
 
-			configuredfeature = Features.field_243861_bG;
+			configuredfeature = Features.HUGE_RED_MUSHROOM;
 		}
 
 		if (configuredfeature.func_242765_a(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {

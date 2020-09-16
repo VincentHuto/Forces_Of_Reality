@@ -1,7 +1,7 @@
 package com.huto.hutosmod.objects.items;
 
-import com.huto.hutosmod.capabilities.IVibrations;
-import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

@@ -5,12 +5,15 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemContractRune;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
+import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemKnapper;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.ItemMysticTome;
+import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemRune;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
@@ -131,9 +134,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> purging_stone = ITEMS.register("purging_stone",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemPurgingStone(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> grand_purging_stone = ITEMS.register("grand_purging_stone",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemGrandPurgingStone(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Food
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
@@ -166,17 +169,17 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	// Contract Runes
 	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Base Runes
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
@@ -236,29 +239,29 @@ public class ItemInit {
 	// Armor
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.HEAD,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 	public static final RegistryObject<Item> null_chestplate = ITEMS.register("null_chestplate",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 	public static final RegistryObject<Item> null_leggings = ITEMS.register("null_leggings",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.LEGS,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 	public static final RegistryObject<Item> null_boots = ITEMS.register("null_boots",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.FEET,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 
 	public static final RegistryObject<Item> elder_helmet = ITEMS.register("elder_helmet",
 			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.HEAD,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 	public static final RegistryObject<Item> elder_chestplate = ITEMS.register("elder_chestplate",
 			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 	public static final RegistryObject<Item> elder_leggings = ITEMS.register("elder_leggings",
 			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.LEGS,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 	public static final RegistryObject<Item> elder_boots = ITEMS.register("elder_boots",
 			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.FEET,
-					(new Item.Properties()).group(HutosModItemGroup.instance).isBurnable()));
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 
 	// Hands
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
@@ -296,7 +299,7 @@ public class ItemInit {
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {
 
 		// Attract Charm
-		ItemModelsProperties.func_239418_a_(attraction_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+		ItemModelsProperties.registerProperty(attraction_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
@@ -312,7 +315,7 @@ public class ItemInit {
 				});
 
 		// Repulsion Charm
-		ItemModelsProperties.func_239418_a_(repulsion_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+		ItemModelsProperties.registerProperty(repulsion_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {

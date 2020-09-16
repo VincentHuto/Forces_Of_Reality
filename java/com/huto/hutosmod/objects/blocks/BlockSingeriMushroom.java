@@ -20,98 +20,101 @@ import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.server.ServerWorld;
 
 public class BlockSingeriMushroom extends BushBlock implements IGrowable {
-   protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
-   public BlockSingeriMushroom(AbstractBlock.Properties properties) {
-      super(properties);
-   }
+	public BlockSingeriMushroom(AbstractBlock.Properties properties) {
+		super(properties);
+	}
 
-   public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-	      return SHAPE;
-	   }
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return SHAPE;
+	}
 
-	   /**
-	    * Performs a random tick on a block.
-	    */
-	   public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-	      if (random.nextInt(25) == 0) {
-	         int i = 5;
-	      //   int j = 4;
+	/**
+	 * Performs a random tick on a block.
+	 */
+	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		if (random.nextInt(25) == 0) {
+			int i = 5;
+			// int j = 4;
 
-	         for(BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
-	            if (worldIn.getBlockState(blockpos).isIn(this)) {
-	               --i;
-	               if (i <= 0) {
-	                  return;
-	               }
-	            }
-	         }
+			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4))) {
+				if (worldIn.getBlockState(blockpos).isIn(this)) {
+					--i;
+					if (i <= 0) {
+						return;
+					}
+				}
+			}
 
-	         BlockPos blockpos1 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+			BlockPos blockpos1 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2),
+					random.nextInt(3) - 1);
 
-	         for(int k = 0; k < 4; ++k) {
-	            if (worldIn.isAirBlock(blockpos1) && state.isValidPosition(worldIn, blockpos1)) {
-	               pos = blockpos1;
-	            }
+			for (int k = 0; k < 4; ++k) {
+				if (worldIn.isAirBlock(blockpos1) && state.isValidPosition(worldIn, blockpos1)) {
+					pos = blockpos1;
+				}
 
-	            blockpos1 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
-	         }
+				blockpos1 = pos.add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2),
+						random.nextInt(3) - 1);
+			}
 
-	         if (worldIn.isAirBlock(blockpos1) && state.isValidPosition(worldIn, blockpos1)) {
-	            worldIn.setBlockState(blockpos1, state, 2);
-	         }
-	      }
+			if (worldIn.isAirBlock(blockpos1) && state.isValidPosition(worldIn, blockpos1)) {
+				worldIn.setBlockState(blockpos1, state, 2);
+			}
+		}
 
-	   }
+	}
 
-	   protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-	      return state.isOpaqueCube(worldIn, pos);
-	   }
+	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.isOpaqueCube(worldIn, pos);
+	}
 
-	   public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-	      BlockPos blockpos = pos.down();
-	      BlockState blockstate = worldIn.getBlockState(blockpos);
-	      if (blockstate.isIn(BlockTags.field_242171_aD)) {
-	         return true;
-	      } else {
-	         return worldIn.getLightSubtracted(pos, 0) < 13 && blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
-	      }
-	   }
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.down();
+		BlockState blockstate = worldIn.getBlockState(blockpos);
+		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+			return true;
+		} else {
+			return worldIn.getLightSubtracted(pos, 0) < 13
+					&& blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
+		}
+	}
 
-	   public boolean grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
-	      world.removeBlock(pos, false);
-	      ConfiguredFeature<?, ?> configuredfeature;
-	      if (this == Blocks.BROWN_MUSHROOM) {
-	         configuredfeature = Features.field_243860_bF;
-	      } else {
-	         if (this != Blocks.RED_MUSHROOM) {
-	            world.setBlockState(pos, state, 3);
-	            return false;
-	         }
+	public boolean grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
+		world.removeBlock(pos, false);
+		ConfiguredFeature<?, ?> configuredfeature;
+		if (this == Blocks.BROWN_MUSHROOM) {
+			configuredfeature = Features.HUGE_BROWN_MUSHROOM;
+		} else {
+			if (this != Blocks.RED_MUSHROOM) {
+				world.setBlockState(pos, state, 3);
+				return false;
+			}
 
-	         configuredfeature = Features.field_243861_bG;
-	      }
+			configuredfeature = Features.HUGE_RED_MUSHROOM;
+		}
 
-	      if (configuredfeature.func_242765_a(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
-	         return true;
-	      } else {
-	         world.setBlockState(pos, state, 3);
-	         return false;
-	      }
-	   }
+		if (configuredfeature.func_242765_a(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
+			return true;
+		} else {
+			world.setBlockState(pos, state, 3);
+			return false;
+		}
+	}
 
-	   /**
-	    * Whether this IGrowable can grow
-	    */
-	   public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-	      return true;
-	   }
+	/**
+	 * Whether this IGrowable can grow
+	 */
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
 
-	   public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-	      return (double)rand.nextFloat() < 0.4D;
-	   }
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		return (double) rand.nextFloat() < 0.4D;
+	}
 
-	   public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-	      this.grow(worldIn, pos, state, rand);
-	   }
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		this.grow(worldIn, pos, state, rand);
+	}
 }

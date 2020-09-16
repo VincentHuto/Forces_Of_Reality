@@ -2,8 +2,8 @@ package com.huto.hutosmod.network;
 
 import java.util.function.Supplier;
 
-import com.huto.hutosmod.capabilities.IVibrations;
-import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
@@ -23,7 +23,7 @@ public class VibrationPacketClient {
             //Get the currency
             IVibrations vibes = sender.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
             //Send message back to the client to set the information
-            PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sender), new VibrationPacketServer(vibes.getVibes()));
+            PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> sender), new VibrationPacketServer(vibes.getVibes()));
         });
         ctx.get().setPacketHandled(true);
     }

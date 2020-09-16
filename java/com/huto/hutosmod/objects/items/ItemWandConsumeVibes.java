@@ -1,7 +1,7 @@
 package com.huto.hutosmod.objects.items;
 
-import com.huto.hutosmod.capabilities.IVibrations;
-import com.huto.hutosmod.capabilities.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VibrationPacketServer;
 
@@ -32,7 +32,7 @@ public class ItemWandConsumeVibes extends Item {
 					new StringTextComponent("Reduced Resonance to: " + TextFormatting.BLUE + vibes.getVibes() + "Hz"),
 					false);
 			// Sync Packet with server
-			PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+			PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
 					new VibrationPacketServer(vibes.getVibes()));
 		}
 

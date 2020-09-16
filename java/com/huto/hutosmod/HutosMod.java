@@ -4,9 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.huto.hutosmod.capabilities.CapabilityInit;
-import com.huto.hutosmod.events.VibrationEvents;
+import com.huto.hutosmod.capabilities.karma.KarmaEvents;
+import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.tileenties.TileEntityInit;
@@ -49,10 +51,12 @@ public class HutosMod {
 		ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
 		TileEntityInit.TILES.register(modEventBus);
+		ContainerInit.CONTAINERS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 		// Register Vibration Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
+		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		PacketHandler.registerChannels();
 	}
 
