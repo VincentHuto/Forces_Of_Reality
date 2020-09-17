@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.objects.tileenties.TileEntityInit;
+import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityVirtuousEnchant;
 
 import net.minecraft.block.Block;

@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/vibratory_storage_drum"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/vibratory_storage_drum",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/vibratory_storage_drum",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/vibratory_storage_drum",
+			"y": 90
+		}
+	}
+}

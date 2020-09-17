@@ -2,12 +2,12 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "hutosmod:mana_storagedrum"
+            "item": "hutosmod:vibratory_storage_drum"
         }
     
     ],
     "result": {
-        "item": "hutosmod:mana_capacitor",
+        "item": "hutosmod:vibratory_capacitor",
         "count": 4
     }
 }

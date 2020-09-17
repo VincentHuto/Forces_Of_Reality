@@ -78,7 +78,7 @@ public class ItemRepulsionCharm extends Item {
 			playerIn.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 		}
-		
+
 		stack.setTag(compound);
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
@@ -109,15 +109,13 @@ public class ItemRepulsionCharm extends Item {
 				ent.setMotion(r.x / 1.2D / distance, r.y / 1.2D / distance, r.z / 1.2D / distance);
 
 				for (int countparticles = 0; countparticles <= 10; ++countparticles) {
-					if (world.isRemote) {
-						ent.world.addParticle(RedstoneParticleData.REDSTONE_DUST,
-								ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
-								ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
-										- (double) ent.getYOffset() - 0.5,
-								ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
-								0.0D);
-					}
-					ent.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.010f, 0.1F);
+					world.addParticle(RedstoneParticleData.REDSTONE_DUST,
+							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
+							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
+									- (double) ent.getYOffset() - 0.5,
+							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
+							0.0D);
+					// ent.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.010f, 0.1F);
 
 				}
 			}

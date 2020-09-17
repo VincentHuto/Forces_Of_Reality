@@ -68,6 +68,7 @@ public class TomePageLib {
 	// Elder
 	public static String ELDER_PAGE_1 = "title.mystictome.elder.page.1.text";
 	public static String ELDER_PAGE_2 = "title.mystictome.elder.page.2.text";
+	public static String ELDER_PAGE_3 = "title.mystictome.elder.page.3.text";
 
 	public static void registerPages() {
 
@@ -147,21 +148,23 @@ public class TomePageLib {
 		// Runes
 
 		RunesPageList.add(new GuiTomePage(1, EnumTomeCatagories.RUNES, "Runes", "More than goodluck",
-				new ItemStack(ItemInit.anti_tear.get()), I18n.format(RUNES_PAGE_1)));
+				new ItemStack(ItemInit.rune_beast.get()), I18n.format(RUNES_PAGE_1)));
 		RunesPageList.add(new GuiTomePage(2, EnumTomeCatagories.RUNES, "Runes cont.", "Etching your mind",
-				new ItemStack(ItemInit.anti_tear.get()), I18n.format(RUNES_PAGE_2)));
+				new ItemStack(ItemInit.mind_spike.get()), I18n.format(RUNES_PAGE_2)));
 
 		// Elder
 		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, "The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
 		ElderPageList.add(new GuiTomePage(2, EnumTomeCatagories.ELDER, "Gem Enchanting", "Virtuosity at its finest",
 				new ItemStack(BlockInit.virtuous_enchanter.get()), I18n.format(ELDER_PAGE_2)));
+		ElderPageList.add(new GuiTomePage(3, EnumTomeCatagories.ELDER, "Elder Runes", "Exclusive Perks",
+				new ItemStack(ItemInit.rune_milkweed_c.get()), I18n.format(ELDER_PAGE_2)));
 
-		//Adding Chapters
+		// Adding Chapters
 		Collections.addAll(ChapterList, IntroPageList, KarmaPageList, WorldGenPageList, WorldGenPageList, ArmorPageList,
 				BlocksPageList, GeneratePageList, WandsPageList, RunesPageList, ElderPageList);
 
-		//TOC PAGES
+		// TOC PAGES
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.mana_powder.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.KARMA, new ItemStack(ItemInit.purging_stone.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WORLDGEN, new ItemStack(BlockInit.morel_mushroom.get())));

@@ -9,6 +9,12 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class PacketHandler {
 	private static int networkID = 0;
 	private static final String PROTOCOL_VERSION = "1";
+
+	public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder
+			.named(new ResourceLocation(HutosMod.MOD_ID + ("main_channel")))
+			.clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals)
+			.networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
+
 	public static final SimpleChannel CHANNELVIBES = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(HutosMod.MOD_ID, "vibrationchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
 			PROTOCOL_VERSION::equals);
@@ -28,6 +34,10 @@ public class PacketHandler {
 				VibrationPacketServer::decode, VibrationPacketServer::handle);
 		CHANNELKARMA.registerMessage(networkID++, KarmaPacketServer.class, KarmaPacketServer::encode,
 				KarmaPacketServer::decode, KarmaPacketServer::handle);
+
+		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
+				SetFlyPKT.Handler::handle);
+
 	}
 
 }

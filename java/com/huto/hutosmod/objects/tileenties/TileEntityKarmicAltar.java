@@ -10,6 +10,7 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.entity.item.ItemEntity;
@@ -62,7 +63,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 
 	@SuppressWarnings("unused")
 	@Override
-	
+
 	public void tick() {
 		Random rand = new Random();
 		double xpos = pos.getX() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
@@ -145,4 +146,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public int getCooldown() {
 		return cooldown;
 	}
+
+
+
 }

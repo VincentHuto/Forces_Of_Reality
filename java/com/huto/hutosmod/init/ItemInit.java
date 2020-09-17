@@ -7,6 +7,8 @@ import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemContractRune;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
+import com.huto.hutosmod.objects.items.ItemDestructOrb;
+import com.huto.hutosmod.objects.items.ItemDestructOrbContained;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
@@ -20,6 +22,7 @@ import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
+import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
@@ -99,7 +102,10 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> null_rod = ITEMS.register("null_rod",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> destruction_orb = ITEMS.register("destruction_orb",
+			() -> new ItemDestructOrb(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> destruction_orb_contained = ITEMS.register("destruction_orb_contained",
+			() -> new ItemDestructOrbContained(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Materials
 	// Gems
 	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
@@ -225,7 +231,7 @@ public class ItemInit {
 			() -> new SwordItem(EnumModToolTiers.NULL, 3, -2.4F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> duality_pick = ITEMS.register("duality_pick",
-			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
+			() -> new ToolVeinPickaxe(EnumModToolTiers.NULL, 1, -2.8F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> duality_axe = ITEMS.register("duality_axe",
 			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,

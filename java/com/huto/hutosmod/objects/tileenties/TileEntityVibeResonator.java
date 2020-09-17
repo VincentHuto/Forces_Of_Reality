@@ -9,6 +9,7 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
@@ -132,8 +133,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 				cooldown--;
 			}
 		}
-		vibes.addVibes(3);
-		System.out.println(vibes.getVibes());
+	/*	vibes.addVibes(3);
+		System.out.println(vibes.getVibes());*/
 	}
 
 	@Override
@@ -191,7 +192,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		}
 	}
 
-	public void onWanded(PlayerEntity player, ItemStack wand) {
+	public void onActivated(PlayerEntity player, ItemStack wand) {
 
 		RecipeResonator recipe = null;
 		if (currentRecipe != null)

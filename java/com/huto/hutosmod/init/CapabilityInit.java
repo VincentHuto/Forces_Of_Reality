@@ -1,4 +1,4 @@
-package com.huto.hutosmod.capabilities;
+package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.karma.IKarma;

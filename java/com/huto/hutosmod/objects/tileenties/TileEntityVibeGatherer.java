@@ -3,6 +3,7 @@ package com.huto.hutosmod.objects.tileenties;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.TileEntityInit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

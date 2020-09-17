@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/vibratory_capacitor"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/vibratory_capacitor",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/vibratory_capacitor",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/vibratory_capacitor",
+			"y": 90
+		}
+	}
+}

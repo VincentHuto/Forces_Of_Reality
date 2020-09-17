@@ -3,16 +3,17 @@ package com.huto.hutosmod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.huto.hutosmod.capabilities.CapabilityInit;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.CapabilityInit;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.objects.tileenties.TileEntityInit;
 import com.huto.hutosmod.particles.init.ParticleInit;
+import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 
@@ -78,6 +79,7 @@ public class HutosMod {
 		CapabilityInit.init();
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
+		ModFuserRecipies.init();
 
 	}
 

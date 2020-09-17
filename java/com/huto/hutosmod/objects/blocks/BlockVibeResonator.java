@@ -143,7 +143,7 @@ public class BlockVibeResonator extends Block implements IActivatable {
 
 	@Override
 	public boolean onUsedByActivator(PlayerEntity player, ItemStack stack, World world, BlockPos pos, Direction face) {
-		((TileEntityVibeResonator) world.getTileEntity(pos)).onWanded(player, stack);
+		((TileEntityVibeResonator) world.getTileEntity(pos)).onActivated(player, stack);
 		return true;
 	}
 

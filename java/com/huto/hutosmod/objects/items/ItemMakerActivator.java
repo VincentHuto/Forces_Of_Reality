@@ -22,18 +22,18 @@ public class ItemMakerActivator extends Item {
 		Block block = context.getWorld().getBlockState(context.getPos()).getBlock();
 		BlockPos pos = context.getPos();
 		if (block instanceof IActivatable) {
-			boolean wanded;
+			boolean acti;
 			if (context.getWorld().isRemote) {
 				context.getPlayer().swingArm(context.getHand());
 				context.getPlayer().playSound(SoundEvents.BLOCK_ANVIL_USE, 0.11F, 1F);
 			}
-			wanded = true;
+			acti = true;
 
-			wanded = ((IActivatable) block).onUsedByActivator(context.getPlayer(), stack, context.getWorld(), pos,
+			acti = ((IActivatable) block).onUsedByActivator(context.getPlayer(), stack, context.getWorld(), pos,
 					context.getFace());
-			if (wanded && context.getWorld().isRemote)
+			if (acti && context.getWorld().isRemote)
 				context.getPlayer().swingArm(context.getHand());
-			return wanded ? ActionResultType.SUCCESS : ActionResultType.FAIL;
+			return acti ? ActionResultType.SUCCESS : ActionResultType.FAIL;
 		}
 		return ActionResultType.PASS;
 	}

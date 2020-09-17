@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.containers.ContainerVirtuousEnchanter;
+import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.blocks.BlockVirtuousEnchant;
 
 import net.minecraft.block.Block;

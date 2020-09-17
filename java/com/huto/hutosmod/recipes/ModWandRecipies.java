@@ -13,9 +13,7 @@ import net.minecraft.util.ResourceLocation;
 public class ModWandRecipies {
 	public static final List<RecipeWandMaker> wandMakerRecipies = new ArrayList<>();
 
-	public static RecipeWandMaker recipeManaConsumption;
-	public static RecipeWandMaker recipeManaAbsorbtion;
-	public static RecipeWandMaker test;
+	public static RecipeWandMaker recipeManaConsumption,recipeManaAbsorbtion,test;
 
 	public static void init() {
 
