@@ -23,6 +23,7 @@ import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
 import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
+import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
@@ -120,6 +121,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> gem_amethyst = ITEMS.register("gem_amethyst",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> gem_opal = ITEMS.register("gem_opal",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -181,7 +184,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemMilkweedRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
@@ -189,7 +192,9 @@ public class ItemInit {
 
 	// Base Runes
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	
+	
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",

@@ -34,6 +34,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	 float maxVibes = 400;
 
 	public TileEntityWandMaker() {
 		super(TileEntityInit.wand_maker.get());
@@ -44,6 +45,17 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		super.onLoad();
 	}
 
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
+	}
 	public RecipeWandMaker getCurrentRecipe() {
 		for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
 			if (recipe_.matches(itemHandler)) {

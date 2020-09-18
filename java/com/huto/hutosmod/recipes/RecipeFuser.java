@@ -17,15 +17,15 @@ public class RecipeFuser implements IModRecipe {
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final ImmutableList<Ingredient> inputs;
-	private final float mana;
+	private final float vibes;
 
-	public RecipeFuser(ResourceLocation id, ItemStack output, float mana, Ingredient... inputs) {
+	public RecipeFuser(ResourceLocation id, ItemStack output, float vibesIn, Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 16);
-		Preconditions.checkArgument(mana <= 100000);
+		Preconditions.checkArgument(vibesIn <= 100000);
 		this.id = id;
 		this.output = output;
 		this.inputs = ImmutableList.copyOf(inputs);
-		this.mana = mana;
+		this.vibes = vibesIn;
 	}
 
 	public boolean matches(IItemHandler inv) {
@@ -69,7 +69,7 @@ public class RecipeFuser implements IModRecipe {
 	}
 
 	public float getManaUsage() {
-		return mana;
+		return vibes;
 	}
 
 	public void write(PacketBuffer buf) {
@@ -79,7 +79,7 @@ public class RecipeFuser implements IModRecipe {
 			input.write(buf);
 		}
 		buf.writeItemStack(output, false);
-		buf.writeFloat(mana);
+		buf.writeFloat(vibes);
 	}
 
 	public static RecipeFuser read(PacketBuffer buf) {
@@ -89,8 +89,8 @@ public class RecipeFuser implements IModRecipe {
 			inputs[i] = Ingredient.read(buf);
 		}
 		ItemStack output = buf.readItemStack();
-		float mana = buf.readFloat();
-		return new RecipeFuser(id, output, mana, inputs);
+		float vibes = buf.readFloat();
+		return new RecipeFuser(id, output, vibes, inputs);
 	}
 
 }

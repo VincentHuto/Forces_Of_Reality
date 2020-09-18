@@ -5,6 +5,8 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
@@ -31,6 +33,8 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -65,12 +69,31 @@ public class BlockStorageDrum extends Block {
 
 			return ActionResultType.SUCCESS;
 		}
-		if (!stack.isEmpty()) {
+		if (!stack.isEmpty() && stack.getItem() != ItemInit.enhancedmagatama.get()) {
 			te.addItem(player, stack, handIn);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
+		/*
+		 * // If there is something in your hand add it to the block if its not an //
+		 * extractor if (!stack.isEmpty() && stack instanceof ItemUpgrade) {
+		 * te.addItem(player, stack, handIn);
+		 * VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te); }
+		 */
 
+		// Upgrade clause
+		if (te.getTankLevel() < 9 || stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 9) {
+			te.addTankLevel(1);
+			player.getHeldItemMainhand().shrink(1);
+			player.getHeldItemOffhand().shrink(1);
+
+		}
+		// Says the tank is full
+		if (te.getVibeCap().getVibes() >= te.getTankSize()) {
+			String message = String.format("Drum is full");
+			player.sendStatusMessage(new StringTextComponent(TextFormatting.BLUE + message), false);
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 		return ActionResultType.FAIL;
 
 	}
@@ -93,10 +116,9 @@ public class BlockStorageDrum extends Block {
 			if (count > 0) {
 				for (int i = 0; i < random.nextInt(count); i++) {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
-					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
+					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.5;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
 					world.addParticle(ParticleTypes.REVERSE_PORTAL, randX, randY, randZ, 0, 0, 0);
-
 				}
 			}
 		}
@@ -131,7 +153,7 @@ public class BlockStorageDrum extends Block {
 					Math.cos(-i) / 3, Math.sin(i) / 3, Math.sin(-i) / 3);
 		}
 
-		worldIn.playSound(null, pos, SoundEvents.BLOCK_BEACON_DEACTIVATE,  SoundCategory.AMBIENT, 10f, 0.01F);
+		worldIn.playSound(null, pos, SoundEvents.BLOCK_BEACON_DEACTIVATE, SoundCategory.AMBIENT, 10f, 0.01F);
 
 	}
 

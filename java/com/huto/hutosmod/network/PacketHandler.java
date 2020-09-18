@@ -1,14 +1,22 @@
 package com.huto.hutosmod.network;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.network.mindrunes.OpenNormalInvPacket;
+import com.huto.hutosmod.network.mindrunes.OpenRunesInvPacket;
+import com.huto.hutosmod.network.mindrunes.SyncPacket;
 
+import net.minecraft.command.arguments.MessageArgument.Message;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 public class PacketHandler {
 	private static int networkID = 0;
 	private static final String PROTOCOL_VERSION = "1";
+
+	public static SimpleChannel INSTANCE;
 
 	public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder
 			.named(new ResourceLocation(HutosMod.MOD_ID + ("main_channel")))
@@ -35,9 +43,20 @@ public class PacketHandler {
 		CHANNELKARMA.registerMessage(networkID++, KarmaPacketServer.class, KarmaPacketServer::encode,
 				KarmaPacketServer::decode, KarmaPacketServer::handle);
 
+		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
 				SetFlyPKT.Handler::handle);
 
+		// MindRunes
+		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(HutosMod.MOD_ID, "runechannel"), () -> "1.0",
+				s -> true, s -> true);
+
+		INSTANCE.registerMessage(networkID++, OpenRunesInvPacket.class, OpenRunesInvPacket::toBytes,
+				OpenRunesInvPacket::new, OpenRunesInvPacket::handle);
+		INSTANCE.registerMessage(networkID++, OpenNormalInvPacket.class, OpenNormalInvPacket::toBytes,
+				OpenNormalInvPacket::new, OpenNormalInvPacket::handle);
+		INSTANCE.registerMessage(networkID++, SyncPacket.class, SyncPacket::toBytes, SyncPacket::new,
+				SyncPacket::handle);
 	}
 
 }

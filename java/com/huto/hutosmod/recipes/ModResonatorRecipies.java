@@ -125,10 +125,10 @@ public class ModResonatorRecipies {
 
 	}
 
-	public static RecipeResonator registerRecipe(ResourceLocation rl, ItemStack output, float mana,
+	public static RecipeResonator registerRecipe(ResourceLocation rl, ItemStack output, float vibes,
 			EnumEssecenceType type, Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 1);
-		RecipeResonator recipe = new RecipeResonator(rl, output, mana, type, inputs);
+		RecipeResonator recipe = new RecipeResonator(rl, output, vibes, type, inputs);
 		resonatorRecipies.add(recipe);
 		return recipe;
 	}

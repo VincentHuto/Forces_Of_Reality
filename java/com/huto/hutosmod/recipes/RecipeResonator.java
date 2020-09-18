@@ -18,17 +18,17 @@ public class RecipeResonator implements IModRecipe {
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final ImmutableList<Ingredient> inputs;
-	private final float mana;
+	private final float vibes;
 	private EnumEssecenceType type;
 
-	public RecipeResonator(ResourceLocation id, ItemStack output, float mana, EnumEssecenceType type,
+	public RecipeResonator(ResourceLocation id, ItemStack output, float vibesIn, EnumEssecenceType type,
 			Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 16);
-		Preconditions.checkArgument(mana <= 100000);
+		Preconditions.checkArgument(vibesIn <= 100000);
 		this.id = id;
 		this.output = output;
 		this.inputs = ImmutableList.copyOf(inputs);
-		this.mana = mana;
+		this.vibes = vibesIn;
 		this.type = type;
 
 	}
@@ -74,7 +74,7 @@ public class RecipeResonator implements IModRecipe {
 	}
 
 	public float getManaUsage() {
-		return mana;
+		return vibes;
 	}
 
 	public void write(PacketBuffer buf) {
@@ -84,7 +84,7 @@ public class RecipeResonator implements IModRecipe {
 			input.write(buf);
 		}
 		buf.writeItemStack(output, false);
-		buf.writeFloat(mana);
+		buf.writeFloat(vibes);
 		buf.writeEnumValue(type);
 	}
 
@@ -95,9 +95,9 @@ public class RecipeResonator implements IModRecipe {
 			inputs[i] = Ingredient.read(buf);
 		}
 		ItemStack output = buf.readItemStack();
-		float mana = buf.readFloat();
+		float vibes = buf.readFloat();
 		EnumEssecenceType type = buf.readEnumValue(EnumEssecenceType.class);
-		return new RecipeResonator(id, output, mana, type, inputs);
+		return new RecipeResonator(id, output, vibes, type, inputs);
 	}
 
 	public EnumEssecenceType getRecipeType() {

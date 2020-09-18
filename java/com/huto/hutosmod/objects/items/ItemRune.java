@@ -2,6 +2,9 @@ package com.huto.hutosmod.objects.items;
 
 import java.util.List;
 
+import com.huto.hutosmod.capabilities.mindrunes.RuneType;
+import com.huto.hutosmod.capabilities.mindrunes.IRune;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +19,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class ItemRune extends Item {
+public class ItemRune extends Item implements IRune{
 	public int level = 1;
 	public String TAG_LEVEL = "level";
 
@@ -67,6 +70,11 @@ public class ItemRune extends Item {
 			tooltip.add(new TranslationTextComponent("Form: " + stack.getTag().getInt(TAG_LEVEL))
 					.mergeStyle(TextFormatting.BLUE));
 		}
+	}
+
+	@Override
+	public RuneType getBaubleType() {
+		return RuneType.TRINKET;
 	}
 
 }

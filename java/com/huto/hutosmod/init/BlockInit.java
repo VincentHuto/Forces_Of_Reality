@@ -162,7 +162,12 @@ public class BlockInit {
 	public static final RegistryObject<Block> anti_sapling = BLOCKS.register("anti_sapling",
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-
+	public static final RegistryObject<Block> obj_flower = BLOCKS.register("obj_flower",
+			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
+					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> obj_rose = BLOCKS.register("obj_rose",
+			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
+					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {

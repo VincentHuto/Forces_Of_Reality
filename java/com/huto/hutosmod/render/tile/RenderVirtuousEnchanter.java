@@ -41,7 +41,6 @@ public class RenderVirtuousEnchanter extends TileEntityRenderer<TileEntityVirtuo
 		while (f1 < -(float) Math.PI) {
 			f1 += ((float) Math.PI * 2F);
 		}
-
 		float f2 = tileEntityIn.pageAngle + f1 * partialTicks;
 		matrixStackIn.rotate(Vector3f.YP.rotation(-f2));
 		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(80.0F));
@@ -56,7 +55,6 @@ public class RenderVirtuousEnchanter extends TileEntityRenderer<TileEntityVirtuo
 		matrixStackIn.scale(0.75f, 0.75f, 0.75f);
 		modelBook.render(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		irendertypebuffer$impl.finish();
-
 		matrixStackIn.pop();
 	}
 

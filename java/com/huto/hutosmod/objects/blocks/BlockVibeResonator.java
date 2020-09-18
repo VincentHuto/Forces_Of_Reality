@@ -5,6 +5,8 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.objects.blocks.util.IActivatable;
+import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 

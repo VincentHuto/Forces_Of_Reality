@@ -10,8 +10,6 @@ import net.minecraft.entity.merchant.IMerchant;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -71,46 +69,43 @@ public class KarmaEvents {
 
 	@SubscribeEvent
 	public static void applyKarmaBuffs(PlayerTickEvent event) {
+		@SuppressWarnings("unused")
 		PlayerEntity player = event.player;
-		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
-		// messing with caabilites gets sorta sticky because they dont return back to
-		// normal... change later
-		if (karma.getKarma() >= 1.0F) {
-			// player.capabilities.setPlayerWalkSpeed(0.1F);
-
-		}
-
-		if (karma.getKarma() >= 20.0F) {
-			player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 100, 1));
-			// player.capabilities.setPlayerWalkSpeed(1F);
-
-		}
-		if (karma.getKarma() >= 40.0F) {
-			player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 100, 2));
-			// player.capabilities.setPlayerWalkSpeed(0.2F);
-
-		}
-		if (karma.getKarma() >= 60.0F) {
-			// player.capabilities.setPlayerWalkSpeed(0.3F);
-
-		}
-		if (karma.getKarma() >= 80.0F) {
-			player.addPotionEffect(new EffectInstance(Effects.GLOWING, 100, 2));
-
-		}
-		if (karma.getKarma() >= 100.0F) {
-			// player.capabilities.isFlying= true;
-		}
+		/*
+		 * IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(
+		 * IllegalStateException::new); // messing with caabilites gets sorta sticky
+		 * because they dont return back to // normal... change later if
+		 * (karma.getKarma() >= 1.0F) { // player.capabilities.setPlayerWalkSpeed(0.1F);
+		 * 
+		 * }
+		 * 
+		 * if (karma.getKarma() >= 20.0F) { player.addPotionEffect(new
+		 * EffectInstance(Effects.RESISTANCE, 100, 1)); //
+		 * player.capabilities.setPlayerWalkSpeed(1F);
+		 * 
+		 * } if (karma.getKarma() >= 40.0F) { player.addPotionEffect(new
+		 * EffectInstance(Effects.STRENGTH, 100, 2)); //
+		 * player.capabilities.setPlayerWalkSpeed(0.2F);
+		 * 
+		 * } if (karma.getKarma() >= 60.0F) { //
+		 * player.capabilities.setPlayerWalkSpeed(0.3F);
+		 * 
+		 * } if (karma.getKarma() >= 80.0F) { player.addPotionEffect(new
+		 * EffectInstance(Effects.GLOWING, 100, 2));
+		 * 
+		 * } if (karma.getKarma() >= 100.0F) { // player.capabilities.isFlying= true; }
+		 */
 
 	}
 
 	@SubscribeEvent
 	public static void applyKarmaDebuffs(PlayerTickEvent event) {
-		PlayerEntity player = event.player;
-		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
-		if (karma.getKarma() <= -20.0F) {
-			player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 1, 2));
-		}
-	}
+		/*
+		 * PlayerEntity player = event.player; IKarma karma =
+		 * player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(
+		 * IllegalStateException::new); if (karma.getKarma() <= -20.0F) {
+		 * player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 1, 2)); } }
+		 */
 
+	}
 }

@@ -1,5 +1,5 @@
 
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.util;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

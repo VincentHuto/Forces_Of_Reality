@@ -125,15 +125,15 @@ public class TomePageLib {
 		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
 				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_3)));
 		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
-				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_4)));
+				new ItemStack(BlockInit.vibratory_storage_drum.get()), I18n.format(MACHINE_PAGE_4)));
 		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
 				new ItemStack(BlockInit.vibe_resonator.get()), I18n.format(MACHINE_PAGE_5)));
 		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
-				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_6)));
+				new ItemStack(BlockInit.vibratory_fuser.get()), I18n.format(MACHINE_PAGE_6)));
 		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
 				new ItemStack(BlockInit.wand_maker.get()), I18n.format(MACHINE_PAGE_8)));
 		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
-				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_7)));
+				new ItemStack(BlockInit.karmic_extractor.get()), I18n.format(MACHINE_PAGE_7)));
 		// Generate
 		GeneratePageList.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Mana Gathering",
 				"It comes from the air", new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));
@@ -169,7 +169,8 @@ public class TomePageLib {
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.KARMA, new ItemStack(ItemInit.purging_stone.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WORLDGEN, new ItemStack(BlockInit.morel_mushroom.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.EQUIPS, new ItemStack(ItemInit.null_helmet.get())));
-		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.MACHINES, new ItemStack(BlockInit.vibe_resonator.get())));
+		TOCPageList.add(
+				new GuiTomePageTOC(EnumTomeCatagories.MACHINES, new ItemStack(BlockInit.activated_obsidian.get())));
 		TOCPageList
 				.add(new GuiTomePageTOC(EnumTomeCatagories.GENERATION, new ItemStack(ItemInit.emanating_ingot.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WANDS, new ItemStack(ItemInit.wand_consume_vibes.get())));

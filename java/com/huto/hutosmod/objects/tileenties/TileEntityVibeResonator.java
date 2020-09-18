@@ -38,6 +38,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	public static EnumEssecenceType resonantState;
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	float maxVibes = 300;
 
 	public TileEntityVibeResonator() {
 		super(TileEntityInit.vibe_resonator.get());
@@ -46,6 +47,18 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	@Override
 	public void onLoad() {
 		super.onLoad();
+	}
+
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
 	}
 
 	public void checkStructure() {
@@ -133,8 +146,9 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 				cooldown--;
 			}
 		}
-	/*	vibes.addVibes(3);
-		System.out.println(vibes.getVibes());*/
+		/*
+		 * vibes.addVibes(3); System.out.println(vibes.getVibes());
+		 */
 	}
 
 	@Override

@@ -26,9 +26,18 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	int cooldown = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
+	float maxVibes = 500;
 
 	public TileEntityKarmicAltar() {
 		super(TileEntityInit.karmic_altar.get());
+	}
+
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
 	}
 
 	@Override
@@ -146,7 +155,5 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public int getCooldown() {
 		return cooldown;
 	}
-
-
 
 }

@@ -1,7 +1,10 @@
 package com.huto.hutosmod.events;
 
+import org.lwjgl.glfw.GLFW;
+
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.gui.GuiVirtuousEnchanter;
+import com.huto.hutosmod.gui.mindrunes.PlayerExpandedScreen;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
@@ -14,6 +17,7 @@ import com.huto.hutosmod.render.tile.RenderWandMaker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +28,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventSubscriber {
+    public static final KeyBinding KEY_RUNES = new KeyBinding("keybind.runesinventory", GLFW.GLFW_KEY_B, "key.categories.inventory");
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
@@ -36,7 +41,8 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_fuser.get(), RenderVibeFuser::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
-
+        ScreenManager.registerFactory(HutosMod.Registration.PLAYER_RUNES, PlayerExpandedScreen::new);
+        ClientRegistry.registerKeyBinding(KEY_RUNES);
 	}
 
 	public static PlayerEntity getClientPlayer() {

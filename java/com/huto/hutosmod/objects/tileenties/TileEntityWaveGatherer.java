@@ -14,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 public class TileEntityWaveGatherer extends TileModVibes implements ITickableTileEntity {
 
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	 float maxVibes = 100;
+
 
 	public TileEntityWaveGatherer() {
 		super(TileEntityInit.wave_gatherer.get());
@@ -23,7 +25,7 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 	public void tick() {
 		if (checkStructure() && vibes.getVibes() < 100) {
 			vibes.addVibes(0.2f);
-			//System.out.println(vibes.getVibes());
+			// System.out.println(vibes.getVibes());
 		}
 	}
 
@@ -39,4 +41,16 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 
 	}
 
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
+	}
+	
 }

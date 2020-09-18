@@ -31,10 +31,10 @@ public class ModWandRecipies {
 				Ingredient.fromItems(ItemInit.soaking_agent.get()));
 	}
 
-	public static RecipeWandMaker registerRecipe(ResourceLocation rl, ItemStack output, float mana,
+	public static RecipeWandMaker registerRecipe(ResourceLocation rl, ItemStack output, float vibes,
 			Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 4);
-		RecipeWandMaker recipe = new RecipeWandMaker(rl, output, mana, inputs);
+		RecipeWandMaker recipe = new RecipeWandMaker(rl, output, vibes, inputs);
 		wandMakerRecipies.add(recipe);
 		return recipe;
 	}

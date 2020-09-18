@@ -14,11 +14,23 @@ import net.minecraft.util.math.BlockPos;
 public class TileEntityVibeGatherer extends TileModVibes implements ITickableTileEntity {
 
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-
+	float maxVibes = 100;
 	public TileEntityVibeGatherer() {
 		super(TileEntityInit.vibe_gatherer.get());
 	}
 
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
+	}
+	
 	@Override
 	public void tick() {
 		if (checkStructure() && vibes.getVibes() < 100) {

@@ -5,6 +5,8 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
@@ -31,6 +33,8 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -67,12 +71,32 @@ public class BlockCapacitor extends Block {
 
 			return ActionResultType.SUCCESS;
 		}
-		if (!stack.isEmpty()) {
+		if (!stack.isEmpty() && stack.getItem() != ItemInit.enhancedmagatama.get()) {
 			te.addItem(player, stack, handIn);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
+		/*
+		 * // If there is something in your hand add it to the block if its not an //
+		 * extractor if (!stack.isEmpty() && stack instanceof ItemUpgrade) {
+		 * te.addItem(player, stack, handIn);
+		 * VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te); }
+		 */
 
+		// Upgrade clause
+		
+		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 3) {
+			te.addTankLevel(1);
+			player.getHeldItemMainhand().shrink(1);
+			player.getHeldItemOffhand().shrink(1);
+
+		}
+		// Says the tank is full
+		if (te.getVibeCap().getVibes() >= te.getTankSize()) {
+			String message = String.format("Drum is full");
+			player.sendStatusMessage(new StringTextComponent(TextFormatting.BLUE + message), false);
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 		return ActionResultType.FAIL;
 
 	}

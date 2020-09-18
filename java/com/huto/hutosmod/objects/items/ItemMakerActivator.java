@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.items;
 
-import com.huto.hutosmod.objects.blocks.IActivatable;
+import com.huto.hutosmod.objects.blocks.util.IActivatable;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

@@ -4,6 +4,10 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.Karma;
 import com.huto.hutosmod.capabilities.karma.KarmaStorage;
+import com.huto.hutosmod.capabilities.mindrunes.RuneCap;
+import com.huto.hutosmod.capabilities.mindrunes.RunestemHandlerCap;
+import com.huto.hutosmod.capabilities.mindrunes.IRune;
+import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationStorage;
 import com.huto.hutosmod.capabilities.vibes.Vibrations;
@@ -18,9 +22,11 @@ public class CapabilityInit {
 	public static void init() {
 		CapabilityManager.INSTANCE.register(IVibrations.class, new VibrationStorage(), Vibrations::new);
 		CapabilityManager.INSTANCE.register(IKarma.class, new KarmaStorage(), Karma::new);
-
+		CapabilityManager.INSTANCE.register(IRune.class, new RuneCap.IBaubleStorage(),
+				new RuneCap.IBaubleFactory());
+		CapabilityManager.INSTANCE.register(IRunesItemHandler.class,
+				new RunestemHandlerCap.IBaublesItemHandlerStorage(),
+				new RunestemHandlerCap.IBaublesItemHandlerFactory());
 	}
-
-	
 
 }

@@ -17,7 +17,7 @@ public class ModFuserRecipies {
 
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
-			recipeUpgradeExport, recipeElderTome;
+			recipeUpgradeExport, recipeElderTome, recipeOpal;
 
 	public static void init() {
 
@@ -51,12 +51,17 @@ public class ModFuserRecipies {
 		recipeElderTome = registerRecipe(new ResourceLocation("elder_tome"),
 				new ItemStack(ItemInit.elder_tome.get(), 1), 150, Ingredient.fromItems(ItemInit.karmic_bar.get()),
 				Ingredient.fromItems(ItemInit.mystic_tome.get()));
-		;
+
+		recipeOpal = registerRecipe(new ResourceLocation("gem_opal"), new ItemStack(ItemInit.gem_opal.get(), 1), 150,
+				Ingredient.fromItems(ItemInit.gem_amethyst.get()), Ingredient.fromItems(ItemInit.gem_hematite.get()),
+				Ingredient.fromItems(ItemInit.gem_onyx.get()), Ingredient.fromItems(ItemInit.gem_ruby.get()),
+				Ingredient.fromItems(ItemInit.gem_sapphire.get()), Ingredient.fromItems(ItemInit.gem_topaz.get()));
+
 	}
 
-	public static RecipeFuser registerRecipe(ResourceLocation rl, ItemStack output, float mana, Ingredient... inputs) {
+	public static RecipeFuser registerRecipe(ResourceLocation rl, ItemStack output, float vibes, Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 6);
-		RecipeFuser recipe = new RecipeFuser(rl, output, mana, inputs);
+		RecipeFuser recipe = new RecipeFuser(rl, output, vibes, inputs);
 		fuserRecipies.add(recipe);
 		return recipe;
 	}

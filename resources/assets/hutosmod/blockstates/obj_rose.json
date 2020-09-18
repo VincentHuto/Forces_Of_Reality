@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"": {
+			"model": "hutosmod:block/obj_rose",
+			"custom": {
+				"flip-v": true
+			}
+		}
+	}
+}

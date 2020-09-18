@@ -1,5 +1,5 @@
 
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.util;
 
 import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
 

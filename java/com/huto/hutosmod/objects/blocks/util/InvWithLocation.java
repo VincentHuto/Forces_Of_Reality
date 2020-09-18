@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.util;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

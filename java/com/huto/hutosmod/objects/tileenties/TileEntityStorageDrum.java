@@ -18,10 +18,90 @@ import net.minecraft.util.Hand;
 
 public class TileEntityStorageDrum extends TileVibeSimpleInventory implements ITickableTileEntity {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	public static final String TAG_LEVEL = "tankLevel";
+	public static final String TAG_SIZE = "tankSize";
+	public int tankLevel = 0;
+	float maxVibes = 0.0F;
 
 	public TileEntityStorageDrum() {
 		super(TileEntityInit.vibratory_storage_drum.get());
 	}
+
+	@Override
+	public void tick() {
+		// vibes.addVibes(2);
+		// vibes.setVibes(900);
+		// System.out.println(vibes.getVibes());
+	}
+
+	// Vibe Stuff
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		this.getTankSize();
+	}
+
+	public float getTankSize() {
+		if (tankLevel == 0) {
+			return this.maxVibes = 100;
+		} else if (tankLevel > 0 && tankLevel <= 9) {
+			return this.maxVibes = (tankLevel + 1) * 100;
+		} else {
+			return maxVibes;
+		}
+	}
+
+	public boolean isFull() {
+		return vibes.getVibes() <= this.getMaxVibes() ? false : true;
+	}
+
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void addTankLevel(float tankValue) {
+		this.tankLevel += tankValue;
+	}
+
+	public int getTankLevel() {
+		return tankLevel;
+	}
+
+	public void setTankLevel(int tankLevel) {
+		this.tankLevel = tankLevel;
+	}
+
+	// NBT data
+	@Override
+	public void readPacketNBT(CompoundNBT tag) {
+		super.readPacketNBT(tag);
+		tankLevel = tag.getInt(TAG_LEVEL);
+		maxVibes = tag.getFloat(TAG_SIZE);
+	}
+
+	@Override
+	public void writePacketNBT(CompoundNBT tag) {
+		super.writePacketNBT(tag);
+		tag.putInt(TAG_LEVEL, tankLevel);
+		tag.putFloat(TAG_SIZE, maxVibes);
+
+	}
+
+	@Override
+	public CompoundNBT write(CompoundNBT compound) {
+		return super.write(compound);
+	}
+
+	@Override
+	public void read(BlockState state, CompoundNBT nbt) {
+		super.read(state, nbt);
+
+	}
+	// Item Info
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
@@ -46,25 +126,6 @@ public class TileEntityStorageDrum extends TileVibeSimpleInventory implements IT
 			System.out.println("add ITEM");
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
-	}
-
-	@Override
-	public void tick() {
-		
-		//vibes.addVibes(2);
-		//vibes.setVibes(900);
-		//System.out.println(vibes.getVibes());
-	}
-
-	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		return super.write(compound);
-	}
-
-	@Override
-	public void read(BlockState state, CompoundNBT nbt) {
-		super.read(state, nbt);
-
 	}
 
 	@Override

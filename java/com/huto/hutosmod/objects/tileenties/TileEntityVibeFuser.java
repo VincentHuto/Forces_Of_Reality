@@ -34,6 +34,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	float maxVibes = 500;
 
 	public TileEntityVibeFuser() {
 		super(TileEntityInit.vibratory_fuser.get());
@@ -43,7 +44,17 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 	public void onLoad() {
 		super.onLoad();
 	}
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
 
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
+	}
 	public RecipeFuser getCurrentRecipe() {
 		for (RecipeFuser recipe_ : ModFuserRecipies.fuserRecipies) {
 			if (recipe_.matches(itemHandler)) {
