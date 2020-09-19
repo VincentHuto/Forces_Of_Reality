@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
+import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
@@ -63,26 +64,20 @@ public class BlockStorageDrum extends Block {
 			return ActionResultType.SUCCESS;
 		TileEntityStorageDrum te = (TileEntityStorageDrum) worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(handIn);
-		if (player.isSneaking()) {
+		if (stack.getItem() == ItemInit.upgrade_wrench.get()) {
 			ModInventoryVibeHelper.withdrawFromInventory(te, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-
 			return ActionResultType.SUCCESS;
 		}
-		if (!stack.isEmpty() && stack.getItem() != ItemInit.enhancedmagatama.get()) {
+		// If there is something in your hand add it to the block if its not an //
+		if (!stack.isEmpty() && stack.getItem() instanceof ItemUpgrade) {
 			te.addItem(player, stack, handIn);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
-		}
-		/*
-		 * // If there is something in your hand add it to the block if its not an //
-		 * extractor if (!stack.isEmpty() && stack instanceof ItemUpgrade) {
-		 * te.addItem(player, stack, handIn);
-		 * VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te); }
-		 */
 
+		}
 		// Upgrade clause
-		if (te.getTankLevel() < 9 || stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 9) {
+		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 9) {
 			te.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 			player.getHeldItemOffhand().shrink(1);

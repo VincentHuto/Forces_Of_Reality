@@ -28,7 +28,7 @@ public class RuneCap {
 
         @Override
         public IRune call() {
-            return () -> RuneType.TRINKET;
+            return () -> RuneType.OVERRIDE;
         }
     }
 }

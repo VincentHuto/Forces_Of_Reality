@@ -18,66 +18,67 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class RunesButton extends AbstractButton {
 
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	private final ContainerScreen parentGui;
 
-    //temp
-    public boolean _isHovered = this.isHovered();
-    public boolean _visible = this.active;
-    public int _x = this.x;
-    public int _y = this.y;
-    public int _width = this.width;
-    public int _height = this.height;
+	// temp
+	public boolean _isHovered = this.isHovered();
+	public boolean _visible = this.active;
+	public int _x = this.x;
+	public int _y = this.y;
+	public int _width = this.width;
+	public int _height = this.height;
 
-
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	public RunesButton(ContainerScreen parentGui, int x, int y, int width, int height) {
-        super(x + parentGui.getGuiLeft(), parentGui.getGuiTop() + y, width, height, new StringTextComponent(""));
-        this.parentGui = parentGui;
-    }
+		super(x + parentGui.getGuiLeft() - 35, parentGui.getGuiTop() + y, width, height, new StringTextComponent(""));
+		this.parentGui = parentGui;
+	}
 
-    @Override
-    public void onPress() { //onPress
-        if (parentGui instanceof InventoryScreen) {
-            PacketHandler.INSTANCE.sendToServer(new OpenRunesInvPacket());
-        } else {
-            PacketHandler.INSTANCE.sendToServer(new OpenNormalInvPacket());
-            this.displayNormalInventory();
-        }
-    }
-
-    @SuppressWarnings({ "static-access", "deprecation" })
 	@Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) { //render
-        if(!Minecraft.getInstance().player.isCreative()){
-            if (this._visible) {
-                FontRenderer fontrenderer = Minecraft.getInstance().fontRenderer;
-                Minecraft.getInstance().getTextureManager().bindTexture(PlayerExpandedScreen.background);
-                GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                Minecraft.getInstance().getTextureManager().bindTexture(PlayerExpandedScreen.background);
-                GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                this._isHovered = mouseX >= _x && mouseY >= this._y && mouseX < _x + this._width && mouseY < this._y + this._height;
-                GlStateManager.enableBlend();
-                GlStateManager.blendFuncSeparate(770, 771, 1, 0);
-                GlStateManager.blendFuncSeparate(770, 771, 1, 0);
-                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	public void onPress() { // onPress
+		if (parentGui instanceof InventoryScreen) {
+			PacketHandler.INSTANCE.sendToServer(new OpenRunesInvPacket());
+		} else {
+			PacketHandler.INSTANCE.sendToServer(new OpenNormalInvPacket());
+			this.displayNormalInventory();
+		}
+	}
 
-                GlStateManager.pushMatrix();
-                GlStateManager.translatef(0, 0, 200);
-                GlStateManager.translatef(0, 0, 200);
-                if (!_isHovered) {
-                    this.blit(matrixStack, _x, this._y, 200, 48, 10, 10); //blit
-                } else {
-                    this.blit(matrixStack, _x, this._y, 210, 48, 10, 10); //blit
-                    this.drawCenteredString(matrixStack, fontrenderer, new TranslationTextComponent("button.displayText").getString(), _x + 5, this._y + this._height, 0xffffff); //drawCenteredString
-                }
-                GlStateManager.popMatrix();
-            }
-        }
-    }
+	@SuppressWarnings({ "static-access", "deprecation" })
+	@Override
+	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) { // render
+		if (!Minecraft.getInstance().player.isCreative()) {
+			if (this._visible) {
+				FontRenderer fontrenderer = Minecraft.getInstance().fontRenderer;
+				Minecraft.getInstance().getTextureManager().bindTexture(PlayerExpandedScreen.background);
+				GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+				Minecraft.getInstance().getTextureManager().bindTexture(PlayerExpandedScreen.background);
+				GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+				this._isHovered = mouseX >= _x && mouseY >= this._y && mouseX < _x + this._width
+						&& mouseY < this._y + this._height;
+				GlStateManager.enableBlend();
+				GlStateManager.blendFuncSeparate(770, 771, 1, 0);
+				GlStateManager.blendFuncSeparate(770, 771, 1, 0);
+				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				GlStateManager.pushMatrix();
+				GlStateManager.translatef(0, 0, 200);
+				GlStateManager.translatef(0, 0, 200);
+				if (!_isHovered) {
+					this.blit(matrixStack, _x, this._y, 176, 0, 10, 10); // blit
+				} else {
+					this.blit(matrixStack, _x, this._y, 186, 0, 10, 10); // blit
+					this.drawCenteredString(matrixStack, fontrenderer,
+							new TranslationTextComponent("button.runeInv").getString(), _x + 5+27,
+							this._y + this._height-10, 0xffffff); // drawCenteredString
+				}
+				GlStateManager.popMatrix();
+			}
+		}
+	}
 
-    public void displayNormalInventory() {
-        InventoryScreen gui = new InventoryScreen(Minecraft.getInstance().player);
-        Minecraft.getInstance().displayGuiScreen(gui);
-    }
+	public void displayNormalInventory() {
+		InventoryScreen gui = new InventoryScreen(Minecraft.getInstance().player);
+		Minecraft.getInstance().displayGuiScreen(gui);
+	}
 }

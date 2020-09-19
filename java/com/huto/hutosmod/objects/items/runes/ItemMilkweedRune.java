@@ -18,7 +18,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemMilkweedRune extends ItemContractRune implements IRune {
 
@@ -37,7 +36,7 @@ public class ItemMilkweedRune extends ItemContractRune implements IRune {
 
 	@Override
 	public RuneType getBaubleType() {
-		return RuneType.TRINKET;
+		return RuneType.CONTRACT;
 	}
 
 	@Override

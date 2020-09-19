@@ -9,6 +9,8 @@ import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
+import com.huto.hutosmod.objects.blocks.BlockVibeAbsorber;
+import com.huto.hutosmod.objects.blocks.BlockVibeAccel;
 import com.huto.hutosmod.objects.blocks.BlockVibeFuser;
 import com.huto.hutosmod.objects.blocks.BlockVibeGatherer;
 import com.huto.hutosmod.objects.blocks.BlockVibeResonator;
@@ -85,6 +87,13 @@ public class BlockInit {
 	public static final RegistryObject<Block> vibratory_fuser = BLOCKS.register("vibratory_fuser",
 			() -> new BlockVibeFuser(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibe_absorber = BLOCKS.register("vibe_absorber",
+			() -> new BlockVibeAbsorber(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
+			() -> new BlockVibeAccel(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
 			() -> new BlockStorageDrum(
@@ -128,6 +137,8 @@ public class BlockInit {
 	public static final RegistryObject<Block> anti_log = BLOCKS.register("anti_log",
 			() -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0f)
 					.harvestLevel(1).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<LeavesBlock> anti_leaves = BLOCKS.register("anti_leaves",
+			() -> new LeavesBlock(Block.Properties.from(Blocks.OAK_LEAVES)));
 	public static final RegistryObject<Block> anti_planks = BLOCKS.register("anti_planks",
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
@@ -162,12 +173,18 @@ public class BlockInit {
 	public static final RegistryObject<Block> anti_sapling = BLOCKS.register("anti_sapling",
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-	public static final RegistryObject<Block> obj_flower = BLOCKS.register("obj_flower",
-			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
-					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-	public static final RegistryObject<Block> obj_rose = BLOCKS.register("obj_rose",
-			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
-					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+
+	/*
+	 * public static final RegistryObject<Block> obj_flower =
+	 * BLOCKS.register("obj_flower", () -> new SaplingBlock(new OakTree(),
+	 * AbstractBlock.Properties.create(Material.PLANTS)
+	 * .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(
+	 * SoundType.PLANT))); public static final RegistryObject<Block> obj_rose =
+	 * BLOCKS.register("obj_rose", () -> new SaplingBlock(new OakTree(),
+	 * AbstractBlock.Properties.create(Material.PLANTS)
+	 * .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(
+	 * SoundType.PLANT)));
+	 */
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -181,6 +198,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_sapling.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.wand_maker.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_leaves.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.anti_leaves.get(), RenderType.getCutoutMipped());
 
 		}
 	}

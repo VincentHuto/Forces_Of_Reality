@@ -27,6 +27,6 @@ public class ItemContractRune extends ItemRune implements IRune{
 
 	@Override
 	public RuneType getBaubleType() {
-		return RuneType.TRINKET;
+		return RuneType.CONTRACT;
 	}
 }

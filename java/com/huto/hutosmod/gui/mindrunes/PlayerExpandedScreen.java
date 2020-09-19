@@ -45,7 +45,7 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int p_146979_1_, int p_146979_2_) { // drawGuiContainerForegroundLayer
 		if (this.minecraft != null) { // this.minecraft
 			this.minecraft.fontRenderer.func_243248_b(matrixStack, new TranslationTextComponent("container.crafting"),
-					115, 8, 4210752);
+					115-18, 8+22, 4210752);
 		}
 	}
 

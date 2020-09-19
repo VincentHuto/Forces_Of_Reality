@@ -44,6 +44,8 @@ public class TomePageLib {
 
 	// Equips
 	public static String EQUIP_PAGE_1 = "title.mystictome.equip.page.1.text";
+	public static String EQUIP_PAGE_2 = "title.mystictome.equip.page.2.text";
+
 	// Machines
 	public static String MACHINE_PAGE_1 = "title.mystictome.blocks.page.1.text";
 	public static String MACHINE_PAGE_2 = "title.mystictome.blocks.page.2.text";
@@ -121,9 +123,11 @@ public class TomePageLib {
 		// Weapons and Armor
 		ArmorPageList.add(new GuiTomePage(1, EnumTomeCatagories.EQUIPS, "Equipables", "Form AND Function",
 				new ItemStack(ItemInit.null_chestplate.get()), I18n.format(EQUIP_PAGE_1)));
+		ArmorPageList.add(new GuiTomePage(2, EnumTomeCatagories.EQUIPS, "Visualization", "Know what you got",
+				new ItemStack(ItemInit.vibrational_seer.get()), I18n.format(EQUIP_PAGE_2)));
 		// Machines
 		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
-				new ItemStack(BlockInit.activated_obsidian.get()), I18n.format(MACHINE_PAGE_3)));
+				new ItemStack(BlockInit.vibratory_accelerometer.get()), I18n.format(MACHINE_PAGE_3)));
 		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
 				new ItemStack(BlockInit.vibratory_storage_drum.get()), I18n.format(MACHINE_PAGE_4)));
 		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
@@ -134,6 +138,7 @@ public class TomePageLib {
 				new ItemStack(BlockInit.wand_maker.get()), I18n.format(MACHINE_PAGE_8)));
 		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
 				new ItemStack(BlockInit.karmic_extractor.get()), I18n.format(MACHINE_PAGE_7)));
+
 		// Generate
 		GeneratePageList.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Mana Gathering",
 				"It comes from the air", new ItemStack(BlockInit.vibe_gatherer.get()), I18n.format(GENERATION_PAGE_1)));

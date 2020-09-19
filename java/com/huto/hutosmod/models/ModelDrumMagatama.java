@@ -27,7 +27,7 @@ public class ModelDrumMagatama extends Model {
 		super(RenderType::getEntitySolid);
 		/*
 		 * spinningCube = new ModelRenderer(64, 32, 0, 10); spinningCube.addBox(0,0,0,
-		 * 8.0F, 8.0F, 8.0F); spinningCube.setRotationPoint(0F, 0F, 0F);
+		 * 1.0F, 1.0F, 1.0F); spinningCube.setRotationPoint(0F, 0F, 0F);
 		 * spinningCube.setTextureSize(32, 32);
 		 */
 

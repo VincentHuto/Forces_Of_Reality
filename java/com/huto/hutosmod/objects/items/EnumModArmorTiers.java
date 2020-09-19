@@ -22,7 +22,11 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.magatamabead.get());
 			}),
-	CIRCLETS(HutosMod.MOD_ID + ":circlet", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
+	CIRCLET(HutosMod.MOD_ID + ":vibrational_seer", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
+			0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.null_ingot.get());
+			}),
+	MASK(HutosMod.MOD_ID + ":mysterious_mask", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			});

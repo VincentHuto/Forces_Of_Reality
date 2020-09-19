@@ -12,14 +12,18 @@ import com.huto.hutosmod.objects.items.ItemDestructOrbContained;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
+import com.huto.hutosmod.objects.items.ItemGuidanceRune;
 import com.huto.hutosmod.objects.items.ItemKnapper;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
+import com.huto.hutosmod.objects.items.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemRune;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
+import com.huto.hutosmod.objects.items.ItemUpgrade;
+import com.huto.hutosmod.objects.items.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
 import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
@@ -106,7 +110,8 @@ public class ItemInit {
 	public static final RegistryObject<Item> destruction_orb = ITEMS.register("destruction_orb",
 			() -> new ItemDestructOrb(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> destruction_orb_contained = ITEMS.register("destruction_orb_contained",
-			() -> new ItemDestructOrbContained(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemDestructOrbContained(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Materials
 	// Gems
 	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
@@ -193,8 +198,7 @@ public class ItemInit {
 	// Base Runes
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	
-	
+
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",
@@ -216,7 +220,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemGuidanceRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 	// Tools
@@ -241,6 +245,10 @@ public class ItemInit {
 	public static final RegistryObject<Item> duality_axe = ITEMS.register("duality_axe",
 			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> absorber_configurer = ITEMS.register("absorber_configurer",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> frequency_matcher = ITEMS.register("frequency_matcher",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Knappers
 	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper",
 			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON, new Item.Properties().group(HutosModItemGroup.instance)));
@@ -248,6 +256,13 @@ public class ItemInit {
 			() -> new ItemKnapper(50f, 1, 0, EnumModToolTiers.NULL,
 					new Item.Properties().group(HutosModItemGroup.instance)));
 	// Armor
+	public static final RegistryObject<Item> vibrational_seer = ITEMS.register("vibrational_seer",
+			() -> new ItemVibeSeer(EnumModArmorTiers.CIRCLET, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> mysterious_mask = ITEMS.register("mysterious_mask",
+			() -> new ItemMysteriousMask(EnumModArmorTiers.MASK, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
+
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
@@ -290,21 +305,21 @@ public class ItemInit {
 
 	// Upgrades
 	public static final RegistryObject<Item> upgrade_wrench = ITEMS.register("upgrade_wrench",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> upgrade_blank = ITEMS.register("upgrade_blank",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_block = ITEMS.register("upgrade_block",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_player = ITEMS.register("upgrade_player",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_animal = ITEMS.register("upgrade_animal",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_mob = ITEMS.register("upgrade_mob",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_absorber = ITEMS.register("upgrade_absorber",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_import = ITEMS.register("upgrade_import",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {

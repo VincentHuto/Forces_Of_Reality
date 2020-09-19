@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
+import com.huto.hutosmod.events.SeerEventHandler;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.CapabilityInit;
@@ -37,6 +38,7 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -56,12 +58,15 @@ public class HutosMod {
 	private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "hutosmod";
 	public static HutosMod instance;
+	public static IProxy proxy;
 
+	@SuppressWarnings("deprecation")
 	public HutosMod() {
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::commonSetup);
 		modEventBus.addListener(this::doClientStuff);
+		proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
@@ -74,7 +79,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
-
+		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		PacketHandler.registerChannels();
 	}
 
@@ -110,6 +115,7 @@ public class HutosMod {
 
 	public void setupOnLoaded(FMLLoadCompleteEvent event) {
 		this.addLayers();
+
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -141,7 +147,7 @@ public class HutosMod {
 
 		public static List<ContainerType<?>> CONTAINERS = new ArrayList<>();
 
-		@ObjectHolder("baubles:player_runes")
+		@ObjectHolder("hutosmod:player_runes")
 		public static ContainerType<PlayerExpandedContainer> PLAYER_RUNES = createContainer("player_runes",
 				(id, inv, data) -> new PlayerExpandedContainer(id, inv, !inv.player.world.isRemote));
 

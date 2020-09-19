@@ -6,12 +6,14 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.particles.types.Vector3;
 
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -109,10 +111,15 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 				count = 0;
 				if (world.isRemote) {
 					world.addParticle(ParticleTypes.WARPED_SPORE, xpos, ypos, zpos, 0, 0, 0);
+
 				}
 			}
 		}
-
+		if (world.isRemote) {
+			Vector3 vec = Vector3.fromTileEntityCenter(this);
+			Vector3 endVec = vec.add(0, 2.5, 0);
+			HutosMod.proxy.lightningFX(vec, endVec, 2F, 0x00948B, 0x00E4D7);
+		}
 		// Decement the cooldown
 		if (cooldown > 0) {
 			cooldown--;

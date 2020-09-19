@@ -5,10 +5,7 @@ import com.huto.hutosmod.network.mindrunes.OpenNormalInvPacket;
 import com.huto.hutosmod.network.mindrunes.OpenRunesInvPacket;
 import com.huto.hutosmod.network.mindrunes.SyncPacket;
 
-import net.minecraft.command.arguments.MessageArgument.Message;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
