@@ -29,6 +29,7 @@ public class PacketHandler {
 
 	public static void registerChannels() {
 		// Register Networking packets
+
 		// Client
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketClient.class, VibrationPacketClient::encode,
 				VibrationPacketClient::decode, VibrationPacketClient::handle);

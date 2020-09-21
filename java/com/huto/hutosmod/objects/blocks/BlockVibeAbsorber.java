@@ -80,13 +80,16 @@ public class BlockVibeAbsorber extends Block {
 		// Upgrade clause
 		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 3) {
 			te.addTankLevel(1);
+			te.checkTransferRate();
+			te.getTankLevel();
 			player.getHeldItemMainhand().shrink(1);
 			player.getHeldItemOffhand().shrink(1);
+			
 			return ActionResultType.SUCCESS;
 		}
 		// Cycle Clause
 		if (stack.getItem() == ItemInit.absorber_configurer.get()) {
-			te.cycleMode();
+			te.cycleEnumMode();
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 

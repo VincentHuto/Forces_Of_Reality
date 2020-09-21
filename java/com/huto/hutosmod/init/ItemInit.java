@@ -11,6 +11,7 @@ import com.huto.hutosmod.objects.items.ItemDestructOrb;
 import com.huto.hutosmod.objects.items.ItemDestructOrbContained;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
+import com.huto.hutosmod.objects.items.ItemFrequencyMatcher;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemGuidanceRune;
 import com.huto.hutosmod.objects.items.ItemKnapper;
@@ -248,7 +249,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> absorber_configurer = ITEMS.register("absorber_configurer",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> frequency_matcher = ITEMS.register("frequency_matcher",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemFrequencyMatcher(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Knappers
 	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper",
 			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON, new Item.Properties().group(HutosModItemGroup.instance)));
@@ -302,7 +303,6 @@ public class ItemInit {
 			() -> new ItemWandConsumeVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> wand_gain_vibes = ITEMS.register("wand_gain_vibes",
 			() -> new ItemWandGainVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
-
 	// Upgrades
 	public static final RegistryObject<Item> upgrade_wrench = ITEMS.register("upgrade_wrench",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));

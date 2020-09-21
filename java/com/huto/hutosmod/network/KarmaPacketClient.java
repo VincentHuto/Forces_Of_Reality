@@ -19,7 +19,6 @@ public class KarmaPacketClient {
 	public static void handle(final KarmaPacketClient msg, Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
-
 			// Get the currency
 			IKarma karma = sender.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
 			// Send message back to the client to set the information

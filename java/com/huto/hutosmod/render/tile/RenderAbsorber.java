@@ -3,6 +3,7 @@ package com.huto.hutosmod.render.tile;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.ModelDrumMagatama;
 import com.huto.hutosmod.models.ModelFloatingCube;
+import com.huto.hutosmod.objects.tileenties.EnumAbsorberStates;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -78,13 +79,14 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		ResourceLocation textureBoth = new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal_purple.png");
 		ResourceLocation textureMode;
 
-		if (te.getMode() == 0) {
+		//Switch Textures
+		if (te.getEnumMode() == EnumAbsorberStates.DEFAULT) {
 			textureMode = textureDefault;
-		} else if (te.getMode() == 1) {
+		} else if (te.getEnumMode() == EnumAbsorberStates.IMPORT) {
 			textureMode = textureImport;
-		} else if (te.getMode() == 2) {
+		} else if (te.getEnumMode() == EnumAbsorberStates.EXPORT) {
 			textureMode = textureExport;
-		} else if (te.getMode() == 3) {
+		} else if (te.getEnumMode() == EnumAbsorberStates.BOTH) {
 			textureMode = textureBoth;
 		} else {
 			textureMode = textureDefault;
