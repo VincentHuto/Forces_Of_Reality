@@ -9,6 +9,7 @@ import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.render.tile.RenderAbsorber;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
+import com.huto.hutosmod.render.tile.RenderHasturPylon;
 import com.huto.hutosmod.render.tile.RenderKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderStorageDrum;
@@ -42,6 +43,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_capacitor.get(), RenderCapacitor::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_fuser.get(), RenderVibeFuser::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_absorber.get(), RenderAbsorber::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(HutosMod.Registration.PLAYER_RUNES, PlayerExpandedScreen::new);

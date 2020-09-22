@@ -43,8 +43,8 @@ public class ItemFrequencyMatcher extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack = playerIn.getHeldItemMainhand();
-		CompoundNBT compound = stack.getTag();
+		//ItemStack stack = playerIn.getHeldItemMainhand();
+		//CompoundNBT compound = stack.getTag();
 
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
@@ -74,6 +74,7 @@ public class ItemFrequencyMatcher extends Item {
 				BlockPos newPos = NBTUtil.readBlockPos(stack.getTag().getCompound(TAG_POS));
 				te.addToLinkedBlocks(newPos);
 				te.sendUpdates();
+				te.markDirty();
 			}
 
 		}

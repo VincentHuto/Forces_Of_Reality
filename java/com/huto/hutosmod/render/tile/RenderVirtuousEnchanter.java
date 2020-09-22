@@ -53,7 +53,7 @@ public class RenderVirtuousEnchanter extends TileEntityRenderer<TileEntityVirtuo
 				.getImpl(Tessellator.getInstance().getBuffer());
 		IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(modelBook.getRenderType(NEW_TEXTURE_BOOK));
 		matrixStackIn.scale(0.75f, 0.75f, 0.75f);
-		modelBook.render(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		modelBook.render(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		irendertypebuffer$impl.finish();
 		matrixStackIn.pop();
 	}

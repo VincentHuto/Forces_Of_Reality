@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
@@ -27,7 +28,7 @@ public class TileEntityInit {
 
 	public static final RegistryObject<TileEntityType<TileEntityVibeResonator>> vibe_resonator = TILES
 			.register("vibe_resonator", () -> TileEntityType.Builder
-					.create(TileEntityVibeResonator::new, BlockInit.wave_gatherer.get()).build(null));
+					.create(TileEntityVibeResonator::new, BlockInit.vibe_resonator.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntityWaveGatherer>> wave_gatherer = TILES
 			.register("wave_gatherer", () -> TileEntityType.Builder
@@ -36,6 +37,7 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityVibeGatherer>> vibe_gatherer = TILES
 			.register("vibe_gatherer", () -> TileEntityType.Builder
 					.create(TileEntityVibeGatherer::new, BlockInit.vibe_gatherer.get()).build(null));
+
 	public static final RegistryObject<TileEntityType<TileEntityKarmicAltar>> karmic_altar = TILES.register(
 			"karmic_altar",
 			() -> TileEntityType.Builder.create(TileEntityKarmicAltar::new, BlockInit.karmic_altar.get()).build(null));
@@ -63,4 +65,7 @@ public class TileEntityInit {
 			"vibe_absorber",
 			() -> TileEntityType.Builder.create(TileEntityAbsorber::new, BlockInit.vibe_absorber.get()).build(null));
 
+	public static final RegistryObject<TileEntityType<TileEntityHasturPylon>> hastur_pylon = TILES.register(
+			"hastur_pylon",
+			() -> TileEntityType.Builder.create(TileEntityHasturPylon::new, BlockInit.hastur_pylon.get()).build(null));
 }

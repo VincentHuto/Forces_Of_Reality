@@ -13,6 +13,7 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.util.Constants;
 
 public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITickableTileEntity {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
@@ -34,7 +35,8 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 
 	@Override
 	public void tick() {
-		System.out.println(getLinkedBlocks());
+		System.out.println(getUpdateTag());
+
 	}
 
 	// Vibe Stuff
@@ -45,7 +47,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		this.checkTransferRate();
 	}
 
-	// Linked
 	public List<BlockPos> getLinkedBlocks() {
 		return linkedBlocks;
 	}
@@ -54,8 +55,11 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		this.linkedBlocks = linkedBlocks;
 	}
 
-	public void addToLinkedBlocks(BlockPos linkedBlocks) {
-		this.linkedBlocks.add(linkedBlocks);
+	public void addToLinkedBlocks(BlockPos linkedBlocksIn) {
+		if (!(linkedBlocks.contains(linkedBlocksIn))) {
+			this.linkedBlocks.add(linkedBlocksIn);
+			this.markDirty();
+		}
 	}
 
 	public void removeFromLinkedBlocks(BlockPos linkedBlocks) {
@@ -142,32 +146,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		this.tankLevel = tankLevel;
 	}
 
-/*	// NBT data
-	@SuppressWarnings("static-access")
-	@Override
-	public void readPacketNBT(CompoundNBT tag) {
-		super.readPacketNBT(tag);
-		tankLevel = tag.getInt(TAG_LEVEL);
-		maxVibes = tag.getFloat(TAG_SIZE);
-		transferRate = tag.getFloat(TAG_RATE);
-		enumMode = enumMode.valueOf(tag.getString(TAG_ENUMMODE));
-		for (int i = 0; i < linkedBlocks.size(); i++) {
-			linkedBlocks.set(i, NBTUtil.readBlockPos(tag));
-		}
-	}
-
-	@Override
-	public void writePacketNBT(CompoundNBT tag) {
-		super.writePacketNBT(tag);
-		tag.putInt(TAG_LEVEL, tankLevel);
-		tag.putFloat(TAG_SIZE, maxVibes);
-		tag.putFloat(TAG_RATE, transferRate);
-		tag.putString(TAG_ENUMMODE, enumMode.toString());
-		for (BlockPos i : linkedBlocks) {
-			NBTUtil.writeBlockPos(i);
-		}
-	}*/
-	
 	// NBT data
 	@SuppressWarnings("static-access")
 	@Override
@@ -177,9 +155,14 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		maxVibes = tag.getFloat(TAG_SIZE);
 		transferRate = tag.getFloat(TAG_RATE);
 		enumMode = enumMode.valueOf(tag.getString(TAG_ENUMMODE));
-		linkedBlocks.add(NBTUtil.readBlockPos(tag.getCompound(TAG_LINKEDPOS)));
-		sendUpdates();
-
+		ListNBT tagList = tag.getList(TAG_LINKEDPOS, Constants.NBT.TAG_COMPOUND);
+		if (linkedBlocks != null || tagList != null) {
+			for (int i = 0; i < tagList.size(); i++) {
+				if (!(linkedBlocks.contains(NBTUtil.readBlockPos(tagList.getCompound(i))))) {
+					linkedBlocks.add(NBTUtil.readBlockPos(tagList.getCompound(i)));
+				}
+			}
+		}
 	}
 
 	@Override
@@ -191,30 +174,22 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		tag.putString(TAG_ENUMMODE, enumMode.toString());
 		ListNBT tagList = new ListNBT();
 		for (int i = 0; i < linkedBlocks.size(); i++) {
-			BlockPos s = linkedBlocks.get(i);
-			if (s != null) {
-				CompoundNBT newtag = new CompoundNBT();
-				tag.put(TAG_LINKEDPOS, NBTUtil.writeBlockPos(s));
-				tagList.add(newtag);
-			}
+			tagList.add(NBTUtil.writeBlockPos(linkedBlocks.get(i)));
+			NBTUtil.writeBlockPos(linkedBlocks.get(i));
 		}
 		tag.put(TAG_LINKEDPOS, tagList);
-		sendUpdates();
-		// for (int i = 0; i < linkedBlocks.size(); i++) { tag.put(TAG_LINKEDPOS,
-		// NBTUtil.writeBlockPos(linkedBlocks.get(i))); }
-		 
-	}
 
-
-	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		return super.write(compound);
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT nbt) {
-		super.read(state, nbt);
+	public CompoundNBT write(CompoundNBT tag) {
+		super.write(tag);
+		return tag;
+	}
 
+	@Override
+	public void read(BlockState state, CompoundNBT tag) {
+		super.read(state, tag);
 	}
 
 	@Override

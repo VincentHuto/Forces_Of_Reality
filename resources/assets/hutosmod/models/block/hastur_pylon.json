@@ -1,0 +1,9 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "hutosmod:blocks/hastur_stone_core",
+		"1": "hutosmod:blocks/hastur_stone_smooth",
+		"particle": "hutosmod:blocks/hastur_stone_core"
+	}
+	}
