@@ -13,6 +13,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemMysticTome extends Item {
 
@@ -21,6 +23,7 @@ public class ItemMysticTome extends Item {
 	}
 
 	@Override
+	@OnlyIn(Dist.CLIENT)
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (worldIn.isRemote) {

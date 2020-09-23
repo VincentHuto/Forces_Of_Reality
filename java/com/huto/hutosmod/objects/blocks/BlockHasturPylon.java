@@ -44,11 +44,17 @@ public class BlockHasturPylon extends Block {
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();;
+			
+			private static final VoxelShape SHAPE_R = Block.makeCuboidShape(-8, 0, -7, 24, 32, 25);
 
 	public BlockHasturPylon(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 
+	}
+	@Override
+	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return SHAPE_R;
 	}
 
 	@Override
@@ -72,6 +78,7 @@ public class BlockHasturPylon extends Block {
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
 					world.addParticle(ParticleTypes.REVERSE_PORTAL, randX, randY, randZ, 0, 0, 0);
+					world.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
 
 				}
 			}

@@ -9,7 +9,9 @@ import com.huto.hutosmod.init.ItemInit;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+@OnlyIn(Dist.CLIENT)
 public class TomePageLib {
 
 	// This is the page array for the book, needed because i dont know how to add

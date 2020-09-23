@@ -10,11 +10,12 @@ import org.apache.logging.log4j.Logger;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
-import com.huto.hutosmod.events.SeerEventHandler;
+import com.huto.hutosmod.events.ClientEventRender;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.CapabilityInit;
 import com.huto.hutosmod.init.ContainerInit;
+import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
@@ -33,6 +34,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
@@ -70,14 +73,13 @@ public class HutosMod {
 		BlockInit.BLOCKS.register(modEventBus);
 		TileEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
+		EntityInit.ENTITY_TYPES.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 		// Register Vibration Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
-		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
-		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
-		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
+	//	MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		PacketHandler.registerChannels();
 	}
 
@@ -100,10 +102,12 @@ public class HutosMod {
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
 
+
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		TomePageLib.registerPages();
+        MinecraftForge.EVENT_BUS.register(ClientEventRender.class);
 
 	}
 
@@ -117,19 +121,18 @@ public class HutosMod {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@OnlyIn(Dist.CLIENT)
 	private void addLayers() {
 		Map<String, PlayerRenderer> skinMap = Minecraft.getInstance().getRenderManager().getSkinMap();
 		PlayerRenderer render;
 		render = skinMap.get("default");
 		render.addLayer(new RunesRenderLayer(render));
-
 		render = skinMap.get("slim");
 		render.addLayer(new RunesRenderLayer(render));
 	}
 
 	public static class HutosModItemGroup extends ItemGroup {
 		public static final HutosModItemGroup instance = new HutosModItemGroup(ItemGroup.GROUPS.length, "hutosTab");
-
 		public HutosModItemGroup(int index, String label) {
 			super(index, label);
 		}

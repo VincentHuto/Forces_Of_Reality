@@ -15,7 +15,9 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+@OnlyIn(Dist.CLIENT)
 public class GuiTomeTitle extends Screen {
 
 	final ResourceLocation texture = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/newbook.png");

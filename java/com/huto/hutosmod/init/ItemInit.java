@@ -27,6 +27,7 @@ import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
+import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
 import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
 
@@ -39,6 +40,7 @@ import net.minecraft.item.Food;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
@@ -49,6 +51,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -321,7 +324,12 @@ public class ItemInit {
 	public static final RegistryObject<Item> upgrade_import = ITEMS.register("upgrade_import",
 			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 
+	// Spawn Eggs
+	public static final RegistryObject<ModSpawnEggItem> example_mob_spawn_egg = ITEMS.register("example_mob_spawn_egg",
+			() ->	new ModSpawnEggItem(EntityInit.EXAMPLE_ENTITY, 0x8B15A3, 0xa735e3, new Item.Properties().group(ItemGroup.MISC)));
+
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {
 
 		// Attract Charm

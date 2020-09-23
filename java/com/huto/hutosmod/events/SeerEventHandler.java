@@ -3,16 +3,18 @@ package com.huto.hutosmod.events;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.gui.VibrationalSeerHud;
 import com.huto.hutosmod.init.ItemInit;
+import com.ibm.icu.impl.UResource.Value;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.FORGE)
+@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.FORGE,  value = Dist.CLIENT)
 public class SeerEventHandler {
 
 	public SeerEventHandler() {

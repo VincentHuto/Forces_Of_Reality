@@ -4,6 +4,7 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
+import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
@@ -68,4 +69,8 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityHasturPylon>> hastur_pylon = TILES.register(
 			"hastur_pylon",
 			() -> TileEntityType.Builder.create(TileEntityHasturPylon::new, BlockInit.hastur_pylon.get()).build(null));
+	
+	public static final RegistryObject<TileEntityType<TileEntityIcoSphere>> obj_icosahedron = TILES.register(
+			"obj_icosahedron",
+			() -> TileEntityType.Builder.create(TileEntityIcoSphere::new, BlockInit.obj_icosahedron.get()).build(null));
 }

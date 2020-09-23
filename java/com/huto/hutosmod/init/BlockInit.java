@@ -2,8 +2,10 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.blocks.BlockCapacitor;
+import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
 import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
 import com.huto.hutosmod.objects.blocks.BlockHasturPylon;
+import com.huto.hutosmod.objects.blocks.BlockIcoSphere;
 import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
@@ -157,7 +159,7 @@ public class BlockInit {
 	// Hastur
 	public static final RegistryObject<Block> hastur_pylon = BLOCKS.register("hastur_pylon",
 			() -> new BlockHasturPylon(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f)
-					.harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+					.harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).notSolid()));
 	public static final RegistryObject<Block> hastur_stone_core = BLOCKS.register("hastur_stone_core",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
@@ -188,6 +190,8 @@ public class BlockInit {
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 
+	
+	//OBJ
 	/*
 	 * public static final RegistryObject<Block> obj_flower =
 	 * BLOCKS.register("obj_flower", () -> new SaplingBlock(new OakTree(),
@@ -199,6 +203,11 @@ public class BlockInit {
 	 * .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(
 	 * SoundType.PLANT)));
 	 */
+	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron", () -> new BlockIcoSphere(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
+	public static final RegistryObject<Block> obj_crystal = BLOCKS.register("obj_crystal", () -> new BlockCrystalObj(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
+	
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -213,6 +222,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.wand_maker.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_leaves.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.obj_icosahedron.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.obj_crystal.get(), RenderType.getCutoutMipped());
 
 		}
 	}
