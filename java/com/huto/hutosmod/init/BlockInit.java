@@ -192,22 +192,12 @@ public class BlockInit {
 
 	
 	//OBJ
-	/*
-	 * public static final RegistryObject<Block> obj_flower =
-	 * BLOCKS.register("obj_flower", () -> new SaplingBlock(new OakTree(),
-	 * AbstractBlock.Properties.create(Material.PLANTS)
-	 * .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(
-	 * SoundType.PLANT))); public static final RegistryObject<Block> obj_rose =
-	 * BLOCKS.register("obj_rose", () -> new SaplingBlock(new OakTree(),
-	 * AbstractBlock.Properties.create(Material.PLANTS)
-	 * .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(
-	 * SoundType.PLANT)));
-	 */
 	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron", () -> new BlockIcoSphere(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
-	public static final RegistryObject<Block> obj_crystal = BLOCKS.register("obj_crystal", () -> new BlockCrystalObj(
+	public static final RegistryObject<Block> end_crystal_mystic = BLOCKS.register("end_crystal_mystic", () -> new BlockCrystalObj(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
-	
+	public static final RegistryObject<Block> end_crystal_nightmare = BLOCKS.register("end_crystal_nightmare", () -> new BlockCrystalObj(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -223,7 +213,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.obj_icosahedron.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.obj_crystal.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_mystic.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutoutMipped());
 
 		}
 	}

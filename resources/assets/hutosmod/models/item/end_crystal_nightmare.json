@@ -1,0 +1,5 @@
+{
+	"parent":"forge:item/default",
+	"loader": "forge:obj",
+	"model": "hutosmod:models/block/end_crystal_nightmare.obj"
+}

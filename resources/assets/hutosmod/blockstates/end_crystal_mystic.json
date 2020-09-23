@@ -1,0 +1,31 @@
+
+{
+	"variants": {
+		"facing=down": {
+			"model": "hutosmod:block/end_crystal_mystic",
+			"x": 180
+		},
+		"facing=east": {
+			"model": "hutosmod:block/end_crystal_mystic",
+			"x": 90,
+			"y": 90
+		},
+		"facing=north": {
+			"model": "hutosmod:block/end_crystal_mystic",
+			"x": 90
+		},
+		"facing=south": {
+			"model": "hutosmod:block/end_crystal_mystic",
+			"x": 90,
+			"y": 180
+		},
+		"facing=up": {
+			"model": "hutosmod:block/end_crystal_mystic"
+		},
+		"facing=west": {
+			"model": "hutosmod:block/end_crystal_mystic",
+			"x": 90,
+			"y": 270
+		}
+	}
+}
