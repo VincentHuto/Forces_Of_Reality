@@ -35,7 +35,22 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 
 	@Override
 	public void tick() {
-		System.out.println(getUpdateTag());
+	//	System.out.println(getUpdateTag().get(TAG_LINKEDPOS));
+		if (linkedBlocks != null) {
+			for (int i = 0; i < linkedBlocks.size(); i++) {
+				// System.out.println(world.getBlockState(linkedBlocks.get(i)).getBlock());
+				// System.out.println(world.getTileEntity(linkedBlocks.get(i)) instanceof
+				// TileEntityStorageDrum);
+				if (world.getTileEntity(linkedBlocks.get(i)) instanceof TileEntityStorageDrum) {
+					TileEntityStorageDrum te = (TileEntityStorageDrum) world.getTileEntity(linkedBlocks.get(i));
+					te.vibes.addVibes(0.2f);
+
+				}else if(world.getTileEntity(linkedBlocks.get(i)) instanceof TileEntityCapacitor) {
+					TileEntityCapacitor te = (TileEntityCapacitor) world.getTileEntity(linkedBlocks.get(i));
+					te.vibes.addVibes(0.05f);
+				}
+			}
+		}
 
 	}
 
@@ -62,8 +77,20 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		}
 	}
 
-	public void removeFromLinkedBlocks(BlockPos linkedBlocks) {
-		this.linkedBlocks.remove(linkedBlocks);
+	public void clearLinkedBlocks() {
+		if (linkedBlocks != null) {
+			for (int i = 0; i < linkedBlocks.size(); i++) {
+				this.linkedBlocks.remove(i);
+				this.markDirty();
+			}
+		}
+	}
+
+	public void removeFromLinkedBlocks(BlockPos linkedBlocksIn) {
+		if (linkedBlocks.contains(linkedBlocksIn)) {
+			this.linkedBlocks.remove(linkedBlocksIn);
+			this.markDirty();
+		}
 	}
 
 	// Modes
@@ -156,6 +183,7 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		transferRate = tag.getFloat(TAG_RATE);
 		enumMode = enumMode.valueOf(tag.getString(TAG_ENUMMODE));
 		ListNBT tagList = tag.getList(TAG_LINKEDPOS, Constants.NBT.TAG_COMPOUND);
+		tagList.clear();
 		if (linkedBlocks != null || tagList != null) {
 			for (int i = 0; i < tagList.size(); i++) {
 				if (!(linkedBlocks.contains(NBTUtil.readBlockPos(tagList.getCompound(i))))) {
@@ -178,7 +206,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 			NBTUtil.writeBlockPos(linkedBlocks.get(i));
 		}
 		tag.put(TAG_LINKEDPOS, tagList);
-
 	}
 
 	@Override

@@ -44,11 +44,12 @@ public class RenderMiningLaser {
         drawLasers(event, playerPos, trace, 0, 0, 0, 120 / 255f, 1 / 255f, 1 / 255f, 0.02f, player, ticks, speedModifier);
     }
 
-    private static float getSpeedModifier(ItemStack stack) {
+    @SuppressWarnings("unused")
+	private static float getSpeedModifier(ItemStack stack) {
             return -0.02f;
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({ "deprecation", "unused" })
 	private static void drawLasers(RenderWorldLastEvent event, Vector3d from, RayTraceResult trace, double xOffset, double yOffset, double zOffset, float r, float g, float b, float thickness, PlayerEntity player, float ticks, float speedModifier) {
         Hand activeHand;
         if (player.getHeldItemMainhand().getItem() instanceof ItemFrequencyMatcher) {

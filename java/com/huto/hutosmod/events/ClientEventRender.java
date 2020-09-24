@@ -25,9 +25,9 @@ public class ClientEventRender {
 				continue;
 
 			ItemStack heldItem = new ItemStack(ItemInit.frequency_matcher.get());
-			if (heldItem.getItem() instanceof ItemFrequencyMatcher) {
+		/*	if (heldItem.getItem() instanceof ItemFrequencyMatcher) {
 				RenderMiningLaser2.renderLaser(evt, player, Minecraft.getInstance().getRenderPartialTicks());
-			}
+			}*/
 		}
 	}
 

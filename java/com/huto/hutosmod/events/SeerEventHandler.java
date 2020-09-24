@@ -3,12 +3,12 @@ package com.huto.hutosmod.events;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.gui.VibrationalSeerHud;
 import com.huto.hutosmod.init.ItemInit;
-import com.ibm.icu.impl.UResource.Value;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +23,7 @@ public class SeerEventHandler {
 
 	static Minecraft mc = Minecraft.getInstance();
 
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(receiveCanceled = true)
 	public static void onEvent(RenderGameOverlayEvent.Pre event) {
 		ClientPlayerEntity entityPlayerSP = Minecraft.getInstance().player;

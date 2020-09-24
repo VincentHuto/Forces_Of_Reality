@@ -34,8 +34,8 @@ public class ItemAttractionCharm extends Item {
 		return state;
 	}
 
-	public void setState(boolean state) {
-		ItemAttractionCharm.state = state;
+	public void setState(boolean stateIn) {
+		state = stateIn;
 	}
 
 	@Override

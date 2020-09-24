@@ -30,10 +30,14 @@ import net.minecraft.world.World;
 
 public class BlockWaveGatherer extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(2, 0, 2, 14, 1, 14),
-			Block.makeCuboidShape(5, 1, 5, 11, 2, 11), Block.makeCuboidShape(6, 2, 6, 10, 9, 10),
-			Block.makeCuboidShape(3, 10, 3, 13, 13, 13), Block.makeCuboidShape(5, 9, 5, 11, 10, 11))
-			.reduce((v1, v2) -> {
+	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(0, 0, 0, 16, 1, 16),
+			Block.makeCuboidShape(3, 1, 3, 13, 6, 13), Block.makeCuboidShape(0, 1, 0, 3, 5, 3),
+			Block.makeCuboidShape(1, -7, 1, 4, 0, 4), Block.makeCuboidShape(13, 1, 0, 16, 5, 3),
+			Block.makeCuboidShape(12, -7, 1, 15, 0, 4), Block.makeCuboidShape(13, 1, 13, 16, 5, 16),
+			Block.makeCuboidShape(12, -7, 12, 15, 0, 15), Block.makeCuboidShape(0, 1, 13, 3, 5, 16),
+			Block.makeCuboidShape(1, -7, 12, 4, 0, 15), Block.makeCuboidShape(13, 1, 3, 15, 5, 13),
+			Block.makeCuboidShape(1, 1, 3, 3, 5, 13), Block.makeCuboidShape(3, 1, 13, 13, 5, 15),
+			Block.makeCuboidShape(3, 1, 1, 13, 5, 3), Block.makeCuboidShape(4, -8, 4, 12, 0, 12)).reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
 

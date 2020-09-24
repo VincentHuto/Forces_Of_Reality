@@ -55,6 +55,7 @@ public class PacketHandler {
 				OpenNormalInvPacket::new, OpenNormalInvPacket::handle);
 		INSTANCE.registerMessage(networkID++, SyncPacket.class, SyncPacket::toBytes, SyncPacket::new,
 				SyncPacket::handle);
+
 	}
 
 }

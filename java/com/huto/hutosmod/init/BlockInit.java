@@ -54,19 +54,21 @@ public class BlockInit {
 	public static final RegistryObject<Block> activated_obsidian = BLOCKS.register("activated_obsidian",
 			() -> new Block(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> nether_block = BLOCKS.register("nether_block", () -> new Block(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> reversion_catalyst = BLOCKS.register("reversion_catalyst",
 			() -> new Block(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).sound(SoundType.ANVIL)));
 	public static final RegistryObject<Block> display_glass = BLOCKS.register("display_glass",
 			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
 					.sound(SoundType.GLASS).notSolid()));
-	public static final RegistryObject<Block> nether_block = BLOCKS.register("nether_block", () -> new Block(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
-			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 	public static final RegistryObject<Block> phantasmal_glass = BLOCKS.register("phantasmal_glass",
 			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
 					.sound(SoundType.GLASS).notSolid()));
+
+	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
+			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
+
 	// Tiles
 	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
@@ -96,7 +98,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
 			() -> new BlockVibeAccel(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
 			() -> new BlockStorageDrum(
@@ -104,7 +105,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> vibratory_capacitor = BLOCKS.register("vibratory_capacitor",
 			() -> new BlockCapacitor(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
 	// Mystic
 	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
@@ -132,7 +132,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> enchanted_ore_mystic = BLOCKS.register("enchanted_ore_mystic",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f).harvestLevel(3)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-
 	// Anti
 	public static final RegistryObject<Block> anti_earth = BLOCKS.register("anti_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
@@ -155,7 +154,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> nightmare_media = BLOCKS.register("nightmare_media",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-
 	// Hastur
 	public static final RegistryObject<Block> hastur_pylon = BLOCKS.register("hastur_pylon",
 			() -> new BlockHasturPylon(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f)
@@ -213,8 +211,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.obj_icosahedron.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_mystic.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_mystic.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
 
 		}
 	}

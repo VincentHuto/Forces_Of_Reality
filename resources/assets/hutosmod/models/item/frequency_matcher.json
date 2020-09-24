@@ -1,6 +1,20 @@
 {
-   "parent": "item/handheld",
-   "textures": {
-       "layer0": "hutosmod:items/frequency_matcher"
-   }
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "hutosmod:items/frequency_matcher"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"hutosmod:clear": 0
+			},
+			"model": "hutosmod:item/frequency_matcher"
+		},
+		{
+			"predicate": {
+				"hutosmod:clear": 1
+			},
+			"model": "hutosmod:item/frequency_matcher_clear"
+		}
+	]
 }

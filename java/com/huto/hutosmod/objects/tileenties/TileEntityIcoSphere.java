@@ -13,7 +13,7 @@ public class TileEntityIcoSphere extends TileEntity implements ITickableTileEnti
 	}
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
-		return super.getRenderBoundingBox().grow(3);
+		return super.getRenderBoundingBox().grow(8);
 	} 
 
 

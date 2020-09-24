@@ -2,6 +2,7 @@ package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.ModelHasturPylon;
+import com.huto.hutosmod.models.ObjModelHandler;
 import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -15,9 +16,12 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.common.util.NonNullLazy;
 
 public class RenderHasturPylon extends TileEntityRenderer<TileEntityHasturPylon> {
 	private final ModelHasturPylon pylon = new ModelHasturPylon();
+	public static final NonNullLazy<ObjModelHandler> modelTorus = NonNullLazy
+			.of(() -> ObjModelHandler.of("hutosmod:models/block/torus.obj"));
 
 	public RenderHasturPylon(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -44,6 +48,7 @@ public class RenderHasturPylon extends TileEntityRenderer<TileEntityHasturPylon>
 				.getImpl(Tessellator.getInstance().getBuffer());
 		IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(
 				pylon.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/hastur_pylon.png")));
+	//	IVertexBuilder bb = bufferIn.getBuffer(RenderInit.HASTURTRANS);
 		pylon.render(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		irendertypebuffer$impl.finish();
 		matrixStackIn.pop();

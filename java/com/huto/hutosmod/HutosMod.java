@@ -11,6 +11,7 @@ import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
 import com.huto.hutosmod.events.ClientEventRender;
+import com.huto.hutosmod.events.SeerEventHandler;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.CapabilityInit;
@@ -79,8 +80,7 @@ public class HutosMod {
 		// Register Vibration Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
-	//	MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
-		PacketHandler.registerChannels();
+		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 	}
 
 	@SubscribeEvent
@@ -101,6 +101,7 @@ public class HutosMod {
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
+		PacketHandler.registerChannels();
 
 
 	}

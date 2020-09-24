@@ -39,7 +39,6 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 	private static final List<RenderType> RENDER_TYPES = IntStream.range(0, 16).mapToObj((p_228882_0_) -> {
 		return RenderType.getEndPortal(p_228882_0_ + 1);
 	}).collect(ImmutableList.toImmutableList());
-	public static float heightMod = 0;
 
 	public RenderCapacitor(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -49,18 +48,11 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 	@Override
 	public void render(TileEntityCapacitor te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		// Portal Schtuff
-		RANDOM.setSeed(31100L);
-		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
-		int p = this.getPasses(d0);
-		float f = this.getOffset();
-		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-		this.renderCube(te, f, 0.15F, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)));
-		for (int j = 1; j < p; ++j) {
-			this.renderCube(te, f, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)));
-		}
+
 		IVibrations vibeCap = te.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 		float vibe = vibeCap.getVibes();
+		float heightMod = 0;
+
 		// Check System that increments the vibe based on amount and color
 		if (vibe >= 0 && vibe <= 50)
 			heightMod = (float) (vibe / 50 * 0.75);
@@ -74,6 +66,17 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		if (heightMod > 0.75) {
 			heightMod = (float) 0.75;
 		}
+		// Portal Schtuff
+		RANDOM.setSeed(31100L);
+		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
+		int p = this.getPasses(d0);
+		float f = this.getOffset();
+		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
+		this.renderCube(te, f, 0.15F, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
+		for (int j = 1; j < p; ++j) {
+			this.renderCube(te, f, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)), heightMod);
+		}
+	
 
 		// Add items above block
 		int items = 0;
@@ -138,9 +141,8 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 
 			IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
-			IVertexBuilder ivertexbuilder = irendertypebuffer$impl
-					.getBuffer(magatamas.getRenderType(new ResourceLocation(
-							HutosMod.MOD_ID + ":textures/blocks/end_portal_red.png")));
+			IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(magatamas
+					.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal_red.png")));
 			magatamas.render(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
 					1.0F);
 			irendertypebuffer$impl.finish();
@@ -148,24 +150,24 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		}
 	}
 
-	private void renderCube(TileEntityCapacitor te, float offset, float fIn, Matrix4f matrix, IVertexBuilder vertx) {
+	private void renderCube(TileEntityCapacitor te, float offset, float fIn, Matrix4f matrix, IVertexBuilder vertx,	float heightModIn) {
 		float r = (RANDOM.nextFloat() * 0.5F + 0.1F) * fIn;
 		float g = (RANDOM.nextFloat() * 0.5F + 0.4F) * fIn;
 		float b = (RANDOM.nextFloat() * 0.5F + 0.5F) * fIn;
 		float a = 0.8f;
 
-		this.renderFace(te, matrix, vertx, 0.31f, .69f, 0.0f, heightMod, .69f, .69f, .69f, .69f, r, g, b, a,
+		this.renderFace(te, matrix, vertx, 0.31f, .69f, 0.0f, heightModIn, .69f, .69f, .69f, .69f, r, g, b, a,
 				Direction.SOUTH);
-		this.renderFace(te, matrix, vertx, 0.31f, .69f, heightMod, 0.0f, 0.31f, 0.31f, 0.31f, 0.31f, r, g, b, a,
+		this.renderFace(te, matrix, vertx, 0.31f, .69f, heightModIn, 0.0f, 0.31f, 0.31f, 0.31f, 0.31f, r, g, b, a,
 				Direction.NORTH);
-		this.renderFace(te, matrix, vertx, 0.69f, 0.69f, heightMod, 0.0625F, 0.31f, 0.69f, 0.69f, 0.31f, r, g, b, a,
+		this.renderFace(te, matrix, vertx, 0.69f, 0.69f, heightModIn, 0.0625F, 0.31f, 0.69f, 0.69f, 0.31f, r, g, b, a,
 				Direction.EAST);
-		this.renderFace(te, matrix, vertx, 0.31f, 0.31f, 0.0f, heightMod, 0.31f, 0.69f, 0.69f, 0.31f, r, g, b, a,
+		this.renderFace(te, matrix, vertx, 0.31f, 0.31f, 0.0f, heightModIn, 0.31f, 0.69f, 0.69f, 0.31f, r, g, b, a,
 				Direction.WEST);
 		// Down isnt really needed because itll never be seen
 		// this.renderFace(te, matrix, vertx, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F,
 		// 1.0F, r, g, b, a, Direction.DOWN);
-		this.renderFace(te, matrix, vertx, 0.31f, 0.69f, heightMod, heightMod, 0.69f, 0.69f, 0.31f, 0.31f, r, g, b, a,
+		this.renderFace(te, matrix, vertx, 0.31f, 0.69f, heightModIn, heightModIn, 0.69f, 0.69f, 0.31f, 0.31f, r, g, b, a,
 				Direction.UP);
 	}
 

@@ -26,10 +26,13 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class RenderMiningLaser2 {
 
+	@SuppressWarnings("unused")
 	private final static ResourceLocation laserBeam = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/misc/laser.png");
+	@SuppressWarnings("unused")
 	private final static ResourceLocation laserBeam2 = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/misc/laser2.png");
+	@SuppressWarnings("unused")
 	private final static ResourceLocation laserBeamGlow = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/misc/laser_glow.png");
 
@@ -46,10 +49,12 @@ public class RenderMiningLaser2 {
 				speedModifier);
 	}
 
+	@SuppressWarnings("unused")
 	private static float getSpeedModifier(ItemStack stack) {
 		return -0.02f;
 	}
 
+	@SuppressWarnings("unused")
 	private static void drawLasers(RenderWorldLastEvent event, Vector3d from, RayTraceResult trace, double xOffset,
 			double yOffset, double zOffset, float r, float g, float b, float thickness, PlayerEntity player,
 			float ticks, float speedModifier) {

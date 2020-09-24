@@ -79,7 +79,7 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		ResourceLocation textureBoth = new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal_purple.png");
 		ResourceLocation textureMode;
 
-		//Switch Textures
+		// Switch Textures
 		if (te.getEnumMode() == EnumAbsorberStates.DEFAULT) {
 			textureMode = textureDefault;
 		} else if (te.getEnumMode() == EnumAbsorberStates.IMPORT) {
@@ -134,6 +134,7 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		cube.render(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		irendertypebuffer$impl.finish();
 		matrixStackIn.pop();
+		//System.out.println(te.getUpdateTag().get(te.TAG_LINKEDPOS));
 
 	}
 
