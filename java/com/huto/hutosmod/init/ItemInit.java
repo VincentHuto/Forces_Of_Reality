@@ -269,7 +269,7 @@ public class ItemInit {
 			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_mob = ITEMS.register("upgrade_mob",
 			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_absorber = ITEMS.register("upgrade_absorber",
+	public static final RegistryObject<Item> upgrade_export = ITEMS.register("upgrade_export",
 			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> upgrade_import = ITEMS.register("upgrade_import",
 			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));

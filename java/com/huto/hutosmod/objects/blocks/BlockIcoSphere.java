@@ -21,5 +21,5 @@ public class BlockIcoSphere extends Block{
 		// TODO Auto-generated method stub
 		return new TileEntityIcoSphere();
 	}
-
+	
 }

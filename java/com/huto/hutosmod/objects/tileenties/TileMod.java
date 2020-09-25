@@ -49,7 +49,7 @@ public class TileMod extends TileEntity {
 	}
 
 	@Override
-	public final SUpdateTileEntityPacket getUpdatePacket() {
+	public SUpdateTileEntityPacket getUpdatePacket() {
 		CompoundNBT tag = new CompoundNBT();
 		writePacketNBT(tag);
 		return new SUpdateTileEntityPacket(pos, -999, tag);

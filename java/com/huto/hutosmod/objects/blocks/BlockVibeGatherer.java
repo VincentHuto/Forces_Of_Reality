@@ -73,8 +73,9 @@ public class BlockVibeGatherer extends Block {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-					world.addParticle(ParticleTypes.DOLPHIN, randX, randY, randZ, 0, 0, 0);
-
+					if (tile.canGenerate()) {
+						world.addParticle(ParticleTypes.DOLPHIN, randX, randY, randZ, 0, 0, 0);
+					}
 				}
 			}
 		}

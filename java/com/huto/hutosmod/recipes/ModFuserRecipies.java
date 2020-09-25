@@ -42,8 +42,8 @@ public class ModFuserRecipies {
 		recipeUpgradePeople = registerRecipe(new ResourceLocation("upgrade_player"),
 				new ItemStack(ItemInit.upgrade_player.get(), 1), 50, Ingredient.fromItems(Items.NETHER_STAR),
 				Ingredient.fromItems(ItemInit.upgrade_blank.get()));
-		recipeUpgradeExport = registerRecipe(new ResourceLocation("upgrade_absorber"),
-				new ItemStack(ItemInit.upgrade_absorber.get(), 1), 50, Ingredient.fromItems(ItemInit.gem_ruby.get()),
+		recipeUpgradeExport = registerRecipe(new ResourceLocation("upgrade_export"),
+				new ItemStack(ItemInit.upgrade_export.get(), 1), 50, Ingredient.fromItems(ItemInit.gem_ruby.get()),
 				Ingredient.fromItems(ItemInit.upgrade_blank.get()));
 		recipeUpgradeImport = registerRecipe(new ResourceLocation("upgrade_import"),
 				new ItemStack(ItemInit.upgrade_import.get(), 1), 50, Ingredient.fromItems(ItemInit.gem_sapphire.get()),

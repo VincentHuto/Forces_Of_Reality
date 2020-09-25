@@ -68,9 +68,9 @@ public class RenderIcoSphere extends TileEntityRenderer<TileEntityIcoSphere> {
 		matrixStackIn.translate(0.5, 0.5, 0.5);
 		matrixStackIn.rotate(Vector3f.YN.rotation(rotationRate));
 		matrixStackIn.scale(count * 2.8f, count * 1f, count * 2.8f);
-		modelTorus.get().render(bufferIn, RenderInit.ENDTRANS, matrixStackIn, combinedLightIn, 0x8f8f8f);
+		modelTorus.get().render(bufferIn, RenderInit.ENDTRANS, matrixStackIn, combinedLightIn, 0xFF8400);
 		matrixStackIn.scale(0.9f, 0.9f, 0.9f);
-		modelTorus.get().render(bufferIn, RenderInit.ENDTRANS, matrixStackIn, combinedLightIn, 0xBEAE00);
+		modelTorus.get().render(bufferIn, RenderInit.ENDTRANS, matrixStackIn, combinedLightIn, 0xFF8400);
 		matrixStackIn.pop();
 
 	}

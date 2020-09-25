@@ -6,8 +6,6 @@ import java.util.stream.IntStream;
 
 import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.models.ModelDrumMagatama;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
@@ -51,8 +49,9 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 	public void render(TileEntityStorageDrum te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
-		IVibrations vibeCap = te.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-		float vibe = vibeCap.getVibes();
+		float vibe = te.clientVibes;
+		//System.out.println(te.getUpdateTag().get(te.TAG_VIBES));
+
 		float heightMod = 0;
 		// Check System that increments the mana based on amount and color
 		if (vibe > 0 && vibe <= 300)
@@ -68,15 +67,26 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 			heightMod = (float) 1.4;
 		}
 
+		double manaRatioColor = vibe / 300;
+		float colorMod = 0;
+		// Higher F1 = more blue
+		if (manaRatioColor <= 1) {
+			colorMod = 0.35F;
+		} else if (manaRatioColor > 1 && manaRatioColor <= 2) {
+			colorMod = 4.8F;
+
+		} else if (manaRatioColor > 2 && manaRatioColor <= 3) {
+			colorMod = 12.4F;
+
+		}
 		// Portal Schtuff
 		RANDOM.setSeed(31100L);
 		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
 		int p = this.getPasses(d0);
-		float f = this.getOffset();
 		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-		this.renderCube(te, f, 0.15F, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
+		this.renderCube(te, 0.15f, colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
 		for (int j = 1; j < p; ++j) {
-			this.renderCube(te, f, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)),
+			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)),
 					heightMod);
 		}
 
@@ -97,10 +107,9 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 		for (int k = 0; k < te.getSizeInventory(); k++) {
 			matrixStackIn.push();
 			matrixStackIn.translate(0.5F, 2F, 0.5F);
-			matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(angles[k] + (float) time));
-			matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angles[k] + (float) time));
-			matrixStackIn.rotate(Vector3f.YN.rotationDegrees(angles[k] + (float) time));
-
+			matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(angles[k] + (float) time * 0.8f));
+			matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angles[k] + (float) time * 0.8f));
+			matrixStackIn.rotate(Vector3f.YN.rotationDegrees(angles[k] + (float) time * 0.8f));
 			// Edit True Radius
 			matrixStackIn.translate(0.025F, -0.5F, 0.025F);
 			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90f));
@@ -157,7 +166,7 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 		float r = (RANDOM.nextFloat() * 0.5F + 0.1F) * fIn;
 		float g = (RANDOM.nextFloat() * 0.5F + 0.4F) * fIn;
 		float b = (RANDOM.nextFloat() * 0.5F + 0.5F) * fIn;
-		float a = 0.8f;
+		float a = 1f;
 		this.renderFace(te, matrix, vertx, 0.125F, .875F, 0.0625F, heightModIn, .875F, .875F, .875F, .875F, r, g, b, a,
 				Direction.SOUTH);
 		this.renderFace(te, matrix, vertx, 0.125F, .875F, heightModIn, 0.00F, 0.125F, 0.125F, 0.125F, 0.125F, r, g, b,

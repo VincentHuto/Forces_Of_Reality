@@ -44,7 +44,10 @@ public class PacketHandler {
 		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
 				SetFlyPKT.Handler::handle);
-
+		HANDLER.registerMessage(networkID++, ImportVibePacket.class, ImportVibePacket::encode, ImportVibePacket::decode,
+				ImportVibePacket.Handler::handle);
+		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
+				ExportVibePacket.Handler::handle);
 		// MindRunes
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(HutosMod.MOD_ID, "runechannel"), () -> "1.0",
 				s -> true, s -> true);

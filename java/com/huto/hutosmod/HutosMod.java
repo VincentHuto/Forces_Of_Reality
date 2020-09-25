@@ -34,6 +34,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -68,7 +69,8 @@ public class HutosMod {
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::commonSetup);
 		modEventBus.addListener(this::doClientStuff);
-	//	proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+		// proxy = DistExecutor.runForDist(() -> ClientProxy::new, () ->
+		// ServerProxy::new);
 		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
@@ -88,11 +90,18 @@ public class HutosMod {
 		// Automatically Registers BlockItems
 		final IForgeRegistry<Item> registry = event.getRegistry();
 		BlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-			final Item.Properties properties = new Item.Properties().group(HutosModItemGroup.instance);
-			final BlockItem blockItem = new BlockItem(block, properties);
-			blockItem.setRegistryName(block.getRegistryName());
-			registry.register(blockItem);
-
+			if (block == BlockInit.obj_icosahedron.get()) {
+				final Item.Properties properties = new Item.Properties().group(HutosModItemGroup.instance)
+						.rarity(Rarity.EPIC);
+				final BlockItem blockItem = new BlockItem(block, properties);
+				blockItem.setRegistryName(block.getRegistryName());
+				registry.register(blockItem);
+			} else {
+				final Item.Properties properties = new Item.Properties().group(HutosModItemGroup.instance);
+				final BlockItem blockItem = new BlockItem(block, properties);
+				blockItem.setRegistryName(block.getRegistryName());
+				registry.register(blockItem);
+			}
 		});
 	}
 
@@ -103,12 +112,11 @@ public class HutosMod {
 		ModFuserRecipies.init();
 		PacketHandler.registerChannels();
 
-
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		TomePageLib.registerPages();
-        MinecraftForge.EVENT_BUS.register(ClientEventRender.class);
+		MinecraftForge.EVENT_BUS.register(ClientEventRender.class);
 
 	}
 
@@ -134,6 +142,7 @@ public class HutosMod {
 
 	public static class HutosModItemGroup extends ItemGroup {
 		public static final HutosModItemGroup instance = new HutosModItemGroup(ItemGroup.GROUPS.length, "hutosTab");
+
 		public HutosModItemGroup(int index, String label) {
 			super(index, label);
 		}

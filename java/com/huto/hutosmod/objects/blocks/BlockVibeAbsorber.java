@@ -84,7 +84,7 @@ public class BlockVibeAbsorber extends Block {
 			te.getTankLevel();
 			player.getHeldItemMainhand().shrink(1);
 			player.getHeldItemOffhand().shrink(1);
-			
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
 		// Cycle Clause

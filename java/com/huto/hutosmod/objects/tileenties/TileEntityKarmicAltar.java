@@ -11,6 +11,7 @@ import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.entity.item.ItemEntity;
@@ -21,11 +22,12 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements ITickableTileEntity {
-
+public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements ITickableTileEntity,IExportableTile {
+	public static final String TAG_VIBES = "vibes";
+	public float clientVibes = 0.0f;
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	int cooldown = 0;
-	private static final int SET_COOLDOWN_EVENT = 1;
+	private  final int SET_COOLDOWN_EVENT = 1;
 	float maxVibes = 500;
 
 	public TileEntityKarmicAltar() {
@@ -39,6 +41,10 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public float getMaxVibes() {
 		return maxVibes;
 	}
+	public boolean canGenerate() {
+		return  !isVibeFull() ? true : false;
+	}
+
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
@@ -160,5 +166,22 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public int getCooldown() {
 		return cooldown;
 	}
+	public boolean isVibeFull() {
+		return vibes.getVibes() < maxVibes ? false : true;
+	}
+	
+	
+	
+	@Override
+	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
+		if (!this.isVibeFull() && vibes.getVibes()>1) {
+			this.vibes.subtractVibes(rateIn);
+			exportToIn.vibes.addVibes(rateIn);
+		}
+	}
 
+	@Override
+	public boolean canExport() {
+		return canGenerate();
+	}
 }

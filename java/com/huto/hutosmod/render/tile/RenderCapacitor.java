@@ -6,8 +6,6 @@ import java.util.stream.IntStream;
 
 import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.models.ModelDrumMagatama;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
@@ -49,8 +47,7 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 	public void render(TileEntityCapacitor te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
-		IVibrations vibeCap = te.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-		float vibe = vibeCap.getVibes();
+		float vibe = te.clientVibes;
 		float heightMod = 0;
 
 		// Check System that increments the vibe based on amount and color
@@ -66,15 +63,28 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		if (heightMod > 0.75) {
 			heightMod = (float) 0.75;
 		}
+		
+		double manaRatioColor = vibe / 50;
+		float colorMod =0;
+		// Higher F1 = more blue
+		if (manaRatioColor <= 1) {
+			colorMod = 0.35F;
+		} else if (manaRatioColor > 1 && manaRatioColor <= 2) {
+			colorMod = 4.8F;
+
+		} else if (manaRatioColor > 2 && manaRatioColor <= 3) {
+			colorMod = 12.4F;
+
+		}
+
 		// Portal Schtuff
 		RANDOM.setSeed(31100L);
 		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
 		int p = this.getPasses(d0);
-		float f = this.getOffset();
 		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-		this.renderCube(te, f, 0.15F, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
+		this.renderCube(te,  0.15f,colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
 		for (int j = 1; j < p; ++j) {
-			this.renderCube(te, f, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)), heightMod);
+			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)), heightMod);
 		}
 	
 
@@ -154,7 +164,7 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		float r = (RANDOM.nextFloat() * 0.5F + 0.1F) * fIn;
 		float g = (RANDOM.nextFloat() * 0.5F + 0.4F) * fIn;
 		float b = (RANDOM.nextFloat() * 0.5F + 0.5F) * fIn;
-		float a = 0.8f;
+		float a = 1f;
 
 		this.renderFace(te, matrix, vertx, 0.31f, .69f, 0.0f, heightModIn, .69f, .69f, .69f, .69f, r, g, b, a,
 				Direction.SOUTH);

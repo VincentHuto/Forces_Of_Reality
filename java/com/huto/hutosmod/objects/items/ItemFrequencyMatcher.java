@@ -3,6 +3,7 @@ package com.huto.hutosmod.objects.items;
 import java.util.List;
 
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,8 +19,10 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -96,45 +99,56 @@ public class ItemFrequencyMatcher extends Item {
 		if (!stack.hasTag()) {
 			stack.setTag(new CompoundNBT());
 		}
-		
+		// Always Select a new block if player is sneaking
+		if (player.isSneaking()) {
+			player.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
+			CompoundNBT posCompound = NBTUtil.writeBlockPos(blockPos);
+			compound.putString(TAG_POS_NAME, I18n.format(world.getBlockState(blockPos).getBlock().getTranslationKey()));
+			compound.put(TAG_POS, posCompound);
+			stack.setTag(compound);
+			return ActionResultType.SUCCESS;
+
+		}
+
+		// Link
+		BlockPos readPos = NBTUtil.readBlockPos(stack.getTag().getCompound(TAG_POS));
+
 		if (stack.getTag().getBoolean("state")) {
-			if (!player.isSneaking() && !(world.getTileEntity(blockPos) instanceof TileEntityAbsorber)) {
-				player.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
-				CompoundNBT posCompound = NBTUtil.writeBlockPos(blockPos);
-				compound.putString(TAG_POS_NAME,
-						I18n.format(world.getBlockState(blockPos).getBlock().getTranslationKey()));
-				compound.put(TAG_POS, posCompound);
-				stack.setTag(compound);
-				return ActionResultType.SUCCESS;
-
-			}
-
 			if (!player.isSneaking() && world.getTileEntity(blockPos) instanceof TileEntityAbsorber) {
 				TileEntityAbsorber te = (TileEntityAbsorber) world.getTileEntity(blockPos);
 				player.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.40f, 1F);
 				if (stack.getTag().get(TAG_POS) != null) {
-					BlockPos newPos = NBTUtil.readBlockPos(stack.getTag().getCompound(TAG_POS));
-					if (NBTUtil.readBlockPos(stack.getTag().getCompound(TAG_POS))
-							.compareTo(new Vector3i(0, 0, 0)) != 0) {
-						te.addToLinkedBlocks(newPos);
-						te.sendUpdates();
-						return ActionResultType.SUCCESS;
-
+					if (readPos.compareTo(new Vector3i(0, 0, 0)) != 0) {
+						Vector3d teVec = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
+						Vector3d readVec = new Vector3d(readPos.getX(), readPos.getY(), readPos.getZ());
+						double distance = teVec.distanceTo(readVec);
+						if (distance < 8) {
+							te.addToLinkedBlocks(readPos);
+							VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+							return ActionResultType.SUCCESS;
+						} else {
+							if (world.isRemote) {
+								player.sendStatusMessage(
+										new StringTextComponent(TextFormatting.GOLD + "Too Far Cannot Connect"), false);
+								return ActionResultType.SUCCESS;
+							}
+						}
 					}
 				}
 			}
 		}
-
+		// Unlink
 		if (!stack.getTag().getBoolean("state")) {
 			if (!player.isSneaking() && world.getTileEntity(blockPos) instanceof TileEntityAbsorber) {
 				TileEntityAbsorber te = (TileEntityAbsorber) world.getTileEntity(blockPos);
 				player.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.40f, 1F);
-				BlockPos newPos = NBTUtil.readBlockPos(stack.getTag().getCompound(TAG_POS));
-				if (stack.getTag().get(TAG_POS) != null) {
-					te.removeFromLinkedBlocks(newPos);
-					te.sendUpdates();
+				Vector3d teVec = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
+				Vector3d readVec = new Vector3d(readPos.getX(), readPos.getY(), readPos.getZ());
+				double distance = teVec.distanceTo(readVec);
+				if (distance < 8) {
+					te.removeFromLinkedBlocks(readPos);
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 					return ActionResultType.SUCCESS;
-
 				}
 
 			}
@@ -157,9 +171,9 @@ public class ItemFrequencyMatcher extends Item {
 				tooltip.add(new TranslationTextComponent("NO POS SAVED").mergeStyle(TextFormatting.GOLD));
 			}
 			if (stack.getTag().getBoolean(TAG_STATE)) {
-				tooltip.add(new TranslationTextComponent("State: On").mergeStyle(TextFormatting.BLUE));
+				tooltip.add(new TranslationTextComponent("State: Link").mergeStyle(TextFormatting.BLUE));
 			} else {
-				tooltip.add(new TranslationTextComponent("State: Off").mergeStyle(TextFormatting.RED));
+				tooltip.add(new TranslationTextComponent("State: Unlinke").mergeStyle(TextFormatting.RED));
 			}
 		}
 	}

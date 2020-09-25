@@ -52,19 +52,19 @@ public class RenderInit extends RenderType {
 	public static final RenderType LASER_MAIN_BEAM = makeType("MiningLaserMainBeam",
 			DefaultVertexFormats.POSITION_COLOR_TEX, GL11.GL_QUADS, 256,
 			RenderType.State.getBuilder().texture(new TextureState(laserBeam2, false, false)).layer(field_239235_M_)
-					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS).cull(CULL_DISABLED)
+					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS)
 					.lightmap(LIGHTMAP_DISABLED).writeMask(COLOR_WRITE).build(false));
 
 	public static final RenderType LASER_MAIN_ADDITIVE = makeType("MiningLaserAdditiveBeam",
 			DefaultVertexFormats.POSITION_COLOR_TEX, GL11.GL_QUADS, 256,
 			RenderType.State.getBuilder().texture(new TextureState(laserBeamGlow, false, false)).layer(field_239235_M_)
-					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS).cull(CULL_DISABLED)
+					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS)
 					.lightmap(LIGHTMAP_DISABLED).writeMask(COLOR_WRITE).build(false));
 
 	public static final RenderType LASER_MAIN_CORE = makeType("MiningLaserCoreBeam",
 			DefaultVertexFormats.POSITION_COLOR_TEX, GL11.GL_QUADS, 256,
 			RenderType.State.getBuilder().texture(new TextureState(laserBeam, false, false)).layer(field_239235_M_)
-					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS).cull(CULL_DISABLED)
+					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS)
 					.lightmap(LIGHTMAP_DISABLED).writeMask(COLOR_WRITE).build(false));
 
 	public static final RenderType BlockOverlay = makeType("MiningLaserBlockOverlay",
@@ -73,16 +73,6 @@ public class RenderInit extends RenderType {
 					.texture(NO_TEXTURE).depthTest(DEPTH_LEQUAL).cull(CULL_ENABLED).lightmap(LIGHTMAP_DISABLED)
 					.writeMask(COLOR_DEPTH_WRITE).build(false));
 
-	public static final RenderType RenderBlock = makeType("MiningLaserRenderBlock", DefaultVertexFormats.BLOCK,
-			GL11.GL_QUADS, 256,
-			RenderType.State.getBuilder().shadeModel(SHADE_ENABLED).lightmap(LIGHTMAP_ENABLED)
-					.texture(BLOCK_SHEET_MIPPED).layer(field_239235_M_).transparency(TRANSLUCENT_TRANSPARENCY)
-					.depthTest(DEPTH_LEQUAL).cull(CULL_ENABLED).writeMask(COLOR_WRITE).build(false));
 
-	public static RenderType getTranslucent(ResourceLocation locationIn) {
-		return makeType("my_type", DefaultVertexFormats.POSITION_COLOR, 7, 256, false, true,
-				State.getBuilder().transparency(TRANSLUCENT_TRANSPARENCY).writeMask(COLOR_DEPTH_WRITE)
-						.texture(new TextureState(locationIn, false, false)).build(false));
-	}
 
 }

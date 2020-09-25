@@ -238,7 +238,6 @@ public class ContainerVirtuousEnchanter extends Container {
 									&& world.isAirBlock(blockPos.add(l, 1, k))) {
 								power += getPower(world, blockPos.add(l * 2, 0, k * 2));
 								power += getPower(world, blockPos.add(l * 2, 1, k * 2));
-
 								if (l != 0 && k != 0) {
 									power += getPower(world, blockPos.add(l * 2, 0, k));
 									power += getPower(world, blockPos.add(l * 2, 1, k));
@@ -422,7 +421,13 @@ public class ContainerVirtuousEnchanter extends Container {
 	}
 
 	private float getPower(net.minecraft.world.World world, net.minecraft.util.math.BlockPos pos) {
-		return world.getBlockState(pos).getEnchantPowerBonus(world, pos);
+
+		if (world.getBlockState(pos).getBlock() == BlockInit.end_crystal_mystic.get()
+				|| world.getBlockState(pos).getBlock() == BlockInit.end_crystal_nightmare.get()) {
+			return 1f;
+		} else {
+			return world.getBlockState(pos).getEnchantPowerBonus(world, pos);
+		}
 	}
 
 	private List<EnchantmentData> getEnchantmentList(ItemStack stack, int enchantSlot, int level) {

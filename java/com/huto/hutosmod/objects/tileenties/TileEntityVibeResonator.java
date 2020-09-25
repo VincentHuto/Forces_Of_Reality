@@ -21,6 +21,8 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
@@ -39,6 +41,10 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	public static EnumEssecenceType resonantState;
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	float maxVibes = 300;
+	public final String TAG_VIBES = "vibes";
+	public final String TAG_SIZE = "tankSize";
+
+	public float clientVibes = 0.0f;
 
 	public TileEntityVibeResonator() {
 		super(TileEntityInit.vibe_resonator.get());
@@ -142,6 +148,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
+			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 			if (cooldown > 0) {
 				cooldown--;
 			}
@@ -149,6 +156,24 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		/*
 		 * vibes.addVibes(3); System.out.println(vibes.getVibes());
 		 */
+	}
+
+	// NBT data
+	@Override
+	public void readPacketNBT(CompoundNBT tag) {
+		super.readPacketNBT(tag);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
+	}
+
+	@Override
+	public void writePacketNBT(CompoundNBT tag) {
+		super.writePacketNBT(tag);
+		tag.merge(itemHandler.serializeNBT());
+		tag.putFloat(TAG_SIZE, maxVibes);
+		tag.putFloat(TAG_VIBES, vibes.getVibes());
 	}
 
 	@Override
@@ -160,6 +185,33 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	public void read(BlockState state, CompoundNBT nbt) {
 		super.read(state, nbt);
 
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		super.getUpdatePacket();
+		CompoundNBT nbtTag = new CompoundNBT();
+		nbtTag.merge(itemHandler.serializeNBT());
+		nbtTag.putFloat(TAG_SIZE, maxVibes);
+		nbtTag.putFloat(TAG_VIBES, vibes.getVibes());
+		return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		CompoundNBT tag = pkt.getNbtCompound();
+		super.onDataPacket(net, pkt);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
+	}
+
+	@Override
+	public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+		super.handleUpdateTag(state, tag);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
 	}
 
 	@Override

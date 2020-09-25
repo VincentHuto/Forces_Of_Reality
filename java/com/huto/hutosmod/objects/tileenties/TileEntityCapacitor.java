@@ -7,22 +7,29 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
+import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 
-public class TileEntityCapacitor extends TileVibeSimpleInventory implements ITickableTileEntity {
-	
+public class TileEntityCapacitor extends TileVibeSimpleInventory
+		implements ITickableTileEntity, IImportableTile, IExportableTile {
+
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public static final String TAG_LEVEL = "tankLevel";
 	public static final String TAG_SIZE = "tankSize";
 	public int tankLevel = 0;
 	float maxVibes = 0.0F;
+	public static final String TAG_VIBES = "vibes";
+	public float clientVibes = 0.0f;
 
 	public TileEntityCapacitor() {
 		super(TileEntityInit.vibratory_capacitor.get());
@@ -30,7 +37,9 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory implements ITic
 
 	@Override
 	public void tick() {
-
+		if (!world.isRemote) {
+			world.notifyBlockUpdate(pos, getState(), getState(), 2);
+		}
 	}
 
 	// Vibe Stuff
@@ -75,19 +84,25 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory implements ITic
 	}
 
 	// NBT data
+
+	// NBT data
 	@Override
 	public void readPacketNBT(CompoundNBT tag) {
 		super.readPacketNBT(tag);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
 		tankLevel = tag.getInt(TAG_LEVEL);
 		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
 	}
 
 	@Override
 	public void writePacketNBT(CompoundNBT tag) {
 		super.writePacketNBT(tag);
+		tag.merge(itemHandler.serializeNBT());
 		tag.putInt(TAG_LEVEL, tankLevel);
 		tag.putFloat(TAG_SIZE, maxVibes);
-
+		tag.putFloat(TAG_VIBES, vibes.getVibes());
 	}
 
 	@Override
@@ -99,6 +114,36 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory implements ITic
 	public void read(BlockState state, CompoundNBT nbt) {
 		super.read(state, nbt);
 
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		super.getUpdatePacket();
+		CompoundNBT nbtTag = new CompoundNBT();
+		nbtTag.merge(itemHandler.serializeNBT());
+		nbtTag.putInt(TAG_LEVEL, tankLevel);
+		nbtTag.putFloat(TAG_SIZE, maxVibes);
+		nbtTag.putFloat(TAG_VIBES, vibes.getVibes());
+		return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		CompoundNBT tag = pkt.getNbtCompound();
+		super.onDataPacket(net, pkt);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		tankLevel = tag.getInt(TAG_LEVEL);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
+	}
+
+	@Override
+	public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+		super.handleUpdateTag(state, tag);
+		tankLevel = tag.getInt(TAG_LEVEL);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
 	}
 
 	@Override
@@ -141,12 +186,58 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory implements ITic
 		};
 	}
 
+	@Override
+	public boolean canImport() {
+		for (int i = 0; i < getSizeInventory(); i++) {
+			if (itemHandler.getStackInSlot(i).getItem() == ItemInit.upgrade_import.get()
+					&& vibes.getVibes() < maxVibes) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public boolean canExport() {
+		for (int i = 0; i < getSizeInventory(); i++) {
+			if (itemHandler.getStackInSlot(i).getItem() == ItemInit.upgrade_export.get() && vibes.getVibes() > 5) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean isEmpty() {
 		for (int i = 0; i < getSizeInventory(); i++)
 			if (!itemHandler.getStackInSlot(i).isEmpty())
 				return false;
 
 		return true;
+	}
+
+	@Override
+	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
+		this.vibes.addVibes(rate);
+		importFrom.vibes.subtractVibes(rate);
+	}
+
+	public boolean isVibeFull() {
+		return vibes.getVibes() < maxVibes ? false : true;
+	}
+
+	@Override
+	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
+		if (!this.isVibeFull() && vibes.getVibes() > 1) {
+			this.vibes.subtractVibes(rateIn);
+			exportToIn.vibes.addVibes(rateIn);
+		}
+	}
+
+	@Override
+	public void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, getState(), getState());
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		markDirty();
 	}
 
 }
