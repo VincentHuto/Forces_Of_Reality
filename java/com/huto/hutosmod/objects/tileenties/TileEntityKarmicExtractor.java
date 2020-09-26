@@ -15,8 +15,9 @@ import net.minecraft.tileentity.ITickableTileEntity;
 
 public class TileEntityKarmicExtractor extends TileModVibes implements ITickableTileEntity {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-	public static final String TAG_VIBES = "vibes";
 	public float clientVibes = 0.0f;
+	public static final String TAG_VIBES = "vibes";
+
 	public TileEntityKarmicExtractor() {
 		super(TileEntityInit.karmic_extractor.get());
 	}

@@ -18,10 +18,9 @@ import net.minecraft.util.math.BlockPos;
 public class TileEntityWaveGatherer extends TileModVibes implements ITickableTileEntity, IExportableTile {
 
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-	float maxVibes = 50;
 	public static final String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
-
+	float maxVibes = 50;
 	public float clientVibes = 0.0f;
 
 	public TileEntityWaveGatherer() {
@@ -35,7 +34,6 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 		}
 
 		if (isVibeFull()) {
-			System.out.println("s");
 
 		}
 		if (canGenerate()) {

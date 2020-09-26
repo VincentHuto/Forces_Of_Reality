@@ -28,24 +28,22 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
 public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITickableTileEntity {
+	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	int cooldown = 0;
-	List<ItemStack> lastRecipe = null;
-	RecipeFuser currentRecipe;
 	int recipeKeepTicks = 0;
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	float maxVibes = 500;
+	public float clientVibes = 0.0f;
 	public final String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
-	public float clientVibes = 0.0f;
+	List<ItemStack> lastRecipe = null;
+	RecipeFuser currentRecipe;
 
 	public TileEntityVibeFuser() {
 		super(TileEntityInit.vibratory_fuser.get());
 	}
-	
-	
 
 	@Override
 	public void onLoad() {
@@ -120,7 +118,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 
 	@Override
 	public void tick() {
-		
+
 		if (!world.isRemote) {
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 
@@ -132,7 +130,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 		// System.out.println(vibes.getVibes());
 	}
 
-	//Nbt
+	// Nbt
 	@Override
 	public void readPacketNBT(CompoundNBT tag) {
 		super.readPacketNBT(tag);

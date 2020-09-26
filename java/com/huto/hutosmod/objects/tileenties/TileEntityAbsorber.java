@@ -31,7 +31,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	public final String TAG_RATE = "transRate";
 	public final String TAG_ENUMMODE = "powerEnumMode";
 	public final String TAG_CLIENTMODE = "powerEnumMode";
-
 	public final String TAG_BLOCKPOS = "blockPos";
 	public final String TAG_LINKEDPOS = "linkedBlockPos";
 	public int tankLevel = 0;
@@ -54,8 +53,9 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void tick() {
-
+	public void tick() {	
+	//	System.out.println(vibes.getVibes());
+	//	System.out.println(clientVibes);
 		if (!world.isRemote) {
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 		}

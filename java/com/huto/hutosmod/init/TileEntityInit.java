@@ -8,6 +8,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
+import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeGatherer;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
@@ -69,8 +70,12 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityHasturPylon>> hastur_pylon = TILES.register(
 			"hastur_pylon",
 			() -> TileEntityType.Builder.create(TileEntityHasturPylon::new, BlockInit.hastur_pylon.get()).build(null));
-	
+
 	public static final RegistryObject<TileEntityType<TileEntityIcoSphere>> obj_icosahedron = TILES.register(
 			"obj_icosahedron",
 			() -> TileEntityType.Builder.create(TileEntityIcoSphere::new, BlockInit.obj_icosahedron.get()).build(null));
+	public static final RegistryObject<TileEntityType<TileEntityThermalInfluxer>> thermal_influxer = TILES
+			.register("thermal_influxer", () -> TileEntityType.Builder
+					.create(TileEntityThermalInfluxer::new, BlockInit.thermal_influxer.get()).build(null));
+
 }

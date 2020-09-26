@@ -36,19 +36,9 @@ public class TileEntityStorageDrum extends TileVibeSimpleInventory
 
 	@Override
 	public void tick() {
-		System.out.println(vibes.getVibes());
 		if (!world.isRemote) {
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 		}
-
-		/*
-		 * PacketHandler.CHANNELVIBES.send( PacketDistributor.TRACKING_CHUNK.with(() ->
-		 * this.getWorld().getChunk(getPos())), new
-		 * VibrationPacketServer(vibes.getVibes()));
-		 */
-
-		// vibes.addVibes(2);
-		// vibes.setVibes(900);
 	}
 
 	// Vibe Stuff

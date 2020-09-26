@@ -1,16 +1,13 @@
 package com.huto.hutosmod.objects.tileenties;
 
-import java.util.Set;
-
-import com.google.common.collect.Sets;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
-import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -18,15 +15,42 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityVibeGatherer extends TileModVibes implements ITickableTileEntity, IExportableTile {
+public class TileEntityThermalInfluxer extends TileModVibes implements ITickableTileEntity, IExportableTile {
+
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public static final String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
-	float maxVibes = 120;
+	float maxVibes = 150;
 	public float clientVibes = 0.0f;
 
-	public TileEntityVibeGatherer() {
-		super(TileEntityInit.vibe_gatherer.get());
+	public TileEntityThermalInfluxer() {
+		super(TileEntityInit.thermal_influxer.get());
+	}
+
+	@Override
+	public void tick() {
+		if (!world.isRemote) {
+			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
+		}
+
+		if (isVibeFull()) {
+
+		}
+		if (canGenerate()) {
+			vibes.addVibes(0.4f);
+		}
+	}
+
+	public boolean checkStructure() {
+		BlockPos adj = getPos().offset(Direction.DOWN);
+		BlockState blockState = world.getBlockState(adj);
+		Block block = blockState.getBlock();
+		if (block == Blocks.LAVA) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public IVibrations getVibeCap() {
@@ -41,38 +65,18 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 		this.maxVibes = maxVibes;
 	}
 
-	@Override
-	public void tick() {
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
-		}
-		if (canGenerate()) {
-			// System.out.println(vibes.getVibes());
-			vibes.addVibes(0.2f);
-		}
+	public boolean isVibeFull() {
+
+		return vibes.getVibes() <= maxVibes - 5 ? true : false;
 	}
 
 	public boolean canGenerate() {
-		return checkStructure() && !isVibeFull() ? true : false;
-	}
-
-	public boolean isVibeFull() {
-		return vibes.getVibes() > maxVibes ? true : false;
-	}
-
-	public boolean checkStructure() {
-		Set<Block> allowedBlocks = Sets.newHashSet(BlockInit.enchanted_stone.get(),
-				BlockInit.enchanted_stone_smooth.get());
-		BlockPos adj = getPos().offset(Direction.DOWN);
-		BlockState blockState = world.getBlockState(adj);
-		Block block = blockState.getBlock();
-		return allowedBlocks.contains(block) ? true : false;
-
+		return checkStructure() && isVibeFull() ? true : false;
 	}
 
 	@Override
 	public boolean canExport() {
-		if (this.vibes.getVibes() > 0.6f) {
+		if (this.vibes.getVibes() > 1.10f) {
 			return true;
 
 		} else {
@@ -82,7 +86,7 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 
 	@Override
 	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
-		if (vibes.getVibes() > rateIn) {
+		if (!this.isVibeFull() && vibes.getVibes() > rateIn) {
 			this.vibes.subtractVibes(rateIn);
 			exportToIn.vibes.addVibes(rateIn);
 		}
@@ -118,6 +122,7 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 	@Override
 	public void read(BlockState state, CompoundNBT nbt) {
 		super.read(state, nbt);
+
 	}
 
 	@Override
@@ -143,5 +148,4 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 		maxVibes = tag.getFloat(TAG_SIZE);
 		clientVibes = tag.getFloat(TAG_VIBES);
 	}
-
 }

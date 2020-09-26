@@ -424,7 +424,7 @@ public class ContainerVirtuousEnchanter extends Container {
 
 		if (world.getBlockState(pos).getBlock() == BlockInit.end_crystal_mystic.get()
 				|| world.getBlockState(pos).getBlock() == BlockInit.end_crystal_nightmare.get()) {
-			return 1f;
+			return 3f;
 		} else {
 			return world.getBlockState(pos).getEnchantPowerBonus(world, pos);
 		}

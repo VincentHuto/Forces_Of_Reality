@@ -1,5 +1,7 @@
 package com.huto.hutosmod.render.tile;
 
+import java.util.Vector;
+
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.RenderInit;
 import com.huto.hutosmod.models.ModelDrumMagatama;
@@ -7,7 +9,7 @@ import com.huto.hutosmod.models.ModelFloatingCube;
 import com.huto.hutosmod.objects.tileenties.EnumAbsorberStates;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.ibm.icu.text.DecimalFormat;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -157,12 +159,12 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 			g = 122 / 255f;
 			b = 122 / 255f;
 		} else if (te.clientEnumMode == EnumAbsorberStates.IMPORT) {
-			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
+			r = 192 + te.getWorld().rand.nextInt(35) / 255f;
 			g = 122 / 255f;
 			b = 255 / 255f;
 		} else if (te.clientEnumMode == EnumAbsorberStates.EXPORT) {
-			r = 122  / 255f;
-			g = 1/ 255f;
+			r = 122 / 255f;
+			g = 1 / 255f;
 			b = 1 / 255f;
 		} else if (te.clientEnumMode == EnumAbsorberStates.BOTH) {
 			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
@@ -176,6 +178,7 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 
 		matrixStackIn.push();
 		matrixStackIn.translate(0.5, 0, 0.5);
+
 		// matrixStackIn.scale(5f, 5f, 5f);
 		Vector3d vecPosOther;
 		Vector3d vecPos = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
@@ -187,9 +190,10 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 				RayTraceResult trace = te.getWorld().rayTraceBlocks(new RayTraceContext(vecPos, test2,
 						RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, null));
 				double distance2 = vecPos.distanceTo(vecPosOther);
+				DecimalFormat df = new DecimalFormat("0");
+				distance2 = (int) distance2;
 				drawLasers(matrixStackIn, vecPos, trace, test2.x * distance2, test2.y * distance2, test2.z * distance2,
-						r, g, b, (.05f), (float) ticks, .05f, te);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+						r, g, b, (.08f), (float) ticks, .09f, te);
 
 			}
 		}
@@ -202,7 +206,7 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 			float speedModifier, TileEntityAbsorber tile) {
 
 		IVertexBuilder builder;
-		double distance = Math.max(0, (from.subtract(trace.getHitVec()).length()));
+		double distance = Math.max(0, 1 - (from.subtract(trace.getHitVec()).length()));
 		long gameTime = tile.getWorld().getGameTime();
 		double v = gameTime * speedModifier;
 		// How wide the blur is on the beam

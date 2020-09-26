@@ -12,27 +12,30 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class VibrationPacketClient {
 
-    public VibrationPacketClient() {
+	public VibrationPacketClient() {
 
-    }
+	}
 
-    public static void handle(final VibrationPacketClient msg, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
+	public static void handle(final VibrationPacketClient msg, Supplier<NetworkEvent.Context> ctx) {
+		ctx.get().enqueueWork(() -> {
+			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
+			if (sender != null) {
+				// Get the currency
+				IVibrations vibes = sender.getCapability(VibrationProvider.VIBE_CAPA)
+						.orElseThrow(IllegalStateException::new);
+				// Send message back to the client to set the information
+				PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> sender),
+						new VibrationPacketServer(vibes.getVibes()));
+			}
+		});
+		ctx.get().setPacketHandled(true);
+	}
 
-            //Get the currency
-            IVibrations vibes = sender.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-            //Send message back to the client to set the information
-            PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> sender), new VibrationPacketServer(vibes.getVibes()));
-        });
-        ctx.get().setPacketHandled(true);
-    }
+	public static void encode(final VibrationPacketClient msg, final PacketBuffer packetBuffer) {
 
-    public static void encode(final VibrationPacketClient msg, final PacketBuffer packetBuffer) {
+	}
 
-    }
-
-    public static VibrationPacketClient decode(final PacketBuffer packetBuffer) {
-        return new VibrationPacketClient();
-    }
+	public static VibrationPacketClient decode(final PacketBuffer packetBuffer) {
+		return new VibrationPacketClient();
+	}
 }

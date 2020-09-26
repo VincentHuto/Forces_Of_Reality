@@ -26,9 +26,9 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public static final String TAG_LEVEL = "tankLevel";
 	public static final String TAG_SIZE = "tankSize";
+	public static final String TAG_VIBES = "vibes";
 	public int tankLevel = 0;
 	float maxVibes = 0.0F;
-	public static final String TAG_VIBES = "vibes";
 	public float clientVibes = 0.0f;
 
 	public TileEntityCapacitor() {

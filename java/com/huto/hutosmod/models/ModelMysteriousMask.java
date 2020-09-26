@@ -42,7 +42,7 @@ public class ModelMysteriousMask extends BipedModel {
 		this.bipedHead.addChild(Mask);
 		this.bipedHead.addChild(LeftBand);
 		this.bipedHead.addChild(RightBand);
-		this.bipedHead.addChild(BackBand);	
+		this.bipedHead.addChild(BackBand);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -62,5 +62,13 @@ public class ModelMysteriousMask extends BipedModel {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	public void renderMask(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay,
+			float red, float green, float blue, float alpha) {
+		LeftBand.render(matrixStack, buffer, packedOverlay, packedOverlay);
+		RightBand.render(matrixStack, buffer, packedOverlay, packedOverlay);
+		BackBand.render(matrixStack, buffer, packedOverlay, packedOverlay);
+		Mask.render(matrixStack, buffer, packedOverlay, packedOverlay);
 	}
 }

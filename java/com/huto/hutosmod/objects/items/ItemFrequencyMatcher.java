@@ -122,7 +122,7 @@ public class ItemFrequencyMatcher extends Item {
 						Vector3d teVec = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
 						Vector3d readVec = new Vector3d(readPos.getX(), readPos.getY(), readPos.getZ());
 						double distance = teVec.distanceTo(readVec);
-						if (distance < 8) {
+						if (distance < 4) {
 							te.addToLinkedBlocks(readPos);
 							VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 							return ActionResultType.SUCCESS;
@@ -145,7 +145,7 @@ public class ItemFrequencyMatcher extends Item {
 				Vector3d teVec = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
 				Vector3d readVec = new Vector3d(readPos.getX(), readPos.getY(), readPos.getZ());
 				double distance = teVec.distanceTo(readVec);
-				if (distance < 8) {
+				if (distance < 4) {
 					te.removeFromLinkedBlocks(readPos);
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 					return ActionResultType.SUCCESS;

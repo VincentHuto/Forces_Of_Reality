@@ -22,13 +22,13 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements ITickableTileEntity,IExportableTile {
-	public static final String TAG_VIBES = "vibes";
-	public float clientVibes = 0.0f;
+public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements ITickableTileEntity, IExportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	int cooldown = 0;
-	private  final int SET_COOLDOWN_EVENT = 1;
-	float maxVibes = 500;
+	final int SET_COOLDOWN_EVENT = 1;
+	public float maxVibes = 500;
+	public float clientVibes = 0.0f;
+	public static final String TAG_VIBES = "vibes";
 
 	public TileEntityKarmicAltar() {
 		super(TileEntityInit.karmic_altar.get());
@@ -41,10 +41,10 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public float getMaxVibes() {
 		return maxVibes;
 	}
-	public boolean canGenerate() {
-		return  !isVibeFull() ? true : false;
-	}
 
+	public boolean canGenerate() {
+		return !isVibeFull() ? true : false;
+	}
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
@@ -166,15 +166,14 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	public int getCooldown() {
 		return cooldown;
 	}
+
 	public boolean isVibeFull() {
 		return vibes.getVibes() < maxVibes ? false : true;
 	}
-	
-	
-	
+
 	@Override
 	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
-		if (!this.isVibeFull() && vibes.getVibes()>1) {
+		if (!this.isVibeFull() && vibes.getVibes() > 1) {
 			this.vibes.subtractVibes(rateIn);
 			exportToIn.vibes.addVibes(rateIn);
 		}

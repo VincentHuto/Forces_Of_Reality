@@ -28,17 +28,17 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
 public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity {
-	int cooldown = 0;
-	List<ItemStack> lastRecipe = null;
-	RecipeWandMaker currentRecipe;
-	int recipeKeepTicks = 0;
+	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	int cooldown = 0;
+	int recipeKeepTicks = 0;
 	float maxVibes = 400;
 	public String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
+	List<ItemStack> lastRecipe = null;
+	RecipeWandMaker currentRecipe;
 
 	public float clientVibes = 0.0f;
 

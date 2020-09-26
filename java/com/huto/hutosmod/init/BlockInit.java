@@ -12,6 +12,7 @@ import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
+import com.huto.hutosmod.objects.blocks.BlockThermalInfluxer;
 import com.huto.hutosmod.objects.blocks.BlockVibeAbsorber;
 import com.huto.hutosmod.objects.blocks.BlockVibeAccel;
 import com.huto.hutosmod.objects.blocks.BlockVibeFuser;
@@ -97,6 +98,9 @@ public class BlockInit {
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
 			() -> new BlockVibeAccel(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
+			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",

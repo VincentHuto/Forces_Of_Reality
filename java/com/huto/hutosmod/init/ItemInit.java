@@ -16,11 +16,13 @@ import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemGuidanceRune;
 import com.huto.hutosmod.objects.items.ItemKnapper;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
+import com.huto.hutosmod.objects.items.ItemManaExtractor;
 import com.huto.hutosmod.objects.items.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemRune;
+import com.huto.hutosmod.objects.items.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
@@ -245,11 +247,13 @@ public class ItemInit {
 
 	// Hands
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemManaExtractor(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
 			() -> new ItemMakerActivator(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> vibration_debug_tool = ITEMS.register("vibration_debug_tool",
 			() -> new ItemDebugTool(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> self_analyzer = ITEMS.register("self_analyzer",
+			() -> new ItemSelfAnalyzer(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	// Wands
 	public static final RegistryObject<Item> wand_consume_vibes = ITEMS.register("wand_consume_vibes",
@@ -321,9 +325,15 @@ public class ItemInit {
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Spawn Eggs
-	public static final RegistryObject<ModSpawnEggItem> example_mob_spawn_egg = ITEMS.register("example_mob_spawn_egg",
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_example_mob = ITEMS.register("spawn_egg_example_mob",
 			() -> new ModSpawnEggItem(EntityInit.EXAMPLE_ENTITY, 0x8B15A3, 0xa735e3,
-					new Item.Properties().group(ItemGroup.MISC)));
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_walker = ITEMS
+			.register("spawn_egg_dream_walker", () -> new ModSpawnEggItem(EntityInit.dream_walker, 0x000000, 0xFFFFFF,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_colin = ITEMS.register("spawn_egg_dream_colin",
+			() -> new ModSpawnEggItem(EntityInit.colin, 0x88008B, 0xFF7F00,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
@@ -360,8 +370,8 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		
-		//Frequency Matcher
+
+		// Frequency Matcher
 		ItemModelsProperties.registerProperty(frequency_matcher.get(), new ResourceLocation(HutosMod.MOD_ID, "clear"),
 				new IItemPropertyGetter() {
 					@Override
