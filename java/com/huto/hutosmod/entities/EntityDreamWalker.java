@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -51,9 +50,10 @@ public class EntityDreamWalker extends AnimalEntity {
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
 
-	public static AttributeModifierMap.MutableAttribute func_233666_p_() {
+	public static AttributeModifierMap.MutableAttribute setAttributes() {
 		return AnimalEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 16.0D)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK).createMutableAttribute(Attributes.MOVEMENT_SPEED,0.3f);
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.1f);
 	}
 
 	@Override
@@ -101,7 +101,6 @@ public class EntityDreamWalker extends AnimalEntity {
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
 	}
-
 
 	@Override
 	public EntityDreamWalker func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {

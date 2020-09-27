@@ -67,7 +67,7 @@ public class TileEntityThermalInfluxer extends TileModVibes implements ITickable
 
 	public boolean isVibeFull() {
 
-		return vibes.getVibes() <= maxVibes - 5 ? true : false;
+		return vibes.getVibes() <= maxVibes - 1.10 ? true : false;
 	}
 
 	public boolean canGenerate() {

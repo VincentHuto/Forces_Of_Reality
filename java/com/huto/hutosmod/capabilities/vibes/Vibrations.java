@@ -5,7 +5,6 @@ public class Vibrations implements IVibrations {
 
 	public void subtractVibes(float points) {
 		this.vibes -= points;
-
 		if (this.vibes < 0.0F)
 			this.vibes = 0.0F;
 	}

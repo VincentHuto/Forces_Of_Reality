@@ -75,8 +75,7 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 						// Importing from Absorber
 						if (world.getTileEntity(linkedBlocks.get(i)) instanceof IImportableTile) {
 							IImportableTile te = (IImportableTile) world.getTileEntity(linkedBlocks.get(i));
-							if (this.isExportState() && te.canImport()) {
-								// System.out.println("Should be Exporting");
+							if (this.isExportState() && this.vibes.getVibes()>transferRate && te.canImport()) {
 								te.importFromAbsorber(this, transferRate);
 								te.sendUpdates();
 								VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);

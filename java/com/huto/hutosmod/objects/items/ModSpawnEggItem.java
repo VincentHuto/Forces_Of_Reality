@@ -20,38 +20,40 @@ import java.util.Map;
 
 public class ModSpawnEggItem extends SpawnEggItem {
 
-    protected static final List<ModSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
-    private final Lazy<? extends EntityType<?>> entityTypeSupplier;
+	protected static final List<ModSpawnEggItem> UNADDED_EGGS = new ArrayList<>();
+	private final Lazy<? extends EntityType<?>> entityTypeSupplier;
 
-    public ModSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, final int primaryColour, final int secondaryColour, final Item.Properties properties) {
-        super(null, primaryColour, secondaryColour, properties);
-        this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
-        UNADDED_EGGS.add(this);
-    }
+	public ModSpawnEggItem(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, final int primaryColour,
+			final int secondaryColour, final Item.Properties properties) {
+		super(null, primaryColour, secondaryColour, properties);
+		this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
+		UNADDED_EGGS.add(this);
+	}
 
-    public static void initSpawnEggs() {
-        final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class, null, "field_195987_b");
-        DefaultDispenseItemBehavior dispenseBehaviour = new DefaultDispenseItemBehavior() {
-            @Override
-            protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
-                Direction direction = source.getBlockState().get(DispenserBlock.FACING);
-                EntityType<?> type = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
-                type.spawn(source.getWorld(), stack, null, source.getBlockPos().offset(direction),
-                        SpawnReason.DISPENSER, direction != Direction.UP, false);
-                stack.shrink(1);
-                return stack;
-            }
-        };
+	public static void initSpawnEggs() {
+		final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class,
+				null, "field_195987_b");
+		DefaultDispenseItemBehavior dispenseBehaviour = new DefaultDispenseItemBehavior() {
+			@Override
+			protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+				Direction direction = source.getBlockState().get(DispenserBlock.FACING);
+				EntityType<?> type = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
+				type.spawn(source.getWorld(), stack, null, source.getBlockPos().offset(direction),
+						SpawnReason.DISPENSER, direction != Direction.UP, false);
+				stack.shrink(1);
+				return stack;
+			}
+		};
 
-        for (final SpawnEggItem spawnEgg : UNADDED_EGGS) {
-            EGGS.put(spawnEgg.getType(null), spawnEgg);
-            DispenserBlock.registerDispenseBehavior(spawnEgg, dispenseBehaviour);
-        }
-        UNADDED_EGGS.clear();
-    }
+		for (final SpawnEggItem spawnEgg : UNADDED_EGGS) {
+			EGGS.put(spawnEgg.getType(null), spawnEgg);
+			DispenserBlock.registerDispenseBehavior(spawnEgg, dispenseBehaviour);
+		}
+		UNADDED_EGGS.clear();
+	}
 
-    @Override
-    public EntityType<?> getType(CompoundNBT nbt) {
-        return this.entityTypeSupplier.get();
-    }
+	@Override
+	public EntityType<?> getType(CompoundNBT nbt) {
+		return this.entityTypeSupplier.get();
+	}
 }

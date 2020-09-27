@@ -8,11 +8,8 @@ import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
@@ -26,8 +23,6 @@ public class ItemManaExtractor extends Item {
 
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
-		ItemStack stack = context.getPlayer().getHeldItem(context.getHand());
-		Block block = context.getWorld().getBlockState(context.getPos()).getBlock();
 		BlockPos pos = context.getPos();
 		if (context.getWorld().getTileEntity(pos) instanceof TileEntityStorageDrum) {
 			TileEntityStorageDrum te = (TileEntityStorageDrum) context.getWorld().getTileEntity(pos);

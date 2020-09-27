@@ -57,6 +57,9 @@ public class BlockInit {
 					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> nether_block = BLOCKS.register("nether_block", () -> new Block(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> contained_magma = BLOCKS.register("contained_magma", () -> new Block(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
 	public static final RegistryObject<Block> reversion_catalyst = BLOCKS.register("reversion_catalyst",
 			() -> new Block(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).sound(SoundType.ANVIL)));
@@ -66,7 +69,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> phantasmal_glass = BLOCKS.register("phantasmal_glass",
 			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
 					.sound(SoundType.GLASS).notSolid()));
-
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 
@@ -192,14 +194,17 @@ public class BlockInit {
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 
-	
-	//OBJ
-	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron", () -> new BlockIcoSphere(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
-	public static final RegistryObject<Block> end_crystal_mystic = BLOCKS.register("end_crystal_mystic", () -> new BlockCrystalObj(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
-	public static final RegistryObject<Block> end_crystal_nightmare = BLOCKS.register("end_crystal_nightmare", () -> new BlockCrystalObj(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
+	// OBJ
+	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron",
+			() -> new BlockIcoSphere(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
+	public static final RegistryObject<Block> end_crystal_mystic = BLOCKS.register("end_crystal_mystic",
+			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
+	public static final RegistryObject<Block> end_crystal_nightmare = BLOCKS.register("end_crystal_nightmare",
+			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
+
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {

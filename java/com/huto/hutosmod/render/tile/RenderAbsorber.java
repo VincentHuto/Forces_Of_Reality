@@ -1,7 +1,5 @@
 package com.huto.hutosmod.render.tile;
 
-import java.util.Vector;
-
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.RenderInit;
 import com.huto.hutosmod.models.ModelDrumMagatama;
@@ -9,7 +7,6 @@ import com.huto.hutosmod.models.ModelFloatingCube;
 import com.huto.hutosmod.objects.tileenties.EnumAbsorberStates;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.ibm.icu.text.DecimalFormat;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -190,7 +187,6 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 				RayTraceResult trace = te.getWorld().rayTraceBlocks(new RayTraceContext(vecPos, test2,
 						RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, null));
 				double distance2 = vecPos.distanceTo(vecPosOther);
-				DecimalFormat df = new DecimalFormat("0");
 				distance2 = (int) distance2;
 				drawLasers(matrixStackIn, vecPos, trace, test2.x * distance2, test2.y * distance2, test2.z * distance2,
 						r, g, b, (.08f), (float) ticks, .09f, te);

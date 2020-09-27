@@ -11,6 +11,7 @@ import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
 import com.huto.hutosmod.events.ClientEventRender;
+import com.huto.hutosmod.events.KarmaHudEventHandler;
 import com.huto.hutosmod.events.SeerEventHandler;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
@@ -25,6 +26,7 @@ import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 import com.huto.hutosmod.render.rune.RunesRenderLayer;
+import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
@@ -62,15 +64,12 @@ public class HutosMod {
 	private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "hutosmod";
 	public static HutosMod instance;
-//	public static IProxy proxy;
 
 	public HutosMod() {
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::commonSetup);
 		modEventBus.addListener(this::doClientStuff);
-		// proxy = DistExecutor.runForDist(() -> ClientProxy::new, () ->
-		// ServerProxy::new);
 		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
@@ -83,6 +82,10 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
+
+		SoundHandler.registerSounds();
+
 	}
 
 	@SubscribeEvent
@@ -122,6 +125,7 @@ public class HutosMod {
 
 	@SubscribeEvent
 	public void onServerStarting(FMLServerStartingEvent event) {
+
 	}
 
 	public void setupOnLoaded(FMLLoadCompleteEvent event) {

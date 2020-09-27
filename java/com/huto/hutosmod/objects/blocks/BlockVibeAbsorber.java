@@ -32,8 +32,6 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -91,13 +89,6 @@ public class BlockVibeAbsorber extends Block {
 		if (stack.getItem() == ItemInit.absorber_configurer.get()) {
 			te.cycleEnumMode();
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-
-		}
-		// Says the tank is full
-		if (te.getVibeCap().getVibes() >= te.getTankSize()) {
-			String message = String.format("Drum is full");
-			player.sendStatusMessage(new StringTextComponent(TextFormatting.BLUE + message), false);
 			return ActionResultType.SUCCESS;
 
 		}

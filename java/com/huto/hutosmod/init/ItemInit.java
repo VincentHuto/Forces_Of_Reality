@@ -326,7 +326,7 @@ public class ItemInit {
 
 	// Spawn Eggs
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_example_mob = ITEMS.register("spawn_egg_example_mob",
-			() -> new ModSpawnEggItem(EntityInit.EXAMPLE_ENTITY, 0x8B15A3, 0xa735e3,
+			() -> new ModSpawnEggItem(EntityInit.EXAMPLE_ENTITY, 0xFF7F00, 0xa735e3,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_walker = ITEMS
 			.register("spawn_egg_dream_walker", () -> new ModSpawnEggItem(EntityInit.dream_walker, 0x000000, 0xFFFFFF,

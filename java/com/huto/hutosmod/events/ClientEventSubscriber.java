@@ -16,6 +16,7 @@ import com.huto.hutosmod.render.tile.RenderCapacitor;
 import com.huto.hutosmod.render.tile.RenderHasturPylon;
 import com.huto.hutosmod.render.tile.RenderIcoSphere;
 import com.huto.hutosmod.render.tile.RenderKarmicAltar;
+import com.huto.hutosmod.render.tile.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderStorageDrum;
 import com.huto.hutosmod.render.tile.RenderThermalInfluxer;
@@ -45,6 +46,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_altar.get(), RenderKarmicAltar::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_extractor.get(), RenderKarmicExtractor::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.virtuous_enchanter.get(), RenderVirtuousEnchanter::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_storage_drum.get(), RenderStorageDrum::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_capacitor.get(), RenderCapacitor::new);

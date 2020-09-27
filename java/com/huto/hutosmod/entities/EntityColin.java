@@ -1,11 +1,13 @@
 package com.huto.hutosmod.entities;
 
 import com.huto.hutosmod.init.EntityInit;
+import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -17,6 +19,7 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -52,29 +55,32 @@ public class EntityColin extends AnimalEntity {
 		this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(5, new PanicGoal(this, 2.0D));
+		this.goalSelector.addGoal(5, new PanicGoal(this,1.5D));
 
 	}
 
-	public static AttributeModifierMap.MutableAttribute func_233666_p_() {
-		return AnimalEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 16.0D)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.1D);
+	public static AttributeModifierMap.MutableAttribute setAttributes() {
+		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 15.0D);
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_COW_AMBIENT;
+		return SoundHandler.ENTITY_COLIN_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_COW_HURT;
+		return SoundHandler.ENTITY_COLIN_HURT;
+
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_COW_DEATH;
+		return SoundHandler.ENTITY_COLIN_DEATH;
+
 	}
 
 	@Override
@@ -82,9 +88,6 @@ public class EntityColin extends AnimalEntity {
 		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
 
-	/**
-	 * Returns the volume for the sounds this mob makes.
-	 */
 	@Override
 	protected float getSoundVolume() {
 		return 0.4F;
@@ -93,9 +96,9 @@ public class EntityColin extends AnimalEntity {
 	@Override
 	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
-		if (itemstack.getItem() == Items.BUCKET && !this.isChild()) {
+		if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
 			p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
+			ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_, Items.BEETROOT_SOUP.getDefaultInstance());
 			p_230254_1_.setHeldItem(p_230254_2_, itemstack1);
 			return ActionResultType.func_233537_a_(this.world.isRemote);
 		} else {
@@ -143,19 +146,20 @@ public class EntityColin extends AnimalEntity {
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);
 		int i = 500;
 		if (!this.world.isRemote) {
+			ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(), new ItemStack(Items.POTATO));
+			world.addEntity(outputItem);
+
 			if (this.deathTicks > 150 && this.deathTicks % 5 == 0 && flag) {
 				this.dropExperience(MathHelper.floor((float) i * 0.08F));
 			}
 
-			if (this.deathTicks == 1 && !this.isSilent()) {
-				this.world.playBroadcastSound(1028, this.getPosition(), 0);
-			}
+
 		}
 
-		this.move(MoverType.SELF, new Vector3d(0.0D, (double) 0.5F, 0.0D));
-
-		this.rotationPitch +=20.0f;
-		this.renderYawOffset = this.rotationYaw;
+		this.move(MoverType.SELF, new Vector3d(0.0D, (double) 0.3F, 0.0D));
+		/*
+		 * this.rotationPitch += 20.0f; this.renderYawOffset = this.rotationYaw;
+		 */
 
 		if (this.deathTicks == 400 && !this.world.isRemote) {
 			if (flag) {

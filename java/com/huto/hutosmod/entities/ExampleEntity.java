@@ -51,9 +51,10 @@ public class ExampleEntity extends AnimalEntity {
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
 
-	public static AttributeModifierMap.MutableAttribute func_233666_p_() {
+	public static AttributeModifierMap.MutableAttribute setAttributes() {
 		return LivingEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 16.0D)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK).createMutableAttribute(Attributes.MOVEMENT_SPEED,0.3f);
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15f);
 	}
 
 	@Override
@@ -101,7 +102,6 @@ public class ExampleEntity extends AnimalEntity {
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
 	}
-
 
 	@Override
 	public ExampleEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {

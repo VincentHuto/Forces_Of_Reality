@@ -40,8 +40,8 @@ public class EntityInit {
 
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
-		GlobalEntityTypeAttributes.put(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntity.func_233666_p_().create());
-		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.func_233666_p_().create());
-		GlobalEntityTypeAttributes.put(EntityInit.colin.get(), EntityColin.func_233666_p_().create());
+		GlobalEntityTypeAttributes.put(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntity.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.colin.get(), EntityColin.setAttributes().create());
 	}
 }
