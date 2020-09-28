@@ -2,6 +2,7 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.blocks.BlockCapacitor;
+import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
 import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
 import com.huto.hutosmod.objects.blocks.BlockHasturPylon;
@@ -59,7 +60,7 @@ public class BlockInit {
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> contained_magma = BLOCKS.register("contained_magma", () -> new Block(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> reversion_catalyst = BLOCKS.register("reversion_catalyst",
 			() -> new Block(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).sound(SoundType.ANVIL)));
@@ -104,6 +105,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
 			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+
+	public static final RegistryObject<Block> runic_chisel_station = BLOCKS.register("runic_chisel_station",
+			() -> new BlockChiselStation(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
 			() -> new BlockStorageDrum(

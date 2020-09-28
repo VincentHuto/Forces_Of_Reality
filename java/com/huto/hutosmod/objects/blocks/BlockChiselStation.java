@@ -1,12 +1,9 @@
 package com.huto.hutosmod.objects.blocks;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
-
-import com.huto.hutosmod.init.TileEntityInit;
-import com.huto.hutosmod.objects.tileenties.TileEntityVirtuousEnchant;
+import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
+import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -35,20 +31,45 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockVirtuousEnchant extends Block {
+public class BlockChiselStation extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream
-			.of(Block.makeCuboidShape(2, 0, 2, 14, 1, 14), Block.makeCuboidShape(5, 1, 5, 11, 2, 11),
-					Block.makeCuboidShape(6, 2, 6, 10, 9, 10), Block.makeCuboidShape(3, 10, 3, 13, 12, 13),
-					Block.makeCuboidShape(4, 12, 4, 12, 13, 12), Block.makeCuboidShape(5, 9, 5, 11, 10, 11))
+			.of(Block.makeCuboidShape(4, 0, 4, 12, 3, 12), Block.makeCuboidShape(2, 3, 2, 14, 7, 14),
+					Block.makeCuboidShape(12, 7, 9, 13, 8, 13), Block.makeCuboidShape(11, 7, 10, 12, 8, 13),
+					Block.makeCuboidShape(3, 7, 10, 4, 8, 13), Block.makeCuboidShape(12, 7, 8, 13, 8, 9),
+					Block.makeCuboidShape(11, 7, 9, 12, 8, 10), Block.makeCuboidShape(3, 7, 9, 4, 8, 10))
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-			}).get();;
+			}).get();
 
-	public BlockVirtuousEnchant(Properties properties) {
+	public BlockChiselStation(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 
+	}
+
+
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult result) {
+		if (!worldIn.isRemote) {
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile instanceof TileEntityChiselStation) {
+				NetworkHooks.openGui((ServerPlayerEntity) player, (TileEntityChiselStation) tile, pos);
+				return ActionResultType.SUCCESS;
+			}
+		}
+		return ActionResultType.FAIL;
+	}
+
+	@Override
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+/*		if (state.getBlock() != newState.getBlock()) {
+			TileEntity te = worldIn.getTileEntity(pos);
+			if (te instanceof TileEntityChiselStation) {
+				InventoryHelper.dropItems(worldIn, pos, ((TileEntityChiselStation) te).getItems());
+			}
+		}*/
 	}
 
 	@Override
@@ -61,21 +82,9 @@ public class BlockVirtuousEnchant extends Block {
 	}
 
 	@Override
-	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
-			@Nonnull Random random) {
-		TileEntityVirtuousEnchant tile = (TileEntityVirtuousEnchant) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityVirtuousEnchant) {
-			int count = (int) (10 * 0.5f);
-			if (count > 0) {
-				for (int i = 0; i < random.nextInt(count); i++) {
-					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
-					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
-					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-					world.addParticle(ParticleTypes.ENCHANT, randX, randY, randZ, 0, 0, 0);
-
-				}
-			}
-		}
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
+			boolean isMoving) {
+		TileEntity te = worldIn.getTileEntity(pos);
 	}
 
 	@Override
@@ -101,12 +110,12 @@ public class BlockVirtuousEnchant extends Block {
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return TileEntityInit.virtuous_enchanter.get().create();
+		return new TileEntityChiselStation();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -115,28 +124,4 @@ public class BlockVirtuousEnchant extends Block {
 		super.onBlockClicked(state, worldIn, pos, player);
 	}
 
-	
-	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult result) {
-		if (!worldIn.isRemote) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof TileEntityVirtuousEnchant) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (TileEntityVirtuousEnchant) tile, pos);
-				return ActionResultType.SUCCESS;
-			}
-		}
-		return ActionResultType.FAIL;
-	}
-
-	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof TileEntityVirtuousEnchant) {
-				InventoryHelper.dropItems(worldIn, pos, ((TileEntityVirtuousEnchant) te).getItems());
-			}
-		}
-	}
-	
 }

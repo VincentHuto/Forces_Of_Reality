@@ -334,6 +334,9 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_colin = ITEMS.register("spawn_egg_dream_colin",
 			() -> new ModSpawnEggItem(EntityInit.colin, 0x88008B, 0xFF7F00,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_hastur = ITEMS
+			.register("spawn_egg_dream_hastur", () -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)

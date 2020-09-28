@@ -32,10 +32,6 @@ public class TileEntityThermalInfluxer extends TileModVibes implements ITickable
 		if (!world.isRemote) {
 			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
 		}
-
-		if (isVibeFull()) {
-
-		}
 		if (canGenerate()) {
 			vibes.addVibes(0.4f);
 		}

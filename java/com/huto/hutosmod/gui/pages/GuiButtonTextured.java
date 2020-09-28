@@ -12,6 +12,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 @OnlyIn(Dist.CLIENT)
 public class GuiButtonTextured extends Button {
 
@@ -41,9 +42,8 @@ public class GuiButtonTextured extends Button {
 	}
 
 	public GuiButtonTextured(ResourceLocation texIn, int idIn, int posXIn, int posYIn, int buttonWidthIn,
-			int buttonHeightIn, int uIn, int vIn, Button.ITooltip tooltip, Button.IPressable action, boolean stateIn) {
+			int buttonHeightIn, int uIn, int vIn, boolean stateIn, Button.ITooltip tooltip, Button.IPressable action) {
 		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, action, tooltip);
-
 		this.texture = texIn;
 		this.id = idIn;
 		this.posX = posXIn;

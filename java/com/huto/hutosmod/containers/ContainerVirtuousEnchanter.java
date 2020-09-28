@@ -118,6 +118,8 @@ public class ContainerVirtuousEnchanter extends Container {
 			enchantingType = EnumVirtuousTypes.ONYX;
 		} else if (item == ItemInit.gem_ruby.get()) {
 			enchantingType = EnumVirtuousTypes.RUBY;
+		} else if (item == ItemInit.gem_opal.get()) {
+			enchantingType = EnumVirtuousTypes.OPAL;
 		} else {
 			enchantingType = EnumVirtuousTypes.DEFAULT;
 		}
@@ -141,6 +143,8 @@ public class ContainerVirtuousEnchanter extends Container {
 			return 6.0f;
 		case RUBY:
 			return 7.0f;
+		case OPAL:
+			return 20.0f;
 		default:
 			return 1.0f;
 		}
@@ -331,26 +335,22 @@ public class ContainerVirtuousEnchanter extends Container {
 							// EnchantedBookItem.addEnchantment(itemstack2, enchantmentdata);
 							// Modifying the power of the old enchant
 							if (checkEnchantList(getEnchantingType(), enchantmentdata)) {
-								System.out.println("SPECIALTY");
 								EnchantedBookItem.addEnchantment(itemstack2,
 										new EnchantmentData(enchantmentdata.enchantment,
 												(int) (enchantmentdata.enchantmentLevel * getGemModifier())));
 
 							} else {
 								// If its not in that gems specialty
-								System.out.println("NOTSPECILTY");
 								EnchantedBookItem.addEnchantment(itemstack2, new EnchantmentData(
 										enchantmentdata.enchantment, (int) (enchantmentdata.enchantmentLevel)));
 							}
 						} else {
 							// Modifying the power of the old enchant
 							if (checkEnchantList(getEnchantingType(), enchantmentdata)) {
-								System.out.println("SPECIALTY");
 								itemstack2.addEnchantment(enchantmentdata.enchantment,
 										(int) (enchantmentdata.enchantmentLevel * getGemModifier()));
 							} else {
 								// If its not in that gems specialty
-								System.out.println("NOTSPECILTY");
 								itemstack2.addEnchantment(enchantmentdata.enchantment,
 										(int) (enchantmentdata.enchantmentLevel));
 							}
@@ -388,7 +388,9 @@ public class ContainerVirtuousEnchanter extends Container {
 		List<Enchantment> rubyList = new ArrayList<Enchantment>();
 		List<Enchantment> sapphireList = new ArrayList<Enchantment>();
 		List<Enchantment> amethystList = new ArrayList<Enchantment>();
-		Collections.addAll(onyxList, Enchantments.FEATHER_FALLING, Enchantments.FIRE_PROTECTION);
+		List<Enchantment> opalList = new ArrayList<Enchantment>();
+
+		Collections.addAll(onyxList, Enchantments.FEATHER_FALLING, Enchantments.FIRE_PROTECTION,Enchantments.EFFICIENCY);
 		Collections.addAll(topazList, Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.THORNS,
 				Enchantments.QUICK_CHARGE, Enchantments.MULTISHOT, Enchantments.PIERCING);
 		Collections.addAll(hematiteList, Enchantments.PROTECTION, Enchantments.UNBREAKING, Enchantments.KNOCKBACK,
@@ -400,6 +402,12 @@ public class ContainerVirtuousEnchanter extends Container {
 		Collections.addAll(sapphireList, Enchantments.RESPIRATION, Enchantments.AQUA_AFFINITY,
 				Enchantments.DEPTH_STRIDER, Enchantments.FROST_WALKER, Enchantments.IMPALING, Enchantments.RIPTIDE,
 				Enchantments.CHANNELING);
+		opalList.addAll(topazList);
+		opalList.addAll(hematiteList);
+		opalList.addAll(onyxList);
+		opalList.addAll(rubyList);
+		opalList.addAll(sapphireList);
+		opalList.addAll(amethystList);
 
 		Enchantment enchant = enchantmentdata.enchantment;
 		if (type == EnumVirtuousTypes.TOPAZ && topazList.contains(enchant)) {
@@ -413,6 +421,8 @@ public class ContainerVirtuousEnchanter extends Container {
 		} else if (type == EnumVirtuousTypes.RUBY && rubyList.contains(enchant)) {
 			return true;
 		} else if (type == EnumVirtuousTypes.SAPPHIRE && sapphireList.contains(enchant)) {
+			return true;
+		} else if (type == EnumVirtuousTypes.OPAL && opalList.contains(enchant)) {
 			return true;
 		} else {
 			return false;

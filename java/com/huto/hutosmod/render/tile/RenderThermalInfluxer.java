@@ -30,7 +30,9 @@ public class RenderThermalInfluxer extends TileEntityRenderer<TileEntityThermalI
 		matrixStackIn.push();
 		matrixStackIn.translate(0.5, -0.5, 0.5);
 		matrixStackIn.scale(3, 19, 3);
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees((float) ticks));
+		if (te.canGenerate()) {
+			matrixStackIn.rotate(Vector3f.YP.rotationDegrees((float) ticks));
+		}
 		IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 				.getImpl(Tessellator.getInstance().getBuffer());
 		IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(
@@ -42,7 +44,9 @@ public class RenderThermalInfluxer extends TileEntityRenderer<TileEntityThermalI
 		matrixStackIn.push();
 		matrixStackIn.translate(0.5, -0.5, 0.5);
 		matrixStackIn.scale(3, 19, 3);
-		matrixStackIn.rotate(Vector3f.YN.rotationDegrees((float) ticks));
+		if (te.canGenerate()) {
+			matrixStackIn.rotate(Vector3f.YN.rotationDegrees((float) ticks));
+		}
 		IRenderTypeBuffer.Impl irendertypebuffer$impl1 = IRenderTypeBuffer
 				.getImpl(Tessellator.getInstance().getBuffer());
 		IVertexBuilder ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(

@@ -25,15 +25,18 @@ public class KarmaHudEventHandler {
 	@SubscribeEvent(receiveCanceled = true)
 	public static void onEvent(RenderGameOverlayEvent.Pre event) {
 		ClientPlayerEntity entityPlayerSP = Minecraft.getInstance().player;
-		if (entityPlayerSP == null)
+		if (entityPlayerSP == null) {
 			return; // just in case
+		}
 		switch (event.getType()) {
 		case ALL:
-			KarmaHud karmaHud = new KarmaHud(entityPlayerSP, mc);
-			karmaHud.renderStatusBar(event.getMatrixStack(), event.getWindow().getScaledWidth(),
-					event.getWindow().getScaledHeight(), entityPlayerSP.world,
-					entityPlayerSP); /* Call a helper method so that this method stays organized */
 
+			KarmaHud karmaHud = new KarmaHud(entityPlayerSP, mc);
+			if (entityPlayerSP.isAlive()) {
+				karmaHud.renderStatusBar(event.getMatrixStack(), event.getWindow().getScaledWidth(),
+						event.getWindow().getScaledHeight(), entityPlayerSP.world,
+						entityPlayerSP); /* Call a helper method so that this method stays organized */
+			}
 		default: // If it's not one of the above cases, do nothing
 			break;
 		}

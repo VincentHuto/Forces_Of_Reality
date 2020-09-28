@@ -1,10 +1,8 @@
 package com.huto.hutosmod.entities;
 
-import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -14,18 +12,13 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
@@ -40,15 +33,14 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
-import net.minecraft.world.server.ServerWorld;
 
-public class EntityColin extends AnimalEntity {
+public class EntityHastur extends MobEntity {
 
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
-			BossInfo.Color.PINK, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+			BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntityColin(EntityType<? extends EntityColin> type, World worldIn) {
+	public EntityHastur(EntityType<? extends EntityHastur> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -56,11 +48,8 @@ public class EntityColin extends AnimalEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.WHEAT), false));
-		this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(5, new PanicGoal(this, 1.5D));
+		this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
 
 	}
 
@@ -83,13 +72,11 @@ public class EntityColin extends AnimalEntity {
 		super.addTrackingPlayer(player);
 		this.bossInfo.addPlayer(player);
 	}
-
 	@Override
 	public void removeTrackingPlayer(ServerPlayerEntity player) {
-		super.removeTrackingPlayer(player);
-		this.bossInfo.removePlayer(player);
-	}
-
+	      super.removeTrackingPlayer(player);
+	      this.bossInfo.removePlayer(player);
+	   }
 	@Override
 	public boolean isNonBoss() {
 		return false;
@@ -138,11 +125,6 @@ public class EntityColin extends AnimalEntity {
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
-	}
-
-	@Override
-	public EntityColin func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-		return EntityInit.colin.get().create(p_241840_1_);
 	}
 
 	// Death

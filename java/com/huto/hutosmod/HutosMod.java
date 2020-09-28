@@ -83,7 +83,6 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
-
 		SoundHandler.registerSounds();
 
 	}

@@ -49,7 +49,7 @@ public class LayerDreamWalkerMask extends LayerRenderer<EntityDreamWalker, Model
 			matrixStackIn.rotate(Vector3f.XP.rotationDegrees(f11));
 			matrixStackIn.translate(0f, 0f, -0.01f);
 			IVertexBuilder ivertexbuilder = bufferIn.getBuffer(mask.getRenderType(texture));
-			mask.renderMask(matrixStackIn, ivertexbuilder, packedLightIn, packedLightIn, 0, 0, 0, 1f);
+			mask.renderMask(matrixStackIn, ivertexbuilder, 0, packedLightIn, 0, 0, 0, 1f);
 			matrixStackIn.pop();
 		}
 

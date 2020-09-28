@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityColin;
 import com.huto.hutosmod.entities.EntityDreamWalker;
+import com.huto.hutosmod.entities.EntityHastur;
 import com.huto.hutosmod.entities.ExampleEntity;
 
 import net.minecraft.entity.EntityClassification;
@@ -38,10 +39,16 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityColin>create(EntityColin::new, EntityClassification.CREATURE)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "colin").toString()));
 
+	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
+			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.CREATURE)
+					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "hastur").toString()));
+
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
 		GlobalEntityTypeAttributes.put(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntity.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.colin.get(), EntityColin.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.hastur.get(), EntityHastur.setAttributes().create());
+
 	}
 }
