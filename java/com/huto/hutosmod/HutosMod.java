@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.huto.hutosmod.capabilities.covenant.CovenantEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
@@ -22,6 +23,7 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.particles.init.ParticleInit;
+import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
@@ -81,6 +83,7 @@ public class HutosMod {
 		// Register Vibration Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
+		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
 		SoundHandler.registerSounds();
@@ -112,6 +115,7 @@ public class HutosMod {
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
+		ModChiselRecipes.init();
 		PacketHandler.registerChannels();
 
 	}

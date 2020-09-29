@@ -1,8 +1,5 @@
 package com.huto.hutosmod.objects.blocks;
 
-import java.util.stream.Stream;
-
-import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 
 import net.minecraft.block.Block;
@@ -33,21 +30,14 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BlockChiselStation extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream
-			.of(Block.makeCuboidShape(4, 0, 4, 12, 3, 12), Block.makeCuboidShape(2, 3, 2, 14, 7, 14),
-					Block.makeCuboidShape(12, 7, 9, 13, 8, 13), Block.makeCuboidShape(11, 7, 10, 12, 8, 13),
-					Block.makeCuboidShape(3, 7, 10, 4, 8, 13), Block.makeCuboidShape(12, 7, 8, 13, 8, 9),
-					Block.makeCuboidShape(11, 7, 9, 12, 8, 10), Block.makeCuboidShape(3, 7, 9, 4, 8, 10))
-			.reduce((v1, v2) -> {
-				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-			}).get();
+	private static final VoxelShape SHAPE_N = VoxelShapes.combineAndSimplify(Block.makeCuboidShape(4, 0, 4, 12, 3, 12),
+			Block.makeCuboidShape(2, 3, 2, 14, 7, 14), IBooleanFunction.OR);
 
 	public BlockChiselStation(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.SOUTH));
 
 	}
-
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
@@ -55,8 +45,14 @@ public class BlockChiselStation extends Block {
 		if (!worldIn.isRemote) {
 			TileEntity tile = worldIn.getTileEntity(pos);
 			if (tile instanceof TileEntityChiselStation) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (TileEntityChiselStation) tile, pos);
-				return ActionResultType.SUCCESS;
+				TileEntityChiselStation te = (TileEntityChiselStation) tile;
+				if (te.numPlayersUsing < 2) {
+					NetworkHooks.openGui((ServerPlayerEntity) player, (TileEntityChiselStation) tile, pos);
+					return ActionResultType.SUCCESS;
+				}
+			}else {
+				return ActionResultType.PASS;
+
 			}
 		}
 		return ActionResultType.FAIL;
@@ -64,12 +60,13 @@ public class BlockChiselStation extends Block {
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-/*		if (state.getBlock() != newState.getBlock()) {
+		if (state.getBlock() != newState.getBlock()) {
 			TileEntity te = worldIn.getTileEntity(pos);
 			if (te instanceof TileEntityChiselStation) {
 				InventoryHelper.dropItems(worldIn, pos, ((TileEntityChiselStation) te).getItems());
 			}
-		}*/
+		}
+
 	}
 
 	@Override
@@ -84,7 +81,6 @@ public class BlockChiselStation extends Block {
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
 			boolean isMoving) {
-		TileEntity te = worldIn.getTileEntity(pos);
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.huto.hutosmod.containers;
 
 import java.util.Objects;
 
-import com.huto.hutosmod.gui.GuiChiselStation;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 
@@ -18,7 +17,10 @@ public class ContainerChiselStation extends Container {
 	private final int numRows;
 	private final TileEntityChiselStation chestInventory;
 	public int[] activatedRunes;
-	GuiChiselStation station;
+
+	public ContainerChiselStation(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+		this(windowId, playerInventory, getTileEntity(playerInventory, data));
+	}
 
 	public ContainerChiselStation(final int windowId, final PlayerInventory playerInv,
 			final TileEntityChiselStation chestInventory) {
@@ -27,9 +29,10 @@ public class ContainerChiselStation extends Container {
 		this.numRows = 4;
 		// chestInventory.openInventory(player);
 		// SLOTS
+		this.addSlot(new SlotChisel(chestInventory, 3, 8, 14));
 		this.addSlot(new Slot(chestInventory, 0, 8, 18 + 1 * 18));
 		this.addSlot(new Slot(chestInventory, 1, 8, 22 + 2 * 18));
-		this.addSlot(new Slot(chestInventory, 2, 145, 44));
+		this.addSlot(new SlotOutput(chestInventory, 2, 145, 44));
 		// INVENTORY
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {
@@ -53,13 +56,9 @@ public class ContainerChiselStation extends Container {
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
 	}
 
-	public ContainerChiselStation(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
-		this(windowId, playerInventory, getTileEntity(playerInventory, data));
-	}
-
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn) {
-		return this.chestInventory.isUsableByPlayer(playerIn);
+		return true;
 	}
 
 	@Override
@@ -94,4 +93,5 @@ public class ContainerChiselStation extends Container {
 	public TileEntityChiselStation getChestInventory() {
 		return this.chestInventory;
 	}
+
 }

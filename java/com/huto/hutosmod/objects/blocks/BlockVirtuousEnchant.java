@@ -101,7 +101,7 @@ public class BlockVirtuousEnchant extends Block {
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -115,7 +115,6 @@ public class BlockVirtuousEnchant extends Block {
 		super.onBlockClicked(state, worldIn, pos, player);
 	}
 
-	
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult result) {
@@ -138,5 +137,5 @@ public class BlockVirtuousEnchant extends Block {
 			}
 		}
 	}
-	
+
 }

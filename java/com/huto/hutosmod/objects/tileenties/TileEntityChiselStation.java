@@ -1,13 +1,19 @@
 package com.huto.hutosmod.objects.tileenties;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.swing.JButton;
 
 import com.huto.hutosmod.containers.ContainerChiselStation;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.blocks.BlockVirtuousEnchant;
+import com.huto.hutosmod.objects.items.ItemKnapper;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.recipes.ModChiselRecipes;
+import com.huto.hutosmod.recipes.RecipeChiselStation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,8 +21,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -27,21 +39,23 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class TileEntityChiselStation extends LockableLootTileEntity implements ITickableTileEntity {
-	public NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
+public class TileEntityChiselStation extends LockableLootTileEntity
+		implements ITickableTileEntity, INamedContainerProvider {
+	public NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	private IItemHandlerModifiable items = createHandler();
 	public LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 	public int numPlayersUsing = 0;
 	public int ticksSinceSync;
 	public float lidAngle, prevLidAngle;
-	public static final String TAG_RUNELIST = "RUNELIST";
+	public final String TAG_RUNELIST = "RUNELIST";
 	public List<Integer> runesList;
-	// RecipeRuneChisel currentRecipe;
+	RecipeChiselStation currentRecipe;
 	@SuppressWarnings("unused")
 	private int blockMetadata = -1;
 
@@ -51,7 +65,6 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 
 	@Override
 	public void tick() {
-
 	}
 
 	@Override
@@ -78,7 +91,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 
 	@Override
 	public int getSizeInventory() {
-		return 3;
+		return 4;
 	}
 
 	@Override
@@ -96,6 +109,47 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 		return 1;
 	}
 
+	public RecipeChiselStation getCurrentRecipe() {
+		for (RecipeChiselStation recipe : ModChiselRecipes.runeRecipies) {
+			if (recipe.getInputs().size() == 1) {
+				if (recipe.getInputs().get(0).test(this.getItems().get(0))) {
+					currentRecipe = recipe;
+					return currentRecipe;
+
+				}
+			}
+			if (recipe.getInputs().size() == 2) {
+				if (recipe.getInputs().get(0).test(this.getItems().get(0))
+						&& recipe.getInputs().get(1).test(this.getItems().get(1))) {
+					currentRecipe = recipe;
+					return currentRecipe;
+
+				}
+			}
+		}
+		return currentRecipe;
+
+	}
+
+	public boolean hasValidRecipe() {
+		for (RecipeChiselStation recipe : ModChiselRecipes.runeRecipies) {
+			if (recipe.getInputs().size() == 1) {
+				if (recipe.getInputs().get(0).test(this.getItems().get(0))) {
+					return true;
+
+				}
+			}
+			if (recipe.getInputs().size() == 2) {
+				if (recipe.getInputs().get(0).test(this.getItems().get(0))
+						&& recipe.getInputs().get(1).test(this.getItems().get(1))) {
+					return true;
+
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public NonNullList<ItemStack> getItems() {
 		return this.chestContents;
@@ -108,11 +162,50 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 	}
 
 	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		super.onDataPacket(net, pkt);
+		ListNBT tagList = pkt.getNbtCompound().getList(TAG_RUNELIST, Constants.NBT.TAG_COMPOUND);
+		List<Integer> test = new ArrayList<Integer>();
+		for (int i = 0; i < tagList.size(); i++) {
+			CompoundNBT tag = tagList.getCompound(i);
+			int s = tag.getInt("ListPos " + i);
+			test.add(i, s);
+			test.set(i, s);
+		}
+		this.runesList = test;
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		super.getUpdatePacket();
+		ListNBT tagList = new ListNBT();
+		CompoundNBT tag = new CompoundNBT();
+		tagList.add(tag);
+		if (runesList != null) {
+			for (int i = 0; i < runesList.size(); i++) {
+				Integer s = runesList.get(i);
+				if (s != null) {
+					tagList.add(tag);
+				}
+			}
+			write(tag);
+		}
+		return new SUpdateTileEntityPacket(pos, 0, tag);
+	}
+
+	@Override
 	public void read(BlockState state, CompoundNBT compound) {
 		super.read(state, compound);
 		this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		if (!this.checkLootAndRead(compound)) {
 			ItemStackHelper.loadAllItems(compound, this.chestContents);
+		}
+		ListNBT tagList = compound.getList(TAG_RUNELIST, Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < tagList.size(); i++) {
+			CompoundNBT tag = tagList.getCompound(i);
+			int s = tag.getInt("ListPos " + i);
+			runesList.add(i, s);
+			runesList.set(i, s);
 		}
 
 	}
@@ -123,6 +216,21 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 		if (!this.checkLootAndWrite(compound)) {
 			ItemStackHelper.saveAllItems(compound, this.chestContents);
 		}
+
+		ListNBT tagList = new ListNBT();
+		if (runesList != null) {
+			for (int i = 0; i < runesList.size(); i++) {
+				Integer s = runesList.get(i);
+				CompoundNBT ss = new CompoundNBT();
+				if (s != null) {
+					ss.putInt("Int", s);
+					tagList.add(ss);
+				}
+			}
+
+			compound.put(TAG_RUNELIST, tagList);
+		}
+
 		return compound;
 	}
 
@@ -182,22 +290,12 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 	}
 
 	@Override
-	public void updateContainingBlockInfo() {
-		super.updateContainingBlockInfo();
-		if (this.itemHandler != null) {
-			this.itemHandler.invalidate();
-			this.itemHandler = null;
-		}
-	}
-
-	@Override
 	public void remove() {
 		super.remove();
 		if (itemHandler != null) {
 			itemHandler.invalidate();
 		}
 	}
-
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
@@ -224,6 +322,86 @@ public class TileEntityChiselStation extends LockableLootTileEntity implements I
 		world.markBlockRangeForRenderUpdate(pos, getBlockState(), getBlockState());
 		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
 		markDirty();
+	}
+
+	public void craftEvent() {
+		List<ItemStack> chestStuff = new ArrayList<ItemStack>();
+		chestStuff.add(chestContents.get(0));
+		chestStuff.add(chestContents.get(1));
+
+		RecipeChiselStation recipe = null;
+
+		if (currentRecipe != null)
+			recipe = currentRecipe;
+		else
+			for (RecipeChiselStation recipe_ : ModChiselRecipes.runeRecipies) {
+
+				List<Ingredient> recipieInObjFirst = recipe_.getInputs();
+				if (recipieInObjFirst.get(0).test(chestStuff.get(0)) && recipieInObjFirst.size() == 1) {
+					recipe = recipe_;
+
+					break;
+				} else if (recipieInObjFirst.get(0).test(chestStuff.get(0))
+						&& recipieInObjFirst.get(1).test(chestStuff.get(1)) && recipieInObjFirst.size() == 2) {
+					recipe = recipe_;
+					break;
+
+				}
+			}
+
+		if (recipe != null && chestContents.get(2).isEmpty()) {
+
+			List<Ingredient> recipieInObj = recipe.getInputs();
+
+			List<Integer> list1 = recipe.getActivatedRunes();
+			List<Integer> list2 = this.getRuneList();
+			// These two make sure that even if you click the buttons in the wrong order
+			// they still work.
+			Collections.sort(list1);
+			Collections.sort(list2);
+			// Checks if the two inventories have the exact same values
+			boolean matcher = false;
+			if (recipieInObj.get(0).test(chestStuff.get(0)) && recipieInObj.size() == 1) {
+
+				matcher = true;
+			}
+
+			else if (recipieInObj.get(0).test(chestStuff.get(0)) && recipieInObj.get(1).test(chestStuff.get(1))
+					&& recipieInObj.size() == 2) {
+
+				matcher = true;
+			}
+
+			if (list1.equals(list2) && matcher) {
+				{
+
+					ItemStack output = recipe.getOutput().copy();
+
+					if (world.isRemote) {
+
+						world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+					}
+					chestContents.set(0, output);
+					currentRecipe = null;
+					for (int i = 0; i < getSizeInventory(); i++) {
+						chestContents.set(0, ItemStack.EMPTY);
+						chestContents.set(1, ItemStack.EMPTY);
+						chestContents.set(2, output);
+						ItemStack knapperIn = chestContents.get(3);
+						if (knapperIn.getItem() instanceof ItemKnapper) {
+							ItemStack newKnapper = knapperIn.copy();
+							newKnapper.attemptDamageItem(20, world.rand, null);
+							chestContents.set(3, newKnapper);
+						}
+						runesList.clear();
+						this.sendUpdates();
+						VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+
+					}
+				}
+			}
+		}
+
 	}
 
 }

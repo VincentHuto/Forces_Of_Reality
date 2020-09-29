@@ -26,20 +26,29 @@ public class PacketHandler {
 	public static final SimpleChannel CHANNELKARMA = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(HutosMod.MOD_ID, "karmachannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
 			PROTOCOL_VERSION::equals);
+	public static final SimpleChannel CHANNELCOVENANT = NetworkRegistry.newSimpleChannel(
+			new ResourceLocation(HutosMod.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
+			PROTOCOL_VERSION::equals);
 
 	public static void registerChannels() {
 		// Register Networking packets
-
-		// Client
+		// Vibes
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketClient.class, VibrationPacketClient::encode,
 				VibrationPacketClient::decode, VibrationPacketClient::handle);
-		CHANNELKARMA.registerMessage(networkID++, KarmaPacketClient.class, KarmaPacketClient::encode,
-				KarmaPacketClient::decode, KarmaPacketClient::handle);
-		// Server
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketServer.class, VibrationPacketServer::encode,
 				VibrationPacketServer::decode, VibrationPacketServer::handle);
+
+		// Karma
+		CHANNELKARMA.registerMessage(networkID++, KarmaPacketClient.class, KarmaPacketClient::encode,
+				KarmaPacketClient::decode, KarmaPacketClient::handle);
 		CHANNELKARMA.registerMessage(networkID++, KarmaPacketServer.class, KarmaPacketServer::encode,
 				KarmaPacketServer::decode, KarmaPacketServer::handle);
+		
+		//Covenant
+		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketClient.class, CovenantPacketClient::encode,
+				CovenantPacketClient::decode, CovenantPacketClient::handle);
+		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketServer.class, CovenantPacketServer::encode,
+				CovenantPacketServer::decode, CovenantPacketServer::handle);
 
 		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
@@ -48,6 +57,12 @@ public class PacketHandler {
 				ImportVibePacket.Handler::handle);
 		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
 				ExportVibePacket.Handler::handle);
+
+		HANDLER.registerMessage(networkID++, PacketUpdateChiselRunes.class, PacketUpdateChiselRunes::encode,
+				PacketUpdateChiselRunes::decode, PacketUpdateChiselRunes.Handler::handle);
+		HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class, PacketChiselCraftingEvent::encode,
+				PacketChiselCraftingEvent::decode, PacketChiselCraftingEvent.Handler::handle);
+
 		// MindRunes
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(HutosMod.MOD_ID, "runechannel"), () -> "1.0",
 				s -> true, s -> true);

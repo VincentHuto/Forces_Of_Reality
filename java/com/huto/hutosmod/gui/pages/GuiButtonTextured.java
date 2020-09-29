@@ -42,8 +42,9 @@ public class GuiButtonTextured extends Button {
 	}
 
 	public GuiButtonTextured(ResourceLocation texIn, int idIn, int posXIn, int posYIn, int buttonWidthIn,
-			int buttonHeightIn, int uIn, int vIn, boolean stateIn, Button.ITooltip tooltip, Button.IPressable action) {
-		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, action, tooltip);
+			int buttonHeightIn, int uIn, int vIn, boolean stateIn, Button.ITooltip tooltip,
+			Button.IPressable actionIn) {
+		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, actionIn, tooltip);
 		this.texture = texIn;
 		this.id = idIn;
 		this.posX = posXIn;
@@ -54,6 +55,7 @@ public class GuiButtonTextured extends Button {
 		this.v = vIn;
 		this.adjV = vIn + buttonHeightIn;
 		this.newV = vIn;
+		this.action = actionIn;
 		this.state = stateIn;
 
 	}
@@ -64,11 +66,12 @@ public class GuiButtonTextured extends Button {
 		if (visible) {
 			GlStateManager.enableAlphaTest();
 			GlStateManager.enableBlend();
-			;
-
 			Minecraft.getInstance().getTextureManager().bindTexture(texture);
-			if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || state) {
+			if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
 				this.isHovered = true;
+				v = newV;
+				GuiUtil.drawTexturedModalRect(posX, posY, u, adjV, width, height);
+			} else if (state == true) {
 				v = newV;
 				GuiUtil.drawTexturedModalRect(posX, posY, u, adjV, width, height);
 			} else {

@@ -17,6 +17,7 @@ import com.huto.hutosmod.render.entity.RenderExampleMob;
 import com.huto.hutosmod.render.entity.RenderHastur;
 import com.huto.hutosmod.render.tile.RenderAbsorber;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
+import com.huto.hutosmod.render.tile.RenderChiselStation;
 import com.huto.hutosmod.render.tile.RenderHasturPylon;
 import com.huto.hutosmod.render.tile.RenderIcoSphere;
 import com.huto.hutosmod.render.tile.RenderKarmicAltar;
@@ -63,16 +64,18 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
 		ScreenManager.registerFactory(HutosMod.Registration.PLAYER_RUNES, PlayerExpandedScreen::new);
-		ClientRegistry.registerKeyBinding(KEY_RUNES);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.EXAMPLE_ENTITY.get(), RenderExampleMob::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur.get(), RenderHastur::new);
+
+		ClientRegistry.registerKeyBinding(KEY_RUNES);
 
 	}
 

@@ -72,7 +72,13 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 
 		return currentRecipe;
 	}
+	public boolean hasValidRecipe() {
+		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+			if (recipe.matches(itemHandler))
+				return true;
 
+		return false;
+	}
 	public void updateRecipe() {
 		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
 			if (recipe.matches(itemHandler)) {
@@ -84,13 +90,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 	}
 
-	public boolean hasValidRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
-			if (recipe.matches(itemHandler))
-				return true;
 
-		return false;
-	}
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {

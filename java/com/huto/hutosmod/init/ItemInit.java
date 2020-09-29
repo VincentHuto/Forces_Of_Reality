@@ -281,46 +281,46 @@ public class ItemInit {
 	// Runes
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	// Contract Runes
-	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
-			() -> new ItemMilkweedRune(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance)));
-
-	// Base Runes
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
+	// Contract Runes
+	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
+			() -> new ItemMilkweedRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+
+	// Base Runes
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_lake = ITEMS.register("rune_lake",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_clawmark = ITEMS.register("rune_clawmark",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_rapture = ITEMS.register("rune_rapture",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_oedon = ITEMS.register("rune_oedon",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_eye = ITEMS.register("rune_eye",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_moon = ITEMS.register("rune_moon",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_beast = ITEMS.register("rune_beast",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
-			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
-			() -> new ItemGuidanceRune(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemGuidanceRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 

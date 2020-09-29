@@ -11,7 +11,6 @@ public class ItemContractRune extends ItemRune implements IRune{
 
 	public ItemContractRune(Properties properties) {
 		super(properties);
-		properties.maxStackSize(1);
 
 	}
 

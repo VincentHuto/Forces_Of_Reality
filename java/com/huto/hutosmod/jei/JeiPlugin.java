@@ -5,9 +5,11 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.jei.catagories.ChiselRecipeCategory;
 import com.huto.hutosmod.jei.catagories.ResonatorRecipeCategory;
 import com.huto.hutosmod.jei.catagories.VibeFuserRecipeCategory;
 import com.huto.hutosmod.jei.catagories.WandMakerRecipeCategory;
+import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
@@ -35,6 +37,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCategories(new WandMakerRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new ResonatorRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new VibeFuserRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 
 	}
 
@@ -47,6 +50,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipes(ModWandRecipies.wandMakerRecipies, WandMakerRecipeCategory.UID);
 		registry.addRecipes(ModResonatorRecipies.resonatorRecipies, ResonatorRecipeCategory.UID);
 		registry.addRecipes(ModFuserRecipies.fuserRecipies, VibeFuserRecipeCategory.UID);
+		registry.addRecipes(ModChiselRecipes.runeRecipies, ChiselRecipeCategory.UID);
 
 	}
 
@@ -60,6 +64,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.wand_maker.get()), WandMakerRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.vibe_resonator.get()), ResonatorRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.vibratory_fuser.get()), VibeFuserRecipeCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.runic_chisel_station.get()), ChiselRecipeCategory.UID);
 
 	}
 
