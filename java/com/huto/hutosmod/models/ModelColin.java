@@ -24,8 +24,12 @@ public class ModelColin extends PlayerModel<EntityColin> {
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red,
 			float green, float blue, float alpha) {
-		super.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-	}
+	    this.getHeadParts().forEach((p_228228_8_) -> {
+            p_228228_8_.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+         });
+         this.getBodyParts().forEach((p_228227_8_) -> {
+            p_228227_8_.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+         });	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;

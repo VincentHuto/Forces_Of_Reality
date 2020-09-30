@@ -502,30 +502,30 @@ public class ModChiselRecipes {
 					private static final long serialVersionUID = 1L;
 
 					{
-						add(1);
 						add(10);
 						add(12);
-						add(14);
+						add(17);
 						add(19);
+						add(21);
 						add(24);
-						add(25);
+						add(26);
 						add(27);
 						add(28);
 						add(29);
 						add(30);
 						add(31);
 						add(32);
-						add(33);
+						add(34);
 						add(35);
 						add(36);
 						add(37);
 						add(38);
 						add(39);
+						add(41);
 						add(43);
+						add(45);
 						add(50);
 						add(52);
-						add(54);
-						add(57);
 					}
 				}, Ingredient.fromItems(ItemInit.rune_clawmark.get()), Ingredient.fromItems(Items.DIAMOND));
 

@@ -9,12 +9,20 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class SoundHandler {
 
 	public static SoundEvent ENTITY_COLIN_AMBIENT, ENTITY_COLIN_HURT, ENTITY_COLIN_DEATH;
+	public static SoundEvent ENTITY_HASTUR_AMBIENT, ENTITY_HASTUR_HURT, ENTITY_HASTUR_DEATH, ENTITY_HASTUR_MUSIC,
+			ENTITY_HASTUR_HIT;
 
 	public static void registerSounds() {
 
 		ENTITY_COLIN_AMBIENT = registerSound("entity.colin.ambient");
-		 ENTITY_COLIN_HURT = registerSound("entity.colin.hurt");
-		 ENTITY_COLIN_DEATH = registerSound("entity.colin.death");
+		ENTITY_COLIN_HURT = registerSound("entity.colin.hurt");
+		ENTITY_COLIN_DEATH = registerSound("entity.colin.death");
+
+		ENTITY_HASTUR_AMBIENT = registerSound("entity.hastur.ambient");
+		ENTITY_HASTUR_HURT = registerSound("entity.hastur.hurt");
+		ENTITY_HASTUR_DEATH = registerSound("entity.hastur.death");
+		ENTITY_HASTUR_MUSIC = registerSound("entity.hastur.music");
+		ENTITY_HASTUR_HIT = registerSound("entity.hastur.hit");
 
 	}
 

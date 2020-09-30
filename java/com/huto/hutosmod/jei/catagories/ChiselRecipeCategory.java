@@ -91,27 +91,27 @@ public class ChiselRecipeCategory implements IRecipeCategory<RecipeChiselStation
 	int guiHeight = 186;
 	private static final ResourceLocation GUI_Chisel = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/gui/chisel_station.png");
+	public int centerX = (Minecraft.getInstance().currentScreen.width / 2) - guiWidth / 2;
+	public int centerY = (Minecraft.getInstance().currentScreen.height / 2) - guiHeight / 2;
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void draw(RecipeChiselStation recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-		GlStateManager.pushMatrix();
-		GlStateManager.enableAlphaTest();
-		GlStateManager.enableBlend();
 		overlay.draw(matrixStack);
-		GlStateManager.translated(170, 100, 10);
+
+		GlStateManager.pushMatrix();
+		GlStateManager.translatef(centerX + 10, centerY + 50, 10);
 		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 		for (int i = 0; i < buttonList.size(); i++) {
-			buttonList.get(i).renderButton(matrixStack, 111, 111, 10);
+			buttonList.get(i).renderButton(matrixStack, (int) mouseX, (int) mouseY, 10);
 		}
-		GlStateManager.translated(20, 90, 10);
-		fontRenderer.func_238418_a_(new StringTextComponent("Runes to Activate"), 0, (int) (fontRenderer.FONT_HEIGHT)-8,
-				130, 10);
+		GlStateManager.popMatrix();
+
+		fontRenderer.func_238418_a_(new StringTextComponent("Runes to Activate"), 20,
+				(int) (fontRenderer.FONT_HEIGHT) - 8, 130, 10);
 		fontRenderer.func_238418_a_(new StringTextComponent(recipe.getActivatedRunes().toString()), -20,
 				(int) (fontRenderer.FONT_HEIGHT), 150, 0);
-		GlStateManager.disableBlend();
-		GlStateManager.disableAlphaTest();
-		GlStateManager.popMatrix();
+
 	}
 
 	@Override

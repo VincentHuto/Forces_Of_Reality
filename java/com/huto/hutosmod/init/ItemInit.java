@@ -23,6 +23,7 @@ import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemRune;
 import com.huto.hutosmod.objects.items.ItemSelfAnalyzer;
+import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
@@ -101,7 +102,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> null_ingot = ITEMS.register("null_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> shattered_ingot = ITEMS.register("shattered_ingot",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemShatterIngot(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> nullifying_powder = ITEMS.register("nullifying_powder",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> null_crystal = ITEMS.register("null_crystal",

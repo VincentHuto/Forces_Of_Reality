@@ -22,6 +22,7 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.button.Button.IPressable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -120,13 +121,34 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 			GlStateManager.scalef(0.45f, 0.5f, 0.5f);
 			renderTooltip(matrixStack,
 					new StringTextComponent(I18n.format(currentRecipe.getOutput().getTranslationKey())), 250, 150);
+
 		}
 		GlStateManager.popMatrix();
 
-		/*
-		 * if (this.te.getRuneList() != null) { this.font.drawString(matrixStack,
-		 * this.te.runesList.toString(), 8, this.ySize - 170, 000000); }
-		 */
+		GlStateManager.pushMatrix();
+		if (te.hasValidRecipe()) {
+			Minecraft.getInstance().textureManager.bindTexture(GUI_Chisel);
+			if (te.areRunesMatching()) {
+				GuiUtils.drawTexturedModalRect(162 - 42, 45 + 32, 176, 96, 16, 16, 10f);
+			} else {
+				GuiUtils.drawTexturedModalRect(162 - 42, 45 + 32, 176, 80, 16, 16, 10f);
+			}
+		}
+		GlStateManager.popMatrix();
+
+		GlStateManager.pushMatrix();
+		// Prevents the runes from disappering on resize or jei check
+		for (int l = 0; l < runeButtonArray.length; l++) {
+			for (int m = 0; m < runeButtonArray.length; m++) {
+				for (int k = 0; k < this.getActivatedRuneList().size(); k++) {
+					if (runeButtonArray[l][m].getId() == this.getActivatedRuneList().get(k)) {
+						runeButtonArray[l][m].setState(true);
+					}
+				}
+			}
+		}
+		GlStateManager.popMatrix();
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -171,6 +193,7 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 											}
 
 										}
+
 									}
 
 								}
@@ -197,16 +220,18 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 				}));
 		this.addButton(chiselButton = new GuiButtonTextured(GUI_Chisel, CHISELBUTTONID,
 				left + guiWidth - (guiWidth - 120), top + guiHeight - (150), 16, 16, 176, 48, null, (press) -> {
-					PacketHandler.HANDLER.sendToServer(new PacketChiselCraftingEvent());
-					for (int i = 0; i < 64; i++) {
-						if (buttons.get(i) instanceof GuiButtonTextured) {
-							GuiButtonTextured test = (GuiButtonTextured) buttons.get(i);
-							if (test.getState() == true) {
-								test.setState(false);
-								activatedRuneList.clear();
-								PacketHandler.HANDLER.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
-							}
+					if (te.chestContents.get(3).getItem() != Items.AIR) {
+						PacketHandler.HANDLER.sendToServer(new PacketChiselCraftingEvent());
+						for (int i = 0; i < 64; i++) {
+							if (buttons.get(i) instanceof GuiButtonTextured) {
+								GuiButtonTextured test = (GuiButtonTextured) buttons.get(i);
+								if (test.getState() == true) {
+									test.setState(false);
+									activatedRuneList.clear();
+									PacketHandler.HANDLER.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+								}
 
+							}
 						}
 					}
 				}));

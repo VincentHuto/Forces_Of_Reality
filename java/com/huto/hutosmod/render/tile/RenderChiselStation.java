@@ -76,6 +76,8 @@ public class RenderChiselStation extends TileEntityRenderer<TileEntityChiselStat
 		matrixStackIn.translate(-0.5, 0f, -0.4f);
 		mc.getItemRenderer().renderItem(te.getStackInSlot(0), TransformType.FIXED, combinedLightIn, combinedOverlayIn,
 				matrixStackIn, bufferIn);
+		matrixStackIn.translate(0, 0f, 0.05);
+
 		mc.getItemRenderer().renderItem(te.getStackInSlot(1), TransformType.FIXED, combinedLightIn, combinedOverlayIn,
 				matrixStackIn, bufferIn);
 		mc.getItemRenderer().renderItem(te.getStackInSlot(2), TransformType.FIXED, combinedLightIn, combinedOverlayIn,

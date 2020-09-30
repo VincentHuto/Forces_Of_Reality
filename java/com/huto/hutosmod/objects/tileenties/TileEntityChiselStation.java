@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.swing.JButton;
 
 import com.huto.hutosmod.containers.ContainerChiselStation;
 import com.huto.hutosmod.init.TileEntityInit;
@@ -55,6 +54,8 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 	public float lidAngle, prevLidAngle;
 	public final String TAG_RUNELIST = "RUNELIST";
 	public List<Integer> runesList;
+	public List<Integer> clientRuneList;
+
 	RecipeChiselStation currentRecipe;
 	@SuppressWarnings("unused")
 	private int blockMetadata = -1;
@@ -65,6 +66,9 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 
 	@Override
 	public void tick() {
+		if (!world.isRemote) {
+			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
+		}
 	}
 
 	@Override
@@ -107,6 +111,23 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 	@Override
 	public int getInventoryStackLimit() {
 		return 1;
+	}
+
+	public boolean areRunesMatching() {
+		if (this.getCurrentRecipe() != null) {
+			List<Integer> currentList = clientRuneList;
+			List<Integer> recipeList = currentRecipe.getActivatedRunes();
+			Collections.sort(currentList);
+			Collections.sort(recipeList);
+			if (currentList.equals(recipeList)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		return false;
+
 	}
 
 	public RecipeChiselStation getCurrentRecipe() {
@@ -162,20 +183,6 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		super.onDataPacket(net, pkt);
-		ListNBT tagList = pkt.getNbtCompound().getList(TAG_RUNELIST, Constants.NBT.TAG_COMPOUND);
-		List<Integer> test = new ArrayList<Integer>();
-		for (int i = 0; i < tagList.size(); i++) {
-			CompoundNBT tag = tagList.getCompound(i);
-			int s = tag.getInt("ListPos " + i);
-			test.add(i, s);
-			test.set(i, s);
-		}
-		this.runesList = test;
-	}
-
-	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		super.getUpdatePacket();
 		ListNBT tagList = new ListNBT();
@@ -191,6 +198,31 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 			write(tag);
 		}
 		return new SUpdateTileEntityPacket(pos, 0, tag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		super.onDataPacket(net, pkt);
+		ListNBT tagList = pkt.getNbtCompound().getList(TAG_RUNELIST, Constants.NBT.TAG_COMPOUND);
+		List<Integer> test = new ArrayList<Integer>();
+		for (int i = 0; i < tagList.size(); i++) {
+			CompoundNBT tag = tagList.getCompound(i);
+			int s = Integer.valueOf(tag.toString().substring(5).replace("}", ""));
+			test.add(i, s);
+			test.set(i, s);
+		}
+		this.runesList = test;
+		clientRuneList = test;
+	}
+
+	@Override
+	public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+		super.handleUpdateTag(state, tag);
+		if (tag.get(TAG_RUNELIST) != null) {
+			for (int i = 0; i < runesList.size(); i++) {
+				clientRuneList.add(runesList.get(i));
+			}
+		}
 	}
 
 	@Override
@@ -296,6 +328,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 			itemHandler.invalidate();
 		}
 	}
+
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
@@ -368,7 +401,6 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 
 			else if (recipieInObj.get(0).test(chestStuff.get(0)) && recipieInObj.get(1).test(chestStuff.get(1))
 					&& recipieInObj.size() == 2) {
-
 				matcher = true;
 			}
 
@@ -390,7 +422,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 						ItemStack knapperIn = chestContents.get(3);
 						if (knapperIn.getItem() instanceof ItemKnapper) {
 							ItemStack newKnapper = knapperIn.copy();
-							newKnapper.attemptDamageItem(20, world.rand, null);
+							newKnapper.attemptDamageItem(recipe.getActivatedRunes().size(), world.rand, null);
 							chestContents.set(3, newKnapper);
 						}
 						runesList.clear();

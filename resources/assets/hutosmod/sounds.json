@@ -1,22 +1,82 @@
 {
-    "entity.colin.ambient":
-    {
-        "category": "entity",
-        "subtitle": "entity.colin.ambient",
-        "sounds": [{ "name": "hutosmod:entity/colin/ambient","stream": true}]
-    },
-    
-    "entity.colin.hurt":
-    {
-        "category": "entity",
-        "subtitle": "entity.colin.hurt",
-        "sounds": [{ "name": "hutosmod:entity/colin/hurt","stream": true}]
-    },
-    
-    "entity.colin.death":
-    {
-        "category": "entity",
-        "subtitle": "entity.colin.death",
-        "sounds": [{ "name": "hutosmod:entity/colin/death","stream": true}]
-    }
+	"entity.colin.ambient": {
+		"category": "entity",
+		"subtitle": "entity.colin.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/colin/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.colin.hurt": {
+		"category": "entity",
+		"subtitle": "entity.colin.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/colin/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.colin.death": {
+		"category": "entity",
+		"subtitle": "entity.colin.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/colin/death",
+				"stream": true
+			}
+		]
+	},
+	"entity.hastur.ambient": {
+		"category": "entity",
+		"subtitle": "entity.hastur.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/hastur/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.hastur.hurt": {
+		"category": "entity",
+		"subtitle": "entity.hastur.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/hastur/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.hastur.death": {
+		"category": "entity",
+		"subtitle": "entity.hastur.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/hastur/death",
+				"stream": true
+			}
+		]
+	},
+	"entity.hastur.music": {
+		"category": "entity",
+		"subtitle": "entity.hastur.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/hastur/music",
+				"stream": true
+			}
+		]
+	},
+	"entity.hastur.hit": {
+		"category": "entity",
+		"subtitle": "entity.hastur.hit",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/hastur/hit",
+				"stream": true
+			}
+		]
+	}
 }

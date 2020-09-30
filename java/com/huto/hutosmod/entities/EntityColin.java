@@ -31,6 +31,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -170,6 +171,11 @@ public class EntityColin extends AnimalEntity {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
+		}
+
+		if (this.deathTicks == 400) {
+			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
+					SoundCategory.HOSTILE, 3f, 0.2f, false);
 		}
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);

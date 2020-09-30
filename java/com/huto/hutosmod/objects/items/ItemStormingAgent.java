@@ -29,20 +29,32 @@ public class ItemStormingAgent extends Item {
 		if (!entityItem.getEntityWorld().isRaining() || !entityItem.getEntityWorld().isThundering()) {
 			if (!entityItem.isAirBorne)
 				if (count > 0) {
+					entityItem.setMotion(0, 0.05, 0);
+
 					if (world.isRemote) {
-					      double x = (double)pos.getX() + 0.5D+ rand.nextDouble() - rand.nextDouble();
-					      double y = (double)pos.getY() + rand.nextDouble() - rand.nextDouble();
-					      double z = (double)pos.getZ() + 0.5D+ rand.nextDouble() - rand.nextDouble();
+						double x = (double) pos.getX() + 0.5D + rand.nextDouble() - rand.nextDouble();
+						double y = (double) pos.getY() + rand.nextDouble() - rand.nextDouble();
+						double z = (double) pos.getZ() + 0.5D + rand.nextDouble() - rand.nextDouble();
 						world.addParticle(ParticleTypes.DRIPPING_HONEY, x, y, z, 0.0D, 0.0D, 0.0D);
 						world.addParticle(ParticleTypes.CRIT, x, y, z, 0.0D, 0.0D, 0.0D);
 					}
 					count = 0;
 				}
 			if (entityItem.ticksExisted > 150) {
+				double x = (double) pos.getX() + 0.5D + rand.nextDouble() - rand.nextDouble();
+				double y = (double) pos.getY() + rand.nextDouble() - rand.nextDouble();
+				double z = (double) pos.getZ() + 0.5D + rand.nextDouble() - rand.nextDouble();
 				if (!world.isRemote) {
+
 					ServerWorld sWorld = (ServerWorld) world;
 					sWorld.func_241113_a_(0, 10000, true, true);
+					for (int i = 0; i < 10; i++) {
+						sWorld.addParticle(ParticleTypes.EXPLOSION, x, y, z, 0.0D, 0.0D, 0.0D);
+					}
 					entityItem.remove();
+				}
+				for (int i = 0; i < 10; i++) {
+					world.addParticle(ParticleTypes.EXPLOSION, x, y, z, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}

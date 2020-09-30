@@ -1,0 +1,4 @@
+new ArrayList<Integer>() {{add(18);
+ add(36);
+ add(41);
+}}
