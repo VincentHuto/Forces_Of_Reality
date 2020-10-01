@@ -17,13 +17,9 @@ import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.DrinkHelper;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -80,7 +76,7 @@ public class EntityDreamWalker extends AnimalEntity {
 		return 0.4F;
 	}
 
-	@Override
+/*	@Override
 	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
 		if (itemstack.getItem() == Items.BUCKET && !this.isChild()) {
@@ -91,7 +87,7 @@ public class EntityDreamWalker extends AnimalEntity {
 		} else {
 			return super.func_230254_b_(p_230254_1_, p_230254_2_);
 		}
-	}
+	}*/
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

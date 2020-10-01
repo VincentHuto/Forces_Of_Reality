@@ -2,9 +2,9 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityColin;
+import com.huto.hutosmod.entities.EntityDenizen;
 import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityHastur;
-import com.huto.hutosmod.entities.ExampleEntity;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -23,11 +23,6 @@ public class EntityInit {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES,
 			HutosMod.MOD_ID);
 
-	public static final RegistryObject<EntityType<ExampleEntity>> EXAMPLE_ENTITY = ENTITY_TYPES
-			.register("example_entity",
-					() -> EntityType.Builder.<ExampleEntity>create(ExampleEntity::new, EntityClassification.CREATURE)
-							.size(0.9f, 1.3f)
-							.build(new ResourceLocation(HutosMod.MOD_ID, "example_entity").toString()));
 
 	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES
 			.register("dream_walker",
@@ -40,15 +35,19 @@ public class EntityInit {
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "colin").toString()));
 
 	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
-			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.CREATURE)
+			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "hastur").toString()));
+	
+	public static final RegistryObject<EntityType<EntityDenizen>> denizen = ENTITY_TYPES.register("denizen",
+			() -> EntityType.Builder.<EntityDenizen>create(EntityDenizen::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen").toString()));
 
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
-		GlobalEntityTypeAttributes.put(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntity.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.colin.get(), EntityColin.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur.get(), EntityHastur.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.denizen.get(), EntityHastur.setAttributes().create());
 
 	}
 }

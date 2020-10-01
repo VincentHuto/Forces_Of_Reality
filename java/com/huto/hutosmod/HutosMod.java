@@ -29,6 +29,7 @@ import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 import com.huto.hutosmod.render.rune.RunesRenderLayer;
 import com.huto.hutosmod.sounds.SoundHandler;
+import com.huto.hutosmod.worldgen.ModOreGen;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
@@ -111,6 +112,8 @@ public class HutosMod {
 	}
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
+		ModOreGen.initGen();
+		ModOreGen.setupGen();
 		CapabilityInit.init();
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();

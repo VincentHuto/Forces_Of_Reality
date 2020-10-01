@@ -78,5 +78,36 @@
 				"stream": true
 			}
 		]
+	},
+	
+	"entity.denizen.ambient": {
+		"category": "entity",
+		"subtitle": "entity.denizen.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/denizen/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.denizen.hurt": {
+		"category": "entity",
+		"subtitle": "entity.denizen.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/denizen/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.denizen.death": {
+		"category": "entity",
+		"subtitle": "entity.denizen.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/denizen/death",
+				"stream": true
+			}
+		]
 	}
 }

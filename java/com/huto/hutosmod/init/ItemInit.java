@@ -34,6 +34,8 @@ import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
 import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
 
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -55,6 +57,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -142,6 +145,10 @@ public class ItemInit {
 	public static final RegistryObject<Item> enhancedmagatama = ITEMS.register("enhancedmagatama",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
+	// Hastur
+	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Karma
@@ -326,18 +333,40 @@ public class ItemInit {
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Spawn Eggs
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_example_mob = ITEMS.register("spawn_egg_example_mob",
-			() -> new ModSpawnEggItem(EntityInit.EXAMPLE_ENTITY, 0xFF7F00, 0xa735e3,
-					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_walker = ITEMS
 			.register("spawn_egg_dream_walker", () -> new ModSpawnEggItem(EntityInit.dream_walker, 0x000000, 0xFFFFFF,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_colin = ITEMS.register("spawn_egg_dream_colin",
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_colin = ITEMS.register("spawn_egg_colin",
 			() -> new ModSpawnEggItem(EntityInit.colin, 0x88008B, 0xFF7F00,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_hastur = ITEMS
-			.register("spawn_egg_dream_hastur", () -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = ITEMS.register("spawn_egg_hastur",
+			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen = ITEMS.register("spawn_egg_denizen",
+			() -> new ModSpawnEggItem(EntityInit.denizen, 8750204, 12037632,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+
+	@SubscribeEvent
+	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
+		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
+				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen);
+	}
+
+	@SuppressWarnings("unchecked")
+	@SafeVarargs
+	public static void registerSpawnEggColorHandler(ItemColors colors, RegistryObject<ModSpawnEggItem>... spawnEggs) {
+		for (RegistryObject<ModSpawnEggItem> spawnEgg : spawnEggs) {
+			registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.get().getColor(tintIndex), spawnEgg);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void registerItemColorHandler(ItemColors colors, IItemColor itemColor,
+			RegistryObject<ModSpawnEggItem>... items) {
+		for (RegistryObject<ModSpawnEggItem> itemProvider : items) {
+			colors.register(itemColor, itemProvider.get());
+		}
+	}
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)

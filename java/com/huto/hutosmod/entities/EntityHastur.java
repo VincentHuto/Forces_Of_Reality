@@ -26,15 +26,11 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.DrinkHelper;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -166,7 +162,7 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		return 0.4F;
 	}
 
-	@Override
+/*	@Override
 	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
 		if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
@@ -177,7 +173,7 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		} else {
 			return super.func_230254_b_(p_230254_1_, p_230254_2_);
 		}
-	}
+	}*/
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

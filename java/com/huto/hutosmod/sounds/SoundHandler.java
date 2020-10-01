@@ -11,6 +11,7 @@ public class SoundHandler {
 	public static SoundEvent ENTITY_COLIN_AMBIENT, ENTITY_COLIN_HURT, ENTITY_COLIN_DEATH;
 	public static SoundEvent ENTITY_HASTUR_AMBIENT, ENTITY_HASTUR_HURT, ENTITY_HASTUR_DEATH, ENTITY_HASTUR_MUSIC,
 			ENTITY_HASTUR_HIT;
+	public static SoundEvent ENTITY_DENIZEN_AMBIENT, ENTITY_DENIZEN_HURT, ENTITY_DENIZEN_DEATH;
 
 	public static void registerSounds() {
 
@@ -23,6 +24,10 @@ public class SoundHandler {
 		ENTITY_HASTUR_DEATH = registerSound("entity.hastur.death");
 		ENTITY_HASTUR_MUSIC = registerSound("entity.hastur.music");
 		ENTITY_HASTUR_HIT = registerSound("entity.hastur.hit");
+
+		ENTITY_DENIZEN_AMBIENT = registerSound("entity.denizen.ambient");
+		ENTITY_DENIZEN_HURT = registerSound("entity.denizen.hurt");
+		ENTITY_DENIZEN_DEATH = registerSound("entity.denizen.death");
 
 	}
 
