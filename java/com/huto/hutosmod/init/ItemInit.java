@@ -345,11 +345,14 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen = ITEMS.register("spawn_egg_denizen",
 			() -> new ModSpawnEggItem(EntityInit.denizen, 8750204, 12037632,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen_sage = ITEMS.register("spawn_egg_denizen_sage",
+			() -> new ModSpawnEggItem(EntityInit.denizen_sage, 8750204, 72037632,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
-				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen);
+				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen,ItemInit.spawn_egg_denizen_sage);
 	}
 
 	@SuppressWarnings("unchecked")

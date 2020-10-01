@@ -18,9 +18,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class RenderColin extends MobRenderer<EntityColin, ModelColin> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/modelcolin.png");
+			"textures/entity/colin/modelcolin.png");
 	private static final ResourceLocation DRAGON_DEAD_TEXTURES = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/modelcolin_dead.png");
+			"textures/entity/colin/modelcolin_dead.png");
 
 	public RenderColin(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelColin(), 0.5f);

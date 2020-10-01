@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerHasturAura extends LayerRenderer<EntityHastur, ModelHastur> {
 	private static final ResourceLocation COLIN_ARMOR = new ResourceLocation(
-			HutosMod.MOD_ID + ":textures/entity/hastur_aura.png");
+			HutosMod.MOD_ID + ":textures/entity/hastur/hastur_aura.png");
 	private final ModelHastur hasturModel = new ModelHastur();
 
 	public LayerHasturAura(IEntityRenderer<EntityHastur, ModelHastur> entityRendererIn) {

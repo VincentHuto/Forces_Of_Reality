@@ -47,19 +47,19 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
 
-public class EntityDenizen extends AnimalEntity {
-	private static final DataParameter<Integer> DENIZEN_TYPE = EntityDataManager.createKey(EntityDenizen.class,
+public class EntityDenizenSage extends AnimalEntity {
+	private static final DataParameter<Integer> DENIZEN_TYPE = EntityDataManager.createKey(EntityDenizenSage.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_grey.png"));
-		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_grey_cloak.png"));
-		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_red.png"));
-		p_213410_0_.put(3, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_red_cloak.png"));
-		p_213410_0_.put(4, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_white.png"));
-		p_213410_0_.put(5, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_white_cloak.png"));
+		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_grey.png"));
+		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_grey_cloak.png"));
+		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red.png"));
+		p_213410_0_.put(3, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red_cloak.png"));
+		p_213410_0_.put(4, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_white.png"));
+		p_213410_0_.put(5, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_white_cloak.png"));
 	});
 
-	public EntityDenizen(EntityType<? extends EntityDenizen> type, World worldIn) {
+	public EntityDenizenSage(EntityType<? extends EntityDenizenSage> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -167,13 +167,13 @@ public class EntityDenizen extends AnimalEntity {
 	}
 
 	@Override
-	public EntityDenizen func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-		EntityDenizen catentity = EntityInit.denizen.get().create(p_241840_1_);
-		if (p_241840_2_ instanceof EntityDenizen) {
+	public EntityDenizenSage func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+		EntityDenizenSage catentity = EntityInit.denizen_sage.get().create(p_241840_1_);
+		if (p_241840_2_ instanceof EntityDenizenSage) {
 			if (this.rand.nextBoolean()) {
 				catentity.setDenizenType(this.getDenizenType());
 			} else {
-				catentity.setDenizenType(((EntityDenizen) p_241840_2_).getDenizenType());
+				catentity.setDenizenType(((EntityDenizenSage) p_241840_2_).getDenizenType());
 			}
 
 		}

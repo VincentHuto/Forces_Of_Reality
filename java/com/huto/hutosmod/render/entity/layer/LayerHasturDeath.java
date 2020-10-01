@@ -20,9 +20,9 @@ import net.minecraft.util.math.vector.Vector3f;
 public class LayerHasturDeath extends LayerRenderer<EntityHastur, ModelHastur> {
 	private static float constant = (float) (Math.sqrt(3.0D) / 2.0D);
 	private static ResourceLocation DRAGON_EXPLODING_TEXTURES = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/modelhastur_exploding.png");
+			"textures/entity/hastur/modelhastur_exploding.png");
 	protected static ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/modelhastur.png");
+			"textures/entity/hastur/modelhastur.png");
 	static Random random = new Random(432L);
 
 	private final ModelHastur model = new ModelHastur();

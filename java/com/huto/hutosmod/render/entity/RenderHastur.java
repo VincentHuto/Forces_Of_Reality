@@ -18,9 +18,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class RenderHastur extends MobRenderer<EntityHastur, ModelHastur> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/modelhastur.png");
+			"textures/entity/hastur/modelhastur.png");
 	private static final ResourceLocation DRAGON_DEAD_TEXTURES = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/modelhastur_dead.png");
+			"textures/entity/hastur/modelhastur_dead.png");
 
 	public RenderHastur(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelHastur(), 0.5f);

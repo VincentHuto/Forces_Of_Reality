@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerColinAura extends LayerRenderer<EntityColin, ModelColin> {
 	private static final ResourceLocation COLIN_ARMOR = new ResourceLocation(
-			HutosMod.MOD_ID + ":textures/entity/colin_armor2.png");
+			HutosMod.MOD_ID + ":textures/entity/colin/colin_armor2.png");
 	private final ModelColin colinModel = new ModelColin();
 
 	public LayerColinAura(IEntityRenderer<EntityColin, ModelColin> entityRendererIn) {
