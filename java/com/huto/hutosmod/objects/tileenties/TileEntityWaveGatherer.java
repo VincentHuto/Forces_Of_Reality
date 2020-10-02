@@ -91,8 +91,6 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 			exportToIn.vibes.addVibes(rateIn);
 		}
 	}
-
-	@Override
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, getBlockState(), getBlockState());
 		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);

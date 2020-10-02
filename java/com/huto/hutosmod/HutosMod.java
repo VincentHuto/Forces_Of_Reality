@@ -28,7 +28,6 @@ import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 import com.huto.hutosmod.render.rune.RunesRenderLayer;
-import com.huto.hutosmod.sounds.SoundHandler;
 import com.huto.hutosmod.worldgen.ModOreGen;
 
 import net.minecraft.client.Minecraft;
@@ -87,7 +86,6 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
-		SoundHandler.registerSounds();
 
 	}
 

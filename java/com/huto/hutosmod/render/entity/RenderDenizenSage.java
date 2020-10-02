@@ -8,6 +8,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.HeldItemLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -20,6 +21,8 @@ public class RenderDenizenSage extends MobRenderer<EntityDenizenSage, ModelDeniz
 
 	public RenderDenizenSage(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelDenizenSage(), 0.5f);
+		this.addLayer(new HeldItemLayer<EntityDenizenSage, ModelDenizenSage>(this));
+
 	}
 
 	@Override

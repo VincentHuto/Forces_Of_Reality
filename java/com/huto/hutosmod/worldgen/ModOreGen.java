@@ -16,7 +16,6 @@ import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
@@ -25,9 +24,10 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 public class ModOreGen {
 
 	// OBUFSCATION HELPERS
-	// func_242733_d(int) = MaxSpawnHeight 
+	// func_242733_d(int) = MaxSpawnHeight
 	// func_242731_b(int) = MinSpawnHeight
-	// OreFeatureConfig(OreFeatureConfig.FillerBlockType.field_241882_a = FillerReplacement
+	// OreFeatureConfig(OreFeatureConfig.FillerBlockType.field_241882_a =
+	// FillerReplacement
 	// Features.States.DIAMOND_ORE, 8 == chance?
 	// func_242732_c(1) MaxVeinSiz
 
@@ -44,6 +44,7 @@ public class ModOreGen {
 		);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void setupGen() {
 		for (Map.Entry<RegistryKey<Biome>, Biome> biome : WorldGenRegistries.BIOME
 				.getEntries() /* Collection of Biome Entries */) {

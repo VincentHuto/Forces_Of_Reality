@@ -5,7 +5,6 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
-import com.huto.hutosmod.objects.items.ItemContractRune;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDestructOrb;
 import com.huto.hutosmod.objects.items.ItemDestructOrbContained;
@@ -21,7 +20,6 @@ import com.huto.hutosmod.objects.items.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
-import com.huto.hutosmod.objects.items.ItemRune;
 import com.huto.hutosmod.objects.items.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
@@ -30,9 +28,12 @@ import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
+import com.huto.hutosmod.objects.items.ItemYellowSign;
 import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
+import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
+import com.huto.hutosmod.objects.items.runes.ItemRune;
 
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -50,6 +51,7 @@ import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
@@ -150,7 +152,8 @@ public class ItemInit {
 	// Hastur
 	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign", () -> new ItemYellowSign(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -342,17 +345,24 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = ITEMS.register("spawn_egg_hastur",
 			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tentacle = ITEMS.register("spawn_egg_tentacle",
+			() -> new ModSpawnEggItem(EntityInit.tentacle, 22073, 12371968,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen = ITEMS.register("spawn_egg_denizen",
 			() -> new ModSpawnEggItem(EntityInit.denizen, 8750204, 12037632,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen_sage = ITEMS.register("spawn_egg_denizen_sage",
-			() -> new ModSpawnEggItem(EntityInit.denizen_sage, 8750204, 72037632,
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen_sage = ITEMS
+			.register("spawn_egg_denizen_sage", () -> new ModSpawnEggItem(EntityInit.denizen_sage, 8750204, 72037632,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_ibis = ITEMS.register("spawn_egg_ibis",
+			() -> new ModSpawnEggItem(EntityInit.ibis, 9175040, 8672512,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
-				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen,ItemInit.spawn_egg_denizen_sage);
+				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
+				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle);
 	}
 
 	@SuppressWarnings("unchecked")

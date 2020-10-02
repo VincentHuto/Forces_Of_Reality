@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Maps;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.EntityInit;
+import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
@@ -29,6 +30,8 @@ import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -51,16 +54,30 @@ public class EntityDenizenSage extends AnimalEntity {
 	private static final DataParameter<Integer> DENIZEN_TYPE = EntityDataManager.createKey(EntityDenizenSage.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_grey.png"));
-		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_grey_cloak.png"));
-		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red.png"));
-		p_213410_0_.put(3, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red_cloak.png"));
-		p_213410_0_.put(4, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_white.png"));
-		p_213410_0_.put(5, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_white_cloak.png"));
+		p_213410_0_.put(0,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_grey.png"));
+		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID,
+				"textures/entity/denizen_sage/model_denizen_sage_grey_cloak.png"));
+		p_213410_0_.put(2,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red.png"));
+		p_213410_0_.put(3,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red_cloak.png"));
+		p_213410_0_.put(4,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_white.png"));
+		p_213410_0_.put(5, new ResourceLocation(HutosMod.MOD_ID,
+				"textures/entity/denizen_sage/model_denizen_sage_white_cloak.png"));
 	});
 
 	public EntityDenizenSage(EntityType<? extends EntityDenizenSage> type, World worldIn) {
 		super(type, worldIn);
+
+	}
+
+	@Override
+	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+		super.setEquipmentBasedOnDifficulty(difficulty);
+		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemInit.mana_extractor.get()));
+		this.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(ItemInit.cooked_morel_on_a_stick.get()));
 
 	}
 
@@ -134,17 +151,6 @@ public class EntityDenizenSage extends AnimalEntity {
 		return 0.4F;
 	}
 
-	/*
-	 * @Override public ActionResultType func_230254_b_(PlayerEntity p_230254_1_,
-	 * Hand p_230254_2_) { ItemStack itemstack =
-	 * p_230254_1_.getHeldItem(p_230254_2_); if (itemstack.getItem() == Items.BUCKET
-	 * && !this.isChild()) { p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK,
-	 * 1.0F, 1.0F); ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_,
-	 * Items.MILK_BUCKET.getDefaultInstance()); p_230254_1_.setHeldItem(p_230254_2_,
-	 * itemstack1); return ActionResultType.func_233537_a_(this.world.isRemote); }
-	 * else { return super.func_230254_b_(p_230254_1_, p_230254_2_); } }
-	 */
-
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
@@ -155,6 +161,7 @@ public class EntityDenizenSage extends AnimalEntity {
 			@Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		this.setDenizenType(this.rand.nextInt(7));
+		this.setEquipmentBasedOnDifficulty(difficultyIn);
 
 		World world = worldIn.getWorld();
 		if (world instanceof ServerWorld && ((ServerWorld) world).func_241112_a_()
@@ -162,6 +169,7 @@ public class EntityDenizenSage extends AnimalEntity {
 			this.setDenizenType(1);
 			this.enablePersistence();
 		}
+
 		return spawnDataIn;
 
 	}

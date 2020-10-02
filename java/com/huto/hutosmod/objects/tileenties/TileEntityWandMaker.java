@@ -10,6 +10,7 @@ import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 import com.huto.hutosmod.recipes.RecipeWandMaker;
@@ -27,7 +28,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
-public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity {
+public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
@@ -72,6 +73,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 
 		return currentRecipe;
 	}
+
 	public boolean hasValidRecipe() {
 		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
 			if (recipe.matches(itemHandler))
@@ -79,6 +81,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 
 		return false;
 	}
+
 	public void updateRecipe() {
 		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
 			if (recipe.matches(itemHandler)) {
@@ -89,8 +92,6 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			}
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 	}
-
-
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
@@ -274,4 +275,18 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		sendUpdates();
 	}
 
+	@Override
+	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
+		this.vibes.addVibes(rate);
+		importFrom.vibes.subtractVibes(rate);
+	}
+
+	@Override
+	public boolean canImport() {
+		if (vibes.getVibes() < maxVibes) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

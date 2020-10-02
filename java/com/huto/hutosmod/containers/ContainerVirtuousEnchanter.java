@@ -254,7 +254,6 @@ public class ContainerVirtuousEnchanter extends Container {
 					ItemStack itemstack1 = inventoryIn.getStackInSlot(1);
 					updateEnchantingType(itemstack1);
 					enchantingType = getEnchantingType();
-					System.out.println(enchantingType);
 
 					this.rand.setSeed((long) this.xpSeed.get());
 					for (int i1 = 0; i1 < 3; ++i1) {
@@ -274,13 +273,12 @@ public class ContainerVirtuousEnchanter extends Container {
 							List<EnchantmentData> list = this.getEnchantmentList(itemstack, j1, this.enchantLevels[j1]);
 							if (list != null && !list.isEmpty()) {
 								EnchantmentData enchantmentdata = list.get(this.rand.nextInt(list.size()));
-								// System.out.println(enchantmentdata.enchantment.toString());
 								// this.enchantlevls[j1] is the xp levels
 								// this.worldClue[j1] is enchant power
 								// this.enchantclue[j1] is maybe the enchanment ids/objs?
 								this.enchantClue[j1] = Registry.ENCHANTMENT.getId(enchantmentdata.enchantment);
 								this.worldClue[j1] = enchantmentdata.enchantmentLevel;
-								System.out.println(enchantmentdata.enchantment.getName() + " " + this.worldClue[j1]);
+							//	System.out.println(enchantmentdata.enchantment.getName() + " " + this.worldClue[j1]);
 							}
 						}
 					}

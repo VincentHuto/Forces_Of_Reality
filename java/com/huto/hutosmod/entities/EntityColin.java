@@ -5,11 +5,9 @@ import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
@@ -27,10 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.DrinkHelper;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -124,24 +119,6 @@ public class EntityColin extends AnimalEntity {
 	}
 
 	@Override
-	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
-		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
-		if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
-			p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_, Items.BEETROOT_SOUP.getDefaultInstance());
-			p_230254_1_.setHeldItem(p_230254_2_, itemstack1);
-			return ActionResultType.func_233537_a_(this.world.isRemote);
-		} else {
-			return super.func_230254_b_(p_230254_1_, p_230254_2_);
-		}
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
-	}
-
-	@Override
 	public EntityColin func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
 		return EntityInit.colin.get().create(p_241840_1_);
 	}
@@ -174,8 +151,10 @@ public class EntityColin extends AnimalEntity {
 		}
 
 		if (this.deathTicks == 400) {
-			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
-					SoundCategory.HOSTILE, 3f, 0.2f, false);
+			if (world.isRemote) {
+				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
+						SoundCategory.HOSTILE, 3f, 0.2f, false);
+			}
 		}
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);

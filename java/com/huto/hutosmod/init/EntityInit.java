@@ -6,6 +6,9 @@ import com.huto.hutosmod.entities.EntityDenizen;
 import com.huto.hutosmod.entities.EntityDenizenSage;
 import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityHastur;
+import com.huto.hutosmod.entities.EntityIbis;
+import com.huto.hutosmod.entities.EntityTentacle;
+import com.huto.hutosmod.entities.EntityTrackingOrb;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -24,7 +27,6 @@ public class EntityInit {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES,
 			HutosMod.MOD_ID);
 
-
 	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES
 			.register("dream_walker",
 					() -> EntityType.Builder
@@ -38,14 +40,27 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "hastur").toString()));
-	
+
+	public static final RegistryObject<EntityType<EntityTentacle>> tentacle = ENTITY_TYPES.register("tentacle",
+			() -> EntityType.Builder.<EntityTentacle>create(EntityTentacle::new, EntityClassification.MONSTER)
+					.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "tentacle").toString()));
+	public static final EntityType<EntityTrackingOrb> MAGIC_MISSILE = EntityType.Builder
+			.<EntityTrackingOrb>create(EntityTrackingOrb::new, EntityClassification.MISC).setTrackingRange(64)
+			.setUpdateInterval(2).setShouldReceiveVelocityUpdates(true).build("");
+
 	public static final RegistryObject<EntityType<EntityDenizen>> denizen = ENTITY_TYPES.register("denizen",
 			() -> EntityType.Builder.<EntityDenizen>create(EntityDenizen::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen").toString()));
-	public static final RegistryObject<EntityType<EntityDenizenSage>> denizen_sage = ENTITY_TYPES.register("denizen_sage",
-			() -> EntityType.Builder.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
-					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
-	
+
+	public static final RegistryObject<EntityType<EntityDenizenSage>> denizen_sage = ENTITY_TYPES
+			.register("denizen_sage",
+					() -> EntityType.Builder
+							.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
+							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
+
+	public static final RegistryObject<EntityType<EntityIbis>> ibis = ENTITY_TYPES.register("ibis",
+			() -> EntityType.Builder.<EntityIbis>create(EntityIbis::new, EntityClassification.MONSTER).size(0.4F, 0.7F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "ibis").toString()));
 
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
@@ -54,6 +69,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.hastur.get(), EntityHastur.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.denizen.get(), EntityDenizen.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.denizen_sage.get(), EntityDenizenSage.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.ibis.get(), EntityIbis.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.tentacle.get(), EntityTentacle.setAttributes().create());
 
 	}
 }

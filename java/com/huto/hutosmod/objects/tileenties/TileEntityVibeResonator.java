@@ -11,6 +11,7 @@ import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
+import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.RecipeResonator;
@@ -30,7 +31,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityVibeResonator extends TileVibeSimpleInventory implements ITickableTileEntity {
+public class TileEntityVibeResonator extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
@@ -44,7 +45,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	public static EnumEssecenceType resonantState;
 	List<ItemStack> lastRecipe = null;
 	RecipeResonator currentRecipe;
-	
+
 	public TileEntityVibeResonator() {
 		super(TileEntityInit.vibe_resonator.get());
 	}
@@ -52,6 +53,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	@Override
 	public void onLoad() {
 		super.onLoad();
+
 	}
 
 	public IVibrations getVibeCap() {
@@ -139,7 +141,6 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 			}
 
 		if (did)
-			System.out.println("add ITEM");
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
@@ -147,14 +148,13 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
+			checkStructure();
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
+			System.out.println(vibes.getVibes());
 			if (cooldown > 0) {
 				cooldown--;
 			}
 		}
-		/*
-		 * vibes.addVibes(3); System.out.println(vibes.getVibes());
-		 */
 	}
 
 	// NBT data
@@ -258,7 +258,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	}
 
 	public void onActivated(PlayerEntity player, ItemStack wand) {
-
+		if (world.isRemote)
+			return;
 		RecipeResonator recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
@@ -301,6 +302,21 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 
 	public void setBlockToUpdate() {
 		sendUpdates();
+	}
+
+	@Override
+	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
+		this.vibes.addVibes(rate);
+		importFrom.vibes.subtractVibes(rate);
+	}
+
+	@Override
+	public boolean canImport() {
+		if (vibes.getVibes() < maxVibes) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

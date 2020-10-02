@@ -109,5 +109,46 @@
 				"stream": true
 			}
 		]
+	},
+	
+	"entity.tentacle.ambient": {
+		"category": "entity",
+		"subtitle": "entity.tentacle.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/tentacle/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.tentacle.hurt": {
+		"category": "entity",
+		"subtitle": "entity.tentacle.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/tentacle/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.tentacle.death": {
+		"category": "entity",
+		"subtitle": "entity.tentacle.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/tentacle/death",
+				"stream": true
+			}
+		]
+	},
+	"entity.tentacle.summon": {
+		"category": "entity",
+		"subtitle": "entity.tentacle.summon",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/tentacle/summon",
+				"stream": true
+			}
+		]
 	}
 }

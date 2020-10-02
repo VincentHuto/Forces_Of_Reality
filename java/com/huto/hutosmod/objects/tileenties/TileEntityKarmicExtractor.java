@@ -6,6 +6,7 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.entity.item.ItemEntity;
@@ -13,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ITickableTileEntity;
 
-public class TileEntityKarmicExtractor extends TileModVibes implements ITickableTileEntity {
+public class TileEntityKarmicExtractor extends TileModVibes implements ITickableTileEntity, IExportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public float clientVibes = 0.0f;
 	public static final String TAG_VIBES = "vibes";
@@ -24,6 +25,7 @@ public class TileEntityKarmicExtractor extends TileModVibes implements ITickable
 
 	@Override
 	public void tick() {
+
 	}
 
 	public void onActivated(PlayerEntity player, ItemStack stack) {
@@ -46,5 +48,28 @@ public class TileEntityKarmicExtractor extends TileModVibes implements ITickable
 
 		}
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+	}
+
+	@Override
+	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
+		if (vibes.getVibes() > 1) {
+			this.vibes.subtractVibes(rateIn);
+			exportToIn.vibes.addVibes(rateIn);
+		}
+	}
+
+	public boolean canExport() {
+		if (vibes.getVibes() > 10) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, getBlockState(), getBlockState());
+		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+		markDirty();
 	}
 }

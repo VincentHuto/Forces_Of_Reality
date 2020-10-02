@@ -3,7 +3,7 @@ package com.huto.hutosmod.containers.mindrunes;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
-import com.huto.hutosmod.objects.items.ItemContractRune;
+import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

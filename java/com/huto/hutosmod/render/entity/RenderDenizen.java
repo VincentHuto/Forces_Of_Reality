@@ -26,7 +26,7 @@ public class RenderDenizen extends MobRenderer<EntityDenizen, ModelDenizen> {
 	public void render(EntityDenizen entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
+	
 	}
 
 	@Override

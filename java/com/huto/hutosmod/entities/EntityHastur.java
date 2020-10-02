@@ -1,15 +1,14 @@
 package com.huto.hutosmod.entities;
 
+import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
-import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
@@ -20,6 +19,7 @@ import net.minecraft.entity.ai.goal.MoveTowardsTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
@@ -37,6 +37,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
@@ -64,6 +65,7 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 	@Override
 	public void tick() {
 		super.tick();
+		spawnMissile();
 		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
@@ -71,7 +73,6 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		this.world.addParticle(ParticleTypes.CRIMSON_SPORE, this.getPosX() + (double) f,
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-		playAttackSound(SoundHandler.ENTITY_HASTUR_HIT, 0.1f, 0.5f);
 	}
 
 	@Override
@@ -146,12 +147,6 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 
 	}
 
-	public void playAttackSound(SoundEvent soundIn, float volume, float pitch) {
-		if (this.isHandActive()) {
-			super.playSound(soundIn, volume, pitch);
-		}
-	}
-
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
@@ -160,24 +155,6 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 	@Override
 	protected float getSoundVolume() {
 		return 0.4F;
-	}
-
-/*	@Override
-	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
-		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
-		if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
-			p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_, Items.BEETROOT_SOUP.getDefaultInstance());
-			p_230254_1_.setHeldItem(p_230254_2_, itemstack1);
-			return ActionResultType.func_233537_a_(this.world.isRemote);
-		} else {
-			return super.func_230254_b_(p_230254_1_, p_230254_2_);
-		}
-	}*/
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
 	}
 
 	// Death
@@ -202,18 +179,97 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);
 
+		if (!this.world.isRemote && deathTicks % (15 + rand.nextInt(4)) == 0) {
+			ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(),
+					new ItemStack(ItemInit.unsettling_fabric.get()));
+			world.addEntity(outputItem);
+		}
+
 		if (this.deathTicks == 200) {
-			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
-					SoundCategory.HOSTILE, 3f, 0.2f, false);
+			if (world.isRemote) {
+				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
+						SoundCategory.HOSTILE, 3f, 0.2f, false);
+			}
 		}
 
 		if (this.deathTicks == 200 && !this.world.isRemote) {
 			if (flag) {
 				this.dropExperience(MathHelper.floor((float) 500 * 0.2F));
 			}
+			int attackRoll = 4;
+			switch (attackRoll) {
+			case 1:
+				this.summonTentacleAid(rand.nextInt(10));
+				break;
+			case 2:
+				this.world.createExplosion(this, this.getPosX(), this.getPosY() + (double) (this.getHeight() / 16.0F),
+						this.getPosZ(), 4.0F, Explosion.Mode.DESTROY);
+				break;
+			case 3:
+				this.summonDenizenAid(rand.nextInt(10));
+				break;
+			case 4:
+				this.spawnMissile();
+				break;
+			}
 
 			this.remove();
 		}
+	}
+
+	// Attack types
+	public void summonTentacleAid(int numTent) {
+		EntityTentacle[] tentArray = new EntityTentacle[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityTentacle(EntityInit.tentacle.get(), world);
+			tentArray[i].setTentacleType(rand.nextInt(4));
+			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+					this.getPosZ() + 0.5 + zMod);
+			if (!world.isRemote) {
+				world.addEntity(tentArray[i]);
+
+			}
+		}
+	}
+
+	private void spawnMissile() {
+		EntityTrackingOrb missile = new EntityTrackingOrb(this, true);
+		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
+				this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1), this.getPosZ() + (Math.random() - 0.5 * 0.1));
+		if (missile.findTarget()) {
+			playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+			world.addEntity(missile);
+		}
+	}
+
+	public void summonDenizenAid(int numTent) {
+		EntityDenizen[] tentArray = new EntityDenizen[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityDenizen(EntityInit.denizen.get(), world);
+			tentArray[i].setDenizenType(rand.nextInt(7));
+			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+					this.getPosZ() + 0.5 + zMod);
+			if (!world.isRemote) {
+				world.addEntity(tentArray[i]);
+
+			}
+		}
+	}
+
+	@Override
+	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
+		super.dropSpecialItems(source, looting, recentlyHitIn);
+		ItemEntity itementity = this.entityDropItem(ItemInit.yellow_sign.get());
+		if (itementity != null) {
+			itementity.setNoDespawn();
+		}
+
 	}
 
 	private void dropExperience(int xp) {
@@ -237,14 +293,13 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 	@Override
 	public void writeSpawnData(PacketBuffer buffer) {
 		buffer.writeLong(source.toLong());
-		System.out.println("PLAYIBNG MUSCI");
 
 	}
 
 	@Override
+	@OnlyIn(Dist.CLIENT)
 	public void readSpawnData(PacketBuffer additionalData) {
 		source = BlockPos.fromLong(additionalData.readLong());
-
 		Minecraft.getInstance().getSoundHandler().play(new HasturMusic(this));
 
 	}
@@ -281,7 +336,6 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 
 		public HasturMusic(EntityHastur hastur) {
 			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
-			System.out.println("PLAYIBNG MUSCI");
 
 			this.hastur = hastur;
 			this.x = hastur.getSource().getX();

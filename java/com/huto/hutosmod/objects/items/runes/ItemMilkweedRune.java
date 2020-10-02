@@ -6,7 +6,6 @@ import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.SetFlyPKT;
-import com.huto.hutosmod.objects.items.ItemContractRune;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;

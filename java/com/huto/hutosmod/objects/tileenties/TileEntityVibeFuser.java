@@ -10,6 +10,7 @@ import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.RecipeFuser;
@@ -27,7 +28,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
-public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITickableTileEntity {
+public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	int cooldown = 0;
 	int recipeKeepTicks = 0;
@@ -272,6 +273,21 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 
 	public void setBlockToUpdate() {
 		sendUpdates();
+	}
+
+	@Override
+	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
+		this.vibes.addVibes(rate);
+		importFrom.vibes.subtractVibes(rate);
+	}
+
+	@Override
+	public boolean canImport() {
+		if (vibes.getVibes() < maxVibes) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

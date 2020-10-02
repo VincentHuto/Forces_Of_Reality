@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.items;
+package com.huto.hutosmod.objects.items.runes;
 
 
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;

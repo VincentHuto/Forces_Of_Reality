@@ -4,39 +4,56 @@ import com.huto.hutosmod.HutosMod;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SoundHandler {
 
-	public static SoundEvent ENTITY_COLIN_AMBIENT, ENTITY_COLIN_HURT, ENTITY_COLIN_DEATH;
-	public static SoundEvent ENTITY_HASTUR_AMBIENT, ENTITY_HASTUR_HURT, ENTITY_HASTUR_DEATH, ENTITY_HASTUR_MUSIC,
-			ENTITY_HASTUR_HIT;
-	public static SoundEvent ENTITY_DENIZEN_AMBIENT, ENTITY_DENIZEN_HURT, ENTITY_DENIZEN_DEATH;
+	public static final SoundEvent ENTITY_COLIN_AMBIENT = makeSoundEvent("entity.colin.ambient");
+	public static final SoundEvent ENTITY_COLIN_HURT = makeSoundEvent("entity.colin.hurt");
+	public static final SoundEvent ENTITY_COLIN_DEATH = makeSoundEvent("entity.colin.death");
+	public static final SoundEvent ENTITY_HASTUR_AMBIENT = makeSoundEvent("entity.hastur.ambient");
+	public static final SoundEvent ENTITY_HASTUR_HURT = makeSoundEvent("entity.hastur.hurt");
+	public static final SoundEvent ENTITY_HASTUR_DEATH = makeSoundEvent("entity.hastur.death");
+	public static final SoundEvent ENTITY_HASTUR_MUSIC = makeSoundEvent("entity.hastur.music");
+	public static final SoundEvent ENTITY_HASTUR_HIT = makeSoundEvent("entity.hastur.hit");
+	public static final SoundEvent ENTITY_TENTACLE_AMBIENT = makeSoundEvent("entity.tentacle.ambient");
+	public static final SoundEvent ENTITY_TENTACLE_HURT = makeSoundEvent("entity.tentacle.hurt");
+	public static final SoundEvent ENTITY_TENTACLE_DEATH = makeSoundEvent("entity.tentacle.death");
+	public static final SoundEvent ENTITY_TENTACLE_SUMMON = makeSoundEvent("entity.tentacle.summon");
+	public static final SoundEvent ENTITY_DENIZEN_AMBIENT = makeSoundEvent("entity.denizen.ambient");
+	public static final SoundEvent ENTITY_DENIZEN_HURT = makeSoundEvent("entity.denizen.hurt");
+	public static final SoundEvent ENTITY_DENIZEN_DEATH = makeSoundEvent("entity.denizen.death");
 
-	public static void registerSounds() {
-
-		ENTITY_COLIN_AMBIENT = registerSound("entity.colin.ambient");
-		ENTITY_COLIN_HURT = registerSound("entity.colin.hurt");
-		ENTITY_COLIN_DEATH = registerSound("entity.colin.death");
-
-		ENTITY_HASTUR_AMBIENT = registerSound("entity.hastur.ambient");
-		ENTITY_HASTUR_HURT = registerSound("entity.hastur.hurt");
-		ENTITY_HASTUR_DEATH = registerSound("entity.hastur.death");
-		ENTITY_HASTUR_MUSIC = registerSound("entity.hastur.music");
-		ENTITY_HASTUR_HIT = registerSound("entity.hastur.hit");
-
-		ENTITY_DENIZEN_AMBIENT = registerSound("entity.denizen.ambient");
-		ENTITY_DENIZEN_HURT = registerSound("entity.denizen.hurt");
-		ENTITY_DENIZEN_DEATH = registerSound("entity.denizen.death");
-
+	private static SoundEvent makeSoundEvent(String name) {
+		ResourceLocation loc = new ResourceLocation(HutosMod.MOD_ID, name);
+		return new SoundEvent(loc).setRegistryName(loc);
 	}
 
-	public static SoundEvent registerSound(String name) {
-		ResourceLocation location = new ResourceLocation(HutosMod.MOD_ID, name);
-		SoundEvent event = new SoundEvent(location);
-		event.setRegistryName(name);
-		ForgeRegistries.SOUND_EVENTS.register(event);
-		return event;
+	@SubscribeEvent
+	public static void registerSounds(RegistryEvent.Register<SoundEvent> evt) {
+		IForgeRegistry<SoundEvent> r = evt.getRegistry();
+		r.register(ENTITY_COLIN_AMBIENT);
+		r.register(ENTITY_COLIN_HURT);
+		r.register(ENTITY_COLIN_DEATH);
+
+		r.register(ENTITY_HASTUR_AMBIENT);
+		r.register(ENTITY_HASTUR_HURT);
+		r.register(ENTITY_HASTUR_DEATH);
+		r.register(ENTITY_HASTUR_MUSIC);
+		r.register(ENTITY_HASTUR_HIT);
+
+		r.register(ENTITY_TENTACLE_AMBIENT);
+		r.register(ENTITY_TENTACLE_HURT);
+		r.register(ENTITY_TENTACLE_DEATH);
+		r.register(ENTITY_TENTACLE_SUMMON);
+
+		r.register(ENTITY_DENIZEN_AMBIENT);
+		r.register(ENTITY_DENIZEN_HURT);
+		r.register(ENTITY_DENIZEN_DEATH);
 	}
 
 }

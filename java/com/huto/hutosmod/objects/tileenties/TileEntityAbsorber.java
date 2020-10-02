@@ -54,9 +54,11 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {	
+		
 	//	System.out.println(vibes.getVibes());
 	//	System.out.println(clientVibes);
 		if (!world.isRemote) {
+
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 		}
 

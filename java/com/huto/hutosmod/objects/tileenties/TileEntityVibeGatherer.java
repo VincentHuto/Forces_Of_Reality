@@ -88,7 +88,6 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 		}
 	}
 
-	@Override
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, getBlockState(), getBlockState());
 		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
