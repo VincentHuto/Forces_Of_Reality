@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/slime_repelent"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/slime_repelent",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/slime_repelent",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/slime_repelent",
+			"y": 90
+		}
+	}
+}

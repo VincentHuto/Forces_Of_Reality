@@ -18,17 +18,15 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
@@ -36,41 +34,40 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
 
-public class EntityTentacle extends MonsterEntity {
-	private static final DataParameter<Integer> TENTACLE_TYPE = EntityDataManager.createKey(EntityTentacle.class,
+public class EntityHasturSpawn1 extends MonsterEntity implements IFlyingAnimal{
+	private static final DataParameter<Integer> SPAWN_TYPE = EntityDataManager.createKey(EntityHasturSpawn1.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/tentacle/model_tentacle_green.png"));
-		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/tentacle/model_tentacle_yellow.png"));
-		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/tentacle/model_tentacle_grey.png"));
+		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/hastur_spawn/model_hastur_spawn_green.png"));
+		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/hastur_spawn/model_hastur_spawn_brown.png"));
+		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/hastur_spawn/model_hastur_spawn_grey.png"));
 	});
-	public float deathTicks = 1;
 
-	public EntityTentacle(EntityType<? extends EntityTentacle> type, World worldIn) {
+	public EntityHasturSpawn1(EntityType<? extends EntityHasturSpawn1> type, World worldIn) {
 		super(type, worldIn);
 
 	}
 
-	public ResourceLocation getTentacleTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getTentacleType(), TEXTURE_BY_ID.get(0));
+	public ResourceLocation getSpawnTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getSpawnType(), TEXTURE_BY_ID.get(0));
 	}
 
-	public int getTentacleType() {
-		return this.dataManager.get(TENTACLE_TYPE);
+	public int getSpawnType() {
+		return this.dataManager.get(SPAWN_TYPE);
 	}
 
-	public void setTentacleType(int type) {
+	public void setSpawnType(int type) {
 		if (type <= 0 || type >= 4) {
 			type = this.rand.nextInt(5);
 		}
 
-		this.dataManager.set(TENTACLE_TYPE, type);
+		this.dataManager.set(SPAWN_TYPE, type);
 	}
 
 	@Override
 	protected void registerData() {
 		super.registerData();
-		this.dataManager.register(TENTACLE_TYPE, 1);
+		this.dataManager.register(SPAWN_TYPE, 1);
 
 	}
 
@@ -78,12 +75,12 @@ public class EntityTentacle extends MonsterEntity {
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason,
 			@Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		this.setTentacleType(this.rand.nextInt(4));
+		this.setSpawnType(this.rand.nextInt(7));
 		this.setEquipmentBasedOnDifficulty(difficultyIn);
 		World world = worldIn.getWorld();
 		if (world instanceof ServerWorld && ((ServerWorld) world).func_241112_a_()
 				.func_235010_a_(this.getPosition(), true, Structure.field_236374_j_).isValid()) {
-			this.setTentacleType(1);
+			this.setSpawnType(1);
 			this.enablePersistence();
 		}
 
@@ -91,26 +88,11 @@ public class EntityTentacle extends MonsterEntity {
 
 	}
 
-	/*
-	 * @Override public EntityTentacle func_241840_a(ServerWorld p_241840_1_,
-	 * EntityTentacle p_241840_2_) { EntityTentacle catentity =
-	 * EntityInit.tentacle.get().create(p_241840_1_); if (p_241840_2_ instanceof
-	 * EntityTentacle) { if (this.rand.nextBoolean()) {
-	 * catentity.setTentacleType(this.getTentacleType()); } else {
-	 * catentity.setTentacleType(((EntityTentacle) p_241840_2_).getTentacleType());
-	 * }
-	 * 
-	 * } return catentity;
-	 * 
-	 * }
-	 * 
-	 * on
-	 */
 	@Override
 	public void tick() {
 		super.tick();
 
-		// Particle Effects
+	/*	// Particle Effects
 		float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
 		float f1 = -1;
 		float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
@@ -130,40 +112,18 @@ public class EntityTentacle extends MonsterEntity {
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 		}
-		if (this.ticksExisted == 120) {
+		if (this.ticksExisted >= 120) {
 			this.world.addParticle(ParticleTypes.POOF, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			if (!this.world.isRemote) {
-				this.setHealth(0);
+				this.remove();
 			} else {
 				if (world.isRemote) {
 					world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_SLIME_DEATH,
 							SoundCategory.HOSTILE, 3f, 1.2f, false);
 				}
 			}
-		}
-	}
-
-	@Override
-	protected void onDeathUpdate() {
-		// Particle Effects
-		float g = (this.rand.nextFloat() - 0.5F) * 2.0F;
-		float g1 = -1;
-		float g2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
-		deathTicks -= 0.05;
-		if (this.deathTicks <= 0.1) {
-			if (world.isRemote) {
-				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK,
-						SoundCategory.HOSTILE, 3f, 0.2f, false);
-				this.world.addParticle(ParticleTypes.POOF, this.getPosX() + (double) g,
-						this.getPosY() + 2.0D + (double) g1, this.getPosZ() + (double) g2, 0.0D, 0.0D, 0.0D);
-			}
-		}
-
-		if (this.deathTicks <= 0.1 && !this.world.isRemote) {
-			this.remove();
-		}
-
+		}*/
 	}
 
 	@Override
@@ -176,7 +136,7 @@ public class EntityTentacle extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur)) {
+		if (!(entityIn instanceof EntityHasturSpawn1 || entityIn instanceof EntityHastur)) {
 			entityIn.attackEntityFrom(DamageSource.CACTUS, 1.5f);
 		}
 

@@ -1,10 +1,11 @@
-package com.huto.hutosmod.entities;
+package com.huto.hutosmod.entities.projectiles;
 
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
 import com.google.common.base.Predicates;
+import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.EntityInit;
 
 import net.minecraft.block.Block;
@@ -30,27 +31,27 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityTrackingOrb extends ThrowableEntity {
-	public static EntityType<EntityTrackingOrb> TYPE = EntityInit.MAGIC_MISSILE;
+public class EntityStarStrike extends ThrowableEntity {
+	public static EntityType<EntityStarStrike> TYPE = EntityInit.star_strike.get();
 
 	private static final String TAG_TIME = "time";
-	private static final DataParameter<Boolean> EVIL = EntityDataManager.createKey(EntityTrackingOrb.class,
+	private static final DataParameter<Boolean> EVIL = EntityDataManager.createKey(EntityStarStrike.class,
 			DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityTrackingOrb.class,
+	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityStarStrike.class,
 			DataSerializers.VARINT);
 
 	double lockX, lockY = -1, lockZ;
 	int time = 0;
 
-	public EntityTrackingOrb(EntityType<EntityTrackingOrb> type, World world) {
+	public EntityStarStrike(EntityType<EntityStarStrike> type, World world) {
 		super(type, world);
 	}
 
-	public EntityTrackingOrb(World world) {
+	public EntityStarStrike(World world) {
 		this(TYPE, world);
 	}
 
-	public EntityTrackingOrb(LivingEntity thrower, boolean evil) {
+	public EntityStarStrike(LivingEntity thrower, boolean evil) {
 		super(TYPE, thrower, thrower.world);
 		setEvil(evil);
 	}
@@ -109,14 +110,10 @@ public class EntityTrackingOrb extends ThrowableEntity {
 		int steps = (int) (diff.mag() / step.mag());
 		Vector3 particlePos = oldPos;
 
-		/*
-		 * SparkleParticleData data = evil ? SparkleParticleData.corrupt(0.8F, 1F, 0.0F,
-		 * 1F, 2) : SparkleParticleData.sparkle(0.8F, 1F, 0.4F, 1F, 2);
-		 */
 		for (int i = 0; i < steps; i++) {
-			world.addParticle(ParticleTypes.EXPLOSION, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
+			world.addParticle(ParticleTypes.ENCHANTED_HIT, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
 			if (world.rand.nextInt(steps) <= 1)
-				world.addParticle(ParticleTypes.EXPLOSION, particlePos.x + (Math.random() - 0.5) * 0.4,
+				world.addParticle(ParticleTypes.ENCHANT, particlePos.x + (Math.random() - 0.5) * 0.4,
 						particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0,
 						0);
 

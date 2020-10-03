@@ -14,8 +14,11 @@ import com.huto.hutosmod.render.entity.RenderDenizen;
 import com.huto.hutosmod.render.entity.RenderDenizenSage;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
 import com.huto.hutosmod.render.entity.RenderHastur;
+import com.huto.hutosmod.render.entity.RenderHasturSpawn;
 import com.huto.hutosmod.render.entity.RenderIbis;
+import com.huto.hutosmod.render.entity.RenderStarStrike;
 import com.huto.hutosmod.render.entity.RenderTentacle;
+import com.huto.hutosmod.render.entity.RenderTrackingOrb;
 import com.huto.hutosmod.render.tile.RenderAbsorber;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
 import com.huto.hutosmod.render.tile.RenderChiselStation;
@@ -74,6 +77,9 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.denizen_sage.get(), RenderDenizenSage::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.ibis.get(), RenderIbis::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tentacle.get(), RenderTentacle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tracking_orb.get(), RenderTrackingOrb::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.star_strike.get(), RenderStarStrike::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
 

@@ -8,6 +8,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
 import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
+import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
@@ -84,4 +85,7 @@ public class TileEntityInit {
 			.register("runic_chisel_station", () -> TileEntityType.Builder
 					.create(TileEntityChiselStation::new, BlockInit.runic_chisel_station.get()).build(null));
 
+	public static final RegistryObject<TileEntityType<TileEntitySlimeRepelent>> slime_repelent = TILES
+			.register("slime_repelent", () -> TileEntityType.Builder
+					.create(TileEntitySlimeRepelent::new, BlockInit.slime_repelent.get()).build(null));
 }

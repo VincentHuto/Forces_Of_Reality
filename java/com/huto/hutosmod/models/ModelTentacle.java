@@ -41,14 +41,14 @@ public class ModelTentacle extends EntityModel<EntityTentacle> {
 	@Override
 	public void setRotationAngles(EntityTentacle entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		
+
 		this.Base.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0625);
 		this.Base.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625);
 		this.Second.rotateAngleX = (float) (Math.cos(ageInTicks) * 0.0625);
 		this.Second.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625);
 		this.Third.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0625);
 		this.Third.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625);
-		this.Tip.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0625);
+		this.Tip.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0925);
 		this.Tip.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925);
 	}
 

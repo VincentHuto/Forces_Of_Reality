@@ -1,4 +1,4 @@
-package com.huto.hutosmod.entities;
+package com.huto.hutosmod.entities.utils;
 
 import java.util.Arrays;
 import java.util.Formatter;

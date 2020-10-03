@@ -8,7 +8,7 @@
  *
  * File Created @ [? (GMT)]
  */
-package com.huto.hutosmod.entities;
+package com.huto.hutosmod.entities.utils;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

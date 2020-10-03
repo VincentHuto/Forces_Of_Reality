@@ -3,8 +3,8 @@ package com.huto.hutosmod.render.entity;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityTentacle;
-import com.huto.hutosmod.models.ModelTentacle;
+import com.huto.hutosmod.entities.EntityHasturSpawn;
+import com.huto.hutosmod.models.ModelHasturSpawn;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -15,17 +15,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderTentacle extends MobRenderer<EntityTentacle, ModelTentacle> {
+public class RenderHasturSpawn extends MobRenderer<EntityHasturSpawn, ModelHasturSpawn> {
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID,
-			"textures/entity/tentacle/model_tentacle.png");
+			"textures/entity/hastur_spawn/model_hastur_spawn_brown.png");
 
-	public RenderTentacle(EntityRendererManager renderManagerIn) {
-		super(renderManagerIn, new ModelTentacle(), 0.5f);
+	public RenderHasturSpawn(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn, new ModelHasturSpawn(), 0.5f);
 
 	}
 
 	@Override
-	public void render(EntityTentacle entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
+	public void render(EntityHasturSpawn entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
@@ -33,7 +33,7 @@ public class RenderTentacle extends MobRenderer<EntityTentacle, ModelTentacle> {
 
 	// Growth Scaling
 	@Override
-	protected void preRenderCallback(EntityTentacle entitylivingbaseIn, MatrixStack matrixStackIn,
+	protected void preRenderCallback(EntityHasturSpawn entitylivingbaseIn, MatrixStack matrixStackIn,
 			float partialTickTime) {
 		super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
 		float f = 0.0F;
@@ -42,8 +42,8 @@ public class RenderTentacle extends MobRenderer<EntityTentacle, ModelTentacle> {
 			f = ((float) i - partialTickTime) / 30.0F * 0.5F;
 		}
 
-		if (f > 1.3) {
-			f = 1.3f;
+		if (f > 1) {
+			f = 1;
 		}
 		if (entitylivingbaseIn.deathTicks == 1) {
 			matrixStackIn.scale(f, f, f);
@@ -58,8 +58,8 @@ public class RenderTentacle extends MobRenderer<EntityTentacle, ModelTentacle> {
 
 	@Nonnull
 	@Override
-	public ResourceLocation getEntityTexture(@Nonnull EntityTentacle entity) {
-		return entity.getTentacleTypeName();
+	public ResourceLocation getEntityTexture(@Nonnull EntityHasturSpawn entity) {
+		return entity.getSpawnTypeName();
 	}
 
 }

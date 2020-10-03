@@ -12,6 +12,7 @@ import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
+import com.huto.hutosmod.objects.blocks.BlockSlimeRepelent;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
 import com.huto.hutosmod.objects.blocks.BlockThermalInfluxer;
 import com.huto.hutosmod.objects.blocks.BlockVibeAbsorber;
@@ -74,6 +75,7 @@ public class BlockInit {
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 
 	// Tiles
+
 	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> vibe_resonator = BLOCKS.register("vibe_resonator",
@@ -105,11 +107,12 @@ public class BlockInit {
 	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
 			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
 	public static final RegistryObject<Block> runic_chisel_station = BLOCKS.register("runic_chisel_station",
 			() -> new BlockChiselStation(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
+	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",
+			() -> new BlockSlimeRepelent(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
 			() -> new BlockStorageDrum(
