@@ -150,5 +150,25 @@
 				"stream": true
 			}
 		]
+	},
+	"item.star_slug.strike": {
+		"category": "item",
+		"subtitle": "item.star_slug.strike",
+		"sounds": [
+			{
+				"name": "hutosmod:item/star_slug/strike",
+				"stream": true
+			}
+		]
+	},
+	"item.star_slug.storm": {
+		"category": "item",
+		"subtitle": "item.star_slug.storm",
+		"sounds": [
+			{
+				"name": "hutosmod:item/star_slug/storm",
+				"stream": true
+			}
+		]
 	}
 }

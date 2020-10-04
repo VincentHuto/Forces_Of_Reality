@@ -14,7 +14,6 @@ import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -40,8 +39,6 @@ public class EntityTrackingOrb extends ThrowableEntity {
 	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityTrackingOrb.class,
 			DataSerializers.VARINT);
 
-	
-	
 	double lockX, lockY = -1, lockZ;
 	int time = 0;
 
@@ -113,7 +110,8 @@ public class EntityTrackingOrb extends ThrowableEntity {
 		Vector3 particlePos = oldPos;
 
 		for (int i = 0; i < steps; i++) {
-			world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
+			world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, particlePos.x, particlePos.y, particlePos.z, 0, 0,
+					0);
 			if (world.rand.nextInt(steps) <= 1)
 				world.addParticle(ParticleTypes.ASH, particlePos.x + (Math.random() - 0.5) * 0.4,
 						particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0,
@@ -136,7 +134,6 @@ public class EntityTrackingOrb extends ThrowableEntity {
 			setMotion(motionVec.toVec3D());
 			if (time < 10)
 				setMotion(getMotion().getX(), Math.abs(getMotion().getY()), getMotion().getZ());
-
 			List<LivingEntity> targetList = world.getEntitiesWithinAABB(LivingEntity.class,
 					new AxisAlignedBB(getPosX() - 0.5, getPosY() - 0.5, getPosZ() - 0.5, getPosX() + 0.5,
 							getPosY() + 0.5, getPosZ() + 0.5));
@@ -186,7 +183,10 @@ public class EntityTrackingOrb extends ThrowableEntity {
 		if (isEvil()) {
 			entities = world.getEntitiesWithinAABB(PlayerEntity.class, bounds);
 		} else {
-			entities = world.getEntitiesWithinAABB(Entity.class, bounds, Predicates.instanceOf(IMob.class));
+			entities = world.getEntitiesWithinAABB(Entity.class, bounds, (Predicates.instanceOf(LivingEntity.class)));
+			if (entities.contains(this.func_234616_v_())) {
+				entities.remove(this.func_234616_v_());
+			}
 		}
 		while (entities.size() > 0) {
 			Entity e = (Entity) entities.get(world.rand.nextInt(entities.size()));

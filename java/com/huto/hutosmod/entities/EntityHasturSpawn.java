@@ -99,6 +99,8 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 	protected BodyController createBodyController() {
 		return new EntityHasturSpawn.BodyHelperController(this);
 	}
+	
+	
 
 	@Override
 	protected void registerGoals() {
@@ -323,7 +325,7 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 	 */
 	@Override
 	protected float getSoundVolume() {
-		return 1.0F;
+		return 0.3F;
 	}
 
 	@Override

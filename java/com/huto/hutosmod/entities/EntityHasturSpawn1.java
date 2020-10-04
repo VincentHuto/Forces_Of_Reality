@@ -129,7 +129,7 @@ public class EntityHasturSpawn1 extends MonsterEntity implements IFlyingAnimal{
 	@Override
 	public void onCollideWithPlayer(PlayerEntity entityIn) {
 		super.onCollideWithPlayer(entityIn);
-		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.5f);
+		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 
 	}
 

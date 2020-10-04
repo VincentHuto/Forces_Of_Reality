@@ -7,8 +7,7 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
-import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
-import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
+import com.huto.hutosmod.objects.tileenties.util.ITank;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.BlockState;
@@ -21,7 +20,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 
 public class TileEntityCapacitor extends TileVibeSimpleInventory
-		implements ITickableTileEntity, IImportableTile, IExportableTile {
+		implements ITickableTileEntity,ITank {
 
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public static final String TAG_LEVEL = "tankLevel";
@@ -215,19 +214,21 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory
 		return true;
 	}
 
-	@Override
-	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
-		this.vibes.addVibes(rate);
-		importFrom.vibes.subtractVibes(rate);
-	}
-
 	public boolean isVibeFull() {
 		return vibes.getVibes() < maxVibes ? false : true;
 	}
 
 	@Override
+	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
+		if (!this.isVibeFull()) {
+			this.vibes.addVibes(rate);
+			importFrom.vibes.subtractVibes(rate);
+		}
+	}
+
+	@Override
 	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
-		if (!this.isVibeFull() && vibes.getVibes() > 1) {
+		if (vibes.getVibes() > rateIn) {
 			this.vibes.subtractVibes(rateIn);
 			exportToIn.vibes.addVibes(rateIn);
 		}

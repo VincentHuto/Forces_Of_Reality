@@ -27,6 +27,8 @@ public class SoundHandler {
 	public static final SoundEvent ENTITY_DENIZEN_AMBIENT = makeSoundEvent("entity.denizen.ambient");
 	public static final SoundEvent ENTITY_DENIZEN_HURT = makeSoundEvent("entity.denizen.hurt");
 	public static final SoundEvent ENTITY_DENIZEN_DEATH = makeSoundEvent("entity.denizen.death");
+	public static final SoundEvent STAR_SLUG_STRIKE = makeSoundEvent("item.star_slug.strike");
+	public static final SoundEvent STAR_SLUG_STORM = makeSoundEvent("item.star_slug.storm");
 
 	private static SoundEvent makeSoundEvent(String name) {
 		ResourceLocation loc = new ResourceLocation(HutosMod.MOD_ID, name);
@@ -54,6 +56,9 @@ public class SoundHandler {
 		r.register(ENTITY_DENIZEN_AMBIENT);
 		r.register(ENTITY_DENIZEN_HURT);
 		r.register(ENTITY_DENIZEN_DEATH);
+		
+		r.register(STAR_SLUG_STRIKE);
+		r.register(STAR_SLUG_STORM);
 	}
 
 }

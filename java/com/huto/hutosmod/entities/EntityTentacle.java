@@ -68,6 +68,11 @@ public class EntityTentacle extends MonsterEntity {
 	}
 
 	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+	
+	@Override
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(TENTACLE_TYPE, 1);
@@ -169,7 +174,7 @@ public class EntityTentacle extends MonsterEntity {
 	@Override
 	public void onCollideWithPlayer(PlayerEntity entityIn) {
 		super.onCollideWithPlayer(entityIn);
-		entityIn.attackEntityFrom(DamageSource.CACTUS, 1.5f);
+		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 
 	}
 
@@ -177,7 +182,7 @@ public class EntityTentacle extends MonsterEntity {
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
 		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur)) {
-			entityIn.attackEntityFrom(DamageSource.CACTUS, 1.5f);
+			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 
 	}

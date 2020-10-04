@@ -14,7 +14,6 @@ import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -184,7 +183,10 @@ public class EntityStarStrike extends ThrowableEntity {
 		if (isEvil()) {
 			entities = world.getEntitiesWithinAABB(PlayerEntity.class, bounds);
 		} else {
-			entities = world.getEntitiesWithinAABB(Entity.class, bounds, Predicates.instanceOf(IMob.class));
+			entities = world.getEntitiesWithinAABB(Entity.class, bounds, (Predicates.instanceOf(LivingEntity.class)));
+			if (entities.contains(this.func_234616_v_())) {
+				entities.remove(this.func_234616_v_());
+			}
 		}
 		while (entities.size() > 0) {
 			Entity e = (Entity) entities.get(world.rand.nextInt(entities.size()));

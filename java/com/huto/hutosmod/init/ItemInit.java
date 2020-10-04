@@ -8,6 +8,7 @@ import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDestructOrb;
 import com.huto.hutosmod.objects.items.ItemDestructOrbContained;
+import com.huto.hutosmod.objects.items.ItemDiscordantBell;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemFrequencyMatcher;
@@ -22,13 +23,16 @@ import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
+import com.huto.hutosmod.objects.items.ItemSlimeRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
+import com.huto.hutosmod.objects.items.ItemStarSlug;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
 import com.huto.hutosmod.objects.items.ItemYellowSign;
+import com.huto.hutosmod.objects.items.ItemYellowTome;
 import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.ToolVeinPickaxe;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
@@ -154,6 +158,13 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign", () -> new ItemYellowSign(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> yellow_tome = ITEMS.register("yellow_tome", () -> new ItemYellowTome(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
+			() -> new ItemDiscordantBell(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -183,6 +194,9 @@ public class ItemInit {
 			() -> new ItemAttractionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> repulsion_charm = ITEMS.register("repulsion_charm",
 			() -> new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> slime_charm = ITEMS.register("slime_charm",
+			() -> new ItemSlimeRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+
 	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
 			() -> new ItemDryingAgent(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
@@ -357,9 +371,10 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_ibis = ITEMS.register("spawn_egg_ibis",
 			() -> new ModSpawnEggItem(EntityInit.ibis, 9175040, 8672512,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_spawn = ITEMS.register("spawn_egg_hastur_spawn",
-			() -> new ModSpawnEggItem(EntityInit.hastur_spawn, 4539136, 13548032,
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_spawn = ITEMS
+			.register("spawn_egg_hastur_spawn", () -> new ModSpawnEggItem(EntityInit.hastur_spawn, 4539136, 13548032,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
@@ -389,6 +404,22 @@ public class ItemInit {
 
 		// Attract Charm
 		ItemModelsProperties.registerProperty(attraction_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+
+		// Slime Charm
+		ItemModelsProperties.registerProperty(slime_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {

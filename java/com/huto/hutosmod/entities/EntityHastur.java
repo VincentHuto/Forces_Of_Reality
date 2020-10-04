@@ -13,8 +13,10 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.MoveTowardsTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
@@ -81,15 +83,15 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		 */
 		// Attacks
 		int attackRoll = ticksExisted + rand.nextInt(5);
-		if (attackRoll % 137 * diffMult == 0) {
+		if (attackRoll % 100 * diffMult == 0) {
 			this.setMotion(0, 0, 0);
 			this.spawnMissile();
 			this.setMotion(0, 0, 0);
-		} else if (attackRoll % 141 * diffMult == 0) {
+		} else if (attackRoll % 110 * diffMult == 0) {
 			this.setMotion(0, 0, 0);
 			this.spawnMissileVortex(rand.nextInt(15));
 			this.setMotion(0, 0, 0);
-		} else if (attackRoll % 157 * diffMult == 0) {
+		} else if (attackRoll % 120 * diffMult == 0) {
 			this.setMotion(0, 0, 0);
 			if (world.rand.nextBoolean()) {
 				this.summonTentacleAid(rand.nextInt(10));
@@ -97,7 +99,7 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 				this.summonSpawnAid(rand.nextInt(5));
 			}
 			this.setMotion(0, 0, 0);
-		} else if (attackRoll % 180 * diffMult == 0) {
+		} else if (attackRoll % 160 * diffMult == 0) {
 			this.setMotion(0, 0, 0);
 			this.summonMissleSwarn(rand.nextInt(10));
 			this.setMotion(0, 0, 0);
@@ -126,9 +128,9 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		 */
 		this.applyEntityAI();
 		this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 0.12));
-		// this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 2d, 2));
+		this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 3d, 5));
 		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1d, true));
-		// this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.1f));
+		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.2f));
 		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 
 	}
@@ -275,11 +277,11 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		EntityHasturSpawn[] spawnArray = new EntityHasturSpawn[numSpawn];
 		for (int i = 0; i < numSpawn; i++) {
 			spawnArray[i] = new EntityHasturSpawn(EntityInit.hastur_spawn.get(), world);
-			spawnArray[i].setSpawnType(rand.nextInt(4));
+			spawnArray[i].setSpawnType(rand.nextInt(3));
 			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			spawnArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+			spawnArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 2.5 + yMod,
 					this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
 				world.addEntity(spawnArray[i]);

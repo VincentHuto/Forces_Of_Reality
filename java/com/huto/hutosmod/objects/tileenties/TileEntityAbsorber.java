@@ -8,8 +8,10 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.EnumAbsorberStates;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
+import com.huto.hutosmod.objects.tileenties.util.ITank;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.BlockState;
@@ -53,12 +55,10 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void tick() {	
-		
-	//	System.out.println(vibes.getVibes());
-	//	System.out.println(clientVibes);
-		if (!world.isRemote) {
+	public void tick() {
 
+		if (!world.isRemote) {
+			System.out.println(this.getMaxVibes());
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 		}
 
@@ -69,15 +69,15 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 				}
 			}
 
-			// System.out.println(getUpdateTag().get(TAG_LINKEDPOS));
 			if (linkedBlocks != null) {
 				for (int i = 0; i < linkedBlocks.size(); i++) {
-					// System.out.println(vibes.getVibes());
 					if (linkedBlocks.get(i) != null) {
 						// Importing from Absorber
 						if (world.getTileEntity(linkedBlocks.get(i)) instanceof IImportableTile) {
 							IImportableTile te = (IImportableTile) world.getTileEntity(linkedBlocks.get(i));
-							if (this.isExportState() && this.vibes.getVibes()>transferRate && te.canImport()) {
+
+							if (this.isExportState() && this.vibes.getVibes() > transferRate && te.canImport()) {
+								System.out.println("t");
 								te.importFromAbsorber(this, transferRate);
 								te.sendUpdates();
 								VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
@@ -97,22 +97,29 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 
 							}
 						}
-						// Other Absorbers
-						/*
-						 * if (world.getTileEntity(linkedBlocks.get(i)) instanceof TileEntityAbsorber) {
-						 * TileEntityAbsorber other = (TileEntityAbsorber)
-						 * world.getTileEntity(linkedBlocks.get(i)); if (this.isImportState() &&
-						 * other.isExportState()) { if (this.vibes.getVibes() < other.vibes.getVibes())
-						 * this.vibes.addVibes(transferRate); other.vibes.subtractVibes(transferRate); }
-						 * if (this.isExportState() && other.isImportState()) { if
-						 * (this.vibes.getVibes() > other.vibes.getVibes())
-						 * other.vibes.addVibes(transferRate); this.vibes.subtractVibes(transferRate); }
-						 * this.sendUpdates(); other.sendUpdates(); }
-						 */
+
+						// Tanks
+						if (world.getTileEntity(linkedBlocks.get(i)) instanceof ITank) {
+							ITank te = (ITank) world.getTileEntity(linkedBlocks.get(i));
+							if (this.isExportState() && this.vibes.getVibes() > transferRate && te.canImport()) {
+								te.importFromAbsorber(this, transferRate);
+								te.sendUpdates();
+								VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+
+							}
+							if (this.isImportState() && this.vibes.getVibes() <= maxVibes && te.canExport()) {
+								// Limit how much it can export when importing so that it will fill with
+								// priority
+								te.exportToAbsorber(this, transferRate * 0.5f);
+								te.sendUpdates();
+								VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+							}
+						}
 					}
 				}
 			}
 		}
+
 	}
 
 	public boolean isImportState() {
@@ -129,7 +136,7 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	@Override
 	public void onLoad() {
 		super.onLoad();
-		this.getTankSize();
+		this.checkTankSize();
 		this.checkTransferRate();
 	}
 
@@ -199,7 +206,7 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		return enumMode;
 	}
 
-	// Transfer/Size
+	// Transfer
 	public float checkTransferRate() {
 		if (tankLevel == 0) {
 			return this.transferRate = 0.1f;
@@ -209,8 +216,8 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 			return transferRate;
 		}
 	}
-
-	public float getTankSize() {
+	//Size
+	public float checkTankSize() {
 		if (tankLevel == 0) {
 			return this.maxVibes = 10;
 		} else if (tankLevel > 0 && tankLevel < 4) {

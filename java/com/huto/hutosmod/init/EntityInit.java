@@ -8,7 +8,9 @@ import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityHastur;
 import com.huto.hutosmod.entities.EntityHasturSpawn;
 import com.huto.hutosmod.entities.EntityIbis;
+import com.huto.hutosmod.entities.EntityPlayerTentacle;
 import com.huto.hutosmod.entities.EntityTentacle;
+import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 
@@ -61,21 +63,35 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityTentacle>create(EntityTentacle::new, EntityClassification.MONSTER)
 					.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "tentacle").toString()));
 
+	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
+			"player_tentacle",
+			() -> EntityType.Builder
+					.<EntityPlayerTentacle>create(EntityPlayerTentacle::new, EntityClassification.CREATURE)
+					.size(1.4F, 1.5F).build(new ResourceLocation(HutosMod.MOD_ID, "player_tentacle").toString()));
+
 	public static final RegistryObject<EntityType<EntityTrackingOrb>> tracking_orb = ENTITY_TYPES.register(
 			"tracking_orb",
 			() -> EntityType.Builder.<EntityTrackingOrb>create(EntityTrackingOrb::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.1F, 0.1F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "tracking_orb").toString()));
+
+	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
+			"corrupt_note",
+			() -> EntityType.Builder.<EntityCorruptNote>create(EntityCorruptNote::new, EntityClassification.MISC)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "corrupt_note").toString()));
 
 	public static final RegistryObject<EntityType<EntityStarStrike>> star_strike = ENTITY_TYPES.register("star_strike",
 			() -> EntityType.Builder.<EntityStarStrike>create(EntityStarStrike::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.1F, 0.1F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "star_strike").toString()));
 
-	public static final RegistryObject<EntityType<EntityHasturSpawn>> hastur_spawn = ENTITY_TYPES.register("hastur_spawn",
-			() -> EntityType.Builder.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
-					.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_spawn").toString()));
-	
+	public static final RegistryObject<EntityType<EntityHasturSpawn>> hastur_spawn = ENTITY_TYPES
+			.register("hastur_spawn",
+					() -> EntityType.Builder
+							.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
+							.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_spawn").toString()));
+
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
 		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.setAttributes().create());
@@ -85,6 +101,7 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.denizen_sage.get(), EntityDenizenSage.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.ibis.get(), EntityIbis.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.tentacle.get(), EntityTentacle.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.player_tentacle.get(), EntityPlayerTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur_spawn.get(), EntityHasturSpawn.setAttributes().create());
 
 	}

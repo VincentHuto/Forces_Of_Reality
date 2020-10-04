@@ -10,12 +10,14 @@ import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.render.entity.RenderColin;
+import com.huto.hutosmod.render.entity.RenderCorruptNote;
 import com.huto.hutosmod.render.entity.RenderDenizen;
 import com.huto.hutosmod.render.entity.RenderDenizenSage;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
 import com.huto.hutosmod.render.entity.RenderHastur;
 import com.huto.hutosmod.render.entity.RenderHasturSpawn;
 import com.huto.hutosmod.render.entity.RenderIbis;
+import com.huto.hutosmod.render.entity.RenderPlayerTentacle;
 import com.huto.hutosmod.render.entity.RenderStarStrike;
 import com.huto.hutosmod.render.entity.RenderTentacle;
 import com.huto.hutosmod.render.entity.RenderTrackingOrb;
@@ -77,8 +79,10 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.denizen_sage.get(), RenderDenizenSage::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.ibis.get(), RenderIbis::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tentacle.get(), RenderTentacle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.player_tentacle.get(), RenderPlayerTentacle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tracking_orb.get(), RenderTrackingOrb::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.star_strike.get(), RenderStarStrike::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.corrupt_note.get(), RenderCorruptNote::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
@@ -88,7 +92,5 @@ public class ClientEventSubscriber {
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
-
-
 
 }
