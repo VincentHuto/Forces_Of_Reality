@@ -5,17 +5,18 @@ import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
 import com.huto.hutosmod.init.EntityInit;
-import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 public class ItemYellowTome extends Item {
@@ -26,21 +27,49 @@ public class ItemYellowTome extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		RayTraceResult result = playerIn.pick(100, 0, false);
-		Vector3d hitVec = result.getHitVec();
-		ICovenant coven = playerIn.getCapability(CovenantProvider.COVEN_CAPA)
-				.orElseThrow(IllegalArgumentException::new);
-		if (coven.getCovenant() == EnumCovenants.HASTUR) {
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+		playerIn.setActiveHand(handIn);
+		return ActionResult.resultConsume(itemstack);
+
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+		if (entityLiving instanceof PlayerEntity) {
+			PlayerEntity playerentity = (PlayerEntity) entityLiving;
+
 			if (!worldIn.isRemote) {
-				this.summonTentacleAid(worldIn.rand.nextInt(10), worldIn, playerIn, hitVec);
+				RayTraceResult result = entityLiving.pick(100, 0, false);
+				Vector3d hitVec = result.getHitVec();
+				ICovenant coven = entityLiving.getCapability(CovenantProvider.COVEN_CAPA)
+						.orElseThrow(IllegalArgumentException::new);
+				if (coven.getCovenant() == EnumCovenants.HASTUR) {
+					if (!worldIn.isRemote) {
+						this.summonTentacleAid(worldIn.rand.nextInt(10), worldIn, (PlayerEntity) entityLiving, hitVec);
+					}
+				} else {
+					playerentity.sendStatusMessage(new StringTextComponent("Lord Hastur does not grant you his power"),
+							false);
+				}
 
-			} else {
-				playerIn.playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
-
+				stack.damageItem(1, playerentity, (p_220009_1_) -> {
+					p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
+				});
 			}
-		}
-		return super.onItemRightClick(worldIn, playerIn, handIn);
 
+			playerentity.addStat(Stats.ITEM_USED.get(this));
+		}
+	}
+
+	@Override
+	public int getUseDuration(ItemStack stack) {
+		return 72000 / 2;
+	}
+
+	@Override
+	public UseAction getUseAction(ItemStack stack) {
+		return UseAction.BOW;
 	}
 
 	public void summonTentacleAid(int numTent, World world, PlayerEntity player, Vector3d hitVec) {
@@ -58,12 +87,6 @@ public class ItemYellowTome extends Item {
 
 			}
 		}
-	}
-
-	@Override
-	public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target,
-			Hand hand) {
-		return super.itemInteractionForEntity(stack, playerIn, target, hand);
 	}
 
 }

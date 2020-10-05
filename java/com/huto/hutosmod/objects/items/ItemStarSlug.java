@@ -3,9 +3,12 @@ package com.huto.hutosmod.objects.items;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.sounds.SoundHandler;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -15,14 +18,49 @@ public class ItemStarSlug extends Item {
 	public ItemStarSlug(Properties properties) {
 		super(properties);
 	}
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		if (!worldIn.isRemote) {
-			this.summonMissleSwarn(worldIn.rand.nextInt(10), worldIn, playerIn);
-		} else {
-			playerIn.playSound(SoundHandler.STAR_SLUG_STORM, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+		playerIn.setActiveHand(handIn);
+		return ActionResult.resultConsume(itemstack);
+
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+		if (entityLiving instanceof PlayerEntity) {
+			PlayerEntity playerentity = (PlayerEntity) entityLiving;
+
+			if (!worldIn.isRemote) {
+				this.summonMissleSwarn(worldIn.rand.nextInt(25), worldIn, playerentity);
+			} else {
+				entityLiving.playSound(SoundHandler.STAR_SLUG_STORM, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+			}
+			stack.damageItem(1, playerentity, (p_220009_1_) -> {
+				p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
+			});
 		}
-		return super.onItemRightClick(worldIn, playerIn, handIn);
+		/*
+		 * worldIn.playSound((PlayerEntity) null, entityLiving.getPosX(),
+		 * entityLiving.getPosY(), entityLiving.getPosZ(),
+		 * SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F /
+		 * (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+		 */
+
+		((PlayerEntity) entityLiving).addStat(Stats.ITEM_USED.get(this));
+
+	}
+
+	@Override
+	public int getUseDuration(ItemStack stack) {
+		return 72000;
+	}
+
+	@Override
+	public UseAction getUseAction(ItemStack stack) {
+		return UseAction.BOW;
 	}
 
 	public void summonMissleSwarn(int numMiss, World world, PlayerEntity player) {

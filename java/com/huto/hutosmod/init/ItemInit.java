@@ -24,6 +24,7 @@ import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSlimeRepulsionCharm;
+import com.huto.hutosmod.objects.items.ItemSlugBucket;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStarSlug;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
@@ -178,7 +179,6 @@ public class ItemInit {
 	// Food
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
@@ -188,6 +188,8 @@ public class ItemInit {
 					.saturation(1.5f).effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build())));
 	public static final RegistryObject<Item> mana_bottle = ITEMS.register("mana_bottle",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> bucket_slug = ITEMS.register("bucket_slug",
+			() -> new ItemSlugBucket(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	// Charms
 	public static final RegistryObject<Item> attraction_charm = ITEMS.register("attraction_charm",
@@ -374,12 +376,16 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_spawn = ITEMS
 			.register("spawn_egg_hastur_spawn", () -> new ModSpawnEggItem(EntityInit.hastur_spawn, 4539136, 13548032,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_slug = ITEMS.register("spawn_egg_slug",
+			() -> new ModSpawnEggItem(EntityInit.slug, 7761777, 4206080,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
-				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn);
+				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
+				ItemInit.spawn_egg_slug);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -34,6 +34,8 @@ public class ItemPurgingStone extends Item {
 				// Sync Packet with server
 				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
 						new KarmaPacketServer(karma.getKarma()));
+				playerIn.getHeldItemMainhand().shrink(1);
+
 			} else if (karma.getKarma() > 0 && karma.getKarma() < 20) {
 				karma.setKarma(0);
 				playerIn.sendStatusMessage(
@@ -41,6 +43,8 @@ public class ItemPurgingStone extends Item {
 				// Sync Packet with server
 				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
 						new KarmaPacketServer(karma.getKarma()));
+				playerIn.getHeldItemMainhand().shrink(1);
+
 			}
 
 		}

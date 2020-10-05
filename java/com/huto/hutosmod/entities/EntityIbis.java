@@ -230,9 +230,6 @@ public class EntityIbis extends AnimalEntity {
 		this.chickenJockey = jockey;
 	}
 
-	public ResourceLocation getDenizenTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getIbisType(), TEXTURE_BY_ID.get(0));
-	}
 
 	public int getIbisType() {
 		return this.dataManager.get(IBIS_TYPE);
@@ -250,7 +247,6 @@ public class EntityIbis extends AnimalEntity {
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(IBIS_TYPE, 1);
-
 	}
 
 	@Nullable

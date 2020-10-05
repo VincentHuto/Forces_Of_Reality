@@ -18,6 +18,7 @@ import com.huto.hutosmod.render.entity.RenderHastur;
 import com.huto.hutosmod.render.entity.RenderHasturSpawn;
 import com.huto.hutosmod.render.entity.RenderIbis;
 import com.huto.hutosmod.render.entity.RenderPlayerTentacle;
+import com.huto.hutosmod.render.entity.RenderSlug;
 import com.huto.hutosmod.render.entity.RenderStarStrike;
 import com.huto.hutosmod.render.entity.RenderTentacle;
 import com.huto.hutosmod.render.entity.RenderTrackingOrb;
@@ -84,6 +85,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.star_strike.get(), RenderStarStrike::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.corrupt_note.get(), RenderCorruptNote::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
 

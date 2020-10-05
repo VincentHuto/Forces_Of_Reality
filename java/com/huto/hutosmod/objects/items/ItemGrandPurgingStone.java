@@ -34,6 +34,7 @@ public class ItemGrandPurgingStone extends Item {
 				// Sync Packet with server
 				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
 						new KarmaPacketServer(karma.getKarma()));
+				playerIn.getHeldItemMainhand().shrink(1);
 			}
 
 		}

@@ -3,9 +3,12 @@ package com.huto.hutosmod.objects.items;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
 import com.huto.hutosmod.sounds.SoundHandler;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
@@ -19,22 +22,51 @@ public class ItemDiscordantBell extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		if (!worldIn.isRemote) {
-			if (playerIn.isCrouching()) {
-				this.summonNoteStorm(worldIn.rand.nextInt(3), worldIn, playerIn);
-			} else {
-				this.summomCorruptNote(1, worldIn, playerIn);
-			}
-		} else {
-			playerIn.playSound(SoundEvents.BLOCK_NOTE_BLOCK_BELL, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
 
-		}
-
-		return super.onItemRightClick(worldIn, playerIn, handIn);
+		playerIn.setActiveHand(handIn);
+		return ActionResult.resultConsume(itemstack);
 
 	}
 
-	public void summomCorruptNote(int numMiss, World world, PlayerEntity player) {
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+		if (entityLiving instanceof PlayerEntity) {
+			PlayerEntity playerentity = (PlayerEntity) entityLiving;
+
+			if (!worldIn.isRemote) {
+				if (playerentity.isCrouching()) {
+					this.summonNoteStorm(worldIn.rand.nextInt(3), worldIn, playerentity);
+				} else {
+					this.summomCorruptNote(worldIn, playerentity);
+				}
+			} else {
+				playerentity.playSound(SoundEvents.BLOCK_NOTE_BLOCK_BELL, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+			}
+			stack.damageItem(1, playerentity, (p_220009_1_) -> {
+				p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
+			});
+		}
+
+/*		worldIn.playSound((PlayerEntity) null, entityLiving.getPosX(), entityLiving.getPosY(), entityLiving.getPosZ(),
+				SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F,
+				1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);*/
+
+		((PlayerEntity) entityLiving).addStat(Stats.ITEM_USED.get(this));
+
+	}
+
+	@Override
+	public int getUseDuration(ItemStack stack) {
+		return 72000/4;
+	}
+
+	@Override
+	public UseAction getUseAction(ItemStack stack) {
+		return UseAction.BOW;
+	}
+
+	public void summomCorruptNote(World world, PlayerEntity player) {
 		EntityCorruptNote missile = new EntityCorruptNote(player, false);
 		missile.setPosition(player.getPosX() + (Math.random() - 0.5 * 0.1),
 				player.getPosY() + 0.8 + (Math.random() - 0.5 * 0.1), player.getPosZ() + (Math.random() - 0.5 * 0.1));
