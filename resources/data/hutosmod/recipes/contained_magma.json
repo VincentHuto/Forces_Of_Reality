@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"NON",
+		"OPO",
+		"NON"
+	],
+	"key": {
+		"N": {
+			"item": "minecraft:nether_brick"
+		},
+		"O": {
+			"item": "minecraft:magma_block"
+		},
+		"P": {
+			"item": "hutosmod:nullifying_powder"
+		}
+	},
+	"result": {
+		"item": "hutosmod:contained_magmar",
+		"count": 1
+	}
+}

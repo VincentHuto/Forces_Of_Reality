@@ -16,6 +16,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 @OnlyIn(Dist.CLIENT)
 public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedContainer> {
 
@@ -47,7 +48,7 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int p_146979_1_, int p_146979_2_) { // drawGuiContainerForegroundLayer
 		if (this.minecraft != null) { // this.minecraft
 			this.minecraft.fontRenderer.func_243248_b(matrixStack, new TranslationTextComponent("container.crafting"),
-					115-18, 8+22, 4210752);
+					115 - 18, 8 + 22, 4210752);
 		}
 	}
 
@@ -60,7 +61,6 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 		this.oldMouseY = (float) mouseY;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX,
 			int mouseY) { // drawGuiContainerBackgroundLayer

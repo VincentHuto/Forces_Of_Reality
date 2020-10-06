@@ -32,27 +32,26 @@ public class EntityInit {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES,
 			HutosMod.MOD_ID);
 
-	//Passive
+	// Passive
 	public static final RegistryObject<EntityType<EntityIbis>> ibis = ENTITY_TYPES.register("ibis",
 			() -> EntityType.Builder.<EntityIbis>create(EntityIbis::new, EntityClassification.CREATURE).size(0.4F, 0.7F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "ibis").toString()));
 
 	public static final RegistryObject<EntityType<EntitySlug>> slug = ENTITY_TYPES.register("slug",
-			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.2F, 0.1F)
+			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.4F, 0.4F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "slug").toString()));
 
-	
 	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES
 			.register("dream_walker",
 					() -> EntityType.Builder
 							.<EntityDreamWalker>create(EntityDreamWalker::new, EntityClassification.CREATURE)
 							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "dream_walker").toString()));
-	//Elders
+	// Elders
 	public static final RegistryObject<EntityType<EntityColin>> colin = ENTITY_TYPES.register("colin",
 			() -> EntityType.Builder.<EntityColin>create(EntityColin::new, EntityClassification.CREATURE)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "colin").toString()));
 
-	//Denizens
+	// Denizens
 	public static final RegistryObject<EntityType<EntityDenizen>> denizen = ENTITY_TYPES.register("denizen",
 			() -> EntityType.Builder.<EntityDenizen>create(EntityDenizen::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen").toString()));
@@ -63,8 +62,7 @@ public class EntityInit {
 							.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
 							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
 
-	
-	//Hastur
+	// Hastur
 	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "hastur").toString()));

@@ -1,9 +1,9 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "ERE",
-        "N N",
-        "NAN"
+        "EOE",
+        "RNR",
+        "AAA"
     ],
     "key": {
         
@@ -18,10 +18,13 @@
         },
         "N": {
             "item": "hutosmod:nether_block"
+        },
+        "O": {
+            "item": "minecraft:obsidian"
         }
     },
     "result": {
-        "item": "hutosmod:vibratory_fuser",
+        "item": "hutosmod:vibratory_accelerometer",
         "count": 1
     }
 }

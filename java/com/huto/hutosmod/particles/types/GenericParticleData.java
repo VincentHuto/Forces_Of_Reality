@@ -10,15 +10,11 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.util.registry.Registry;
 
 public class GenericParticleData extends ParticleType<GenericParticleData> implements IParticleData {
-	
-	@SuppressWarnings("deprecation")
+
 	private static final IParticleData.IDeserializer<GenericParticleData> DESERIALIZER = new IParticleData.IDeserializer<GenericParticleData>() {
-		
-		
+
 		public GenericParticleData deserialize(ParticleType<GenericParticleData> particleTypeIn, StringReader reader)
 				throws CommandSyntaxException {
-			System.out.println("t");
-
 			boolean show = (boolean) reader.readBoolean();
 			reader.expect(' ');
 			float red = (float) reader.readDouble();
@@ -43,10 +39,9 @@ public class GenericParticleData extends ParticleType<GenericParticleData> imple
 	private final Codec<GenericParticleData> field_239825_b_ = Codec.unit(this::getType);
 
 	public GenericParticleData(boolean alwaysShow) {
-		
+
 		super(alwaysShow, DESERIALIZER);
 		System.out.println("t");
-
 
 	}
 
@@ -104,8 +99,8 @@ public class GenericParticleData extends ParticleType<GenericParticleData> imple
 	}
 
 	public GenericParticleData getType() {
-		new GenericParticleData(false, 1, 0,1, 1,100);
-		
+		new GenericParticleData(false, 1, 0, 1, 1, 100);
+
 		return this;
 	}
 
@@ -127,8 +122,6 @@ public class GenericParticleData extends ParticleType<GenericParticleData> imple
 
 	@SuppressWarnings("deprecation")
 	public String getParameters() {
-		System.out.println("t");
-
 		return String.format("false %1f %1f %.2f %1f %1f 100", Registry.PARTICLE_TYPE.getKey(this.getType()));
 	}
 }

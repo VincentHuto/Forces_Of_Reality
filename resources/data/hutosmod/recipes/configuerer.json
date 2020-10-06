@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" EQ",
+		" RA",
+		"S  "
+	],
+	"key": {
+		"S": {
+			"item": "hutosmod:null_rod"
+		},
+		"Q": {
+			"item": "minecraft:quartz"
+		},
+		"E": {
+			"item": "minecraft:emerald"
+		},
+		"A": {
+			"item": "minecraft:gem_amethyst"
+		},
+		"R": {
+			"item": "minecraft:gem_ruby"
+		}
+	},
+	"result": {
+		"item": "hutosmod:absorber_configuerer",
+		"count": 1
+	}
+}

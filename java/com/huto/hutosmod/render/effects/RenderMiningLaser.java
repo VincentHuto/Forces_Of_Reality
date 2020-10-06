@@ -26,124 +26,135 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class RenderMiningLaser {
 
-    private final static ResourceLocation laserBeam = new ResourceLocation(HutosMod.MOD_ID + ":textures/misc/laser.png");
-    private final static ResourceLocation laserBeam2 = new ResourceLocation(HutosMod.MOD_ID + ":textures/misc/laser2.png");
-    private final static ResourceLocation laserBeamGlow = new ResourceLocation(HutosMod.MOD_ID + ":textures/misc/laser_glow.png");
+	private final static ResourceLocation laserBeam = new ResourceLocation(
+			HutosMod.MOD_ID + ":textures/misc/laser.png");
+	private final static ResourceLocation laserBeam2 = new ResourceLocation(
+			HutosMod.MOD_ID + ":textures/misc/laser2.png");
+	private final static ResourceLocation laserBeamGlow = new ResourceLocation(
+			HutosMod.MOD_ID + ":textures/misc/laser_glow.png");
 
-    public static void renderLaser(RenderWorldLastEvent event, PlayerEntity player, float ticks) {
+	public static void renderLaser(RenderWorldLastEvent event, PlayerEntity player, float ticks) {
 
+		int range = 10;
 
-        int range = 10;
+		Vector3d playerPos = player.getEyePosition(ticks);
+		RayTraceResult trace = player.pick(range, 0.0F, false);
 
-        Vector3d playerPos = player.getEyePosition(ticks);
-        RayTraceResult trace = player.pick(range, 0.0F, false);
+		// parse data from item
+		float speedModifier = 0.5f;
 
-        // parse data from item
-        float speedModifier = 0.5f;
+		drawLasers(event, playerPos, trace, 0, 0, 0, 120 / 255f, 1 / 255f, 1 / 255f, 0.02f, player, ticks,
+				speedModifier);
+	}
 
-        drawLasers(event, playerPos, trace, 0, 0, 0, 120 / 255f, 1 / 255f, 1 / 255f, 0.02f, player, ticks, speedModifier);
-    }
-
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static float getSpeedModifier(ItemStack stack) {
-            return -0.02f;
-    }
+		return -0.02f;
+	}
 
-    @SuppressWarnings({ "deprecation", "unused" })
-	private static void drawLasers(RenderWorldLastEvent event, Vector3d from, RayTraceResult trace, double xOffset, double yOffset, double zOffset, float r, float g, float b, float thickness, PlayerEntity player, float ticks, float speedModifier) {
-        Hand activeHand;
-        if (player.getHeldItemMainhand().getItem() instanceof ItemFrequencyMatcher) {
-            activeHand = Hand.MAIN_HAND;
-        } else if (player.getHeldItemOffhand().getItem() instanceof ItemFrequencyMatcher) {
-            activeHand = Hand.OFF_HAND;
-        } else {
-            return;
-        }
+	@SuppressWarnings({ "unused" })
+	private static void drawLasers(RenderWorldLastEvent event, Vector3d from, RayTraceResult trace, double xOffset,
+			double yOffset, double zOffset, float r, float g, float b, float thickness, PlayerEntity player,
+			float ticks, float speedModifier) {
+		Hand activeHand;
+		if (player.getHeldItemMainhand().getItem() instanceof ItemFrequencyMatcher) {
+			activeHand = Hand.MAIN_HAND;
+		} else if (player.getHeldItemOffhand().getItem() instanceof ItemFrequencyMatcher) {
+			activeHand = Hand.OFF_HAND;
+		} else {
+			return;
+		}
 
-        ItemStack stack = player.getHeldItem(activeHand);
+		ItemStack stack = player.getHeldItem(activeHand);
 
-        double distance = from.subtract(trace.getHitVec()).length();
-        long gameTime = player.world.getGameTime();
-        double v = gameTime * speedModifier;
-        float additiveThickness = (thickness * 3.5f) * calculateLaserFlickerModifier(gameTime);
-        BufferBuilder wr = Tessellator.getInstance().getBuffer();
+		double distance = from.subtract(trace.getHitVec()).length();
+		long gameTime = player.world.getGameTime();
+		double v = gameTime * speedModifier;
+		float additiveThickness = (thickness * 3.5f) * calculateLaserFlickerModifier(gameTime);
+		BufferBuilder wr = Tessellator.getInstance().getBuffer();
 
-        Vector3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
+		Vector3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
 
-        MatrixStack matrix = event.getMatrixStack();
-        matrix.translate(view.getX(), view.getY(), view.getZ());
-        if( trace.getType() == RayTraceResult.Type.MISS )
-            matrix.translate(-from.x, -from.y, -from.z);
+		MatrixStack matrix = event.getMatrixStack();
+		matrix.translate(view.getX(), view.getY(), view.getZ());
+		if (trace.getType() == RayTraceResult.Type.MISS)
+			matrix.translate(-from.x, -from.y, -from.z);
 
-        RenderSystem.pushMatrix();
-        RenderSystem.multMatrix(matrix.getLast().getMatrix());
+		RenderSystem.pushMatrix();
+		RenderSystem.multMatrix(matrix.getLast().getMatrix());
 
-        RenderSystem.enableColorMaterial();
-        // This makes it so we don't clip into the world, we're effectively drawing on it
-        RenderSystem.disableDepthTest();
-        RenderSystem.enableBlend();
-        //This makes it so multiplayer doesn't matter which side the player is standing on to see someone elses laser
-        RenderSystem.disableCull();
-        RenderSystem.enableTexture();
+		RenderSystem.enableColorMaterial();
+		// This makes it so we don't clip into the world, we're effectively drawing on
+		// it
+		RenderSystem.disableDepthTest();
+		RenderSystem.enableBlend();
+		// This makes it so multiplayer doesn't matter which side the player is standing
+		// on to see someone elses laser
+		RenderSystem.disableCull();
+		RenderSystem.enableTexture();
 
-        RenderSystem.rotatef(MathHelper.lerp(ticks, -player.rotationYaw, -player.prevRotationYaw), 0, 1, 0);
-        RenderSystem.rotatef(MathHelper.lerp(ticks, player.rotationPitch, player.prevRotationPitch), 1, 0, 0);
+		RenderSystem.rotatef(MathHelper.lerp(ticks, -player.rotationYaw, -player.prevRotationYaw), 0, 1, 0);
+		RenderSystem.rotatef(MathHelper.lerp(ticks, player.rotationPitch, player.prevRotationPitch), 1, 0, 0);
 
-        // additive laser beam
-        RenderSystem.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        RenderSystem.color4f(r, g, b, 0.7f);
-        Minecraft.getInstance().getTextureManager().bindTexture(laserBeamGlow);
-        drawBeam(xOffset, yOffset, zOffset, additiveThickness, activeHand, distance, wr, 0.5, 1, ticks);
+		// additive laser beam
+		RenderSystem.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		RenderSystem.color4f(r, g, b, 0.7f);
+		Minecraft.getInstance().getTextureManager().bindTexture(laserBeamGlow);
+		drawBeam(xOffset, yOffset, zOffset, additiveThickness, activeHand, distance, wr, 0.5, 1, ticks);
 
-        // main laser, colored part
-        RenderSystem.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        RenderSystem.color4f(r, g, b, 1.0f);
-        Minecraft.getInstance().getTextureManager().bindTexture(laserBeam2);
-        drawBeam(xOffset, yOffset, zOffset, thickness, activeHand, distance, wr, v, v + distance * 1.5, ticks);
-        // white core
-        RenderSystem.color4f(255 / 255f, 255/ 255f, 255/ 255f, 1.0f);
-        Minecraft.getInstance().getTextureManager().bindTexture(laserBeam);
-        drawBeam(xOffset, yOffset, zOffset, thickness / 2, activeHand, distance, wr, v, v + distance * 1.5, ticks);
+		// main laser, colored part
+		RenderSystem.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		RenderSystem.color4f(r, g, b, 1.0f);
+		Minecraft.getInstance().getTextureManager().bindTexture(laserBeam2);
+		drawBeam(xOffset, yOffset, zOffset, thickness, activeHand, distance, wr, v, v + distance * 1.5, ticks);
+		// white core
+		RenderSystem.color4f(255 / 255f, 255 / 255f, 255 / 255f, 1.0f);
+		Minecraft.getInstance().getTextureManager().bindTexture(laserBeam);
+		drawBeam(xOffset, yOffset, zOffset, thickness / 2, activeHand, distance, wr, v, v + distance * 1.5, ticks);
 
-        RenderSystem.enableDepthTest();
-        RenderSystem.enableCull();
-        RenderSystem.popMatrix();
-    }
+		RenderSystem.enableDepthTest();
+		RenderSystem.enableCull();
+		RenderSystem.popMatrix();
+	}
 
-    private static float calculateLaserFlickerModifier(long gameTime) {
-        return 0.9f + 0.1f * MathHelper.sin(gameTime * 0.99f) * MathHelper.sin(gameTime * 0.3f) * MathHelper.sin(gameTime * 0.1f);
-    }
+	private static float calculateLaserFlickerModifier(long gameTime) {
+		return 0.9f + 0.1f * MathHelper.sin(gameTime * 0.99f) * MathHelper.sin(gameTime * 0.3f)
+				* MathHelper.sin(gameTime * 0.1f);
+	}
 
-    private static void drawBeam(double xOffset, double yOffset, double zOffset, float thickness, Hand hand, double distance, BufferBuilder wr, double v1, double v2, float ticks) {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
+	private static void drawBeam(double xOffset, double yOffset, double zOffset, float thickness, Hand hand,
+			double distance, BufferBuilder wr, double v1, double v2, float ticks) {
+		ClientPlayerEntity player = Minecraft.getInstance().player;
 
-        float startXOffset = -0.25f;
-        float startYOffset = -.115f;
-        float startZOffset = 0.65f + (1 - player.getFovModifier());
+		float startXOffset = -0.25f;
+		float startYOffset = -.115f;
+		float startZOffset = 0.65f + (1 - player.getFovModifier());
 
-        float f = (MathHelper.lerp(ticks, player.prevRotationPitch, player.rotationPitch) - MathHelper.lerp(ticks, player.prevRenderArmPitch, player.renderArmPitch));
-        float f1 = (MathHelper.lerp(ticks, player.prevRotationYaw, player.rotationYaw) - MathHelper.lerp(ticks, player.prevRenderArmYaw, player.renderArmYaw));
-        startXOffset = startXOffset + (f1 / 1000);
-        startYOffset = startYOffset + (f / 1000);
+		float f = (MathHelper.lerp(ticks, player.prevRotationPitch, player.rotationPitch)
+				- MathHelper.lerp(ticks, player.prevRenderArmPitch, player.renderArmPitch));
+		float f1 = (MathHelper.lerp(ticks, player.prevRotationYaw, player.rotationYaw)
+				- MathHelper.lerp(ticks, player.prevRenderArmYaw, player.renderArmYaw));
+		startXOffset = startXOffset + (f1 / 1000);
+		startYOffset = startYOffset + (f / 1000);
 
-        // Support for hand sides remembering to take into account of Skin options
-        if( Minecraft.getInstance().gameSettings.mainHand != HandSide.RIGHT )
-            hand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
+		// Support for hand sides remembering to take into account of Skin options
+		if (Minecraft.getInstance().gameSettings.mainHand != HandSide.RIGHT)
+			hand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
 
-        wr.begin(GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        if (hand == Hand.MAIN_HAND) {
-            wr.pos(startXOffset, -thickness + startYOffset, startZOffset).tex(1, (float) v1).endVertex();
-            wr.pos(xOffset, -thickness + yOffset, distance + zOffset).tex(1, (float) v2).endVertex();
-            wr.pos(xOffset, thickness + yOffset, distance + zOffset).tex(0, (float) v2).endVertex();
-            wr.pos(startXOffset, thickness + startYOffset, startZOffset).tex(0, (float) v1).endVertex();
-        } else {
-            startYOffset = -.120f;
-            wr.pos(-startXOffset, thickness + startYOffset, startZOffset).tex(0, (float) v1).endVertex();
-            wr.pos(xOffset, thickness + yOffset, distance + zOffset).tex(0, (float) v2).endVertex();
-            wr.pos(xOffset, -thickness + yOffset, distance + zOffset).tex(1, (float) v2).endVertex();
-            wr.pos(-startXOffset, -thickness + startYOffset, startZOffset).tex(1, (float) v1).endVertex();
-        }
-        Tessellator.getInstance().draw();
-    }
+		wr.begin(GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		if (hand == Hand.MAIN_HAND) {
+			wr.pos(startXOffset, -thickness + startYOffset, startZOffset).tex(1, (float) v1).endVertex();
+			wr.pos(xOffset, -thickness + yOffset, distance + zOffset).tex(1, (float) v2).endVertex();
+			wr.pos(xOffset, thickness + yOffset, distance + zOffset).tex(0, (float) v2).endVertex();
+			wr.pos(startXOffset, thickness + startYOffset, startZOffset).tex(0, (float) v1).endVertex();
+		} else {
+			startYOffset = -.120f;
+			wr.pos(-startXOffset, thickness + startYOffset, startZOffset).tex(0, (float) v1).endVertex();
+			wr.pos(xOffset, thickness + yOffset, distance + zOffset).tex(0, (float) v2).endVertex();
+			wr.pos(xOffset, -thickness + yOffset, distance + zOffset).tex(1, (float) v2).endVertex();
+			wr.pos(-startXOffset, -thickness + startYOffset, startZOffset).tex(1, (float) v1).endVertex();
+		}
+		Tessellator.getInstance().draw();
+	}
 
 }

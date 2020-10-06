@@ -10,6 +10,9 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -21,6 +24,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
@@ -43,8 +47,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
@@ -63,13 +70,60 @@ public class EntitySlug extends AnimalEntity {
 		super(type, worldIn);
 	}
 
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
+	}
+
+	int timer = 0;
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (!world.isRemote) {
+			// System.out.println(world.getBlockState(this.getPosition().add(0, 1,
+			// 0)).getBlock());
+			if (world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock() instanceof CropsBlock) {
+				Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
+				if (timer <= 150) {
+					timer++;
+					if (timer % 15 == 0) {
+						this.playSound(SoundEvents.BLOCK_CHORUS_FLOWER_DEATH, 1, 1);
+					}
+				}
+
+				if (timer > 150) {
+					world.setBlockState(this.getPosition().add(0, 1, 0), Blocks.AIR.getDefaultState(), 2);
+					this.playSound(SoundEvents.ENTITY_PLAYER_BURP, 1, 1);
+					timer = 0;
+				}
+			}
+		}
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox() {
+		return super.getBoundingBox();
+	}
+
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
+		this.goalSelector.addGoal(0, new MoveToBlockGoal(this, 1.5f, 10) {
+			@Override
+			protected boolean shouldMoveTo(IWorldReader worldIn, BlockPos pos) {
+				if (worldIn.getBlockState(pos).getBlock() instanceof CropsBlock) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.SUGAR), false));
-		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 0.75D));
+		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.75D));
 
 	}
 

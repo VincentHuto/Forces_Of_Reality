@@ -24,7 +24,7 @@ public class RenderIcoSphere extends TileEntityRenderer<TileEntityIcoSphere> {
 	public static final NonNullLazy<ObjModelHandler> modelHexTorus = NonNullLazy
 			.of(() -> ObjModelHandler.of("hutosmod:models/block/hextorus.obj"));
 
-	static float count = 5.5f;
+	float count = 5.5f;
 
 	public RenderIcoSphere(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -44,8 +44,8 @@ public class RenderIcoSphere extends TileEntityRenderer<TileEntityIcoSphere> {
 				count = 5.5f;
 			}
 		}
-	//	System.out.println(count);
-		//count =9;
+		// System.out.println(count);
+		// count =9;
 		// Changing the tan to sin/cos to other fun stuff can do neat things
 		// float rotationRate = (float) Math.sin(count *4) + (float) Math.tan(count *4);
 		float rotationRate = count * 20;

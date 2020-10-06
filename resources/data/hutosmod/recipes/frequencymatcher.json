@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" BO",
+		" SB",
+		"S  "
+	],
+	"key": {
+		"S": {
+			"item": "hutosmod:null_rod"
+		},
+		"O": {
+			"item": "hutosmod:gem_opal"
+		},
+		"B": {
+			"item": "hutosmod:upgrade_blank"
+		}
+	},
+	"result": {
+		"item": "hutosmod:frequency_matcher",
+		"count": 1
+	}
+}

@@ -115,7 +115,7 @@ public class EntityColin extends AnimalEntity {
 
 	@Override
 	protected float getSoundVolume() {
-		return 0.4F;
+		return 1F;
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class LayerColinDeath extends LayerRenderer<EntityColin, ModelColin> {
 	private static float constant = (float) (Math.sqrt(3.0D) / 2.0D);
 	private static ResourceLocation DRAGON_EXPLODING_TEXTURES = new ResourceLocation(HutosMod.MOD_ID,
 			"textures/entity/colin/modelcolin_exploding.png");
-	protected static ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID, "textures/entity/modelcolin.png");
+	protected static ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID, "textures/entity/colin/modelcolin.png");
 	static Random random = new Random(432L);
 
 	private final ModelColin model = new ModelColin();

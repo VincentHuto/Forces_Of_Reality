@@ -19,7 +19,7 @@ import net.minecraft.world.server.ServerWorld;
 public class ItemSlugBucket extends Item {
 
 	public ItemSlugBucket(Properties properties) {
-		super(properties);	
+		super(properties);
 	}
 
 	@Override
