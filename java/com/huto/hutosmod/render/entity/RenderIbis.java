@@ -22,7 +22,7 @@ public class RenderIbis extends MobRenderer<EntityIbis, ModelIbis> {
 	@Override
 	public ResourceLocation getEntityTexture(EntityIbis entity) {
 		return entity.getIbisTypeName();
-		
+
 	}
 
 	@Override

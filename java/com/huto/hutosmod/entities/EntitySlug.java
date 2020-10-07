@@ -10,7 +10,6 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.AgeableEntity;
@@ -85,7 +84,7 @@ public class EntitySlug extends AnimalEntity {
 			// System.out.println(world.getBlockState(this.getPosition().add(0, 1,
 			// 0)).getBlock());
 			if (world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock() instanceof CropsBlock) {
-				Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
+				//Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
 				if (timer <= 150) {
 					timer++;
 					if (timer % 15 == 0) {

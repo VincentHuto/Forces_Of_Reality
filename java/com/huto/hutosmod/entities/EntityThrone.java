@@ -15,8 +15,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MoveTowardsTargetGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -36,17 +36,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
 
-public class EntityTentacle extends MonsterEntity {
-	private static final DataParameter<Integer> TENTACLE_TYPE = EntityDataManager.createKey(EntityTentacle.class,
+public class EntityThrone extends MonsterEntity {
+	private static final DataParameter<Integer> TENTACLE_TYPE = EntityDataManager.createKey(EntityThrone.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/tentacle/model_tentacle_green.png"));
-		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/tentacle/model_tentacle_yellow.png"));
-		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/tentacle/model_tentacle_grey.png"));
+		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/throne/model_throne_blue.png"));
+		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/throne/model_throne_brown.png"));
+		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/throne/model_throne_green.png"));
 	});
 	public float deathTicks = 1;
 
-	public EntityTentacle(EntityType<? extends EntityTentacle> type, World worldIn) {
+	public EntityThrone(EntityType<? extends EntityThrone> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -71,7 +71,7 @@ public class EntityTentacle extends MonsterEntity {
 	protected float getSoundVolume() {
 		return 0.3f;
 	}
-	
+
 	@Override
 	protected void registerData() {
 		super.registerData();
@@ -96,21 +96,6 @@ public class EntityTentacle extends MonsterEntity {
 
 	}
 
-	/*
-	 * @Override public EntityTentacle func_241840_a(ServerWorld p_241840_1_,
-	 * EntityTentacle p_241840_2_) { EntityTentacle catentity =
-	 * EntityInit.tentacle.get().create(p_241840_1_); if (p_241840_2_ instanceof
-	 * EntityTentacle) { if (this.rand.nextBoolean()) {
-	 * catentity.setTentacleType(this.getTentacleType()); } else {
-	 * catentity.setTentacleType(((EntityTentacle) p_241840_2_).getTentacleType());
-	 * }
-	 * 
-	 * } return catentity;
-	 * 
-	 * }
-	 * 
-	 * on
-	 */
 	@Override
 	public void tick() {
 		super.tick();
@@ -126,23 +111,23 @@ public class EntityTentacle extends MonsterEntity {
 
 		if (this.ticksExisted > 2 && this.ticksExisted < 20) {
 
-			this.world.addParticle(ParticleTypes.ITEM_SLIME, this.getPosX() + (double) f,
+			this.world.addParticle(ParticleTypes.ITEM_SNOWBALL, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		}
 
-		if (this.ticksExisted > 80 && this.ticksExisted < 120) {
-			this.world.addParticle(ParticleTypes.ITEM_SLIME, this.getPosX() + (double) f,
+		if (this.ticksExisted > 180 && this.ticksExisted < 220) {
+			this.world.addParticle(ParticleTypes.ITEM_SNOWBALL, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 		}
-		if (this.ticksExisted == 120) {
+		if (this.ticksExisted == 220) {
 			this.world.addParticle(ParticleTypes.POOF, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			if (!this.world.isRemote) {
 				this.setHealth(0);
 			} else {
 				if (!world.isRemote) {
-					world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_SLIME_DEATH,
+					world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.BLOCK_SNOW_BREAK,
 							SoundCategory.HOSTILE, 3f, 1.2f, false);
 				}
 			}
@@ -181,7 +166,7 @@ public class EntityTentacle extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur)) {
+		if (!(entityIn instanceof EntityThrone || entityIn instanceof EntitySeraphim)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 
@@ -189,29 +174,35 @@ public class EntityTentacle extends MonsterEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 4d, 30));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+
 	}
 
 	public static AttributeModifierMap.MutableAttribute setAttributes() {
-		return LivingEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 16.0D)
+		return LivingEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 30.0D)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0f)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0);
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2f)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 1f);
+	}
+
+	@Override
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundHandler.ENTITY_TENTACLE_AMBIENT;
+		return SoundHandler.STAR_SLUG_STRIKE;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.ENTITY_TENTACLE_DEATH;
+		return SoundHandler.STAR_SLUG_STRIKE;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundHandler.ENTITY_TENTACLE_HURT;
+		return SoundHandler.STAR_SLUG_STRIKE;
 	}
 }

@@ -166,6 +166,11 @@ public class ItemInit {
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
 			() -> new ItemDiscordantBell(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
+
+	// Seraph
+	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -379,13 +384,19 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_slug = ITEMS.register("spawn_egg_slug",
 			() -> new ModSpawnEggItem(EntityInit.slug, 7761777, 4206080,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_seraphim = ITEMS.register("spawn_egg_seraphim",
+			() -> new ModSpawnEggItem(EntityInit.seraphim, 16515071, 16514816,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_throne = ITEMS.register("spawn_egg_throne",
+			() -> new ModSpawnEggItem(EntityInit.throne, 16777215, 12745984,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
 				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
-				ItemInit.spawn_egg_slug);
+				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne);
 	}
 
 	@SuppressWarnings("unchecked")

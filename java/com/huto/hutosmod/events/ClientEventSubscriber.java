@@ -16,11 +16,15 @@ import com.huto.hutosmod.render.entity.RenderDenizenSage;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
 import com.huto.hutosmod.render.entity.RenderHastur;
 import com.huto.hutosmod.render.entity.RenderHasturSpawn;
+import com.huto.hutosmod.render.entity.RenderHolyFlare;
 import com.huto.hutosmod.render.entity.RenderIbis;
+import com.huto.hutosmod.render.entity.RenderJudgement;
 import com.huto.hutosmod.render.entity.RenderPlayerTentacle;
+import com.huto.hutosmod.render.entity.RenderSeraphim;
 import com.huto.hutosmod.render.entity.RenderSlug;
 import com.huto.hutosmod.render.entity.RenderStarStrike;
 import com.huto.hutosmod.render.entity.RenderTentacle;
+import com.huto.hutosmod.render.entity.RenderThrone;
 import com.huto.hutosmod.render.entity.RenderTrackingOrb;
 import com.huto.hutosmod.render.tile.RenderAbsorber;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
@@ -86,6 +90,10 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.corrupt_note.get(), RenderCorruptNote::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.seraphim.get(), RenderSeraphim::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.throne.get(), RenderThrone::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.judgement.get(), RenderJudgement::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_flare.get(), RenderHolyFlare::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
 

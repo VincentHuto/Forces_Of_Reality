@@ -7,11 +7,15 @@ import com.huto.hutosmod.entities.EntityDenizenSage;
 import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityHastur;
 import com.huto.hutosmod.entities.EntityHasturSpawn;
+import com.huto.hutosmod.entities.EntityHolyFlare;
 import com.huto.hutosmod.entities.EntityIbis;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
+import com.huto.hutosmod.entities.EntitySeraphim;
 import com.huto.hutosmod.entities.EntitySlug;
 import com.huto.hutosmod.entities.EntityTentacle;
+import com.huto.hutosmod.entities.EntityThrone;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
+import com.huto.hutosmod.entities.projectiles.EntityJudgement;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 
@@ -38,7 +42,7 @@ public class EntityInit {
 					.build(new ResourceLocation(HutosMod.MOD_ID, "ibis").toString()));
 
 	public static final RegistryObject<EntityType<EntitySlug>> slug = ENTITY_TYPES.register("slug",
-			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.4F, 0.4F)
+			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.4F, 0.1F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "slug").toString()));
 
 	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES
@@ -63,7 +67,7 @@ public class EntityInit {
 							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
 
 	// Hastur
-	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
+	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("s",
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "hastur").toString()));
 
@@ -77,6 +81,13 @@ public class EntityInit {
 							.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
 							.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_spawn").toString()));
 
+	// Seraphim
+	public static final RegistryObject<EntityType<EntitySeraphim>> seraphim = ENTITY_TYPES.register("seraphim",
+			() -> EntityType.Builder.<EntitySeraphim>create(EntitySeraphim::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "seraphim").toString()));
+	public static final RegistryObject<EntityType<EntityThrone>> throne = ENTITY_TYPES.register("throne",
+			() -> EntityType.Builder.<EntityThrone>create(EntityThrone::new, EntityClassification.MONSTER).size(1F, 1F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "throne").toString()));
 	// Projectiles
 	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
 			"player_tentacle",
@@ -100,6 +111,13 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityStarStrike>create(EntityStarStrike::new, EntityClassification.MISC)
 					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "star_strike").toString()));
+	public static final RegistryObject<EntityType<EntityJudgement>> judgement = ENTITY_TYPES.register("judgement",
+			() -> EntityType.Builder.<EntityJudgement>create(EntityJudgement::new, EntityClassification.MISC)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "judgement").toString()));
+	public static final RegistryObject<EntityType<EntityHolyFlare>> holy_flare = ENTITY_TYPES.register("holy_flare",
+			() -> EntityType.Builder.<EntityHolyFlare>create(EntityHolyFlare::new, EntityClassification.MONSTER)
+					.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "holy_flare").toString()));
 
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
@@ -113,6 +131,9 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.player_tentacle.get(), EntityPlayerTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur_spawn.get(), EntityHasturSpawn.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.slug.get(), EntitySlug.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.seraphim.get(), EntitySeraphim.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.throne.get(), EntityThrone.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.holy_flare.get(), EntityHolyFlare.setAttributes().create());
 
 	}
 }

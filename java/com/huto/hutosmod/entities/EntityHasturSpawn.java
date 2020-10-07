@@ -180,7 +180,7 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 				// this.remove();
 				this.setHealth(0);
 			} else {
-				if (world.isRemote) {
+				if (!world.isRemote) {
 					world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_SLIME_DEATH,
 							SoundCategory.HOSTILE, 3f, 1.2f, false);
 				}

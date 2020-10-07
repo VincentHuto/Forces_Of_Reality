@@ -96,11 +96,7 @@ public class EntityIbis extends AnimalEntity {
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
 	}
 
-	/**
-	 * Called frequently so the entity can update its state every tick as required.
-	 * For example, zombies and skeletons use this to react to sunlight and start to
-	 * burn.
-	 */
+	@Override
 	public void livingTick() {
 		super.livingTick();
 		this.oFlap = this.wingRotation;
@@ -118,6 +114,7 @@ public class EntityIbis extends AnimalEntity {
 		}
 
 		this.wingRotation += this.wingRotDelta * 2.0F;
+
 		if (!this.world.isRemote && this.isAlive() && !this.isChild() && !this.isChickenJockey()
 				&& --this.timeUntilNextEgg <= 0) {
 			this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F,
@@ -229,7 +226,6 @@ public class EntityIbis extends AnimalEntity {
 	public void setChickenJockey(boolean jockey) {
 		this.chickenJockey = jockey;
 	}
-
 
 	public int getIbisType() {
 		return this.dataManager.get(IBIS_TYPE);
