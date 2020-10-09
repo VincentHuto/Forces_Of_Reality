@@ -14,7 +14,9 @@ import com.huto.hutosmod.render.entity.RenderCorruptNote;
 import com.huto.hutosmod.render.entity.RenderDenizen;
 import com.huto.hutosmod.render.entity.RenderDenizenSage;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
+import com.huto.hutosmod.render.entity.RenderEldritchGrip;
 import com.huto.hutosmod.render.entity.RenderHastur;
+import com.huto.hutosmod.render.entity.RenderHasturClone;
 import com.huto.hutosmod.render.entity.RenderHasturSpawn;
 import com.huto.hutosmod.render.entity.RenderHolyFlare;
 import com.huto.hutosmod.render.entity.RenderIbis;
@@ -94,6 +96,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.throne.get(), RenderThrone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.judgement.get(), RenderJudgement::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_flare.get(), RenderHolyFlare::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.eldritch_grip.get(), RenderEldritchGrip::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
 

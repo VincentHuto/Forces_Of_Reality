@@ -143,7 +143,7 @@ public class EntityThrone extends MonsterEntity {
 		deathTicks -= 0.05;
 		if (this.deathTicks <= 0.1) {
 			if (world.isRemote) {
-				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK,
+				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.BLOCK_NETHER_GOLD_ORE_BREAK,
 						SoundCategory.HOSTILE, 3f, 0.2f, false);
 				this.world.addParticle(ParticleTypes.POOF, this.getPosX() + (double) g,
 						this.getPosY() + 2.0D + (double) g1, this.getPosZ() + (double) g2, 0.0D, 0.0D, 0.0D);

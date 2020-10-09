@@ -58,7 +58,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	public void tick() {
 
 		if (!world.isRemote) {
-			System.out.println(this.getMaxVibes());
 			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 		}
 
@@ -216,7 +215,8 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 			return transferRate;
 		}
 	}
-	//Size
+
+	// Size
 	public float checkTankSize() {
 		if (tankLevel == 0) {
 			return this.maxVibes = 10;

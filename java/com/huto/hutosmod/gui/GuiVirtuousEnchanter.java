@@ -155,6 +155,7 @@ public class GuiVirtuousEnchanter extends ContainerScreen<ContainerVirtuousEncha
 				(float) this.playerInventoryTitleY, 7804791);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX,
 			int mouseY) {

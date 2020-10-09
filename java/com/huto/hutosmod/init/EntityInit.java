@@ -5,7 +5,9 @@ import com.huto.hutosmod.entities.EntityColin;
 import com.huto.hutosmod.entities.EntityDenizen;
 import com.huto.hutosmod.entities.EntityDenizenSage;
 import com.huto.hutosmod.entities.EntityDreamWalker;
+import com.huto.hutosmod.entities.EntityEldritchGrip;
 import com.huto.hutosmod.entities.EntityHastur;
+import com.huto.hutosmod.entities.EntityHasturClone;
 import com.huto.hutosmod.entities.EntityHasturSpawn;
 import com.huto.hutosmod.entities.EntityHolyFlare;
 import com.huto.hutosmod.entities.EntityIbis;
@@ -67,7 +69,7 @@ public class EntityInit {
 							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
 
 	// Hastur
-	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("s",
+	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "hastur").toString()));
 
@@ -81,6 +83,11 @@ public class EntityInit {
 							.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
 							.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_spawn").toString()));
 
+	public static final RegistryObject<EntityType<EntityHasturClone>> hastur_clone = ENTITY_TYPES
+			.register("hastur_clone",
+					() -> EntityType.Builder
+							.<EntityHasturClone>create(EntityHasturClone::new, EntityClassification.MONSTER)
+							.size(1F, 1F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_clone").toString()));
 	// Seraphim
 	public static final RegistryObject<EntityType<EntitySeraphim>> seraphim = ENTITY_TYPES.register("seraphim",
 			() -> EntityType.Builder.<EntitySeraphim>create(EntitySeraphim::new, EntityClassification.MONSTER)
@@ -100,6 +107,12 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityTrackingOrb>create(EntityTrackingOrb::new, EntityClassification.MISC)
 					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "tracking_orb").toString()));
+
+	public static final RegistryObject<EntityType<EntityEldritchGrip>> eldritch_grip = ENTITY_TYPES
+			.register("eldritch_grip",
+					() -> EntityType.Builder
+							.<EntityEldritchGrip>create(EntityEldritchGrip::new, EntityClassification.MONSTER)
+							.size(0.3f, 0.3F).build(new ResourceLocation(HutosMod.MOD_ID, "eldritch_grip").toString()));
 
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",
@@ -134,6 +147,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.seraphim.get(), EntitySeraphim.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.throne.get(), EntityThrone.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.holy_flare.get(), EntityHolyFlare.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.eldritch_grip.get(), EntityEldritchGrip.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.hastur_clone.get(), EntityHasturClone.setAttributes().create());
 
 	}
 }

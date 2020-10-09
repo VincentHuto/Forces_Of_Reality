@@ -26,7 +26,6 @@ public class RenderHastur extends MobRenderer<EntityHastur, ModelHastur> {
 		super(renderManagerIn, new ModelHastur(), 0.5f);
 		this.addLayer(new LayerHasturAura(this));
 		this.addLayer(new LayerHasturDeath(this));
-
 	}
 
 	@Override

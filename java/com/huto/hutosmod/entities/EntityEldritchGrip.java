@@ -2,6 +2,8 @@ package com.huto.hutosmod.entities;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.sounds.SoundHandler;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -19,16 +21,17 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
-public class EntityHolyFlare extends MonsterEntity {
+public class EntityEldritchGrip extends MonsterEntity {
 	public float deathTicks = 1;
 
-	public EntityHolyFlare(EntityType<? extends EntityHolyFlare> type, World worldIn) {
+	public EntityEldritchGrip(EntityType<? extends EntityEldritchGrip> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -73,6 +76,11 @@ public class EntityHolyFlare extends MonsterEntity {
 	}
 
 	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		return super.getRenderBoundingBox().grow(10);
+	}
+
+	@Override
 	public boolean canBeHitWithPotion() {
 		return false;
 	}
@@ -103,23 +111,25 @@ public class EntityHolyFlare extends MonsterEntity {
 		float f2 = (this.rand.nextFloat() - 0.5F) * 1.5F;
 		if (this.ticksExisted > 0) {
 			for (int j = 0; j < 10; j++) {
-				this.world.addParticle(ParticleTypes.CLOUD, this.getPosX() + (double) f * 1.6,
+				this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + (double) f * 1.6,
 						this.getPosY() + 2.1D + (double) f1 * 1.6, this.getPosZ() + (double) f2 * 1.6, 0.0D, 0.0D,
 						0.0D);
 			}
 		}
 		if (this.ticksExisted > 15) {
-			for (int i = 0; i < 6; i++) {
-				this.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getPosX() + (double) f,
+			for (int i = 0; i < 2; i++) {
+				this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + (double) f * 0.5, this.getPosY(),
+						this.getPosZ() + (double) f2 * 0.5, 0.0D, 0.0D, 0.0D);
+				this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f,
 						this.getPosY() + (0.0D + i) + (double) f3, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
-				this.world.addParticle(ParticleTypes.ENCHANT, this.getPosX() + (double) f,
+				this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() + (double) f,
 						this.getPosY() + (0.0D + i) + (double) f3, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 		if (this.ticksExisted == 200) {
-			this.world.addParticle(ParticleTypes.POOF, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
-					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			if (!this.world.isRemote) {
 				this.setHealth(0);
 			} else {
@@ -142,7 +152,7 @@ public class EntityHolyFlare extends MonsterEntity {
 			if (world.isRemote) {
 				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE,
 						SoundCategory.HOSTILE, 3f, 0.2f, false);
-				this.world.addParticle(ParticleTypes.POOF, this.getPosX() + (double) g,
+				this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + (double) g,
 						this.getPosY() + 2.0D + (double) g1, this.getPosZ() + (double) g2, 0.0D, 0.0D, 0.0D);
 			}
 		}
@@ -157,16 +167,14 @@ public class EntityHolyFlare extends MonsterEntity {
 	public void onCollideWithPlayer(PlayerEntity entityIn) {
 		super.onCollideWithPlayer(entityIn);
 		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.5f);
-		entityIn.setMotion(0, 0.5f, 0);
+		entityIn.setMotion(0, -0.5f, 0);
 	}
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityHolyFlare || entityIn instanceof EntitySeraphim
-				|| entityIn instanceof EntityThrone)) {
-			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
-			((LivingEntity) entityIn).addPotionEffect(new EffectInstance(Effects.GLOWING, 200, 2));
+		if (!(entityIn instanceof EntityEldritchGrip || entityIn instanceof EntityHastur)) {
+			((LivingEntity) entityIn).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 2));
 
 		}
 
@@ -183,5 +191,20 @@ public class EntityHolyFlare extends MonsterEntity {
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0f)
 				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1f);
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundHandler.ENTITY_TENTACLE_AMBIENT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundHandler.ENTITY_TENTACLE_DEATH;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundHandler.ENTITY_TENTACLE_HURT;
 	}
 }

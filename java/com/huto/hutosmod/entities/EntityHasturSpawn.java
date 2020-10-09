@@ -99,8 +99,6 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 	protected BodyController createBodyController() {
 		return new EntityHasturSpawn.BodyHelperController(this);
 	}
-	
-	
 
 	@Override
 	protected void registerGoals() {
@@ -694,7 +692,7 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 					livingentity.getPosZ());
 			if (EntityHasturSpawn.this.getBoundingBox().grow((double) 0.2F).intersects(livingentity.getBoundingBox())) {
 				// EntityHasturSpawn.this.attackEntityAsMob(livingentity);
-				livingentity.attackEntityFrom(DamageSource.CACTUS, 1.5f);
+				livingentity.attackEntityFrom(DamageSource.causeMobDamage(EntityHasturSpawn.this), 1.5f);
 
 				EntityHasturSpawn.this.attackPhase = EntityHasturSpawn.AttackPhase.CIRCLE;
 				if (!EntityHasturSpawn.this.isSilent()) {

@@ -61,6 +61,7 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 		this.oldMouseY = (float) mouseY;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX,
 			int mouseY) { // drawGuiContainerBackgroundLayer

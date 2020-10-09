@@ -52,7 +52,7 @@ public class RenderMiningLaser {
 		return -0.02f;
 	}
 
-	@SuppressWarnings({ "unused" })
+	@SuppressWarnings({ "unused", "deprecation" })
 	private static void drawLasers(RenderWorldLastEvent event, Vector3d from, RayTraceResult trace, double xOffset,
 			double yOffset, double zOffset, float r, float g, float b, float thickness, PlayerEntity player,
 			float ticks, float speedModifier) {

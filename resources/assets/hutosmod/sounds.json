@@ -79,7 +79,6 @@
 			}
 		]
 	},
-	
 	"entity.denizen.ambient": {
 		"category": "entity",
 		"subtitle": "entity.denizen.ambient",
@@ -110,7 +109,6 @@
 			}
 		]
 	},
-	
 	"entity.tentacle.ambient": {
 		"category": "entity",
 		"subtitle": "entity.tentacle.ambient",
@@ -167,6 +165,76 @@
 		"sounds": [
 			{
 				"name": "hutosmod:item/star_slug/storm",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.ambient": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.hurt": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.death": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/death",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.music": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/music",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.hit": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.hit",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/hit",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.flare": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.flare",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/flare",
+				"stream": true
+			}
+		]
+	},
+	"entity.seraphim.thronesummon": {
+		"category": "entity",
+		"subtitle": "entity.seraphim.thronesummon",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/seraphim/thronesummon",
 				"stream": true
 			}
 		]

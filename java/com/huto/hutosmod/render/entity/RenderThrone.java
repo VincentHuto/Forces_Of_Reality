@@ -46,12 +46,12 @@ public class RenderThrone extends MobRenderer<EntityThrone, ModelThrone> {
 			f = 1.1f;
 		}
 		if (entitylivingbaseIn.deathTicks == 1) {
-			matrixStackIn.scale(f, f, f);
+			matrixStackIn.scale(f, 1, f);
 		}
 
 		if (entitylivingbaseIn.deathTicks > 0) {
 			float d = entitylivingbaseIn.deathTicks;
-			matrixStackIn.scale(d, d, d);
+			matrixStackIn.scale(d, 1, d);
 
 		}
 	}

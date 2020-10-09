@@ -30,6 +30,14 @@ public class SoundHandler {
 	public static final SoundEvent STAR_SLUG_STRIKE = makeSoundEvent("item.star_slug.strike");
 	public static final SoundEvent STAR_SLUG_STORM = makeSoundEvent("item.star_slug.storm");
 
+	public static final SoundEvent ENTITY_SERAPHIM_AMBIENT = makeSoundEvent("entity.seraphim.ambient");
+	public static final SoundEvent ENTITY_SERAPHIM_HURT = makeSoundEvent("entity.seraphim.hurt");
+	public static final SoundEvent ENTITY_SERAPHIM_DEATH = makeSoundEvent("entity.seraphim.death");
+	public static final SoundEvent ENTITY_SERAPHIM_MUSIC = makeSoundEvent("entity.seraphim.music");
+	public static final SoundEvent ENTITY_SERAPHIM_HIT = makeSoundEvent("entity.seraphim.hit");
+	public static final SoundEvent ENTITY_SERAPHIM_FLARE = makeSoundEvent("entity.seraphim.flare");
+	public static final SoundEvent ENTITY_SERAPHIM_THRONE= makeSoundEvent("entity.seraphim.thronesummon");
+
 	private static SoundEvent makeSoundEvent(String name) {
 		ResourceLocation loc = new ResourceLocation(HutosMod.MOD_ID, name);
 		return new SoundEvent(loc).setRegistryName(loc);
@@ -52,13 +60,22 @@ public class SoundHandler {
 		r.register(ENTITY_TENTACLE_HURT);
 		r.register(ENTITY_TENTACLE_DEATH);
 		r.register(ENTITY_TENTACLE_SUMMON);
-
+ 
 		r.register(ENTITY_DENIZEN_AMBIENT);
 		r.register(ENTITY_DENIZEN_HURT);
 		r.register(ENTITY_DENIZEN_DEATH);
-		
+
 		r.register(STAR_SLUG_STRIKE);
 		r.register(STAR_SLUG_STORM);
+
+		r.register(ENTITY_SERAPHIM_AMBIENT);
+		r.register(ENTITY_SERAPHIM_HURT);
+		r.register(ENTITY_SERAPHIM_DEATH);
+		r.register(ENTITY_SERAPHIM_MUSIC);
+		r.register(ENTITY_SERAPHIM_HIT);
+		r.register(ENTITY_SERAPHIM_FLARE);
+		r.register(ENTITY_SERAPHIM_THRONE);
+
 	}
 
 }

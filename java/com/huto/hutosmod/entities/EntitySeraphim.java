@@ -133,25 +133,27 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 		// Attacks
 		int attackRoll = ticksExisted + rand.nextInt(5);
 
-		/*
-		 * if (this.ticksExisted % 30 - rand.nextInt(10) > 20) { pullPlayer( new
-		 * AxisAlignedBB(this.getPositionVec().add(-15, -15, -15),
-		 * this.getPositionVec().add(15, 15, 15)), this.getPositionVec().getX() + 0.5,
-		 * this.getPositionVec().getY() + 0.5, this.getPositionVec().getZ() + 0.5); }
-		 */
+		if (this.ticksExisted % 10 - rand.nextInt(10) > 20) {
+			pullPlayer(
+					new AxisAlignedBB(this.getPositionVec().add(-15, -15, -15), this.getPositionVec().add(15, 15, 15)),
+					this.getPositionVec().getX() + 0.5, this.getPositionVec().getY() + 0.5,
+					this.getPositionVec().getZ() + 0.5);
+		}
 
 		if (attackRoll % 100 * diffMult == 0) {
 			this.spawnMissile();
 		} else if (attackRoll % 110 * diffMult == 0) {
 			this.spawnMissileVortex(rand.nextInt(15));
 		} else if (attackRoll % 130 * diffMult == 0) {
-			this.summonThroneAid(rand.nextInt(5) + 2);
+			this.summonThroneAid(rand.nextInt(2) + 2);
 		} else if (attackRoll % 160 * diffMult == 0) {
 			this.summonJudgement(rand.nextInt(3) + 3);
+
 		}
 		if (!this.isOnGround()) {
 			if (attackRoll % 100 * diffMult == 0) {
 				this.summonHolyFlare(rand.nextInt(1) + 3);
+				playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 			}
 		}
 
@@ -234,24 +236,24 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundHandler.ENTITY_HASTUR_AMBIENT;
+		return SoundHandler.ENTITY_SERAPHIM_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundHandler.ENTITY_HASTUR_HURT;
+		return SoundHandler.ENTITY_SERAPHIM_HURT;
 
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.ENTITY_HASTUR_DEATH;
+		return SoundHandler.ENTITY_SERAPHIM_DEATH;
 
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_HOGLIN_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -345,6 +347,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
 					this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
+				playSound(SoundHandler.ENTITY_SERAPHIM_THRONE, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 				world.addEntity(tentArray[i]);
 
 			}
@@ -373,6 +376,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 				this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1), this.getPosZ() + (Math.random() - 0.5 * 0.1));
 		if (missile.findTarget()) {
 			playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+
 			world.addEntity(missile);
 		}
 	}
@@ -388,6 +392,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 					this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
 				playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+
 				world.addEntity(missArray[i]);
 
 			}
@@ -483,21 +488,21 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntitySeraphim hastur;
+		private final EntitySeraphim seraph;
 
-		public HasturMusic(EntitySeraphim hastur) {
-			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
+		public HasturMusic(EntitySeraphim seraph) {
+			super(SoundHandler.ENTITY_SERAPHIM_MUSIC, SoundCategory.RECORDS);
 
-			this.hastur = hastur;
-			this.x = hastur.getSource().getX();
-			this.y = hastur.getSource().getY();
-			this.z = hastur.getSource().getZ();
+			this.seraph = seraph;
+			this.x = seraph.getSource().getX();
+			this.y = seraph.getSource().getY();
+			this.z = seraph.getSource().getZ();
 			this.repeat = true; // TODO restore once LWJGL3/vanilla bug fixed?
 		}
 
 		@Override
 		public void tick() {
-			if (!hastur.isAlive()) {
+			if (!seraph.isAlive()) {
 				this.finishPlaying();
 			}
 		}

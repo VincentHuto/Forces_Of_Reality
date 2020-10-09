@@ -86,6 +86,13 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 			} else {
 				this.summonSpawnAid(rand.nextInt(5));
 			}
+		} else if (attackRoll % 130 * diffMult == 0) {
+			this.summonClones(rand.nextInt(2));
+		}
+		if (this.isOnGround()) {
+			if (attackRoll % 100 * diffMult == 0) {
+				this.summonEldritchGrip(rand.nextInt(1) + 3);
+			}
 		}
 
 		// Removed Starstrikes to use on the seraphim, still has the one missle spawn
@@ -97,11 +104,6 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		this.world.addParticle(ParticleTypes.CRIMSON_SPORE, this.getPosX() + (double) f,
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-	}
-
-	@Override
-	public ItemStack getHeldItemOffhand() {
-		return new ItemStack(ItemInit.destruction_orb.get(), 1);
 	}
 
 	@Override
@@ -250,6 +252,38 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
 					this.getPosZ() + 0.5 + zMod);
+			if (!world.isRemote) {
+				world.addEntity(tentArray[i]);
+
+			}
+		}
+	}
+
+	public void summonClones(int numTent) {
+		EntityHasturClone[] tentArray = new EntityHasturClone[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityHasturClone(EntityInit.hastur_clone.get(), world);
+			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+					this.getPosZ() + 0.5 + zMod);
+			if (!world.isRemote) {
+				playSound(SoundHandler.ENTITY_HASTUR_HURT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+				world.addEntity(tentArray[i]);
+
+			}
+		}
+	}
+
+	public void summonEldritchGrip(int numTent) {
+		EntityEldritchGrip[] tentArray = new EntityEldritchGrip[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityEldritchGrip(EntityInit.eldritch_grip.get(), world);
+			float xMod = (this.rand.nextFloat() - 0.5F) * 16.0F;
+			// float yMod = (this.rand.nextFloat() - 0.5F) * 2.0F;
+			float zMod = (this.rand.nextFloat() - 0.5F) * 16.0F;
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 0.1, this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
 				world.addEntity(tentArray[i]);
 

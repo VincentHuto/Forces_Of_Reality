@@ -11,6 +11,7 @@ import net.minecraft.util.registry.Registry;
 
 public class GenericParticleData extends ParticleType<GenericParticleData> implements IParticleData {
 
+	@SuppressWarnings("deprecation")
 	private static final IParticleData.IDeserializer<GenericParticleData> DESERIALIZER = new IParticleData.IDeserializer<GenericParticleData>() {
 
 		public GenericParticleData deserialize(ParticleType<GenericParticleData> particleTypeIn, StringReader reader)

@@ -19,8 +19,6 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 	private final ModelRenderer Body;
 	private final ModelRenderer Belt;
 	private final ModelRenderer SideTails;
-	private final ModelRenderer r;
-	private final ModelRenderer l;
 	private final ModelRenderer Bib;
 	private final ModelRenderer Tail;
 	private final ModelRenderer f1;
@@ -34,6 +32,8 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 	private final ModelRenderer f8;
 	private final ModelRenderer f9;
 	private final ModelRenderer f10;
+	private final ModelRenderer r;
+	private final ModelRenderer l;
 	private final ModelRenderer RightArm;
 	private final ModelRenderer RightFore;
 	private final ModelRenderer LeftArm;
@@ -50,6 +50,12 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 	private final ModelRenderer RightWing2;
 	private final ModelRenderer Limb5;
 	private final ModelRenderer Limb6;
+	private final ModelRenderer LeftWing3;
+	private final ModelRenderer Limb9;
+	private final ModelRenderer Limb10;
+	private final ModelRenderer RightWing3;
+	private final ModelRenderer Limb11;
+	private final ModelRenderer Limb12;
 
 	public ModelSeraphim() {
 		textureWidth = 64;
@@ -280,6 +286,44 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 		RightWing2.addChild(Limb6);
 		setRotationAngle(Limb6, 0.0F, 0.0F, -1.6581F);
 
+		LeftWing3 = new ModelRenderer(this);
+		LeftWing3.setRotationPoint(4.0F, 2.0F, 1.5F);
+		setRotationAngle(LeftWing3, 0.2181F, 0.6982F, 2.8798F);
+		LeftWing3.setTextureOffset(41, 53).addBox(-0.2337F, -0.5531F, -0.4026F, 1.0F, 9.0F, 1.0F, 0.0F, false);
+		LeftWing3.setTextureOffset(0, 15).addBox(-8.2337F, -2.5531F, 0.5974F, 9.0F, 11.0F, 0.0F, 0.0F, false);
+
+		Limb9 = new ModelRenderer(this);
+		Limb9.setRotationPoint(0.0F, 3.0F, 0.0F);
+		LeftWing3.addChild(Limb9);
+		setRotationAngle(Limb9, 0.0F, 0.0F, -1.6581F);
+
+		Limb10 = new ModelRenderer(this);
+		Limb10.setRotationPoint(-3.0F, 12.5F, -0.5F);
+		LeftWing3.addChild(Limb10);
+		setRotationAngle(Limb10, 0.0F, 0.0F, 0.5672F);
+		Limb10.setTextureOffset(37, 49).addBox(-0.0012F, -5.442F, 0.0974F, 1.0F, 10.0F, 1.0F, 0.0F, false);
+		Limb10.setTextureOffset(37, 33).addBox(-6.0012F, 4.558F, 0.0974F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+		Limb10.setTextureOffset(18, 0).addBox(-7.0012F, -5.442F, 1.1F, 8.0F, 10.0F, 0.0F, 0.0F, false);
+
+		RightWing3 = new ModelRenderer(this);
+		RightWing3.setRotationPoint(-4.0F, 2.0F, 1.5F);
+		setRotationAngle(RightWing3, 0.2181F, -0.6981F, -2.8798F);
+		RightWing3.setTextureOffset(52, 0).addBox(-0.7663F, -0.5531F, -0.4026F, 1.0F, 9.0F, 1.0F, 0.0F, false);
+		RightWing3.setTextureOffset(18, 18).addBox(-0.7663F, -2.5531F, 0.5974F, 8.0F, 11.0F, 0.0F, 0.0F, false);
+
+		Limb11 = new ModelRenderer(this);
+		Limb11.setRotationPoint(4.1684F, 12.096F, 0.5702F);
+		RightWing3.addChild(Limb11);
+		setRotationAngle(Limb11, 0.0F, 0.0F, -0.5672F);
+		Limb11.setTextureOffset(33, 44).addBox(-2.2013F, -5.729F, -0.9728F, 1.0F, 10.0F, 1.0F, 0.0F, false);
+		Limb11.setTextureOffset(37, 27).addBox(-1.2013F, 4.271F, -0.9728F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+		Limb11.setTextureOffset(0, 26).addBox(-2.2013F, -5.729F, 0.0298F, 8.0F, 10.0F, 0.0F, 0.0F, false);
+
+		Limb12 = new ModelRenderer(this);
+		Limb12.setRotationPoint(8.0F, 3.0F, 0.0F);
+		RightWing3.addChild(Limb12);
+		setRotationAngle(Limb12, 0.0F, 0.0F, -1.6581F);
+
 	}
 
 	@Override
@@ -313,7 +357,10 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 		this.RightWing2.rotateAngleZ = f3 * 0.5f;
 		this.LeftWing2.rotateAngleZ = -f3 * 0.5f;
 
-		if (entity.isVulnerable()) {
+		this.RightWing3.rotateAngleZ = f3 * 0.2f;
+		this.LeftWing3.rotateAngleZ = -f3 * 0.2f;
+
+		if (entity.isArmored()) {
 			float a = MathHelper.lerp(0, entity.oFlap * 1.4f, entity.wingRotation);
 			float a1 = MathHelper.lerp(0, entity.oFlapSpeed * 1.4f, entity.destPos);
 			float a3 = (MathHelper.sin(a) + 1.6F) * a1;
@@ -338,6 +385,10 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 		LeftWing2.render(matrixStack, buffer, packedLight, packedOverlay);
 		RightWing.render(matrixStack, buffer, packedLight, packedOverlay);
 		RightWing2.render(matrixStack, buffer, packedLight, packedOverlay);
+
+		LeftWing3.render(matrixStack, buffer, packedLight, packedOverlay);
+		RightWing3.render(matrixStack, buffer, packedLight, packedOverlay);
+
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
