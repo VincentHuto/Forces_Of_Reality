@@ -1,6 +1,7 @@
 package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.objects.blocks.BlockAscendentAltar;
 import com.huto.hutosmod.objects.blocks.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
@@ -112,6 +113,9 @@ public class BlockInit {
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",
 			() -> new BlockSlimeRepelent(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> ascendent_altar = BLOCKS.register("ascendent_altar",
+			() -> new BlockAscendentAltar(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",

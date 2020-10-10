@@ -2,6 +2,7 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
@@ -88,4 +89,8 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntitySlimeRepelent>> slime_repelent = TILES
 			.register("slime_repelent", () -> TileEntityType.Builder
 					.create(TileEntitySlimeRepelent::new, BlockInit.slime_repelent.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<TileEntityAscendentAltar>> ascendent_altar = TILES
+			.register("ascendent_altar", () -> TileEntityType.Builder
+					.create(TileEntityAscendentAltar::new, BlockInit.ascendent_altar.get()).build(null));
 }
