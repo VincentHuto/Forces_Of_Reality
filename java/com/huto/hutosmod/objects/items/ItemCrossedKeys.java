@@ -18,9 +18,9 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemYellowSign extends ItemContractRune implements IRune {
+public class ItemCrossedKeys extends ItemContractRune implements IRune {
 
-	public ItemYellowSign(Properties properties) {
+	public ItemCrossedKeys(Properties properties) {
 		super(properties);
 		properties.rarity(Rarity.UNCOMMON);
 	}
@@ -42,7 +42,7 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 	@Override
 	public void onEquipped(LivingEntity player) {
 		super.onEquipped(player);
-		player.playSound(SoundHandler.ENTITY_HASTUR_HURT, 1F, 1f);
+		player.playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 1F, 1.9f);
 		if (player instanceof PlayerEntity) {
 			if (!player.getEntityWorld().isRemote) {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
@@ -50,12 +50,11 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 				if (coven != null) {
 					System.out.println(coven.getCovenant());
 
-					if (!(coven.getCovenant() == EnumCovenants.HASTUR)) {
-						coven.setCovenant(EnumCovenants.HASTUR);
+					if (!(coven.getCovenant() == EnumCovenants.ASCENDENT)) {
+						coven.setCovenant(EnumCovenants.ASCENDENT);
 						PlayerEntity playerEnt = (PlayerEntity) player;
-						playerEnt.sendStatusMessage(
-								new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Accepts your Fealty"),
-								false);
+						playerEnt.sendStatusMessage(new StringTextComponent(
+								TextFormatting.AQUA + "You hear the clang of bells in the distance"), false);
 
 					}
 				}
@@ -67,7 +66,7 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 	@Override
 	public void onUnequipped(LivingEntity player) {
 		super.onUnequipped(player);
-		player.playSound(SoundHandler.ENTITY_HASTUR_AMBIENT, 1F, 1f);
+		player.playSound(SoundHandler.ENTITY_SERAPHIM_DEATH, 1F, 1f);
 		if (player instanceof PlayerEntity) {
 			if (!player.getEntityWorld().isRemote) {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
@@ -78,7 +77,7 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 					coven.setCovenant(EnumCovenants.NONE);
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
-							new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Renounces your Fealty"),
+							new StringTextComponent(TextFormatting.AQUA + "You hear an angelic screech in your minds"),
 							false);
 				}
 			}

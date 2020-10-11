@@ -34,7 +34,7 @@ public class ItemMilkweedRune extends ItemContractRune implements IRune {
 	}
 
 	@Override
-	public RuneType getBaubleType() {
+	public RuneType getRuneType() {
 		return RuneType.CONTRACT;
 	}
 

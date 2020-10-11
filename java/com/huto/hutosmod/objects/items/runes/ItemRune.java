@@ -66,7 +66,7 @@ public class ItemRune extends Item implements IRune{
 	}
 
 	@Override
-	public RuneType getBaubleType() {
+	public RuneType getRuneType() {
 		return RuneType.RUNE;
 	}
 

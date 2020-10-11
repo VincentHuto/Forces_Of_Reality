@@ -291,7 +291,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 
 		if (!this.world.isRemote && deathTicks % (15 + rand.nextInt(4)) == 0) {
 			ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(),
-					new ItemStack(ItemInit.unsettling_fabric.get()));
+					new ItemStack(ItemInit.seraph_feather.get()));
 			world.addEntity(outputItem);
 		}
 
@@ -421,7 +421,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 	@Override
 	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
 		super.dropSpecialItems(source, looting, recentlyHitIn);
-		ItemEntity itementity = this.entityDropItem(ItemInit.yellow_sign.get());
+		ItemEntity itementity = this.entityDropItem(ItemInit.crossed_keys.get());
 		if (itementity != null) {
 			itementity.setNoDespawn();
 		}

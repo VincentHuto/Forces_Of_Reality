@@ -17,9 +17,9 @@ public class RingItemTooltip {
 	@SubscribeEvent
 	public static void tooltipEvent(ItemTooltipEvent event) {
 		if (!event.getItemStack().isEmpty()) {
-			event.getItemStack().getCapability(RunesCapabilities.ITEM_RUNE).ifPresent(bauble -> {
-				RuneType bt = bauble.getBaubleType();
-				TranslationTextComponent text = new TranslationTextComponent("name." + bt);
+			event.getItemStack().getCapability(RunesCapabilities.ITEM_RUNE).ifPresent(rune -> {
+				RuneType rt = rune.getRuneType();
+				TranslationTextComponent text = new TranslationTextComponent("name." + rt);
 				text.getStyle().applyFormatting(TextFormatting.GOLD); // setColor(TextFormatting)
 				event.getToolTip().add(text);
 			});

@@ -65,11 +65,6 @@ public class PlayerExpandedContainer extends Container {
 		this.addSlot(new SlotRune(player, runes, 2, 78 + 2 * 18, 8));
 		this.addSlot(new SlotRune(player, runes, 3, 78 + 3 * 18, 8));
 
-
-	/*	this.addSlot(new SlotRune(player, runes, 4, 96, 8));
-		this.addSlot(new SlotRune(player, runes, 5, 96, 8 + 1 * 18));
-		this.addSlot(new SlotRune(player, runes, 6, 96, 8 + 2 * 18));*/
-
 		for (int l = 0; l < 3; ++l) {
 			for (int j1 = 0; j1 < 9; ++j1) {
 				this.addSlot(new Slot(playerInventory, j1 + (l + 1) * 9, 8 + j1 * 18, 84 + l * 18));
@@ -124,24 +119,24 @@ public class PlayerExpandedContainer extends Container {
 			int slotShift = runes.getSlots();
 
 			if (index == 0) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift-3, 45 + slotShift-3, true)) {
+				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, true)) {
 					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (index >= 1 && index < 5) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift-3, 45 + slotShift-3, false)) {
+				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (index >= 5 && index < 9) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift-3, 45 + slotShift-3, false)) {
+				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
 					return ItemStack.EMPTY;
 				}
 			}
 
-			// baubles -> inv
+			// runes -> inv
 			else if (index >= 9 && index < 9 + slotShift) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift-3, 45 + slotShift-3, false)) {
+				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
 					return ItemStack.EMPTY;
 				}
 			}
@@ -163,27 +158,27 @@ public class PlayerExpandedContainer extends Container {
 					return ItemStack.EMPTY;
 				}
 			}
-			// inv -> bauble
+			// inv -> rune
 			else if (itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null).isPresent()) {
-				IRune bauble = itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
+				IRune rune = itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
 						.orElseThrow(NullPointerException::new);
-				for (int baubleSlot : bauble.getBaubleType().getValidSlots()) {
-					if (bauble.canEquip(this.player) && !(this.inventorySlots.get(baubleSlot + 9)).getHasStack()
-							&& !this.mergeItemStack(itemstack1, baubleSlot + 9, baubleSlot + 10, false)) {
+				for (int runeSlot : rune.getRuneType().getValidSlots()) {
+					if (rune.canEquip(this.player) && !(this.inventorySlots.get(runeSlot + 9)).getHasStack()
+							&& !this.mergeItemStack(itemstack1, runeSlot + 9, runeSlot + 10, false)) {
 						return ItemStack.EMPTY;
 					}
 					if (itemstack1.getCount() == 0)
 						break;
 				}
 			} else if (index >= 9 + slotShift && index < 36 + slotShift) {
-				if (!this.mergeItemStack(itemstack1, 36 + slotShift-3, 45 + slotShift-3, false)) {
+				if (!this.mergeItemStack(itemstack1, 36 + slotShift - 3, 45 + slotShift - 3, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (index >= 36 + slotShift-3 && index < 45 + slotShift-3) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift-3, 36 + slotShift-3, false)) {
+			} else if (index >= 36 + slotShift - 3 && index < 45 + slotShift - 3) {
+				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 36 + slotShift - 3, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (!this.mergeItemStack(itemstack1, 9 + slotShift-3, 45 + slotShift-3, false)) {
+			} else if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
 				return ItemStack.EMPTY;
 			}
 

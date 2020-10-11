@@ -5,6 +5,7 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemCrossedKeys;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDestructOrb;
 import com.huto.hutosmod.objects.items.ItemDestructOrbContained;
@@ -32,6 +33,7 @@ import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.ItemWandGainVibes;
+import com.huto.hutosmod.objects.items.ItemWatchfulPendant;
 import com.huto.hutosmod.objects.items.ItemYellowSign;
 import com.huto.hutosmod.objects.items.ItemYellowTome;
 import com.huto.hutosmod.objects.items.ModSpawnEggItem;
@@ -155,22 +157,31 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Hastur
-	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign", () -> new ItemYellowSign(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> yellow_tome = ITEMS.register("yellow_tome", () -> new ItemYellowTome(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+
+	// Seraph
+	public static final RegistryObject<Item> crossed_keys = ITEMS.register("crossed_keys",
+			() -> new ItemCrossedKeys(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
+	// Eldritch
+	public static final RegistryObject<Item> everwatchful_pendant = ITEMS.register("everwatchful_pendant",
+			() -> new ItemWatchfulPendant(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
+	// Magic
 	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
 			() -> new ItemDiscordantBell(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
-
-	// Seraph
-	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -279,9 +290,9 @@ public class ItemInit {
 
 	// Hands
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
-			() -> new ItemManaExtractor(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemManaExtractor(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
-			() -> new ItemMakerActivator(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemMakerActivator(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> vibration_debug_tool = ITEMS.register("vibration_debug_tool",
 			() -> new ItemDebugTool(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> self_analyzer = ITEMS.register("self_analyzer",
@@ -312,7 +323,7 @@ public class ItemInit {
 
 	// Runes
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 

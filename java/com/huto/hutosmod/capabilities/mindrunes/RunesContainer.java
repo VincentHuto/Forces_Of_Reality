@@ -18,95 +18,96 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class RunesContainer extends ItemStackHandler implements IRunesItemHandler {
 
-    private final static int BAUBLE_SLOTS = 7;
-    private final ItemStack[] previous = new ItemStack[BAUBLE_SLOTS];
-    private boolean[] changed = new boolean[BAUBLE_SLOTS];
-    private boolean blockEvents = false;
-    private LivingEntity holder;
+	private final static int RUNE_SLOTS = 7;
+	private final ItemStack[] previous = new ItemStack[RUNE_SLOTS];
+	private boolean[] changed = new boolean[RUNE_SLOTS];
+	private boolean blockEvents = false;
+	private LivingEntity holder;
 
-    public RunesContainer(LivingEntity player) {
-        super(BAUBLE_SLOTS);
-        this.holder = player;
-        Arrays.fill(previous, ItemStack.EMPTY);
-    }
+	public RunesContainer(LivingEntity player) {
+		super(RUNE_SLOTS);
+		this.holder = player;
+		Arrays.fill(previous, ItemStack.EMPTY);
+	}
 
-    @Override
-    public void setSize(int size) {
-        if (size != BAUBLE_SLOTS)
-            System.out.println("Cannot resize baubles container");
-    }
+	@Override
+	public void setSize(int size) {
+		if (size != RUNE_SLOTS)
+			System.out.println("Cannot resize rune container");
+	}
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring
-     * stack size) into the given slot.
-     */
-    public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        LazyOptional<IRune> opt = stack.getCapability(RunesCapabilities.ITEM_RUNE);
-        if (stack.isEmpty() || !opt.isPresent())
-            return false;
-        IRune bauble = opt.orElseThrow(NullPointerException::new);
-        return bauble.canEquip(holder) && bauble.getBaubleType().hasSlot(slot);
-    }
+	/**
+	 * Returns true if automation is allowed to insert the given stack (ignoring
+	 * stack size) into the given slot.
+	 */
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		LazyOptional<IRune> opt = stack.getCapability(RunesCapabilities.ITEM_RUNE);
+		if (stack.isEmpty() || !opt.isPresent())
+			return false;
+		IRune bauble = opt.orElseThrow(NullPointerException::new);
+		return bauble.canEquip(holder) && bauble.getRuneType().hasSlot(slot);
+	}
 
-    @Override
-    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-        if (stack.isEmpty() || this.isItemValidForSlot(slot, stack)) {
-            super.setStackInSlot(slot, stack);
-        }
-    }
+	@Override
+	public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+		if (stack.isEmpty() || this.isItemValidForSlot(slot, stack)) {
+			super.setStackInSlot(slot, stack);
+		}
+	}
 
-    @Override
-    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        if (!this.isItemValidForSlot(slot, stack)) return stack;
-        return super.insertItem(slot, stack, simulate);
-    }
+	@Override
+	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+		if (!this.isItemValidForSlot(slot, stack))
+			return stack;
+		return super.insertItem(slot, stack, simulate);
+	}
 
-    @Override
-    public boolean isEventBlocked() {
-        return blockEvents;
-    }
+	@Override
+	public boolean isEventBlocked() {
+		return blockEvents;
+	}
 
-    @Override
-    public void setEventBlock(boolean blockEvents) {
-        this.blockEvents = blockEvents;
-    }
+	@Override
+	public void setEventBlock(boolean blockEvents) {
+		this.blockEvents = blockEvents;
+	}
 
-    @Override
-    protected void onContentsChanged(int slot) {
-        this.changed[slot] = true;
-    }
+	@Override
+	protected void onContentsChanged(int slot) {
+		this.changed[slot] = true;
+	}
 
-    public void tick() {
-        for (int i = 0; i < getSlots(); i++) {
-            ItemStack stack = getStackInSlot(i);
-            stack.getCapability(RunesCapabilities.ITEM_RUNE)
-                    .ifPresent(b -> b.onWornTick(holder));
-        }
-        sync();
-    }
+	public void tick() {
+		for (int i = 0; i < getSlots(); i++) {
+			ItemStack stack = getStackInSlot(i);
+			stack.getCapability(RunesCapabilities.ITEM_RUNE).ifPresent(b -> b.onWornTick(holder));
+		}
+		sync();
+	}
 
-    private void sync() {
-        if (!(holder instanceof ServerPlayerEntity)) {
-            return;
-        }
+	private void sync() {
+		if (!(holder instanceof ServerPlayerEntity)) {
+			return;
+		}
 
-        List<PlayerEntity> receivers = null;
-        for (byte i = 0; i < getSlots(); i++) {
-            ItemStack stack = getStackInSlot(i);
-            boolean autosync = stack.getCapability(RunesCapabilities.ITEM_RUNE).map(b -> b.willAutoSync(holder)).orElse(false);
-            if (changed[i] || autosync && !ItemStack.areItemStacksEqual(stack, previous[i])) {
-                if (receivers == null) {
-                    receivers = new ArrayList<>(((ServerWorld) holder.world).getPlayers());
-                    receivers.add((ServerPlayerEntity) holder);
-                }
-                EventHandlerEntity.syncSlot((ServerPlayerEntity) holder, i, stack, receivers);
-                this.changed[i] = false;
-                previous[i] = stack.copy();
-            }
-        }
-    }
+		List<PlayerEntity> receivers = null;
+		for (byte i = 0; i < getSlots(); i++) {
+			ItemStack stack = getStackInSlot(i);
+			boolean autosync = stack.getCapability(RunesCapabilities.ITEM_RUNE).map(b -> b.willAutoSync(holder))
+					.orElse(false);
+			if (changed[i] || autosync && !ItemStack.areItemStacksEqual(stack, previous[i])) {
+				if (receivers == null) {
+					receivers = new ArrayList<>(((ServerWorld) holder.world).getPlayers());
+					receivers.add((ServerPlayerEntity) holder);
+				}
+				EventHandlerEntity.syncSlot((ServerPlayerEntity) holder, i, stack, receivers);
+				this.changed[i] = false;
+				previous[i] = stack.copy();
+			}
+		}
+	}
 
-    public LivingEntity getHolder() {
-        return this.holder;
-    }
+	public LivingEntity getHolder() {
+		return this.holder;
+	}
 }

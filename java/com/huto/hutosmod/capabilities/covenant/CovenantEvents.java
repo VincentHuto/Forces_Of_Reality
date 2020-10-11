@@ -1,8 +1,11 @@
 package com.huto.hutosmod.capabilities.covenant;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
+import com.huto.hutosmod.capabilities.mindrunes.RunesApi;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,7 +49,23 @@ public class CovenantEvents {
 	}
 
 	@SubscribeEvent
-	public static void onPlayerKillsEntity(LivingDeathEvent event) {
+	public static void onDropRune(LivingDeathEvent e) {
+		if (e.getEntity() instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) e.getEntity();
+			IRunesItemHandler runes = RunesApi.getRunesHandler(player).orElseThrow(IllegalArgumentException::new);
+			for (int i = 0; i < runes.getSlots(); ++i) {
+				if (!runes.getStackInSlot(i).isEmpty()
+						&& runes.getStackInSlot(i).getItem() instanceof ItemContractRune) {
+					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
+							.orElseThrow(IllegalArgumentException::new);
+					coven.setCovenant(EnumCovenants.NONE);
+					player.sendStatusMessage(
+							new StringTextComponent(TextFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"),
+							false);
+
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent

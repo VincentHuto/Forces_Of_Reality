@@ -186,6 +186,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> hastur_stone_smooth = BLOCKS.register("hastur_stone_smooth",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	// Seraph
+	public static final RegistryObject<Block> gilded_wool = BLOCKS.register("gilded_wool",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+
 	// Plants
 	public static final RegistryObject<Block> morel_mushroom = BLOCKS.register("morel_mushroom",
 			() -> new BlockMorelMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()

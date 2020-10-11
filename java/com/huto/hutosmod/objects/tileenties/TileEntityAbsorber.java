@@ -26,7 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
-public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITickableTileEntity {
+public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITickableTileEntity, ITank {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public final String TAG_LEVEL = "tankLevel";
 	public final String TAG_SIZE = "tankSize";
@@ -358,4 +358,42 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		return 1;
 	}
 
+	@Override
+	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate) {
+		if (!this.isVibeFull()) {
+			this.vibes.addVibes(rate);
+			importFrom.vibes.subtractVibes(rate);
+		}
+	}
+
+	@Override
+	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
+		if (vibes.getVibes() > rateIn) {
+			this.vibes.subtractVibes(rateIn);
+			exportToIn.vibes.addVibes(rateIn);
+		}
+	}
+
+	@Override
+	public void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, getState(), getState());
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		markDirty();
+	}
+
+	@Override
+	public boolean canImport() {
+		if (vibes.getVibes() < maxVibes) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canExport() {
+		if (vibes.getVibes() > 1) {
+			return true;
+		}
+		return false;
+	}
 }
