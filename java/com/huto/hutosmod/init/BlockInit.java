@@ -15,6 +15,7 @@ import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockSlimeRepelent;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
+import com.huto.hutosmod.objects.blocks.BlockTeleporter;
 import com.huto.hutosmod.objects.blocks.BlockThermalInfluxer;
 import com.huto.hutosmod.objects.blocks.BlockVibeAbsorber;
 import com.huto.hutosmod.objects.blocks.BlockVibeAccel;
@@ -51,7 +52,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			HutosMod.MOD_ID);
-
+	
+	
+	
+	//TELEPORTER
+	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter", () -> new BlockTeleporter(
+			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
 	// Random
 	public static final RegistryObject<Block> runed_obsidian = BLOCKS.register("runed_obsidian", () -> new Block(
 			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));

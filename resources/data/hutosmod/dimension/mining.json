@@ -1,0 +1,12 @@
+{
+	"generator": {
+		"type": "minecraft:noise",
+		"biome_source": {
+			"type": "minecraft:fixed",
+			"biome": "hutosmod:mining"
+		},
+		"seed": 0,
+		"settings": "hutosmod:mining"
+	},
+	"type": "hutosmod:mining"
+}

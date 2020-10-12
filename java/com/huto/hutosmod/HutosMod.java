@@ -3,7 +3,9 @@ package com.huto.hutosmod;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,14 +44,17 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -66,6 +71,9 @@ public class HutosMod {
 	private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "hutosmod";
 	public static HutosMod instance;
+	public static ServerConfig SERVER_CONFIG;
+	public static ClientConfig CLIENT_CONFIG;
+
 
 	public HutosMod() {
 		instance = this;
@@ -87,6 +95,51 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
 
+		SERVER_CONFIG = registerConfig(ModConfig.Type.SERVER, ServerConfig.class, true);
+		CLIENT_CONFIG = registerConfig(ModConfig.Type.CLIENT, ClientConfig.class);
+
+	}
+
+	/**
+	 * Registers a config for the provided config type
+	 *
+	 * @param type             the config type
+	 * @param configClass      the config class
+	 * @param registerListener if a config reload listener should be registered
+	 * @return the instantiated config
+	 */
+	public static <T extends ConfigBase> T registerConfig(ModConfig.Type type, Class<T> configClass,
+			boolean registerListener) {
+		Pair<T, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(builder -> {
+			try {
+				return configClass.getConstructor(ForgeConfigSpec.Builder.class).newInstance(builder);
+			} catch (Throwable e) {
+				throw new RuntimeException(e);
+			}
+		});
+		ModLoadingContext.get().registerConfig(type, specPair.getRight());
+		T config = specPair.getLeft();
+		config.setConfigSpec(specPair.getRight());
+		if (registerListener) {
+			Consumer<ModConfig.ModConfigEvent> consumer = evt -> {
+				if (evt.getConfig().getType() == type) {
+					config.onReload(evt);
+				}
+			};
+			FMLJavaModLoadingContext.get().getModEventBus().addListener(consumer);
+		}
+		return config;
+	}
+
+	/**
+	 * Registers a config for the provided config type
+	 *
+	 * @param type        the config type
+	 * @param configClass the config class
+	 * @return the instantiated config
+	 */
+	public static <T extends ConfigBase> T registerConfig(ModConfig.Type type, Class<T> configClass) {
+		return registerConfig(type, configClass, false);
 	}
 
 	@SubscribeEvent

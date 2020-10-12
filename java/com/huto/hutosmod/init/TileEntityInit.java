@@ -11,6 +11,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
+import com.huto.hutosmod.objects.tileenties.TileEntityTeleporter;
 import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeGatherer;
@@ -93,4 +94,8 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityAscendentAltar>> ascendent_altar = TILES
 			.register("ascendent_altar", () -> TileEntityType.Builder
 					.create(TileEntityAscendentAltar::new, BlockInit.ascendent_altar.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<TileEntityTeleporter>> teleporter = TILES.register(
+			"teleporter",
+			() -> TileEntityType.Builder.create(TileEntityTeleporter::new, BlockInit.teleporter.get()).build(null));
 }

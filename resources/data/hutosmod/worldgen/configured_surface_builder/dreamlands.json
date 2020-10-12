@@ -1,0 +1,14 @@
+{
+  "config": {
+    "top_material": {
+      "Name": "minecraft:lapis_block"
+    },
+    "under_material": {
+      "Name": "minecraft:polished_diorite"
+    },
+    "underwater_material": {
+      "Name": "minecraft:cobblestone"
+    }
+  },
+  "type": "minecraft:nether"
+}

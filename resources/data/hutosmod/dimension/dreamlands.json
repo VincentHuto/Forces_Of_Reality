@@ -1,0 +1,12 @@
+{
+	"generator": {
+		"type": "minecraft:noise",
+		"biome_source": {
+			"type": "minecraft:fixed",
+			"biome": "hutosmod:dreamlands"
+		},
+		"seed": 0,
+		"settings": "hutosmod:dreamlands"
+	},
+	"type": "hutosmod:dreamlands"
+}
