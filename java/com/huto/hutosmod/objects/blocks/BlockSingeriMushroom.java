@@ -2,6 +2,8 @@ package com.huto.hutosmod.objects.blocks;
 
 import java.util.Random;
 
+import com.huto.hutosmod.init.BlockInit;
+
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -66,14 +68,11 @@ public class BlockSingeriMushroom extends BushBlock implements IGrowable {
 
 	}
 
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isOpaqueCube(worldIn, pos);
-	}
-
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK) || blockstate.getBlock() == BlockInit.mystic_earth.get()
+				|| blockstate.getBlock() == BlockInit.enchanted_stone.get()) {
 			return true;
 		} else {
 			return worldIn.getLightSubtracted(pos, 0) < 13

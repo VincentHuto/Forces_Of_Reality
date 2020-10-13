@@ -29,6 +29,7 @@ import com.huto.hutosmod.objects.blocks.BlockWaveGatherer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.GrassBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SaplingBlock;
@@ -52,12 +53,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			HutosMod.MOD_ID);
-	
-	
-	
-	//TELEPORTER
-	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter", () -> new BlockTeleporter(
-			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
+
+	// TELEPORTER
+	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
+			() -> new BlockTeleporter(
+					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
 	// Random
 	public static final RegistryObject<Block> runed_obsidian = BLOCKS.register("runed_obsidian", () -> new Block(
 			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));

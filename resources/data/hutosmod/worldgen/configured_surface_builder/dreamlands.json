@@ -1,14 +1,17 @@
 {
   "config": {
     "top_material": {
-      "Name": "minecraft:lapis_block"
+      "Properties": {
+        "snowy": "false"
+      },
+      "Name": "minecraft:grass_block"
     },
     "under_material": {
-      "Name": "minecraft:polished_diorite"
+      "Name": "hutosmod:enchanted_stone"
     },
     "underwater_material": {
-      "Name": "minecraft:cobblestone"
+      "Name": "hutosmod:mystic_media"
     }
   },
-  "type": "minecraft:nether"
+  "type": "minecraft:default"
 }

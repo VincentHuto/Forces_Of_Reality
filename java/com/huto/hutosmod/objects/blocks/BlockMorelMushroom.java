@@ -2,6 +2,8 @@ package com.huto.hutosmod.objects.blocks;
 
 import java.util.Random;
 
+import com.huto.hutosmod.init.BlockInit;
+
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -73,12 +75,30 @@ public class BlockMorelMushroom extends BushBlock implements IGrowable {
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK)) {
+		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK) || blockstate.getBlock() == BlockInit.mystic_earth.get()|| blockstate.getBlock() == BlockInit.enchanted_stone.get()) {
 			return true;
 		} else {
 			return worldIn.getLightSubtracted(pos, 0) < 13
 					&& blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.util.Direction.UP, this);
 		}
+	}
+
+	/**
+	 * Whether this IGrowable can grow
+	 */
+	@Override
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		return (double) rand.nextFloat() < 0.4D;
+	}
+
+	@Override
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		this.grow(worldIn, pos, state, rand);
 	}
 
 	public boolean grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
@@ -101,20 +121,5 @@ public class BlockMorelMushroom extends BushBlock implements IGrowable {
 			world.setBlockState(pos, state, 3);
 			return false;
 		}
-	}
-
-	/**
-	 * Whether this IGrowable can grow
-	 */
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return true;
-	}
-
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-		return (double) rand.nextFloat() < 0.4D;
-	}
-
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		this.grow(worldIn, pos, state, rand);
 	}
 }
