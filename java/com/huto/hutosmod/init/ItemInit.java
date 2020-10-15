@@ -5,6 +5,7 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemCovenTome;
 import com.huto.hutosmod.objects.items.ItemCrossedKeys;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
 import com.huto.hutosmod.objects.items.ItemDestructOrb;
@@ -22,6 +23,7 @@ import com.huto.hutosmod.objects.items.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemRepulsionCharm;
+import com.huto.hutosmod.objects.items.ItemResonanceDestabalizer;
 import com.huto.hutosmod.objects.items.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSlimeRepulsionCharm;
@@ -80,11 +82,18 @@ public class ItemInit {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HutosMod.MOD_ID);
 
+	//Return Rune
+	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
+			() -> new ItemResonanceDestabalizer(new Item.Properties().group(HutosModItemGroup.instance)));
+	
 	// Books
 	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
 			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> coven_tome = ITEMS.register("coven_tome",
+			() -> new ItemCovenTome(new Item.Properties().group(HutosModItemGroup.instance)));
+	
 
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
@@ -161,6 +170,8 @@ public class ItemInit {
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> unsettling_tapestry = ITEMS.register("unsettling_tapestry",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> yellow_tome = ITEMS.register("yellow_tome", () -> new ItemYellowTome(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
@@ -169,19 +180,22 @@ public class ItemInit {
 			() -> new ItemCrossedKeys(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> wing_fragment = ITEMS.register("wing_fragment",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
+			() -> new ItemDiscordantBell(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 
 	// Eldritch
 	public static final RegistryObject<Item> everwatchful_pendant = ITEMS.register("everwatchful_pendant",
 			() -> new ItemWatchfulPendant(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
-	// Magic
-	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
-			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
-	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
-			() -> new ItemDiscordantBell(
-					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -197,7 +211,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> cooked_morel_on_a_stick = ITEMS.register("cooked_morel_on_a_stick",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).food(new Food.Builder().hunger(6)
@@ -222,38 +235,6 @@ public class ItemInit {
 	public static final RegistryObject<Item> storming_agent = ITEMS.register("storming_agent",
 			() -> new ItemStormingAgent(new Item.Properties().group(HutosModItemGroup.instance)));
 
-	// Tools
-	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
-			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> null_shovel = ITEMS.register("null_shovel",
-			() -> new ShovelItem(EnumModToolTiers.NULL, 1.5F, -3.0F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> null_hoe = ITEMS.register("null_hoe",
-			() -> new HoeItem(EnumModToolTiers.NULL, -3, 0.0F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> null_axe = ITEMS.register("null_axe",
-			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> null_sword = ITEMS.register("null_sword",
-			() -> new SwordItem(EnumModToolTiers.NULL, 3, -2.4F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> duality_pick = ITEMS.register("duality_pick",
-			() -> new ToolVeinPickaxe(EnumModToolTiers.NULL, 1, -2.8F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> duality_axe = ITEMS.register("duality_axe",
-			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
-					new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> absorber_configurer = ITEMS.register("absorber_configurer",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> frequency_matcher = ITEMS.register("frequency_matcher",
-			() -> new ItemFrequencyMatcher(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
-	// Knappers
-	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper",
-			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON, new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> obsidian_knapper = ITEMS.register("obsidian_knapper",
-			() -> new ItemKnapper(50f, 1, 0, EnumModToolTiers.NULL,
-					new Item.Properties().group(HutosModItemGroup.instance)));
 	// Armor
 	public static final RegistryObject<Item> vibrational_seer = ITEMS.register("vibrational_seer",
 			() -> new ItemVibeSeer(EnumModArmorTiers.CIRCLET, EquipmentSlotType.HEAD,
@@ -288,6 +269,39 @@ public class ItemInit {
 			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 
+	// Tools
+	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
+			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_shovel = ITEMS.register("null_shovel",
+			() -> new ShovelItem(EnumModToolTiers.NULL, 1.5F, -3.0F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_hoe = ITEMS.register("null_hoe",
+			() -> new HoeItem(EnumModToolTiers.NULL, -3, 0.0F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_axe = ITEMS.register("null_axe",
+			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> null_sword = ITEMS.register("null_sword",
+			() -> new SwordItem(EnumModToolTiers.NULL, 3, -2.4F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> duality_pick = ITEMS.register("duality_pick",
+			() -> new ToolVeinPickaxe(EnumModToolTiers.NULL, 1, -2.8F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> duality_axe = ITEMS.register("duality_axe",
+			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> absorber_configurer = ITEMS.register("absorber_configurer",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> frequency_matcher = ITEMS.register("frequency_matcher",
+			() -> new ItemFrequencyMatcher(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	// Knappers
+	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper",
+			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON, new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> obsidian_knapper = ITEMS.register("obsidian_knapper",
+			() -> new ItemKnapper(50f, 1, 0, EnumModToolTiers.NULL,
+					new Item.Properties().group(HutosModItemGroup.instance)));
+
 	// Hands
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
 			() -> new ItemManaExtractor(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
@@ -303,6 +317,7 @@ public class ItemInit {
 			() -> new ItemWandConsumeVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> wand_gain_vibes = ITEMS.register("wand_gain_vibes",
 			() -> new ItemWandGainVibes(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+
 	// Upgrades
 	public static final RegistryObject<Item> upgrade_wrench = ITEMS.register("upgrade_wrench",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));

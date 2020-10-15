@@ -1,6 +1,5 @@
 {
-  "values": [
-    "#forge:ores/mystic"
-
-  ]
+	"values": [
+		"#forge:ores/mystic"
+	]
 }

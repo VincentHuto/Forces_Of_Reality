@@ -16,7 +16,8 @@ import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
 import com.huto.hutosmod.events.ClientEventRender;
 import com.huto.hutosmod.events.KarmaHudEventHandler;
 import com.huto.hutosmod.events.SeerEventHandler;
-import com.huto.hutosmod.gui.pages.TomePageLib;
+import com.huto.hutosmod.gui.pages.coven.CovenPageLib;
+import com.huto.hutosmod.gui.pages.guide.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.CapabilityInit;
 import com.huto.hutosmod.init.ContainerInit;
@@ -176,6 +177,7 @@ public class HutosMod {
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		TomePageLib.registerPages();
+		CovenPageLib.registerPages();
 		MinecraftForge.EVENT_BUS.register(ClientEventRender.class);
 
 	}

@@ -1,7 +1,7 @@
 package com.huto.hutosmod.objects.items;
 
 
-import com.huto.hutosmod.gui.pages.GuiTomeTitle;
+import com.huto.hutosmod.gui.pages.guide.GuiTomeTitle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;

@@ -12,19 +12,15 @@
             "chance": 0.05
           },
           {
-            "feature": "minecraft:acacia",
+            "feature": "hutosmod:dreamtree",
             "chance": 0.6666667
           },
           {
-            "feature": "minecraft:birch",
-            "chance": 0.2
-          },
-          {
-            "feature": "minecraft:fancy_oak",
-            "chance": 0.1
+            "feature": "hutosmod:antitree",
+            "chance": 0.6666667
           }
         ],
-        "default": "minecraft:oak"
+        "default": "hutosmod:antitree"
       },
       "type": "minecraft:random_selector"
     },

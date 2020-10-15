@@ -7,4 +7,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.FORGE)
 public class HutosModEvents {
+
+
 }
+	

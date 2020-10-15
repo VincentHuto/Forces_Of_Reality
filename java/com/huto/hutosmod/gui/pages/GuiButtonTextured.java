@@ -16,8 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class GuiButtonTextured extends Button {
 
-	final ResourceLocation texture;
-	int id, posX, posY, buttonWidth, buttonHeight, u, v, adjV, newV;
+	public final ResourceLocation texture;
+	public int id, posX, posY, buttonWidth, buttonHeight, u, v, adjV, newV;
 	boolean state;
 	protected Button.ITooltip onTooltip;
 	public static ITextComponent text;
