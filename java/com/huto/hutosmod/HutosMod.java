@@ -75,7 +75,6 @@ public class HutosMod {
 	public static ServerConfig SERVER_CONFIG;
 	public static ClientConfig CLIENT_CONFIG;
 
-
 	public HutosMod() {
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

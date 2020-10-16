@@ -59,6 +59,8 @@ public class ClientEventSubscriber {
 	public static final KeyBinding KEY_RUNES = new KeyBinding("keybind.runesinventory", GLFW.GLFW_KEY_B,
 			"key.categories.inventory");
 
+
+	
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);

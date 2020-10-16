@@ -26,6 +26,7 @@ public class CapabilityInit {
 		CapabilityManager.INSTANCE.register(IVibrations.class, new VibrationStorage(), Vibrations::new);
 		CapabilityManager.INSTANCE.register(IKarma.class, new KarmaStorage(), Karma::new);
 		CapabilityManager.INSTANCE.register(ICovenant.class, new CovenantStorage(), Covenant::new);
+		//CapabilityManager.INSTANCE.register(IHash.class, new HashStorage(), Hash::new);
 		CapabilityManager.INSTANCE.register(IRune.class, new RuneCap.IBaubleStorage(), new RuneCap.IBaubleFactory());
 		CapabilityManager.INSTANCE.register(IRunesItemHandler.class,
 				new RunestemHandlerCap.IBaublesItemHandlerStorage(),

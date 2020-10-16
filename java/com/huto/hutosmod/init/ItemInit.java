@@ -2,6 +2,7 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
@@ -82,10 +83,10 @@ public class ItemInit {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HutosMod.MOD_ID);
 
-	//Return Rune
+	// Return Rune
 	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
 			() -> new ItemResonanceDestabalizer(new Item.Properties().group(HutosModItemGroup.instance)));
-	
+
 	// Books
 	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
 			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -93,7 +94,6 @@ public class ItemInit {
 			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> coven_tome = ITEMS.register("coven_tome",
 			() -> new ItemCovenTome(new Item.Properties().group(HutosModItemGroup.instance)));
-	
 
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
@@ -166,8 +166,10 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Hastur
-	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign", () -> new ItemYellowSign(
-			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign",
+			() -> new ItemYellowSign(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON),
+					EnumCovenants.HASTUR));
 	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> unsettling_tapestry = ITEMS.register("unsettling_tapestry",
@@ -177,7 +179,8 @@ public class ItemInit {
 
 	// Seraph
 	public static final RegistryObject<Item> crossed_keys = ITEMS.register("crossed_keys",
-			() -> new ItemCrossedKeys(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemCrossedKeys(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.ASCENDENT));
 	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> wing_fragment = ITEMS.register("wing_fragment",
@@ -190,7 +193,8 @@ public class ItemInit {
 
 	// Eldritch
 	public static final RegistryObject<Item> everwatchful_pendant = ITEMS.register("everwatchful_pendant",
-			() -> new ItemWatchfulPendant(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemWatchfulPendant(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.ELDRITCH));
 	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
@@ -344,17 +348,23 @@ public class ItemInit {
 
 	// Contract Runes
 	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.NONE));
 	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.NONE));
 	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.NONE));
 	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
-			() -> new ItemMilkweedRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMilkweedRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.NONE));
 	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.NONE));
 	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
-			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.NONE));
 
 	// Base Runes
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",

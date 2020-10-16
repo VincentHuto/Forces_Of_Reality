@@ -44,7 +44,7 @@ public class ItemYellowTome extends Item {
 				Vector3d hitVec = result.getHitVec();
 				ICovenant coven = entityLiving.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
-				if (coven.getCovenant() == EnumCovenants.HASTUR) {
+				if (coven.getDevotionByCoven(EnumCovenants.HASTUR) >= 10) {
 					if (!worldIn.isRemote) {
 						this.summonTentacleAid(worldIn.rand.nextInt(10), worldIn, (PlayerEntity) entityLiving, hitVec);
 					}

@@ -19,6 +19,7 @@ public class BlockMysticEarth extends SpreadableSnowyDirtBlock implements IGrowa
 	/**
 	 * Whether this IGrowable can grow
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return worldIn.getBlockState(pos.up()).isAir();

@@ -5,11 +5,14 @@ import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
+import com.huto.hutosmod.network.CovenantPacketServer;
+import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
@@ -17,11 +20,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemCrossedKeys extends ItemContractRune implements IRune {
 
-	public ItemCrossedKeys(Properties properties) {
-		super(properties);
+	public ItemCrossedKeys(Properties properties,EnumCovenants covenIn) {
+		super(properties, covenIn);
 		properties.rarity(Rarity.UNCOMMON);
 	}
 
@@ -48,19 +52,20 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					System.out.println(coven.getCovenant());
+					coven.setCovenDevotion(EnumCovenants.ASCENDENT,
+							(coven.getDevotionByCoven(EnumCovenants.ASCENDENT) + 10));
+					System.out.println(coven.getDevotionByCoven(EnumCovenants.ASCENDENT));
+					PlayerEntity playerEnt = (PlayerEntity) player;
+					playerEnt.sendStatusMessage(new StringTextComponent(
+							TextFormatting.AQUA + "You hear the clang of bells in the distance"), false);
+					System.out.println(coven.getDevotion().size());
+					PacketHandler.CHANNELCOVENANT.send(
+							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
+							new CovenantPacketServer(coven.getDevotion()));
 
-					if (!(coven.getCovenant() == EnumCovenants.ASCENDENT)) {
-						coven.setCovenant(EnumCovenants.ASCENDENT);
-						PlayerEntity playerEnt = (PlayerEntity) player;
-						playerEnt.sendStatusMessage(new StringTextComponent(
-								TextFormatting.AQUA + "You hear the clang of bells in the distance"), false);
-
-					}
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -72,17 +77,19 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					System.out.println(coven.getCovenant());
-
-					coven.setCovenant(EnumCovenants.NONE);
+					coven.setCovenDevotion(EnumCovenants.ASCENDENT,
+							(coven.getDevotionByCoven(EnumCovenants.ASCENDENT) - 10));
+					System.out.println(coven.getDevotionByCoven(EnumCovenants.ASCENDENT));
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.AQUA + "You hear an angelic screech in your minds"),
 							false);
+					PacketHandler.CHANNELCOVENANT.send(
+							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
+							new CovenantPacketServer(coven.getDevotion()));
 				}
 			}
 		}
-
 	}
 
 	@Override

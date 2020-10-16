@@ -20,12 +20,10 @@ public class CovenantPacketClient {
 		ctx.get().enqueueWork(() -> {
 			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
 			if (sender != null) {
-				// Get the currency
 				ICovenant covenant = sender.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalStateException::new);
-				// Send message back to the client to set the information
 				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> sender),
-						new CovenantPacketServer(covenant.getCovenant().toString()));
+						new CovenantPacketServer(covenant.getDevotion()));
 			}
 		});
 		ctx.get().setPacketHandled(true);

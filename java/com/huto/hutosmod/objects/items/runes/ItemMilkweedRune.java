@@ -2,6 +2,7 @@ package com.huto.hutosmod.objects.items.runes;
 
 import java.util.List;
 
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
 import com.huto.hutosmod.network.PacketHandler;
@@ -20,8 +21,9 @@ import net.minecraft.world.World;
 
 public class ItemMilkweedRune extends ItemContractRune implements IRune {
 
-	public ItemMilkweedRune(Properties properties) {
-		super(properties);
+	public ItemMilkweedRune(Properties properties, EnumCovenants covenIn) {
+		super(properties, covenIn);
+
 	}
 
 	@Override

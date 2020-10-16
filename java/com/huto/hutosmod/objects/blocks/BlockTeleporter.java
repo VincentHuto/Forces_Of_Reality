@@ -90,6 +90,7 @@ public class BlockTeleporter extends Block {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	private BlockPos findPortalInChunk(Chunk chunk) {
 		for (TileEntity tile : chunk.getTileEntityMap().values()) {
 			if (tile instanceof TileEntityTeleporter) {
@@ -102,6 +103,7 @@ public class BlockTeleporter extends Block {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	private BlockPos placeTeleporterMining(ServerWorld world, Chunk chunk) {
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		for (int y = 0; y < 255; y++) {
@@ -164,11 +166,13 @@ public class BlockTeleporter extends Block {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean isAirOrStone(Chunk chunk, BlockPos pos) {
 		BlockState state = chunk.getBlockState(pos);
 		return state.getBlock().equals(Blocks.STONE) || state.isAir();
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean isReplaceable(World world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		return state.getBlock().equals(Blocks.STONE) || state.getBlock().equals(Blocks.GRANITE)
@@ -177,6 +181,7 @@ public class BlockTeleporter extends Block {
 				|| state.getBlock().equals(Blocks.LAVA) || state.isAir();
 	}
 
+	@SuppressWarnings("deprecation")
 	private BlockPos placeTeleporterOverworld(ServerWorld world, Chunk chunk) {
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		for (int x = 0; x < 16; x++) {

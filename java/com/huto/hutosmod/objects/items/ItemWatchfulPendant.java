@@ -5,10 +5,13 @@ import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
+import com.huto.hutosmod.network.CovenantPacketServer;
+import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
@@ -17,11 +20,12 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 
-	public ItemWatchfulPendant(Properties properties) {
-		super(properties);
+	public ItemWatchfulPendant(Properties properties,EnumCovenants covenIn) {
+		super(properties, covenIn);
 		properties.rarity(Rarity.UNCOMMON);
 	}
 
@@ -48,20 +52,20 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					System.out.println(coven.getCovenant());
+					coven.setCovenDevotion(EnumCovenants.ELDRITCH,
+							(coven.getDevotionByCoven(EnumCovenants.ELDRITCH) + 10));
+					//coven.setCovenant(EnumCovenants.ELDRITCH);
+					PlayerEntity playerEnt = (PlayerEntity) player;
+					playerEnt.sendStatusMessage(
+							new StringTextComponent(TextFormatting.LIGHT_PURPLE + "You begin to see more clearly"),
+							false);
+					PacketHandler.CHANNELCOVENANT.send(
+							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
+							new CovenantPacketServer(coven.getDevotion()));
 
-					if (!(coven.getCovenant() == EnumCovenants.ASCENDENT)) {
-						coven.setCovenant(EnumCovenants.ASCENDENT);
-						PlayerEntity playerEnt = (PlayerEntity) player;
-						playerEnt.sendStatusMessage(
-								new StringTextComponent(TextFormatting.LIGHT_PURPLE + "You begin to see more clearly"),
-								false);
-
-					}
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -73,12 +77,16 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					System.out.println(coven.getCovenant());
-
-					coven.setCovenant(EnumCovenants.NONE);
+					coven.setCovenDevotion(EnumCovenants.ELDRITCH,
+							(coven.getDevotionByCoven(EnumCovenants.ELDRITCH) - 10));
+				//	coven.setCovenant(EnumCovenants.NONE);
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(new StringTextComponent(
 							TextFormatting.LIGHT_PURPLE + "You suddenly feel as your being watched"), false);
+					PacketHandler.CHANNELCOVENANT.send(
+							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
+							new CovenantPacketServer(coven.getDevotion()));
+
 				}
 			}
 		}
