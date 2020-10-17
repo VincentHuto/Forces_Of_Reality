@@ -17,6 +17,7 @@ import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemFrequencyMatcher;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemGuidanceRune;
+import com.huto.hutosmod.objects.items.ItemInfluenceSuppressor;
 import com.huto.hutosmod.objects.items.ItemKnapper;
 import com.huto.hutosmod.objects.items.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.ItemManaExtractor;
@@ -245,6 +246,9 @@ public class ItemInit {
 					(new Item.Properties()).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> mysterious_mask = ITEMS.register("mysterious_mask",
 			() -> new ItemMysteriousMask(EnumModArmorTiers.MASK, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> influence_supressor = ITEMS.register("influence_supressor",
+			() -> new ItemInfluenceSuppressor(EnumModArmorTiers.SUPPRESSOR, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(HutosModItemGroup.instance)));
 
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",

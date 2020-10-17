@@ -22,12 +22,16 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.magatamabead.get());
 			}),
-	CIRCLET(HutosMod.MOD_ID + ":vibrational_seer", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+	CIRCLET(HutosMod.MOD_ID + ":vibrational_seer", 1, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	MASK(HutosMod.MOD_ID + ":mysterious_mask", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+	MASK(HutosMod.MOD_ID + ":mysterious_mask", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+			3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.null_ingot.get());
+			}),
+	SUPPRESSOR(HutosMod.MOD_ID + ":influence_supressor", 1, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			});
 	;
@@ -41,8 +45,8 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 	private final float field_234660_o_;
 	private final LazyValue<Ingredient> repairMaterial;
 
-	private EnumModArmorTiers(String name, int damgaeFactor, int[] armorVals, int ench,
-			SoundEvent soundevent, float tough, float p_i231593_9_, Supplier<Ingredient> repairIng) {
+	private EnumModArmorTiers(String name, int damgaeFactor, int[] armorVals, int ench, SoundEvent soundevent,
+			float tough, float p_i231593_9_, Supplier<Ingredient> repairIng) {
 		this.name = name;
 		this.maxDamageFactor = damgaeFactor;
 		this.damageReductionAmountArray = armorVals;

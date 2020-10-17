@@ -15,34 +15,37 @@ import net.minecraft.util.ResourceLocation;
 
 public class ArmorSlot extends Slot {
 
-    private EquipmentSlotType slotType;
-    private PlayerEntity playerEntity;
+	private EquipmentSlotType slotType;
+	private PlayerEntity playerEntity;
 
-    public ArmorSlot(IInventory inventoryIn, int index, int xPosition, int yPosition, EquipmentSlotType slotType, PlayerEntity playerEntity) {
-        super(inventoryIn, index, xPosition, yPosition);
-        this.slotType = slotType;
-        this.playerEntity = playerEntity;
-    }
+	public ArmorSlot(IInventory inventoryIn, int index, int xPosition, int yPosition, EquipmentSlotType slotType,
+			PlayerEntity playerEntity) {
+		super(inventoryIn, index, xPosition, yPosition);
+		this.slotType = slotType;
+		this.playerEntity = playerEntity;
+	}
 
-    @Override
-    public int getSlotStackLimit() {
-        return 1;
-    }
+	@Override
+	public int getSlotStackLimit() {
+		return 1;
+	}
 
-    @Override
-    public boolean isItemValid(ItemStack stack) {
-        return stack.canEquip(this.slotType, this.playerEntity);
-    }
+	@Override
+	public boolean isItemValid(ItemStack stack) {
+		return stack.canEquip(this.slotType, this.playerEntity);
+	}
 
-    @Override
-    public boolean canTakeStack(PlayerEntity playerIn) {
-        ItemStack itemstack = this.getStack();
-        return (itemstack.isEmpty() || playerIn.isCreative() || !EnchantmentHelper.hasBindingCurse(itemstack)) && super.canTakeStack(playerIn);
-    }
+	@Override
+	public boolean canTakeStack(PlayerEntity playerIn) {
+		ItemStack itemstack = this.getStack();
+		return (itemstack.isEmpty() || playerIn.isCreative() || !EnchantmentHelper.hasBindingCurse(itemstack))
+				&& super.canTakeStack(playerIn);
+	}
 
-    @Nullable
-    @Override
-    public Pair<ResourceLocation, ResourceLocation> getBackground() { //getSlotTexture
-        return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, PlayerExpandedContainer.ARMOR_SLOT_TEXTURES[slotType.getIndex()]);
-    }
+	@Nullable
+	@Override
+	public Pair<ResourceLocation, ResourceLocation> getBackground() { // getSlotTexture
+		return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE,
+				PlayerExpandedContainer.ARMOR_SLOT_TEXTURES[slotType.getIndex()]);
+	}
 }

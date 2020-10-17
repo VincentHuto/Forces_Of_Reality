@@ -36,10 +36,6 @@ public class RunesContainer extends ItemStackHandler implements IRunesItemHandle
 			System.out.println("Cannot resize rune container");
 	}
 
-	/**
-	 * Returns true if automation is allowed to insert the given stack (ignoring
-	 * stack size) into the given slot.
-	 */
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		LazyOptional<IRune> opt = stack.getCapability(RunesCapabilities.ITEM_RUNE);
 		if (stack.isEmpty() || !opt.isPresent())

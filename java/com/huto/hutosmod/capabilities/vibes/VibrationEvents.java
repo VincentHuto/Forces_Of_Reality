@@ -15,6 +15,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -26,7 +27,7 @@ public class VibrationEvents {
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "vibrations"), new VibrationProvider());
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void attachCapabilitiesTile(final AttachCapabilitiesEvent<TileEntity> event) {
 		if (event.getObject() instanceof TileVibeSimpleInventory) {
@@ -39,6 +40,15 @@ public class VibrationEvents {
 
 	@SubscribeEvent
 	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+		float amount = VibrationProvider.getPlayerVibes(player);
+		PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> player), new VibrationPacketServer(amount));
+		player.sendStatusMessage(
+				new StringTextComponent("Welcome! Current Resonance: " + TextFormatting.GOLD + amount + "Hz"), false);
+	}
+
+	@SubscribeEvent
+	public static void onDimensionChange(PlayerChangedDimensionEvent event) {
 		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
 		float amount = VibrationProvider.getPlayerVibes(player);
 		PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> player), new VibrationPacketServer(amount));

@@ -20,7 +20,7 @@ displayName="Duality of Nature" #mandatory
 updateJSONURL="http://myurl.me/" #optional
 
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="http://example.com/" #optional
+displayURL="http://curseforge.com/" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="examplemod.png" #optional
@@ -33,8 +33,10 @@ authors="Huto" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-		Hello,
-			something something description.
+	Have you ever wanted to have a magic system based entirely on selling your soul? 
+	How about one that acts like it may have a lore but who knows??
+	Well this is the mod for you!
+	Please give me feedback its my first time!
 '''
 
 

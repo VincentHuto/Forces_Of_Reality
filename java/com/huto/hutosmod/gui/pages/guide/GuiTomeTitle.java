@@ -1,9 +1,12 @@
 package com.huto.hutosmod.gui.pages.guide;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.entities.EntityColin;
+import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -11,7 +14,9 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +24,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 @OnlyIn(Dist.CLIENT)
 public class GuiTomeTitle extends Screen {
 
@@ -29,7 +35,7 @@ public class GuiTomeTitle extends Screen {
 	int guiHeight = 240;
 	int left, top;
 	final int BUTTONCLOSE = 0;
-	final int BUTTONWHITE = 1; 
+	final int BUTTONWHITE = 1;
 	final int BUTTONYELLOW = 2;
 	final int BUTTONBLUE = 3;
 	final int BUTTONGREEN = 4;
@@ -67,7 +73,7 @@ public class GuiTomeTitle extends Screen {
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
 		{
-			//The 10 for the z translate draws the text ON the book
+			// The 10 for the z translate draws the text ON the book
 			GlStateManager.translatef((width / 2) - font.getStringWidth(title) / 2, centerY + 10, 10);
 			drawString(matrixStack, font, TextFormatting.GOLD + title, 0, 0, 8060954);
 			drawString(matrixStack, font, TextFormatting.GOLD + subtitle, 0, 10, 8060954);
@@ -84,7 +90,7 @@ public class GuiTomeTitle extends Screen {
 
 		GlStateManager.pushMatrix();
 		{
-		
+
 			GlStateManager.translatef(centerX, centerY, 0);
 			GlStateManager.scalef(2, 2, 2);
 			mc.getItemRenderer().renderItemAndEffectIntoGUI(icon, 0, 0);
@@ -106,25 +112,30 @@ public class GuiTomeTitle extends Screen {
 			GlStateManager.rotatef(180, 100, 0, 360);
 			// This lightmap turns the brightness back up so the gui doesnt get dark at
 			// night
-			
-	
-	//		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
-		//	mc.getRenderManager().renderEntityStatic(entityIn, xIn, yIn, zIn, rotationYawIn, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
+			// OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f,
+			// 240f);
+			// mc.getRenderManager().renderEntityStatic(entityIn, xIn, yIn, zIn,
+			// rotationYawIn, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 //			mc.getRenderManager().renderEntityStatic(CowEntity, 1, 0, 0, 0, partialTicks, matrixStack,null, 2);
+
+			IRenderTypeBuffer.Impl bufferIn = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+			
+			mc.getRenderManager().renderEntityStatic(
+					new EntityColin(EntityInit.colin.get(), ClientEventSubscriber.getClientPlayer().getEntityWorld()),
+					1, 0, 0, 33, 0, matrixStack, bufferIn, 0);
+
+			bufferIn.finish();
+
 			GlStateManager.rotatef(-25, 0, 10, 40);
 			GlStateManager.translatef(0f, 1.5f, 3f);
 			GlStateManager.scalef(0.5f, 0.5f, 0.5f);
-		//	mc.getRenderManager().renderEntity(new EntityElemental(mc.world), 1, 0, 0, 40, 0, true);
+			// mc.getRenderManager().renderEntity(new EntityElemental(mc.world), 1, 0, 0,
+			// 40, 0, true);
 
-			
-		
 		}
 		GlStateManager.popMatrix();
 
-		
-		
-		
-		
 		int sideLoc = left + guiWidth;
 		int verticalLoc = top + guiHeight;
 		if (buttonclose.isHovered()) {
@@ -147,7 +158,8 @@ public class GuiTomeTitle extends Screen {
 			renderTooltip(matrixStack, new StringTextComponent("Runes"), sideLoc - (guiWidth - 180), verticalLoc - 91);
 		}
 		if (orangeButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Machines"), sideLoc - (guiWidth - 177), verticalLoc - 49);
+			renderTooltip(matrixStack, new StringTextComponent("Machines"), sideLoc - (guiWidth - 177),
+					verticalLoc - 49);
 		}
 		if (darkBlueButton.isHovered()) {
 			renderTooltip(matrixStack, new StringTextComponent("Generation"), sideLoc - (guiWidth - 177),

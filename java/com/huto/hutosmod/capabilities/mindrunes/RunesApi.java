@@ -11,10 +11,7 @@ public class RunesApi {
 		return player.getCapability(RunesCapabilities.RUNES);
 	}
 
-	// Returns if the passed in item is equipped in a bauble slot. Will return the
-	// first slot found
-	// @return -1 if not found and slot number if it is found
-	public static int isBaubleEquipped(PlayerEntity player, Item bauble) {
+	public static int isRuneEquipped(PlayerEntity player, Item bauble) {
 		return getRunesHandler(player).map(handler -> {
 			for (int a = 0; a < handler.getSlots(); a++) {
 				if (!handler.getStackInSlot(a).isEmpty() && handler.getStackInSlot(a).getItem() == bauble)

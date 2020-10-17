@@ -197,7 +197,7 @@ public class PlayerExpandedContainer extends Container {
 				@SuppressWarnings("unused")
 				ItemStack finalItemstack = itemstack;
 				itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
-						.ifPresent((iBauble -> iBauble.onEquipped(playerIn)));
+						.ifPresent((iRune -> iRune.onEquipped(playerIn)));
 			}
 
 			ItemStack itemstack2 = slot.onTake(playerIn, itemstack1);
@@ -216,7 +216,7 @@ public class PlayerExpandedContainer extends Container {
 	}
 
 	@SuppressWarnings("unused")
-	private void addBaubleSlots() {
+	private void addRuneSlots() {
 
 	}
 }

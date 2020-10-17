@@ -33,6 +33,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -54,6 +55,16 @@ public class KarmaEvents {
 		player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
 				false);
 	}
+	
+	@SubscribeEvent
+	public static void onDimensionChange(PlayerChangedDimensionEvent event) {
+		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+		int amount = KarmaProvider.getPlayerKarma(player);
+		PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> player), new KarmaPacketServer(amount));
+		player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
+				false);
+	}
+
 
 	@SubscribeEvent
 	public static void playerDeath(PlayerEvent.Clone event) {

@@ -19,9 +19,6 @@ public class SlotRune extends SlotItemHandler {
 		this.player = player;
 	}
 
-	/**
-	 * Check if the stack is a valid item for this slot.
-	 */
 	@Override
 	public boolean isItemValid(ItemStack stack) {
 		if (stack.getItem() instanceof IRune && !(stack.getItem() instanceof ItemContractRune)) {
@@ -29,8 +26,6 @@ public class SlotRune extends SlotItemHandler {
 		} else {
 			return false;
 		}
-		// return ((IRunesItemHandler) getItemHandler()).isItemValidForSlot(baubleSlot,
-		// stack);
 	}
 
 	@Override

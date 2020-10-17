@@ -11,11 +11,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.huto.hutosmod.capabilities.covenant.CovenantEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
+import com.huto.hutosmod.capabilities.karma.KarmaHudEventHandler;
+import com.huto.hutosmod.capabilities.vibes.SeerEventHandler;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
-import com.huto.hutosmod.events.ClientEventRender;
-import com.huto.hutosmod.events.KarmaHudEventHandler;
-import com.huto.hutosmod.events.SeerEventHandler;
+import com.huto.hutosmod.events.RenderLaserWithItem;
 import com.huto.hutosmod.gui.pages.coven.CovenPageLib;
 import com.huto.hutosmod.gui.pages.guide.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
@@ -177,7 +177,7 @@ public class HutosMod {
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
-		MinecraftForge.EVENT_BUS.register(ClientEventRender.class);
+		MinecraftForge.EVENT_BUS.register(RenderLaserWithItem.class);
 
 	}
 

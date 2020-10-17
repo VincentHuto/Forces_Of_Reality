@@ -69,7 +69,6 @@ public class BlockInit {
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> contained_magma = BLOCKS.register("contained_magma", () -> new Block(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
 	public static final RegistryObject<Block> reversion_catalyst = BLOCKS.register("reversion_catalyst",
 			() -> new Block(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).sound(SoundType.ANVIL)));
@@ -82,55 +81,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 
-	// Tiles
-
-	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> vibe_resonator = BLOCKS.register("vibe_resonator",
-			() -> new BlockVibeResonator(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> wave_gatherer = BLOCKS.register("wave_gatherer",
-			() -> new BlockWaveGatherer(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> vibe_gatherer = BLOCKS.register("vibe_gatherer",
-			() -> new BlockVibeGatherer(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> karmic_altar = BLOCKS.register("karmic_altar", () -> new BlockKarmicAltar(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> virtuous_enchanter = BLOCKS.register("virtuous_enchanter",
-			() -> new BlockVirtuousEnchant(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> karmic_extractor = BLOCKS.register("karmic_extractor",
-			() -> new BlockKarmicExtractor(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> vibratory_fuser = BLOCKS.register("vibratory_fuser",
-			() -> new BlockVibeFuser(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> vibe_absorber = BLOCKS.register("vibe_absorber",
-			() -> new BlockVibeAbsorber(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
-			() -> new BlockVibeAccel(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
-			() -> new BlockThermalInfluxer(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> runic_chisel_station = BLOCKS.register("runic_chisel_station",
-			() -> new BlockChiselStation(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",
-			() -> new BlockSlimeRepelent(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> ascendent_altar = BLOCKS.register("ascendent_altar",
-			() -> new BlockAscendentAltar(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	// Storage
-	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
-			() -> new BlockStorageDrum(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> vibratory_capacitor = BLOCKS.register("vibratory_capacitor",
-			() -> new BlockCapacitor(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Mystic
 	public static final RegistryObject<Block> mystic_earth = BLOCKS.register("mystic_earth",
 			() -> new GrassBlock(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f)
@@ -197,9 +147,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> gilded_wool = BLOCKS.register("gilded_wool",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> ascendent_altar = BLOCKS.register("ascendent_altar",
+			() -> new BlockAscendentAltar(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	// Plants
-
 	public static final RegistryObject<Block> mystic_grass = BLOCKS.register("mystic_grass",
 			() -> new TallGrassBlock(Block.Properties.from(Blocks.GRASS)));
 
@@ -222,6 +174,53 @@ public class BlockInit {
 	public static final RegistryObject<Block> anti_sapling = BLOCKS.register("anti_sapling",
 			() -> new SaplingBlock(new OakTree(), AbstractBlock.Properties.create(Material.PLANTS)
 					.doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+
+	// Tiles
+	public static final RegistryObject<Block> wand_maker = BLOCKS.register("wand_maker", () -> new BlockWandMaker(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibe_resonator = BLOCKS.register("vibe_resonator",
+			() -> new BlockVibeResonator(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> wave_gatherer = BLOCKS.register("wave_gatherer",
+			() -> new BlockWaveGatherer(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibe_gatherer = BLOCKS.register("vibe_gatherer",
+			() -> new BlockVibeGatherer(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> karmic_altar = BLOCKS.register("karmic_altar", () -> new BlockKarmicAltar(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> virtuous_enchanter = BLOCKS.register("virtuous_enchanter",
+			() -> new BlockVirtuousEnchant(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> karmic_extractor = BLOCKS.register("karmic_extractor",
+			() -> new BlockKarmicExtractor(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibratory_fuser = BLOCKS.register("vibratory_fuser",
+			() -> new BlockVibeFuser(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibe_absorber = BLOCKS.register("vibe_absorber",
+			() -> new BlockVibeAbsorber(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
+			() -> new BlockVibeAccel(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
+			() -> new BlockThermalInfluxer(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	// Storage
+	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
+			() -> new BlockStorageDrum(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibratory_capacitor = BLOCKS.register("vibratory_capacitor",
+			() -> new BlockCapacitor(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	// Misc
+	public static final RegistryObject<Block> runic_chisel_station = BLOCKS.register("runic_chisel_station",
+			() -> new BlockChiselStation(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",
+			() -> new BlockSlimeRepelent(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	// OBJ
 	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron",
@@ -252,8 +251,6 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_mystic.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_grass.get(), RenderType.getCutout());
-
 		}
 	}
-
 }
