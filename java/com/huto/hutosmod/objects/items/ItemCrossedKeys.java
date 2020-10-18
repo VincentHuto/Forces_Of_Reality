@@ -52,12 +52,12 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(EnumCovenants.ASCENDENT,
-							(coven.getDevotionByCoven(EnumCovenants.ASCENDENT) + 10));
-					System.out.println(coven.getDevotionByCoven(EnumCovenants.ASCENDENT));
+					coven.setCovenDevotion(getAssignedCovenant(),
+							(coven.getDevotionByCoven(getAssignedCovenant()) + 10));
+					System.out.println(coven.getDevotionByCoven(getAssignedCovenant()));
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(new StringTextComponent(
-							TextFormatting.AQUA + "You hear the clang of bells in the distance"), false);
+							TextFormatting.AQUA + "You hear the clang of bells in the distance"), true);
 					System.out.println(coven.getDevotion().size());
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
@@ -77,13 +77,13 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(EnumCovenants.ASCENDENT,
-							(coven.getDevotionByCoven(EnumCovenants.ASCENDENT) - 10));
-					System.out.println(coven.getDevotionByCoven(EnumCovenants.ASCENDENT));
+					coven.setCovenDevotion(getAssignedCovenant(),
+							(coven.getDevotionByCoven(getAssignedCovenant()) - 10));
+					System.out.println(coven.getDevotionByCoven(getAssignedCovenant()));
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.AQUA + "You hear an angelic screech in your minds"),
-							false);
+							true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));

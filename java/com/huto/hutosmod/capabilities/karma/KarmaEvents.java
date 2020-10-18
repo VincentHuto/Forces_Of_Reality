@@ -1,5 +1,6 @@
 package com.huto.hutosmod.capabilities.karma;
 
+import java.awt.Color;
 import java.util.Optional;
 
 import com.huto.hutosmod.HutosMod;
@@ -9,6 +10,9 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.merchant.IMerchant;
@@ -29,6 +33,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -55,7 +62,7 @@ public class KarmaEvents {
 		player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
 				false);
 	}
-	
+
 	@SubscribeEvent
 	public static void onDimensionChange(PlayerChangedDimensionEvent event) {
 		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
@@ -64,7 +71,6 @@ public class KarmaEvents {
 		player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
 				false);
 	}
-
 
 	@SubscribeEvent
 	public static void playerDeath(PlayerEvent.Clone event) {
@@ -95,6 +101,46 @@ public class KarmaEvents {
 		}
 	}
 
+	private static FontRenderer fontRenderer;
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
+		if (fontRenderer == null) {
+			fontRenderer = Minecraft.getInstance().fontRenderer;
+		}
+		PlayerEntity player = Minecraft.getInstance().player;
+		if (player != null) {
+			if (player.isAlive()) {
+				if (player.world.getDimensionKey() == DimensionInit.dreamlands) {
+					if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ItemInit.mysterious_mask
+							.get()) {
+						IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA)
+								.orElseThrow(IllegalArgumentException::new);
+						if (karma.getKarma() > 0) {
+							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
+									new Color(0, 0, 255, 3).getRGB());
+							fontRenderer.drawString(event.getMatrixStack(), "Positive View", 5, 5,
+									new Color(255, 0, 0, 255).getRGB());
+						} else if (karma.getKarma() == 0) {
+							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000, new Color(0, 0, 0, 0).getRGB());
+							fontRenderer.drawString(event.getMatrixStack(), "Neutral View", 5, 5,
+									new Color(255, 0, 0, 255).getRGB());
+						} else if (karma.getKarma() < 0) {
+							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
+									new Color(255, 0, 0, 3).getRGB());
+							fontRenderer.drawString(event.getMatrixStack(), "Negative View", 5, 5,
+									new Color(255, 0, 0, 255).getRGB());
+						}
+
+					}
+				}
+
+			}
+		}
+
+	}
+
 	@SubscribeEvent
 	public static void applyKarmaBuffs(PlayerTickEvent event) {
 		@SuppressWarnings("unused")
@@ -104,7 +150,7 @@ public class KarmaEvents {
 		 * IllegalStateException::new); // messing with caabilites gets sorta sticky
 		 * because they dont return back to // normal... change later if
 		 * (karma.getKarma() >= 1.0F) { // player.capabilities.setPlayerWalkSpeed(0.1F);
-		 * 
+		 *                                           
 		 * }
 		 * 
 		 * if (karma.getKarma() >= 20.0F) { player.addPotionEffect(new
@@ -206,6 +252,7 @@ public class KarmaEvents {
 
 	}
 
+	//Saving player position to return too before and after teleport
 	public static Optional<DimensionalPosition> getLastOverworldPosition(PlayerEntity player) {
 		CompoundNBT data = player.getPersistentData();
 		if (!data.contains("overworld-lastpos")) {

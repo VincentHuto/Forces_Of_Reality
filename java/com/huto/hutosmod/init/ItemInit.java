@@ -6,6 +6,7 @@ import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.ItemBeastBreath;
 import com.huto.hutosmod.objects.items.ItemCovenTome;
 import com.huto.hutosmod.objects.items.ItemCrossedKeys;
 import com.huto.hutosmod.objects.items.ItemDebugTool;
@@ -199,6 +200,15 @@ public class ItemInit {
 	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
+	// Beast
+	public static final RegistryObject<Item> breath_of_the_beast = ITEMS.register("breath_of_the_beast",
+			() -> new ItemBeastBreath(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.BEAST));
+	public static final RegistryObject<Item> blooddrawn_fang = ITEMS.register("blooddrawn_fang",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> beastly_bone = ITEMS.register("beastly_bone",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Karma

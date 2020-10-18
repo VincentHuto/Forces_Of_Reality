@@ -136,12 +136,17 @@ public class CovenantEvents {
 								fontRenderer.drawString(event.getMatrixStack(), "Seraph View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								break;
-
+							case BEAST:
+								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
+										new Color(255, 0, 0, 3).getRGB());
+								fontRenderer.drawString(event.getMatrixStack(), "Beast View", 5, 5,
+										new Color(255, 0, 0, 255).getRGB());
+								break;
 							default:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
 										new Color(0, 0, 0, 0).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "No Covenant", 5, 5,
-										new Color(255, 0, 0, 255).getRGB());
+										new Color(0, 0, 0, 0).getRGB());
 								break;
 							}
 						}

@@ -24,7 +24,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 
-	public ItemWatchfulPendant(Properties properties,EnumCovenants covenIn) {
+	public ItemWatchfulPendant(Properties properties, EnumCovenants covenIn) {
 		super(properties, covenIn);
 		properties.rarity(Rarity.UNCOMMON);
 	}
@@ -52,17 +52,15 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(EnumCovenants.ELDRITCH,
-							(coven.getDevotionByCoven(EnumCovenants.ELDRITCH) + 10));
-					//coven.setCovenant(EnumCovenants.ELDRITCH);
+					coven.setCovenDevotion(getAssignedCovenant(),
+							(coven.getDevotionByCoven(getAssignedCovenant()) + 10));
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.LIGHT_PURPLE + "You begin to see more clearly"),
-							false);
+							true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
-
 				}
 			}
 		}
@@ -77,12 +75,11 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(EnumCovenants.ELDRITCH,
-							(coven.getDevotionByCoven(EnumCovenants.ELDRITCH) - 10));
-				//	coven.setCovenant(EnumCovenants.NONE);
+					coven.setCovenDevotion(getAssignedCovenant(),
+							(coven.getDevotionByCoven(getAssignedCovenant()) - 10));
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(new StringTextComponent(
-							TextFormatting.LIGHT_PURPLE + "You suddenly feel as your being watched"), false);
+							TextFormatting.LIGHT_PURPLE + "You suddenly feel as your being watched"), true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));

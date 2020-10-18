@@ -8,7 +8,6 @@ import com.huto.hutosmod.capabilities.mindrunes.RuneType;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
-import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,14 +16,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class ItemYellowSign extends ItemContractRune implements IRune {
+public class ItemBeastBreath extends ItemContractRune implements IRune {
 
-	public ItemYellowSign(Properties properties, EnumCovenants covenIn) {
+	public ItemBeastBreath(Properties properties, EnumCovenants covenIn) {
 		super(properties, covenIn);
 		properties.rarity(Rarity.UNCOMMON);
 	}
@@ -46,7 +46,7 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 	@Override
 	public void onEquipped(LivingEntity player) {
 		super.onEquipped(player);
-		player.playSound(SoundHandler.ENTITY_HASTUR_HURT, 1F, 1f);
+		player.playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
 		if (player instanceof PlayerEntity) {
 			if (!player.getEntityWorld().isRemote) {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
@@ -56,7 +56,8 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 							(coven.getDevotionByCoven(getAssignedCovenant()) + 10));
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
-							new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Accepts your Fealty"), true);
+							new StringTextComponent(TextFormatting.DARK_RED + "The Howl of a Great Beast can be Heard in the Distance"),
+							true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
@@ -69,7 +70,7 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 	@Override
 	public void onUnequipped(LivingEntity player) {
 		super.onUnequipped(player);
-		player.playSound(SoundHandler.ENTITY_HASTUR_AMBIENT, 1F, 1f);
+		player.playSound(SoundEvents.ENTITY_WOLF_GROWL, .25F, 1f);
 		if (player instanceof PlayerEntity) {
 			if (!player.getEntityWorld().isRemote) {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
@@ -78,12 +79,12 @@ public class ItemYellowSign extends ItemContractRune implements IRune {
 					coven.setCovenDevotion(getAssignedCovenant(),
 							(coven.getDevotionByCoven(getAssignedCovenant()) - 10));
 					PlayerEntity playerEnt = (PlayerEntity) player;
-					playerEnt.sendStatusMessage(
-							new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Renounces your Fealty"),
-							true);
+					playerEnt.sendStatusMessage(new StringTextComponent(
+							TextFormatting.DARK_RED + "The Hunt has begun..."), true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
+
 				}
 			}
 		}
