@@ -167,6 +167,11 @@ public class ItemInit {
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
+	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> cured_clay_flask = ITEMS.register("cured_clay_flask",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
 	// Hastur
 	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign",
 			() -> new ItemYellowSign(
@@ -440,13 +445,17 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_throne = ITEMS.register("spawn_egg_throne",
 			() -> new ModSpawnEggItem(EntityInit.throne, 16777215, 12745984,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_beast_from_beyond = ITEMS
+			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 0, 0,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
 				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
-				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne);
+				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
+				ItemInit.spawn_egg_beast_from_beyond);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -34,7 +34,6 @@ public class Covenant implements ICovenant {
 	public int getDevotionByCoven(EnumCovenants covenIn) {
 		if (devotion != null && devotion.get(covenIn) != null) {
 			return devotion.get(covenIn);
-
 		} else {
 			return 0;
 		}

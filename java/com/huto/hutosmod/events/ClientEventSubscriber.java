@@ -9,6 +9,7 @@ import com.huto.hutosmod.gui.mindrunes.PlayerExpandedScreen;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.render.entity.RenderBeastFromBeyond;
 import com.huto.hutosmod.render.entity.RenderColin;
 import com.huto.hutosmod.render.entity.RenderCorruptNote;
 import com.huto.hutosmod.render.entity.RenderDenizen;
@@ -98,6 +99,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_flare.get(), RenderHolyFlare::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.eldritch_grip.get(), RenderEldritchGrip::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
+				RenderBeastFromBeyond::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
 

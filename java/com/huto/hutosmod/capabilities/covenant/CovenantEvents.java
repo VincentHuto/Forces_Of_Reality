@@ -1,7 +1,9 @@
 package com.huto.hutosmod.capabilities.covenant;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
@@ -14,10 +16,21 @@ import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
+import net.minecraft.entity.monster.AbstractRaiderEntity;
+import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.monster.piglin.AbstractPiglinEntity;
+import net.minecraft.entity.passive.AmbientEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -109,7 +122,6 @@ public class CovenantEvents {
 		}
 		PlayerEntity player = Minecraft.getInstance().player;
 		if (player != null) {
-
 			if (player.isAlive()) {
 				if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ItemInit.influence_supressor
 						.get()) {
@@ -141,6 +153,7 @@ public class CovenantEvents {
 										new Color(255, 0, 0, 3).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Beast View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
+
 								break;
 							default:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
@@ -165,7 +178,36 @@ public class CovenantEvents {
 	}
 
 	@SubscribeEvent
-	public static void applyKarmaDebuffs(PlayerTickEvent event) {
+	public static void applyKarmaDebuffs(PlayerTickEvent e) {
+		if (e.player.isAlive()) {
+			if (e.player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ItemInit.influence_supressor.get()) {
+				Predicate<Entity> WARMBLOODED = new Predicate<Entity>() {
+					@Override
+					public boolean test(Entity e) {
+						if (e instanceof AnimalEntity || e instanceof PlayerEntity || e instanceof AbstractRaiderEntity
+								|| e instanceof ZombieEntity || e instanceof AbstractPiglinEntity
+								|| e instanceof AmbientEntity || e instanceof WaterMobEntity
+								|| e instanceof AbstractVillagerEntity) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				};
 
+				ICovenant coven = e.player.getCapability(CovenantProvider.COVEN_CAPA)
+						.orElseThrow(IllegalArgumentException::new);
+				if (coven.getDevotion().get(EnumCovenants.BEAST) >= 10) {
+					List<Entity> entList = e.player.world.getEntitiesInAABBexcluding(e.player,
+							e.player.getBoundingBox().grow(15), WARMBLOODED);
+					for (Entity ent : entList) {
+						if (ent instanceof LivingEntity) {
+							LivingEntity livEnt = (LivingEntity) ent;
+							livEnt.addPotionEffect(new EffectInstance(Effects.GLOWING, 2, 2, true, false));
+						}
+					}
+				}
+			}
+		}
 	}
 }

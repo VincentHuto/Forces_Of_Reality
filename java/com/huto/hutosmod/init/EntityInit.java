@@ -1,6 +1,7 @@
 package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.entities.EntityBeastFromBeyond;
 import com.huto.hutosmod.entities.EntityColin;
 import com.huto.hutosmod.entities.EntityDenizen;
 import com.huto.hutosmod.entities.EntityDenizenSage;
@@ -95,6 +96,14 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityThrone>> throne = ENTITY_TYPES.register("throne",
 			() -> EntityType.Builder.<EntityThrone>create(EntityThrone::new, EntityClassification.MONSTER).size(1F, 1F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "throne").toString()));
+
+	// Beast
+	public static final RegistryObject<EntityType<EntityBeastFromBeyond>> beast_from_beyond = ENTITY_TYPES.register(
+			"beast_from_beyond",
+			() -> EntityType.Builder
+					.<EntityBeastFromBeyond>create(EntityBeastFromBeyond::new, EntityClassification.MONSTER)
+					.size(2f, 2f).build(new ResourceLocation(HutosMod.MOD_ID, "beast_from_beyond").toString()));
+
 	// Projectiles
 	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
 			"player_tentacle",
@@ -149,6 +158,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.holy_flare.get(), EntityHolyFlare.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.eldritch_grip.get(), EntityEldritchGrip.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur_clone.get(), EntityHasturClone.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.beast_from_beyond.get(),
+				EntityBeastFromBeyond.setAttributes().create());
 
 	}
 }
