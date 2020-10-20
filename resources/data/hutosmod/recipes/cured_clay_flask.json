@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "hutosmod:raw_clay_flask"
+  },
+  "result": "hutosmod:cured_clay_flask",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -24,7 +24,7 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.math.vector.Vector4f;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
-public class RenderMiningLaser2 {
+public class RenderVibeLaser {
 
 	@SuppressWarnings("unused")
 	private final static ResourceLocation laserBeam = new ResourceLocation(
@@ -45,8 +45,9 @@ public class RenderMiningLaser2 {
 
 		// parse data from item
 		float speedModifier = 0.5f;
-		drawLasers(event, playerPos, trace, 0, 0, 0, 1+player.world.rand.nextInt(100) / 255f, 1+player.world.rand.nextInt(100) / 255f, 1+player.world.rand.nextInt(100) / 255f, 0.02f, player, ticks,
-				speedModifier);
+		drawLasers(event, playerPos, trace, 0, 0, 0, 1 + player.world.rand.nextInt(100) / 255f,
+				1 + player.world.rand.nextInt(100) / 255f, 1 + player.world.rand.nextInt(100) / 255f, 0.02f, player,
+				ticks, speedModifier);
 	}
 
 	@SuppressWarnings("unused")
@@ -72,10 +73,10 @@ public class RenderMiningLaser2 {
 		double distance = Math.max(1, from.subtract(trace.getHitVec()).length());
 		long gameTime = player.world.getGameTime();
 		double v = gameTime * speedModifier;
-		//How wide the blur is on the beam
+		// How wide the blur is on the beam
 		float additiveThickness = (thickness * 4.5f) * calculateLaserFlickerModifier(gameTime);
 
-		//Core Color
+		// Core Color
 		float beam2r = 255 / 255f;
 		float beam2g = 255 / 255f;
 		float beam2b = 255 / 255f;

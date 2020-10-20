@@ -3,11 +3,11 @@ package com.huto.hutosmod.capabilities.covenant;
 import java.awt.Color;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesApi;
+import com.huto.hutosmod.entities.utils.ModEntityPredicates;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
@@ -16,21 +16,13 @@ import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
-import net.minecraft.entity.monster.AbstractRaiderEntity;
-import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.monster.piglin.AbstractPiglinEntity;
-import net.minecraft.entity.passive.AmbientEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.scoreboard.ScorePlayerTeam;
+import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -129,28 +121,29 @@ public class CovenantEvents {
 							.orElseThrow(IllegalArgumentException::new);
 					for (EnumCovenants covens : coven.getDevotion().keySet()) {
 						if (coven.getDevotionByCoven(covens) > 1) {
+							int devonMult = coven.getDevotionByCoven(covens) / 3;
 							switch (covens) {
 							case HASTUR:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
-										new Color(255, 255, 0, 3).getRGB());
+										new Color(255, 255, 0, devonMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Hasturs View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								break;
 							case ELDRITCH:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
-										new Color(255, 0, 255, 3).getRGB());
+										new Color(255, 0, 255, devonMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Azathoth View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								break;
 							case ASCENDENT:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
-										new Color(255, 255, 255, 3).getRGB());
+										new Color(255, 255, 255, devonMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Seraph View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								break;
 							case BEAST:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
-										new Color(255, 0, 0, 3).getRGB());
+										new Color(255, 0, 0, devonMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Beast View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 
@@ -178,36 +171,202 @@ public class CovenantEvents {
 	}
 
 	@SubscribeEvent
-	public static void applyKarmaDebuffs(PlayerTickEvent e) {
-		if (e.player.isAlive()) {
-			if (e.player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ItemInit.influence_supressor.get()) {
-				Predicate<Entity> WARMBLOODED = new Predicate<Entity>() {
-					@Override
-					public boolean test(Entity e) {
-						if (e instanceof AnimalEntity || e instanceof PlayerEntity || e instanceof AbstractRaiderEntity
-								|| e instanceof ZombieEntity || e instanceof AbstractPiglinEntity
-								|| e instanceof AmbientEntity || e instanceof WaterMobEntity
-								|| e instanceof AbstractVillagerEntity) {
-							return true;
-						} else {
-							return false;
-						}
-					}
-				};
+	public static void renderHeatVision(PlayerTickEvent e) {
+		if (e.player.world.isRemote)
+			if (e.player.isAlive()) {
 
 				ICovenant coven = e.player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
-				if (coven.getDevotion().get(EnumCovenants.BEAST) >= 10) {
-					List<Entity> entList = e.player.world.getEntitiesInAABBexcluding(e.player,
-							e.player.getBoundingBox().grow(15), WARMBLOODED);
-					for (Entity ent : entList) {
-						if (ent instanceof LivingEntity) {
-							LivingEntity livEnt = (LivingEntity) ent;
-							livEnt.addPotionEffect(new EffectInstance(Effects.GLOWING, 2, 2, true, false));
+				if (coven != null && coven.getDevotion().get(EnumCovenants.BEAST) != null) {
+					if (coven.getDevotion().get(EnumCovenants.BEAST) >= 10) {
+
+						// Full Check
+						List<Entity> entList = e.player.world.getEntitiesInAABBexcluding(e.player,
+								e.player.getBoundingBox().grow(30), EntityPredicates.IS_ALIVE);
+						for (Entity ent : entList) {
+							if (ent instanceof LivingEntity) {
+								LivingEntity livEnt = (LivingEntity) ent;
+								if (livEnt != null) {
+									if (e.player.getItemStackFromSlot(EquipmentSlotType.HEAD)
+											.getItem() == ItemInit.influence_supressor.get()) {
+										// Warm Blooded
+										if (ModEntityPredicates.WARMBLOODED.test(ent)) {
+											if (!livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Heat Signature")) {
+												livEnt.getEntityWorld().getScoreboard().createTeam("Heat Signature");
+											}
+											ScorePlayerTeam heatTeam = livEnt.getEntityWorld().getScoreboard()
+													.getTeam("Heat Signature");
+											if (livEnt.getEntityWorld().getGameTime() % 10 == 0) {
+												if (livEnt.getEntityWorld().getGameTime() % 3 == 2) {
+													heatTeam.setColor(TextFormatting.RED);
+												} else if (livEnt.getEntityWorld().getGameTime() % 4 == 0) {
+													heatTeam.setColor(TextFormatting.GOLD);
+												} else if (livEnt.getEntityWorld().getGameTime() % 5 == 0) {
+													heatTeam.setColor(TextFormatting.YELLOW);
+												}
+											}
+											if (livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Heat Signature")) {
+												livEnt.getEntityWorld().getScoreboard()
+														.addPlayerToTeam(livEnt.getCachedUniqueIdString(), heatTeam);
+												livEnt.setGlowing(true);
+												if (e.player.getDistance(livEnt) > 30) {
+													livEnt.setGlowing(false);
+												}
+											}
+										}
+
+										// Cold Blooded
+										if (ModEntityPredicates.COLDBLOODED.test(ent)) {
+											if (!livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Cold Signature")) {
+												livEnt.getEntityWorld().getScoreboard().createTeam("Cold Signature");
+											}
+											ScorePlayerTeam coldTeam = livEnt.getEntityWorld().getScoreboard()
+													.getTeam("Cold Signature");
+											if (livEnt.getEntityWorld().getGameTime() % 10 == 0) {
+												if (livEnt.getEntityWorld().getGameTime() % 3 == 2) {
+													coldTeam.setColor(TextFormatting.AQUA);
+												} else if (livEnt.getEntityWorld().getGameTime() % 4 == 0) {
+													coldTeam.setColor(TextFormatting.BLUE);
+												} else if (livEnt.getEntityWorld().getGameTime() % 5 == 0) {
+													coldTeam.setColor(TextFormatting.DARK_AQUA);
+												}
+											}
+											if (livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Cold Signature")) {
+												livEnt.getEntityWorld().getScoreboard()
+														.addPlayerToTeam(livEnt.getCachedUniqueIdString(), coldTeam);
+												livEnt.setGlowing(true);
+												if (e.player.getDistance(livEnt) > 30) {
+													livEnt.setGlowing(false);
+												}
+											}
+										}
+
+										// Undead
+										if (ModEntityPredicates.UNDEAD.test(ent)) {
+											if (!livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Undead Signature")) {
+												livEnt.getEntityWorld().getScoreboard().createTeam("Undead Signature");
+											}
+											ScorePlayerTeam undeadTeam = livEnt.getEntityWorld().getScoreboard()
+													.getTeam("Undead Signature");
+											if (livEnt.getEntityWorld().getGameTime() % 10 == 0) {
+												if (livEnt.getEntityWorld().getGameTime() % 3 == 2) {
+													undeadTeam.setColor(TextFormatting.WHITE);
+												} else if (livEnt.getEntityWorld().getGameTime() % 4 == 0) {
+													undeadTeam.setColor(TextFormatting.GRAY);
+												} else if (livEnt.getEntityWorld().getGameTime() % 5 == 0) {
+													undeadTeam.setColor(TextFormatting.DARK_GRAY);
+												}
+											}
+											if (livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Undead Signature")) {
+												livEnt.getEntityWorld().getScoreboard()
+														.addPlayerToTeam(livEnt.getCachedUniqueIdString(), undeadTeam);
+												livEnt.setGlowing(true);
+												if (e.player.getDistance(livEnt) > 30) {
+													livEnt.setGlowing(false);
+												}
+											}
+										}
+
+										// Ender Blooded
+										if (ModEntityPredicates.ENDERBLOOD.test(ent)) {
+											if (!livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Ender Signature")) {
+												livEnt.getEntityWorld().getScoreboard().createTeam("Ender Signature");
+											}
+											ScorePlayerTeam enderTeam = livEnt.getEntityWorld().getScoreboard()
+													.getTeam("Ender Signature");
+											if (livEnt.getEntityWorld().getGameTime() % 10 == 0) {
+												if (livEnt.getEntityWorld().getGameTime() % 3 == 2) {
+													enderTeam.setColor(TextFormatting.LIGHT_PURPLE);
+												} else if (livEnt.getEntityWorld().getGameTime() % 4 == 0) {
+													enderTeam.setColor(TextFormatting.DARK_PURPLE);
+												} else if (livEnt.getEntityWorld().getGameTime() % 5 == 0) {
+													enderTeam.setColor(TextFormatting.BLACK);
+												}
+											}
+											if (livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Ender Signature")) {
+												livEnt.getEntityWorld().getScoreboard()
+														.addPlayerToTeam(livEnt.getCachedUniqueIdString(), enderTeam);
+												livEnt.setGlowing(true);
+												if (e.player.getDistance(livEnt) > 30) {
+													livEnt.setGlowing(false);
+												}
+											}
+										}
+										// Plant Blooded
+										if (ModEntityPredicates.PLANTBLOOD.test(ent)) {
+											if (!livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Plant Signature")) {
+												livEnt.getEntityWorld().getScoreboard().createTeam("Plant Signature");
+											}
+											ScorePlayerTeam plantTeam = livEnt.getEntityWorld().getScoreboard()
+													.getTeam("Plant Signature");
+											if (livEnt.getEntityWorld().getGameTime() % 10 == 0) {
+												if (livEnt.getEntityWorld().getGameTime() % 3 == 2) {
+													plantTeam.setColor(TextFormatting.GREEN);
+												} else if (livEnt.getEntityWorld().getGameTime() % 4 == 0) {
+													plantTeam.setColor(TextFormatting.YELLOW);
+												} else if (livEnt.getEntityWorld().getGameTime() % 5 == 0) {
+													plantTeam.setColor(TextFormatting.RED);
+												} else if (livEnt.getEntityWorld().getGameTime() % 6 == 0) {
+													plantTeam.setColor(TextFormatting.WHITE);
+												}
+											}
+											if (livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Plant Signature")) {
+												livEnt.getEntityWorld().getScoreboard()
+														.addPlayerToTeam(livEnt.getCachedUniqueIdString(), plantTeam);
+												livEnt.setGlowing(true);
+												if (e.player.getDistance(livEnt) > 30) {
+													livEnt.setGlowing(false);
+												}
+											}
+										}
+										// Infernal Blooded
+										if (ModEntityPredicates.INFERNALBLOOD.test(ent)) {
+											if (!livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Flame Signature")) {
+												livEnt.getEntityWorld().getScoreboard().createTeam("Flame Signature");
+											}
+											ScorePlayerTeam infernalTeam = livEnt.getEntityWorld().getScoreboard()
+													.getTeam("Flame Signature");
+											if (livEnt.getEntityWorld().getGameTime() % 10 == 0) {
+												if (livEnt.getEntityWorld().getGameTime() % 3 == 2) {
+													infernalTeam.setColor(TextFormatting.RED);
+												} else if (livEnt.getEntityWorld().getGameTime() % 4 == 0) {
+													infernalTeam.setColor(TextFormatting.GOLD);
+												} else if (livEnt.getEntityWorld().getGameTime() % 5 == 0) {
+													infernalTeam.setColor(TextFormatting.YELLOW);
+												} else if (livEnt.getEntityWorld().getGameTime() % 6 == 0) {
+													infernalTeam.setColor(TextFormatting.DARK_GRAY);
+												}
+											}
+											if (livEnt.getEntityWorld().getScoreboard().getTeamNames()
+													.contains("Flame Signature")) {
+												livEnt.getEntityWorld().getScoreboard().addPlayerToTeam(
+														livEnt.getCachedUniqueIdString(), infernalTeam);
+												livEnt.setGlowing(true);
+												if (e.player.getDistance(livEnt) > 30) {
+													livEnt.setGlowing(false);
+												}
+											}
+										}
+									} else {
+										livEnt.setGlowing(false);
+									}
+
+								}
+							}
 						}
 					}
 				}
 			}
-		}
 	}
 }

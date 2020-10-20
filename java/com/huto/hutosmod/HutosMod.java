@@ -172,6 +172,7 @@ public class HutosMod {
 		ModChiselRecipes.init();
 		PacketHandler.registerChannels();
 
+
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {

@@ -11,10 +11,10 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 modId="hutosmod" #mandatory
 
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="1.0" #mandatory
+version="Alpha 1.0" #mandatory
 
  # A display name for the mod
-displayName="Duality of Nature" #mandatory
+displayName="Forces of Reality" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification <here>
 updateJSONURL="http://myurl.me/" #optional
@@ -23,7 +23,7 @@ updateJSONURL="http://myurl.me/" #optional
 displayURL="http://curseforge.com/" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="examplemod.png" #optional
+logoFile="logo.png" #optional
 
 # A text field displayed in the mod UI
 credits="Huto" #optional
@@ -33,10 +33,12 @@ authors="Huto" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-	Have you ever wanted to have a magic system based entirely on selling your soul? 
-	How about one that acts like it may have a lore but who knows??
-	Well this is the mod for you!
-	Please give me feedback its my first time!
+Have you ever wanted to have a magic system based entirely on selling your soul? 
+How about one that acts like it may have a lore but who knows??
+Do you wanna know what its like to slowly descend to madness or ascend to enlightenment?
+Well this is the mod for you!
+Please give me feedback its my first time!
+~Huto
 '''
 
 

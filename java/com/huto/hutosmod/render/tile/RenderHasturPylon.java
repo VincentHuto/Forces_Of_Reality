@@ -44,13 +44,11 @@ public class RenderHasturPylon extends TileEntityRenderer<TileEntityHasturPylon>
 		matrixStackIn.translate(0, y, 0);
 		matrixStackIn.rotate(Vector3f.YP.rotation((float) (0.05 * ticks)));
 		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(180));
-		IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
-				.getImpl(Tessellator.getInstance().getBuffer());
-		IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(
+		IRenderTypeBuffer.Impl impl = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+		IVertexBuilder ivertexbuilder = impl.getBuffer(
 				pylon.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/hastur_pylon.png")));
-	//	IVertexBuilder bb = bufferIn.getBuffer(RenderInit.HASTURTRANS);
 		pylon.render(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-		irendertypebuffer$impl.finish();
+		impl.finish();
 		matrixStackIn.pop();
 
 	}
