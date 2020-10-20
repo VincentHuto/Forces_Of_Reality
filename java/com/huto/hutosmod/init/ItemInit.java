@@ -448,6 +448,9 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_beast_from_beyond = ITEMS
 			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 0, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_summoned_beast = ITEMS
+			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 0, 114140,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -455,7 +458,7 @@ public class ItemInit {
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
 				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
 				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
-				ItemInit.spawn_egg_beast_from_beyond);
+				ItemInit.spawn_egg_beast_from_beyond,ItemInit.spawn_egg_summoned_beast);
 	}
 
 	@SuppressWarnings("unchecked")

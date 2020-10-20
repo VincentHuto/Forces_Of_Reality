@@ -15,6 +15,7 @@ import com.huto.hutosmod.entities.EntityIbis;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
 import com.huto.hutosmod.entities.EntitySeraphim;
 import com.huto.hutosmod.entities.EntitySlug;
+import com.huto.hutosmod.entities.EntitySummonedBeast;
 import com.huto.hutosmod.entities.EntityTentacle;
 import com.huto.hutosmod.entities.EntityThrone;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
@@ -103,6 +104,11 @@ public class EntityInit {
 			() -> EntityType.Builder
 					.<EntityBeastFromBeyond>create(EntityBeastFromBeyond::new, EntityClassification.MONSTER)
 					.size(2f, 2f).build(new ResourceLocation(HutosMod.MOD_ID, "beast_from_beyond").toString()));
+	public static final RegistryObject<EntityType<EntitySummonedBeast>> summoned_beast = ENTITY_TYPES
+			.register("summoned_beast",
+					() -> EntityType.Builder
+							.<EntitySummonedBeast>create(EntitySummonedBeast::new, EntityClassification.MONSTER)
+							.size(1F, 1F).build(new ResourceLocation(HutosMod.MOD_ID, "summoned_beast").toString()));
 
 	// Projectiles
 	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
@@ -160,6 +166,6 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.hastur_clone.get(), EntityHasturClone.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.beast_from_beyond.get(),
 				EntityBeastFromBeyond.setAttributes().create());
-
+		GlobalEntityTypeAttributes.put(EntityInit.summoned_beast.get(), EntitySummonedBeast.setAttributes().create());
 	}
 }

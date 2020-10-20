@@ -26,6 +26,7 @@ import com.huto.hutosmod.render.entity.RenderPlayerTentacle;
 import com.huto.hutosmod.render.entity.RenderSeraphim;
 import com.huto.hutosmod.render.entity.RenderSlug;
 import com.huto.hutosmod.render.entity.RenderStarStrike;
+import com.huto.hutosmod.render.entity.RenderSummonedBeast;
 import com.huto.hutosmod.render.entity.RenderTentacle;
 import com.huto.hutosmod.render.entity.RenderThrone;
 import com.huto.hutosmod.render.entity.RenderTrackingOrb;
@@ -101,6 +102,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 
 		ClientRegistry.registerKeyBinding(KEY_RUNES);
 

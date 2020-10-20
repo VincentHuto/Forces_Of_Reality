@@ -16,10 +16,10 @@
 			"item": "minecraft:emerald"
 		},
 		"A": {
-			"item": "minecraft:gem_amethyst"
+			"item": "hutosmod:gem_amethyst"
 		},
 		"R": {
-			"item": "minecraft:gem_ruby"
+			"item": "hutosmod:gem_ruby"
 		}
 	},
 	"result": {

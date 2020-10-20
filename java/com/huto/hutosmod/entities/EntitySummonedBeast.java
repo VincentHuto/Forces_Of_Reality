@@ -40,9 +40,12 @@ public class EntitySummonedBeast extends MonsterEntity {
 	private static final DataParameter<Integer> BEAST_TYPE = EntityDataManager.createKey(EntitySummonedBeast.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/throne/model_throne_blue.png"));
-		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/throne/model_throne_brown.png"));
-		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/throne/model_throne_green.png"));
+		p_213410_0_.put(0,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/summoned_beast/model_summoned_beast_grey.png"));
+		p_213410_0_.put(1,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/summoned_beast/model_summoned_beast_brown.png"));
+		p_213410_0_.put(2,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/summoned_beast/model_summoned_beast_white.png"));
 	});
 	public float deathTicks = 1;
 
@@ -51,15 +54,15 @@ public class EntitySummonedBeast extends MonsterEntity {
 
 	}
 
-	public ResourceLocation getTentacleTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getTentacleType(), TEXTURE_BY_ID.get(0));
+	public ResourceLocation getBeastTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getBeastType(), TEXTURE_BY_ID.get(0));
 	}
 
-	public int getTentacleType() {
+	public int getBeastType() {
 		return this.dataManager.get(BEAST_TYPE);
 	}
 
-	public void setTentacleType(int type) {
+	public void setBeastType(int type) {
 		if (type <= 0 || type >= 4) {
 			type = this.rand.nextInt(5);
 		}
@@ -83,12 +86,12 @@ public class EntitySummonedBeast extends MonsterEntity {
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason,
 			@Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		this.setTentacleType(this.rand.nextInt(4));
+		this.setBeastType(this.rand.nextInt(4));
 		this.setEquipmentBasedOnDifficulty(difficultyIn);
 		World world = worldIn.getWorld();
 		if (world instanceof ServerWorld && ((ServerWorld) world).func_241112_a_()
 				.func_235010_a_(this.getPosition(), true, Structure.field_236374_j_).isValid()) {
-			this.setTentacleType(1);
+			this.setBeastType(1);
 			this.enablePersistence();
 		}
 
@@ -166,7 +169,7 @@ public class EntitySummonedBeast extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntitySeraphim)) {
+		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 
