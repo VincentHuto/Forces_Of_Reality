@@ -30,12 +30,14 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class ModEntityPredicates {
 	public static Predicate<Entity> WARMBLOODED = new Predicate<Entity>() {
 		@Override
 		public boolean test(Entity e) {
-			if (e instanceof AnimalEntity || e instanceof AmbientEntity || e instanceof AbstractVillagerEntity) {
+			if (e instanceof AnimalEntity || e instanceof AmbientEntity || e instanceof AbstractVillagerEntity
+					|| e instanceof PlayerEntity) {
 				return true;
 			} else {
 				return false;

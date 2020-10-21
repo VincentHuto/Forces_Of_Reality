@@ -5,6 +5,7 @@ import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.objects.items.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.EnumModToolTiers;
+import com.huto.hutosmod.objects.items.ItemAllegianceIdentifier;
 import com.huto.hutosmod.objects.items.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.ItemBeastBreath;
 import com.huto.hutosmod.objects.items.ItemCovenTome;
@@ -88,6 +89,10 @@ public class ItemInit {
 	// Return Rune
 	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
 			() -> new ItemResonanceDestabalizer(new Item.Properties().group(HutosModItemGroup.instance)));
+
+	public static final RegistryObject<Item> allegiance_identifier = ITEMS.register("allegiance_identifier",
+			() -> new ItemAllegianceIdentifier(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	// Books
 	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
@@ -458,7 +463,7 @@ public class ItemInit {
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
 				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
 				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
-				ItemInit.spawn_egg_beast_from_beyond,ItemInit.spawn_egg_summoned_beast);
+				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast);
 	}
 
 	@SuppressWarnings("unchecked")

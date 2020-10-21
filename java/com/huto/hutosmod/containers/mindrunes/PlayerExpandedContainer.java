@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
 
@@ -109,7 +108,6 @@ public class PlayerExpandedContainer extends Container {
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
-
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
@@ -120,16 +118,19 @@ public class PlayerExpandedContainer extends Container {
 
 			if (index == 0) {
 				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, true)) {
+
 					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (index >= 1 && index < 5) {
 				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
+
 					return ItemStack.EMPTY;
 				}
 			} else if (index >= 5 && index < 9) {
 				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
+
 					return ItemStack.EMPTY;
 				}
 			}
@@ -137,7 +138,9 @@ public class PlayerExpandedContainer extends Container {
 			// runes -> inv
 			else if (index >= 9 && index < 9 + slotShift) {
 				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
+
 					return ItemStack.EMPTY;
+
 				}
 			}
 
@@ -147,42 +150,54 @@ public class PlayerExpandedContainer extends Container {
 				int i = 8 - entityequipmentslot.getIndex();
 
 				if (!this.mergeItemStack(itemstack1, i, i + 1, false)) {
+
 					return ItemStack.EMPTY;
 				}
+
 			}
 
 			// inv -> offhand
 			else if (entityequipmentslot == EquipmentSlotType.OFFHAND
 					&& !(this.inventorySlots.get(45 + slotShift)).getHasStack()) {
 				if (!this.mergeItemStack(itemstack1, 45 + slotShift, 46 + slotShift, false)) {
+
 					return ItemStack.EMPTY;
+
 				}
 			}
 			// inv -> rune
-			else if (itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null).isPresent()) {
+		/*	else if (itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null).isPresent()) {
+
 				IRune rune = itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
 						.orElseThrow(NullPointerException::new);
+
 				for (int runeSlot : rune.getRuneType().getValidSlots()) {
 					if (rune.canEquip(this.player) && !(this.inventorySlots.get(runeSlot + 9)).getHasStack()
 							&& !this.mergeItemStack(itemstack1, runeSlot + 9, runeSlot + 10, false)) {
+
 						return ItemStack.EMPTY;
 					}
 					if (itemstack1.getCount() == 0)
 						break;
 				}
 			} else if (index >= 9 + slotShift && index < 36 + slotShift) {
+
 				if (!this.mergeItemStack(itemstack1, 36 + slotShift - 3, 45 + slotShift - 3, false)) {
+
 					return ItemStack.EMPTY;
 				}
 			} else if (index >= 36 + slotShift - 3 && index < 45 + slotShift - 3) {
 				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 36 + slotShift - 3, false)) {
+
 					return ItemStack.EMPTY;
 				}
 			} else if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
+
 				return ItemStack.EMPTY;
 			}
-
+*/
 			if (itemstack1.isEmpty()) {
+
 				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();

@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
-import com.huto.hutosmod.events.EventHandlerEntity;
+import com.huto.hutosmod.events.RuneEntityEventHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +21,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class RunesContainer extends ItemStackHandler implements IRunesItemHandler {
 
-	private final static int RUNE_SLOTS = 7;
+	private final static int RUNE_SLOTS = 4;
 	private final ItemStack[] previous = new ItemStack[RUNE_SLOTS];
 	private boolean[] changed = new boolean[RUNE_SLOTS];
 	private boolean blockEvents = false;
@@ -99,7 +99,7 @@ public class RunesContainer extends ItemStackHandler implements IRunesItemHandle
 					receivers = new ArrayList<>(((ServerWorld) holder.world).getPlayers());
 					receivers.add((ServerPlayerEntity) holder);
 				}
-				EventHandlerEntity.syncSlot((ServerPlayerEntity) holder, i, stack, receivers);
+				RuneEntityEventHandler.syncSlot((ServerPlayerEntity) holder, i, stack, receivers);
 				this.changed[i] = false;
 				previous[i] = stack.copy();
 			}

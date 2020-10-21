@@ -177,7 +177,7 @@ public class EntitySummonedBeast extends MonsterEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 4d, 30));
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 0.3d, 30));
 		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 
 	}
@@ -186,7 +186,7 @@ public class EntitySummonedBeast extends MonsterEntity {
 		return LivingEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 30.0D)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2f)
-				.createMutableAttribute(Attributes.MAX_HEALTH, 1f);
+				.createMutableAttribute(Attributes.MAX_HEALTH, 5f);
 	}
 
 	@Override

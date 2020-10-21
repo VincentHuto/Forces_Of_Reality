@@ -12,6 +12,7 @@ import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
+import com.huto.hutosmod.objects.blocks.BlockRuneModStation;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockSlimeRepelent;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
@@ -218,6 +219,10 @@ public class BlockInit {
 	public static final RegistryObject<Block> runic_chisel_station = BLOCKS.register("runic_chisel_station",
 			() -> new BlockChiselStation(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> rune_mod_station = BLOCKS.register("rune_mod_station",
+			() -> new BlockRuneModStation(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
 	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",
 			() -> new BlockSlimeRepelent(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));

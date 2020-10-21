@@ -4,6 +4,7 @@ import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
@@ -11,7 +12,7 @@ public class ModelDreamWalker extends PlayerModel<EntityDreamWalker> {
 
 	public ModelDreamWalker() {
 
-		super(0.3f, false);
+		super(0.3f, Minecraft.getInstance().getRenderManager().getSkinMap().get("default") != null ? true : false);
 		textureWidth = 64;
 		textureHeight = 64;
 	}

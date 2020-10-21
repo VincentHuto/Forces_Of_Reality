@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EventHandlerEntity {
+public class RuneEntityEventHandler {
 
     @SubscribeEvent
     public static void cloneCapabilitiesEvent(PlayerEvent.Clone event) {
@@ -41,7 +41,7 @@ public class EventHandlerEntity {
                 });
             });
         } catch (Exception e) {
-            System.out.println("Could not clone player [" + event.getOriginal().getName() + "] baubles when changing dimensions");
+            System.out.println("Could not clone player [" + event.getOriginal().getName() + "] runes when changing dimensions");
         }
     }
 
@@ -79,9 +79,9 @@ public class EventHandlerEntity {
     }
 
     private static void syncSlots(PlayerEntity player, Collection<? extends PlayerEntity> receivers) {
-        player.getCapability(RunesCapabilities.RUNES).ifPresent(baubles -> {
-            for (byte i = 0; i < baubles.getSlots(); i++) {
-                syncSlot(player, i, baubles.getStackInSlot(i), receivers);
+        player.getCapability(RunesCapabilities.RUNES).ifPresent(runes -> {
+            for (byte i = 0; i < runes.getSlots(); i++) {
+                syncSlot(player, i, runes.getStackInSlot(i), receivers);
             }
         });
     }
@@ -101,13 +101,13 @@ public class EventHandlerEntity {
     }
 
     private static void dropItemsAt(PlayerEntity player, Collection<ItemEntity> drops) {
-        player.getCapability(RunesCapabilities.RUNES).ifPresent(baubles -> {
-            for (int i = 0; i < baubles.getSlots(); ++i) {
-                if (!baubles.getStackInSlot(i).isEmpty()) {
-                    ItemEntity ei = new ItemEntity(player.world, player.getPosX(), player.getPosY() + player.getEyeHeight(), player.getPosZ(), baubles.getStackInSlot(i).copy());
+        player.getCapability(RunesCapabilities.RUNES).ifPresent(runes -> {
+            for (int i = 0; i < runes.getSlots(); ++i) {
+                if (!runes.getStackInSlot(i).isEmpty()) {
+                    ItemEntity ei = new ItemEntity(player.world, player.getPosX(), player.getPosY() + player.getEyeHeight(), player.getPosZ(), runes.getStackInSlot(i).copy());
                     ei.setPickupDelay(40);
                     drops.add(ei);
-                    baubles.setStackInSlot(i, ItemStack.EMPTY);
+                    runes.setStackInSlot(i, ItemStack.EMPTY);
                 }
             }
         });

@@ -30,6 +30,7 @@ import com.huto.hutosmod.render.entity.RenderSummonedBeast;
 import com.huto.hutosmod.render.entity.RenderTentacle;
 import com.huto.hutosmod.render.entity.RenderThrone;
 import com.huto.hutosmod.render.entity.RenderTrackingOrb;
+import com.huto.hutosmod.render.entity.layer.ThermalLayerRender;
 import com.huto.hutosmod.render.tile.RenderAbsorber;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
 import com.huto.hutosmod.render.tile.RenderChiselStation;
@@ -38,6 +39,7 @@ import com.huto.hutosmod.render.tile.RenderIcoSphere;
 import com.huto.hutosmod.render.tile.RenderKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderResonator;
+import com.huto.hutosmod.render.tile.RenderRuneModStation;
 import com.huto.hutosmod.render.tile.RenderStorageDrum;
 import com.huto.hutosmod.render.tile.RenderThermalInfluxer;
 import com.huto.hutosmod.render.tile.RenderVibeFuser;
@@ -49,6 +51,8 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -58,11 +62,17 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventSubscriber {
+
 	public static final KeyBinding KEY_RUNES = new KeyBinding("keybind.runesinventory", GLFW.GLFW_KEY_B,
 			"key.categories.inventory");
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
+		
+		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+		forgeBus.addListener(ThermalLayerRender::renderWorld);
+		forgeBus.addListener(ThermalLayerRender::renderEntities);
+		
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_altar.get(), RenderKarmicAltar::new);
@@ -76,6 +86,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderRuneModStation::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);

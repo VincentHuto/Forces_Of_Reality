@@ -2,13 +2,11 @@ package com.huto.hutosmod.gui.mindrunes;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
-import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.gui.DisplayEffectsScreen;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
-import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
@@ -81,8 +79,8 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 					(float) (l + 75 - 50) - this.oldMouseY, this.minecraft.player);
 		}
 	}
-
-	@Override
+	//No Longer necccisairy as you cannot acsess runes from INV anymore
+	/*@Override
 	public boolean keyPressed(int keyCode, int scanCode, int what) { // keyPressed
 		if (ClientEventSubscriber.KEY_RUNES.isActiveAndMatches(InputMappings.getInputByCode(keyCode, scanCode))) {
 			if (this.minecraft != null) {
@@ -93,7 +91,7 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 			return super.keyPressed(keyCode, scanCode, what);
 		}
 	}
-
+*/
 	private void resetGuiLeft() {
 		this.guiLeft = (this.width - this.xSize) / 2; // width
 	}

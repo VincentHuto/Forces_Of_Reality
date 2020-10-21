@@ -2,7 +2,6 @@ package com.huto.hutosmod.objects.blocks;
 
 import javax.annotation.Nullable;
 
-import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.dimension.DimensionInit;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityTeleporter;
@@ -17,9 +16,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -45,7 +47,9 @@ public class BlockTeleporter extends Block {
 		}
 
 		if (playerMP.world.getDimensionKey().equals(DimensionInit.dreamlands)) {
-			ServerWorld teleportWorld = playerMP.server.getWorld(HutosMod.SERVER_CONFIG.overworldDimension);
+
+			ServerWorld teleportWorld = playerMP.server
+					.getWorld(RegistryKey.getOrCreateKey(Registry.WORLD_KEY, DimensionType.OVERWORLD_ID));
 
 			if (teleportWorld == null) {
 				return false;
@@ -64,7 +68,8 @@ public class BlockTeleporter extends Block {
 			playerMP.addExperienceLevel(0);
 			playerMP.teleport(teleportWorld, teleporterPos.getX() + 0.5D, teleporterPos.getY() + 1D,
 					teleporterPos.getZ() + 0.5D, playerMP.rotationYaw, playerMP.rotationPitch);
-		} else if (playerMP.world.getDimensionKey().equals(HutosMod.SERVER_CONFIG.overworldDimension)) {
+		} else if (playerMP.world.getDimensionKey()
+				.equals(RegistryKey.getOrCreateKey(Registry.WORLD_KEY, DimensionType.OVERWORLD_ID))) {
 			ServerWorld teleportWorld = playerMP.server.getWorld(DimensionInit.dreamlands);
 
 			if (teleportWorld == null) {

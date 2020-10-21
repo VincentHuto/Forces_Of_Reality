@@ -10,7 +10,7 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class RunestemHandlerCap {
+public class RunesItemHandlerCap {
 
 	public static class IRunesItemHandlerStorage implements Capability.IStorage<IRunesItemHandler> {
 

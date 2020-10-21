@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
 
 public class ModelSummonedBeast extends EntityModel<EntitySummonedBeast> {
 	private final ModelRenderer Head;
@@ -115,7 +116,32 @@ public class ModelSummonedBeast extends EntityModel<EntitySummonedBeast> {
 	@Override
 	public void setRotationAngles(EntitySummonedBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		// previously the render function, render code was moved to a method below
+		this.Head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
+		this.Head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
+		this.JawTop.rotateAngleX = -limbSwingAmount * 0.43f;
+		this.JawBottom.rotateAngleX = limbSwingAmount * 0.43f;
+
+		this.Tail1.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0425);
+		this.Tail2.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.Tail3.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0225);
+		this.Tail4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925);
+
+		if (!entity.isAggressive()) {
+			this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+			this.RightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
+			this.LeftFoot.rotateAngleX = -MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F
+					* limbSwingAmount;
+			this.RightFoot.rotateAngleX = -MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		} else {
+
+			this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.7F * limbSwingAmount;
+			this.RightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.7F * limbSwingAmount;
+
+			this.LeftFoot.rotateAngleX = -MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.7F
+					* limbSwingAmount;
+			this.RightFoot.rotateAngleX = -MathHelper.cos(limbSwing * 0.6662F) * 1.7F * limbSwingAmount;
+		}
 	}
 
 	@Override

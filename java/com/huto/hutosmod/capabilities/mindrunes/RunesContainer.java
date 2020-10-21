@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.events.EventHandlerEntity;
+import com.huto.hutosmod.events.RuneEntityEventHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -96,7 +96,7 @@ public class RunesContainer extends ItemStackHandler implements IRunesItemHandle
 					receivers = new ArrayList<>(((ServerWorld) holder.world).getPlayers());
 					receivers.add((ServerPlayerEntity) holder);
 				}
-				EventHandlerEntity.syncSlot((ServerPlayerEntity) holder, i, stack, receivers);
+				RuneEntityEventHandler.syncSlot((ServerPlayerEntity) holder, i, stack, receivers);
 				this.changed[i] = false;
 				previous[i] = stack.copy();
 			}
