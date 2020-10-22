@@ -5,24 +5,34 @@ import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
+import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
+import com.huto.hutosmod.render.rune.IRenderRunes;
+import com.mojang.blaze3d.matrix.MatrixStack;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class ItemWatchfulPendant extends ItemContractRune implements IRune {
+public class ItemWatchfulPendant extends ItemContractRune implements IRune, IRenderRunes {
 
 	public ItemWatchfulPendant(Properties properties, EnumCovenants covenIn) {
 		super(properties, covenIn);
@@ -100,4 +110,23 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune {
 	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
+	
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onPlayerRuneRender(MatrixStack matrix, IRenderTypeBuffer buffer, PlayerEntity player, RenderType type,
+			float partialTicks) {
+		if (type == RenderType.HEAD) {
+			boolean armor = !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
+			Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+			RenderHelper.enableStandardItemLighting();
+			matrix.rotate(Vector3f.XN.rotationDegrees(180f));
+			matrix.scale(0.5f, 0.5f, 0.5f);
+			matrix.translate(0, 1,0.5);
+			Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(ItemInit.everwatchful_pendant.get()),
+					TransformType.FIXED, 0, 0, matrix, buffer);
+
+		}
+	}
+	
 }

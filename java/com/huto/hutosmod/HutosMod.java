@@ -126,6 +126,7 @@ public class HutosMod {
 		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		MinecraftForge.EVENT_BUS.register(RenderLaserWithItem.class);
+		this.addLayers();
 
 	}
 
@@ -135,7 +136,6 @@ public class HutosMod {
 	}
 
 	public void setupOnLoaded(FMLLoadCompleteEvent event) {
-		this.addLayers();
 
 	}
 

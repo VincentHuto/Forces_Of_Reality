@@ -21,6 +21,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -98,6 +100,8 @@ public class CovenantEvents {
 
 	private static FontRenderer fontRenderer;
 
+	
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(receiveCanceled = true)
 	public static void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
 
