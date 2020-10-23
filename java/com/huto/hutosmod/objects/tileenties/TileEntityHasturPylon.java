@@ -13,6 +13,7 @@ public class TileEntityHasturPylon extends TileEntity implements ITickableTileEn
 
 	@Override
 	public void tick() {
+	
 	}
 
 }

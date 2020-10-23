@@ -38,13 +38,13 @@ public class GuiCovenTitle extends Screen {
 	final int BUTTONHASTUR = 1;
 	final int BUTTONEldritch = 2;
 	final int BUTTONASCEND = 3;
-
-	final int BUTTONEYE = 8;
+	final int BUTTONBEAST = 4;
+	int BUTTONEYE = 8;
 	static String title = " Table of Contents";
 	static StringTextComponent titleComponent = new StringTextComponent(title);
 	String subtitle = " Covenenants";
 	ItemStack icon = new ItemStack(Items.PAPER);
-	GuiButtonTextured buttonclose, hasturButton, EldritchButton, ascendButton, eyeButton;
+	GuiButtonTextured buttonclose, hasturButton, EldritchButton, ascendButton, beastButton, eyeButton;
 	boolean isElder;
 
 	public GuiCovenTitle(boolean isElderIn) {
@@ -141,24 +141,9 @@ public class GuiCovenTitle extends Screen {
 			renderTooltip(matrixStack, new StringTextComponent("Ascendents"), sideLoc - (guiWidth - 175),
 					verticalLoc - 153);
 		}
-		/*
-		 * if (greenButton.isHovered()) { renderTooltip(matrixStack, new
-		 * StringTextComponent("Wands"), sideLoc - (guiWidth - 177), verticalLoc - 121);
-		 * } if (redButton.isHovered()) { renderTooltip(matrixStack, new
-		 * StringTextComponent("Runes"), sideLoc - (guiWidth - 180), verticalLoc - 91);
-		 * } if (orangeButton.isHovered()) { renderTooltip(matrixStack, new
-		 * StringTextComponent("Machines"), sideLoc - (guiWidth - 177), verticalLoc -
-		 * 49); } if (darkBlueButton.isHovered()) { renderTooltip(matrixStack, new
-		 * StringTextComponent("Generation"), sideLoc - (guiWidth - 177), verticalLoc -
-		 * 69); } if (cyanButton.isHovered()) { renderTooltip(matrixStack, new
-		 * StringTextComponent("Karma"), sideLoc - (guiWidth - 177), verticalLoc - 200);
-		 * }
-		 */
-		/*
-		 * if (isElder) { if (eyeButton.isHovered()) { renderTooltip(matrixStack, new
-		 * StringTextComponent("Elder"), sideLoc - (guiWidth - 155), verticalLoc - 30);
-		 * } }
-		 */
+		if (beastButton.isHovered()) {
+			renderTooltip(matrixStack, new StringTextComponent("Beast"), sideLoc - (guiWidth - 177), verticalLoc - 121);
+		}
 	}
 
 	@Override
@@ -184,6 +169,12 @@ public class GuiCovenTitle extends Screen {
 				verticalLoc - 153, 23, 16, 186, 64, null, (press) -> {
 					mc.displayGuiScreen(CovenPageLib.AscendentPageList.get(0));
 				}));
+
+		this.addButton(beastButton = new GuiButtonTextured(texture, BUTTONBEAST, sideLoc - (guiWidth - 177),
+				verticalLoc - 121, 23, 16, 186, 96, null, (press) -> {
+					mc.displayGuiScreen(CovenPageLib.BeastPageList.get(0));
+				}));
+
 		/*
 		 * this.addButton(greenButton = new GuiButtonTextured(texture, BUTTONGREEN,
 		 * sideLoc - (guiWidth - 177), verticalLoc - 121, 24, 16, 186, 96, null, (press)

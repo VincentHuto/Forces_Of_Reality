@@ -122,15 +122,21 @@ public class KarmaEvents {
 									new Color(0, 0, 255, 3).getRGB());
 							fontRenderer.drawString(event.getMatrixStack(), "Positive View", 5, 5,
 									new Color(255, 0, 0, 255).getRGB());
+							Minecraft.getInstance().textureManager
+							.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 						} else if (karma.getKarma() == 0) {
 							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000, new Color(0, 0, 0, 0).getRGB());
 							fontRenderer.drawString(event.getMatrixStack(), "Neutral View", 5, 5,
 									new Color(255, 0, 0, 255).getRGB());
+							Minecraft.getInstance().textureManager
+							.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 						} else if (karma.getKarma() < 0) {
 							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
 									new Color(255, 0, 0, 3).getRGB());
 							fontRenderer.drawString(event.getMatrixStack(), "Negative View", 5, 5,
 									new Color(255, 0, 0, 255).getRGB());
+							Minecraft.getInstance().textureManager
+							.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 						}
 
 					}

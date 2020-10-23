@@ -1,44 +1,36 @@
 package com.huto.hutosmod.objects.items;
 
-import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
-import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
-import com.huto.hutosmod.init.RenderInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.render.rune.IRenderRunes;
 import com.huto.hutosmod.sounds.SoundHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderRunes {
@@ -116,22 +108,34 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderR
 
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return true;
+		return false;
 	}
-
-	@SuppressWarnings("deprecation")
+/*
 	@Override
-	public void onPlayerRuneRender(MatrixStack matrix, IRenderTypeBuffer buffer, PlayerEntity player, RenderType type,
-			float partialTicks) {
+	@OnlyIn(Dist.CLIENT)
+	public void doRender(BipedModel<?> bipedModel, ItemStack stack, LivingEntity living, MatrixStack ms,
+			IRenderTypeBuffer buffers, int light, float limbSwing, float limbSwingAmount, float partialTicks,
+			float ageInTicks, float netHeadYaw, float headPitch) {
+		bipedModel.bipedHead.translateRotate(ms);
+		ms.translate(-0.25, -0.4, 0);
+		ms.scale(0.5F, -0.5F, -0.5F);
+		Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(ModBlocks.tinyPlanet.getDefaultState(), ms,
+				buffers, light, OverlayTexture.NO_OVERLAY);
+	}*/
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void onPlayerRuneRender(MatrixStack matrix, int packedLightIn, IRenderTypeBuffer buffer, PlayerEntity player,
+			RenderType type, float partialTicks) {
 		if (type == RenderType.HEAD) {
-			boolean armor = !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
-			Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+			// boolean armor =
+			// !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
 			RenderHelper.enableStandardItemLighting();
 			matrix.rotate(Vector3f.XN.rotationDegrees(180f));
 			matrix.scale(0.5f, 0.5f, 0.5f);
-			matrix.translate(0, 1,0.5);
+			matrix.translate(0, 1, 0.5);
 			Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(ItemInit.crossed_keys.get()),
-					TransformType.FIXED, 0, 0, matrix, buffer);
+					TransformType.FIXED, packedLightIn,OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
 	}

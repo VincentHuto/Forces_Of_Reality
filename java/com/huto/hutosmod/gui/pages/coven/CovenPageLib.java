@@ -14,38 +14,41 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class CovenPageLib {
 
-	// This is the page array for the book, needed because i dont know how to add
-	// the pages to their own like sub class
 	public static List<GuiCovenPage> HasturPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> EldritchPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> AscendentPageList = new ArrayList<GuiCovenPage>();
+	public static List<GuiCovenPage> BeastPageList = new ArrayList<GuiCovenPage>();
 
-//	public static List<GuiCovenPage> ElderPageList = new ArrayList<GuiCovenPage>();
 	public static List<List<GuiCovenPage>> ChapterList = new ArrayList<List<GuiCovenPage>>();
 	public static List<GuiCovenPageTOC> TOCPageList = new ArrayList<GuiCovenPageTOC>();
 
-	// Text Locations
-	public static String HASTUR_PAGE_1 = "title.mystictome.hastur.page.1.text";
-	public static String HASTUR_PAGE_2 = "title.mystictome.hastur.page.2.text";
-	public static String HASTUR_PAGE_3 = "title.mystictome.hastur.page.3.text";
+	// HASTUR
+	public static String HASTUR_PAGE_1 = "title.coventome.hastur.page.1.text";
+	public static String HASTUR_PAGE_2 = "title.coventome.hastur.page.2.text";
+	public static String HASTUR_PAGE_3 = "title.coventome.hastur.page.3.text";
 
-	// World
-	public static String ASCENDENT_PAGE_1 = "title.mystictome.ascendent.page.1.text";
-	public static String ASCENDENT_PAGE_2 = "title.mystictome.ascendent.page.2.text";
-	public static String ASCENDENT_PAGE_3 = "title.mystictome.ascendent.page.3.text";
+	// ASCENDENT
+	public static String ASCENDENT_PAGE_1 = "title.coventome.ascendent.page.1.text";
+	public static String ASCENDENT_PAGE_2 = "title.coventome.ascendent.page.2.text";
+	public static String ASCENDENT_PAGE_3 = "title.coventome.ascendent.page.3.text";
 
 	// ELDRITCH
-	public static String ELDRITCH_PAGE_1 = "title.mystictome.eldritch.page.1.text";
-	public static String ELDRITCH_PAGE_2 = "title.mystictome.eldritch.page.2.text";
-	public static String ELDRITCH_PAGE_3 = "title.mystictome.eldritch.page.3.text";
+	public static String ELDRITCH_PAGE_1 = "title.coventome.eldritch.page.1.text";
+	public static String ELDRITCH_PAGE_2 = "title.coventome.eldritch.page.2.text";
+	public static String ELDRITCH_PAGE_3 = "title.coventome.eldritch.page.3.text";
+
+	// BEAST
+	public static String BEAST_PAGE_1 = "title.coventome.beast.page.1.text";
+	public static String BEAST_PAGE_2 = "title.coventome.beast.page.2.text";
+	public static String BEAST_PAGE_3 = "title.coventome.beast.page.3.text";
 
 	public static void registerPages() {
 
 		HasturPageList.clear();
 		EldritchPageList.clear();
 		AscendentPageList.clear();
+		BeastPageList.clear();
 
-		// ElderPageList.clear();
 		ChapterList.clear();
 		TOCPageList.clear();
 
@@ -73,8 +76,16 @@ public class CovenPageLib {
 		AscendentPageList.add(new GuiCovenPage(3, EnumCovenTomeCatagories.ASCENDENT, "Holy Flares", "Star Spawn",
 				new ItemStack(ItemInit.star_slug.get()), I18n.format(ASCENDENT_PAGE_3)));
 
+		// Beast
+		BeastPageList.add(new GuiCovenPage(1, EnumCovenTomeCatagories.BEAST, "Fight Tooth and Nail", "Beastly Blood",
+				new ItemStack(ItemInit.beastly_bone.get()), I18n.format(BEAST_PAGE_1)));
+		BeastPageList.add(new GuiCovenPage(2, EnumCovenTomeCatagories.BEAST, "Just a Nail", "Nail Clippings",
+				new ItemStack(ItemInit.blooddrawn_fang.get()), I18n.format(BEAST_PAGE_2)));
+		BeastPageList.add(new GuiCovenPage(3, EnumCovenTomeCatagories.BEAST, "Thermal Vision", "Hunt as a Beast",
+				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(BEAST_PAGE_3)));
+
 		// Adding Chapters
-		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList);
+		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList);
 
 		// TOC PAGES
 		TOCPageList.add(new GuiCovenPageTOC(EnumCovenTomeCatagories.HASTUR, new ItemStack(ItemInit.yellow_sign.get())));
@@ -82,11 +93,15 @@ public class CovenPageLib {
 				new ItemStack(ItemInit.everwatchful_pendant.get())));
 		TOCPageList.add(
 				new GuiCovenPageTOC(EnumCovenTomeCatagories.ASCENDENT, new ItemStack(ItemInit.crossed_keys.get())));
+		TOCPageList.add(
+				new GuiCovenPageTOC(EnumCovenTomeCatagories.BEAST, new ItemStack(ItemInit.breath_of_the_beast.get())));
 
 		// Adding the table of contents to each chapter
+
 		HasturPageList.add(0, TOCPageList.get(0));
 		EldritchPageList.add(0, TOCPageList.get(1));
 		AscendentPageList.add(0, TOCPageList.get(2));
+		BeastPageList.add(0, TOCPageList.get(3));
 
 	}
 
@@ -100,6 +115,10 @@ public class CovenPageLib {
 
 	public static List<GuiCovenPage> getAscendentPageList() {
 		return AscendentPageList;
+	}
+
+	public static List<GuiCovenPage> getBeastPageList() {
+		return BeastPageList;
 	}
 
 	public static List<List<GuiCovenPage>> getChapterList() {

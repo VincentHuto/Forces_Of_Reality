@@ -11,7 +11,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +31,6 @@ public class RenderRuneModStation extends TileEntityRenderer<TileEntityRuneModSt
 		if (player.isAlive()) {
 			GlStateManager.pushMatrix();
 			GlStateManager.color4f(1F, 1F, 1F, 1F);
-			GlStateManager.translated(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
 
 			IRunesItemHandler runes = player.getCapability(RunesCapabilities.RUNES)
 					.orElseThrow(IllegalArgumentException::new);
@@ -48,7 +46,6 @@ public class RenderRuneModStation extends TileEntityRenderer<TileEntityRuneModSt
 			}
 
 			double time = ClientTickHandler.ticksInGame + partialTicks;
-			Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 			Minecraft mc = Minecraft.getInstance();
 
 			matrixStackIn.push();
@@ -59,8 +56,10 @@ public class RenderRuneModStation extends TileEntityRenderer<TileEntityRuneModSt
 			matrixStackIn.scale(0.2f, 0.2f, 0.2f);
 			ItemStack stack = runes.getStackInSlot(0);
 			if (!stack.isEmpty()) {
+				GlStateManager.pushMatrix();
 				mc.getItemRenderer().renderItem(stack, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
 						matrixStackIn, bufferIn);
+				GlStateManager.popMatrix();
 			}
 			matrixStackIn.pop();
 

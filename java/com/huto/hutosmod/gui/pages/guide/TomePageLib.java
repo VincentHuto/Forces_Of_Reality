@@ -16,8 +16,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class TomePageLib {
 
-	// This is the page array for the book, needed because i dont know how to add
-	// the pages to their own like sub class
 	public static List<GuiTomePage> IntroPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> KarmaPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> WorldGenPageList = new ArrayList<GuiTomePage>();

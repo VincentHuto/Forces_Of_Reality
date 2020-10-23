@@ -68,11 +68,11 @@ public class ClientEventSubscriber {
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
-		
+
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(ThermalLayerRender::renderWorld);
 		forgeBus.addListener(ThermalLayerRender::renderEntities);
-		
+
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_altar.get(), RenderKarmicAltar::new);
@@ -122,5 +122,16 @@ public class ClientEventSubscriber {
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
+
+/*	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed, int colorOuter,
+			int colorInner) {
+		Minecraft.getInstance().particles.addEffect(new FXLightning(Minecraft.getInstance().world, vectorStart,
+				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
+	}
+
+	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, int colorOuter,
+			int colorInner) {
+		lightningFX(vectorStart, vectorEnd, ticksPerMeter, System.nanoTime(), colorOuter, colorInner);
+	}*/
 
 }

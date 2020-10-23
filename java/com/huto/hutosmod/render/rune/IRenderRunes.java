@@ -5,13 +5,18 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IRenderRunes extends IRune {
 
-	void onPlayerRuneRender(MatrixStack matrix, IRenderTypeBuffer iRenderTypeBuffer, PlayerEntity player,
-			RenderType type, float partialTicks);
+	void onPlayerRuneRender(MatrixStack matrix, int packedLight, IRenderTypeBuffer iRenderTypeBuffer,
+			PlayerEntity player, RenderType type, float partialTicks);
 
 	final class Helper {
 
@@ -52,6 +57,13 @@ public interface IRenderRunes extends IRune {
 			GlStateManager.rotatef(180F, 1F, 0F, 0F);
 			GlStateManager.translatef(0F, -3.2F, -0.85F);
 		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public static void doRender(BipedModel<?> bipedModel, ItemStack stack, LivingEntity player, MatrixStack ms,
+			IRenderTypeBuffer buffers, int light, float limbSwing, float limbSwingAmount, float partialTicks,
+			float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 
 	enum RenderType {

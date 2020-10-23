@@ -5,7 +5,9 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.ContainerVirtuousEnchanter;
+import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.blocks.BlockVirtuousEnchant;
 
@@ -59,6 +61,15 @@ public class TileEntityVirtuousEnchant extends LockableLootTileEntity
 
 	@Override
 	public void tick() {
+
+		if (world.isRemote) {
+			if (world.getGameTime() % 20 == 0) {
+				Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.4, 0);
+				Vector3 endVec = vec.add(0, 1, 0);
+				HutosMod.proxy.lightningFX(vec, endVec, 12F, 0xFF00FF, 0x000000);
+			}
+		}
+
 		this.pageTurningSpeed = this.nextPageTurningSpeed;
 		this.pageAngle = this.nextPageAngle;
 		PlayerEntity playerentity = this.world.getClosestPlayer((double) this.pos.getX() + 0.5D,
@@ -150,9 +161,10 @@ public class TileEntityVirtuousEnchant extends LockableLootTileEntity
 		super.write(compound);
 		if (!this.checkLootAndWrite(compound)) {
 			ItemStackHelper.saveAllItems(compound, this.chestContents);
-		}	
-		//	ContainerVirtuousEnchanter cont = new ContainerVirtuousEnchanter(1, ClientEventSubscriber, pos), this);
-				return compound;
+		}
+		// ContainerVirtuousEnchanter cont = new ContainerVirtuousEnchanter(1,
+		// ClientEventSubscriber, pos), this);
+		return compound;
 	}
 
 	@Override

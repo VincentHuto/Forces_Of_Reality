@@ -10,18 +10,15 @@ import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.render.rune.IRenderRunes;
-import com.huto.hutosmod.render.rune.IRenderRunes.RenderType;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
@@ -110,22 +107,19 @@ public class ItemBeastBreath extends ItemContractRune implements IRune , IRender
 
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return true;
+		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public void onPlayerRuneRender(MatrixStack matrix, IRenderTypeBuffer buffer, PlayerEntity player, RenderType type,
+	public void onPlayerRuneRender(MatrixStack matrix, int packedLightIn,IRenderTypeBuffer buffer, PlayerEntity player, RenderType type,
 			float partialTicks) {
 		if (type == RenderType.HEAD) {
-			boolean armor = !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
-			Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
-			RenderHelper.enableStandardItemLighting();
+			//boolean armor = !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
 			matrix.rotate(Vector3f.XN.rotationDegrees(180f));
 			matrix.scale(0.5f, 0.5f, 0.5f);
-			matrix.translate(0, 1,0.5);
+			matrix.translate(0, 0.8,0.5);
 			Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(ItemInit.breath_of_the_beast.get()),
-					TransformType.FIXED, 0, 0, matrix, buffer);
+					TransformType.FIXED, packedLightIn,OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
 	}

@@ -48,6 +48,7 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -67,8 +68,13 @@ public class HutosMod {
 	private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "hutosmod";
 	public static HutosMod instance;
+	public static IProxy proxy = new IProxy() {
+	};
 
+	@SuppressWarnings("deprecation")
 	public HutosMod() {
+		DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> proxy = new ClientProxy());
+		proxy.registerHandlers();
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::commonSetup);

@@ -26,7 +26,7 @@ public class KarmaHudEventHandler {
 	public static void onEvent(RenderGameOverlayEvent.Pre event) {
 		ClientPlayerEntity entityPlayerSP = Minecraft.getInstance().player;
 		if (entityPlayerSP == null) {
-			return; // just in case
+			return;
 		}
 		switch (event.getType()) {
 		case ALL:
@@ -35,9 +35,9 @@ public class KarmaHudEventHandler {
 			if (entityPlayerSP.isAlive()) {
 				karmaHud.renderStatusBar(event.getMatrixStack(), event.getWindow().getScaledWidth(),
 						event.getWindow().getScaledHeight(), entityPlayerSP.world,
-						entityPlayerSP); /* Call a helper method so that this method stays organized */
+						entityPlayerSP);
 			}
-		default: // If it's not one of the above cases, do nothing
+		default: 
 			break;
 		}
 	}
