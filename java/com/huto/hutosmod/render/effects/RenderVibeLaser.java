@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.effects;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.RenderInit;
-import com.huto.hutosmod.objects.items.ItemFrequencyMatcher;
+import com.huto.hutosmod.objects.items.tools.ItemFrequencyMatcher;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

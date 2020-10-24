@@ -1,0 +1,20 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "hutosmod:items/bow_blade"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"hutosmod:open": 0
+			},
+			"model": "hutosmod:item/bow_blade"
+		},
+		{
+			"predicate": {
+				"hutosmod:open": 1
+			},
+			"model": "hutosmod:item/bow_blade_open"
+		}
+	]
+}

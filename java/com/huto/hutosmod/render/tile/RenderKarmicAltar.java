@@ -47,9 +47,8 @@ public class RenderKarmicAltar extends TileEntityRenderer<TileEntityKarmicAltar>
 		Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 		for (int i = 0; i < te.getSizeInventory(); i++) {
 			matrixStackIn.push();
-			matrixStackIn.translate(0.5F, 1.25F, 0.5F);
 			if (heightMod > 0) {
-				GlStateManager.translatef(0.5F, (float) (1 + ((heightMod / 180) * 1.6)), 0.5F);
+				matrixStackIn.translate(0.5F, (float) (1.3 + ((heightMod / 180) * 1.6)), 0.5F);
 			}
 			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(angles[i] + (float) time));
 			// Edit True Radius

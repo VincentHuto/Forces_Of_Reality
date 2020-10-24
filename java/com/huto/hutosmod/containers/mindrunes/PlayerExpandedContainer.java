@@ -135,7 +135,7 @@ public class PlayerExpandedContainer extends Container {
 				}
 			}
 
-			// runes -> inv
+		/*	// runes -> inv
 			else if (index >= 9 && index < 9 + slotShift) {
 				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
 
@@ -143,7 +143,7 @@ public class PlayerExpandedContainer extends Container {
 
 				}
 			}
-
+*/
 			// inv -> armor
 			else if (entityequipmentslot.getSlotType() == EquipmentSlotType.Group.ARMOR
 					&& !(this.inventorySlots.get(8 - entityequipmentslot.getIndex())).getHasStack()) {

@@ -1,83 +1,81 @@
 package com.huto.hutosmod.objects.items.runes;
 
-import java.util.List;
-
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
-import com.huto.hutosmod.capabilities.mindrunes.RuneType;
-import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.SetFlyPKT;
+import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
+import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
+import com.huto.hutosmod.render.rune.IRenderRunes;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
+import net.minecraft.util.math.vector.Vector3f;
 
-public class ItemMilkweedRune extends ItemContractRune implements IRune {
+public class ItemMilkweedRune extends ItemContractRune implements IRune, IRenderRunes {
 
-	public ItemMilkweedRune(Properties properties, EnumCovenants covenIn) {
-		super(properties, covenIn);
+	public ItemMilkweedRune(Properties properties, EnumCovenants covenIn, int deepenAmount) {
+		super(properties, covenIn, deepenAmount);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public boolean willAutoSync(LivingEntity player) {
-		return true;
-	}
+	public void onPlayerRuneRender(MatrixStack matrix, int packedLightIn, IRenderTypeBuffer buffer, PlayerEntity player,
+			RenderType type, float partialTicks) {
 
-	@Override
-	public void onWornTick(LivingEntity player) {
-	}
+		if (type == RenderType.HEAD) {
+			RenderHelper.enableStandardItemLighting();
+			matrix.rotate(Vector3f.XN.rotationDegrees(180f));
+			matrix.scale(0.5f, 0.5f, 0.5f);
+			matrix.translate(0, 0.5, 0.5);
+			Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(ItemInit.rune_milkweed_c.get()),
+					TransformType.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 
-	@Override
-	public RuneType getRuneType() {
-		return RuneType.CONTRACT;
-	}
-
-	@Override
-	public void onEquipped(LivingEntity player) {
-		super.onEquipped(player);
-		player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, .75F, 1.9f);
-		if (player instanceof PlayerEntity) {
-			if (!player.getEntityWorld().isRemote) {
-				updateClientServerFlight((ServerPlayerEntity) player, true);
-			}
 		}
-	}
 
-	@Override
-	public void onUnequipped(LivingEntity player) {
-		super.onUnequipped(player);
-		player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, .75F, 1.9f);
-		if (player instanceof PlayerEntity) {
-			if (!((PlayerEntity) player).isCreative()) {
-				if (!player.getEntityWorld().isRemote) {
-					updateClientServerFlight((ServerPlayerEntity) player, false, false);
+		if (type == RenderType.HEAD) {
+			if (player.isAlive()) {
+				GlStateManager.pushMatrix();
+				GlStateManager.color4f(1F, 1F, 1F, 1F);
+
+				IRunesItemHandler runes = player.getCapability(RunesCapabilities.RUNES)
+						.orElseThrow(IllegalArgumentException::new);
+				int items = 0;
+				for (int i = 0; i < 3; i++) {
+					items++;
 				}
+				float[] angles = new float[runes.getSlots()];
+				float anglePer = 360F / items;
+				float totalAngle = 0F;
+				for (int i = 0; i < angles.length; i++) {
+					angles[i] = totalAngle += anglePer;
+				}
+
+				double time = ClientTickHandler.ticksInGame + partialTicks;
+				Minecraft mc = Minecraft.getInstance();
+
+				for (int i = 1; i < runes.getSlots(); i++) {
+					matrix.push();
+					matrix.rotate(Vector3f.YP.rotationDegrees(angles[i] + (float) time));
+					matrix.translate(0.5F, 0.4f, 0.5F);
+					matrix.rotate(Vector3f.XP.rotationDegrees(90f));
+					matrix.rotate(Vector3f.YN.rotationDegrees(90f));
+					matrix.translate(0.2, 0.375D, 0F);
+					ItemStack stack2 = runes.getStackInSlot(i);
+					mc.getItemRenderer().renderItem(stack2, TransformType.FIXED, packedLightIn,
+							OverlayTexture.NO_OVERLAY, matrix, buffer);
+					matrix.pop();
+				}
+				GlStateManager.popMatrix();
 			}
 		}
-	}
-
-	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying) {
-		updateClientServerFlight(player, allowFlying, allowFlying && player.abilities.isFlying);
-	}
-
-	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying, boolean isFlying) {
-		PacketHandler.HANDLER.sendToServer(new SetFlyPKT(allowFlying, isFlying));
-		player.abilities.allowFlying = allowFlying;
-		player.abilities.isFlying = isFlying;
-	}
-
-	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent(TextFormatting.AQUA + "Effect:Flight"));
-
 	}
 }

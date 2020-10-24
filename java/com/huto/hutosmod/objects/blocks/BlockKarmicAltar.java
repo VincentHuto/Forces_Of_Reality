@@ -5,21 +5,27 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -41,6 +47,31 @@ public class BlockKarmicAltar extends Block {
 	public BlockKarmicAltar(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+
+	}
+
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isRemote)
+			return ActionResultType.SUCCESS;
+		TileEntityKarmicAltar te = (TileEntityKarmicAltar) worldIn.getTileEntity(pos);
+		ItemStack stack = player.getHeldItem(handIn);
+		if (player.isSneaking()) {
+			ModInventoryVibeHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
+			return ActionResultType.SUCCESS;
+		}
+		if (!stack.isEmpty()) {
+			if (stack.getItem().isFood()) {
+				te.addItem(player, stack, handIn);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+				return ActionResultType.SUCCESS;
+			}
+		}
+
+		return ActionResultType.FAIL;
 
 	}
 
@@ -71,8 +102,6 @@ public class BlockKarmicAltar extends Block {
 		}
 	}
 
-
-	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());

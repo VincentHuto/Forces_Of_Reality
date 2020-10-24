@@ -95,11 +95,10 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
-		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get())
+		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get() && stack.getItem().isFood())
 			return false;
 
 		boolean did = false;
-
 		for (int i = 0; i < getSizeInventory(); i++)
 			if (itemHandler.getStackInSlot(i).isEmpty()) {
 				did = true;
@@ -121,7 +120,6 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 			if (cooldown > 0) {
 				cooldown--;
 			}
@@ -188,7 +186,6 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
 		return 4;
 	}
 

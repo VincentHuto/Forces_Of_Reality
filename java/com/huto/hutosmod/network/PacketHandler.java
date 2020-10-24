@@ -30,10 +30,6 @@ public class PacketHandler {
 			new ResourceLocation(HutosMod.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
 			PROTOCOL_VERSION::equals);
 
-	public static final SimpleChannel CHANNELHASH = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(HutosMod.MOD_ID, "hashchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
-			PROTOCOL_VERSION::equals);
-
 	public static void registerChannels() {
 		// Register Networking packets
 		// Vibes
@@ -53,15 +49,6 @@ public class PacketHandler {
 				CovenantPacketClient::decode, CovenantPacketClient::handle);
 		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketServer.class, CovenantPacketServer::encode,
 				CovenantPacketServer::decode, CovenantPacketServer::handle);
-
-		// Hash
-		/*
-		 * CHANNELHASH.registerMessage(networkID++, HashPacketClient.class,
-		 * HashPacketClient::encode, HashPacketClient::decode,
-		 * HashPacketClient::handle); CHANNELHASH.registerMessage(networkID++,
-		 * HashPacketServer.class, HashPacketServer::encode, HashPacketServer::decode,
-		 * HashPacketServer::handle);
-		 */
 
 		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,

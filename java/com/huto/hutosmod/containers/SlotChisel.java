@@ -1,6 +1,6 @@
 package com.huto.hutosmod.containers;
 
-import com.huto.hutosmod.objects.items.ItemKnapper;
+import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;

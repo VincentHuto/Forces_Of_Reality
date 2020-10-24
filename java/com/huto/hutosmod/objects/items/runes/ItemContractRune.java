@@ -9,20 +9,9 @@ import net.minecraft.item.Rarity;
 
 public class ItemContractRune extends ItemRune implements IRune {
 
-	EnumCovenants assignedCovenant;
+	public ItemContractRune(Properties properties, EnumCovenants covenIn,int deepenAmount) {
+		super(properties, covenIn, deepenAmount);
 
-	public ItemContractRune(Properties properties, EnumCovenants covenIn) {
-		super(properties);
-		this.assignedCovenant = covenIn;
-
-	}
-
-	public EnumCovenants getAssignedCovenant() {
-		return assignedCovenant;
-	}
-
-	public void setAssignedCovenant(EnumCovenants assignedCovenant) {
-		this.assignedCovenant = assignedCovenant;
 	}
 
 	@Override

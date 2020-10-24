@@ -36,7 +36,7 @@ public class ModChiselRecipes {
 
 	public static void init() {
 
-		recipeMoon = registerRuneAltarRecipe(new ResourceLocation("recipemoon"),
+		recipeMoon = registerChiselRecipe(new ResourceLocation("recipemoon"),
 				new ItemStack(ItemInit.rune_moon.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -76,7 +76,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.REDSTONE));
 
-		recipeMetamorphosisCW = registerRuneAltarRecipe(new ResourceLocation("recipemetamorphosiscw"),
+		recipeMetamorphosisCW = registerChiselRecipe(new ResourceLocation("recipemetamorphosiscw"),
 				new ItemStack(ItemInit.rune_metamorphosis_cw.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -103,7 +103,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.GUNPOWDER));
 
-		recipeHeir = registerRuneAltarRecipe(new ResourceLocation("recipeheir"),
+		recipeHeir = registerChiselRecipe(new ResourceLocation("recipeheir"),
 				new ItemStack(ItemInit.rune_heir.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -148,7 +148,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.STRING));
 
-		recipeGuidance = registerRuneAltarRecipe(new ResourceLocation("recipeguidance"),
+		recipeGuidance = registerChiselRecipe(new ResourceLocation("recipeguidance"),
 				new ItemStack(ItemInit.rune_guidance.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -177,8 +177,8 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.ENDER_EYE));
 
-		recipeEye = registerRuneAltarRecipe(new ResourceLocation("recipeeye"),
-				new ItemStack(ItemInit.rune_eye.get(), 1), new ArrayList<Integer>() {
+		recipeEye = registerChiselRecipe(new ResourceLocation("recipeeye"), new ItemStack(ItemInit.rune_eye.get(), 1),
+				new ArrayList<Integer>() {
 					/**
 					 * 
 					 */
@@ -219,7 +219,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(ItemInit.mana_powder.get()));
 
-		recipeCommunion = registerRuneAltarRecipe(new ResourceLocation("recipecommunion"),
+		recipeCommunion = registerChiselRecipe(new ResourceLocation("recipecommunion"),
 				new ItemStack(ItemInit.rune_communion.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -248,7 +248,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(ItemInit.grey_powder.get()));
 
-		recipeBeast = registerRuneAltarRecipe(new ResourceLocation("recipebeast"),
+		recipeBeast = registerChiselRecipe(new ResourceLocation("recipebeast"),
 				new ItemStack(ItemInit.rune_beast.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -274,7 +274,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.BEEF));
 
-		recipeClawMark = registerRuneAltarRecipe(new ResourceLocation("recipeclawmark"),
+		recipeClawMark = registerChiselRecipe(new ResourceLocation("recipeclawmark"),
 				new ItemStack(ItemInit.rune_clawmark.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -301,7 +301,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.FLINT));
 
-		recipeMetamorphosis = registerRuneAltarRecipe(new ResourceLocation("recipemetamorphosis"),
+		recipeMetamorphosis = registerChiselRecipe(new ResourceLocation("recipemetamorphosis"),
 				new ItemStack(ItemInit.rune_metamorphosis.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -327,7 +327,7 @@ public class ModChiselRecipes {
 						add(59);
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.SUGAR));
-		recipeOedon = registerRuneAltarRecipe(new ResourceLocation("recipeoedon"),
+		recipeOedon = registerChiselRecipe(new ResourceLocation("recipeoedon"),
 				new ItemStack(ItemInit.rune_oedon.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -358,7 +358,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.REDSTONE));
 
-		recipeLake = registerRuneAltarRecipe(new ResourceLocation("recipelake"),
+		recipeLake = registerChiselRecipe(new ResourceLocation("recipelake"),
 				new ItemStack(ItemInit.rune_lake.get(), 1), new ArrayList<Integer>() {
 
 					/**
@@ -386,7 +386,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_blank.get()), Ingredient.fromItems(Items.WATER_BUCKET));
 
-		recipeRapture = registerRuneAltarRecipe(new ResourceLocation("reciperapture"),
+		recipeRapture = registerChiselRecipe(new ResourceLocation("reciperapture"),
 				new ItemStack(ItemInit.rune_rapture.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -432,7 +432,7 @@ public class ModChiselRecipes {
 
 		// Contract runes
 
-		recipeBeastContract = registerRuneAltarRecipe(new ResourceLocation("recipebeastcontract"),
+		recipeBeastContract = registerChiselRecipe(new ResourceLocation("recipebeastcontract"),
 				new ItemStack(ItemInit.rune_beast_c.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -460,7 +460,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_beast.get()), Ingredient.fromItems(Items.DIAMOND));
 
-		recipeImpurityContract = registerRuneAltarRecipe(new ResourceLocation("recipeimpuritycontract"),
+		recipeImpurityContract = registerChiselRecipe(new ResourceLocation("recipeimpuritycontract"),
 				new ItemStack(ItemInit.rune_impurity_c.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -494,7 +494,7 @@ public class ModChiselRecipes {
 						add(57);
 					}
 				}, Ingredient.fromItems(ItemInit.rune_oedon.get()), Ingredient.fromItems(Items.DIAMOND));
-		recipeCorruptionContract = registerRuneAltarRecipe(new ResourceLocation("recipecorruptioncontract"),
+		recipeCorruptionContract = registerChiselRecipe(new ResourceLocation("recipecorruptioncontract"),
 				new ItemStack(ItemInit.rune_corruption_c.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -529,7 +529,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_clawmark.get()), Ingredient.fromItems(Items.DIAMOND));
 
-		recipeMilkweedContract = registerRuneAltarRecipe(new ResourceLocation("recipemilkweedcontract"),
+		recipeMilkweedContract = registerChiselRecipe(new ResourceLocation("recipemilkweedcontract"),
 				new ItemStack(ItemInit.rune_milkweed_c.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -572,7 +572,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_lake.get()), Ingredient.fromItems(Items.DIAMOND));
 
-		recipeHunterContract = registerRuneAltarRecipe(new ResourceLocation("recipehuntercontract"),
+		recipeHunterContract = registerChiselRecipe(new ResourceLocation("recipehuntercontract"),
 				new ItemStack(ItemInit.rune_hunter_c.get(), 1), new ArrayList<Integer>() {
 
 					/**
@@ -608,7 +608,7 @@ public class ModChiselRecipes {
 					}
 				}, Ingredient.fromItems(ItemInit.rune_guidance.get()), Ingredient.fromItems(Items.DIAMOND));
 
-		recipeRadianceContract = registerRuneAltarRecipe(new ResourceLocation("reciperadiancecontract"),
+		recipeRadianceContract = registerChiselRecipe(new ResourceLocation("reciperadiancecontract"),
 				new ItemStack(ItemInit.rune_radiance_c.get(), 1), new ArrayList<Integer>() {
 					/**
 					 * 
@@ -649,7 +649,11 @@ public class ModChiselRecipes {
 				}, Ingredient.fromItems(ItemInit.rune_rapture.get()), Ingredient.fromItems(Items.NETHER_STAR));
 	}
 
-	public static RecipeChiselStation registerRuneAltarRecipe(ResourceLocation rl, ItemStack output,
+	public static List<RecipeChiselStation> getRunerecipies() {
+		return runeRecipies;
+	}
+
+	public static RecipeChiselStation registerChiselRecipe(ResourceLocation rl, ItemStack output,
 			ArrayList<Integer> runesIn, Ingredient... inputs) {
 		Preconditions.checkArgument(inputs.length <= 2);
 		RecipeChiselStation recipe = new RecipeChiselStation(rl, output, runesIn, inputs);

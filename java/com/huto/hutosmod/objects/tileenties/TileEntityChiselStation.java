@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.containers.ContainerChiselStation;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.blocks.BlockVirtuousEnchant;
-import com.huto.hutosmod.objects.items.ItemKnapper;
+import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.RecipeChiselStation;

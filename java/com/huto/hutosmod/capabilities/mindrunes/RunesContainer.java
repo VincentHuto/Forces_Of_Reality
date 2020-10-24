@@ -12,6 +12,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
@@ -76,7 +77,9 @@ public class RunesContainer extends ItemStackHandler implements IRunesItemHandle
 	public void tick() {
 		for (int i = 0; i < getSlots(); i++) {
 			ItemStack stack = getStackInSlot(i);
-			stack.getCapability(RunesCapabilities.ITEM_RUNE).ifPresent(b -> b.onWornTick(holder));
+			if (stack.getItem() != Items.AIR) {
+				stack.getCapability(RunesCapabilities.ITEM_RUNE).ifPresent(b -> b.onWornTick(holder));
+			}
 		}
 		sync();
 	}

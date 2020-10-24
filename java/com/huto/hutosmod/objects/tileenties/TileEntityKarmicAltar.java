@@ -6,18 +6,23 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
+import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,6 +33,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 	final int SET_COOLDOWN_EVENT = 1;
 	public float maxVibes = 500;
 	public float clientVibes = 0.0f;
+	public final String TAG_SIZE = "tankSize";
 	public static final String TAG_VIBES = "vibes";
 
 	public TileEntityKarmicAltar() {
@@ -48,7 +54,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
-		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get())
+		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get() && !stack.getItem().isFood())
 			return false;
 
 		boolean did = false;
@@ -62,7 +68,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 				if (player == null || !player.abilities.isCreativeMode) {
 					stack.shrink(1);
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
-					this.receiveClientEvent(SET_COOLDOWN_EVENT, 90);
+					this.receiveClientEvent(SET_COOLDOWN_EVENT, 60);
 				}
 				break;
 			}
@@ -78,8 +84,11 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 
 	@SuppressWarnings("unused")
 	@Override
-
 	public void tick() {
+		if (!world.isRemote) {
+			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
+		}
+
 		Random rand = new Random();
 		double xpos = pos.getX() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
 		double ypos = pos.getY() + 1.3;
@@ -87,22 +96,26 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 		int mod = 3 + rand.nextInt(10);
 
 		// Grabs the item above the block
+
 		List<ItemEntity> items = world.getEntitiesWithinAABB(ItemEntity.class,
 				new AxisAlignedBB(pos, pos.add(1, 1, 1)));
 		for (ItemEntity item : items)
-			if (item.isAlive() && !item.getItem().isEmpty()) {
+			if (item.isAlive() && !item.getItem().isEmpty() && item.getItem().isFood()) {
 				ItemStack stack = item.getItem();
 				addItem(null, stack, null);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+
 			}
 
+		// After the cooldown counter is done consume the item and add mana
 		if (cooldown == 0) {
 			if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY) {
-				itemHandler.setStackInSlot(0, ItemStack.EMPTY);
 				sendUpdates();
 				vibes.addVibes(30);
+				itemHandler.setStackInSlot(0, ItemStack.EMPTY);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
-				world.addBlockEvent(getPos(), BlockInit.karmic_altar.get(), SET_COOLDOWN_EVENT, 90);
-				this.receiveClientEvent(SET_COOLDOWN_EVENT, 90);
+				world.addBlockEvent(getPos(), BlockInit.karmic_altar.get(), SET_COOLDOWN_EVENT, 60);
+				this.receiveClientEvent(SET_COOLDOWN_EVENT, 60);
 
 			}
 
@@ -114,20 +127,21 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 			if (count % 10 == 0) {
 				count = 0;
 				if (world.isRemote) {
-					world.addParticle(ParticleTypes.WARPED_SPORE, xpos, ypos, zpos, 0, 0, 0);
+					Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
+					Vector3 belowVec = Vector3.fromTileEntityCenter(this);
+					HutosMod.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), 0xFFFFFF, 0x00000);
+					HutosMod.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), 0x00000, 0xFFFFFF);
 
 				}
 			}
+
 		}
-		/*
-		 * if (world.isRemote) { Vector3 vec = Vector3.fromTileEntityCenter(this);
-		 * Vector3 endVec = vec.add(0, 2.5, 0); HutosMod.proxy.lightningFX(vec, endVec,
-		 * 2F, 0x00948B, 0x00E4D7); }
-		 */
+
 		// Decement the cooldown
 		if (cooldown > 0) {
 			cooldown--;
 		}
+
 	}
 
 	@Override
@@ -173,7 +187,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 
 	@Override
 	public void exportToAbsorber(TileEntityAbsorber exportToIn, float rateIn) {
-		if (!this.isVibeFull() && vibes.getVibes() > 1) {
+		if (vibes.getVibes() > 1 + rateIn) {
 			this.vibes.subtractVibes(rateIn);
 			exportToIn.vibes.addVibes(rateIn);
 		}
@@ -181,6 +195,72 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 
 	@Override
 	public boolean canExport() {
-		return canGenerate();
+		if (vibes.getVibes() > 5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, getBlockState(), getBlockState());
+		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+		markDirty();
+	}
+
+	// NBT data
+	@Override
+	public void readPacketNBT(CompoundNBT tag) {
+		super.readPacketNBT(tag);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
+	}
+
+	@Override
+	public void writePacketNBT(CompoundNBT tag) {
+		super.writePacketNBT(tag);
+		tag.merge(itemHandler.serializeNBT());
+		tag.putFloat(TAG_SIZE, maxVibes);
+		tag.putFloat(TAG_VIBES, vibes.getVibes());
+	}
+
+	@Override
+	public CompoundNBT write(CompoundNBT compound) {
+		return super.write(compound);
+	}
+
+	@Override
+	public void read(BlockState state, CompoundNBT nbt) {
+		super.read(state, nbt);
+
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		super.getUpdatePacket();
+		CompoundNBT nbtTag = new CompoundNBT();
+		nbtTag.merge(itemHandler.serializeNBT());
+		nbtTag.putFloat(TAG_SIZE, maxVibes);
+		nbtTag.putFloat(TAG_VIBES, vibes.getVibes());
+		return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+		CompoundNBT tag = pkt.getNbtCompound();
+		super.onDataPacket(net, pkt);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
+	}
+
+	@Override
+	public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+		super.handleUpdateTag(state, tag);
+		maxVibes = tag.getFloat(TAG_SIZE);
+		clientVibes = tag.getFloat(TAG_VIBES);
 	}
 }

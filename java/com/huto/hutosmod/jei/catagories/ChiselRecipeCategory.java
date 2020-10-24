@@ -21,14 +21,11 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
 
 public class ChiselRecipeCategory implements IRecipeCategory<RecipeChiselStation> {
 	public static final ResourceLocation UID = new ResourceLocation(HutosMod.MOD_ID, "runic_chisel_station");
@@ -97,17 +94,19 @@ public class ChiselRecipeCategory implements IRecipeCategory<RecipeChiselStation
 	public void draw(RecipeChiselStation recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
 		overlay.draw(matrixStack);
 		GlStateManager.pushMatrix();
-		GlStateManager.translatef(guiWidth / 2 + 70, guiHeight / 2 , 10);
-		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
+		GlStateManager.translatef(guiWidth / 2 + 70, guiHeight / 2, 10);
 		for (int i = 0; i < buttonList.size(); i++) {
 			buttonList.get(i).renderButton(matrixStack, (int) mouseX, (int) mouseY, 10);
 		}
 		GlStateManager.popMatrix();
 
-		fontRenderer.func_238418_a_(new StringTextComponent("Runes to Activate"), 20,
-				(int) (fontRenderer.FONT_HEIGHT) - 8, 130, 10);
-		fontRenderer.func_238418_a_(new StringTextComponent(recipe.getActivatedRunes().toString()), -20,
-				(int) (fontRenderer.FONT_HEIGHT), 150, 0);
+		/*
+		 * fontRenderer.func_238418_a_(new StringTextComponent("Runes to Activate"), 20,
+		 * (int) (fontRenderer.FONT_HEIGHT) - 8, 130, 10);
+		 * fontRenderer.func_238418_a_(new
+		 * StringTextComponent(recipe.getActivatedRunes().toString()), -20, (int)
+		 * (fontRenderer.FONT_HEIGHT), 150, 0);
+		 */
 
 	}
 
