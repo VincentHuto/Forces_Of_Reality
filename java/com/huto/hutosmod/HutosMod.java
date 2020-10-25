@@ -1,7 +1,5 @@
 package com.huto.hutosmod;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,17 +10,19 @@ import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaHudEventHandler;
 import com.huto.hutosmod.capabilities.vibes.SeerEventHandler;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
-import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
+import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.events.RenderLaserWithItem;
 import com.huto.hutosmod.gui.pages.coven.CovenPageLib;
 import com.huto.hutosmod.gui.pages.guide.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.CapabilityInit;
 import com.huto.hutosmod.init.ContainerInit;
+import com.huto.hutosmod.init.EnchantmentInit;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.particles.init.ParticleInit;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
@@ -33,19 +33,19 @@ import com.huto.hutosmod.worldgen.ModOreGen;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -57,15 +57,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.IContainerFactory;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.ObjectHolder;
 
 @Mod("hutosmod")
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD)
 public class HutosMod {
 	@SuppressWarnings("unused")
-	private static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "hutosmod";
 	public static HutosMod instance;
 	public static IProxy proxy = new IProxy() {
@@ -74,6 +72,7 @@ public class HutosMod {
 	@SuppressWarnings("deprecation")
 	public HutosMod() {
 		DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> proxy = new ClientProxy());
+
 		proxy.registerHandlers();
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -85,8 +84,10 @@ public class HutosMod {
 		TileEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
 		EntityInit.ENTITY_TYPES.register(modEventBus);
+		EnchantmentInit.ENCHANTS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.addListener(this::pickupEvent);
 		// Register Vibration Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
@@ -125,15 +126,16 @@ public class HutosMod {
 		ModFuserRecipies.init();
 		ModChiselRecipes.init();
 		PacketHandler.registerChannels();
+		PacketHandler.registerRuneBinderChannels();
 
 	}
+
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		MinecraftForge.EVENT_BUS.register(RenderLaserWithItem.class);
 		this.addLayers();
-
 	}
 
 	@SubscribeEvent
@@ -171,25 +173,35 @@ public class HutosMod {
 		render.addLayer(new RunesRenderLayer(render));
 	}
 
-	// Container Registration For runes
-	@Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class Registration {
-		public static List<ContainerType<?>> CONTAINERS = new ArrayList<>();
-		@ObjectHolder("hutosmod:player_runes")
-		public static ContainerType<PlayerExpandedContainer> PLAYER_RUNES = createContainer("player_runes",
-				(id, inv, data) -> new PlayerExpandedContainer(id, inv, !inv.player.world.isRemote));
 
-		private static <T extends Container> ContainerType<T> createContainer(String name,
-				IContainerFactory<T> factory) {
-			ContainerType<T> containerType = IForgeContainerType.create(factory);
-			containerType.setRegistryName(new ResourceLocation(HutosMod.MOD_ID, name));
-			CONTAINERS.add(containerType);
-			return containerType;
-		}
-
-		@SubscribeEvent
-		public static void onContainerRegister(final RegistryEvent.Register<ContainerType<?>> event) {
-			event.getRegistry().registerAll(CONTAINERS.toArray(new ContainerType[0]));
+	private void pickupEvent(EntityItemPickupEvent event) {
+		if (event.getPlayer().openContainer instanceof ContainerRuneBinder || event.getPlayer().isSneaking()
+				|| event.getItem().getItem().getItem() instanceof ItemRuneBinder)
+			return;
+		PlayerInventory playerInv = event.getPlayer().inventory;
+		for (int i = 0; i <= 8; i++) {
+			ItemStack stack = playerInv.getStackInSlot(i);
+			if (stack.getItem() instanceof ItemRuneBinder
+					&& ((ItemRuneBinder) stack.getItem()).pickupEvent(event, stack)) {
+				event.setResult(Event.Result.ALLOW);
+				return;
+			}
 		}
 	}
+
+	public static ItemStack findRuneBinder(PlayerEntity player) {
+		if (player.getHeldItemMainhand().getItem() instanceof ItemRuneBinder)
+			return player.getHeldItemMainhand();
+		if (player.getHeldItemOffhand().getItem() instanceof ItemRuneBinder)
+			return player.getHeldItemOffhand();
+
+		PlayerInventory inventory = player.inventory;
+		for (int i = 0; i <= 35; i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			if (stack.getItem() instanceof ItemRuneBinder)
+				return stack;
+		}
+		return ItemStack.EMPTY;
+	}
+
 }

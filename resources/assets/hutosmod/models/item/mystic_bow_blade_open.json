@@ -1,7 +1,7 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "hutosmod:items/bow_blade_open"
+       "layer0": "hutosmod:items/mystic_bow_blade_open"
    },
     "display": {
         "thirdperson_righthand": {

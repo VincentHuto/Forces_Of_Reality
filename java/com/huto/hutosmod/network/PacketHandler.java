@@ -19,7 +19,6 @@ public class PacketHandler {
 			.named(new ResourceLocation(HutosMod.MOD_ID + ("main_channel")))
 			.clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals)
 			.networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
-
 	public static final SimpleChannel CHANNELVIBES = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(HutosMod.MOD_ID, "vibrationchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
 			PROTOCOL_VERSION::equals);
@@ -74,6 +73,24 @@ public class PacketHandler {
 		INSTANCE.registerMessage(networkID++, SyncPacket.class, SyncPacket::toBytes, SyncPacket::new,
 				SyncPacket::handle);
 
+	}
+
+	public static ResourceLocation channelName;
+	public String networkVersion;
+	public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
+			new ResourceLocation(HutosMod.MOD_ID, "runebindernetwork"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
+
+	public static SimpleChannel registerRuneBinderChannels() {
+		RUNEBINDER.messageBuilder(ToggleMessage.class, networkID++).decoder(ToggleMessage::decode).encoder(ToggleMessage::encode)
+				.consumer(ToggleMessage::handle).add();
+		RUNEBINDER.messageBuilder(OpenMessage.class, networkID++).decoder(OpenMessage::decode).encoder(OpenMessage::encode)
+				.consumer(OpenMessage::handle).add();
+		RUNEBINDER.messageBuilder(ToggleMessageMessage.class, networkID++).decoder(ToggleMessageMessage::decode)
+				.encoder(ToggleMessageMessage::encode).consumer(ToggleMessageMessage::handle).add();
+		RUNEBINDER.messageBuilder(FilterMessage.class, networkID++).decoder(FilterMessage::decode).encoder(FilterMessage::encode)
+				.consumer(FilterMessage::handle).add();
+		return RUNEBINDER;
 	}
 
 }

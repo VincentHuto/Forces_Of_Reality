@@ -22,6 +22,7 @@ import com.huto.hutosmod.objects.items.equipment.ItemInfluenceSuppressor;
 import com.huto.hutosmod.objects.items.equipment.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.equipment.ItemMysticTome;
 import com.huto.hutosmod.objects.items.equipment.ItemRepulsionCharm;
+import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.objects.items.equipment.ItemSlimeRepulsionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.equipment.ItemWatchfulPendant;
@@ -88,7 +89,6 @@ import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -106,8 +106,6 @@ public class ItemInit {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HutosMod.MOD_ID);
 
-	
-	
 	// Return Rune
 	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
 			() -> new ItemResonanceDestabalizer(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -274,9 +272,6 @@ public class ItemInit {
 			() -> new ItemRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> slime_charm = ITEMS.register("slime_charm",
 			() -> new ItemSlimeRepulsionCharm(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> bow_blade = ITEMS.register("bow_blade",
-			() -> new ItemBowBlade(new Item.Properties().group(HutosModItemGroup.instance)));
-	
 	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
 			() -> new ItemDryingAgent(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
@@ -322,6 +317,15 @@ public class ItemInit {
 					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 
 	// Tools
+	public static final RegistryObject<Item> null_bow_blade = ITEMS.register("null_bow_blade", () -> new ItemBowBlade(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));
+
+	public static final RegistryObject<Item> mystic_bow_blade = ITEMS
+			.register("mystic_bow_blade",
+					() -> new ItemBowBlade(
+							new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(512), 1,
+							6, 1));
+
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
@@ -395,6 +399,11 @@ public class ItemInit {
 					EnumCovenants.NONE, 1));
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> rune_pattern = ITEMS.register("rune_pattern",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
+	public static final RegistryObject<Item> rune_binder = ITEMS.register("rune_binder",
+			() -> new ItemRuneBinder("rune_binder", 18, Rarity.UNCOMMON));
 
 	// Contract Runes
 	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
@@ -623,9 +632,10 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		
-		// Attract Charm
-		ItemModelsProperties.registerProperty(bow_blade.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+
+		// Bow Blades
+		// Null
+		ItemModelsProperties.registerProperty(null_bow_blade.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
@@ -638,6 +648,50 @@ public class ItemInit {
 						}
 						return 0;
 					}
+				});
+		ItemModelsProperties.registerProperty(null_bow_blade.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(null_bow_blade.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
+
+		// Mystic
+		ItemModelsProperties.registerProperty(mystic_bow_blade.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(mystic_bow_blade.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(mystic_bow_blade.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
 	}

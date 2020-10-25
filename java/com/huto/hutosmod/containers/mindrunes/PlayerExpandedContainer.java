@@ -3,9 +3,9 @@ package com.huto.hutosmod.containers.mindrunes;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
+import com.huto.hutosmod.init.ContainerInit;
 
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,7 +39,7 @@ public class PlayerExpandedContainer extends Container {
 	public IRunesItemHandler runes;
 
 	public PlayerExpandedContainer(int id, PlayerInventory playerInventory, boolean localWorld) {
-		super(HutosMod.Registration.PLAYER_RUNES, id);
+		super(ContainerInit.PLAYER_RUNES, id);
 		this.isLocalWorld = localWorld;
 		this.player = playerInventory.player;
 
@@ -135,15 +135,15 @@ public class PlayerExpandedContainer extends Container {
 				}
 			}
 
-		/*	// runes -> inv
-			else if (index >= 9 && index < 9 + slotShift) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
-
-					return ItemStack.EMPTY;
-
-				}
-			}
-*/
+			/*
+			 * // runes -> inv else if (index >= 9 && index < 9 + slotShift) { if
+			 * (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3,
+			 * false)) {
+			 * 
+			 * return ItemStack.EMPTY;
+			 * 
+			 * } }
+			 */
 			// inv -> armor
 			else if (entityequipmentslot.getSlotType() == EquipmentSlotType.Group.ARMOR
 					&& !(this.inventorySlots.get(8 - entityequipmentslot.getIndex())).getHasStack()) {
@@ -166,36 +166,33 @@ public class PlayerExpandedContainer extends Container {
 				}
 			}
 			// inv -> rune
-		/*	else if (itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null).isPresent()) {
-
-				IRune rune = itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
-						.orElseThrow(NullPointerException::new);
-
-				for (int runeSlot : rune.getRuneType().getValidSlots()) {
-					if (rune.canEquip(this.player) && !(this.inventorySlots.get(runeSlot + 9)).getHasStack()
-							&& !this.mergeItemStack(itemstack1, runeSlot + 9, runeSlot + 10, false)) {
-
-						return ItemStack.EMPTY;
-					}
-					if (itemstack1.getCount() == 0)
-						break;
-				}
-			} else if (index >= 9 + slotShift && index < 36 + slotShift) {
-
-				if (!this.mergeItemStack(itemstack1, 36 + slotShift - 3, 45 + slotShift - 3, false)) {
-
-					return ItemStack.EMPTY;
-				}
-			} else if (index >= 36 + slotShift - 3 && index < 45 + slotShift - 3) {
-				if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 36 + slotShift - 3, false)) {
-
-					return ItemStack.EMPTY;
-				}
-			} else if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3, 45 + slotShift - 3, false)) {
-
-				return ItemStack.EMPTY;
-			}
-*/
+			/*
+			 * else if (itemstack.getCapability(RunesCapabilities.ITEM_RUNE,
+			 * null).isPresent()) {
+			 * 
+			 * IRune rune = itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
+			 * .orElseThrow(NullPointerException::new);
+			 * 
+			 * for (int runeSlot : rune.getRuneType().getValidSlots()) { if
+			 * (rune.canEquip(this.player) && !(this.inventorySlots.get(runeSlot +
+			 * 9)).getHasStack() && !this.mergeItemStack(itemstack1, runeSlot + 9, runeSlot
+			 * + 10, false)) {
+			 * 
+			 * return ItemStack.EMPTY; } if (itemstack1.getCount() == 0) break; } } else if
+			 * (index >= 9 + slotShift && index < 36 + slotShift) {
+			 * 
+			 * if (!this.mergeItemStack(itemstack1, 36 + slotShift - 3, 45 + slotShift - 3,
+			 * false)) {
+			 * 
+			 * return ItemStack.EMPTY; } } else if (index >= 36 + slotShift - 3 && index <
+			 * 45 + slotShift - 3) { if (!this.mergeItemStack(itemstack1, 9 + slotShift - 3,
+			 * 36 + slotShift - 3, false)) {
+			 * 
+			 * return ItemStack.EMPTY; } } else if (!this.mergeItemStack(itemstack1, 9 +
+			 * slotShift - 3, 45 + slotShift - 3, false)) {
+			 * 
+			 * return ItemStack.EMPTY; }
+			 */
 			if (itemstack1.isEmpty()) {
 
 				slot.putStack(ItemStack.EMPTY);

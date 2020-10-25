@@ -3,12 +3,19 @@ package com.huto.hutosmod.events;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.containers.ContainerRuneBinder;
+import com.huto.hutosmod.containers.FilterContainer;
+import com.huto.hutosmod.gui.FilterGui;
 import com.huto.hutosmod.gui.GuiChiselStation;
+import com.huto.hutosmod.gui.GuiRuneBinder;
 import com.huto.hutosmod.gui.GuiVirtuousEnchanter;
 import com.huto.hutosmod.gui.mindrunes.PlayerExpandedScreen;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.network.OpenMessage;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.ToggleMessage;
 import com.huto.hutosmod.render.entity.RenderBeastFromBeyond;
 import com.huto.hutosmod.render.entity.RenderColin;
 import com.huto.hutosmod.render.entity.RenderCorruptNote;
@@ -50,8 +57,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -63,9 +72,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventSubscriber {
 
-	public static final KeyBinding KEY_RUNES = new KeyBinding("keybind.runesinventory", GLFW.GLFW_KEY_B,
-			"key.categories.inventory");
+	private static NonNullList<KeyBinding> keyBinds = NonNullList.create();
 
+	@SuppressWarnings("unchecked")
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 
@@ -90,7 +99,9 @@ public class ClientEventSubscriber {
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
-		ScreenManager.registerFactory(HutosMod.Registration.PLAYER_RUNES, PlayerExpandedScreen::new);
+		ScreenManager.registerFactory(ContainerInit.PLAYER_RUNES, PlayerExpandedScreen::new);
+		ScreenManager.registerFactory(ContainerRuneBinder.type, GuiRuneBinder::new);
+		ScreenManager.registerFactory(FilterContainer.type, FilterGui::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);
@@ -115,23 +126,37 @@ public class ClientEventSubscriber {
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 
-		ClientRegistry.registerKeyBinding(KEY_RUNES);
+		keyBinds.add(0, new KeyBinding("key.hutosmod.backpackpickup.desc", -1, "key.hutosmod.category"));
+		keyBinds.add(1, new KeyBinding("key.hutosmod.backpackopen.desc", -1, "key.hutosmod.category"));
+		keyBinds.add(2, new KeyBinding("keybind.runesinventory", GLFW.GLFW_KEY_B, "key.hutosmod.category"));
+		ClientRegistry.registerKeyBinding(keyBinds.get(0));
+		ClientRegistry.registerKeyBinding(keyBinds.get(1));
+		ClientRegistry.registerKeyBinding(keyBinds.get(2));
 
+	}
+
+	@SuppressWarnings("unused")
+	private static void onClientTick(TickEvent.ClientTickEvent event) {
+		if (keyBinds.get(0).isPressed())
+			PacketHandler.RUNEBINDER.sendToServer(new ToggleMessage());
+		if (keyBinds.get(1).isPressed())
+			PacketHandler.RUNEBINDER.sendToServer(new OpenMessage());
 	}
 
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
 
-/*	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed, int colorOuter,
-			int colorInner) {
-		Minecraft.getInstance().particles.addEffect(new FXLightning(Minecraft.getInstance().world, vectorStart,
-				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
-	}
-
-	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, int colorOuter,
-			int colorInner) {
-		lightningFX(vectorStart, vectorEnd, ticksPerMeter, System.nanoTime(), colorOuter, colorInner);
-	}*/
+	/*
+	 * public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float
+	 * ticksPerMeter, long seed, int colorOuter, int colorInner) {
+	 * Minecraft.getInstance().particles.addEffect(new
+	 * FXLightning(Minecraft.getInstance().world, vectorStart, vectorEnd,
+	 * ticksPerMeter, seed, colorOuter, colorInner)); }
+	 * 
+	 * public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float
+	 * ticksPerMeter, int colorOuter, int colorInner) { lightningFX(vectorStart,
+	 * vectorEnd, ticksPerMeter, System.nanoTime(), colorOuter, colorInner); }
+	 */
 
 }

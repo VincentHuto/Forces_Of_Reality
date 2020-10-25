@@ -3,13 +3,17 @@ package com.huto.hutosmod.objects.items.tools;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.huto.hutosmod.init.EnchantmentInit;
+
+import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -22,6 +26,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -31,11 +37,13 @@ public class ItemBowBlade extends ShootableItem {
 
 	public boolean state;
 	public static String TAG_STATE = "state";
-	DamageSource bowBladeSource = new DamageSource("Bow Blade");
+	public float swordDam;
+	public float bowDam;
 
-	public ItemBowBlade(Properties prop) {
+	public ItemBowBlade(Properties prop, int tier, float swordDamIn, float bowDamIn) {
 		super(prop);
-		prop.maxStackSize(1);
+		swordDam = swordDamIn;
+		bowDam = bowDamIn;
 
 	}
 
@@ -57,8 +65,6 @@ public class ItemBowBlade extends ShootableItem {
 			compound.putBoolean(TAG_STATE, false);
 		}
 		if (stack.getTag().getBoolean(TAG_STATE)) {
-
-			// Do the Thing
 		}
 
 	}
@@ -74,10 +80,10 @@ public class ItemBowBlade extends ShootableItem {
 		CompoundNBT compound = stack.getTag();
 		if (playerIn.isSneaking()) {
 			if (!compound.getBoolean(TAG_STATE)) {
-				playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
+				playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.40f, 1F);
 				compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 			} else {
-				playerIn.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.40f, 1F);
+				playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.40f, 1F);
 				compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
 			}
 		} else {
@@ -95,8 +101,6 @@ public class ItemBowBlade extends ShootableItem {
 					playerIn.setActiveHand(handIn);
 					return ActionResult.resultConsume(itemstack);
 				}
-			} else {
-				System.out.println("I AM A SWORD NOW");
 			}
 
 		}
@@ -106,24 +110,115 @@ public class ItemBowBlade extends ShootableItem {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		DamageSource bowBladeSource = DamageSource.causePlayerDamage((PlayerEntity) attacker);
 		CompoundNBT compound = stack.getTag();
+
+		int j = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_fire_aspect.get(), stack);
+		if (target instanceof LivingEntity) {
+			if (j > 0 && !target.isBurning()) {
+				target.setFire(j);
+			}
+		}
+
+		int knockbackMod = 0;
+		knockbackMod = knockbackMod
+				+ EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_knockback.get(), stack);
+		if (attacker.isSprinting()) {
+			++knockbackMod;
+		}
+		if (knockbackMod > 0) {
+			if (target instanceof LivingEntity) {
+				((LivingEntity) target).applyKnockback((float) knockbackMod * 0.5F,
+						(double) MathHelper.sin(attacker.rotationYaw * ((float) Math.PI / 180F)),
+						(double) (-MathHelper.cos(attacker.rotationYaw * ((float) Math.PI / 180F))));
+			} else {
+				target.addVelocity(
+						(double) (-MathHelper.sin(attacker.rotationYaw * ((float) Math.PI / 180F))
+								* (float) knockbackMod * 0.5F),
+						0.1D, (double) (MathHelper.cos(attacker.rotationYaw * ((float) Math.PI / 180F))
+								* (float) knockbackMod * 0.5F));
+			}
+
+			attacker.setMotion(attacker.getMotion().mul(0.6D, 1.0D, 0.6D));
+			attacker.setSprinting(false);
+		}
 		if (!compound.getBoolean(TAG_STATE)) {
-			target.attackEntityFrom(bowBladeSource, 8f);
+
+			float damageModSharp = 1.0F + (float) Math.max(0,
+					EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_sharpness.get(), stack) - 1) * 0.5F;
+			float damageModSmite = EnchantmentInit.bow_blade_smite.get().calcDamageByCreature(
+					EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_smite.get(), stack),
+					CreatureAttribute.UNDEAD);
+			float damageModBane = EnchantmentInit.bow_blade_bane_of_arthropods.get().calcDamageByCreature(
+					EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_bane_of_arthropods.get(), stack),
+					CreatureAttribute.ARTHROPOD);
+
+			float combindedSmteBane = damageModBane + damageModSmite;
+			if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_smite.get(), stack) + EnchantmentHelper
+					.getEnchantmentLevel(EnchantmentInit.bow_blade_bane_of_arthropods.get(), stack) > 0) {
+				target.attackEntityFrom(bowBladeSource, (combindedSmteBane + swordDam));
+			} else if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_sharpness.get(), stack) > 0) {
+				target.attackEntityFrom(bowBladeSource, (swordDam + damageModSharp));
+			} else {
+				target.attackEntityFrom(bowBladeSource, swordDam);
+
+			}
+			stack.damageItem(1, attacker, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
 		} else {
-			target.attackEntityFrom(bowBladeSource, 1f);
+			stack.damageItem(1, attacker, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
+			target.attackEntityFrom(bowBladeSource, bowDam);
 
 		}
-		return super.hitEntity(stack, target, attacker);
+		return true;
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
+			LivingEntity entityLiving) {
+		if (state.getBlockHardness(worldIn, pos) != 0.0F) {
+			stack.damageItem(2, entityLiving, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isDamageable(ItemStack stack) {
+		return true;
 	}
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if (stack.hasTag()) {
+			float damageModSharp = 1.0F + (float) Math.max(0,
+					EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_sharpness.get(), stack) - 1) * 0.5F;
 			if (stack.getTag().getBoolean(TAG_STATE)) {
+				int s = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_power.get(), stack);
 				tooltip.add(new TranslationTextComponent("State: Open").mergeStyle(TextFormatting.BLUE));
+
+				if (s > 0) {
+					tooltip.add(new TranslationTextComponent((bowDam + (s * 0.5D + 0.5D)) + " Additional Arrow Damage")
+							.mergeStyle(TextFormatting.DARK_GREEN));
+				} else {
+					tooltip.add(new TranslationTextComponent((bowDam + " Additional Arrow Damage"))
+							.mergeStyle(TextFormatting.DARK_GREEN));
+				}
+
 			} else {
 				tooltip.add(new TranslationTextComponent("State: Closed").mergeStyle(TextFormatting.RED));
+				if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_sharpness.get(), stack) > 0) {
+					tooltip.add(new TranslationTextComponent((damageModSharp + swordDam) + " Attack Damage")
+							.mergeStyle(TextFormatting.DARK_GREEN));
+				} else {
+					tooltip.add(new TranslationTextComponent((swordDam) + " Attack Damage")
+							.mergeStyle(TextFormatting.DARK_GREEN));
+				}
 			}
 		}
 	}
@@ -136,6 +231,11 @@ public class ItemBowBlade extends ShootableItem {
 	@Override
 	public int func_230305_d_() {
 		return 15;
+	}
+
+	public boolean isBowBladeInfinite(ItemStack bow) {
+		int enchant = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_infinity.get(), bow);
+		return enchant <= 0 ? false : true;
 	}
 
 	/**
@@ -151,7 +251,7 @@ public class ItemBowBlade extends ShootableItem {
 			if (compound.getBoolean(TAG_STATE)) {
 
 				boolean flag = playerentity.abilities.isCreativeMode
-						|| EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
+						|| EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_infinity.get(), stack) > 0;
 				ItemStack itemstack = playerentity.findAmmo(stack);
 
 				int i = this.getUseDuration(stack) - timeLeft;
@@ -164,12 +264,10 @@ public class ItemBowBlade extends ShootableItem {
 					if (itemstack.isEmpty()) {
 						itemstack = new ItemStack(Items.ARROW);
 					}
-
 					float f = getArrowVelocity(i);
 					if (!((double) f < 0.1D)) {
 						boolean flag1 = playerentity.abilities.isCreativeMode
-								|| (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem())
-										.isInfinite(itemstack, stack, playerentity));
+								|| (itemstack.getItem() instanceof ArrowItem && this.isBowBladeInfinite(stack));
 						if (!worldIn.isRemote) {
 							ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem
 									? itemstack.getItem()
@@ -182,19 +280,19 @@ public class ItemBowBlade extends ShootableItem {
 							if (f == 1.0F) {
 								abstractarrowentity.setIsCritical(true);
 							}
-
-							int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+							int j = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_power.get(), stack);
 							if (j > 0) {
 								abstractarrowentity
 										.setDamage(abstractarrowentity.getDamage() + (double) j * 0.5D + 0.5D);
 							}
 
-							int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+							int k = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_punch.get(), stack);
 							if (k > 0) {
 								abstractarrowentity.setKnockbackStrength(k);
 							}
 
-							if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
+							if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.bow_blade_flame.get(),
+									stack) > 0) {
 								abstractarrowentity.setFire(100);
 							}
 

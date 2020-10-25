@@ -1,11 +1,9 @@
-package com.huto.hutosmod.events;
+package com.huto.hutosmod.capabilities.mindrunes;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
-import com.huto.hutosmod.capabilities.mindrunes.IRune;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,7 +17,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = HutosMod.MOD_ID)
-public class AttachCapability {
+public class AttachRuneCapability {
 
 	private static ResourceLocation cap = new ResourceLocation(HutosMod.MOD_ID, "rune_cap");
 

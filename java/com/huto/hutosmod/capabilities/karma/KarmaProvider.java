@@ -23,6 +23,7 @@ public class KarmaProvider implements ICapabilitySerializable<IntNBT> {
 
 	}
 
+	
 	@Override
 	public IntNBT serializeNBT() {
 		return (IntNBT) KARMA_CAPA.getStorage().writeNBT(KARMA_CAPA,

@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class RuneCap {
 
-    public static class IBaubleStorage implements Capability.IStorage<IRune> {
+    public static class IRuneStorage implements Capability.IStorage<IRune> {
 
         @Nullable
         @Override
@@ -24,7 +24,7 @@ public class RuneCap {
         }
     }
 
-    public static class IBaubleFactory implements Callable<IRune> {
+    public static class IRuneFactory implements Callable<IRune> {
 
         @Override
         public IRune call() {

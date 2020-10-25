@@ -4,14 +4,12 @@ import java.util.stream.Stream;
 
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.mindrunes.OpenRunesInvPacket;
-import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 import com.huto.hutosmod.objects.tileenties.TileEntityRuneModStation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -55,17 +53,6 @@ public class BlockRuneModStation extends Block {
 			PacketHandler.INSTANCE.sendToServer(new OpenRunesInvPacket());
 		}
 		return ActionResultType.SUCCESS;
-
-	}
-
-	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof TileEntityChiselStation) {
-				InventoryHelper.dropItems(worldIn, pos, ((TileEntityChiselStation) te).getItems());
-			}
-		}
 
 	}
 

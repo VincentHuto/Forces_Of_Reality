@@ -10,12 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class SlotRune extends SlotItemHandler {
-	int baubleSlot;
+	int runeSlot;
 	PlayerEntity player;
 
 	public SlotRune(PlayerEntity player, IRunesItemHandler itemHandler, int slot, int par4, int par5) {
 		super(itemHandler, slot, par4, par5);
-		this.baubleSlot = slot;
+		this.runeSlot = slot;
 		this.player = player;
 	}
 
