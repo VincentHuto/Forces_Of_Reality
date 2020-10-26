@@ -1,7 +1,8 @@
-package com.huto.hutosmod.entities;
+package com.huto.hutosmod.entities.projectiles;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.entities.EntityHastur;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;

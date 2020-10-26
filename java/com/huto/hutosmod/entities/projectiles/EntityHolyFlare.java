@@ -1,6 +1,9 @@
-package com.huto.hutosmod.entities;
+package com.huto.hutosmod.entities.projectiles;
 
 import javax.annotation.Nullable;
+
+import com.huto.hutosmod.entities.EntitySeraphim;
+import com.huto.hutosmod.entities.EntityThrone;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

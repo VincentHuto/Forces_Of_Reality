@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.hutosmod.HutosMod;
-
 import com.huto.hutosmod.containers.ContainerChiselStation;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.containers.ContainerVirtuousEnchanter;
-import com.huto.hutosmod.containers.FilterContainer;
-import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
+import com.huto.hutosmod.containers.PlayerExpandedContainer;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 
 import net.minecraft.inventory.container.Container;
@@ -53,7 +51,6 @@ public class ContainerInit {
 	public static void onContainerRegister(final RegistryEvent.Register<ContainerType<?>> event) {
 		event.getRegistry().registerAll(RUNECONTAINER.toArray(new ContainerType[0]));
 		event.getRegistry().register(ContainerRuneBinder.type);
-		event.getRegistry().register(FilterContainer.type);
 	}
 
 	@SubscribeEvent

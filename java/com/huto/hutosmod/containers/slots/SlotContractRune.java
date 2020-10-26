@@ -1,4 +1,4 @@
-package com.huto.hutosmod.containers.mindrunes;
+package com.huto.hutosmod.containers.slots;
 
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;

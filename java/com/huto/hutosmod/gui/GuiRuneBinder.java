@@ -19,19 +19,14 @@ public class GuiRuneBinder extends ContainerScreen<ContainerRuneBinder> {
 
 		switch (container.slotcount) {
 		case 18:
-			GUI = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/common_gui.png");
+			GUI = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/rune_binder.png");
 			xSize = 176;
 			ySize = 150;
 			break;
-		case 33:
-			GUI = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/uncommon_gui.png");
-			xSize = 212;
+		case 27:
+			GUI = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/rune_binder_upgrade.png");
+			xSize = 176;
 			ySize = 168;
-			break;
-		case 66:
-			GUI = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/rare_gui.png");
-			xSize = 212;
-			ySize = 222;
 			break;
 		default:
 			GUI = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/epic_gui.png");
@@ -83,8 +78,8 @@ public class GuiRuneBinder extends ContainerScreen<ContainerRuneBinder> {
 	}
 
 	@Override
-	public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
+	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 
-		return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+		return super.keyPressed(keyCode, scanCode, modifiers);
 	}
 }

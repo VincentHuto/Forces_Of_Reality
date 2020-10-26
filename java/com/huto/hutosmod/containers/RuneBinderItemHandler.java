@@ -2,8 +2,6 @@ package com.huto.hutosmod.containers;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
-
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -24,8 +22,6 @@ public class RuneBinderItemHandler extends ItemStackHandler {
 	private int size;
 	private boolean dirty = false;
 	private boolean loaded = false;
-
-	public FilterItemHandler filter = new FilterItemHandler();
 
 	@Nonnull
 	@Override
@@ -89,15 +85,12 @@ public class RuneBinderItemHandler extends ItemStackHandler {
 	public void load(@Nonnull CompoundNBT nbt) {
 		if (nbt.contains("Inventory"))
 			deserializeNBT(nbt.getCompound("Inventory"));
-		if (nbt.contains("Filter"))
-			filter.deserializeNBT(nbt.getCompound("Filter"));
 	}
 
 	public void save() {
 		if (dirty) {
 			CompoundNBT nbt = itemStack.getOrCreateTag();
 			nbt.put("Inventory", serializeNBT());
-			nbt.put("Filter", filter.serializeNBT());
 			dirty = false;
 		}
 	}
@@ -117,41 +110,4 @@ public class RuneBinderItemHandler extends ItemStackHandler {
 		onLoad();
 	}
 
-	public class FilterItemHandler extends ItemStackHandler {
-		public FilterItemHandler() {
-			super(16);
-		}
-
-		public void removeItem(int slot) {
-			this.setStackInSlot(slot, ItemStack.EMPTY);
-			dirty = true;
-			save();
-		}
-
-		public void setItem(int slot, ItemStack item) {
-			if (item.hasTag()) {
-				CompoundNBT tag = item.getTag();
-				if (tag.contains("Items") || tag.contains("BlockEntityTag") || tag.contains("Inventory"))
-					return;
-			}
-			if (item.getItem() instanceof ItemRuneBinder
-					|| item.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent())
-				return;
-			else {
-				this.setStackInSlot(slot, item);
-				dirty = true;
-				save();
-			}
-		}
-
-		@Nonnull
-		@Override
-		public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-			if (stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()
-					|| stack.getItem() instanceof ItemRuneBinder)
-				return stack;
-
-			return super.insertItem(slot, stack, simulate);
-		}
-	}
 }

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.containers.mindrunes;
+package com.huto.hutosmod.capabilities.mindrunes;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -9,10 +9,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
-
-import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
-import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
-import com.huto.hutosmod.capabilities.mindrunes.RunesContainer;
 
 public class RunesContainerProvider implements INBTSerializable<CompoundNBT>, ICapabilityProvider {
 

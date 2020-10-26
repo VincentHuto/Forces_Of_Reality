@@ -1,5 +1,6 @@
 package com.huto.hutosmod.containers;
 
+import com.huto.hutosmod.containers.slots.SlotRuneBinder;
 import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -90,13 +91,9 @@ public class ContainerRuneBinder extends Container {
 			originX = 7;
 			originY = 67;
 			break;
-		case 33:
-			originX = 25;
+		case 27:
+			originX = 7;
 			originY = 85;
-			break;
-		case 66:
-			originX = 25;
-			originY = 139;
 			break;
 		default:
 			originX = 25;
@@ -125,7 +122,7 @@ public class ContainerRuneBinder extends Container {
 		if (handler == null)
 			return;
 
-		int cols = slotcount == 18 ? 9 : 11;
+		int cols = slotcount % 9 == 0 ? 9 : 10;
 		int rows = slotcount / cols;
 		int slotindex = 0;
 
@@ -147,21 +144,22 @@ public class ContainerRuneBinder extends Container {
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
-
 		if (slot != null && slot.getHasStack()) {
 			int bagslotcount = inventorySlots.size() - playerIn.inventory.mainInventory.size();
 			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
-			if (index < bagslotcount) {
-				if (!this.mergeItemStack(itemstack1, bagslotcount, this.inventorySlots.size(), true))
+			if (itemstack1.getCount() < 1) {
+				itemstack = itemstack1.copy();
+				if (index < bagslotcount) {
+					if (!this.mergeItemStack(itemstack1, bagslotcount, this.inventorySlots.size(), true))
+						return ItemStack.EMPTY;
+				} else if (!this.mergeItemStack(itemstack1, 0, bagslotcount, false)) {
 					return ItemStack.EMPTY;
-			} else if (!this.mergeItemStack(itemstack1, 0, bagslotcount, false)) {
-				return ItemStack.EMPTY;
+				}
+				if (itemstack1.isEmpty())
+					slot.putStack(ItemStack.EMPTY);
+				else
+					slot.onSlotChanged();
 			}
-			if (itemstack1.isEmpty())
-				slot.putStack(ItemStack.EMPTY);
-			else
-				slot.onSlotChanged();
 		}
 		return itemstack;
 	}

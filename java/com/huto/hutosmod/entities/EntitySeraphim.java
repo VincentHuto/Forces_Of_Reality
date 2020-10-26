@@ -2,6 +2,7 @@ package com.huto.hutosmod.entities;
 
 import java.util.List;
 
+import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
 import com.huto.hutosmod.entities.projectiles.EntityJudgement;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.init.EntityInit;

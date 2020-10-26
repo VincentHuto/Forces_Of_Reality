@@ -46,7 +46,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class TileEntityChiselStation extends LockableLootTileEntity
 		implements ITickableTileEntity, INamedContainerProvider {
-	public NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	public NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(5, ItemStack.EMPTY);
 	private IItemHandlerModifiable items = createHandler();
 	public LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 	public int numPlayersUsing = 0;
@@ -95,7 +95,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 
 	@Override
 	public int getSizeInventory() {
-		return 4;
+		return 5;
 	}
 
 	@Override

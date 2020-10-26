@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.events.RuneEntityEventHandler;
+import com.huto.hutosmod.events.mindrunes.RuneEntityEventHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,7 +1,9 @@
-package com.huto.hutosmod.containers;
+package com.huto.hutosmod.containers.slots;
 
 
 import javax.annotation.Nonnull;
+
+import com.huto.hutosmod.containers.RuneBinderItemHandler;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -18,7 +20,7 @@ public class SlotRuneBinder extends SlotItemHandler {
 
     @Override
     public int getItemStackLimit(@Nonnull ItemStack stack) {
-        return super.getSlotStackLimit();
+        return 1;
     }
 
     @Override

@@ -1,13 +1,13 @@
-package com.huto.hutosmod.events;
+package com.huto.hutosmod.events.mindrunes;
 
 import java.util.Collection;
 import java.util.Collections;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
 import com.huto.hutosmod.capabilities.mindrunes.RunesContainer;
-import com.huto.hutosmod.containers.mindrunes.RunesContainerProvider;
-import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
+import com.huto.hutosmod.capabilities.mindrunes.RunesContainerProvider;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.mindrunes.SyncPacket;
 

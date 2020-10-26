@@ -1,10 +1,14 @@
-package com.huto.hutosmod.containers.mindrunes;
+package com.huto.hutosmod.containers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
+import com.huto.hutosmod.containers.slots.ArmorSlot;
+import com.huto.hutosmod.containers.slots.OffHandSlot;
+import com.huto.hutosmod.containers.slots.SlotContractRune;
+import com.huto.hutosmod.containers.slots.SlotRune;
 import com.huto.hutosmod.init.ContainerInit;
 
 import net.minecraft.entity.MobEntity;

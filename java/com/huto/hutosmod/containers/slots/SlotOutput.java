@@ -1,4 +1,4 @@
-package com.huto.hutosmod.containers;
+package com.huto.hutosmod.containers.slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;

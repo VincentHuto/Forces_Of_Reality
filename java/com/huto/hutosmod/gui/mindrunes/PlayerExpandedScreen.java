@@ -1,7 +1,7 @@
 package com.huto.hutosmod.gui.mindrunes;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
+import com.huto.hutosmod.containers.PlayerExpandedContainer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 

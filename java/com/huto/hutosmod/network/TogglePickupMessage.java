@@ -9,15 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class ToggleMessage {
-    public static ToggleMessage decode(final PacketBuffer buffer) {
+public class TogglePickupMessage {
+    public static TogglePickupMessage decode(final PacketBuffer buffer) {
         buffer.readByte();
-        return new ToggleMessage();
+        return new TogglePickupMessage();
     }
-    public static void encode(final ToggleMessage message, final PacketBuffer buffer) {
+    public static void encode(final TogglePickupMessage message, final PacketBuffer buffer) {
         buffer.writeByte(0);
     }
-    public static void handle(final ToggleMessage message, final Supplier<NetworkEvent.Context> ctx) {
+    public static void handle(final TogglePickupMessage message, final Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(
                 ()-> {
                     PlayerEntity player = ctx.get().getSender();

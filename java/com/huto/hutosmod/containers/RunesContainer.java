@@ -1,4 +1,4 @@
-package com.huto.hutosmod.containers.mindrunes;
+package com.huto.hutosmod.containers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
-import com.huto.hutosmod.events.RuneEntityEventHandler;
+import com.huto.hutosmod.events.mindrunes.RuneEntityEventHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

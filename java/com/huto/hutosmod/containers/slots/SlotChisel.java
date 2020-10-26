@@ -1,4 +1,4 @@
-package com.huto.hutosmod.containers;
+package com.huto.hutosmod.containers.slots;
 
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 

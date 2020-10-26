@@ -1,4 +1,4 @@
-package com.huto.hutosmod.gui;
+package com.huto.hutosmod.font;
 
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;

@@ -1,7 +1,7 @@
 package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityHolyFlare;
+import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

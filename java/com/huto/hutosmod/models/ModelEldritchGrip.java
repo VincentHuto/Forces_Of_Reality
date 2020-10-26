@@ -1,6 +1,6 @@
 package com.huto.hutosmod.models;
 
-import com.huto.hutosmod.entities.EntityEldritchGrip;
+import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

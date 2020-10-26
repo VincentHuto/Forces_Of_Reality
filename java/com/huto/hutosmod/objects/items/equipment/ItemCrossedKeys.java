@@ -23,12 +23,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -73,11 +70,12 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderR
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(new StringTextComponent(
 							TextFormatting.AQUA + "You hear the clang of bells in the distance"), true);
-					updateClientServerFlight((ServerPlayerEntity) player, true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
-
+					if (!((PlayerEntity) player).isCreative()) {
+						updateClientServerFlight((ServerPlayerEntity) player, true);
+					}
 				}
 			}
 		}
@@ -97,38 +95,21 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderR
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.AQUA + "You hear an angelic screech in your minds"),
 							true);
-					updateClientServerFlight((ServerPlayerEntity) player, false, false);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
+					if (!((PlayerEntity) player).isCreative()) {
+						updateClientServerFlight((ServerPlayerEntity) player, false, false);
+					}
 				}
 			}
 		}
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-
-		return super.onItemRightClick(worldIn, playerIn, handIn);
-	}
-
-	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return false;
 	}
-	/*
-	 * @Override
-	 * 
-	 * @OnlyIn(Dist.CLIENT) public void doRender(BipedModel<?> bipedModel, ItemStack
-	 * stack, LivingEntity living, MatrixStack ms, IRenderTypeBuffer buffers, int
-	 * light, float limbSwing, float limbSwingAmount, float partialTicks, float
-	 * ageInTicks, float netHeadYaw, float headPitch) {
-	 * bipedModel.bipedHead.translateRotate(ms); ms.translate(-0.25, -0.4, 0);
-	 * ms.scale(0.5F, -0.5F, -0.5F);
-	 * Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(ModBlocks.
-	 * tinyPlanet.getDefaultState(), ms, buffers, light, OverlayTexture.NO_OVERLAY);
-	 * }
-	 */
 
 	@Override
 	@OnlyIn(Dist.CLIENT)

@@ -2,6 +2,9 @@ package com.huto.hutosmod.containers;
 
 import java.util.Objects;
 
+import com.huto.hutosmod.containers.slots.SlotChisel;
+import com.huto.hutosmod.containers.slots.SlotOutput;
+import com.huto.hutosmod.containers.slots.SlotRunePattern;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 
@@ -32,6 +35,8 @@ public class ContainerChiselStation extends Container {
 		this.addSlot(new SlotChisel(chestInventory, 3, 8, 14));
 		this.addSlot(new Slot(chestInventory, 0, 8, 18 + 1 * 18));
 		this.addSlot(new Slot(chestInventory, 1, 8, 22 + 2 * 18));
+		this.addSlot(new SlotRunePattern(chestInventory, 4, 8, 26 + 3 * 18));
+
 		this.addSlot(new SlotOutput(chestInventory, 2, 145, 44));
 		// INVENTORY
 		for (int y = 0; y < 3; y++) {

@@ -1,7 +1,8 @@
-package com.huto.hutosmod.containers.mindrunes;
+package com.huto.hutosmod.containers.slots;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.containers.PlayerExpandedContainer;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.enchantment.EnchantmentHelper;

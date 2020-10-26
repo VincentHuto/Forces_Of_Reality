@@ -622,6 +622,7 @@ public class ModChiselRecipes {
 						add(7);
 						add(10);
 						add(11);
+						add(15);
 						add(17);
 						add(19);
 						add(20);

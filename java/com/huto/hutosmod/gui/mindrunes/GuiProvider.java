@@ -2,7 +2,7 @@ package com.huto.hutosmod.gui.mindrunes;
 
 import javax.annotation.Nullable;
 
-import com.huto.hutosmod.containers.mindrunes.PlayerExpandedContainer;
+import com.huto.hutosmod.containers.PlayerExpandedContainer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

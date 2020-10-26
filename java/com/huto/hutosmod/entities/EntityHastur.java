@@ -1,5 +1,6 @@
 package com.huto.hutosmod.entities;
 
+import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;

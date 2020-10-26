@@ -82,14 +82,12 @@ public class PacketHandler {
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
 
 	public static SimpleChannel registerRuneBinderChannels() {
-		RUNEBINDER.messageBuilder(ToggleMessage.class, networkID++).decoder(ToggleMessage::decode).encoder(ToggleMessage::encode)
-				.consumer(ToggleMessage::handle).add();
-		RUNEBINDER.messageBuilder(OpenMessage.class, networkID++).decoder(OpenMessage::decode).encoder(OpenMessage::encode)
-				.consumer(OpenMessage::handle).add();
+		RUNEBINDER.messageBuilder(TogglePickupMessage.class, networkID++).decoder(TogglePickupMessage::decode)
+				.encoder(TogglePickupMessage::encode).consumer(TogglePickupMessage::handle).add();
+		RUNEBINDER.messageBuilder(OpenMessage.class, networkID++).decoder(OpenMessage::decode)
+				.encoder(OpenMessage::encode).consumer(OpenMessage::handle).add();
 		RUNEBINDER.messageBuilder(ToggleMessageMessage.class, networkID++).decoder(ToggleMessageMessage::decode)
 				.encoder(ToggleMessageMessage::encode).consumer(ToggleMessageMessage::handle).add();
-		RUNEBINDER.messageBuilder(FilterMessage.class, networkID++).decoder(FilterMessage::decode).encoder(FilterMessage::encode)
-				.consumer(FilterMessage::handle).add();
 		return RUNEBINDER;
 	}
 

@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, value = Dist.CLIENT)
-public class RingItemTooltip {
+public class RuneItemSharedTooltip {
 
 	@SubscribeEvent
 	public static void tooltipEvent(ItemTooltipEvent event) {

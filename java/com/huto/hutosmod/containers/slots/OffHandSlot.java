@@ -1,4 +1,4 @@
-package com.huto.hutosmod.containers.mindrunes;
+package com.huto.hutosmod.containers.slots;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.inventory.IInventory;

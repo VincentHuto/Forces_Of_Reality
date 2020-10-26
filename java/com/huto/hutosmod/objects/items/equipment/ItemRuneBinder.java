@@ -8,10 +8,10 @@ import javax.annotation.Nullable;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
-import com.huto.hutosmod.containers.FilterContainer;
 import com.huto.hutosmod.containers.RuneBinderItemHandler;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.ToggleMessageMessage;
+import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
@@ -76,21 +76,19 @@ public class ItemRuneBinder extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (!worldIn.isRemote) {
 			if (playerIn.isSneaking()) {
-				// filter
-				playerIn.openContainer(new INamedContainerProvider() {
-					@Override
-					public ITextComponent getDisplayName() {
-						return new StringTextComponent("Rune Binder Filter");
-					}
-
-					@Nullable
-					@Override
-					public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_,
-							PlayerEntity p_createMenu_3_) {
-						return new FilterContainer(p_createMenu_1_, p_createMenu_3_.world,
-								p_createMenu_3_.getPosition(), p_createMenu_2_, p_createMenu_3_);
-					}
-				});
+				/*
+				 * playerIn.openContainer(new INamedContainerProvider() {
+				 * 
+				 * @Override public ITextComponent getDisplayName() { return new
+				 * StringTextComponent("Rune Binder Filter"); }
+				 * 
+				 * @Nullable
+				 * 
+				 * @Override public Container createMenu(int p_createMenu_1_, PlayerInventory
+				 * p_createMenu_2_, PlayerEntity p_createMenu_3_) { return new
+				 * ContainerFilter(p_createMenu_1_, p_createMenu_3_.world,
+				 * p_createMenu_3_.getPosition(), p_createMenu_2_, p_createMenu_3_); } });
+				 */
 			} else {
 				// open
 				playerIn.openContainer(new INamedContainerProvider() {
@@ -102,10 +100,10 @@ public class ItemRuneBinder extends Item {
 
 					@Nullable
 					@Override
-					public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_,
+					public Container createMenu(int windowId, PlayerInventory p_createMenu_2_,
 							PlayerEntity p_createMenu_3_) {
-						return new ContainerRuneBinder(p_createMenu_1_, p_createMenu_3_.world,
-								p_createMenu_3_.getPosition(), p_createMenu_2_, p_createMenu_3_);
+						return new ContainerRuneBinder(windowId, p_createMenu_3_.world, p_createMenu_3_.getPosition(),
+								p_createMenu_2_, p_createMenu_3_);
 					}
 				});
 			}
@@ -165,37 +163,14 @@ public class ItemRuneBinder extends Item {
 			PacketHandler.RUNEBINDER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEntity),
 					new ToggleMessageMessage(Pickup));
 		else
-			playerEntity.sendStatusMessage(
-					new StringTextComponent(I18n.format(
-							Pickup ? "hutosmod.autopickupenabled" : "hutosmod.autopickupdisabled")),
-					true);
+			playerEntity.sendStatusMessage(new StringTextComponent(
+					I18n.format(Pickup ? "hutosmod.autopickupenabled" : "hutosmod.autopickupdisabled")), true);
 
 	}
 
 	public boolean filterItem(ItemStack item, ItemStack packItem) {
-		IItemHandler tmp = packItem.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
-		if (tmp == null || !(tmp instanceof RuneBinderItemHandler))
-			return false;
+		return item.getItem() instanceof ItemRunePattern ? true : false;
 
-		int filterOpts = packItem.getOrCreateTag().getInt("Filter-OPT");
-		boolean whitelist = (filterOpts & 1) > 0;
-		boolean nbtMatch = (filterOpts & 2) > 0;
-
-		RuneBinderItemHandler handler = (RuneBinderItemHandler) tmp;
-
-		for (int i = 0; i < 16; i++) {
-			ItemStack fStack = handler.filter.getStackInSlot(i);
-			if (!fStack.isEmpty()) {
-				if (fStack.isItemEqual(item)) {
-					if (nbtMatch)
-						return ItemStack.areItemStackTagsEqual(fStack, item) == whitelist;
-					else
-						return whitelist;
-				}
-			}
-		}
-
-		return !whitelist;
 	}
 
 	public boolean pickupEvent(EntityItemPickupEvent event, ItemStack stack) {
@@ -221,8 +196,8 @@ public class ItemRuneBinder extends Item {
 		ItemStack pickedUp = event.getItem().getItem();
 		for (int i = 0; i < handler.getSlots(); i++) {
 			ItemStack slot = handler.getStackInSlot(i);
-			if (slot.isEmpty() || (ItemHandlerHelper.canItemStacksStack(slot, pickedUp)
-					&& slot.getCount() < slot.getMaxStackSize() && slot.getCount() < handler.getSlotLimit(i))) {
+			if (slot.isEmpty() || (ItemHandlerHelper.canItemStacksStack(slot, pickedUp) && slot.getCount() < 1
+					&& slot.getCount() < handler.getSlotLimit(i))) {
 				int remainder = handler.insertItem(i, pickedUp.copy(), false).getCount();
 				pickedUp.setCount(remainder);
 				if (remainder == 0)
