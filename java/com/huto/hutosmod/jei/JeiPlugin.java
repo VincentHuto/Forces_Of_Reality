@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.jei.catagories.ChiselRecipeCategory;
 import com.huto.hutosmod.jei.catagories.ResonatorRecipeCategory;
 import com.huto.hutosmod.jei.catagories.VibeFuserRecipeCategory;
@@ -15,6 +16,7 @@ import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 
 import mezz.jei.api.IModPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -51,6 +53,8 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipes(ModResonatorRecipies.resonatorRecipies, ResonatorRecipeCategory.UID);
 		registry.addRecipes(ModFuserRecipies.fuserRecipies, VibeFuserRecipeCategory.UID);
 		registry.addRecipes(ModChiselRecipes.runeRecipies, ChiselRecipeCategory.UID);
+		registry.addIngredientInfo(new ItemStack(ItemInit.yellow_sign.get()), VanillaTypes.ITEM,
+				"The Yellow Sign of Lord Hastur Himself");
 
 	}
 

@@ -44,7 +44,7 @@ public class PacketUpdateChiselRunes {
 			ctx.get().enqueueWork(() -> {
 				Container container = ctx.get().getSender().openContainer;
 				if (container instanceof ContainerChiselStation) {
-					TileEntityChiselStation station = ((ContainerChiselStation) container).getChestInventory();
+					TileEntityChiselStation station = ((ContainerChiselStation) container).getTe();
 					station.setRuneList(msg.getRunes());
 				}
 			});

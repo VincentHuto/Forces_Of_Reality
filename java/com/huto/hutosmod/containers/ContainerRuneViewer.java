@@ -15,13 +15,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerRuneBinder extends Container {
-	public ContainerRuneBinder(final int windowId, final PlayerInventory playerInventory) {
+public class ContainerRuneViewer extends Container {
+	public ContainerRuneViewer(final int windowId, final PlayerInventory playerInventory) {
 		this(windowId, playerInventory.player.world, playerInventory.player.getPosition(), playerInventory,
 				playerInventory.player);
 	}
 
-	public ContainerRuneBinder(int windowId, World world, BlockPos pos, PlayerInventory playerInventory,
+	public ContainerRuneViewer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory,
 			PlayerEntity playerEntity) {
 		super(type, windowId);
 
@@ -47,16 +47,17 @@ public class ContainerRuneBinder extends Container {
 			playerEntity.closeScreen();
 	}
 
-	public ContainerRuneBinder(int openType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory,
+	public ContainerRuneViewer(int openType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory,
 			PlayerEntity playerEntity) {
 		this(windowId, world, pos, playerInventory, playerEntity);
 	}
 
 	public int slotcount = 0;
+
 	private int slotID;
 	public String itemKey = "";
 	@SuppressWarnings("rawtypes")
-	public static final ContainerType type = new ContainerType<>(ContainerRuneBinder::new)
+	public static final ContainerType type = new ContainerType<>(ContainerRuneViewer::new)
 			.setRegistryName("rune_binder_container");
 	private PlayerInventory playerInv;
 	public RuneBinderItemHandler handler;

@@ -169,6 +169,26 @@
 			}
 		]
 	},
+	"item.bow_blade.open": {
+		"category": "item",
+		"subtitle": "item.bow_blade.open",
+		"sounds": [
+			{
+				"name": "hutosmod:item/bow_blade/open",
+				"stream": true
+			}
+		]
+	},
+	"item.bow_blade.close": {
+		"category": "item",
+		"subtitle": "item.bow_blade.close",
+		"sounds": [
+			{
+				"name": "hutosmod:item/bow_blade/close",
+				"stream": true
+			}
+		]
+	},
 	"entity.seraphim.ambient": {
 		"category": "entity",
 		"subtitle": "entity.seraphim.ambient",

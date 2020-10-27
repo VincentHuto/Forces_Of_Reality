@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"GGG",
+		"RRR",
+		"GGG"
+	],
+	"key": {
+		"R": {
+			"item": "hutosmod:rune_pattern"
+		},
+		"G": {
+			"item": "hutosmod:grey_ingot"
+		}
+	},
+	"result": {
+		"item": "hutosmod:rune_binder",
+		"count": 1
+	}
+}

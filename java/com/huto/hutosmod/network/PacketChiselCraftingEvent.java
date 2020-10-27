@@ -27,7 +27,7 @@ public class PacketChiselCraftingEvent {
 			ctx.get().enqueueWork(() -> {
 				Container container = ctx.get().getSender().openContainer;
 				if (container instanceof ContainerChiselStation) {
-					TileEntityChiselStation station = ((ContainerChiselStation) container).getChestInventory();
+					TileEntityChiselStation station = ((ContainerChiselStation) container).getTe();
 					station.craftEvent();
 				}
 			});

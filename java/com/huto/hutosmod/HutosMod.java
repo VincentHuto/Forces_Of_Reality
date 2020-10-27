@@ -25,6 +25,7 @@ import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.TogglePickupMessage;
 import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.particles.init.ParticleInit;
+import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
@@ -41,6 +42,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -206,6 +209,12 @@ public class HutosMod {
 				return stack;
 		}
 		return ItemStack.EMPTY;
+	}
+
+	@SubscribeEvent
+	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
+		event.getRegistry().register(new CopyRuneBinderDataRecipe.Serializer()
+				.setRegistryName(new ResourceLocation(MOD_ID, "rune_binder_upgrade")));
 	}
 
 }

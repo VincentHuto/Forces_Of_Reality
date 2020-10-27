@@ -1,0 +1,29 @@
+{
+    "type": "hutosmod:rune_binder_upgrade",
+   
+    "pattern":
+    [
+        "SSS",
+        "SPS",
+        "SSS"
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "hutosmod:mana_powder"
+        },
+        
+         "P":
+        {
+            "item": "hutosmod:rune_binder"
+        }
+    },
+    
+    "result":
+    {
+        "item": "hutosmod:rune_binder_upgraded",
+        "count": 1
+    }
+}

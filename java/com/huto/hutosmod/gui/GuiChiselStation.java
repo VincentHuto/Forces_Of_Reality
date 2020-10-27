@@ -56,7 +56,7 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 		this.xSize = 176;
 		this.ySize = 186;
 		this.playerInv = inv;
-		this.te = screenContainer.getChestInventory();
+		this.te = screenContainer.getTe();
 	}
 
 	@SuppressWarnings({ "deprecation", "unused" })
@@ -88,8 +88,7 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 			for (int i = 0; i < 64; i++) {
 
 				if (buttons.get(i).isHovered()) {
-					renderTooltip(matrixStack, new StringTextComponent("Rune:" + i), left + guiWidth - (guiWidth - 120),
-							top + guiHeight - (170));
+					renderTooltip(matrixStack, new StringTextComponent("Rune:" + i), mouseX, mouseY);
 				}
 			}
 
@@ -106,7 +105,7 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 		}
 		GlStateManager.popMatrix();
 
-		if (te.getWorld().getGameTime() % 10 == 0) {
+		if (te.getWorld().getGameTime() % 2 == 0) {
 			if (te.getStackInSlot(4) != null && this.te.getStackInSlot(4) != ItemStack.EMPTY) {
 				Minecraft.getInstance().textureManager.bindTexture(GUI_Chisel);
 				if (te.getStackInSlot(4).getItem() instanceof ItemRunePattern) {
@@ -317,4 +316,5 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 	public boolean isPauseScreen() {
 		return false;
 	}
+
 }

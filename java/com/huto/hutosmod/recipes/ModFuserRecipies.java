@@ -17,9 +17,17 @@ public class ModFuserRecipies {
 
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
-			recipeUpgradeExport, recipeElderTome, recipeOpal;
+			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade;
 
 	public static void init() {
+
+		recipeNullBowBlade = registerRecipe(new ResourceLocation("null_bow_blade"),
+				new ItemStack(ItemInit.null_bow_blade.get(), 1), 100, Ingredient.fromItems(ItemInit.null_sword.get()),
+				Ingredient.fromItems(Items.BOW),Ingredient.fromItems(ItemInit.writhing_thread.get()));
+
+		recipeMysticBowBlade = registerRecipe(new ResourceLocation("mystic_bow_blade"),
+				new ItemStack(ItemInit.mystic_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
+				Ingredient.fromItems(Items.BOW),Ingredient.fromItems(ItemInit.writhing_thread.get()));
 
 		recipeGrandPurgingStone = registerRecipe(new ResourceLocation("grand_purging_stone"),
 				new ItemStack(ItemInit.grand_purging_stone.get(), 1), 100,

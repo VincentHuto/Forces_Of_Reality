@@ -196,16 +196,16 @@ public class EntitySummonedBeast extends MonsterEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundHandler.STAR_SLUG_STRIKE;
+		return SoundHandler.ITEM_STAR_SLUG_STRIKE;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.STAR_SLUG_STRIKE;
+		return SoundHandler.ITEM_STAR_SLUG_STRIKE;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundHandler.STAR_SLUG_STRIKE;
+		return SoundHandler.ITEM_STAR_SLUG_STRIKE;
 	}
 }

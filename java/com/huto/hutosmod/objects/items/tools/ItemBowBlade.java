@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.huto.hutosmod.init.EnchantmentInit;
+import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -80,11 +81,13 @@ public class ItemBowBlade extends ShootableItem {
 		CompoundNBT compound = stack.getTag();
 		if (playerIn.isSneaking()) {
 			if (!compound.getBoolean(TAG_STATE)) {
-				playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.40f, 1F);
 				compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
+				playerIn.playSound(SoundHandler.ITEM_BOW_BLADE_OPEN, 0.6F, 0.8F );
+
 			} else {
-				playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.40f, 1F);
 				compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));
+				playerIn.playSound(SoundHandler.ITEM_BOW_BLADE_CLOSE, 0.6F, 0.8f);
+
 			}
 		} else {
 			if (compound.getBoolean(TAG_STATE)) {

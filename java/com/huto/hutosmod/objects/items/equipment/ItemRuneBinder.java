@@ -9,10 +9,12 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.containers.RuneBinderItemHandler;
+import com.huto.hutosmod.gui.GuiRuneBinderViewer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.ToggleMessageMessage;
 import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -29,6 +31,7 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -74,28 +77,22 @@ public class ItemRuneBinder extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+
+		if (worldIn.isRemote) {
+			if (!playerIn.isSneaking()) {
+				Minecraft.getInstance().displayGuiScreen(new GuiRuneBinderViewer(new ItemStack(this), playerIn));
+				playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+				return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+			}
+		}
 		if (!worldIn.isRemote) {
+
 			if (playerIn.isSneaking()) {
-				/*
-				 * playerIn.openContainer(new INamedContainerProvider() {
-				 * 
-				 * @Override public ITextComponent getDisplayName() { return new
-				 * StringTextComponent("Rune Binder Filter"); }
-				 * 
-				 * @Nullable
-				 * 
-				 * @Override public Container createMenu(int p_createMenu_1_, PlayerInventory
-				 * p_createMenu_2_, PlayerEntity p_createMenu_3_) { return new
-				 * ContainerFilter(p_createMenu_1_, p_createMenu_3_.world,
-				 * p_createMenu_3_.getPosition(), p_createMenu_2_, p_createMenu_3_); } });
-				 */
-			} else {
 				// open
 				playerIn.openContainer(new INamedContainerProvider() {
 					@Override
 					public ITextComponent getDisplayName() {
 						return playerIn.getHeldItem(handIn).getDisplayName();
-
 					}
 
 					@Nullable
@@ -106,9 +103,11 @@ public class ItemRuneBinder extends Item {
 								p_createMenu_2_, p_createMenu_3_);
 					}
 				});
+
 			}
 		}
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+
 	}
 
 	@Nullable

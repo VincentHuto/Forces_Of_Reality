@@ -31,14 +31,18 @@ import net.minecraft.world.World;
 
 public class BlockRuneModStation extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(0, 0, 0, 16, 1, 16),
-			Block.makeCuboidShape(2, 13, 2, 14, 15, 14), Block.makeCuboidShape(14, 1, 1, 15, 9, 2),
-			Block.makeCuboidShape(1, 1, 1, 2, 10, 2), Block.makeCuboidShape(14, 1, 14, 15, 10, 15),
-			Block.makeCuboidShape(1, 1, 14, 2, 10, 15), Block.makeCuboidShape(2, 1, 2, 14, 3, 14),
-			Block.makeCuboidShape(3, 3, 11, 5, 13, 13), Block.makeCuboidShape(11, 3, 11, 13, 13, 13),
-			Block.makeCuboidShape(11, 3, 3, 13, 13, 5), Block.makeCuboidShape(3, 3, 3, 5, 13, 5)).reduce((v1, v2) -> {
+	private static final VoxelShape SHAPE_N = Stream
+			.of(Block.makeCuboidShape(1, 0, 1, 15, 1, 15), Block.makeCuboidShape(3, 12, 3, 13, 14, 13),
+					Block.makeCuboidShape(2, 1, 2, 14, 2, 14), Block.makeCuboidShape(2, 11, 2, 14, 12, 14),
+					Block.makeCuboidShape(3, 2, 11, 5, 12, 13), Block.makeCuboidShape(11, 2, 11, 13, 12, 13),
+					Block.makeCuboidShape(11, 2, 3, 13, 12, 5), Block.makeCuboidShape(13, 12, 1, 15, 14, 3),
+					Block.makeCuboidShape(13.5, 14, 1.5, 14.5, 15, 2.5), Block.makeCuboidShape(13, 12, 13, 15, 14, 15),
+					Block.makeCuboidShape(13.5, 14, 13.5, 14.5, 15, 14.5), Block.makeCuboidShape(1, 12, 1, 3, 14, 3),
+					Block.makeCuboidShape(1.5, 14, 1.5, 2.5, 15, 2.5), Block.makeCuboidShape(1, 12, 13, 3, 14, 15),
+					Block.makeCuboidShape(1.5, 14, 13.5, 2.5, 15, 14.5), Block.makeCuboidShape(3, 2, 3, 5, 12, 5))
+			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-			}).get();;
+			}).get();
 
 	public BlockRuneModStation(Properties properties) {
 		super(properties);

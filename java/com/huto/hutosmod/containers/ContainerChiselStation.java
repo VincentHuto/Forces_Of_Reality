@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class ContainerChiselStation extends Container {
 	private final int numRows;
-	private final TileEntityChiselStation chestInventory;
+	private final TileEntityChiselStation te;
 	public int[] activatedRunes;
 
 	public ContainerChiselStation(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
@@ -26,18 +26,18 @@ public class ContainerChiselStation extends Container {
 	}
 
 	public ContainerChiselStation(final int windowId, final PlayerInventory playerInv,
-			final TileEntityChiselStation chestInventory) {
+			final TileEntityChiselStation te) {
 		super(ContainerInit.runic_chisel_station.get(), windowId);
-		this.chestInventory = chestInventory;
+		this.te = te;
 		this.numRows = 4;
-		// chestInventory.openInventory(player);
+		// te.openInventory(player);
 		// SLOTS
-		this.addSlot(new SlotChisel(chestInventory, 3, 8, 14));
-		this.addSlot(new Slot(chestInventory, 0, 8, 18 + 1 * 18));
-		this.addSlot(new Slot(chestInventory, 1, 8, 22 + 2 * 18));
-		this.addSlot(new SlotRunePattern(chestInventory, 4, 8, 26 + 3 * 18));
+		this.addSlot(new SlotChisel(te, 3, 8, 14));
+		this.addSlot(new Slot(te, 0, 8, 18 + 1 * 18));
+		this.addSlot(new Slot(te, 1, 8, 22 + 2 * 18));
+		this.addSlot(new SlotRunePattern(te, 4, 8, 26 + 3 * 18));
 
-		this.addSlot(new SlotOutput(chestInventory, 2, 145, 44));
+		this.addSlot(new SlotOutput(te, 2, 145, 44));
 		// INVENTORY
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {
@@ -69,7 +69,7 @@ public class ContainerChiselStation extends Container {
 	@Override
 	public void onContainerClosed(PlayerEntity playerIn) {
 		super.onContainerClosed(playerIn);
-		chestInventory.closeInventory(playerIn);
+		te.closeInventory(playerIn);
 	}
 
 	@Override
@@ -95,8 +95,8 @@ public class ContainerChiselStation extends Container {
 		return stack;
 	}
 
-	public TileEntityChiselStation getChestInventory() {
-		return this.chestInventory;
+	public TileEntityChiselStation getTe() {
+		return this.te;
 	}
 
 }

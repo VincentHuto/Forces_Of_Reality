@@ -36,7 +36,7 @@ public class ItemStarSlug extends Item {
 			if (!worldIn.isRemote) {
 				this.summonMissleSwarn(worldIn.rand.nextInt(25), worldIn, playerentity);
 			} else {
-				entityLiving.playSound(SoundHandler.STAR_SLUG_STORM, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+				entityLiving.playSound(SoundHandler.ITEM_STAR_SLUG_STRIKE, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 			}
 			stack.damageItem(1, playerentity, (p_220009_1_) -> {
 				p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());

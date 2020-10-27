@@ -191,6 +191,13 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> auric_ingot = ITEMS.register("auric_ingot",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> writhing_thread = ITEMS.register("writhing_thread",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	
 
 	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));

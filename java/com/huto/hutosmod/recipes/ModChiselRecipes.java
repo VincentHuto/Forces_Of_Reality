@@ -14,25 +14,11 @@ import net.minecraft.util.ResourceLocation;
 public class ModChiselRecipes {
 	public static final List<RecipeChiselStation> runeRecipies = new ArrayList<>();
 
-	public static RecipeChiselStation recipeClawMark;
-	public static RecipeChiselStation recipeMetamorphosis;
-	public static RecipeChiselStation recipeOedon;
-	public static RecipeChiselStation recipeLake;
-	public static RecipeChiselStation recipeRapture;
-	public static RecipeChiselStation recipeBeast;
-	public static RecipeChiselStation recipeCommunion;
-	public static RecipeChiselStation recipeEye;
-	public static RecipeChiselStation recipeGuidance;
-	public static RecipeChiselStation recipeHeir;
-	public static RecipeChiselStation recipeMetamorphosisCW;
-	public static RecipeChiselStation recipeMoon;
+	public static RecipeChiselStation recipeClawMark, recipeMetamorphosis, recipeOedon, recipeLake, recipeRapture,
+			recipeEye, recipeBeast, recipeCommunion, recipeGuidance, recipeHeir, recipeMetamorphosisCW, recipeMoon;
 
-	public static RecipeChiselStation recipeBeastContract;
-	public static RecipeChiselStation recipeImpurityContract;
-	public static RecipeChiselStation recipeCorruptionContract;
-	public static RecipeChiselStation recipeMilkweedContract;
-	public static RecipeChiselStation recipeRadianceContract;
-	public static RecipeChiselStation recipeHunterContract;
+	public static RecipeChiselStation recipeBeastContract, recipeImpurityContract, recipeCorruptionContract,
+			recipeMilkweedContract, recipeRadianceContract, recipeHunterContract;
 
 	public static void init() {
 

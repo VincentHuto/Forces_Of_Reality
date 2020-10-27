@@ -1,5 +1,6 @@
 package com.huto.hutosmod.containers.slots;
 
+import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
 
 import net.minecraft.inventory.IInventory;
@@ -14,7 +15,7 @@ public class SlotRunePattern extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		if (stack.getItem() instanceof ItemRunePattern) {
+		if (stack.getItem() instanceof ItemRunePattern || stack.getItem() instanceof ItemRuneBinder) {
 			return true;
 		} else {
 			return false;
