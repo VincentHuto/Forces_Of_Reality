@@ -63,6 +63,7 @@ import com.huto.hutosmod.objects.items.tools.ItemManaExtractor;
 import com.huto.hutosmod.objects.items.tools.ItemResonanceDestabalizer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.tools.ItemStarSlug;
+import com.huto.hutosmod.objects.items.tools.ItemTrickAxe;
 import com.huto.hutosmod.objects.items.tools.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.tools.ItemWandGainVibes;
 import com.huto.hutosmod.objects.items.tools.ToolVeinPickaxe;
@@ -333,6 +334,11 @@ public class ItemInit {
 							new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(512), 1,
 							6, 1));
 
+	public static final RegistryObject<Item> null_trick_axe = ITEMS.register("null_trick_axe", () -> new ItemTrickAxe(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));
+
+	
+	
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
@@ -729,6 +735,38 @@ public class ItemInit {
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
+		
+		//Trick Axe
+		//Null
+		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
+		
 	}
 
 }

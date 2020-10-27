@@ -50,6 +50,7 @@ import com.huto.hutosmod.render.tile.RenderWandMaker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.NonNullList;
@@ -118,13 +119,13 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.thrown_axe.get(),
+				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
 
 		keyBinds.add(0, new KeyBinding("key.hutosmod.runebinderpickup.desc", GLFW.GLFW_KEY_B, "key.hutosmod.category"));
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));
 
 	}
-
-
 
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;

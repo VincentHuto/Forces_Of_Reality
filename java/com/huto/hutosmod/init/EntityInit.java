@@ -21,6 +21,7 @@ import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
 import com.huto.hutosmod.entities.projectiles.EntityJudgement;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
+import com.huto.hutosmod.entities.projectiles.EntityThrownAxe;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 
 import net.minecraft.entity.EntityClassification;
@@ -146,6 +147,10 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityHolyFlare>> holy_flare = ENTITY_TYPES.register("holy_flare",
 			() -> EntityType.Builder.<EntityHolyFlare>create(EntityHolyFlare::new, EntityClassification.MONSTER)
 					.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "holy_flare").toString()));
+	public static final RegistryObject<EntityType<EntityThrownAxe>> thrown_axe = ENTITY_TYPES.register("thrown_axe",
+			() -> EntityType.Builder.<EntityThrownAxe>create(EntityThrownAxe::new, EntityClassification.MISC)
+					.setTrackingRange(64).setUpdateInterval(10).setShouldReceiveVelocityUpdates(true).size(0.25F, 0.25F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "thrown_axe").toString()));
 
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
