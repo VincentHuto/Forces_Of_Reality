@@ -2,29 +2,47 @@ package com.huto.hutosmod.objects.blocks;
 
 import java.util.stream.Stream;
 
+import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.capabilities.covenant.ICovenant;
+import com.huto.hutosmod.network.CovenantPacketServer;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.objects.blocks.util.IBlockDevotionStation;
+import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
-public class BlockAscendentAltar extends Block {
+public class BlockAscendentAltar extends Block implements IBlockDevotionStation {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream
 			.of(Block.makeCuboidShape(0, 0, 1, 16, 1, 15), Block.makeCuboidShape(3, 1, 4, 13, 3, 12),
@@ -37,7 +55,6 @@ public class BlockAscendentAltar extends Block {
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
-
 	private static final VoxelShape SHAPE_E = Stream
 			.of(Block.makeCuboidShape(1, 0, 0, 15, 1, 16), Block.makeCuboidShape(4, 1, 3, 12, 3, 13),
 					Block.makeCuboidShape(4, 11, 3, 12, 13, 13), Block.makeCuboidShape(1, 13, 0, 15, 14, 16),
@@ -56,27 +73,52 @@ public class BlockAscendentAltar extends Block {
 
 	}
 
-	/*
-	 * @Override public ActionResultType onBlockActivated(BlockState state, World
-	 * worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult
-	 * result) { if (!worldIn.isRemote) { TileEntity tile =
-	 * worldIn.getTileEntity(pos); if (tile instanceof TileEntityChiselStation) {
-	 * TileEntityChiselStation te = (TileEntityChiselStation) tile; if
-	 * (te.numPlayersUsing < 2) { NetworkHooks.openGui((ServerPlayerEntity) player,
-	 * (TileEntityChiselStation) tile, pos); return ActionResultType.SUCCESS; } }
-	 * else { return ActionResultType.PASS;
-	 * 
-	 * } } return ActionResultType.FAIL; }
-	 */
-	/*
-	 * @Override public void onReplaced(BlockState state, World worldIn, BlockPos
-	 * pos, BlockState newState, boolean isMoving) { if (state.getBlock() !=
-	 * newState.getBlock()) { TileEntity te = worldIn.getTileEntity(pos); if (te
-	 * instanceof TileEntityChiselStation) { InventoryHelper.dropItems(worldIn, pos,
-	 * ((TileEntityChiselStation) te).getItems()); } }
-	 * 
-	 * }
-	 */
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult hit) {
+		TileEntityAscendentAltar te = (TileEntityAscendentAltar) worldIn.getTileEntity(pos);
+		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+		ItemStack stack = player.getHeldItemMainhand();
+		// Upgrade clause
+
+		if (stack.getItem() instanceof ItemSacrificial) {
+			ItemSacrificial sac = (ItemSacrificial) stack.getItem();
+			if (sac.getCoven() == te.getCovenType()) {
+				if (worldIn.isRemote) {
+					player.playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F);
+					return ActionResultType.SUCCESS;
+				} else {
+					te.devo.addDevotion(sac.getDevoAmount());
+					player.getHeldItemMainhand().shrink(1);
+					coven.setCovenDevotion(te.getCovenType(),
+							coven.getDevotionByCoven(te.getCovenType()) + sac.getDevoAmount());
+					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+							new CovenantPacketServer(coven.getDevotion()));
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+					player.sendStatusMessage(
+							new StringTextComponent(TextFormatting.GOLD + "Your offering was accepted"), true);
+					return ActionResultType.SUCCESS;
+
+				}
+			} else {
+				player.sendStatusMessage(new StringTextComponent(TextFormatting.RED + "Incorrect Offering Type"), true);
+				if (worldIn.isRemote) {
+					player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
+				}
+				return ActionResultType.FAIL;
+			}
+
+		} else {
+			player.sendStatusMessage(new StringTextComponent(TextFormatting.DARK_RED + "Item is not an offering"),
+					true);
+			if (worldIn.isRemote) {
+				player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
+			}
+			return ActionResultType.FAIL;
+
+		}
+
+	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		switch ((Direction) state.get(FACING)) {
@@ -137,6 +179,11 @@ public class BlockAscendentAltar extends Block {
 	@Override
 	public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		super.onBlockClicked(state, worldIn, pos, player);
+	}
+
+	@Override
+	public EnumCovenants getCovenType() {
+		return EnumCovenants.ASCENDENT;
 	}
 
 }

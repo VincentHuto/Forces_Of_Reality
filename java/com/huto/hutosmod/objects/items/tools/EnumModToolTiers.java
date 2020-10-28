@@ -11,7 +11,11 @@ import net.minecraft.util.LazyValue;
 public enum EnumModToolTiers implements IItemTier {
 
 	NULL(5, 4096, 10.0F, 5.0F, 25, () -> {
-		return Ingredient.fromItems(ItemInit.null_ingot.get());
+		return Ingredient.fromItems(ItemInit.shattered_ingot.get());
+	}),
+
+	MYSTIC(4, 2048, 8.0F, 4.0F, 20, () -> {
+		return Ingredient.fromItems(ItemInit.emanating_ingot.get());
 	});
 
 	private final int harvestLevel;

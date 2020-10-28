@@ -18,6 +18,7 @@ public class CovenPageLib {
 	public static List<GuiCovenPage> EldritchPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> AscendentPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> BeastPageList = new ArrayList<GuiCovenPage>();
+	public static List<GuiCovenPage> MachinePageList = new ArrayList<GuiCovenPage>();
 
 	public static List<List<GuiCovenPage>> ChapterList = new ArrayList<List<GuiCovenPage>>();
 	public static List<GuiCovenPageTOC> TOCPageList = new ArrayList<GuiCovenPageTOC>();
@@ -42,12 +43,18 @@ public class CovenPageLib {
 	public static String BEAST_PAGE_2 = "title.coventome.beast.page.2.text";
 	public static String BEAST_PAGE_3 = "title.coventome.beast.page.3.text";
 
+	// Machine
+	public static String MACHINE_PAGE_1 = "title.coventome.machine.page.1.text";
+	public static String MACHINE_PAGE_2 = "title.coventome.machine.page.2.text";
+	public static String MACHINE_PAGE_3 = "title.coventome.machine.page.3.text";
+
 	public static void registerPages() {
 
 		HasturPageList.clear();
 		EldritchPageList.clear();
 		AscendentPageList.clear();
 		BeastPageList.clear();
+		MachinePageList.clear();
 
 		ChapterList.clear();
 		TOCPageList.clear();
@@ -84,8 +91,17 @@ public class CovenPageLib {
 		BeastPageList.add(new GuiCovenPage(3, EnumCovenTomeCatagories.BEAST, "Thermal Vision", "Hunt as a Beast",
 				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(BEAST_PAGE_3)));
 
+		// Machine
+		MachinePageList.add(new GuiCovenPage(1, EnumCovenTomeCatagories.MACHINE, "Fight Tooth and Nail",
+				"Machinely Blood", new ItemStack(ItemInit.auric_ingot.get()), I18n.format(MACHINE_PAGE_1)));
+		MachinePageList.add(new GuiCovenPage(2, EnumCovenTomeCatagories.MACHINE, "Just a Nail", "Nail Clippings",
+				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_2)));
+		MachinePageList.add(new GuiCovenPage(3, EnumCovenTomeCatagories.MACHINE, "Thermal Vision", "Hunt as a Machine",
+				new ItemStack(ItemInit.mystic_trick_axe.get()), I18n.format(MACHINE_PAGE_3)));
+
 		// Adding Chapters
-		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList);
+		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList,
+				MachinePageList);
 
 		// TOC PAGES
 		TOCPageList.add(new GuiCovenPageTOC(EnumCovenTomeCatagories.HASTUR, new ItemStack(ItemInit.yellow_sign.get())));
@@ -95,13 +111,15 @@ public class CovenPageLib {
 				new GuiCovenPageTOC(EnumCovenTomeCatagories.ASCENDENT, new ItemStack(ItemInit.crossed_keys.get())));
 		TOCPageList.add(
 				new GuiCovenPageTOC(EnumCovenTomeCatagories.BEAST, new ItemStack(ItemInit.breath_of_the_beast.get())));
-
+		TOCPageList.add(
+				new GuiCovenPageTOC(EnumCovenTomeCatagories.MACHINE, new ItemStack(ItemInit.neurotic_mechanism.get())));
 		// Adding the table of contents to each chapter
 
 		HasturPageList.add(0, TOCPageList.get(0));
 		EldritchPageList.add(0, TOCPageList.get(1));
 		AscendentPageList.add(0, TOCPageList.get(2));
 		BeastPageList.add(0, TOCPageList.get(3));
+		MachinePageList.add(0, TOCPageList.get(4));
 
 	}
 
@@ -119,6 +137,10 @@ public class CovenPageLib {
 
 	public static List<GuiCovenPage> getBeastPageList() {
 		return BeastPageList;
+	}
+
+	public static List<GuiCovenPage> getMachinePageList() {
+		return MachinePageList;
 	}
 
 	public static List<List<GuiCovenPage>> getChapterList() {

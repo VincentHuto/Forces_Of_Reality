@@ -22,14 +22,15 @@ public class ModResonatorRecipies {
 			recipeEnhancedSword, recipeEnhancedShovel, recipeEnhancedAxe, recipeEnhancedHoe, recipeEnhancedHelm,
 			recipeEnhancedChestplate, recipeEnhancedPants, recipeEnhancedBoots, recipeManaGem, recipeChannelingRod,
 			recipeManaDust, recipeEnchantedEarth, recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling,
-			recipieGreyIngot, recipeElderHelm, recipeElderChestplate, recipeElderPants, recipeElderBoots;
+			recipieGreyIngot, recipeElderHelm, recipeElderChestplate, recipeElderPants, recipeElderBoots,
+			recipeAuricBar;
 
 	// ReversionRecipies
 	public static RecipeResonator recipeAntiTearREVERT, recipeResonantFuelREVERT;
 
 	public static void init() {
-		recipieGreyIngot = registerRecipe(new ResourceLocation("recipiegreyingot"),
-				new ItemStack(ItemInit.grey_ingot.get(), 1), 30, EnumEssecenceType.GREY,
+		recipeAuricBar = registerRecipe(new ResourceLocation("recipeauricbar"),
+				new ItemStack(ItemInit.auric_ingot.get(), 1), 30, EnumEssecenceType.NULL,
 				Ingredient.fromItems(Items.IRON_INGOT));
 		recipeAntiTear = registerRecipe(new ResourceLocation("recipeantitear"),
 				new ItemStack(ItemInit.anti_tear.get(), 1), 30, EnumEssecenceType.KARMIC,

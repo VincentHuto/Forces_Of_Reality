@@ -32,7 +32,10 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.DrinkHelper;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -196,6 +199,20 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 	public void heal(float amount) {
 		super.heal(amount);
 
+	}
+
+	@Override
+	public ActionResultType func_230254_b_(PlayerEntity player, Hand handIn) {
+		ItemStack itemstack = player.getHeldItem(handIn);
+		if (itemstack.getItem() == ItemInit.cured_clay_flask.get()) {
+			player.playSound(SoundEvents.ENTITY_BLAZE_AMBIENT, 1.0F, 1.0F);
+			ItemStack itemstack1 = DrinkHelper.fill(itemstack, player,
+					ItemInit.breath_of_the_beast.get().getDefaultInstance());
+			player.setHeldItem(handIn, itemstack1);
+			return ActionResultType.func_233537_a_(this.world.isRemote);
+		} else {
+			return super.func_230254_b_(player, handIn);
+		}
 	}
 
 	// Death

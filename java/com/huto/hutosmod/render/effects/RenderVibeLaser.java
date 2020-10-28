@@ -1,7 +1,7 @@
 package com.huto.hutosmod.render.effects;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.init.RenderInit;
+import com.huto.hutosmod.init.RenderTypeInit;
 import com.huto.hutosmod.objects.items.tools.ItemFrequencyMatcher;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -100,17 +100,17 @@ public class RenderVibeLaser {
 		Matrix4f positionMatrix = matrixstack$entry.getMatrix();
 
 		// additive laser beam
-		builder = buffer.getBuffer(RenderInit.LASER_MAIN_ADDITIVE);
+		builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_ADDITIVE);
 		drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, additiveThickness, activeHand,
 				distance, 0.5, 1, ticks, r, g, b, 0.7f);
 
 		// main laser, colored part
-		builder = buffer.getBuffer(RenderInit.LASER_MAIN_BEAM);
+		builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_BEAM);
 		drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness, activeHand, distance, v,
 				v + distance * 1.5, ticks, r, g, b, 1f);
 
 		// core
-		builder = buffer.getBuffer(RenderInit.LASER_MAIN_CORE);
+		builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_CORE);
 		drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness / 2, activeHand, distance,
 				v, v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
 		matrix.pop();

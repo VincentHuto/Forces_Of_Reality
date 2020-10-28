@@ -5,7 +5,18 @@ import java.util.Optional;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.capabilities.covenant.ICovenant;
+import com.huto.hutosmod.capabilities.karma.IKarma;
+import com.huto.hutosmod.capabilities.karma.KarmaProvider;
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.dimension.DimensionalPosition;
+import com.huto.hutosmod.network.CovenantPacketServer;
+import com.huto.hutosmod.network.KarmaPacketServer;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.VibrationPacketServer;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.client.gui.screen.Screen;
@@ -19,14 +30,15 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemResonanceDestabalizer extends Item {
 
@@ -74,14 +86,33 @@ public class ItemResonanceDestabalizer extends Item {
 					ServerWorld ovw = world.getServer().getWorld(key);
 					serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5, serverPlayer.rotationYaw,
 							serverPlayer.rotationPitch);
+					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
+							.orElseThrow(NullPointerException::new);
+					IVibrations vibe = player.getCapability(VibrationProvider.VIBE_CAPA)
+							.orElseThrow(NullPointerException::new);
+					IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA)
+							.orElseThrow(NullPointerException::new);
 
-					world.playSound(serverPlayer, serverPlayer.getPosition(), SoundHandler.ENTITY_SERAPHIM_DEATH,
-							SoundCategory.PLAYERS, 1.0f, 1.0f);
+					for (EnumCovenants cov : coven.getDevotion().keySet()) {
+						coven.getDevotion().put(cov, 0);
+					}
+					vibe.setVibes(0);
+					karma.setKarma(0);
+					serverPlayer.setExperienceLevel(0);
+					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+							new CovenantPacketServer(coven.getDevotion()));
+					PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+							new KarmaPacketServer(karma.getKarma()));
+					PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+							new VibrationPacketServer(vibe.getVibes()));
 
 				}
 			}
-		}
 
+		}
+		player.sendStatusMessage(new StringTextComponent(TextFormatting.RED+"Suddenly, you feel as if all you have gained was for naught."), true);
+
+		player.playSound(SoundHandler.ENTITY_SERAPHIM_DEATH, 0.6F, 0.8F);
 		return ActionResult.resultSuccess(stack);
 	}
 

@@ -38,9 +38,6 @@ public class CovenantProvider implements ICapabilitySerializable<INBT> {
 
 	}
 
-//	public static EnumCovenants getPlayerCovenant(PlayerEntity player) {
-//		return player.getCapability(COVEN_CAPA).orElseThrow(IllegalStateException::new).getDevotion();
-//	}
 	public static Map<EnumCovenants, Integer> getPlayerDevotion(PlayerEntity player) {
 		return player.getCapability(COVEN_CAPA).orElseThrow(IllegalStateException::new).getDevotion();
 	}

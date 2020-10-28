@@ -36,9 +36,6 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory
 
 	@Override
 	public void tick() {
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getState(), getState(), 2);
-		}
 	}
 
 	// Vibe Stuff

@@ -1,11 +1,11 @@
 package com.huto.hutosmod.objects.tileenties;
 
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.init.TileEntityInit;
 
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityAscendentAltar extends TileEntity implements ITickableTileEntity {
+public class TileEntityAscendentAltar extends TileModDevotion implements ITickableTileEntity {
 
 	public TileEntityAscendentAltar() {
 		super(TileEntityInit.ascendent_altar.get());
@@ -15,4 +15,8 @@ public class TileEntityAscendentAltar extends TileEntity implements ITickableTil
 	public void tick() {
 	}
 
+	@Override
+	public EnumCovenants getCovenType() {
+		return EnumCovenants.ASCENDENT;
+	}
 }

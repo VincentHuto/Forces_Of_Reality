@@ -15,4 +15,6 @@ public interface ICovenant {
 	public void setCovenDevotion(EnumCovenants covenIn, int value);
 
 	public int getDevotionByCoven( EnumCovenants covenIn);
+	
+	public EnumCovenants getOpposingCoven(EnumCovenants covenIn);
 }

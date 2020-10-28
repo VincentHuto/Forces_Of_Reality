@@ -29,9 +29,6 @@ public class TileEntityThermalInfluxer extends TileModVibes implements ITickable
 
 	@Override
 	public void tick() {
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
-		}
 		if (canGenerate()) {
 			vibes.addVibes(0.4f);
 		}

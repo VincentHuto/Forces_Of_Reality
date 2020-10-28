@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.ITank;
@@ -20,10 +19,8 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 
 public class TileEntityStorageDrum extends TileVibeSimpleInventory implements ITickableTileEntity, ITank {
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public final String TAG_LEVEL = "tankLevel";
 	public final String TAG_SIZE = "tankSize";
-	public final String TAG_VIBES = "vibes";
 	public int tankLevel = 0;
 	public float maxVibes = 0.0F;
 	public float clientVibes = 0.0f;
@@ -34,9 +31,6 @@ public class TileEntityStorageDrum extends TileVibeSimpleInventory implements IT
 
 	@Override
 	public void tick() {
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getState(), getState(), 2);
-		}
 	}
 
 	// Vibe Stuff

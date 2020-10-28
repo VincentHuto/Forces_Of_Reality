@@ -48,7 +48,7 @@ public class ModEntityPredicates {
 		@Override
 		public boolean test(Entity e) {
 			if (e instanceof AbstractRaiderEntity || e instanceof ZombieEntity || e instanceof WaterMobEntity
-					|| e instanceof SnowGolemEntity) {
+					|| e instanceof SnowGolemEntity || e instanceof SlimeEntity) {
 				return true;
 			} else {
 				return false;

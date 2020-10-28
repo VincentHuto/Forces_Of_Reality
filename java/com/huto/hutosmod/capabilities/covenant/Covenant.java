@@ -4,16 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Covenant implements ICovenant {
-//	private EnumCovenants covenant = EnumCovenants.NONE;
 	private Map<EnumCovenants, Integer> devotion = new HashMap<>();
-
-//	public void setCovenant(EnumCovenants covenIn) {
-//		this.covenant = covenIn;
-//	}
-//
-//	public EnumCovenants getCovenant() {
-//		return this.covenant;
-//	}
 
 	public Map<EnumCovenants, Integer> getDevotion() {
 		return devotion;
@@ -25,9 +16,12 @@ public class Covenant implements ICovenant {
 
 	public void setCovenDevotion(EnumCovenants covenIn, int value) {
 		if (devotion != null) {
-			Map<EnumCovenants, Integer> newDevo = devotion;
-			newDevo.put(covenIn, value);
-			setDevotion(newDevo);
+			if (getOpposingCoven(covenIn) != null) {
+				Map<EnumCovenants, Integer> newDevo = devotion;
+				newDevo.put(covenIn, value);
+				newDevo.put(getOpposingCoven(covenIn), getDevotionByCoven(getOpposingCoven(covenIn)) - 1);
+				setDevotion(newDevo);
+			}
 		}
 	}
 
@@ -38,4 +32,26 @@ public class Covenant implements ICovenant {
 			return 0;
 		}
 	}
+
+	@Override
+	public EnumCovenants getOpposingCoven(EnumCovenants covenIn) {
+		switch (covenIn) {
+		case ASCENDENT:
+			return EnumCovenants.ELDRITCH;
+		case BEAST:
+			return EnumCovenants.MACHINE;
+		case ELDRITCH:
+			return EnumCovenants.ASCENDENT;
+		case HASTUR:
+			break;
+		case MACHINE:
+			return EnumCovenants.BEAST;
+		case NONE:
+			return null;
+		default:
+			return null;
+		}
+		return null;
+	}
+
 }

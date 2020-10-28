@@ -8,8 +8,10 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
@@ -104,21 +106,29 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			double r = 0.1;
 			double m = 0.1;
 			for (int i = 0; i < 3; i++) {
-				world.addParticle(ParticleTypes.FLAME, getPosX() + r * (Math.random() - 0.5),
+				world.addParticle(ParticleTypes.CRIMSON_SPORE, getPosX() + r * (Math.random() - 0.5),
 						getPosY() + r * (Math.random() - 0.5), getPosZ() + r * (Math.random() - 0.5),
 						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
 			}
-		}
+		} else {
+			double r = 0.1;
+			double m = 0.1;
+			for (int i = 0; i < 3; i++) {
+				world.addParticle(ParticleTypes.WARPED_SPORE, getPosX() + r * (Math.random() - 0.5),
+						getPosY() + r * (Math.random() - 0.5), getPosZ() + r * (Math.random() - 0.5),
+						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
+			}
 
-		// Server state control
-		if (!world.isRemote && (getTimesBounced() >= MAX_BOUNCES || ticksExisted > 60)) {
-			Entity thrower = func_234616_v_();
-			if (thrower == null) {
-				dropAndKill();
-			} else {
-				setEntityToReturnTo(thrower.getEntityId());
-				if (getDistanceSq(thrower) < 2) {
+			// Server state control
+			if (!world.isRemote && (getTimesBounced() >= MAX_BOUNCES || ticksExisted > 30)) {
+				Entity thrower = func_234616_v_();
+				if (thrower == null) {
 					dropAndKill();
+				} else {
+					setEntityToReturnTo(thrower.getEntityId());
+					if (getDistanceSq(thrower) < 2) {
+						dropAndKill();
+					}
 				}
 			}
 		}
@@ -133,12 +143,11 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 
 	private ItemStack getItemStack() {
 		return !stack.isEmpty() ? stack.copy()
-				: isFire() ? new ItemStack(ItemInit.anti_tear.get()) : new ItemStack(ItemInit.null_trick_axe.get());
-
-		// : isFire() ? new ItemStack(ItemInit.null_trick_axe.get()) : new
-		// ItemStack(ItemInit.mystic_trick_axe.get());
+				: isFire() ? new ItemStack(ItemInit.null_trick_axe.get())
+						: new ItemStack(ItemInit.mystic_trick_axe.get());
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	protected void onImpact(@Nonnull RayTraceResult pos) {
 		if (isReturning()) {
@@ -150,7 +159,16 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			BlockRayTraceResult rtr = (BlockRayTraceResult) pos;
 			Block block = world.getBlockState(rtr.getPos()).getBlock();
 			if (block instanceof BushBlock || block instanceof LeavesBlock) {
+				block.spawnDrops(block.getDefaultState(), world, this.getPosition());
+				world.setBlockState(rtr.getPos(), Blocks.AIR.getDefaultState(), 2);
+				world.addParticle(ParticleTypes.POOF, rtr.getPos().getX(), rtr.getPos().getY(),
+						rtr.getPos().getZ(), 0, 1, 0);
 				return;
+			} else if (block.getDefaultState().getMaterial() == Material.WOOD) {
+				block.spawnDrops(block.getDefaultState(), world, this.getPosition());
+				world.setBlockState(rtr.getPos(), Blocks.AIR.getDefaultState(), 2);
+				world.addParticle(ParticleTypes.POOF, rtr.getPos().getX(), rtr.getPos().getY(),
+						rtr.getPos().getZ(), 0, 1, 0);
 			}
 
 			int bounces = getTimesBounced();
@@ -185,7 +203,7 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 				if (isFire()) {
 					rtr.getEntity().setFire(5);
 				} else if (world.rand.nextInt(3) == 0) {
-					((LivingEntity) rtr.getEntity()).addPotionEffect(new EffectInstance(Effects.POISON, 60, 0));
+					((LivingEntity) rtr.getEntity()).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60, 0));
 				}
 			}
 
@@ -198,7 +216,7 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 
 	@Override
 	protected float getGravityVelocity() {
-		return 0F;
+		return 100f;
 	}
 
 	private int getTimesBounced() {

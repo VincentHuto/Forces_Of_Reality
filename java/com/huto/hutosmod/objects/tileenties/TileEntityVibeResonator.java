@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
@@ -32,7 +31,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 
 public class TileEntityVibeResonator extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
@@ -40,7 +38,6 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	int recipeKeepTicks = 0;
 	float maxVibes = 300;
 	public float clientVibes = 0.0f;
-	public final String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
 	public static EnumEssecenceType resonantState;
 	List<ItemStack> lastRecipe = null;
@@ -141,7 +138,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 			}
 
 		if (did)
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
 
@@ -149,8 +146,6 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	public void tick() {
 		if (!world.isRemote) {
 			checkStructure();
-			world.notifyBlockUpdate(pos, getState(), getState(), 2);
-			System.out.println(vibes.getVibes());
 			if (cooldown > 0) {
 				cooldown--;
 			}

@@ -39,12 +39,13 @@ public class GuiCovenTitle extends Screen {
 	final int BUTTONEldritch = 2;
 	final int BUTTONASCEND = 3;
 	final int BUTTONBEAST = 4;
+	final int BUTTONMACHINE = 5;
 	int BUTTONEYE = 8;
 	static String title = " Table of Contents";
 	static StringTextComponent titleComponent = new StringTextComponent(title);
 	String subtitle = " Covenenants";
 	ItemStack icon = new ItemStack(Items.PAPER);
-	GuiButtonTextured buttonclose, hasturButton, EldritchButton, ascendButton, beastButton, eyeButton;
+	GuiButtonTextured buttonclose, hasturButton, EldritchButton, ascendButton, beastButton, machineButton, eyeButton;
 	boolean isElder;
 
 	public GuiCovenTitle(boolean isElderIn) {
@@ -144,6 +145,11 @@ public class GuiCovenTitle extends Screen {
 		if (beastButton.isHovered()) {
 			renderTooltip(matrixStack, new StringTextComponent("Beast"), sideLoc - (guiWidth - 177), verticalLoc - 121);
 		}
+		if (machineButton.isHovered()) {
+			renderTooltip(matrixStack, new StringTextComponent("Machina"), sideLoc - (guiWidth - 177),
+					verticalLoc - 100);
+		}
+
 	}
 
 	@Override
@@ -175,33 +181,10 @@ public class GuiCovenTitle extends Screen {
 					mc.displayGuiScreen(CovenPageLib.BeastPageList.get(0));
 				}));
 
-		/*
-		 * this.addButton(greenButton = new GuiButtonTextured(texture, BUTTONGREEN,
-		 * sideLoc - (guiWidth - 177), verticalLoc - 121, 24, 16, 186, 96, null, (press)
-		 * -> { mc.displayGuiScreen(TomePageLib.WandsPageList.get(0)); }));
-		 * this.addButton(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc
-		 * - (guiWidth - 180), verticalLoc - 91, 24, 16, 186, 128, null, (press) -> {
-		 * mc.displayGuiScreen(TomePageLib.RunesPageList.get(0)); }));
-		 * this.addButton(orangeButton = new GuiButtonTextured(texture, BUTTONORANGE,
-		 * sideLoc - (guiWidth - 177), verticalLoc - 49, 24, 16, 186, 160, null, (press)
-		 * -> { mc.displayGuiScreen(TomePageLib.BlocksPageList.get(0)); }));
-		 * this.addButton(darkBlueButton = new GuiButtonTextured(texture,
-		 * BUTTONDARKBLUE, sideLoc - (guiWidth - 177), verticalLoc - 69, 24, 16, 209,
-		 * 160, null, (press) -> {
-		 * mc.displayGuiScreen(TomePageLib.GeneratePageList.get(0)); }));
-		 * this.addButton(cyanButton = new GuiButtonTextured(texture, BUTTONCYAN,
-		 * sideLoc - (guiWidth - 177), verticalLoc - 200, 24, 16, 186, 192, null,
-		 * (press) -> { mc.displayGuiScreen(TomePageLib.KarmaPageList.get(0)); }));
-		 */
-		/*
-		 * if (isElder) {
-		 * 
-		 * this.addButton(eyeButton = new GuiButtonTextured(texture, BUTTONEYE, sideLoc
-		 * - (guiWidth - 155), verticalLoc - 30, 16, 16, 209, 0, null, (press) -> {
-		 * mc.displayGuiScreen(TomePageLib.ElderPageList.get(0)); }));
-		 * 
-		 * }
-		 */
+		this.addButton(machineButton = new GuiButtonTextured(texture, BUTTONMACHINE, sideLoc - (guiWidth - 177),
+				verticalLoc - 100, 24, 16, 186, 128, null, (press) -> {
+					mc.displayGuiScreen(CovenPageLib.MachinePageList.get(0));
+				}));
 
 	}
 

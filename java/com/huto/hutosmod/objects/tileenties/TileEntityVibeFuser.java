@@ -121,7 +121,6 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 	public void tick() {
 
 		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getState(), getState(), 2);
 
 			if (cooldown > 0) {
 				cooldown--;

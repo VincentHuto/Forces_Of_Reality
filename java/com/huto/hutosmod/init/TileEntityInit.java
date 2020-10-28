@@ -10,6 +10,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityRuneModStation;
+import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.TileEntityTeleporter;
@@ -87,7 +88,7 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityChiselStation>> runic_chisel_station = TILES
 			.register("runic_chisel_station", () -> TileEntityType.Builder
 					.create(TileEntityChiselStation::new, BlockInit.runic_chisel_station.get()).build(null));
-	
+
 	public static final RegistryObject<TileEntityType<TileEntityRuneModStation>> rune_mod_station = TILES
 			.register("rune_mod_station", () -> TileEntityType.Builder
 					.create(TileEntityRuneModStation::new, BlockInit.rune_mod_station.get()).build(null));
@@ -100,7 +101,11 @@ public class TileEntityInit {
 			.register("ascendent_altar", () -> TileEntityType.Builder
 					.create(TileEntityAscendentAltar::new, BlockInit.ascendent_altar.get()).build(null));
 
-	public static final RegistryObject<TileEntityType<TileEntityTeleporter>> teleporter = TILES.register(
-			"teleporter",
+	public static final RegistryObject<TileEntityType<TileEntityTeleporter>> teleporter = TILES.register("teleporter",
 			() -> TileEntityType.Builder.create(TileEntityTeleporter::new, BlockInit.teleporter.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<TileEntitySacrificePyre>> sacrifice_pyre = TILES
+			.register("sacrifice_pyre", () -> TileEntityType.Builder
+					.create(TileEntitySacrificePyre::new, BlockInit.sacrificial_pyre.get()).build(null));
+
 }

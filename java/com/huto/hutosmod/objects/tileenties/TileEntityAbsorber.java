@@ -57,10 +57,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	@Override
 	public void tick() {
 
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getState(), getState(), 2);
-		}
-
 		if (linkedBlocks != null) {
 			for (int i = 0; i < linkedBlocks.size(); i++) {
 				if (world.getBlockState(linkedBlocks.get(i)).isAir()) {

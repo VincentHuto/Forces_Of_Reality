@@ -13,6 +13,7 @@ import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockRuneModStation;
+import com.huto.hutosmod.objects.blocks.BlockSacrificePyre;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockSlimeRepelent;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
@@ -205,9 +206,14 @@ public class BlockInit {
 	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
 			() -> new BlockVibeAccel(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+
 	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
 			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> sacrificial_pyre = BLOCKS.register("sacrificial_pyre",
+			() -> new BlockSacrificePyre(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.WOOD).notSolid()));
+
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
 			() -> new BlockStorageDrum(
@@ -222,7 +228,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> rune_mod_station = BLOCKS.register("rune_mod_station",
 			() -> new BlockRuneModStation(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",
 			() -> new BlockSlimeRepelent(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
@@ -256,6 +262,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_mystic.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_grass.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.sacrificial_pyre.get(), RenderType.getCutout());
+
 		}
 	}
 }

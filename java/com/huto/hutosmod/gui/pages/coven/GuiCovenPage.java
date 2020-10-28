@@ -228,6 +228,8 @@ public class GuiCovenPage extends Screen {
 			return CovenPageLib.getAscendentPageList();
 		case BEAST:
 			return CovenPageLib.getBeastPageList();
+		case MACHINE:
+			return CovenPageLib.getMachinePageList();
 		default:
 			break;
 		}

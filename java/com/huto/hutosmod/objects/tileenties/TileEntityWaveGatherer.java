@@ -29,10 +29,6 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 
 	@Override
 	public void tick() {
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
-		}
-
 		if (isVibeFull()) {
 
 		}

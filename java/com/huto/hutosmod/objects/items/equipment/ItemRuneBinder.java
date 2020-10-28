@@ -76,8 +76,8 @@ public class ItemRuneBinder extends Item {
 	}
 
 	@Override
+	@OnlyIn(Dist.CLIENT)
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-
 		if (worldIn.isRemote) {
 			if (!playerIn.isSneaking()) {
 				Minecraft.getInstance().displayGuiScreen(new GuiRuneBinderViewer(new ItemStack(this), playerIn));

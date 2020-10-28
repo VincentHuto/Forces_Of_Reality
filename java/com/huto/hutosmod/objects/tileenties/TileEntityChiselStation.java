@@ -66,9 +66,6 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 
 	@Override
 	public void tick() {
-		if (!world.isRemote) {
-			world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
-		}
 	}
 
 	@Override

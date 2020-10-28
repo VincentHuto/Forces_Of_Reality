@@ -83,7 +83,6 @@ public class BlockCapacitor extends Block {
 		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 3) {
 			te.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
-			player.getHeldItemOffhand().shrink(1);
 
 		}
 		// Says the tank is full

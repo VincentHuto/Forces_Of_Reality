@@ -2,6 +2,9 @@ package com.huto.hutosmod.objects.tileenties;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -12,6 +15,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileModVibes extends TileEntity {
+	
+	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	public float clientVibes = 0.0f;
+	public static final String TAG_VIBES = "vibes";
+	
 	public TileModVibes(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}

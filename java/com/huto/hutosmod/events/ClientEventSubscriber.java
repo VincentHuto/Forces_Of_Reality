@@ -34,6 +34,7 @@ import com.huto.hutosmod.render.entity.RenderThrone;
 import com.huto.hutosmod.render.entity.RenderTrackingOrb;
 import com.huto.hutosmod.render.entity.layer.ThermalLayerRender;
 import com.huto.hutosmod.render.tile.RenderAbsorber;
+import com.huto.hutosmod.render.tile.RenderAscendentAltar;
 import com.huto.hutosmod.render.tile.RenderCapacitor;
 import com.huto.hutosmod.render.tile.RenderChiselStation;
 import com.huto.hutosmod.render.tile.RenderHasturPylon;
@@ -42,6 +43,7 @@ import com.huto.hutosmod.render.tile.RenderKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderRuneModStation;
+import com.huto.hutosmod.render.tile.RenderSacrificialPyre;
 import com.huto.hutosmod.render.tile.RenderStorageDrum;
 import com.huto.hutosmod.render.tile.RenderThermalInfluxer;
 import com.huto.hutosmod.render.tile.RenderVibeFuser;
@@ -91,6 +93,8 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderRuneModStation::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendent_altar.get(), RenderAscendentAltar::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
@@ -130,17 +134,4 @@ public class ClientEventSubscriber {
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
-
-	/*
-	 * public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float
-	 * ticksPerMeter, long seed, int colorOuter, int colorInner) {
-	 * Minecraft.getInstance().particles.addEffect(new
-	 * FXLightning(Minecraft.getInstance().world, vectorStart, vectorEnd,
-	 * ticksPerMeter, seed, colorOuter, colorInner)); }
-	 * 
-	 * public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float
-	 * ticksPerMeter, int colorOuter, int colorInner) { lightningFX(vectorStart,
-	 * vectorEnd, ticksPerMeter, System.nanoTime(), colorOuter, colorInner); }
-	 */
-
 }

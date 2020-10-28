@@ -8,6 +8,7 @@ import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemPurgingStone;
+import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSlugBucket;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
@@ -19,6 +20,7 @@ import com.huto.hutosmod.objects.items.equipment.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemBeastBreath;
 import com.huto.hutosmod.objects.items.equipment.ItemCrossedKeys;
 import com.huto.hutosmod.objects.items.equipment.ItemInfluenceSuppressor;
+import com.huto.hutosmod.objects.items.equipment.ItemIntegralCog;
 import com.huto.hutosmod.objects.items.equipment.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.equipment.ItemMysticTome;
 import com.huto.hutosmod.objects.items.equipment.ItemRepulsionCharm;
@@ -66,8 +68,8 @@ import com.huto.hutosmod.objects.items.tools.ItemStarSlug;
 import com.huto.hutosmod.objects.items.tools.ItemTrickAxe;
 import com.huto.hutosmod.objects.items.tools.ItemWandConsumeVibes;
 import com.huto.hutosmod.objects.items.tools.ItemWandGainVibes;
+import com.huto.hutosmod.objects.items.tools.ItemYellowTome;
 import com.huto.hutosmod.objects.items.tools.ToolVeinPickaxe;
-import com.huto.hutosmod.objects.tileenties.ItemYellowTome;
 
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -196,9 +198,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> writhing_thread = ITEMS.register("writhing_thread",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	
 
 	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -211,9 +210,9 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON),
 					EnumCovenants.HASTUR, 10));
 	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR, 1));
 	public static final RegistryObject<Item> unsettling_tapestry = ITEMS.register("unsettling_tapestry",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR, 3));
 	public static final RegistryObject<Item> yellow_tome = ITEMS.register("yellow_tome", () -> new ItemYellowTome(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
@@ -222,9 +221,9 @@ public class ItemInit {
 			() -> new ItemCrossedKeys(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ASCENDENT, 10));
 	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT, 1));
 	public static final RegistryObject<Item> wing_fragment = ITEMS.register("wing_fragment",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT, 3));
 	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
@@ -236,19 +235,27 @@ public class ItemInit {
 			() -> new ItemWatchfulPendant(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 10));
 	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH, 1));
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH, 3));
 
 	// Beast
 	public static final RegistryObject<Item> breath_of_the_beast = ITEMS.register("breath_of_the_beast",
 			() -> new ItemBeastBreath(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 10));
 	public static final RegistryObject<Item> blooddrawn_fang = ITEMS.register("blooddrawn_fang",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> beastly_bone = ITEMS.register("beastly_bone",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.BEAST, 3));
 
+	// Machine
+	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog",
+			() -> new ItemIntegralCog(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumCovenants.MACHINE, 10));
+	public static final RegistryObject<Item> discared_gear = ITEMS.register("discared_gear",
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE, 1));
+	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR, 3));
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -334,11 +341,13 @@ public class ItemInit {
 							new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(512), 1,
 							6, 1));
 
-	public static final RegistryObject<Item> null_trick_axe = ITEMS.register("null_trick_axe", () -> new ItemTrickAxe(
-			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));
+	public static final RegistryObject<Item> null_trick_axe = ITEMS.register("null_trick_axe",
+			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumModToolTiers.NULL));
+	public static final RegistryObject<Item> mystic_trick_axe = ITEMS.register("mystic_trick_axe",
+			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumModToolTiers.MYSTIC));
 
-	
-	
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
@@ -735,9 +744,8 @@ public class ItemInit {
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
-		
-		//Trick Axe
-		//Null
+		// Trick Axe
+		// Null
 		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
 				new IItemPropertyGetter() {
 					@Override
@@ -766,7 +774,37 @@ public class ItemInit {
 					return p_239428_2_ != null && p_239428_2_.isHandActive()
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
-		
+
+		// Mystic
+		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
+
 	}
 
 }

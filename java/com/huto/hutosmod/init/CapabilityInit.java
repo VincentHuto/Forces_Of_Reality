@@ -13,6 +13,9 @@ import com.huto.hutosmod.capabilities.mindrunes.RuneCap.IRuneFactory;
 import com.huto.hutosmod.capabilities.mindrunes.RuneCap.IRuneStorage;
 import com.huto.hutosmod.capabilities.mindrunes.RunesItemHandlerCap.IRunesItemHandlerFactory;
 import com.huto.hutosmod.capabilities.mindrunes.RunesItemHandlerCap.IRunesItemHandlerStorage;
+import com.huto.hutosmod.capabilities.tiledevotion.Devotion;
+import com.huto.hutosmod.capabilities.tiledevotion.DevotionStorage;
+import com.huto.hutosmod.capabilities.tiledevotion.IDevotion;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationStorage;
 import com.huto.hutosmod.capabilities.vibes.Vibrations;
@@ -28,13 +31,10 @@ public class CapabilityInit {
 		CapabilityManager.INSTANCE.register(IVibrations.class, new VibrationStorage(), Vibrations::new);
 		CapabilityManager.INSTANCE.register(IKarma.class, new KarmaStorage(), Karma::new);
 		CapabilityManager.INSTANCE.register(ICovenant.class, new CovenantStorage(), Covenant::new);
+		CapabilityManager.INSTANCE.register(IDevotion.class, new DevotionStorage(), Devotion::new);
 		CapabilityManager.INSTANCE.register(IRune.class, new IRuneStorage(), new IRuneFactory());
 		CapabilityManager.INSTANCE.register(IRunesItemHandler.class, new IRunesItemHandlerStorage(),
 				new IRunesItemHandlerFactory());
-		/*
-		 * CapabilityManager.INSTANCE.register(IRuneBinderItemHandler.class, new
-		 * RuneBinderItemHandlerStorage(), RuneBinderItemHandler::new);
-		 */
 	}
 
 }

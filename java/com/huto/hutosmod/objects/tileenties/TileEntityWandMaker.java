@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
@@ -29,14 +28,12 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
 public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	int cooldown = 0;
 	int recipeKeepTicks = 0;
 	float maxVibes = 400;
-	public String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
 	List<ItemStack> lastRecipe = null;
 	RecipeWandMaker currentRecipe;

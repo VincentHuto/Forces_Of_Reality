@@ -80,7 +80,6 @@ public class BlockStorageDrum extends Block {
 		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 9) {
 			te.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
-			player.getHeldItemOffhand().shrink(1);
 
 		}
 		// Says the tank is full

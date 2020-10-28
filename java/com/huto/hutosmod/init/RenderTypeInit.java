@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderInit extends RenderType {
+public class RenderTypeInit extends RenderType {
 	private final static ResourceLocation laserBeam = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/misc/laser.png");
 	private final static ResourceLocation laserBeam2 = new ResourceLocation(
@@ -25,7 +25,7 @@ public class RenderInit extends RenderType {
 	private final static ResourceLocation end_trans = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/blocks/end_portal.png");
 
-	public RenderInit(String nameIn, VertexFormat formatIn, int drawModeIn, int bufferSizeIn, boolean useDelegateIn,
+	public RenderTypeInit(String nameIn, VertexFormat formatIn, int drawModeIn, int bufferSizeIn, boolean useDelegateIn,
 			boolean needsSortingIn, Runnable setupTaskIn, Runnable clearTaskIn) {
 		super(nameIn, formatIn, drawModeIn, bufferSizeIn, useDelegateIn, needsSortingIn, setupTaskIn, clearTaskIn);
 	}

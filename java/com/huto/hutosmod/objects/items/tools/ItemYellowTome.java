@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties;
+package com.huto.hutosmod.objects.items.tools;
 
 import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;

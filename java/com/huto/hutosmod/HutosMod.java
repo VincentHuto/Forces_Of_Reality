@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 import com.huto.hutosmod.capabilities.covenant.CovenantEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaHudEventHandler;
+import com.huto.hutosmod.capabilities.tiledevotion.DevotionEvents;
 import com.huto.hutosmod.capabilities.vibes.SeerEventHandler;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
-import com.huto.hutosmod.containers.ContainerRuneBinder;
-import com.huto.hutosmod.events.ClientEventSubscriber;
+import com.huto.hutosmod.events.RuneBinderEvents;
 import com.huto.hutosmod.gui.pages.coven.CovenPageLib;
 import com.huto.hutosmod.gui.pages.guide.TomePageLib;
 import com.huto.hutosmod.init.BlockInit;
@@ -22,7 +22,6 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.TogglePickupMessage;
 import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.particles.init.ParticleInit;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
@@ -48,9 +47,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -91,11 +87,12 @@ public class HutosMod {
 		EnchantmentInit.ENCHANTS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.addListener(this::pickupEvent);
-		MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
-
-		// Register Vibration Events
+		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::pickupEvent);
+		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::onClientTick);
+		MinecraftForge.EVENT_BUS.addListener(ModOreGen::addStuffToBiomes);
+		// Register Capability Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
+		MinecraftForge.EVENT_BUS.register(DevotionEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
@@ -124,8 +121,6 @@ public class HutosMod {
 	}
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
-		ModOreGen.initGen();
-		ModOreGen.setupGen();
 		CapabilityInit.init();
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
@@ -175,26 +170,6 @@ public class HutosMod {
 		render.addLayer(new RunesRenderLayer(render));
 		render = skinMap.get("slim");
 		render.addLayer(new RunesRenderLayer(render));
-	}
-
-	private void pickupEvent(EntityItemPickupEvent event) {
-		if (event.getPlayer().openContainer instanceof ContainerRuneBinder || event.getPlayer().isSneaking()
-				|| event.getItem().getItem().getItem() instanceof ItemRuneBinder)
-			return;
-		PlayerInventory playerInv = event.getPlayer().inventory;
-		for (int i = 0; i <= 8; i++) {
-			ItemStack stack = playerInv.getStackInSlot(i);
-			if (stack.getItem() instanceof ItemRuneBinder
-					&& ((ItemRuneBinder) stack.getItem()).pickupEvent(event, stack)) {
-				event.setResult(Event.Result.ALLOW);
-				return;
-			}
-		}
-	}
-
-	private void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.keyBinds.get(0).isPressed())
-			PacketHandler.RUNEBINDER.sendToServer(new TogglePickupMessage());
 	}
 
 	public static ItemStack findRuneBinder(PlayerEntity player) {

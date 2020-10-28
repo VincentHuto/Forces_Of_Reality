@@ -2,8 +2,6 @@ package com.huto.hutosmod.objects.tileenties;
 
 import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.KarmaProvider;
-import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
@@ -15,9 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ITickableTileEntity;
 
 public class TileEntityKarmicExtractor extends TileModVibes implements ITickableTileEntity, IExportableTile {
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-	public float clientVibes = 0.0f;
-	public static final String TAG_VIBES = "vibes";
 
 	public TileEntityKarmicExtractor() {
 		super(TileEntityInit.karmic_extractor.get());
