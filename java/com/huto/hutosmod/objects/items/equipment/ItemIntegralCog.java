@@ -54,8 +54,8 @@ public class ItemIntegralCog extends ItemContractRune implements IRune, IRenderR
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) + getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.GOLD + "The gears in your mind spin freely"), true);
@@ -76,8 +76,8 @@ public class ItemIntegralCog extends ItemContractRune implements IRune, IRenderR
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) - getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), -getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.GOLD + "You feel as if your short circuiting"),
@@ -116,6 +116,12 @@ public class ItemIntegralCog extends ItemContractRune implements IRune, IRenderR
 					TransformType.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
+	}
+	
+	
+	@Override
+	public EnumCovenants getAssignedCovenant() {
+		return EnumCovenants.MACHINE;
 	}
 
 }

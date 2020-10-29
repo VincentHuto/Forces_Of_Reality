@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
+import com.huto.hutosmod.objects.tileenties.TileEntityAuspiciousBundle;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
@@ -108,4 +109,8 @@ public class TileEntityInit {
 			.register("sacrifice_pyre", () -> TileEntityType.Builder
 					.create(TileEntitySacrificePyre::new, BlockInit.sacrificial_pyre.get()).build(null));
 
+	public static final RegistryObject<TileEntityType<TileEntityAuspiciousBundle>> auspicious_bundle = TILES
+			.register("auspicious_bundle", () -> TileEntityType.Builder
+					.create(TileEntityAuspiciousBundle::new, BlockInit.auspicious_bundle.get()).build(null));
+	
 }

@@ -32,7 +32,7 @@ public class RenderSacrificialPyre extends TileEntityRenderer<TileEntitySacrific
 	public void render(TileEntitySacrificePyre te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		matrixStackIn.push();
-		matrixStackIn.translate(0.5D, 2.1D, 0.5D);
+		matrixStackIn.translate(0.5D, 2.1D+te.yFloatLevel, 0.5D);
 		float f = (float) te.ticks + partialTicks;
 		matrixStackIn.translate(0.0D, (double) (0.1F + MathHelper.sin(f * 0.1F) * 0.01F), 0.0D);
 

@@ -9,12 +9,10 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.containers.RuneBinderItemHandler;
-import com.huto.hutosmod.gui.GuiRuneBinderViewer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.ToggleMessageMessage;
 import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -76,17 +74,15 @@ public class ItemRuneBinder extends Item {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (worldIn.isRemote) {
 			if (!playerIn.isSneaking()) {
-				Minecraft.getInstance().displayGuiScreen(new GuiRuneBinderViewer(new ItemStack(this), playerIn));
+				HutosMod.proxy.openMyGui();
 				playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
-				return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 			}
 		}
-		if (!worldIn.isRemote) {
 
+		if (!worldIn.isRemote) {
 			if (playerIn.isSneaking()) {
 				// open
 				playerIn.openContainer(new INamedContainerProvider() {

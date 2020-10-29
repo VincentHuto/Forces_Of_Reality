@@ -65,8 +65,7 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderR
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) + getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(new StringTextComponent(
 							TextFormatting.AQUA + "You hear the clang of bells in the distance"), true);
@@ -89,8 +88,8 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderR
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) - getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), -getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.AQUA + "You hear an angelic screech in your minds"),
@@ -126,6 +125,11 @@ public class ItemCrossedKeys extends ItemContractRune implements IRune, IRenderR
 					TransformType.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
+	}
+	
+	@Override
+	public EnumCovenants getAssignedCovenant() {
+		return EnumCovenants.ASCENDENT;
 	}
 
 }

@@ -162,7 +162,6 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory
 			}
 
 		if (did)
-			System.out.println("add ITEM");
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}

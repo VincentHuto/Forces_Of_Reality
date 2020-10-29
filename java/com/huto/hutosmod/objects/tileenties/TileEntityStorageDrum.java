@@ -158,7 +158,6 @@ public class TileEntityStorageDrum extends TileVibeSimpleInventory implements IT
 			}
 
 		if (did)
-			System.out.println("add ITEM");
 		world.notifyBlockUpdate(pos, getState(), getState(), 2);
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;

@@ -18,8 +18,8 @@ public class Covenant implements ICovenant {
 		if (devotion != null) {
 			if (getOpposingCoven(covenIn) != null) {
 				Map<EnumCovenants, Integer> newDevo = devotion;
-				newDevo.put(covenIn, value);
-				newDevo.put(getOpposingCoven(covenIn), getDevotionByCoven(getOpposingCoven(covenIn)) - 1);
+				newDevo.put(covenIn, getDevotionByCoven(covenIn) + value);
+				newDevo.put(getOpposingCoven(covenIn), getDevotionByCoven(getOpposingCoven(covenIn)) - value);
 				setDevotion(newDevo);
 			}
 		}
@@ -43,7 +43,7 @@ public class Covenant implements ICovenant {
 		case ELDRITCH:
 			return EnumCovenants.ASCENDENT;
 		case HASTUR:
-			break;
+			return EnumCovenants.ELDRITCH;
 		case MACHINE:
 			return EnumCovenants.BEAST;
 		case NONE:
@@ -51,7 +51,6 @@ public class Covenant implements ICovenant {
 		default:
 			return null;
 		}
-		return null;
 	}
 
 }

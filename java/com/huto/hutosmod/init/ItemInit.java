@@ -210,9 +210,11 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON),
 					EnumCovenants.HASTUR, 10));
 	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR, 1));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR,
+					1));
 	public static final RegistryObject<Item> unsettling_tapestry = ITEMS.register("unsettling_tapestry",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR, 3));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR,
+					3));
 	public static final RegistryObject<Item> yellow_tome = ITEMS.register("yellow_tome", () -> new ItemYellowTome(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
@@ -221,9 +223,11 @@ public class ItemInit {
 			() -> new ItemCrossedKeys(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ASCENDENT, 10));
 	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT, 1));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT,
+					1));
 	public static final RegistryObject<Item> wing_fragment = ITEMS.register("wing_fragment",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT, 3));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT,
+					3));
 	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
@@ -235,9 +239,11 @@ public class ItemInit {
 			() -> new ItemWatchfulPendant(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 10));
 	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH, 1));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH,
+					1));
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH, 3));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH,
+					3));
 
 	// Beast
 	public static final RegistryObject<Item> breath_of_the_beast = ITEMS.register("breath_of_the_beast",
@@ -253,9 +259,11 @@ public class ItemInit {
 			() -> new ItemIntegralCog(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.MACHINE, 10));
 	public static final RegistryObject<Item> discared_gear = ITEMS.register("discared_gear",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE, 1));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE,
+					1));
 	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR, 3));
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR,
+					3));
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));

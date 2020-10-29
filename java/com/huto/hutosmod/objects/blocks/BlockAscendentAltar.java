@@ -90,8 +90,8 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 				} else {
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
-					coven.setCovenDevotion(te.getCovenType(),
-							coven.getDevotionByCoven(te.getCovenType()) + sac.getDevoAmount());
+					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount);
+
 					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 							new CovenantPacketServer(coven.getDevotion()));
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);

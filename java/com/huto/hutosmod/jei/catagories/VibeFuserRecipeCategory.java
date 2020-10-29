@@ -90,10 +90,10 @@ public class VibeFuserRecipeCategory implements IRecipeCategory<RecipeFuser> {
 		GlStateManager.enableAlphaTest();
 		GlStateManager.enableBlend();
 		overlay.draw(matrixStack);
-		matrixStack.translate(25, 90, 0);
+		matrixStack.translate(10, 90, 0);
 		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 		fontRenderer.drawString(matrixStack,
-				"Vibrational Cost: " + TextFormatting.ITALIC + Float.toString(recipe.getManaUsage()), 0,
+				"Vibrational Cost: " + TextFormatting.ITALIC + Float.toString(recipe.getManaUsage())+ "/Level", 0,
 				(int) (fontRenderer.FONT_HEIGHT), 0);
 		GlStateManager.disableBlend();
 		GlStateManager.disableAlphaTest();

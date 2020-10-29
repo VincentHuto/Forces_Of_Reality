@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.IActivatable;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
@@ -64,34 +65,40 @@ public class BlockVibeResonator extends Block implements IActivatable {
 		if (worldIn.isRemote)
 			return ActionResultType.SUCCESS;
 		TileEntityVibeResonator te = (TileEntityVibeResonator) worldIn.getTileEntity(pos);
-		ItemStack stack = player.getHeldItem(handIn);
-		if (player.isSneaking()) {
-			ModInventoryVibeHelper.withdrawFromInventory(te, player);;
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+		ItemStack stack = player.getHeldItemMainhand();
 
+		if (stack.isEmpty()) {
+			ModInventoryVibeHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
-		if (!stack.isEmpty()) {
+		// If there is something in your hand add it to the block if its not an //
+		if (!stack.isEmpty() && !(stack.getItem() == ItemInit.magatamabead.get())) {
 			te.addItem(player, stack, handIn);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
+		// Upgrade clause
+		if (stack.getItem() == ItemInit.magatamabead.get() && te.getLevel() < 9) {
+			te.addLevel(1);
+			player.getHeldItemMainhand().shrink(1);
 
-		return ActionResultType.FAIL;
-
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+		return ActionResultType.SUCCESS;
 	}
 
 	@Override
 	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
 	}
-	
+
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
 			boolean isMoving) {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te instanceof TileEntityVibeResonator) {
 			((TileEntityVibeResonator) te).checkStructure();
-		}	
+		}
 	}
 
 	@Override

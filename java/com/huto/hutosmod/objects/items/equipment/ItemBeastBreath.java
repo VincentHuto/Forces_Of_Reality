@@ -54,8 +54,7 @@ public class ItemBeastBreath extends ItemContractRune implements IRune, IRenderR
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) + getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(
@@ -78,8 +77,8 @@ public class ItemBeastBreath extends ItemContractRune implements IRune, IRenderR
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) - getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), -getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.DARK_RED + "The Hunt has begun..."), true);
@@ -117,6 +116,11 @@ public class ItemBeastBreath extends ItemContractRune implements IRune, IRenderR
 					TransformType.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
+	}
+
+	@Override
+	public EnumCovenants getAssignedCovenant() {
+		return EnumCovenants.BEAST;
 	}
 
 }

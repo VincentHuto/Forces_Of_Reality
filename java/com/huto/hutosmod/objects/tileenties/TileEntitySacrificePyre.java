@@ -21,6 +21,7 @@ public class TileEntitySacrificePyre extends TileModDevotion implements ITickabl
 	public float nextPageAngle;
 	public float pageAngle;
 	public float field_195531_n;
+	public float yFloatLevel;
 	private static final Random random = new Random();
 
 	public TileEntitySacrificePyre() {
@@ -35,6 +36,10 @@ public class TileEntitySacrificePyre extends TileModDevotion implements ITickabl
 		PlayerEntity playerentity = this.world.getClosestPlayer((double) this.pos.getX() + 0.5D,
 				(double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D, 3.0D, false);
 		if (playerentity != null) {
+			this.yFloatLevel += 0.01;
+			if (this.yFloatLevel > 0) {
+				this.yFloatLevel = 0;
+			}
 			double d0 = playerentity.getPosX() - ((double) this.pos.getX() + 0.5D);
 			double d1 = playerentity.getPosZ() - ((double) this.pos.getZ() + 0.5D);
 			this.field_195531_n = (float) MathHelper.atan2(d1, d0);
@@ -47,7 +52,10 @@ public class TileEntitySacrificePyre extends TileModDevotion implements ITickabl
 				} while (f1 == this.field_195525_h);
 			}
 		} else {
-			this.field_195531_n += 0.02F;
+			this.yFloatLevel -= 0.01;
+			if (this.yFloatLevel < -0.7) {
+				this.yFloatLevel = -0.7f;
+			}
 			this.nextPageTurningSpeed -= 0.1F;
 		}
 

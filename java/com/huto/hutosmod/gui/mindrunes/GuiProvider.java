@@ -10,19 +10,17 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-@OnlyIn(Dist.CLIENT)
+
 public class GuiProvider implements INamedContainerProvider {
 
-    @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent("PlayerRuneInv");
-    }
+	@Override
+	public ITextComponent getDisplayName() {
+		return new StringTextComponent("PlayerRuneInv");
+	}
 
-    @Nullable
-    @Override
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        return new PlayerExpandedContainer(id, playerInventory, !playerEntity.world.isRemote);
-    }
+	@Nullable
+	@Override
+	public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+		return new PlayerExpandedContainer(id, playerInventory, !playerEntity.world.isRemote);
+	}
 }

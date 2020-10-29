@@ -27,7 +27,7 @@ public class ItemRune extends Item implements IRune {
 	 */
 
 	EnumCovenants assignedCovenant;
-	 int deepenAmount;
+	int deepenAmount;
 
 	public ItemRune(Properties properties, EnumCovenants covenIn, int deepenAmountIn) {
 		super(properties);
@@ -42,8 +42,7 @@ public class ItemRune extends Item implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) + getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
@@ -61,8 +60,7 @@ public class ItemRune extends Item implements IRune {
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) - getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),

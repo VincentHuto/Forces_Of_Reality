@@ -60,8 +60,7 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune, IRen
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) + getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.LIGHT_PURPLE + "You begin to see more clearly"),
@@ -82,8 +81,8 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune, IRen
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) - getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), -getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(new StringTextComponent(
 							TextFormatting.LIGHT_PURPLE + "You suddenly feel as your being watched"), true);
@@ -121,6 +120,12 @@ public class ItemWatchfulPendant extends ItemContractRune implements IRune, IRen
 					ItemCameraTransforms.TransformType.NONE, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
+	}
+	
+	
+	@Override
+	public EnumCovenants getAssignedCovenant() {
+		return EnumCovenants.ELDRITCH;
 	}
 
 }

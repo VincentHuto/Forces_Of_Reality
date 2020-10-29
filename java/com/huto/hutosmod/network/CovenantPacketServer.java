@@ -27,6 +27,7 @@ public class CovenantPacketServer {
 			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
 			Minecraft.getInstance().player.getCapability(CovenantProvider.COVEN_CAPA)
 					.orElseThrow(IllegalStateException::new).setDevotion(msg.devotion);
+
 		});
 		ctx.get().setPacketHandled(true);
 	}

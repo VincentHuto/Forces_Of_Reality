@@ -44,7 +44,6 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 	@Override
 	public void tick() {
 		if (canGenerate()) {
-			// System.out.println(vibes.getVibes());
 			vibes.addVibes(0.2f);
 		}
 	}

@@ -17,17 +17,28 @@ public class ModFuserRecipies {
 
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
-			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade;
+			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade,
+			recipeIdentifier;
 
 	public static void init() {
 
+		recipeIdentifier = registerRecipe(new ResourceLocation("allegeiance_identifier"),
+				new ItemStack(ItemInit.allegiance_identifier.get(), 1), 30,
+				Ingredient.fromItems(ItemInit.blooddrawn_fang.get()),
+				Ingredient.fromItems(ItemInit.discared_gear.get()), Ingredient.fromItems(ItemInit.purging_stone.get()),
+				Ingredient.fromItems(ItemInit.seraph_feather.get()),
+				Ingredient.fromItems(ItemInit.unsettling_fabric.get()),
+				Ingredient.fromItems(ItemInit.suspicious_eye.get()));
+
 		recipeNullBowBlade = registerRecipe(new ResourceLocation("null_bow_blade"),
 				new ItemStack(ItemInit.null_bow_blade.get(), 1), 100, Ingredient.fromItems(ItemInit.null_sword.get()),
-				Ingredient.fromItems(Items.BOW),Ingredient.fromItems(ItemInit.writhing_thread.get()));
+				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
+				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
 		recipeMysticBowBlade = registerRecipe(new ResourceLocation("mystic_bow_blade"),
 				new ItemStack(ItemInit.mystic_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
-				Ingredient.fromItems(Items.BOW),Ingredient.fromItems(ItemInit.writhing_thread.get()));
+				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
+				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
 		recipeGrandPurgingStone = registerRecipe(new ResourceLocation("grand_purging_stone"),
 				new ItemStack(ItemInit.grand_purging_stone.get(), 1), 100,

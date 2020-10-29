@@ -74,7 +74,6 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 			}
 
 		if (did)
-			System.out.println("add ITEM");
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
@@ -121,7 +120,6 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 
 		}
 
-		// System.out.println(cooldown);
 		count++;
 		if (cooldown > 0) {
 			if (count % 10 == 0) {

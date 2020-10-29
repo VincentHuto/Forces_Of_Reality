@@ -1,29 +1,18 @@
 package com.huto.hutosmod.objects.blocks;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
-
-import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
-import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
-import com.huto.hutosmod.capabilities.covenant.ICovenant;
-import com.huto.hutosmod.network.CovenantPacketServer;
-import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.objects.blocks.util.IBlockDevotionStation;
-import com.huto.hutosmod.objects.items.ItemSacrificial;
-import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
-import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.objects.tileenties.TileEntityAuspiciousBundle;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -32,21 +21,17 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.PacketDistributor;
 
-public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
+public class BlockAuspiciousBundle extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream
 			.of(Block.makeCuboidShape(4, 0, 2, 6, 2, 10), Block.makeCuboidShape(9, 0, 6, 11, 2, 15),
@@ -63,7 +48,7 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
 
 	private static final VoxelShape SHAPE_R = Block.makeCuboidShape(-8, 0, -7, 24, 32, 25);
 
-	public BlockSacrificePyre(Properties properties) {
+	public BlockAuspiciousBundle(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 
@@ -72,45 +57,17 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		TileEntitySacrificePyre te = (TileEntitySacrificePyre) worldIn.getTileEntity(pos);
-		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getHeldItemMainhand();
-		// Upgrade clause
-		if (stack.getItem() instanceof ItemSacrificial) {
-			ItemSacrificial sac = (ItemSacrificial) stack.getItem();
-			if (sac.getCoven() == te.getCovenType()) {
-				if (worldIn.isRemote) {
-					player.playSound(SoundHandler.ITEM_STAR_SLUG_STORM, 0.6F, 0.8F);
-					return ActionResultType.SUCCESS;
-				} else {
-					te.devo.addDevotion(sac.getDevoAmount());
-					player.getHeldItemMainhand().shrink(1);
-					coven.setCovenDevotion(te.getCovenType(),sac.devoAmount);
-					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
-							new CovenantPacketServer(coven.getDevotion()));
-					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-					player.sendStatusMessage(
-							new StringTextComponent(TextFormatting.GOLD + "Your offering was accepted"), true);
-					return ActionResultType.SUCCESS;
-
-				}
+		if (stack.getItem() instanceof FlintAndSteelItem) {
+			if (!worldIn.isRemote) {
+				worldIn.setBlockState(pos, BlockInit.sacrificial_pyre.get().getDefaultState());
 			} else {
-				player.sendStatusMessage(new StringTextComponent(TextFormatting.RED + "Incorrect Offering Type"), true);
-				if (worldIn.isRemote) {
-					player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
-				}
-				return ActionResultType.FAIL;
+				player.playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F);
 			}
-
-		} else {
-			player.sendStatusMessage(new StringTextComponent(TextFormatting.DARK_RED + "Item is not an offering"),
-					true);
-			if (worldIn.isRemote) {
-				player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
-			}
-			return ActionResultType.FAIL;
+			return ActionResultType.SUCCESS;
 
 		}
+		return ActionResultType.FAIL;
 
 	}
 
@@ -126,25 +83,6 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
 
 	@Override
 	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-	}
-
-	@Override
-	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
-			@Nonnull Random random) {
-		TileEntitySacrificePyre tile = (TileEntitySacrificePyre) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntitySacrificePyre) {
-			int count = (int) (6 * 0.5f);
-			if (count > 0) {
-				for (int i = 0; i < random.nextInt(count); i++) {
-					double randX = pos.getX() + random.nextDouble();
-					double randY = pos.getY() + random.nextDouble();
-					double randZ = pos.getZ() + random.nextDouble();
-					world.addParticle(ParticleTypes.FLAME, randX, randY, randZ, 0, 0, 0);
-					world.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
-
-				}
-			}
-		}
 	}
 
 	@Override
@@ -181,12 +119,7 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileEntitySacrificePyre();
-	}
-
-	@Override
-	public EnumCovenants getCovenType() {
-		return EnumCovenants.BEAST;
+		return new TileEntityAuspiciousBundle();
 	}
 
 }

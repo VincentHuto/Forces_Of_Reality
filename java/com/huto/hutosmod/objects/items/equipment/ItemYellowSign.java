@@ -31,7 +31,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemYellowSign extends ItemContractRune implements IRune, IRenderRunes {
 
-	public ItemYellowSign(Properties properties, EnumCovenants covenIn,int deepenAmount) {
+	public ItemYellowSign(Properties properties, EnumCovenants covenIn, int deepenAmount) {
 		super(properties, covenIn, deepenAmount);
 
 		properties.rarity(Rarity.UNCOMMON);
@@ -54,8 +54,8 @@ public class ItemYellowSign extends ItemContractRune implements IRune, IRenderRu
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) + getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
 							new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Accepts your Fealty"), true);
@@ -76,12 +76,11 @@ public class ItemYellowSign extends ItemContractRune implements IRune, IRenderRu
 				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven != null) {
-					coven.setCovenDevotion(getAssignedCovenant(),
-							(coven.getDevotionByCoven(getAssignedCovenant()) - getDeepenAmount()));
+					coven.setCovenDevotion(getAssignedCovenant(), -getDeepenAmount());
+
 					PlayerEntity playerEnt = (PlayerEntity) player;
 					playerEnt.sendStatusMessage(
-							new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Renounces your Fealty"),
-							true);
+							new StringTextComponent(TextFormatting.YELLOW + "Lord Hastur Renounces your Fealty"), true);
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
@@ -101,19 +100,24 @@ public class ItemYellowSign extends ItemContractRune implements IRune, IRenderRu
 	public boolean hasEffect(ItemStack stack) {
 		return false;
 	}
-	
 
 	@Override
-	public void onPlayerRuneRender(MatrixStack matrix, int packedLightIn,IRenderTypeBuffer buffer, PlayerEntity player, RenderType type,
-			float partialTicks) {
+	public void onPlayerRuneRender(MatrixStack matrix, int packedLightIn, IRenderTypeBuffer buffer, PlayerEntity player,
+			RenderType type, float partialTicks) {
 		if (type == RenderType.HEAD) {
-			//boolean armor = !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
+			// boolean armor =
+			// !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
 			matrix.rotate(Vector3f.XN.rotationDegrees(180f));
 			matrix.scale(0.5f, 0.5f, 0.5f);
-			matrix.translate(0, 1,0.5);
+			matrix.translate(0, 1, 0.5);
 			Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(ItemInit.yellow_sign.get()),
-					TransformType.FIXED, packedLightIn,OverlayTexture.NO_OVERLAY, matrix, buffer);
+					TransformType.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 
 		}
+	}
+
+	@Override
+	public EnumCovenants getAssignedCovenant() {
+		return EnumCovenants.HASTUR;
 	}
 }

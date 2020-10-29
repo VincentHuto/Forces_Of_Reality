@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.IActivatable;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
@@ -36,18 +37,15 @@ import net.minecraft.world.World;
 
 public class BlockVibeFuser extends Block implements IActivatable {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream.of(
-			Block.makeCuboidShape(0, 0, 0, 16, 1, 16),
-			Block.makeCuboidShape(3, 14, 2, 13, 16, 13),
-			Block.makeCuboidShape(1, 0, 1, 15, 5, 15),
-			Block.makeCuboidShape(0, 5, 0, 3, 17, 3),
-			Block.makeCuboidShape(13, 5, 0, 16, 17, 3),
-			Block.makeCuboidShape(13, 5, 13, 16, 17, 16),
-			Block.makeCuboidShape(0, 5, 13, 3, 17, 16),
-			Block.makeCuboidShape(13, 5, 3, 15, 16, 13),
-			Block.makeCuboidShape(3, 5, 13, 13, 16, 15),
-			Block.makeCuboidShape(1, 5, 3, 3, 16, 13)
-			).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+	private static final VoxelShape SHAPE_N = Stream
+			.of(Block.makeCuboidShape(0, 0, 0, 16, 1, 16), Block.makeCuboidShape(3, 14, 2, 13, 16, 13),
+					Block.makeCuboidShape(1, 0, 1, 15, 5, 15), Block.makeCuboidShape(0, 5, 0, 3, 17, 3),
+					Block.makeCuboidShape(13, 5, 0, 16, 17, 3), Block.makeCuboidShape(13, 5, 13, 16, 17, 16),
+					Block.makeCuboidShape(0, 5, 13, 3, 17, 16), Block.makeCuboidShape(13, 5, 3, 15, 16, 13),
+					Block.makeCuboidShape(3, 5, 13, 13, 16, 15), Block.makeCuboidShape(1, 5, 3, 3, 16, 13))
+			.reduce((v1, v2) -> {
+				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+			}).get();
 
 	public BlockVibeFuser(Properties properties) {
 		super(properties);
@@ -66,21 +64,27 @@ public class BlockVibeFuser extends Block implements IActivatable {
 		if (worldIn.isRemote)
 			return ActionResultType.SUCCESS;
 		TileEntityVibeFuser te = (TileEntityVibeFuser) worldIn.getTileEntity(pos);
-		ItemStack stack = player.getHeldItem(handIn);
-		if (player.isSneaking()) {
+		ItemStack stack = player.getHeldItemMainhand();
+		
+		if (stack.isEmpty()) {
 			ModInventoryVibeHelper.withdrawFromInventory(te, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-
 			return ActionResultType.SUCCESS;
 		}
-		if (!stack.isEmpty()) {
+		// If there is something in your hand add it to the block if its not an //
+		if (!stack.isEmpty() && !(stack.getItem() == ItemInit.enhancedmagatama.get()) ) {
 			te.addItem(player, stack, handIn);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
+		// Upgrade clause
+		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getLevel() < 9) {
+			te.addLevel(1);
+			player.getHeldItemMainhand().shrink(1);
 
-		return ActionResultType.FAIL;
-
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+		return ActionResultType.SUCCESS;
 	}
 
 	@Override

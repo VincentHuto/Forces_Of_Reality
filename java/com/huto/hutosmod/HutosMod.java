@@ -148,7 +148,7 @@ public class HutosMod {
 
 	// Creative Tab
 	public static class HutosModItemGroup extends ItemGroup {
-		public static final HutosModItemGroup instance = new HutosModItemGroup(ItemGroup.GROUPS.length, "hutosTab");
+		public static final HutosModItemGroup instance = new HutosModItemGroup(ItemGroup.GROUPS.length, "hutostab");
 
 		public HutosModItemGroup(int index, String label) {
 			super(index, label);

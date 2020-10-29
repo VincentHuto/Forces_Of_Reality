@@ -70,9 +70,7 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 						// Importing from Absorber
 						if (world.getTileEntity(linkedBlocks.get(i)) instanceof IImportableTile) {
 							IImportableTile te = (IImportableTile) world.getTileEntity(linkedBlocks.get(i));
-
 							if (this.isExportState() && this.vibes.getVibes() > transferRate && te.canImport()) {
-								System.out.println("t");
 								te.importFromAbsorber(this, transferRate);
 								te.sendUpdates();
 								VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
@@ -85,7 +83,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 						if (world.getTileEntity(linkedBlocks.get(i)) instanceof IExportableTile) {
 							IExportableTile te = (IExportableTile) world.getTileEntity(linkedBlocks.get(i));
 							if (this.isImportState() && this.vibes.getVibes() <= maxVibes && te.canExport()) {
-								// System.out.println("Should be Importing");
 								te.exportToAbsorber(this, transferRate);
 								te.sendUpdates();
 								VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);

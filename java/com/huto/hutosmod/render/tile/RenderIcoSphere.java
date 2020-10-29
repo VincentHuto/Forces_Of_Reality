@@ -55,7 +55,7 @@ public class RenderIcoSphere extends TileEntityRenderer<TileEntityIcoSphere> {
 		matrixStackIn.translate(0.5, 0.5, 0.5);
 		matrixStackIn.rotate(Vector3f.YP.rotation(rotationRate));
 
-		matrixStackIn.scale(count, count, count);
+		matrixStackIn.scale(5, 5, 5);
 		modelSphereInside.get().render(bufferIn, RenderTypeInit.SPHEREIN, matrixStackIn, 0x00F000F0, 0x8f8f8f);
 		modelSphere.get().render(bufferIn, RenderTypeInit.SPHEREIN, matrixStackIn, 0x00F000F0, 0xBEAE00);
 		matrixStackIn.scale(0.95f, 0.95f, 0.95f);
@@ -67,7 +67,7 @@ public class RenderIcoSphere extends TileEntityRenderer<TileEntityIcoSphere> {
 		matrixStackIn.push();
 		matrixStackIn.translate(0.5, 0.5, 0.5);
 		matrixStackIn.rotate(Vector3f.YN.rotation(rotationRate));
-		matrixStackIn.scale(count * 2.8f, count * 1f, count * 2.8f);
+		matrixStackIn.scale(8 * 2.8f, 8 * 1f, 8 * 2.8f);
 		modelTorus.get().render(bufferIn, RenderTypeInit.ENDTRANS, matrixStackIn, combinedLightIn, 0xFF8400);
 		matrixStackIn.scale(0.9f, 0.9f, 0.9f);
 		modelTorus.get().render(bufferIn, RenderTypeInit.ENDTRANS, matrixStackIn, combinedLightIn, 0xFF8400);

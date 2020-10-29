@@ -39,6 +39,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	float maxVibes = 300;
 	public float clientVibes = 0.0f;
 	public final String TAG_SIZE = "tankSize";
+	public final String TAG_LEVEL = "level";
+	public int level = 1;
 	public static EnumEssecenceType resonantState;
 	List<ItemStack> lastRecipe = null;
 	RecipeResonator currentRecipe;
@@ -65,11 +67,23 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		this.maxVibes = maxVibes;
 	}
 
+	public void addLevel(float valIn) {
+		this.level += valIn;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int levelIn) {
+		this.level = levelIn;
+	}
+
 	public void checkStructure() {
 		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
 		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
 
-		if (blockUnder == BlockInit.enchanted_stone_smooth.get()) {
+		if (blockUnder == BlockInit.mystic_media.get()) {
 			resonantState = EnumEssecenceType.MANA;
 		} else if (blockUnder == BlockInit.activated_obsidian.get()) {
 			resonantState = EnumEssecenceType.KARMIC;
@@ -77,8 +91,10 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 			resonantState = EnumEssecenceType.REVERT;
 		} else if (blockUnder == BlockInit.mind_fog.get()) {
 			resonantState = EnumEssecenceType.GREY;
-		} else if (blockUnder == BlockInit.display_glass.get()) {
+		} else if (blockUnder == BlockInit.nightmare_media.get()) {
 			resonantState = EnumEssecenceType.BOTH;
+		} else if (blockUnder == BlockInit.anti_media.get()) {
+			resonantState = EnumEssecenceType.NULL;
 		} else {
 			resonantState = EnumEssecenceType.NONE;
 		}
@@ -160,6 +176,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		itemHandler.deserializeNBT(tag);
 		maxVibes = tag.getFloat(TAG_SIZE);
 		clientVibes = tag.getFloat(TAG_VIBES);
+		level = tag.getInt(TAG_LEVEL);
+
 	}
 
 	@Override
@@ -168,6 +186,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		tag.merge(itemHandler.serializeNBT());
 		tag.putFloat(TAG_SIZE, maxVibes);
 		tag.putFloat(TAG_VIBES, vibes.getVibes());
+		tag.putInt(TAG_LEVEL, level);
+
 	}
 
 	@Override
@@ -188,6 +208,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		nbtTag.merge(itemHandler.serializeNBT());
 		nbtTag.putFloat(TAG_SIZE, maxVibes);
 		nbtTag.putFloat(TAG_VIBES, vibes.getVibes());
+		nbtTag.putInt(TAG_LEVEL, level);
 		return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
 	}
 
@@ -199,6 +220,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		itemHandler.deserializeNBT(tag);
 		maxVibes = tag.getFloat(TAG_SIZE);
 		clientVibes = tag.getFloat(TAG_VIBES);
+		level = tag.getInt(TAG_LEVEL);
+
 	}
 
 	@Override
@@ -206,6 +229,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		super.handleUpdateTag(state, tag);
 		maxVibes = tag.getFloat(TAG_SIZE);
 		clientVibes = tag.getFloat(TAG_VIBES);
+		level = tag.getInt(TAG_LEVEL);
+
 	}
 
 	@Override
@@ -267,26 +292,28 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 				}
 			}
 
-		if (recipe != null && vibes.getVibes() >= recipe.getManaUsage()
-				&& getResonantState() == recipe.getRecipeType()) {
-
-			ItemStack output = recipe.getOutput().copy();
-			ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
-			if (world.isRemote) {
-				world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
-			}
-			world.addEntity(outputItem);
-			vibes.setVibes(vibes.getVibes() - recipe.getManaUsage());
-			currentRecipe = null;
-			world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
-			world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);
-
-			for (int i = 0; i < getSizeInventory(); i++) {
-				ItemStack stack = itemHandler.getStackInSlot(i);
-				if (!stack.isEmpty()) {
+		if (recipe != null && getResonantState() == recipe.getRecipeType()) {
+			float manaCost = recipe.getManaUsage() / this.level;
+			if (vibes.getVibes() >= manaCost) {
+				ItemStack output = recipe.getOutput().copy();
+				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
+						output);
+				if (world.isRemote) {
+					world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
 				}
-				this.sendUpdates();
-				itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+				world.addEntity(outputItem);
+				vibes.setVibes(vibes.getVibes() - recipe.getManaUsage());
+				currentRecipe = null;
+				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
+				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);
+
+				for (int i = 0; i < getSizeInventory(); i++) {
+					ItemStack stack = itemHandler.getStackInSlot(i);
+					if (!stack.isEmpty()) {
+					}
+					this.sendUpdates();
+					itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+				}
 			}
 		}
 	}
