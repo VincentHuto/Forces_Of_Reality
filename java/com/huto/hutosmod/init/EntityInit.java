@@ -23,6 +23,7 @@ import com.huto.hutosmod.entities.projectiles.EntityJudgement;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.entities.projectiles.EntityThrownAxe;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
+import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -104,12 +105,11 @@ public class EntityInit {
 			"beast_from_beyond",
 			() -> EntityType.Builder
 					.<EntityBeastFromBeyond>create(EntityBeastFromBeyond::new, EntityClassification.MONSTER)
-					.size(2f, 2f).build(new ResourceLocation(HutosMod.MOD_ID, "beast_from_beyond").toString()));
-	public static final RegistryObject<EntityType<EntitySummonedBeast>> summoned_beast = ENTITY_TYPES
-			.register("summoned_beast",
-					() -> EntityType.Builder
-							.<EntitySummonedBeast>create(EntitySummonedBeast::new, EntityClassification.MONSTER)
-							.size(1F, 1F).build(new ResourceLocation(HutosMod.MOD_ID, "summoned_beast").toString()));
+					.size(1.7f, 1.7f).build(new ResourceLocation(HutosMod.MOD_ID, "beast_from_beyond").toString()));
+	public static final RegistryObject<EntityType<EntitySummonedBeast>> summoned_beast = ENTITY_TYPES.register(
+			"summoned_beast",
+			() -> EntityType.Builder.<EntitySummonedBeast>create(EntitySummonedBeast::new, EntityClassification.MONSTER)
+					.size(0.5F, 0.5F).build(new ResourceLocation(HutosMod.MOD_ID, "summoned_beast").toString()));
 
 	// Projectiles
 	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
@@ -129,6 +129,11 @@ public class EntityInit {
 					() -> EntityType.Builder
 							.<EntityEldritchGrip>create(EntityEldritchGrip::new, EntityClassification.MONSTER)
 							.size(0.3f, 0.3F).build(new ResourceLocation(HutosMod.MOD_ID, "eldritch_grip").toString()));
+
+	public static final RegistryObject<EntityType<EntityWolfShot>> wolf_shot = ENTITY_TYPES.register("wolf_shot",
+			() -> EntityType.Builder.<EntityWolfShot>create(EntityWolfShot::new, EntityClassification.MISC)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "wolf_shot").toString()));
 
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",

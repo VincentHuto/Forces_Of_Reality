@@ -1,6 +1,8 @@
 package com.huto.hutosmod.entities;
 
-import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
+import java.util.List;
+
+import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
@@ -8,6 +10,7 @@ import com.huto.hutosmod.sounds.SoundHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.MobEntity;
@@ -39,8 +42,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.GameRules;
@@ -95,7 +100,7 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 
 		int attackRoll = ticksExisted + rand.nextInt(5);
 		if (attackRoll % 50 * diffMult == 0) {
-			this.spawnMissile();
+			this.spawnWolfShot();
 		} else if (attackRoll % 120 * diffMult == 0) {
 			if (world.rand.nextBoolean()) {
 				// this.summonTentacleAid(rand.nextInt(10));
@@ -103,11 +108,11 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 				// this.summonSpawnAid(rand.nextInt(5));
 			}
 		} else if (attackRoll % 130 * diffMult == 0) {
-			// this.summonClones(rand.nextInt(2));
+			this.greatHowl();
 		}
 		if (this.isOnGround()) {
 			if (attackRoll % 100 * diffMult == 0) {
-				this.summonHounds(rand.nextInt(1) + 3);
+				this.summonHounds(rand.nextInt(1) + 2);
 			}
 		}
 
@@ -118,11 +123,7 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
 		this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() + (double) f,
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-		/*
-		 * this.world.addParticle(ParticleTypes.SOUL, this.getPosX() + (double) f,
-		 * this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D,
-		 * 0.0D, 0.0D);
-		 */
+
 	}
 
 	@Override
@@ -170,18 +171,18 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundHandler.ENTITY_HASTUR_AMBIENT;
+		return SoundEvents.ENTITY_WOLF_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundHandler.ENTITY_HASTUR_HURT;
+		return SoundEvents.ENTITY_WOLF_HURT;
 
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.ENTITY_HASTUR_DEATH;
+		return SoundEvents.ENTITY_WOLF_DEATH;
 
 	}
 
@@ -260,32 +261,6 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 	}
 
 	// Attack types
-	/*
-	 * public void summonTentacleAid(int numTent) { EntityTentacle[] tentArray = new
-	 * EntityTentacle[numTent]; for (int i = 0; i < numTent; i++) { tentArray[i] =
-	 * new EntityTentacle(EntityInit.tentacle.get(), world);
-	 * tentArray[i].setTentacleType(rand.nextInt(4)); float xMod =
-	 * (this.rand.nextFloat() - 0.5F) * 8.0F; float yMod = (this.rand.nextFloat() -
-	 * 0.5F) * 4.0F; float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-	 * tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 +
-	 * yMod, this.getPosZ() + 0.5 + zMod); if (!world.isRemote) {
-	 * world.addEntity(tentArray[i]);
-	 * 
-	 * } } }
-	 */
-	/*
-	 * public void summonClones(int numTent) { EntityHasturClone[] tentArray = new
-	 * EntityHasturClone[numTent]; for (int i = 0; i < numTent; i++) { tentArray[i]
-	 * = new EntityHasturClone(EntityInit.hastur_clone.get(), world); float xMod =
-	 * (this.rand.nextFloat() - 0.5F) * 8.0F; float yMod = (this.rand.nextFloat() -
-	 * 0.5F) * 4.0F; float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-	 * tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 +
-	 * yMod, this.getPosZ() + 0.5 + zMod); if (!world.isRemote) {
-	 * playSound(SoundHandler.ENTITY_HASTUR_HURT, 0.6F, 0.8F + (float) Math.random()
-	 * * 0.2F); world.addEntity(tentArray[i]);
-	 * 
-	 * } } }
-	 */
 
 	public void summonHounds(int numTent) {
 		EntitySummonedBeast[] tentArray = new EntitySummonedBeast[numTent];
@@ -303,13 +278,47 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 		}
 	}
 
-	private void spawnMissile() {
-		EntityTrackingOrb missile = new EntityTrackingOrb(this, true);
-		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
-				this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1), this.getPosZ() + (Math.random() - 0.5 * 0.1));
+	private void spawnWolfShot() {
+		EntityWolfShot missile = new EntityWolfShot(this, true);
+		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1), this.getPosY() + (Math.random() - 0.5 * 0.1),
+				this.getPosZ() + (Math.random() - 0.5 * 0.1));
 		if (missile.findTarget()) {
-			playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+			playSound(SoundEvents.ENTITY_WOLF_GROWL, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 			world.addEntity(missile);
+		}
+	}
+
+	private void greatHowl() {
+		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
+		this.setMotion(0, 0, 0);
+		this.setMotion(0, 0, 0);
+		this.setMotion(0, 0, 0);
+		this.setMotion(0, 0, 0);
+
+		repel(world, new AxisAlignedBB(this.getPositionVec().add(-8, -8, -8), this.getPositionVec().add(8, 8, 8)),
+				this.getPositionVec().getX() + 0.5, this.getPositionVec().getY(), this.getPositionVec().getZ() + 0.5);
+	}
+
+	public void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {
+		List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, effectBounds);
+		for (Entity ent : list) {
+			if (!(ent instanceof EntitySummonedBeast)) {
+				Vector3d p = new Vector3d(x, y, z);
+				Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
+				double distance = p.distanceTo(t) + 0.1D;
+				Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
+				ent.setMotion(r.x * 2 / distance, r.y * 2 / distance, r.z * 2 / distance);
+				for (int countparticles = 0; countparticles <= 10; ++countparticles) {
+					world.addParticle(ParticleTypes.SMOKE,
+							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
+							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
+									- (double) ent.getYOffset() - 0.5,
+							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
+							0.0D);
+					ent.playSound(SoundEvents.ENTITY_WOLF_HOWL, .15F, 1f + (float) Math.random() * 0.2F);
+
+				}
+			}
 		}
 	}
 

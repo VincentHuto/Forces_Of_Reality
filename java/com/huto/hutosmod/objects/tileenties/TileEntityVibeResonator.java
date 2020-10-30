@@ -280,6 +280,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	public void onActivated(PlayerEntity player, ItemStack wand) {
 		if (world.isRemote)
 			return;
+		checkStructure();
 		RecipeResonator recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;

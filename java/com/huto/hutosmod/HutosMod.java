@@ -47,6 +47,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -83,13 +84,13 @@ public class HutosMod {
 		BlockInit.BLOCKS.register(modEventBus);
 		TileEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
+		BlockInit.FEATURES.register(modEventBus);
 		EntityInit.ENTITY_TYPES.register(modEventBus);
 		EnchantmentInit.ENCHANTS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::pickupEvent);
 		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::onClientTick);
-		MinecraftForge.EVENT_BUS.addListener(ModOreGen::addStuffToBiomes);
 		// Register Capability Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(DevotionEvents.class);
@@ -97,6 +98,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}
 
@@ -128,6 +130,10 @@ public class HutosMod {
 		ModChiselRecipes.init();
 		PacketHandler.registerChannels();
 		PacketHandler.registerRuneBinderChannels();
+		
+	    event.enqueueWork(() -> {
+            ModOreGen.registerConfiguredFeatures();
+        });
 
 	}
 

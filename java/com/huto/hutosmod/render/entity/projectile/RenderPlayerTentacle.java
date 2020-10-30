@@ -1,4 +1,4 @@
-package com.huto.hutosmod.render.entity;
+package com.huto.hutosmod.render.entity.projectile;
 
 import javax.annotation.Nonnull;
 

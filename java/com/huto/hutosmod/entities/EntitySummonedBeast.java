@@ -177,7 +177,7 @@ public class EntitySummonedBeast extends MonsterEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 0.3d, 30));
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 2.3d, 30));
 		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 
 	}

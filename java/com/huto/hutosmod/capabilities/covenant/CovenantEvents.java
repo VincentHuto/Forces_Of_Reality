@@ -116,11 +116,13 @@ public class CovenantEvents {
 							.orElseThrow(IllegalArgumentException::new);
 					for (EnumCovenants covens : coven.getDevotion().keySet()) {
 						if (coven.getDevotionByCoven(covens) >= 10) {
-							int devonMult = coven.getDevotionByCoven(covens) / 3;
+							int devoMult = (coven.getDevotionByCoven(covens) / 3) < 250
+									? (coven.getDevotionByCoven(covens) / 3)
+									: 250;
 							switch (covens) {
 							case HASTUR:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
-										event.getWindow().getHeight(), new Color(255, 255, 0, devonMult).getRGB());
+										event.getWindow().getHeight(), new Color(255, 255, 0, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Hasturs View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								Minecraft.getInstance().textureManager
@@ -128,7 +130,7 @@ public class CovenantEvents {
 								break;
 							case ELDRITCH:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
-										event.getWindow().getHeight(), new Color(255, 0, 255, devonMult).getRGB());
+										event.getWindow().getHeight(), new Color(255, 0, 255, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Azathoth View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								Minecraft.getInstance().textureManager
@@ -136,7 +138,7 @@ public class CovenantEvents {
 								break;
 							case ASCENDENT:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
-										event.getWindow().getHeight(), new Color(255, 255, 255, devonMult).getRGB());
+										event.getWindow().getHeight(), new Color(255, 255, 255, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Seraph View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								Minecraft.getInstance().textureManager
@@ -144,7 +146,7 @@ public class CovenantEvents {
 								break;
 							case BEAST:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
-										event.getWindow().getHeight(), new Color(255, 0, 0, devonMult).getRGB());
+										event.getWindow().getHeight(), new Color(255, 0, 0, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Beast View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								Minecraft.getInstance().textureManager
@@ -153,7 +155,7 @@ public class CovenantEvents {
 
 							case MACHINE:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
-										event.getWindow().getHeight(), new Color(218, 96, 28, devonMult).getRGB());
+										event.getWindow().getHeight(), new Color(218, 96, 28, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Machine View", 5, 5,
 										new Color(255, 0, 0, 255).getRGB());
 								Minecraft.getInstance().textureManager

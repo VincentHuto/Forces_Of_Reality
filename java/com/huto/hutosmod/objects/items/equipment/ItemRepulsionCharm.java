@@ -4,11 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -98,27 +94,24 @@ public class ItemRepulsionCharm extends Item {
 	public static void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {
 		List<Entity> list = world.getEntitiesWithinAABB(Entity.class, effectBounds);
 		for (Entity ent : list) {
-			if ((ent instanceof MobEntity || ent instanceof SlimeEntity || ent instanceof FireballEntity
-					|| ent instanceof ProjectileEntity)) {
 
-				Vector3d p = new Vector3d(x, y, z);
-				Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
-				double distance = p.distanceTo(t) + 0.1D;
-				Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
+			Vector3d p = new Vector3d(x, y, z);
+			Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
+			double distance = p.distanceTo(t) + 0.1D;
+			Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
 
-				ent.setMotion(r.x / 1.2D / distance, r.y / 1.2D / distance, r.z / 1.2D / distance);
+			ent.setMotion(r.x / 1.2D / distance, r.y / 1.2D / distance, r.z / 1.2D / distance);
 
-				for (int countparticles = 0; countparticles <= 10; ++countparticles) {
-					world.addParticle(RedstoneParticleData.REDSTONE_DUST,
-							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
-							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
-									- (double) ent.getYOffset() - 0.5,
-							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
-							0.0D);
-					// ent.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.010f, 0.1F);
+			for (int countparticles = 0; countparticles <= 10; ++countparticles) {
+				world.addParticle(RedstoneParticleData.REDSTONE_DUST,
+						ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
+						ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight() - (double) ent.getYOffset()
+								- 0.5,
+						ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D, 0.0D);
+				// ent.playSound(SoundEvents.BLOCK_BEACON_DEACTIVATE, 0.010f, 0.1F);
 
-				}
 			}
 		}
+
 	}
 }

@@ -1,9 +1,9 @@
-package com.huto.hutosmod.render.entity;
+package com.huto.hutosmod.render.entity.projectile;
 
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
+import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -12,15 +12,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderTrackingOrb extends EntityRenderer<EntityTrackingOrb> {
+public class RenderStarStrike extends EntityRenderer<EntityStarStrike> {
 
-	public RenderTrackingOrb(EntityRendererManager renderManager) {
+	public RenderStarStrike(EntityRendererManager renderManager) {
 		super(renderManager);
 	}
 
 	@Nonnull
 	@Override
-	public ResourceLocation getEntityTexture(@Nonnull EntityTrackingOrb entity) {
+	public ResourceLocation getEntityTexture(@Nonnull EntityStarStrike entity) {
 		return new ResourceLocation(HutosMod.MOD_ID + "textures/entity/tracker.png");
 	}
 
