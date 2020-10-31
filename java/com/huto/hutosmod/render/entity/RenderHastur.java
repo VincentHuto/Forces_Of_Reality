@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityHastur;
-import com.huto.hutosmod.models.ModelHastur;
+import com.huto.hutosmod.models.entity.ModelHastur;
 import com.huto.hutosmod.render.entity.layer.LayerHasturAura;
 import com.huto.hutosmod.render.entity.layer.LayerHasturDeath;
 import com.mojang.blaze3d.matrix.MatrixStack;

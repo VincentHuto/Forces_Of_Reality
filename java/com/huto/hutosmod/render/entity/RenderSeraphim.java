@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntitySeraphim;
-import com.huto.hutosmod.models.ModelSeraphim;
+import com.huto.hutosmod.models.entity.ModelSeraphim;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

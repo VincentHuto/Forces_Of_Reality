@@ -19,11 +19,12 @@ import com.huto.hutosmod.init.CapabilityInit;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.EnchantmentInit;
 import com.huto.hutosmod.init.EntityInit;
+import com.huto.hutosmod.init.FeatureInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.init.ParticleInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
-import com.huto.hutosmod.particles.init.ParticleInit;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
@@ -84,7 +85,7 @@ public class HutosMod {
 		BlockInit.BLOCKS.register(modEventBus);
 		TileEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
-		BlockInit.FEATURES.register(modEventBus);
+		FeatureInit.FEATURES.register(modEventBus);
 		EntityInit.ENTITY_TYPES.register(modEventBus);
 		EnchantmentInit.ENCHANTS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
@@ -130,10 +131,10 @@ public class HutosMod {
 		ModChiselRecipes.init();
 		PacketHandler.registerChannels();
 		PacketHandler.registerRuneBinderChannels();
-		
-	    event.enqueueWork(() -> {
-            ModOreGen.registerConfiguredFeatures();
-        });
+
+		event.enqueueWork(() -> {
+			ModOreGen.registerConfiguredFeatures();
+		});
 
 	}
 

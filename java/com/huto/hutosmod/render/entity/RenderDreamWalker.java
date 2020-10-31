@@ -3,7 +3,7 @@ package com.huto.hutosmod.render.entity;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.entities.EntityDreamWalker;
-import com.huto.hutosmod.models.ModelDreamWalker;
+import com.huto.hutosmod.models.entity.ModelDreamWalker;
 import com.huto.hutosmod.render.entity.layer.LayerDreamWalkerMask;
 
 import net.minecraft.client.Minecraft;

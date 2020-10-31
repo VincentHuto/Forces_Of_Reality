@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityColin;
-import com.huto.hutosmod.models.ModelColin;
+import com.huto.hutosmod.models.entity.ModelColin;
 import com.huto.hutosmod.render.entity.layer.LayerColinAura;
 import com.huto.hutosmod.render.entity.layer.LayerColinDeath;
 import com.mojang.blaze3d.matrix.MatrixStack;

@@ -1,7 +1,7 @@
 package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.models.ModelFloatingCube;
+import com.huto.hutosmod.models.block.ModelFloatingCube;
 import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;

@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityHasturSpawn;
-import com.huto.hutosmod.models.ModelHasturSpawn;
+import com.huto.hutosmod.models.entity.ModelHasturSpawn;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

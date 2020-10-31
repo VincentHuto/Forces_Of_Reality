@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityDenizenSage;
-import com.huto.hutosmod.models.ModelDenizenSage;
+import com.huto.hutosmod.models.entity.ModelDenizenSage;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

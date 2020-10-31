@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityIbis;
-import com.huto.hutosmod.models.ModelIbis;
+import com.huto.hutosmod.models.entity.ModelIbis;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

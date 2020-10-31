@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
-import com.huto.hutosmod.models.ModelPlayerTentacle;
+import com.huto.hutosmod.models.entity.ModelPlayerTentacle;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

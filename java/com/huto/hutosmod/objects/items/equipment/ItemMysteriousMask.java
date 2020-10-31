@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.items.equipment;
 
-import com.huto.hutosmod.models.ModelMysteriousMask;
+import com.huto.hutosmod.models.entity.ModelMysteriousMask;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;

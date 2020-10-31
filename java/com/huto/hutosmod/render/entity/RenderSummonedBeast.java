@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntitySummonedBeast;
-import com.huto.hutosmod.models.ModelSummonedBeast;
+import com.huto.hutosmod.models.entity.ModelSummonedBeast;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

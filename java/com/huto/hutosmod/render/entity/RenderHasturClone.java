@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityHasturClone;
-import com.huto.hutosmod.models.ModelHasturClone;
+import com.huto.hutosmod.models.entity.ModelHasturClone;
 import com.huto.hutosmod.render.entity.layer.LayerHasturClone;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

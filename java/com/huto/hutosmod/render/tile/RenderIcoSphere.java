@@ -1,7 +1,7 @@
 package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.init.RenderTypeInit;
-import com.huto.hutosmod.models.ObjModelHandler;
+import com.huto.hutosmod.models.block.ObjModelHandler;
 import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;

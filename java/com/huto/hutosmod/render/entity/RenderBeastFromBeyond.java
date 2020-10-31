@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityBeastFromBeyond;
-import com.huto.hutosmod.models.ModelBeastFromBeyond;
+import com.huto.hutosmod.models.entity.ModelBeastFromBeyond;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

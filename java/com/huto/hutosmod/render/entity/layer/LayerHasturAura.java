@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityHastur;
-import com.huto.hutosmod.models.ModelHastur;
+import com.huto.hutosmod.models.entity.ModelHastur;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

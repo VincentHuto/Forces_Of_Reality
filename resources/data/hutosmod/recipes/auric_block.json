@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"AAA",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "hutosmod:auric_ingot"
+		}
+	},
+	"result": {
+		"item": "hutosmod:auric_block",
+		"count": 1
+	}
+}

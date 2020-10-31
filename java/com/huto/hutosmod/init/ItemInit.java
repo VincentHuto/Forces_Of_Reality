@@ -262,7 +262,7 @@ public class ItemInit {
 			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE,
 					1));
 	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.HASTUR,
+			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE,
 					3));
 	// Karma
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",

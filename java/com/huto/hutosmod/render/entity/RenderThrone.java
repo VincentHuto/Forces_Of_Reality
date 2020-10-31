@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityThrone;
-import com.huto.hutosmod.models.ModelThrone;
+import com.huto.hutosmod.models.entity.ModelThrone;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

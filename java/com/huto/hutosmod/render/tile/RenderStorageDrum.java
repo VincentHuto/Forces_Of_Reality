@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.models.ModelDrumMagatama;
+import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;

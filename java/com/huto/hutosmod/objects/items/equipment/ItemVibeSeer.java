@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.items.equipment;
 
-import com.huto.hutosmod.models.ModelVibeSeer;
+import com.huto.hutosmod.models.entity.ModelVibeSeer;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;

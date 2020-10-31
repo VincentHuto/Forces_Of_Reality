@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityColin;
-import com.huto.hutosmod.models.ModelColin;
+import com.huto.hutosmod.models.entity.ModelColin;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.models.ModelDrumMagatama;
-import com.huto.hutosmod.models.ModelFloatingSkull;
+import com.huto.hutosmod.models.block.ModelDrumMagatama;
+import com.huto.hutosmod.models.block.ModelFloatingSkull;
 import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;

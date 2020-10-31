@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.models.ModelHasturPylon;
-import com.huto.hutosmod.models.ObjModelHandler;
+import com.huto.hutosmod.models.block.ObjModelHandler;
+import com.huto.hutosmod.models.entity.ModelHasturPylon;
 import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;

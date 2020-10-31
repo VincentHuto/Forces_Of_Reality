@@ -10,6 +10,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
 import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
+import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.hutosmod.objects.tileenties.TileEntityRuneModStation;
 import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
@@ -112,5 +113,9 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityAuspiciousBundle>> auspicious_bundle = TILES
 			.register("auspicious_bundle", () -> TileEntityType.Builder
 					.create(TileEntityAuspiciousBundle::new, BlockInit.auspicious_bundle.get()).build(null));
-	
+
+	public static final RegistryObject<TileEntityType<TileEntityMachinaImperfecta>> machina_imperfecta = TILES
+			.register("machina_imperfecta", () -> TileEntityType.Builder
+					.create(TileEntityMachinaImperfecta::new, BlockInit.machina_imperfecta.get()).build(null));
+
 }

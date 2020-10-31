@@ -1,7 +1,7 @@
 package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.models.ModelFloatingCandle;
+import com.huto.hutosmod.models.block.ModelFloatingCandle;
 import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;

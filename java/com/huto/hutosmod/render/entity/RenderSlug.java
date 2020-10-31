@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntitySlug;
-import com.huto.hutosmod.models.ModelSlug;
+import com.huto.hutosmod.models.entity.ModelSlug;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

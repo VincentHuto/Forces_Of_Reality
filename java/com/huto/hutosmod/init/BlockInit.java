@@ -11,6 +11,7 @@ import com.huto.hutosmod.objects.blocks.BlockHasturPylon;
 import com.huto.hutosmod.objects.blocks.BlockIcoSphere;
 import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
+import com.huto.hutosmod.objects.blocks.BlockMachinaImperfecta;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockRuneModStation;
@@ -42,7 +43,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.trees.OakTree;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -57,8 +57,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = HutosMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-			HutosMod.MOD_ID);
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,
 			HutosMod.MOD_ID);
 
 	// TELEPORTEROS
@@ -163,6 +161,13 @@ public class BlockInit {
 	public static final RegistryObject<Block> sacrificial_pyre = BLOCKS.register("sacrificial_pyre",
 			() -> new BlockSacrificePyre(Block.Properties.create(Material.WOOD).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.WOOD).notSolid()));
+
+	// Machine
+	public static final RegistryObject<Block> auric_block = BLOCKS.register("auric_block", () -> new Block(
+			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> machina_imperfecta = BLOCKS.register("machina_imperfecta",
+			() -> new BlockMachinaImperfecta(Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.ANVIL).notSolid()));
 
 	// Plants
 	public static final RegistryObject<Block> mystic_grass = BLOCKS.register("mystic_grass",
@@ -272,15 +277,9 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_grass.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.sacrificial_pyre.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.auspicious_bundle.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.machina_imperfecta.get(), RenderType.getTranslucent());
 
 		}
 	}
-
-	// Feature
-	/*
-	 * public static final RegistryObject<Feature<OreFeatureConfig>> GOOFEATURE =
-	 * FEATURES.register("enchantedorefeature", () -> new
-	 * GooFeature(OreFeatureConfig.field_236566_a_));
-	 */
 
 }
