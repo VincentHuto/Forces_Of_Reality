@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "hutosmod:rune_pattern"
+		},
+		{
+			"item": "minecraft:diamond"
+		},
+		{
+			"item": "minecraft:rotten_flesh"
+		}
+	],
+	"result": {
+		"item": "hutosmod:rune_pattern_impurity_c",
+		"count": 1
+	}
+}

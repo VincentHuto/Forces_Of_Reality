@@ -244,7 +244,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
 			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH,
 					3));
-
+	public static final RegistryObject<Item> vitreous_humor = ITEMS.register("vitreous_humor",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	
 	// Beast
 	public static final RegistryObject<Item> breath_of_the_beast = ITEMS.register("breath_of_the_beast",
 			() -> new ItemBeastBreath(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),

@@ -16,8 +16,7 @@
 			"item": "hutosmod:energy_focus"
 		},
 		"W": {
-			"item": "minecraft:log2",
-			"data": 1
+			"item": "minecraft:oak_log"
 		},
 		"A": {
 			"item": "hutosmod:activated_obsidian"

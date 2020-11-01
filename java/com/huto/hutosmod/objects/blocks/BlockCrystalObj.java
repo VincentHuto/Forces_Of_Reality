@@ -19,14 +19,13 @@ public class BlockCrystalObj extends Block {
 
 	public BlockCrystalObj(Properties properties) {
 		super(properties);
-	      this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.UP));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.UP));
 
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		// System.out.println(state.get((FACING)));
 
 	}
 
@@ -41,12 +40,12 @@ public class BlockCrystalObj extends Block {
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-	      return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.with(FACING, rot.rotate(state.get(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-	      return state.with(FACING, mirrorIn.mirror(state.get(FACING)));
+		return state.with(FACING, mirrorIn.mirror(state.get(FACING)));
 	}
 
 	@Override

@@ -25,19 +25,17 @@ public class ModOreGen {
 	public static void registerConfiguredFeatures() {
 		Registry<ConfiguredFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_FEATURE;
 		EnchantedOreGen = Feature.ORE
-				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.field_241882_a,
+				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
 						BlockInit.enchanted_ore.get().getDefaultState(), 10))
-				.withPlacement(Placement.field_242907_l.configure(new TopSolidRangeConfig(3, 3, 40))).func_242729_a(1);
+				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(3, 3, 40))).chance(1);
 		Registry.register(registry, new ResourceLocation(HutosMod.MOD_ID, "enchanted_ore_gen"), EnchantedOreGen);
 
-		
 		MysticEnchantedOreGen = Feature.ORE
-				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.field_241882_a,
+				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
 						BlockInit.enchanted_ore_mystic.get().getDefaultState(), 10))
-				.withPlacement(Placement.field_242907_l.configure(new TopSolidRangeConfig(5, 5, 60))).func_242729_a(1);
+				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(5, 5, 60))).chance(1);
 		Registry.register(registry, new ResourceLocation(HutosMod.MOD_ID, "enchanted_ore_gen"), MysticEnchantedOreGen);
 
-		
 	}
 
 	public static void addStuffToBiomes(BiomeLoadingEvent event) {

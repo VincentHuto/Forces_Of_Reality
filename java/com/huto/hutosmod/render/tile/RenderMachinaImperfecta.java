@@ -3,6 +3,7 @@ package com.huto.hutosmod.render.tile;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelFloatingGearHoriz;
 import com.huto.hutosmod.models.block.ModelFloatingGearVert;
+import com.huto.hutosmod.models.block.ModelGearShaft;
 import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.vector.Vector3f;
 public class RenderMachinaImperfecta extends TileEntityRenderer<TileEntityMachinaImperfecta> {
 	private final ModelFloatingGearVert gearVert = new ModelFloatingGearVert();
 	private final ModelFloatingGearHoriz gearHoriz = new ModelFloatingGearHoriz();
+	private final ModelGearShaft gearshaft = new ModelGearShaft();
 
 	public RenderMachinaImperfecta(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -35,19 +37,30 @@ public class RenderMachinaImperfecta extends TileEntityRenderer<TileEntityMachin
 		matrixStackIn.rotate(Vector3f.YP.rotation(te.getWorld().getGameTime()*0.22f));
 		IVertexBuilder vb = impl.getBuffer(gearHoriz
 				.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/entity/model_floating_gear.png")));
+		IVertexBuilder vb1 = impl.getBuffer(gearshaft
+				.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/entity/model_gearshaft.png")));
 		gearHoriz.render(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
 				1.0F);
 		
+		matrixStackIn.translate(0, .45, 0);
+		gearshaft.render(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
+				1.0F);
+		matrixStackIn.translate(0, -.45, 0);
+		
+		
 		matrixStackIn.rotate(Vector3f.YP.rotation(te.getWorld().getGameTime()*-0.44f));
 		matrixStackIn.translate(0, .38, 0);
+		
 		gearHoriz.render(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
+				1.0F);
+		gearshaft.render(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
 				1.0F);
 		impl.finish();
 
 		matrixStackIn.pop();
 
 		
-		matrixStackIn.translate(0.5f, 0.6f, 0.5f);
+		matrixStackIn.translate(0.5f, 0.55f, 0.5f);
 		matrixStackIn.scale(0.5f, 0.5f, 0.5f);
 		// Cubes
 		for (int i = 0; i < te.clientDevo; i++) {

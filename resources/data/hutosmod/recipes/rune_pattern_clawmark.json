@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "hutosmod:rune_pattern"
+		},
+		{
+			"item": "minecraft:flint"
+		}
+	],
+	"result": {
+		"item": "hutosmod:rune_pattern_clawmark",
+		"count": 1
+	}
+}

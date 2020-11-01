@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "hutosmod:rune_pattern"
+		},
+		{
+			"item": "minecraft:diamond"
+		},
+		{
+			"item": "hutosmod:nullifying_powder"
+		}
+	],
+	"result": {
+		"item": "hutosmod:rune_pattern_corruption_c",
+		"count": 1
+	}
+}

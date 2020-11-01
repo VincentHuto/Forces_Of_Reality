@@ -46,7 +46,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
+public class BlockSacrificePyre extends Block implements IBlockDevotionStation {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream
 			.of(Block.makeCuboidShape(4, 0, 2, 6, 2, 10), Block.makeCuboidShape(9, 0, 6, 11, 2, 15),
@@ -76,6 +76,19 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
 		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getHeldItemMainhand();
 		// Upgrade clause
+		if (stack.isEmpty()) {
+			if (!worldIn.isRemote) {
+				player.sendStatusMessage(
+						new StringTextComponent(
+								TextFormatting.RED + "Altar Strength:" + Integer.toString(te.devo.getDevotion())),
+						true);
+			}
+			if (worldIn.isRemote) {
+				player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
+			}
+			return ActionResultType.SUCCESS;
+		}
+
 		if (stack.getItem() instanceof ItemSacrificial) {
 			ItemSacrificial sac = (ItemSacrificial) stack.getItem();
 			if (sac.getCoven() == te.getCovenType()) {
@@ -85,7 +98,7 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation{
 				} else {
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
-					coven.setCovenDevotion(te.getCovenType(),sac.devoAmount);
+					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount);
 					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 							new CovenantPacketServer(coven.getDevotion()));
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);

@@ -43,6 +43,7 @@ import com.huto.hutosmod.render.tile.RenderIcoSphere;
 import com.huto.hutosmod.render.tile.RenderKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderMachinaImperfecta;
+import com.huto.hutosmod.render.tile.RenderOccularHeap;
 import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderRuneModStation;
 import com.huto.hutosmod.render.tile.RenderSacrificialPyre;
@@ -98,6 +99,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendent_altar.get(), RenderAscendentAltar::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.occular_heap.get(), RenderOccularHeap::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);

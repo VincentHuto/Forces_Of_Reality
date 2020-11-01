@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.tile;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.models.block.ModelFloatingSkull;
+import com.huto.hutosmod.models.block.ModelHorizontalBone;
 import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -18,8 +18,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 
 public class RenderSacrificialPyre extends TileEntityRenderer<TileEntitySacrificePyre> {
-	
-	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
+
+	private final ModelHorizontalBone boneHoriz = new ModelHorizontalBone();
+
 	public static final ResourceLocation NEW_TEXTURE_BOOK = new ResourceLocation(HutosMod.MOD_ID,
 			"textures/entity/floating_skull_pyre.png");
 	private final ModelFloatingSkull modelBook = new ModelFloatingSkull();
@@ -32,13 +33,12 @@ public class RenderSacrificialPyre extends TileEntityRenderer<TileEntitySacrific
 	public void render(TileEntitySacrificePyre te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		matrixStackIn.push();
-		matrixStackIn.translate(0.5D, 2.1D+te.yFloatLevel, 0.5D);
+		matrixStackIn.translate(0.5D, 2.1D + te.yFloatLevel, 0.5D);
 		float f = (float) te.ticks + partialTicks;
 		matrixStackIn.translate(0.0D, (double) (0.1F + MathHelper.sin(f * 0.1F) * 0.01F), 0.0D);
 
 		float f1;
-		for (f1 = te.nextPageAngle
-				- te.pageAngle; f1 >= (float) Math.PI; f1 -= ((float) Math.PI * 2F)) {
+		for (f1 = te.nextPageAngle - te.pageAngle; f1 >= (float) Math.PI; f1 -= ((float) Math.PI * 2F)) {
 		}
 
 		while (f1 < -(float) Math.PI) {
@@ -62,19 +62,17 @@ public class RenderSacrificialPyre extends TileEntityRenderer<TileEntitySacrific
 				1.0F);
 		irendertypebuffer$impl.finish();
 		matrixStackIn.pop();
-		
-		
 
 		matrixStackIn.push();
 
-		matrixStackIn.translate(0.5,1.4, 0.5);
-		matrixStackIn.scale(0.5f,-0.5f, 0.5f);
+		matrixStackIn.translate(0.5, 1., 0.5);
+		matrixStackIn.scale(0.5f, -0.5f, 0.5f);
 		// Cubes
 		for (int i = 0; i < te.clientDevo; i++) {
 			double ticks = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks - 1.3;
-			final float modifier = 6F;
+			final float modifier = 2f;
 			final float rotationModifier = 0.2F;
-			final float radiusBase = 0.9F;
+			final float radiusBase = 0.7F;
 			final float radiusMod = 0.0F;
 			int cubes = te.clientDevo;
 			float offsetPerCube = 360 / cubes;
@@ -85,16 +83,16 @@ public class RenderSacrificialPyre extends TileEntityRenderer<TileEntitySacrific
 			float radiusZ = (float) (radiusBase + radiusMod * Math.cos(ticks / modifier));
 			float x = (float) (radiusX * Math.cos(rad));
 			float z = (float) (radiusZ * Math.sin(rad));
-			float y = (float) Math.cos((ticks + 50 * i) / 5F) / 10F;
+			float y = (float) Math.cos((ticks + 510 * i) / 5F) /120F;
 			matrixStackIn.push();
 			matrixStackIn.translate(x, y, z);
-			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 0.5F);
+			float yRotate = (float) Math.max(1.6F, Math.sin(ticks * 1.1F) / 2F + 0.5F);
 			matrixStackIn.rotate(Vector3f.YP.rotation(yRotate));
 			IRenderTypeBuffer.Impl irendertypebuffer$impl1 = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
-			IVertexBuilder ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(magatamas
-					.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal_red.png")));
-			magatamas.render(matrixStackIn, ivertexbuilder1, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
+			IVertexBuilder ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(
+					boneHoriz.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/entity/bone_wrap.png")));
+			boneHoriz.render(matrixStackIn, ivertexbuilder1, combinedLightIn,combinedOverlayIn, 1.0F, 1.0F, 1.0F,
 					1.0F);
 			irendertypebuffer$impl1.finish();
 			matrixStackIn.pop();
@@ -102,8 +100,6 @@ public class RenderSacrificialPyre extends TileEntityRenderer<TileEntitySacrific
 		}
 		matrixStackIn.pop();
 
-		
-		
 	}
 
 }

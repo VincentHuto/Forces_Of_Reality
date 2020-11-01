@@ -77,6 +77,19 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getHeldItemMainhand();
 		// Upgrade clause
+		if (stack.isEmpty()) {
+			if (!worldIn.isRemote) {
+				player.sendStatusMessage(
+						new StringTextComponent(
+								TextFormatting.GOLD + "Altar Strength:" + Integer.toString(te.devo.getDevotion())),
+						true);
+			}
+			if (worldIn.isRemote) {
+				player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
+			}
+			return ActionResultType.SUCCESS;
+		}
+
 		if (stack.getItem() instanceof ItemSacrificial) {
 			ItemSacrificial sac = (ItemSacrificial) stack.getItem();
 			if (sac.getCoven() == te.getCovenType()) {

@@ -87,7 +87,7 @@ public class EntityThrone extends MonsterEntity {
 		this.setEquipmentBasedOnDifficulty(difficultyIn);
 		World world = worldIn.getWorld();
 		if (world instanceof ServerWorld && ((ServerWorld) world).func_241112_a_()
-				.func_235010_a_(this.getPosition(), true, Structure.field_236374_j_).isValid()) {
+				.getStructureStart(this.getPosition(), true, Structure.SWAMP_HUT).isValid()) {
 			this.setTentacleType(1);
 			this.enablePersistence();
 		}

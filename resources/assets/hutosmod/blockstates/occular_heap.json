@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/occular_heap"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/occular_heap",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/occular_heap",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/occular_heap",
+			"y": 90
+		}
+	}
+}

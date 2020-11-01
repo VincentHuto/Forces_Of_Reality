@@ -81,6 +81,19 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 		ItemStack stack = player.getHeldItemMainhand();
 		// Upgrade clause
 
+		if (stack.isEmpty()) {
+			if (!worldIn.isRemote) {
+				player.sendStatusMessage(
+						new StringTextComponent(
+								TextFormatting.AQUA + "Altar Strength:" + Integer.toString(te.devo.getDevotion())),
+						true);
+			}
+			if (worldIn.isRemote) {
+				player.playSound(SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, 0.6F, 0.8F);
+			}
+			return ActionResultType.SUCCESS;
+		}
+
 		if (stack.getItem() instanceof ItemSacrificial) {
 			ItemSacrificial sac = (ItemSacrificial) stack.getItem();
 			if (sac.getCoven() == te.getCovenType()) {

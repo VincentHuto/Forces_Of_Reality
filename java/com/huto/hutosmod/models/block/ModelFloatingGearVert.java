@@ -45,9 +45,6 @@ public class ModelFloatingGearVert extends Model {
 		bb_main.setTextureOffset(4, 13).addBox(1.0F, -5.0F, 0.0F, 0.0F, 2.0F, 1.0F, 0.0F, false);
 		this.bookParts = ImmutableList.of(this.bb_main);
 	}
-	
-	
-	
 
 	@Override
 	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn,

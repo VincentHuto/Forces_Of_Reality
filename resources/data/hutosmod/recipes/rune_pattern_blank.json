@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "hutosmod:rune_blank"
+		},
+		{
+			"item": "minecraft:paper"
+		}
+	],
+	"result": {
+		"item": "hutosmod:rune_pattern",
+		"count": 1
+	}
+}

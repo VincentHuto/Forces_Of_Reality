@@ -115,7 +115,7 @@ public class BlockMorelMushroom extends BushBlock implements IGrowable {
 			configuredfeature = Features.HUGE_RED_MUSHROOM;
 		}
 
-		if (configuredfeature.func_242765_a(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
+		if (configuredfeature.generate(world, world.getChunkProvider().getChunkGenerator(), rand, pos)) {
 			return true;
 		} else {
 			world.setBlockState(pos, state, 3);

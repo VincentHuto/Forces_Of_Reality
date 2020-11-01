@@ -11,6 +11,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
+import com.huto.hutosmod.objects.tileenties.TileEntityOccularHeap;
 import com.huto.hutosmod.objects.tileenties.TileEntityRuneModStation;
 import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
@@ -102,6 +103,11 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityAscendentAltar>> ascendent_altar = TILES
 			.register("ascendent_altar", () -> TileEntityType.Builder
 					.create(TileEntityAscendentAltar::new, BlockInit.ascendent_altar.get()).build(null));
+	
+	public static final RegistryObject<TileEntityType<TileEntityOccularHeap>> occular_heap = TILES
+			.register("occular_heap", () -> TileEntityType.Builder
+					.create(TileEntityOccularHeap::new, BlockInit.occular_heap.get()).build(null));
+	
 
 	public static final RegistryObject<TileEntityType<TileEntityTeleporter>> teleporter = TILES.register("teleporter",
 			() -> TileEntityType.Builder.create(TileEntityTeleporter::new, BlockInit.teleporter.get()).build(null));

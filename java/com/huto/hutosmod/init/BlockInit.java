@@ -13,6 +13,7 @@ import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMachinaImperfecta;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
+import com.huto.hutosmod.objects.blocks.BlockOccularHeap;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockRuneModStation;
 import com.huto.hutosmod.objects.blocks.BlockSacrificePyre;
@@ -33,6 +34,7 @@ import com.huto.hutosmod.objects.blocks.BlockWaveGatherer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.RotatedPillarBlock;
@@ -82,6 +84,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> phantasmal_glass = BLOCKS.register("phantasmal_glass",
 			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
 					.sound(SoundType.GLASS).notSolid()));
+
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 
@@ -154,6 +157,12 @@ public class BlockInit {
 	public static final RegistryObject<Block> ascendent_altar = BLOCKS.register("ascendent_altar",
 			() -> new BlockAscendentAltar(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	// Eldritch
+	public static final RegistryObject<Block> occular_heap = BLOCKS.register("occular_heap", () -> new BlockOccularHeap(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> abyssal_silt = BLOCKS.register("abyssal_silt",
+			() -> new FallingBlock(Block.Properties.from(Blocks.SAND)));
+
 	// Beast
 	public static final RegistryObject<Block> auspicious_bundle = BLOCKS.register("auspicious_bundle",
 			() -> new BlockAuspiciousBundle(Block.Properties.create(Material.WOOD).hardnessAndResistance(50f, 1500f)
@@ -165,6 +174,9 @@ public class BlockInit {
 	// Machine
 	public static final RegistryObject<Block> auric_block = BLOCKS.register("auric_block", () -> new Block(
 			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> machine_glass = BLOCKS.register("machine_glass",
+			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
+					.sound(SoundType.GLASS).notSolid()));
 	public static final RegistryObject<Block> machina_imperfecta = BLOCKS.register("machina_imperfecta",
 			() -> new BlockMachinaImperfecta(Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.ANVIL).notSolid()));
@@ -278,6 +290,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.sacrificial_pyre.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.auspicious_bundle.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.machina_imperfecta.get(), RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(BlockInit.machine_glass.get(), RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
 
 		}
 	}
