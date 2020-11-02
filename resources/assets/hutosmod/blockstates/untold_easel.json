@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/untold_easel"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/untold_easel",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/untold_easel",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/untold_easel",
+			"y": 90
+		}
+	}
+}

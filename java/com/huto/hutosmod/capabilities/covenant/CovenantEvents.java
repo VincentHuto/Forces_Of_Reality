@@ -6,6 +6,7 @@ import java.util.Map;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesApi;
+import com.huto.hutosmod.init.EnchantmentInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
@@ -14,6 +15,7 @@ import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -110,8 +112,9 @@ public class CovenantEvents {
 		PlayerEntity player = Minecraft.getInstance().player;
 		if (player != null) {
 			if (player.isAlive()) {
-				if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() != ItemInit.influence_supressor
-						.get()) {
+				if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() != ItemInit.influence_supressor.get()
+						&& !(EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EquipmentSlotType.HEAD))
+								.containsKey(EnchantmentInit.influence_suppression.get()))) {
 					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 							.orElseThrow(IllegalArgumentException::new);
 					for (EnumCovenants covens : coven.getDevotion().keySet()) {

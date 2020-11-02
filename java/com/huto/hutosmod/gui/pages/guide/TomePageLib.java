@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.gui.pages.EnumTomeCatagories;
+import com.huto.hutosmod.gui.pages.GuiTomeImage;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -36,6 +39,7 @@ public class TomePageLib {
 	public static String INTRO_PAGE_5 = "title.mystictome.intro.page.5.text";
 	public static String INTRO_PAGE_6 = "title.mystictome.intro.page.6.text";
 	public static String INTRO_PAGE_7 = "title.mystictome.intro.page.7.text";
+	public static String INTRO_PAGE_8 = "title.mystictome.intro.page.8.text";
 
 	// World
 	public static String WORLD_PAGE_1 = "title.mystictome.world.page.1.text";
@@ -109,6 +113,14 @@ public class TomePageLib {
 				new ItemStack(ItemInit.null_crystal.get()), I18n.format(INTRO_PAGE_6)));
 		IntroPageList.add(new GuiTomePage(7, EnumTomeCatagories.INTRO, "Vital Essence", "The Power of Vitals",
 				new ItemStack(ItemInit.null_ingot.get()), I18n.format(INTRO_PAGE_7)));
+
+		IntroPageList.add(new GuiTomeImagePage(8, EnumTomeCatagories.INTRO, "ImageTest", "Picture Yo",
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"),0, 0)));
+
+		IntroPageList.add(new GuiTomeImagePage(9, EnumTomeCatagories.INTRO, "ImageTest2", "Pictures Yo",
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"),0, 0),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/red.png"),1, 1)));
+		
 		// Karma
 		KarmaPageList.add(new GuiTomePage(1, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
 				new ItemStack(ItemInit.karmic_drop.get()), I18n.format(KARMA_PAGE_1)));

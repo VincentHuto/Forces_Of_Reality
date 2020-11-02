@@ -7,6 +7,7 @@ import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 
@@ -18,13 +19,12 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemRune extends Item implements IRune {
-	/*
-	 * public int level = 1; public String TAG_LEVEL = "level";
-	 */
 
 	EnumCovenants assignedCovenant;
 	int deepenAmount;
@@ -88,39 +88,19 @@ public class ItemRune extends Item implements IRune {
 		this.assignedCovenant = assignedCovenant;
 	}
 
-	/*
-	 * public int getLevel() { return level; }
-	 * 
-	 * public void setLevel(int level) { this.level = level; }
-	 */
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-		/*
-		 * if (!stack.hasTag()) { stack.setTag(new CompoundNBT()); CompoundNBT compound
-		 * = stack.getTag(); compound.putInt(TAG_LEVEL, level); }
-		 */
+
 	}
-	/*
-	 * @Override public ActionResult<ItemStack> onItemRightClick(World worldIn,
-	 * PlayerEntity playerIn, Hand handIn) { ItemStack stack =
-	 * playerIn.getHeldItemMainhand(); if (!stack.hasTag()) { stack.setTag(new
-	 * CompoundNBT()); CompoundNBT compound = stack.getTag();
-	 * compound.putInt(TAG_LEVEL, level); } CompoundNBT compound = stack.getTag();
-	 * compound.putInt(TAG_LEVEL, this.getLevel());
-	 * 
-	 * playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
-	 * compound.putInt(TAG_LEVEL, level++); stack.setTag(compound); return
-	 * super.onItemRightClick(worldIn, playerIn, handIn); }
-	 */
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		/*
-		 * if (stack.hasTag()) { tooltip.add(new TranslationTextComponent("Form: " +
-		 * stack.getTag().getInt(TAG_LEVEL)) .mergeStyle(TextFormatting.BLUE)); }
-		 */
+		tooltip.add(new StringTextComponent(
+				TextFormatting.GOLD + "Devoted Coven: " + ModTextFormatting.toProperCase(assignedCovenant.name())));
+		tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Devoted Amount: " + deepenAmount));
+
 	}
 
 	@Override

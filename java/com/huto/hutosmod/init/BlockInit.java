@@ -22,6 +22,7 @@ import com.huto.hutosmod.objects.blocks.BlockSlimeRepelent;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
 import com.huto.hutosmod.objects.blocks.BlockTeleporter;
 import com.huto.hutosmod.objects.blocks.BlockThermalInfluxer;
+import com.huto.hutosmod.objects.blocks.BlockUntoldEasel;
 import com.huto.hutosmod.objects.blocks.BlockVibeAbsorber;
 import com.huto.hutosmod.objects.blocks.BlockVibeAccel;
 import com.huto.hutosmod.objects.blocks.BlockVibeFuser;
@@ -147,9 +148,10 @@ public class BlockInit {
 	public static final RegistryObject<Block> hastur_stone = BLOCKS.register("hastur_stone",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> hastur_stone_smooth = BLOCKS.register("hastur_stone_smooth",
-			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
-					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> untold_easel = BLOCKS.register("untold_easel",
+			() -> new BlockUntoldEasel(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15f)
+					.harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOD).notSolid()));
+
 	// Seraph
 	public static final RegistryObject<Block> gilded_wool = BLOCKS.register("gilded_wool",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
@@ -292,7 +294,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.machina_imperfecta.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.machine_glass.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
-
+			RenderTypeLookup.setRenderLayer(BlockInit.untold_easel.get(), RenderType.getCutoutMipped());
 		}
 	}
 

@@ -3,10 +3,18 @@ package com.huto.hutosmod.font;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.loading.StringUtils;
 
 @OnlyIn(Dist.CLIENT)
 public class ModTextFormatting {
 
+	/***
+	 * 
+	 * @param parString
+	 * @param parShineLocation
+	 * @param parReturnToBlack
+	 * @return
+	 */
 	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {
 		int stringLength = parString.length();
 		if (stringLength < 1) {
@@ -44,7 +52,7 @@ public class ModTextFormatting {
 				outputString = outputString + TextFormatting.OBFUSCATED + parString.substring(i, i + 1);
 			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 1) {
 				outputString = outputString + TextFormatting.RED + parString.substring(i, i + 1);
-			} else if ((i + parShineLocation + System.nanoTime()/ 20) % 88 == 87) {
+			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 87) {
 				outputString = outputString + TextFormatting.OBFUSCATED + parString.substring(i, i + 1);
 			} else {
 				outputString = outputString + TextFormatting.BLACK + parString.substring(i, i + 1);
@@ -79,6 +87,12 @@ public class ModTextFormatting {
 		return outputString + TextFormatting.WHITE;
 	}
 
+	/***
+	 * 
+	 * @param input a string to be formated
+	 * @return a string formated red or blue depending of the resonant type >0 =
+	 *         blue <0 = red
+	 */
 	@OnlyIn(Dist.CLIENT)
 	public static String stringToResonant(String parString) {
 
@@ -110,6 +124,28 @@ public class ModTextFormatting {
 			}
 		}
 		return outputString;
+	}
+
+	/***
+	 * 
+	 * @param input a string to be formated
+	 * @return a string formated as such hello world = Hello world || teSt = Test
+	 */
+
+	public static String toProperCase(String input) {
+		String newString = "";
+		for (int i = 0; i < input.length(); i++) {
+			if (i == 0) {
+				String temp = StringUtils.toUpperCase(String.valueOf(input.charAt(i)));
+				newString = newString + temp;
+			} else {
+				String temp = StringUtils.toLowerCase(String.valueOf(input.charAt(i)));
+				newString = newString + temp;
+
+			}
+		}
+
+		return newString;
 	}
 
 }

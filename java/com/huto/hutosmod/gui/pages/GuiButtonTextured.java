@@ -23,6 +23,21 @@ public class GuiButtonTextured extends Button {
 	public static ITextComponent text;
 	public Button.IPressable action;
 
+	
+	/***
+	 * 
+	 * @param texIn Texture Location
+	 * @param idIn	Button Id
+	 * @param posXIn Screen X
+	 * @param posYIn Screen Y
+	 * @param buttonWidthIn Button Size Width
+	 * @param buttonHeightIn Button Size Height
+	 * @param uIn Texture X Loc
+	 * @param vIn Texture Y Loc
+	 * @param tooltip Hover Tooltip
+	 * @param actionIn On Pressed Action
+	 */
+	
 	public GuiButtonTextured(ResourceLocation texIn, int idIn, int posXIn, int posYIn, int buttonWidthIn,
 			int buttonHeightIn, int uIn, int vIn, Button.ITooltip tooltip, Button.IPressable actionIn) {
 		super(posXIn, posYIn, buttonHeightIn, buttonWidthIn, text, actionIn, tooltip);
@@ -72,22 +87,6 @@ public class GuiButtonTextured extends Button {
 				v = newV;
 				GuiUtil.drawTexturedModalRect(posX, posY, u, adjV, width, height);
 			} else if (state == true) {
-				v = newV;
-				GuiUtil.drawTexturedModalRect(posX, posY, u, adjV, width, height);
-			} else {
-				this.isHovered = false;
-				newV = v;
-				GuiUtil.drawTexturedModalRect(posX, posY, u, v, width, height);
-			}
-		}
-
-	}
-
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float particks) {
-		if (visible) {
-			mc.getTextureManager().bindTexture(texture);
-			if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || state) {
-				this.isHovered = true;
 				v = newV;
 				GuiUtil.drawTexturedModalRect(posX, posY, u, adjV, width, height);
 			} else {

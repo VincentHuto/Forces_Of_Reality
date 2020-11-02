@@ -1,16 +1,19 @@
 package com.huto.hutosmod.objects.items.runes;
 
-import com.huto.hutosmod.capabilities.mindrunes.RuneType;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
+import com.huto.hutosmod.capabilities.mindrunes.RuneType;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 
 public class ItemContractRune extends ItemRune implements IRune {
 
+
+	
 	public ItemContractRune(Properties properties, EnumCovenants covenIn,int deepenAmount) {
 		super(properties, covenIn, deepenAmount);
+
 
 	}
 
@@ -29,4 +32,6 @@ public class ItemContractRune extends ItemRune implements IRune {
 	public RuneType getRuneType() {
 		return RuneType.CONTRACT;
 	}
+
+	
 }

@@ -49,6 +49,7 @@ import com.huto.hutosmod.render.tile.RenderRuneModStation;
 import com.huto.hutosmod.render.tile.RenderSacrificialPyre;
 import com.huto.hutosmod.render.tile.RenderStorageDrum;
 import com.huto.hutosmod.render.tile.RenderThermalInfluxer;
+import com.huto.hutosmod.render.tile.RenderUntoldEasel;
 import com.huto.hutosmod.render.tile.RenderVibeFuser;
 import com.huto.hutosmod.render.tile.RenderVirtuousEnchanter;
 import com.huto.hutosmod.render.tile.RenderWandMaker;
@@ -100,6 +101,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendent_altar.get(), RenderAscendentAltar::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.occular_heap.get(), RenderOccularHeap::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.untold_easel.get(), RenderUntoldEasel::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);

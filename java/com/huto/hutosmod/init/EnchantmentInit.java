@@ -8,6 +8,7 @@ import com.huto.hutosmod.enchantments.EnchantmentBowBladeInfinity;
 import com.huto.hutosmod.enchantments.EnchantmentBowBladeKnockBack;
 import com.huto.hutosmod.enchantments.EnchantmentBowBladePower;
 import com.huto.hutosmod.enchantments.EnchantmentBowBladePunch;
+import com.huto.hutosmod.enchantments.EnchantmentInfluenceSuppression;
 import com.huto.hutosmod.objects.items.ModItemPredicates;
 
 import net.minecraft.enchantment.Enchantment;
@@ -49,4 +50,8 @@ public class EnchantmentInit {
 			() -> new EnchantmentBowBladePunch(Enchantment.Rarity.COMMON, EquipmentSlotType.MAINHAND));
 	public static final RegistryObject<Enchantment> bow_blade_infinity = ENCHANTS.register("bow_blade_infinity",
 			() -> new EnchantmentBowBladeInfinity(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.MAINHAND));
+
+	public static final RegistryObject<Enchantment> influence_suppression = ENCHANTS.register("influence_suppression",
+			() -> new EnchantmentInfluenceSuppression(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.HEAD));
+	
 }

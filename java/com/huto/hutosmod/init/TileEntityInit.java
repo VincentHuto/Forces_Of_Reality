@@ -18,6 +18,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.TileEntityTeleporter;
 import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
+import com.huto.hutosmod.objects.tileenties.TileEntityUntoldEasel;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeGatherer;
 import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
@@ -103,11 +104,10 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityAscendentAltar>> ascendent_altar = TILES
 			.register("ascendent_altar", () -> TileEntityType.Builder
 					.create(TileEntityAscendentAltar::new, BlockInit.ascendent_altar.get()).build(null));
-	
-	public static final RegistryObject<TileEntityType<TileEntityOccularHeap>> occular_heap = TILES
-			.register("occular_heap", () -> TileEntityType.Builder
-					.create(TileEntityOccularHeap::new, BlockInit.occular_heap.get()).build(null));
-	
+
+	public static final RegistryObject<TileEntityType<TileEntityOccularHeap>> occular_heap = TILES.register(
+			"occular_heap",
+			() -> TileEntityType.Builder.create(TileEntityOccularHeap::new, BlockInit.occular_heap.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntityTeleporter>> teleporter = TILES.register("teleporter",
 			() -> TileEntityType.Builder.create(TileEntityTeleporter::new, BlockInit.teleporter.get()).build(null));
@@ -123,5 +123,9 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityMachinaImperfecta>> machina_imperfecta = TILES
 			.register("machina_imperfecta", () -> TileEntityType.Builder
 					.create(TileEntityMachinaImperfecta::new, BlockInit.machina_imperfecta.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<TileEntityUntoldEasel>> untold_easel = TILES.register(
+			"untold_easel",
+			() -> TileEntityType.Builder.create(TileEntityUntoldEasel::new, BlockInit.untold_easel.get()).build(null));
 
 }
