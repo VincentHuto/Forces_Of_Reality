@@ -120,7 +120,7 @@ public class GuiTomeTitle extends Screen {
 //			mc.getRenderManager().renderEntityStatic(CowEntity, 1, 0, 0, 0, partialTicks, matrixStack,null, 2);
 
 			IRenderTypeBuffer.Impl bufferIn = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
-			
+
 			mc.getRenderManager().renderEntityStatic(
 					new EntityColin(EntityInit.colin.get(), ClientEventSubscriber.getClientPlayer().getEntityWorld()),
 					1, 0, 0, 33, 0, matrixStack, bufferIn, 0);
@@ -136,42 +136,36 @@ public class GuiTomeTitle extends Screen {
 		}
 		GlStateManager.popMatrix();
 
-		int sideLoc = left + guiWidth;
-		int verticalLoc = top + guiHeight;
 		if (buttonclose.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Close"), sideLoc - (guiWidth - 10), verticalLoc - 50);
+			renderTooltip(matrixStack, new StringTextComponent("Close"), mouseX, mouseY);
 		}
 		if (whiteButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Intro"), sideLoc - (guiWidth - 174), verticalLoc - 226);
+			renderTooltip(matrixStack, new StringTextComponent("Intro"), mouseX, mouseY);
 		}
 		if (yellowButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("World Gen"), sideLoc - (guiWidth - 175),
-					verticalLoc - 181);
+			renderTooltip(matrixStack, new StringTextComponent("World Gen"), mouseX, mouseY);
 		}
 		if (blueButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Armor"), sideLoc - (guiWidth - 175), verticalLoc - 153);
+			renderTooltip(matrixStack, new StringTextComponent("Armor"), mouseX, mouseY);
 		}
 		if (greenButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Wands"), sideLoc - (guiWidth - 177), verticalLoc - 121);
+			renderTooltip(matrixStack, new StringTextComponent("Wands"), mouseX, mouseY);
 		}
 		if (redButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Runes"), sideLoc - (guiWidth - 180), verticalLoc - 91);
+			renderTooltip(matrixStack, new StringTextComponent("Runes"), mouseX, mouseY);
 		}
 		if (orangeButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Machines"), sideLoc - (guiWidth - 177),
-					verticalLoc - 49);
+			renderTooltip(matrixStack, new StringTextComponent("Machines"), mouseX, mouseY);
 		}
 		if (darkBlueButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Generation"), sideLoc - (guiWidth - 177),
-					verticalLoc - 69);
+			renderTooltip(matrixStack, new StringTextComponent("Generation"), mouseX, mouseY);
 		}
 		if (cyanButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Karma"), sideLoc - (guiWidth - 177), verticalLoc - 200);
+			renderTooltip(matrixStack, new StringTextComponent("Karma"), mouseX, mouseY);
 		}
 		if (isElder) {
 			if (eyeButton.isHovered()) {
-				renderTooltip(matrixStack, new StringTextComponent("Elder"), sideLoc - (guiWidth - 155),
-						verticalLoc - 30);
+				renderTooltip(matrixStack, new StringTextComponent("Elder"), mouseX, mouseY);
 			}
 		}
 	}

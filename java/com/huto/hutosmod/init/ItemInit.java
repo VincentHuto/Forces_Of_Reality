@@ -162,6 +162,16 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> destruction_orb = ITEMS.register("destruction_orb",
 			() -> new ItemDestructOrb(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+
+	// Karma
+	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> purging_stone = ITEMS.register("purging_stone",
+			() -> new ItemPurgingStone(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> grand_purging_stone = ITEMS.register("grand_purging_stone",
+			() -> new ItemGrandPurgingStone(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> destruction_orb_contained = ITEMS.register("destruction_orb_contained",
 			() -> new ItemDestructOrbContained(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
@@ -181,7 +191,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> gem_opal = ITEMS.register("gem_opal",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
 	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> phantasmal_pane = ITEMS.register("phantasmal_pane",
@@ -193,10 +202,6 @@ public class ItemInit {
 	public static final RegistryObject<Item> enhancedmagatama = ITEMS.register("enhancedmagatama",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> auric_ingot = ITEMS.register("auric_ingot",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> writhing_thread = ITEMS.register("writhing_thread",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
@@ -246,7 +251,9 @@ public class ItemInit {
 					3));
 	public static final RegistryObject<Item> vitreous_humor = ITEMS.register("vitreous_humor",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	
+	public static final RegistryObject<Item> writhing_thread = ITEMS.register("writhing_thread",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
 	// Beast
 	public static final RegistryObject<Item> breath_of_the_beast = ITEMS.register("breath_of_the_beast",
 			() -> new ItemBeastBreath(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
@@ -266,15 +273,10 @@ public class ItemInit {
 	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
 			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE,
 					3));
-	// Karma
-	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
+	public static final RegistryObject<Item> auric_ingot = ITEMS.register("auric_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
+	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> purging_stone = ITEMS.register("purging_stone",
-			() -> new ItemPurgingStone(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> grand_purging_stone = ITEMS.register("grand_purging_stone",
-			() -> new ItemGrandPurgingStone(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Food
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
@@ -344,12 +346,13 @@ public class ItemInit {
 	// Tools
 	public static final RegistryObject<Item> null_bow_blade = ITEMS.register("null_bow_blade", () -> new ItemBowBlade(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));
-
 	public static final RegistryObject<Item> mystic_bow_blade = ITEMS
 			.register("mystic_bow_blade",
 					() -> new ItemBowBlade(
 							new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(512), 1,
 							6, 1));
+	public static final RegistryObject<Item> auric_bow_blade = ITEMS.register("auric_bow_blade", () -> new ItemBowBlade(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(2048), 3, 10, 1));
 
 	public static final RegistryObject<Item> null_trick_axe = ITEMS.register("null_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
@@ -357,6 +360,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> mystic_trick_axe = ITEMS.register("mystic_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumModToolTiers.MYSTIC));
+	public static final RegistryObject<Item> auric_trick_axe = ITEMS.register("auric_trick_axe",
+			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					EnumModToolTiers.AURIC));
 
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
@@ -428,7 +434,7 @@ public class ItemInit {
 
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> rune_pattern = ITEMS.register("rune_pattern",
@@ -449,7 +455,7 @@ public class ItemInit {
 					"runepattern.rune_pattern_beast_c.text"));
 	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 5));
+					EnumCovenants.SELF, 5));
 	public static final RegistryObject<Item> rune_pattern_corruption_c = ITEMS.register("rune_pattern_corruption_c",
 			() -> new ItemRunePatternCorruptionContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
@@ -477,7 +483,7 @@ public class ItemInit {
 					"runepattern.rune_pattern_radiance_c.text"));
 	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 5));
+					EnumCovenants.SELF, 5));
 	public static final RegistryObject<Item> rune_pattern_hunter_c = ITEMS.register("rune_pattern_hunter_c",
 			() -> new ItemRunePatternHunterContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
@@ -486,14 +492,14 @@ public class ItemInit {
 	// Base Runes
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_metamorphosis = ITEMS.register("rune_pattern_metamorphosis",
 			() -> new ItemRunePatternMetamorphosis(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_metamorphosis.text"));
 	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_metamorphosis_cw = ITEMS.register(
 			"rune_pattern_metamorphosis_cw",
 			() -> new ItemRunePatternMetamorphosisCW(
@@ -501,7 +507,7 @@ public class ItemInit {
 					"runepattern.rune_pattern_metamorphosis_cw.text"));
 	public static final RegistryObject<Item> rune_lake = ITEMS.register("rune_lake",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_lake = ITEMS.register("rune_pattern_lake",
 			() -> new ItemRunePatternLake(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_lake.text"));
@@ -513,25 +519,25 @@ public class ItemInit {
 					"runepattern.rune_pattern_clawmark.text"));
 	public static final RegistryObject<Item> rune_rapture = ITEMS.register("rune_rapture",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_rapture = ITEMS.register("rune_pattern_rapture",
 			() -> new ItemRunePatternRapture(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_rapture.text"));
 	public static final RegistryObject<Item> rune_oedon = ITEMS.register("rune_oedon",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_oedon = ITEMS.register("rune_pattern_oedon",
 			() -> new ItemRunePatternOedon(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_oedon.text"));
 	public static final RegistryObject<Item> rune_eye = ITEMS.register("rune_eye",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_eye = ITEMS.register("rune_pattern_eye",
 			() -> new ItemRunePatternEye(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_eye.text"));
 	public static final RegistryObject<Item> rune_moon = ITEMS.register("rune_moon",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_moon = ITEMS.register("rune_pattern_moon",
 			() -> new ItemRunePatternMoon(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_moon.text"));
@@ -543,13 +549,13 @@ public class ItemInit {
 					"runepattern.rune_pattern_beast.text"));
 	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_heir = ITEMS.register("rune_pattern_heir",
 			() -> new ItemRunePatternHeir(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_pattern_heir.text"));
 	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
 			() -> new ItemGuidanceRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.NONE, 1));
+					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_guidance = ITEMS.register("rune_pattern_guidance",
 			() -> new ItemRunePatternGuidance(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"runepattern.rune_guidance.text"));
@@ -754,6 +760,36 @@ public class ItemInit {
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
+		// Auric
+		ItemModelsProperties.registerProperty(auric_bow_blade.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(auric_bow_blade.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(auric_bow_blade.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
+
 		// Trick Axe
 		// Null
 		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
@@ -810,6 +846,36 @@ public class ItemInit {
 					}
 				});
 		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
+
+		// Mystic
+		ItemModelsProperties.registerProperty(auric_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(auric_trick_axe.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(auric_trick_axe.get(), new ResourceLocation("pulling"),
 				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
 					return p_239428_2_ != null && p_239428_2_.isHandActive()
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;

@@ -91,6 +91,7 @@ public class GuiTomePage extends Screen {
 
 			// drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
 			// Split String(text,x,y,wrapwidth,color)
+			//Max Character Length ~663
 			font.func_238418_a_(new StringTextComponent(I18n.format(text)), 0, 0, 175, 0);
 		}
 		GlStateManager.popMatrix();
@@ -130,12 +131,12 @@ public class GuiTomePage extends Screen {
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));
 		if (buttonTitle.isHovered()) {
-			func_243308_b(matrixStack, titlePage, left - guiWidth + 149, top + guiHeight - 209);
+			func_243308_b(matrixStack, titlePage, mouseX, mouseY);
 		}
 		List<ITextComponent> ClosePage = new ArrayList<ITextComponent>();
 		ClosePage.add(new StringTextComponent(I18n.format("Close Book")));
 		if (buttonCloseTab.isHovered()) {
-			func_243308_b(matrixStack, ClosePage, left - guiWidth + 149, top + guiHeight - 193);
+			func_243308_b(matrixStack, ClosePage, mouseX, mouseY);
 		}
 	}
 

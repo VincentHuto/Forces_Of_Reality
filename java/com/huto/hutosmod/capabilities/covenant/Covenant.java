@@ -43,11 +43,11 @@ public class Covenant implements ICovenant {
 		case ELDRITCH:
 			return EnumCovenants.ASCENDENT;
 		case HASTUR:
-			return EnumCovenants.ELDRITCH;
+			return EnumCovenants.SELF;
 		case MACHINE:
 			return EnumCovenants.BEAST;
-		case NONE:
-			return null;
+		case SELF:
+			return EnumCovenants.HASTUR;
 		default:
 			return null;
 		}

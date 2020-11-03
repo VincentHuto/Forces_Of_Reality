@@ -85,7 +85,7 @@ public class TileModDevotion extends TileEntity {
 	}
 
 	public EnumCovenants getCovenType() {
-		return EnumCovenants.NONE;
+		return EnumCovenants.SELF;
 
 	}
 

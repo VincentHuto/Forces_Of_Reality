@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;
@@ -40,10 +41,10 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 	GuiButtonTextured[] buttonArray = new GuiButtonTextured[chapterPages.size()];
 	public static List<GuiButtonTextured> buttonList = new ArrayList<GuiButtonTextured>();
 	ItemStack icon;
-	EnumCovenTomeCatagories catagory;
+	EnumCovenants catagory;
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenPageTOC(EnumCovenTomeCatagories catagoryIn, ItemStack iconIn) {
+	public GuiCovenPageTOC(EnumCovenants catagoryIn, ItemStack iconIn) {
 		super(0, catagoryIn, "Table of Contents", "", iconIn, "");
 		this.icon = iconIn;
 		this.catagory = catagoryIn;
@@ -90,7 +91,7 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 				GlStateManager.translatef(0, 0, 10);
 				drawString(matrixStack, font, "Pg." + i, (buttonList.get(i).posX + 2), buttonList.get(i).posY + 2,
 						8060954);
-				drawString(matrixStack, font, getMatchingChapter().get(i).title, (int) (buttonList.get(i).posX + 25),
+				drawString(matrixStack, font, getMatchingChapter().get(i).title, (int) (buttonList.get(i).posX + 30),
 						buttonList.get(i).posY + 2, 8060954);
 
 			}
@@ -121,12 +122,12 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));
 		if (buttonTitle.isHovered()) {
-			func_243308_b(matrixStack, titlePage, left - guiWidth + 149, top + guiHeight - 209);
+			func_243308_b(matrixStack, titlePage, mouseX, mouseY);
 		}
 		List<ITextComponent> ClosePage = new ArrayList<ITextComponent>();
 		ClosePage.add(new StringTextComponent(I18n.format("Close Book")));
 		if (buttonCloseTab.isHovered()) {
-			func_243308_b(matrixStack, ClosePage, left - guiWidth + 149, top + guiHeight - 193);
+			func_243308_b(matrixStack, ClosePage, mouseX, mouseY);
 		}
 	}
 
@@ -239,6 +240,9 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		case MACHINE:
 			chapterPages = CovenPageLib.getMachinePageList();
 			break;
+		case SELF:
+			chapterPages = CovenPageLib.getSelfPageList();
+			break;
 		default:
 			break;
 
@@ -257,6 +261,8 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 			return CovenPageLib.getBeastPageList();
 		case MACHINE:
 			return CovenPageLib.getMachinePageList();
+		case SELF:
+			return CovenPageLib.getSelfPageList();
 
 		default:
 			break;

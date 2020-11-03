@@ -24,6 +24,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 @OnlyIn(Dist.CLIENT)
 public class GuiTomePageTOC extends GuiTomePage {
 	final ResourceLocation texture = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/book.png");
@@ -90,7 +91,7 @@ public class GuiTomePageTOC extends GuiTomePage {
 				GlStateManager.translatef(0, 0, 10);
 				drawString(matrixStack, font, "Pg." + i, (buttonList.get(i).posX + 2), buttonList.get(i).posY + 2,
 						8060954);
-				drawString(matrixStack, font, getMatchingChapter().get(i).title, (int) (buttonList.get(i).posX + 25),
+				drawString(matrixStack, font, getMatchingChapter().get(i).title, (int) (buttonList.get(i).posX + 30),
 						buttonList.get(i).posY + 2, 8060954);
 
 			}
@@ -121,12 +122,12 @@ public class GuiTomePageTOC extends GuiTomePage {
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));
 		if (buttonTitle.isHovered()) {
-			func_243308_b(matrixStack, titlePage, left - guiWidth + 149, top + guiHeight - 209);
+			func_243308_b(matrixStack, titlePage, mouseX, mouseY);
 		}
 		List<ITextComponent> ClosePage = new ArrayList<ITextComponent>();
 		ClosePage.add(new StringTextComponent(I18n.format("Close Book")));
 		if (buttonCloseTab.isHovered()) {
-			func_243308_b(matrixStack, ClosePage, left - guiWidth + 149, top + guiHeight - 193);
+			func_243308_b(matrixStack, ClosePage, mouseX, mouseY);
 		}
 	}
 

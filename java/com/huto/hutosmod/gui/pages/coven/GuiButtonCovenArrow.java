@@ -14,10 +14,11 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 @OnlyIn(Dist.CLIENT)
 public class GuiButtonCovenArrow extends Button {
 
-	final ResourceLocation texture = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/book.png");
+	final ResourceLocation texture = new ResourceLocation(HutosMod.MOD_ID, "textures/gui/coven_book.png");
 
 	int buttonWidth = 16;
 	int buttonHeight = 14;
@@ -32,7 +33,7 @@ public class GuiButtonCovenArrow extends Button {
 		this.buttonHeight = heightIn;
 		this.id = idIn;
 		this.u = uIn;
-		this.v =vIn;
+		this.v = vIn;
 
 	}
 

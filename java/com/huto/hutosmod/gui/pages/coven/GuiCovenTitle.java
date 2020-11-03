@@ -36,16 +36,18 @@ public class GuiCovenTitle extends Screen {
 	int left, top;
 	final int BUTTONCLOSE = 0;
 	final int BUTTONHASTUR = 1;
-	final int BUTTONEldritch = 2;
+	final int BUTTONELDRITCH = 2;
 	final int BUTTONASCEND = 3;
 	final int BUTTONBEAST = 4;
 	final int BUTTONMACHINE = 5;
+	final int BUTTONSELF = 6;
 	int BUTTONEYE = 8;
 	static String title = " Table of Contents";
 	static StringTextComponent titleComponent = new StringTextComponent(title);
 	String subtitle = " Covenenants";
 	ItemStack icon = new ItemStack(Items.PAPER);
-	GuiButtonTextured buttonclose, hasturButton, EldritchButton, ascendButton, beastButton, machineButton, eyeButton;
+	GuiButtonTextured buttonclose, hasturButton, eldritchButton, ascendButton, beastButton, machineButton, selfButton,
+			eyeButton;
 	boolean isElder;
 
 	public GuiCovenTitle(boolean isElderIn) {
@@ -125,29 +127,26 @@ public class GuiCovenTitle extends Screen {
 		}
 		GlStateManager.popMatrix();
 
-		int sideLoc = left + guiWidth;
-		int verticalLoc = top + guiHeight;
 		if (buttonclose.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Close"), sideLoc - (guiWidth - 10), verticalLoc - 50);
+			renderTooltip(matrixStack, new StringTextComponent("Close"), mouseX, mouseY);
 		}
 		if (hasturButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Hastur"), sideLoc - (guiWidth - 174),
-					verticalLoc - 226);
+			renderTooltip(matrixStack, new StringTextComponent("Hastur"), mouseX, mouseY);
 		}
-		if (EldritchButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Eldrtich"), sideLoc - (guiWidth - 175),
-					verticalLoc - 181);
+		if (eldritchButton.isHovered()) {
+			renderTooltip(matrixStack, new StringTextComponent("Eldrtich"), mouseX, mouseY);
 		}
 		if (ascendButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Ascendents"), sideLoc - (guiWidth - 175),
-					verticalLoc - 153);
+			renderTooltip(matrixStack, new StringTextComponent("Ascendents"), mouseX, mouseY);
 		}
 		if (beastButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Beast"), sideLoc - (guiWidth - 177), verticalLoc - 121);
+			renderTooltip(matrixStack, new StringTextComponent("Beast"), mouseX, mouseY);
 		}
 		if (machineButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Machina"), sideLoc - (guiWidth - 177),
-					verticalLoc - 100);
+			renderTooltip(matrixStack, new StringTextComponent("Machina"), mouseX, mouseY);
+		}
+		if (selfButton.isHovered()) {
+			renderTooltip(matrixStack, new StringTextComponent("Self"), mouseX, mouseY);
 		}
 
 	}
@@ -163,29 +162,38 @@ public class GuiCovenTitle extends Screen {
 				verticalLoc - 50, 32, 32, 209, 32, null, (press) -> {
 					closeScreen();
 				}));
-		this.addButton(hasturButton = new GuiButtonTextured(texture, BUTTONHASTUR, sideLoc - (guiWidth - 174),
-				verticalLoc - 226, 23, 16, 186, 0, null, (press) -> {
-					mc.displayGuiScreen(CovenPageLib.HasturPageList.get(0));
+		
+		this.addButton(selfButton = new GuiButtonTextured(texture, BUTTONSELF,sideLoc - (guiWidth - 174),
+				verticalLoc - 226, 24, 16, 186, 160, null, (press) -> {
+					mc.displayGuiScreen(CovenPageLib.SelfPageList.get(0));
 				}));
-		this.addButton(EldritchButton = new GuiButtonTextured(texture, BUTTONEldritch, sideLoc - (guiWidth - 175),
-				verticalLoc - 181, 23, 16, 186, 32, null, (press) -> {
-					mc.displayGuiScreen(CovenPageLib.EldritchPageList.get(0));
+
+		this.addButton(hasturButton = new GuiButtonTextured(texture, BUTTONHASTUR,  sideLoc - (guiWidth - 175),
+				verticalLoc - 181, 23, 16, 186, 0, null, (press) -> {
+					mc.displayGuiScreen(CovenPageLib.HasturPageList.get(0));
 				}));
 		this.addButton(ascendButton = new GuiButtonTextured(texture, BUTTONASCEND, sideLoc - (guiWidth - 175),
 				verticalLoc - 153, 23, 16, 186, 64, null, (press) -> {
 					mc.displayGuiScreen(CovenPageLib.AscendentPageList.get(0));
 				}));
-
-		this.addButton(beastButton = new GuiButtonTextured(texture, BUTTONBEAST, sideLoc - (guiWidth - 177),
-				verticalLoc - 121, 23, 16, 186, 96, null, (press) -> {
-					mc.displayGuiScreen(CovenPageLib.BeastPageList.get(0));
+		
+		this.addButton(eldritchButton = new GuiButtonTextured(texture, BUTTONELDRITCH,  sideLoc - (guiWidth - 177),
+				verticalLoc - 121, 23, 16, 186, 32, null, (press) -> {
+					mc.displayGuiScreen(CovenPageLib.EldritchPageList.get(0));
 				}));
-
+	
 		this.addButton(machineButton = new GuiButtonTextured(texture, BUTTONMACHINE, sideLoc - (guiWidth - 177),
 				verticalLoc - 100, 24, 16, 186, 128, null, (press) -> {
 					mc.displayGuiScreen(CovenPageLib.MachinePageList.get(0));
 				}));
 
+		this.addButton(beastButton = new GuiButtonTextured(texture, BUTTONBEAST, sideLoc - (guiWidth - 176),
+				verticalLoc - 73, 23, 16, 186, 96, null, (press) -> {
+					mc.displayGuiScreen(CovenPageLib.BeastPageList.get(0));
+				}));
+
+
+	
 	}
 
 	@Override

@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"2": "hutosmod:blocks/runed_obsidian",
-		"3": "hutosmod:blocks/planks_big_oak",
+		"3": "hutosmod:blocks/dark_oak_plank",
 		"4": "hutosmod:blocks/enchanted_stone_smooth",
 		"5": "hutosmod:blocks/netherblock_side",
 		"6": "hutosmod:blocks/netherblock_bottom",

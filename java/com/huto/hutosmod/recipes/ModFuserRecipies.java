@@ -18,7 +18,7 @@ public class ModFuserRecipies {
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
 			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade,
-			recipeIdentifier;
+			recipeAuricBowBlade, recipeNullTrickAxe, recipeMysticTrickAxe, recipeAuricTrickAxe, recipeIdentifier;
 
 	public static void init() {
 
@@ -30,6 +30,13 @@ public class ModFuserRecipies {
 				Ingredient.fromItems(ItemInit.unsettling_fabric.get()),
 				Ingredient.fromItems(ItemInit.suspicious_eye.get()));
 
+		recipeAuricBowBlade = registerRecipe(new ResourceLocation("auric_bow_blade"),
+				new ItemStack(ItemInit.auric_bow_blade.get(), 1), 200, Ingredient.fromItems(ItemInit.auric_ingot.get()),
+				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(Items.BOW),
+				Ingredient.fromItems(ItemInit.writhing_thread.get()),
+				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.machina_soul.get()));
+
 		recipeNullBowBlade = registerRecipe(new ResourceLocation("null_bow_blade"),
 				new ItemStack(ItemInit.null_bow_blade.get(), 1), 100, Ingredient.fromItems(ItemInit.null_sword.get()),
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
@@ -38,6 +45,23 @@ public class ModFuserRecipies {
 		recipeMysticBowBlade = registerRecipe(new ResourceLocation("mystic_bow_blade"),
 				new ItemStack(ItemInit.mystic_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
+				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
+
+		recipeAuricTrickAxe = registerRecipe(new ResourceLocation("auric_trick_axe"),
+				new ItemStack(ItemInit.auric_trick_axe.get(), 1), 200, Ingredient.fromItems(ItemInit.auric_ingot.get()),
+				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(Items.ENDER_EYE),
+				Ingredient.fromItems(ItemInit.writhing_thread.get()),
+				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.machina_soul.get()));
+
+		recipeNullTrickAxe = registerRecipe(new ResourceLocation("null_trick_axe"),
+				new ItemStack(ItemInit.null_trick_axe.get(), 1), 100, Ingredient.fromItems(ItemInit.null_axe.get()),
+				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
+				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
+
+		recipeMysticTrickAxe = registerRecipe(new ResourceLocation("mystic_trick_axe"),
+				new ItemStack(ItemInit.mystic_trick_axe.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_AXE),
+				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
 		recipeGrandPurgingStone = registerRecipe(new ResourceLocation("grand_purging_stone"),

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;
@@ -43,11 +44,11 @@ public class GuiCovenPage extends Screen {
 	GuiButtonTextured buttonTitle;
 	GuiButtonTextured buttonCloseTab;
 	TextFieldWidget textBox;
-	EnumCovenTomeCatagories catagory;
+	EnumCovenants catagory;
 	Minecraft mc = Minecraft.getInstance();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenPage(int pageNumIn, EnumCovenTomeCatagories catagoryIn, String titleIn, String subtitleIn,
+	public GuiCovenPage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn,
 			ItemStack iconIn, String textIn) {
 		super(titleComponent);
 		this.title = titleIn;
@@ -91,6 +92,7 @@ public class GuiCovenPage extends Screen {
 
 			// drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
 			// Split String(text,x,y,wrapwidth,color)
+			//Max Character Length ~663
 			font.func_238418_a_(new StringTextComponent(I18n.format(text)), 0, 0, 175, 0);
 		}
 		GlStateManager.popMatrix();
@@ -230,6 +232,8 @@ public class GuiCovenPage extends Screen {
 			return CovenPageLib.getBeastPageList();
 		case MACHINE:
 			return CovenPageLib.getMachinePageList();
+		case SELF:
+			return CovenPageLib.getSelfPageList();
 		default:
 			break;
 		}

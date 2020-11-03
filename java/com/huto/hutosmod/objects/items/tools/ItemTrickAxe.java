@@ -145,12 +145,14 @@ public class ItemTrickAxe extends AxeItem {
 								1.0F);
 						if (stack.getItem() == ItemInit.null_trick_axe.get()) {
 							c.setFire(true);
+						} else if (stack.getItem() == ItemInit.auric_trick_axe.get()) {
+							c.setAuric(true);
+						} else {
 						}
 						worldIn.addEntity(c);
 						worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(),
 								SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 0.5F,
 								0.4F / (random.nextFloat() * 0.4F + 0.8F));
-
 						stack.shrink(1);
 					}
 				}

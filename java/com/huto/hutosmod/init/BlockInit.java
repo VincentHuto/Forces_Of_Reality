@@ -148,6 +148,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> hastur_stone = BLOCKS.register("hastur_stone",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	
+	public static final RegistryObject<Block> hastur_stone_smooth = BLOCKS.register("hastur_stone_smooth",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	
 	public static final RegistryObject<Block> untold_easel = BLOCKS.register("untold_easel",
 			() -> new BlockUntoldEasel(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15f)
 					.harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOD).notSolid()));

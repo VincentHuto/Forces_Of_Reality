@@ -14,6 +14,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 @OnlyIn(Dist.CLIENT)
 public class GuiButtonBookArrow extends Button {
 
@@ -32,7 +33,7 @@ public class GuiButtonBookArrow extends Button {
 		this.buttonHeight = heightIn;
 		this.id = idIn;
 		this.u = uIn;
-		this.v =vIn;
+		this.v = vIn;
 
 	}
 

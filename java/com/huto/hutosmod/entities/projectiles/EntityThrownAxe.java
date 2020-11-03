@@ -45,6 +45,8 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			DataSerializers.VARINT);
 	private static final DataParameter<Boolean> FLARE = EntityDataManager.createKey(EntityThrownAxe.class,
 			DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> AURIC = EntityDataManager.createKey(EntityThrownAxe.class,
+			DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> RETURN_TO = EntityDataManager.createKey(EntityThrownAxe.class,
 			DataSerializers.VARINT);
 	private static final int MAX_BOUNCES = 16;
@@ -64,6 +66,7 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 	protected void registerData() {
 		dataManager.register(BOUNCES, 0);
 		dataManager.register(FLARE, false);
+		dataManager.register(AURIC, false);
 		dataManager.register(RETURN_TO, -1);
 	}
 
@@ -110,7 +113,7 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 						getPosY() + r * (Math.random() - 0.5), getPosZ() + r * (Math.random() - 0.5),
 						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
 			}
-		} else {
+		} else if (world.isRemote && !isFire() && !isAuric()) {
 			double r = 0.1;
 			double m = 0.1;
 			for (int i = 0; i < 3; i++) {
@@ -118,17 +121,27 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 						getPosY() + r * (Math.random() - 0.5), getPosZ() + r * (Math.random() - 0.5),
 						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
 			}
+		}
+		if (world.isRemote && isAuric()) {
+			double r = 0.1;
+			double m = 0.1;
+			for (int i = 0; i < 3; i++) {
+				world.addParticle(ParticleTypes.DRIPPING_HONEY, getPosX() + r * (Math.random() - 0.5),
+						getPosY() + r * (Math.random() - 0.5), getPosZ() + r * (Math.random() - 0.5),
+						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
 
-			// Server state control
-			if (!world.isRemote && (getTimesBounced() >= MAX_BOUNCES || ticksExisted > 30)) {
-				Entity thrower = func_234616_v_();
-				if (thrower == null) {
+			}
+		}
+
+		// Server state control
+		if (!world.isRemote && (getTimesBounced() >= MAX_BOUNCES || ticksExisted > 30)) {
+			Entity thrower = func_234616_v_();
+			if (thrower == null) {
+				dropAndKill();
+			} else {
+				setEntityToReturnTo(thrower.getEntityId());
+				if (getDistanceSq(thrower) < 2) {
 					dropAndKill();
-				} else {
-					setEntityToReturnTo(thrower.getEntityId());
-					if (getDistanceSq(thrower) < 2) {
-						dropAndKill();
-					}
 				}
 			}
 		}
@@ -142,9 +155,18 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 	}
 
 	private ItemStack getItemStack() {
-		return !stack.isEmpty() ? stack.copy()
-				: isFire() ? new ItemStack(ItemInit.null_trick_axe.get())
-						: new ItemStack(ItemInit.mystic_trick_axe.get());
+		if (!stack.isEmpty()) {
+			stack.copy();
+		} else {
+			if (isFire()) {
+				return new ItemStack(ItemInit.null_trick_axe.get());
+			} else if (isAuric()) {
+				return new ItemStack(ItemInit.auric_trick_axe.get());
+			} else {
+				return new ItemStack(ItemInit.mystic_trick_axe.get());
+			}
+		}
+		return stack.copy();
 	}
 
 	@SuppressWarnings("static-access")
@@ -161,14 +183,14 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			if (block instanceof BushBlock || block instanceof LeavesBlock) {
 				block.spawnDrops(block.getDefaultState(), world, this.getPosition());
 				world.setBlockState(rtr.getPos(), Blocks.AIR.getDefaultState(), 2);
-				world.addParticle(ParticleTypes.POOF, rtr.getPos().getX(), rtr.getPos().getY(),
-						rtr.getPos().getZ(), 0, 1, 0);
+				world.addParticle(ParticleTypes.POOF, rtr.getPos().getX(), rtr.getPos().getY(), rtr.getPos().getZ(), 0,
+						1, 0);
 				return;
 			} else if (block.getDefaultState().getMaterial() == Material.WOOD) {
 				block.spawnDrops(block.getDefaultState(), world, this.getPosition());
 				world.setBlockState(rtr.getPos(), Blocks.AIR.getDefaultState(), 2);
-				world.addParticle(ParticleTypes.POOF, rtr.getPos().getX(), rtr.getPos().getY(),
-						rtr.getPos().getZ(), 0, 1, 0);
+				world.addParticle(ParticleTypes.POOF, rtr.getPos().getX(), rtr.getPos().getY(), rtr.getPos().getZ(), 0,
+						1, 0);
 			}
 
 			int bounces = getTimesBounced();
@@ -200,6 +222,10 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 					src = DamageSource.causeMobDamage((LivingEntity) thrower);
 				}
 				rtr.getEntity().attackEntityFrom(src, 12);
+				if (isAuric()) {
+					rtr.getEntity().setFire(5);
+					rtr.getEntity().setGlowing(true);
+				}
 				if (isFire()) {
 					rtr.getEntity().setFire(5);
 				} else if (world.rand.nextInt(3) == 0) {
@@ -235,6 +261,14 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 		dataManager.set(FLARE, fire);
 	}
 
+	public boolean isAuric() {
+		return dataManager.get(AURIC);
+	}
+
+	public void setAuric(boolean auric) {
+		dataManager.set(AURIC, auric);
+	}
+
 	private boolean isReturning() {
 		return getEntityToReturnTo() > -1;
 	}
@@ -254,6 +288,8 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			compound.put("fly_stack", stack.write(new CompoundNBT()));
 		}
 		compound.putBoolean("flare", isFire());
+		compound.putBoolean("auric", isAuric());
+
 	}
 
 	@Override
@@ -263,6 +299,8 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			stack = ItemStack.read(compound.getCompound("fly_stack"));
 		}
 		setFire(compound.getBoolean("flare"));
+		setAuric(compound.getBoolean("auric"));
+
 	}
 
 	@Nonnull

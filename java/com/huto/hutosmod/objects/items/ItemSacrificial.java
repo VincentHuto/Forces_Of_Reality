@@ -36,7 +36,7 @@ public class ItemSacrificial extends Item {
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(new StringTextComponent(TextFormatting.GOLD+"Devoted Coven: " +  ModTextFormatting.toProperCase(coven.name())));
-		tooltip.add(new StringTextComponent(TextFormatting.GREEN+"Devoted Amount: " +  devoAmount));
+		tooltip.add(new StringTextComponent(TextFormatting.GREEN+"Sacrifical Worth: " +  devoAmount));
 
 	}
 

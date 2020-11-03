@@ -54,12 +54,13 @@ public class GuiTomeImagePage extends GuiTomePage {
 
 	@OnlyIn(Dist.CLIENT)
 	public GuiTomeImagePage(int pageNumIn, EnumTomeCatagories catagoryIn, String titleIn, String subtitleIn,
-			GuiTomeImage... imagesIn) {
-		super(pageNumIn, catagoryIn, titleIn, subtitleIn, new ItemStack(Items.AIR), "");
-		Preconditions.checkArgument(imagesIn.length <= 11);
+			String textIn, GuiTomeImage... imagesIn) {
+		super(pageNumIn, catagoryIn, titleIn, subtitleIn, new ItemStack(Items.AIR), textIn);
+		Preconditions.checkArgument(imagesIn.length <= 12);
 		this.title = titleIn;
 		this.subtitle = subtitleIn;
 		this.pageNum = pageNumIn;
+		this.text = textIn;
 		this.catagory = catagoryIn;
 		this.icon = new ItemStack(Items.AIR);
 		this.images = ImmutableList.copyOf(imagesIn);
@@ -95,13 +96,14 @@ public class GuiTomeImagePage extends GuiTomePage {
 		// String Text
 		GlStateManager.pushMatrix();
 		{
-			GlStateManager.translatef((width / 2) - 20, centerY + 10, 10);
+			GlStateManager.translatef((width / 2) - 20, centerY + 10, 11);
 			GlStateManager.scalef(0.9f, 1, 1);
 			GlStateManager.translatef(-65f, 25, 0);
 
 			// drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
 			// Split String(text,x,y,wrapwidth,color)
-
+			// Max text length 377 characters
+			font.func_238418_a_(new StringTextComponent(I18n.format(text)), 0, 77, 175, 0);
 		}
 		GlStateManager.popMatrix();
 
@@ -121,9 +123,13 @@ public class GuiTomeImagePage extends GuiTomePage {
 			buttonCloseTab.renderButton(matrixStack, mouseX, mouseY, 411);
 
 			for (int j = 0; j < imagesArray.size(); j++) {
-				imagesArray.get(j).render(matrixStack, mouseX, mouseY, partialTicks);
+				imagesArray.get(j).render(matrixStack, mouseX, mouseY, partialTicks, centerX + 5, centerY + 6);
 			}
-
+			for (int j = 0; j < imagesArray.size(); j++) {
+				if (imagesArray.get(j).isHovered()) {
+					func_243308_b(matrixStack, imagesArray.get(j).getText(), mouseX, mouseY);
+				}
+			}
 			GlStateManager.popMatrix();
 
 		}
@@ -155,6 +161,7 @@ public class GuiTomeImagePage extends GuiTomePage {
 		if (buttonCloseTab.isHovered()) {
 			func_243308_b(matrixStack, ClosePage, left - guiWidth + 149, top + guiHeight - 193);
 		}
+
 	}
 
 	@Override

@@ -13,6 +13,8 @@ import com.huto.hutosmod.init.ItemInit;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -114,13 +116,35 @@ public class TomePageLib {
 		IntroPageList.add(new GuiTomePage(7, EnumTomeCatagories.INTRO, "Vital Essence", "The Power of Vitals",
 				new ItemStack(ItemInit.null_ingot.get()), I18n.format(INTRO_PAGE_7)));
 
-		IntroPageList.add(new GuiTomeImagePage(8, EnumTomeCatagories.INTRO, "ImageTest", "Picture Yo",
-				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"),0, 0)));
+		IntroPageList.add(new GuiTomeImagePage(8, EnumTomeCatagories.INTRO, "ImageTest", "Picture Yo","",
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"), 0, 0)));
+		 List<ITextComponent> textIn = new ArrayList<ITextComponent>();
+		 textIn.add(new StringTextComponent("Hello"));
+		 textIn.add(new StringTextComponent("I "));
+		 textIn.add(new StringTextComponent("Am"));
+		 textIn.add(new StringTextComponent("Red"));
 
-		IntroPageList.add(new GuiTomeImagePage(9, EnumTomeCatagories.INTRO, "ImageTest2", "Pictures Yo",
-				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"),0, 0),
-				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/red.png"),1, 1)));
-		
+		IntroPageList.add(new GuiTomeImagePage(9, EnumTomeCatagories.INTRO, "ImageTest2", "Pictures Yo","",
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/altar1.png"), 0, 0),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/altar2.png"), 1, 1),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/altar3.png"), 2, 2),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/altar4.png"), 3, 3),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/altar5.png"), 4, 4),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"), 5, 5),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/red.png"), 6, 6),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/green.png"), 7, 7),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/white.png"), 8, 8),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/black.png"), 9, 9),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/blue.png"), 10, 10),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/red.png"), 11, 11,textIn)));
+		IntroPageList.add(new GuiTomeImagePage(10, EnumTomeCatagories.INTRO, "ImageTest3", "Stretchy Yo","",
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/horizextend1.png"), 0,
+						0, 128, 64),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/scaled1.png"), 1, 3,
+						128, 128),
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/vertextend1.png"), 6, 8,
+						64, 128)));
+
 		// Karma
 		KarmaPageList.add(new GuiTomePage(1, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
 				new ItemStack(ItemInit.karmic_drop.get()), I18n.format(KARMA_PAGE_1)));
