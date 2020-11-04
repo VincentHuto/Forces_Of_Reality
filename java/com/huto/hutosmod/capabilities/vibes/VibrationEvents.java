@@ -23,7 +23,6 @@ public class VibrationEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof PlayerEntity) {
-			System.out.println("Attatches Capability");
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "vibrations"), new VibrationProvider());
 		}
 	}

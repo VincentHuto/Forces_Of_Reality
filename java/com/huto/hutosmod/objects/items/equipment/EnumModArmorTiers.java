@@ -33,6 +33,10 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 	SUPPRESSOR(HutosMod.MOD_ID + ":influence_supressor", 1, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
+			}),
+	SKULL(HutosMod.MOD_ID + ":skull", 1, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			});
 	;
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };

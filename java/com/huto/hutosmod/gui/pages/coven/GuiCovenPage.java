@@ -48,8 +48,8 @@ public class GuiCovenPage extends Screen {
 	Minecraft mc = Minecraft.getInstance();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenPage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn,
-			ItemStack iconIn, String textIn) {
+	public GuiCovenPage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn, ItemStack iconIn,
+			String textIn) {
 		super(titleComponent);
 		this.title = titleIn;
 		this.subtitle = subtitleIn;
@@ -92,7 +92,7 @@ public class GuiCovenPage extends Screen {
 
 			// drawCenteredString(matrixStack, font, I18n.format(text), 175, 10, 10);
 			// Split String(text,x,y,wrapwidth,color)
-			//Max Character Length ~663
+			// Max Character Length ~663
 			font.func_238418_a_(new StringTextComponent(I18n.format(text)), 0, 0, 175, 0);
 		}
 		GlStateManager.popMatrix();
@@ -123,10 +123,14 @@ public class GuiCovenPage extends Screen {
 			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(icon, 0, 2);
 		}
 		GlStateManager.popMatrix();
+
 		textBox.render(matrixStack, mouseX, mouseY, partialTicks);
-		List<ITextComponent> text = new ArrayList<ITextComponent>();
-		text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
-		func_243308_b(matrixStack, text, centerX, centerY);
+		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2)+20
+				&& mouseY <= (16 * 2)+20 + height)) {
+			List<ITextComponent> text = new ArrayList<ITextComponent>();
+			text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
+			func_243308_b(matrixStack, text, centerX, centerY);
+		}
 
 		List<ITextComponent> titlePage = new ArrayList<ITextComponent>();
 		titlePage.add(new StringTextComponent(I18n.format("Title")));

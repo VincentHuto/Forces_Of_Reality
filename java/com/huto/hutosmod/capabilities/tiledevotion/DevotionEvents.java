@@ -12,7 +12,6 @@ public class DevotionEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<TileEntity> event) {
 		if (event.getObject() instanceof TileModDevotion) {
-			System.out.println("Attatches Capability");
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "devotion"), new DevotionProvider());
 		}
 	}

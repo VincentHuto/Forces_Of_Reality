@@ -49,7 +49,6 @@ public class KarmaEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof PlayerEntity) {
-			System.out.println("Attatches Capability");
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "karma"), new KarmaProvider());
 		}
 	}
@@ -221,7 +220,6 @@ public class KarmaEvents {
 						DimensionalPosition p = lastPos.get();
 						BlockPos bp = p.getPosition();
 						ResourceLocation dimRL = p.getDimension();
-						System.out.println(dimRL);
 						RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
 						ServerWorld ovw = world.getServer().getWorld(key);
 						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,

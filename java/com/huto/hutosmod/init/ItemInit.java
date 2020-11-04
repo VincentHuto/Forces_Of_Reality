@@ -3,10 +3,13 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.objects.items.ItemChannelingIngot;
 import com.huto.hutosmod.objects.items.ItemCovenTome;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
+import com.huto.hutosmod.objects.items.ItemManaPowder;
+import com.huto.hutosmod.objects.items.ItemNullIngot;
 import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
@@ -25,6 +28,7 @@ import com.huto.hutosmod.objects.items.equipment.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.equipment.ItemMysticTome;
 import com.huto.hutosmod.objects.items.equipment.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
+import com.huto.hutosmod.objects.items.equipment.ItemSkullHelmet;
 import com.huto.hutosmod.objects.items.equipment.ItemSlimeRepulsionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.equipment.ItemWatchfulPendant;
@@ -119,11 +123,11 @@ public class ItemInit {
 
 	// Books
 	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
-			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
-			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> coven_tome = ITEMS.register("coven_tome",
-			() -> new ItemCovenTome(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemCovenTome(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	// Grey
 	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
@@ -137,11 +141,11 @@ public class ItemInit {
 	public static final RegistryObject<Item> essence_drop = ITEMS.register("essence_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> channeling_ingot = ITEMS.register("channeling_ingot",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemChannelingIngot(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> emanating_ingot = ITEMS.register("emanating_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> mana_powder = ITEMS.register("mana_powder",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemManaPowder(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> mana_crystal = ITEMS.register("mana_crystal",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> channeling_rod = ITEMS.register("channeling_rod",
@@ -151,7 +155,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> anti_tear = ITEMS.register("anti_tear",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> null_ingot = ITEMS.register("null_ingot",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new ItemNullIngot(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> shattered_ingot = ITEMS.register("shattered_ingot",
 			() -> new ItemShatterIngot(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> nullifying_powder = ITEMS.register("nullifying_powder",
@@ -262,6 +266,9 @@ public class ItemInit {
 			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> beastly_bone = ITEMS.register("beastly_bone",
 			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.BEAST, 3));
+	public static final RegistryObject<Item> skull_helmet = ITEMS.register("skull_helmet",
+			() -> new ItemSkullHelmet(EnumModArmorTiers.SKULL, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
 
 	// Machine
 	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog",
@@ -600,11 +607,16 @@ public class ItemInit {
 			() -> new ModSpawnEggItem(EntityInit.throne, 16777215, 12745984,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_beast_from_beyond = ITEMS
-			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 0, 0,
+			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 9450752, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_summoned_beast = ITEMS
-			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 0, 114140,
+			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 8155760, 9450752,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_malformed_automaton = ITEMS
+			.register("spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton, 15576576, 41873,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	
+	
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -634,6 +646,21 @@ public class ItemInit {
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {
+
+		ItemModelsProperties.registerProperty(channeling_ingot.get(), new ResourceLocation("pull"),
+				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
+					if (p_239429_2_ == null) {
+						return 0.0F;
+					} else {
+						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
+								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
+					}
+				});
+		ItemModelsProperties.registerProperty(channeling_ingot.get(), new ResourceLocation("pulling"),
+				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
+					return p_239428_2_ != null && p_239428_2_.isHandActive()
+							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
 
 		// Attract Charm
 		ItemModelsProperties.registerProperty(attraction_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),

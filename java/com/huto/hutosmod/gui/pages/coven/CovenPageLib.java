@@ -63,6 +63,7 @@ public class CovenPageLib {
 	public static String MACHINE_PAGE_2 = "title.coventome.machine.page.2.text";
 	public static String MACHINE_PAGE_3 = "title.coventome.machine.page.3.text";
 	public static String MACHINE_PAGE_4 = "title.coventome.machine.page.4.text";
+	public static String MACHINE_PAGE_5 = "title.coventome.machine.page.5.text";
 
 	public static void registerPages() {
 
@@ -138,16 +139,22 @@ public class CovenPageLib {
 				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(BEAST_PAGE_4)));
 
 		// Machine
-		MachinePageList.add(new GuiCovenImagePage(1, EnumCovenants.BEAST, "Machine", "Altar", MACHINE_PAGE_1,
+		MachinePageList.add(new GuiCovenImagePage(1, EnumCovenants.MACHINE, "Machine", "Altar", MACHINE_PAGE_1,
 				new GuiTomeImage(
 						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/altar.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenPage(2, EnumCovenants.MACHINE, "Fight Tooth and Nail", "Machine Blood",
+
+		MachinePageList.add(new GuiCovenPage(2, EnumCovenants.MACHINE, "The World of Machines", "Facts and Logic",
 				new ItemStack(ItemInit.auric_ingot.get()), I18n.format(MACHINE_PAGE_2)));
-		MachinePageList.add(new GuiCovenPage(3, EnumCovenants.MACHINE, "Just a Nail", "Nail Clippings",
+		MachinePageList.add(new GuiCovenPage(3, EnumCovenants.MACHINE, "Sentient Machines", "T-1000",
 				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_3)));
-		MachinePageList.add(new GuiCovenPage(4, EnumCovenants.MACHINE, "Thermal Vision", "Hunt as a Machine",
+		MachinePageList.add(new GuiCovenPage(4, EnumCovenants.MACHINE, "Trick Tools", "Mechanical Advantage",
 				new ItemStack(ItemInit.mystic_trick_axe.get()), I18n.format(MACHINE_PAGE_4)));
+		MachinePageList.add(new GuiCovenImagePage(5, EnumCovenants.MACHINE, "Machina Soul", "Life Spark",
+				MACHINE_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/spark.png"), 0, 0,
+						104, 104, 0.00970625F)));
 
 		// Adding Chapters
 		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList,

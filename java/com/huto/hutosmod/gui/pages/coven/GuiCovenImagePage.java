@@ -14,7 +14,6 @@ import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiTomeImage;
 import com.huto.hutosmod.gui.pages.GuiUtil;
-import com.huto.hutosmod.gui.pages.guide.GuiButtonBookArrow;
 import com.huto.hutosmod.init.ItemInit;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -44,7 +43,7 @@ public class GuiCovenImagePage extends GuiCovenPage {
 	String subtitle;
 	String text;
 	ItemStack icon;
-	GuiButtonBookArrow arrowF, arrowB;
+	GuiButtonCovenArrow arrowF, arrowB;
 	private final ImmutableList<GuiTomeImage> images;
 	GuiButtonTextured buttonTitle, buttonCloseTab;
 	List<GuiTomeImage> imagesArray;
@@ -147,11 +146,14 @@ public class GuiCovenImagePage extends GuiCovenPage {
 		}
 		GlStateManager.popMatrix();
 		// ToolTips
-		textBox.render(matrixStack, mouseX, mouseY, partialTicks);
-		List<ITextComponent> text = new ArrayList<ITextComponent>();
-		text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
-		func_243308_b(matrixStack, text, centerX, centerY);
 
+		textBox.render(matrixStack, mouseX, mouseY, partialTicks);
+		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2)+20
+				&& mouseY <= (16 * 2)+20 + height)) {
+			List<ITextComponent> text = new ArrayList<ITextComponent>();
+			text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
+			func_243308_b(matrixStack, text, centerX, centerY);
+		}
 		List<ITextComponent> titlePage = new ArrayList<ITextComponent>();
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));
@@ -174,7 +176,7 @@ public class GuiCovenImagePage extends GuiCovenPage {
 		buttons.clear();
 
 		if (pageNum != (getMatchingChapter().size() - 1)) {
-			this.addButton(arrowF = new GuiButtonBookArrow(ARROWF, left + guiWidth - 18, top + guiHeight - 10, 16, 14,
+			this.addButton(arrowF = new GuiButtonCovenArrow(ARROWF, left + guiWidth - 18, top + guiHeight - 10, 16, 14,
 					175, 1, (press) -> {
 						if (pageNum != (getMatchingChapter().size() - 1)) {
 							mc.displayGuiScreen(getMatchingChapter().get((pageNum + 1)));
@@ -186,7 +188,7 @@ public class GuiCovenImagePage extends GuiCovenPage {
 		}
 		if (pageNum != 0) {
 			this.addButton(
-					arrowB = new GuiButtonBookArrow(ARROWB, left, top + guiHeight - 10, 16, 14, 192, 1, (press) -> {
+					arrowB = new GuiButtonCovenArrow(ARROWB, left, top + guiHeight - 10, 16, 14, 192, 1, (press) -> {
 						if (pageNum > 0) {
 							mc.displayGuiScreen(getMatchingChapter().get((pageNum - 1)));
 						} else {

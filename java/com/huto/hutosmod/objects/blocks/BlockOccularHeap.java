@@ -237,9 +237,10 @@ public class BlockOccularHeap extends Block implements IBlockDevotionStation {
 					player.playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F);
 					return ActionResultType.SUCCESS;
 				} else {
+					te.checkStructure();
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
-					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount);
+					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount* te.sacMod);
 
 					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 							new CovenantPacketServer(coven.getDevotion()));

@@ -20,7 +20,8 @@ public class TileModDevotion extends TileEntity {
 	public IDevotion devo = getCapability(DevotionProvider.DEVO_CAPA).orElseThrow(IllegalStateException::new);
 	public int clientDevo = 0;
 	public static final String TAG_DEVO = "devotion";
-
+	public static final String TAG_MODIFIER = "modifier";
+	public int sacMod = 0;
 	public TileModDevotion(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
@@ -53,11 +54,13 @@ public class TileModDevotion extends TileEntity {
 
 	public void writePacketNBT(CompoundNBT cmp) {
 		cmp.putInt(TAG_DEVO, devo.getDevotion());
+		cmp.putInt(TAG_MODIFIER, sacMod);
 
 	}
 
 	public void readPacketNBT(CompoundNBT cmp) {
 		clientDevo = cmp.getInt(TAG_DEVO);
+		sacMod = cmp.getInt(TAG_MODIFIER);
 
 	}
 
@@ -67,6 +70,8 @@ public class TileModDevotion extends TileEntity {
 		writePacketNBT(tag);
 		CompoundNBT nbtTag = new CompoundNBT();
 		nbtTag.putInt(TAG_DEVO, devo.getDevotion());
+		nbtTag.putInt(TAG_MODIFIER, sacMod);
+
 		return new SUpdateTileEntityPacket(pos, -999, tag);
 	}
 
@@ -76,12 +81,16 @@ public class TileModDevotion extends TileEntity {
 		super.onDataPacket(net, packet);
 		readPacketNBT(packet.getNbtCompound());
 		clientDevo = tag.getInt(TAG_DEVO);
+		sacMod = tag.getInt(TAG_MODIFIER);
+
 	}
 
 	@Override
 	public void handleUpdateTag(BlockState state, CompoundNBT tag) {
 		super.handleUpdateTag(state, tag);
 		clientDevo = tag.getInt(TAG_DEVO);
+		sacMod = tag.getInt(TAG_MODIFIER);
+
 	}
 
 	public EnumCovenants getCovenType() {

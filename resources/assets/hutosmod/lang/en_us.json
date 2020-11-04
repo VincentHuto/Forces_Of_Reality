@@ -1,5 +1,5 @@
 {
-	"itemGroup.hutosTab": "Duality of Nature",
+	"itemGroup.hutostab": "Forces of Reality",
 	"item.hutosmod.example_item": "Example Item",
 	"item.hutosmod.null_ingot": "Nullified Ingot",
 	"item.hutosmod.shattered_ingot": "Shattered Ingot",
@@ -26,6 +26,7 @@
 	"item.hutosmod.gem_sapphire": "Sapphire Gem",
 	"item.hutosmod.gem_topaz": "Topaz Gem",
 	"item.hutosmod.gem_amethyst": "Amethyst Gem",
+	"item.hutosmod.skull_helmet": "Enticing Skull",
 	"item.hutosmod.gem_opal": "Opal",
 	"item.hutosmod.vibration_debug_tool": "Vibratory Debug Tool",
 	"item.hutosmod.coven_tome": "Dictionary of Covens",
@@ -366,6 +367,7 @@
 	"title.coventome.machine.page.2.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
 	"title.coventome.machine.page.3.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
 	"title.coventome.machine.page.4.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
+	"title.coventome.machine.page.5.text": "To know the machine, to know the spark of life itself, just as you run on  spirit, as do machines, Create an artifical soul",
 	"title.coventome.self.page.1.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true",
 	"title.coventome.self.page.2.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
 	"title.coventome.self.page.3.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",

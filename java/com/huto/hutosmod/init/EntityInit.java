@@ -10,6 +10,8 @@ import com.huto.hutosmod.entities.EntityHastur;
 import com.huto.hutosmod.entities.EntityHasturClone;
 import com.huto.hutosmod.entities.EntityHasturSpawn;
 import com.huto.hutosmod.entities.EntityIbis;
+import com.huto.hutosmod.entities.EntityMalformedAutomaton;
+import com.huto.hutosmod.entities.EntityManaDustItem;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
 import com.huto.hutosmod.entities.EntitySeraphim;
 import com.huto.hutosmod.entities.EntitySlug;
@@ -111,6 +113,14 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntitySummonedBeast>create(EntitySummonedBeast::new, EntityClassification.MONSTER)
 					.size(0.5F, 0.5F).build(new ResourceLocation(HutosMod.MOD_ID, "summoned_beast").toString()));
 
+	// Machine
+	public static final RegistryObject<EntityType<EntityMalformedAutomaton>> malformed_automaton = ENTITY_TYPES
+			.register("malformed_automaton", () -> EntityType.Builder
+					.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new, EntityClassification.MONSTER)
+					.size(2.3f, 2.5f).build(new ResourceLocation(HutosMod.MOD_ID, "malformed_automaton").toString()));
+
+	// Machine
+
 	// Projectiles
 	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
 			"player_tentacle",
@@ -157,6 +167,10 @@ public class EntityInit {
 					.setTrackingRange(64).setUpdateInterval(10).setShouldReceiveVelocityUpdates(true).size(0.25F, 0.25F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "thrown_axe").toString()));
 
+	public static final RegistryObject<EntityType<EntityManaDustItem>> mana_dust = ENTITY_TYPES.register("mana_dust",
+			() -> EntityType.Builder.<EntityManaDustItem>create(EntityManaDustItem::new, EntityClassification.MISC)
+					.size(0.25F, 0.25F).build(new ResourceLocation(HutosMod.MOD_ID, "mana_dust").toString()));
+
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
 		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.setAttributes().create());
@@ -177,5 +191,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.beast_from_beyond.get(),
 				EntityBeastFromBeyond.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.summoned_beast.get(), EntitySummonedBeast.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.malformed_automaton.get(),
+				EntityMalformedAutomaton.setAttributes().create());
+
 	}
 }

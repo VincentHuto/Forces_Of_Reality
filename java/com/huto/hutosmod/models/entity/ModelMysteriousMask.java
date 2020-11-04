@@ -7,10 +7,6 @@ import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 
-// Made with Blockbench 3.6.6
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
-
 @SuppressWarnings("rawtypes")
 public class ModelMysteriousMask extends BipedModel {
 	private final ModelRenderer LeftBand;

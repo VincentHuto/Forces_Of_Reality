@@ -21,6 +21,8 @@ import com.huto.hutosmod.render.entity.RenderHasturClone;
 import com.huto.hutosmod.render.entity.RenderHasturSpawn;
 import com.huto.hutosmod.render.entity.RenderIbis;
 import com.huto.hutosmod.render.entity.RenderJudgement;
+import com.huto.hutosmod.render.entity.RenderMalformedAutomaton;
+import com.huto.hutosmod.render.entity.RenderManaDustItem;
 import com.huto.hutosmod.render.entity.RenderSeraphim;
 import com.huto.hutosmod.render.entity.RenderSlug;
 import com.huto.hutosmod.render.entity.RenderSummonedBeast;
@@ -130,9 +132,12 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.malformed_automaton.get(),
+				RenderMalformedAutomaton::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.thrown_axe.get(),
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mana_dust.get(), RenderManaDustItem::new);
 
 		keyBinds.add(0, new KeyBinding("key.hutosmod.runebinderpickup.desc", GLFW.GLFW_KEY_B, "key.hutosmod.category"));
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));

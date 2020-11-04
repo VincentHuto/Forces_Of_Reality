@@ -123,10 +123,12 @@ public class GuiTomePage extends Screen {
 		}
 		GlStateManager.popMatrix();
 		textBox.render(matrixStack, mouseX, mouseY, partialTicks);
-		List<ITextComponent> text = new ArrayList<ITextComponent>();
-		text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
-		func_243308_b(matrixStack, text, centerX, centerY);
-
+		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2)+20
+				&& mouseY <= (16 * 2)+20 + height)) {
+			List<ITextComponent> text = new ArrayList<ITextComponent>();
+			text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
+			func_243308_b(matrixStack, text, centerX, centerY);
+		}
 		List<ITextComponent> titlePage = new ArrayList<ITextComponent>();
 		titlePage.add(new StringTextComponent(I18n.format("Title")));
 		titlePage.add(new StringTextComponent(I18n.format("Return to Catagories")));

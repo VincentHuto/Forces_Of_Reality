@@ -80,7 +80,6 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getHeldItemMainhand();
 		// Upgrade clause
-
 		if (stack.isEmpty()) {
 			if (!worldIn.isRemote) {
 				player.sendStatusMessage(
@@ -103,7 +102,7 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 				} else {
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
-					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount);
+					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
 
 					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 							new CovenantPacketServer(coven.getDevotion()));

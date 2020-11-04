@@ -354,10 +354,7 @@ public class ItemBowBlade extends ShootableItem {
 		return arrow;
 	}
 
-	/**
-	 * returns the action that specifies what animation to play when the items is
-	 * being used
-	 */
+
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
 		return UseAction.BOW;
