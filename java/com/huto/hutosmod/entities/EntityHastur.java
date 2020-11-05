@@ -50,7 +50,7 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
 	private static final String TAG_SOURCE_Z = "sourcesZ";
-
+	protected int clientTickCounter = -1;
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
 			BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
@@ -144,20 +144,20 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 	@Override
 	protected void updateAITasks() {
 		super.updateAITasks();
-		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+		this.getBossInfo().setPercent(this.getHealth() / this.getMaxHealth());
 
 	}
 
 	@Override
 	public void addTrackingPlayer(ServerPlayerEntity player) {
 		super.addTrackingPlayer(player);
-		this.bossInfo.addPlayer(player);
+		this.getBossInfo().addPlayer(player);
 	}
 
 	@Override
 	public void removeTrackingPlayer(ServerPlayerEntity player) {
 		super.removeTrackingPlayer(player);
-		this.bossInfo.removePlayer(player);
+		this.getBossInfo().removePlayer(player);
 	}
 
 	@Override
@@ -424,5 +424,18 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 			}
 		}
 	}
+
+	public int getClientTicks() {
+		return this.clientTickCounter;
+	}
+
+	public void setClientTicks(int ticks) {
+		this.clientTickCounter = ticks;
+	}
+
+	public ServerBossInfo getBossInfo() {
+		return bossInfo;
+	}
+
 
 }

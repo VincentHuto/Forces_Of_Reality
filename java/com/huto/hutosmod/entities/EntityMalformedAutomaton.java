@@ -17,14 +17,10 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
@@ -35,6 +31,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.DrinkHelper;
@@ -63,6 +60,7 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
 	private static final String TAG_SOURCE_Z = "sourcesZ";
+	private int attackTimer;
 
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
@@ -79,6 +77,39 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public void handleStatusUpdate(byte id) {
+		if (id == 4) {
+			this.attackTimer = 10;
+			this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+		} else {
+			super.handleStatusUpdate(id);
+		}
+
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public int getAttackTimer() {
+		return this.attackTimer;
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity entityIn) {
+		this.attackTimer = 10;
+		return super.attackEntityAsMob(entityIn);
+	}
+
+	@Override
+	public void livingTick() {
+		super.livingTick();
+		if (this.attackTimer > 0) {
+			--this.attackTimer;
+		}
+
+	}
+
+	@SuppressWarnings("unused")
 	@Override
 	public void tick() {
 		super.tick();
@@ -99,50 +130,38 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		// Attacks
 
 		int attackRoll = ticksExisted + rand.nextInt(5);
-		if (attackRoll % 50 * diffMult == 0) {
-			this.spawnWolfShot();
-		} else if (attackRoll % 120 * diffMult == 0) {
-			if (world.rand.nextBoolean()) {
-				// this.summonTentacleAid(rand.nextInt(10));
-			} else {
-				// this.summonSpawnAid(rand.nextInt(5));
-			}
-		} else if (attackRoll % 130 * diffMult == 0) {
-			this.greatHowl();
-		}
-		if (this.isOnGround()) {
-			if (attackRoll % 100 * diffMult == 0) {
-				this.summonHounds(rand.nextInt(1) + 2);
-			}
-		}
+		/*
+		 * if (attackRoll % 50 * diffMult == 0) { this.spawnWolfShot(); } else if
+		 * (attackRoll % 120 * diffMult == 0) { if (world.rand.nextBoolean()) { //
+		 * this.summonTentacleAid(rand.nextInt(10)); } else { //
+		 * this.summonSpawnAid(rand.nextInt(5)); } } else if (attackRoll % 130 *
+		 * diffMult == 0) { this.greatHowl(); } if (this.isOnGround()) { if (attackRoll
+		 * % 100 * diffMult == 0) { this.summonHounds(rand.nextInt(1) + 2); } }
+		 */
 
 		// Removed Starstrikes to use on the seraphim, still has the one missle spawn
 		// though
 		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() + (double) f,
+		this.world.addParticle(RedstoneParticleData.REDSTONE_DUST, this.getPosX() + (double) f,
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 	}
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new SwimGoal(this));
-		this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
 		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-		this.goalSelector.addGoal(8, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-		this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EntityColin.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 
 	}
 
 	public static AttributeModifierMap.MutableAttribute setAttributes() {
 		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.15D)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.15D)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
@@ -278,6 +297,7 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void spawnWolfShot() {
 		EntityWolfShot missile = new EntityWolfShot(this, true);
 		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1), this.getPosY() + (Math.random() - 0.5 * 0.1),
@@ -288,6 +308,7 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void greatHowl() {
 		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
 		this.setMotion(0, 0, 0);
@@ -343,11 +364,11 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 	}
 
 	public boolean isArmored() {
-		return this.getHealth() <= this.getMaxHealth() / 2.0F;
+		return this.getHealth() < this.getMaxHealth() / 2.0F && this.getHealth() >= this.getMaxHealth() / 4.0F;
 	}
 
 	public boolean isVulnerable() {
-		return this.getHealth() <= this.getMaxHealth() / 4.0F;
+		return this.getHealth() < this.getMaxHealth() / 4.0F;
 	}
 
 	@Override

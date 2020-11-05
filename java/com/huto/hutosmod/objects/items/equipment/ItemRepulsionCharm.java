@@ -49,7 +49,7 @@ public class ItemRepulsionCharm extends Item {
 		}
 		if (stack.getTag().getBoolean(TAG_STATE)) {
 
-			repel(worldIn,
+			repel(entityIn, worldIn,
 					new AxisAlignedBB(entityIn.getPositionVec().add(-4, -4, -4),
 							entityIn.getPositionVec().add(4, 4, 4)),
 					entityIn.getPositionVec().getX() + 0.5, entityIn.getPositionVec().getY() + 0.5,
@@ -91,8 +91,8 @@ public class ItemRepulsionCharm extends Item {
 		}
 	}
 
-	public static void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {
-		List<Entity> list = world.getEntitiesWithinAABB(Entity.class, effectBounds);
+	public static void repel(Entity player, World world, AxisAlignedBB effectBounds, double x, double y, double z) {
+		List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, effectBounds);
 		for (Entity ent : list) {
 
 			Vector3d p = new Vector3d(x, y, z);

@@ -117,7 +117,7 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityMalformedAutomaton>> malformed_automaton = ENTITY_TYPES
 			.register("malformed_automaton", () -> EntityType.Builder
 					.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new, EntityClassification.MONSTER)
-					.size(2.3f, 2.5f).build(new ResourceLocation(HutosMod.MOD_ID, "malformed_automaton").toString()));
+					.size(3.4f, 5.5f).build(new ResourceLocation(HutosMod.MOD_ID, "malformed_automaton").toString()));
 
 	// Machine
 

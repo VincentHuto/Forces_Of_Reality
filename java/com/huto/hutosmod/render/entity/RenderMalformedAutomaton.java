@@ -3,6 +3,7 @@ package com.huto.hutosmod.render.entity;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityMalformedAutomaton;
 import com.huto.hutosmod.models.entity.ModelMalformedAutomaton;
+import com.huto.hutosmod.render.entity.layer.LayerAutomatonWindow;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -23,6 +25,7 @@ public class RenderMalformedAutomaton extends MobRenderer<EntityMalformedAutomat
 
 	public RenderMalformedAutomaton(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelMalformedAutomaton(), 1.5f);
+		this.addLayer(new LayerAutomatonWindow(this));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -40,6 +43,17 @@ public class RenderMalformedAutomaton extends MobRenderer<EntityMalformedAutomat
 		GlStateManager.popMatrix();
 		matrixStackIn.pop();
 
+	}
+
+	@Override
+	protected void applyRotations(EntityMalformedAutomaton entityLiving, MatrixStack matrixStackIn, float ageInTicks,
+			float rotationYaw, float partialTicks) {
+		super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+		if (!((double) entityLiving.limbSwingAmount < 0.01D)) {
+			float f1 = entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - partialTicks) + 6.0F;
+			float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
+			matrixStackIn.rotate(Vector3f.XP.rotationDegrees(3.5F * f2));
+		}
 	}
 
 	// Growth Scaling
