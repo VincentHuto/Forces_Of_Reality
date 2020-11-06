@@ -53,8 +53,8 @@ public class GuiCovenImagePage extends GuiCovenPage {
 	Minecraft mc = Minecraft.getInstance();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenImagePage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn,
-			String textIn, GuiTomeImage... imagesIn) {
+	public GuiCovenImagePage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn, String textIn,
+			GuiTomeImage... imagesIn) {
 		super(pageNumIn, catagoryIn, titleIn, subtitleIn, new ItemStack(Items.AIR), textIn);
 		Preconditions.checkArgument(imagesIn.length <= 12);
 		this.title = titleIn;
@@ -89,8 +89,10 @@ public class GuiCovenImagePage extends GuiCovenPage {
 			GlStateManager.translatef((width / 2) - 40, centerY + 10, 10);
 			GlStateManager.scalef(1, 1, 1);
 			drawString(matrixStack, font, "Pg." + pageNum, 90, 0, 0000000);
-			drawString(matrixStack, font, title, -5, 0, 8060954);
-			drawString(matrixStack, font, subtitle, -5, 10, 8060954);
+			/*
+			 * drawString(matrixStack, font, title, -5, 0, 8060954); drawString(matrixStack,
+			 * font, subtitle, -5, 10, 8060954);
+			 */
 		}
 		GlStateManager.popMatrix();
 		// String Text
@@ -148,8 +150,8 @@ public class GuiCovenImagePage extends GuiCovenPage {
 		// ToolTips
 
 		textBox.render(matrixStack, mouseX, mouseY, partialTicks);
-		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2)+20
-				&& mouseY <= (16 * 2)+20 + height)) {
+		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2) + 20
+				&& mouseY <= (16 * 2) + 20 + height)) {
 			List<ITextComponent> text = new ArrayList<ITextComponent>();
 			text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
 			func_243308_b(matrixStack, text, centerX, centerY);

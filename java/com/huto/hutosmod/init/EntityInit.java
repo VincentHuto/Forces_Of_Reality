@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityBeastFromBeyond;
 import com.huto.hutosmod.entities.EntityColin;
+import com.huto.hutosmod.entities.EntityDarkYoung;
 import com.huto.hutosmod.entities.EntityDenizen;
 import com.huto.hutosmod.entities.EntityDenizenSage;
 import com.huto.hutosmod.entities.EntityDreamWalker;
@@ -102,6 +103,11 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityThrone>create(EntityThrone::new, EntityClassification.MONSTER).size(1F, 1F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "throne").toString()));
 
+	// Eldritch
+	public static final RegistryObject<EntityType<EntityDarkYoung>> dark_young = ENTITY_TYPES.register("dark_young",
+			() -> EntityType.Builder.<EntityDarkYoung>create(EntityDarkYoung::new, EntityClassification.MONSTER)
+					.size(1.7f, 1.7f).build(new ResourceLocation(HutosMod.MOD_ID, "dark_young").toString()));
+
 	// Beast
 	public static final RegistryObject<EntityType<EntityBeastFromBeyond>> beast_from_beyond = ENTITY_TYPES.register(
 			"beast_from_beyond",
@@ -193,6 +199,7 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.summoned_beast.get(), EntitySummonedBeast.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.malformed_automaton.get(),
 				EntityMalformedAutomaton.setAttributes().create());
-
+		GlobalEntityTypeAttributes.put(EntityInit.dark_young.get(),
+				EntityDarkYoung.setAttributes().create());
 	}
 }

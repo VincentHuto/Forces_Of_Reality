@@ -64,6 +64,7 @@ public class CovenPageLib {
 	public static String MACHINE_PAGE_3 = "title.coventome.machine.page.3.text";
 	public static String MACHINE_PAGE_4 = "title.coventome.machine.page.4.text";
 	public static String MACHINE_PAGE_5 = "title.coventome.machine.page.5.text";
+	public static String MACHINE_PAGE_6 = "title.coventome.machine.page.6.text";
 
 	public static void registerPages() {
 
@@ -155,6 +156,12 @@ public class CovenPageLib {
 				new GuiTomeImage(
 						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/spark.png"), 0, 0,
 						104, 104, 0.00970625F)));
+		MachinePageList.add(new GuiCovenImagePage(6, EnumCovenants.MACHINE, "Malformed Automaton", "The Failed Creation",
+				MACHINE_PAGE_6,
+				new GuiTomeImage(
+						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/automaton.png"), 0, 0,
+						104, 102, 0.0096625F)));
+		
 
 		// Adding Chapters
 		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList,

@@ -65,6 +65,7 @@ public class FXLightning extends Particle {
 		// todo fix this >.>
 
 		// old way (bad position and too thick)
+		LightningHandler.queuedLightningBolts.offer(this);
 
 		// new way (right position but heavy artifacting)
 

@@ -8,6 +8,9 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
+import com.huto.hutosmod.entities.EntityMalformedAutomaton;
+import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.blocks.util.IBlockDevotionStation;
@@ -16,9 +19,16 @@ import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.sounds.SoundHandler;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.pattern.BlockMaterialMatcher;
+import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.block.pattern.BlockPatternBuilder;
+import net.minecraft.block.pattern.BlockStateMatcher;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -29,6 +39,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.CachedBlockInfo;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
@@ -61,8 +72,8 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();;
-
 	private static final VoxelShape SHAPE_R = Block.makeCuboidShape(-8, 0, -7, 24, 32, 25);
+	private BlockPattern golemPattern;
 
 	public BlockMachinaImperfecta(Properties properties) {
 		super(properties);
@@ -99,7 +110,7 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 				} else {
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
-					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount* te.sacMod);
+					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
 					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 							new CovenantPacketServer(coven.getDevotion()));
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
@@ -201,6 +212,64 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 	@Override
 	public EnumCovenants getCovenType() {
 		return EnumCovenants.MACHINE;
+	}
+
+	// Golem Spawning
+	@Override
+	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+		if (!oldState.isIn(state.getBlock())) {
+			this.trySpawnGolem(worldIn, pos);
+		}
+	}
+
+	private void trySpawnGolem(World world, BlockPos pos) {
+		BlockPattern.PatternHelper blockpattern$patternhelper = this.getGolemPattern().match(world, pos);
+		if (blockpattern$patternhelper != null) {
+			blockpattern$patternhelper = this.getGolemPattern().match(world, pos);
+			if (blockpattern$patternhelper != null) {
+				for (int j = 0; j < this.getGolemPattern().getPalmLength(); ++j) {
+					for (int k = 0; k < this.getGolemPattern().getThumbLength(); ++k) {
+						CachedBlockInfo cachedblockinfo2 = blockpattern$patternhelper.translateOffset(j, k, 0);
+						world.setBlockState(cachedblockinfo2.getPos(), Blocks.AIR.getDefaultState(), 2);
+						world.playEvent(2001, cachedblockinfo2.getPos(),
+								Block.getStateId(cachedblockinfo2.getBlockState()));
+					}
+				}
+
+				BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
+				EntityMalformedAutomaton irongolementity = new EntityMalformedAutomaton(
+						EntityInit.malformed_automaton.get(), world);
+				irongolementity.setPlayerCreated(true);
+				irongolementity.setLocationAndAngles((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.05D,
+						(double) blockpos.getZ() + 0.5D, 0.0F, 0.0F);
+				world.addEntity(irongolementity);
+
+				for (ServerPlayerEntity serverplayerentity1 : world.getEntitiesWithinAABB(ServerPlayerEntity.class,
+						irongolementity.getBoundingBox().grow(5.0D))) {
+					CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayerentity1, irongolementity);
+				}
+				for (int i1 = 0; i1 < this.getGolemPattern().getPalmLength(); ++i1) {
+					for (int j1 = 0; j1 < this.getGolemPattern().getThumbLength(); ++j1) {
+						CachedBlockInfo cachedblockinfo1 = blockpattern$patternhelper.translateOffset(i1, j1, 0);
+						world.func_230547_a_(cachedblockinfo1.getPos(), Blocks.AIR);
+					}
+				}
+			}
+		}
+	}
+
+	private BlockPattern getGolemPattern() {
+		if (this.golemPattern == null) {
+			this.golemPattern = BlockPatternBuilder.start()
+					.aisle("~~~^~~~", "~~GMG~~", "~#~#~#~", "~#~#~#~", "~~#~#~~", "~~#~#~~")
+					.where('^', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(this)))
+					.where('#', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(BlockInit.auric_block.get())))
+					.where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
+					.where('M', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(BlockInit.contained_magma.get())))
+					.where('G', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(BlockInit.machine_glass.get())))
+					.build();
+		}
+		return this.golemPattern;
 	}
 
 }

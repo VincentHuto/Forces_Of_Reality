@@ -26,16 +26,12 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResultType;
@@ -60,10 +56,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAdditionalSpawnData {
+public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalSpawnData {
 
-	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.createKey(IronGolemEntity.class,
-			DataSerializers.BYTE);
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
@@ -72,9 +66,9 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
-			BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+			BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntityMalformedAutomaton(EntityType<? extends EntityMalformedAutomaton> type, World worldIn) {
+	public EntityDarkYoung(EntityType<? extends EntityDarkYoung> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -152,9 +146,10 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		this.world.addParticle(RedstoneParticleData.REDSTONE_DUST, this.getPosX() + (double) f,
+		this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
+				this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+		this.world.addParticle(ParticleTypes.REVERSE_PORTAL, this.getPosX() + (double) f,
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-
 	}
 
 	@Override
@@ -322,8 +317,12 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		this.setMotion(0, 0, 0);
 		Vector3 startVec = Vector3.fromEntityCenter(this);
 		Vector3 endVec = Vector3.fromEntityCenter(target);
-		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0xFFAA00, 0xFFAA00);
-		target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
+		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+		if (rand.nextDouble() > 0.3f) {
+			target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
+		}
 	}
 
 	@SuppressWarnings("unused")
@@ -363,11 +362,17 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 	@Override
 	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
 		super.dropSpecialItems(source, looting, recentlyHitIn);
-		ItemEntity itementity = this.entityDropItem(ItemInit.integral_cog.get());
+		ItemEntity itementity = this.entityDropItem(ItemInit.everwatchful_pendant.get());
 		if (itementity != null) {
 			itementity.setNoDespawn();
 		}
 
+	}
+
+	
+	@Override
+	public boolean isImmuneToFire() {
+		return true;
 	}
 
 	private void dropExperience(int xp) {
@@ -392,27 +397,6 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 	public void writeSpawnData(PacketBuffer buffer) {
 		buffer.writeLong(source.toLong());
 
-	}
-
-	// Player Creation
-	public boolean isPlayerCreated() {
-		return (this.dataManager.get(PLAYER_CREATED) & 1) != 0;
-	}
-
-	public void setPlayerCreated(boolean playerCreated) {
-		byte b0 = this.dataManager.get(PLAYER_CREATED);
-		if (playerCreated) {
-			this.dataManager.set(PLAYER_CREATED, (byte) (b0 | 1));
-		} else {
-			this.dataManager.set(PLAYER_CREATED, (byte) (b0 & -2));
-		}
-
-	}
-
-	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(PLAYER_CREATED, (byte) 0);
 	}
 
 	@Override
@@ -451,9 +435,9 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntityMalformedAutomaton hastur;
+		private final EntityDarkYoung hastur;
 
-		public HasturMusic(EntityMalformedAutomaton hastur) {
+		public HasturMusic(EntityDarkYoung hastur) {
 			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
 
 			this.hastur = hastur;

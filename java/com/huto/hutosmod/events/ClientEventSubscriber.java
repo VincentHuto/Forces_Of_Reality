@@ -13,6 +13,7 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.render.entity.RenderBeastFromBeyond;
 import com.huto.hutosmod.render.entity.RenderColin;
+import com.huto.hutosmod.render.entity.RenderDarkYoung;
 import com.huto.hutosmod.render.entity.RenderDenizen;
 import com.huto.hutosmod.render.entity.RenderDenizenSage;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
@@ -134,6 +135,8 @@ public class ClientEventSubscriber {
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.malformed_automaton.get(),
 				RenderMalformedAutomaton::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dark_young.get(),
+				RenderDarkYoung::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.thrown_axe.get(),
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));

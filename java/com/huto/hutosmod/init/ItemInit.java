@@ -613,10 +613,11 @@ public class ItemInit {
 			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 8155760, 9450752,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_malformed_automaton = ITEMS
-			.register("spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton, 15576576, 41873,
+			.register("spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton,
+					15576576, 41873, new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dark_young = ITEMS.register("spawn_egg_dark_young",
+			() -> new ModSpawnEggItem(EntityInit.dark_young, 0, 0xFA00FF,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
-	
-	
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -624,7 +625,8 @@ public class ItemInit {
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
 				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
 				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
-				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast);
+				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
+				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young);
 	}
 
 	@SuppressWarnings("unchecked")
