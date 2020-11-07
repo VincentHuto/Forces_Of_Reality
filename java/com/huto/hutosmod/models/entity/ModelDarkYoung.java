@@ -112,24 +112,24 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 		
 
 		lowerJaw3 = new ModelRenderer(this);
-		lowerJaw3.setRotationPoint(4.0F, 1.0F, 7.0F);
+		lowerJaw3.setRotationPoint(0.0F, 0.5F, -4.5F);
 		mouth3.addChild(lowerJaw3);
-		lowerJaw3.setTextureOffset(0, 0).addBox(-5.0F, 0.0F, -18.0F, 2.0F, 1.0F, 6.0F, 0.0F, false);
-		lowerJaw3.setTextureOffset(38, 67).addBox(-5.0F, -1.0F, -19.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
-		lowerJaw3.setTextureOffset(30, 63).addBox(-6.0F, -1.0F, -18.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		lowerJaw3.setTextureOffset(62, 8).addBox(-3.0F, -1.0F, -18.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		lowerJaw3.setTextureOffset(0, 40).addBox(-5.0F, -2.0F, -18.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
-		lowerJaw3.setTextureOffset(27, 38).addBox(-3.0F, -2.0F, -18.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		lowerJaw3.setTextureOffset(0, 0).addBox(-1.0F, 0.5F, -6.5F, 2.0F, 1.0F, 6.0F, 0.0F, false);
+		lowerJaw3.setTextureOffset(38, 67).addBox(-1.0F, -0.5F, -7.5F, 2.0F, 1.0F, 1.0F, 0.0F, false);
+		lowerJaw3.setTextureOffset(30, 63).addBox(-2.0F, -0.5F, -6.5F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		lowerJaw3.setTextureOffset(62, 8).addBox(1.0F, -0.5F, -6.5F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		lowerJaw3.setTextureOffset(0, 40).addBox(-1.0F, -1.5F, -6.5F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		lowerJaw3.setTextureOffset(27, 38).addBox(1.0F, -1.5F, -6.5F, 0.0F, 2.0F, 5.0F, 0.0F, false);
 
 		upperJaw3 = new ModelRenderer(this);
-		upperJaw3.setRotationPoint(4.0F, -2.0F, 7.0F);
+		upperJaw3.setRotationPoint(0.0F, -2.0F, -6.75F);
 		mouth3.addChild(upperJaw3);
-		upperJaw3.setTextureOffset(36, 8).addBox(-6.0F, -1.0F, -18.0F, 4.0F, 1.0F, 6.0F, 0.0F, false);
-		upperJaw3.setTextureOffset(27, 45).addBox(-6.0F, 0.0F, -19.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-		upperJaw3.setTextureOffset(22, 62).addBox(-7.0F, 0.0F, -18.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		upperJaw3.setTextureOffset(46, 61).addBox(-2.0F, 0.0F, -18.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		upperJaw3.setTextureOffset(0, 38).addBox(-6.0F, 0.0F, -18.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
-		upperJaw3.setTextureOffset(0, 8).addBox(-2.0F, 0.0F, -18.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		upperJaw3.setTextureOffset(36, 8).addBox(-2.0F, -1.0F, -4.25F, 4.0F, 1.0F, 6.0F, 0.0F, false);
+		upperJaw3.setTextureOffset(27, 45).addBox(-2.0F, 0.0F, -5.25F, 4.0F, 1.0F, 1.0F, 0.0F, false);
+		upperJaw3.setTextureOffset(22, 62).addBox(-3.0F, 0.0F, -4.25F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		upperJaw3.setTextureOffset(46, 61).addBox(2.0F, 0.0F, -4.25F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		upperJaw3.setTextureOffset(0, 38).addBox(-2.0F, 0.0F, -4.25F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		upperJaw3.setTextureOffset(0, 8).addBox(2.0F, 0.0F, -4.25F, 0.0F, 2.0F, 5.0F, 0.0F, false);
 
 		frontLeftEye3 = new ModelRenderer(this);
 		frontLeftEye3.setRotationPoint(-2.0F, -2.0F, 3.0F);
@@ -167,24 +167,24 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 		
 
 		lowerJaw2 = new ModelRenderer(this);
-		lowerJaw2.setRotationPoint(4.0F, 1.0F, 7.0F);
+		lowerJaw2.setRotationPoint(0.0F, 0.5F, -1.0F);
 		mouth2.addChild(lowerJaw2);
-		lowerJaw2.setTextureOffset(0, 0).addBox(-5.0F, 0.0F, -8.0F, 2.0F, 1.0F, 6.0F, 0.0F, false);
-		lowerJaw2.setTextureOffset(38, 67).addBox(-5.0F, -1.0F, -2.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
-		lowerJaw2.setTextureOffset(30, 63).addBox(-6.0F, -1.0F, -8.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		lowerJaw2.setTextureOffset(62, 8).addBox(-3.0F, -1.0F, -8.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		lowerJaw2.setTextureOffset(0, 40).addBox(-5.0F, -2.0F, -7.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
-		lowerJaw2.setTextureOffset(27, 38).addBox(-3.0F, -2.0F, -7.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		lowerJaw2.setTextureOffset(0, 0).addBox(-1.0F, 0.5F, 0.0F, 2.0F, 1.0F, 6.0F, 0.0F, false);
+		lowerJaw2.setTextureOffset(38, 67).addBox(-1.0F, -0.5F, 6.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
+		lowerJaw2.setTextureOffset(30, 63).addBox(-2.0F, -0.5F, 0.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		lowerJaw2.setTextureOffset(62, 8).addBox(1.0F, -0.5F, 0.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		lowerJaw2.setTextureOffset(0, 40).addBox(-1.0F, -0.5F, 1.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		lowerJaw2.setTextureOffset(27, 38).addBox(1.0F, -1.5F, 1.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
 
 		upperJaw2 = new ModelRenderer(this);
-		upperJaw2.setRotationPoint(4.0F, -2.0F, 7.0F);
+		upperJaw2.setRotationPoint(0.0F, -2.0F, 0.0F);
 		mouth2.addChild(upperJaw2);
-		upperJaw2.setTextureOffset(36, 8).addBox(-6.0F, -1.0F, -8.0F, 4.0F, 1.0F, 6.0F, 0.0F, false);
-		upperJaw2.setTextureOffset(27, 45).addBox(-6.0F, 0.0F, -2.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-		upperJaw2.setTextureOffset(22, 62).addBox(-7.0F, 0.0F, -8.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		upperJaw2.setTextureOffset(46, 61).addBox(-2.0F, 0.0F, -8.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
-		upperJaw2.setTextureOffset(0, 38).addBox(-6.0F, 0.0F, -7.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
-		upperJaw2.setTextureOffset(0, 8).addBox(-2.0F, 0.0F, -7.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		upperJaw2.setTextureOffset(36, 8).addBox(-2.0F, -1.0F, -1.0F, 4.0F, 1.0F, 6.0F, 0.0F, false);
+		upperJaw2.setTextureOffset(27, 45).addBox(-2.0F, 0.0F, 5.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
+		upperJaw2.setTextureOffset(22, 62).addBox(-3.0F, 0.0F, -1.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		upperJaw2.setTextureOffset(46, 61).addBox(2.0F, 0.0F, -1.0F, 1.0F, 1.0F, 6.0F, 0.0F, false);
+		upperJaw2.setTextureOffset(0, 38).addBox(-2.0F, 0.0F, 0.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
+		upperJaw2.setTextureOffset(0, 8).addBox(2.0F, 0.0F, 0.0F, 0.0F, 2.0F, 5.0F, 0.0F, false);
 
 		frontLeftEye2 = new ModelRenderer(this);
 		frontLeftEye2.setRotationPoint(-2.0F, -2.0F, 5.0F);
@@ -490,7 +490,7 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 		cube_r1 = new ModelRenderer(this);
 		cube_r1.setRotationPoint(-3.0F, 0.5F, 10.0F);
 		midLeftBrain.addChild(cube_r1);
-		setRotationAngle(cube_r1, 0.0F, 0.0F, 1.9199F);
+		setRotationAngle(cube_r1, 0.0F, 0.0F, 1.8762F);
 		cube_r1.setTextureOffset(56, 21).addBox(2.0872F, -2.9981F, -11.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);
 
 		midRightBrain = new ModelRenderer(this);
@@ -628,6 +628,15 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 	@Override
 	public void setRotationAngles(EntityDarkYoung entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
+		
+		
+		//Head
+		this.upperJaw2.rotateAngleX = -limbSwingAmount * 0.13f;
+		this.lowerJaw2.rotateAngleX = limbSwingAmount * 0.13f;
+		
+		this.upperJaw3.rotateAngleX = -limbSwingAmount * 0.13f;
+		this.lowerJaw3.rotateAngleX = limbSwingAmount * 0.13f;
+		
 		this.frontHead.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.frontHead.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
 		this.rearHead.rotateAngleX = -headPitch * ((float) Math.PI / 180F) * 0.5f;
@@ -639,6 +648,9 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 				* 0.5f;
 		this.leftFrontLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5f;
 
+		
+		
+		
 		// Each Tentacle Segment
 		Random rand = new Random();
 		float tentMod = rand.nextInt(3) * 1.1f;

@@ -5,6 +5,7 @@ import java.util.List;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
 import com.huto.hutosmod.entities.utils.Vector3;
+import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
@@ -33,7 +34,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.DrinkHelper;
@@ -138,7 +138,9 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 				this.shock(getAttackTarget());
 			}
 		} else if (attackRoll % 130 * diffMult == 0) {
-			// this.greatHowl();
+			if (getAttackTarget() != null) {
+				this.beyondFlames(getAttackTarget());
+			}
 		}
 
 		// Removed Starstrikes to use on the seraphim, still has the one missle spawn
@@ -311,17 +313,35 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void shock(Entity target) {
 		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
 		this.setMotion(0, 0, 0);
-		Vector3 startVec = Vector3.fromEntityCenter(this);
+		Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
 		Vector3 endVec = Vector3.fromEntityCenter(target);
+		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
 		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
 		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-		if (rand.nextDouble() > 0.3f) {
+		if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(7)) {
 			target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
+		}
+	}
+
+	private void beyondFlames(Entity target) {
+		playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .25F, 1f);
+		setFlame(target.getPosition().add(2, 0, 0));
+		setFlame(target.getPosition().add(-2, 0, 0));
+		setFlame(target.getPosition().add(0, 0, 2));
+		setFlame(target.getPosition().add(0, 0, -2));
+		setFlame(target.getPosition().add(-1, 0, 1));
+		setFlame(target.getPosition().add(1, 0, -1));
+		setFlame(target.getPosition().add(-1, 0, -1));
+		setFlame(target.getPosition().add(1, 0, 1));
+	}
+
+	@SuppressWarnings("deprecation")
+	public void setFlame(BlockPos pos) {
+		if (world.getBlockState(pos).isAir(world, pos)) {
+			world.setBlockState(pos, BlockInit.beyond_flames.get().getDefaultState());
 		}
 	}
 
@@ -369,7 +389,6 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	}
 
-	
 	@Override
 	public boolean isImmuneToFire() {
 		return true;

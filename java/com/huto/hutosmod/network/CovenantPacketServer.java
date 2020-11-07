@@ -25,9 +25,10 @@ public class CovenantPacketServer {
 	public static void handle(final CovenantPacketServer msg, Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
-			Minecraft.getInstance().player.getCapability(CovenantProvider.COVEN_CAPA)
-					.orElseThrow(IllegalStateException::new).setDevotion(msg.devotion);
-
+			if (sender != null) {
+				Minecraft.getInstance().player.getCapability(CovenantProvider.COVEN_CAPA)
+						.orElseThrow(IllegalStateException::new).setDevotion(msg.devotion);
+			}
 		});
 		ctx.get().setPacketHandled(true);
 	}

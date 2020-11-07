@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.blocks.BlockAscendentAltar;
 import com.huto.hutosmod.objects.blocks.BlockAuspiciousBundle;
+import com.huto.hutosmod.objects.blocks.BlockBeyondFlame;
 import com.huto.hutosmod.objects.blocks.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
@@ -148,11 +149,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> hastur_stone = BLOCKS.register("hastur_stone",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> hastur_stone_smooth = BLOCKS.register("hastur_stone_smooth",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> untold_easel = BLOCKS.register("untold_easel",
 			() -> new BlockUntoldEasel(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15f)
 					.harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOD).notSolid()));
@@ -169,6 +170,8 @@ public class BlockInit {
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> abyssal_silt = BLOCKS.register("abyssal_silt",
 			() -> new FallingBlock(Block.Properties.from(Blocks.SAND)));
+	public static final RegistryObject<Block> beyond_flames = BLOCKS.register("beyond_flames",
+			() -> new BlockBeyondFlame(Block.Properties.from(Blocks.FIRE)));
 
 	// Beast
 	public static final RegistryObject<Block> auspicious_bundle = BLOCKS.register("auspicious_bundle",
@@ -300,6 +303,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.machine_glass.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.untold_easel.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
+
 		}
 	}
 
