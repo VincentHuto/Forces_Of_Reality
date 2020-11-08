@@ -4,6 +4,7 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.blocks.BlockAscendentAltar;
 import com.huto.hutosmod.objects.blocks.BlockAuspiciousBundle;
 import com.huto.hutosmod.objects.blocks.BlockBeyondFlame;
+import com.huto.hutosmod.objects.blocks.BlockBonsai;
 import com.huto.hutosmod.objects.blocks.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
@@ -32,6 +33,7 @@ import com.huto.hutosmod.objects.blocks.BlockVibeResonator;
 import com.huto.hutosmod.objects.blocks.BlockVirtuousEnchant;
 import com.huto.hutosmod.objects.blocks.BlockWandMaker;
 import com.huto.hutosmod.objects.blocks.BlockWaveGatherer;
+import com.huto.hutosmod.objects.blocks.util.EnumBonsaiTypes;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -171,7 +173,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> abyssal_silt = BLOCKS.register("abyssal_silt",
 			() -> new FallingBlock(Block.Properties.from(Blocks.SAND)));
 	public static final RegistryObject<Block> beyond_flames = BLOCKS.register("beyond_flames",
-			() -> new BlockBeyondFlame(Block.Properties.from(Blocks.FIRE)));
+			() -> new BlockBeyondFlame(Block.Properties.from(Blocks.FIRE), 1.5f));
 
 	// Beast
 	public static final RegistryObject<Block> auspicious_bundle = BLOCKS.register("auspicious_bundle",
@@ -192,6 +194,16 @@ public class BlockInit {
 					.sound(SoundType.ANVIL).notSolid()));
 
 	// Plants
+
+	// Bonsai
+	public static final RegistryObject<Block> anti_bonsai = BLOCKS.register("anti_bonsai", () -> new BlockBonsai(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+			EnumBonsaiTypes.ANTI));
+	
+	public static final RegistryObject<Block> mystic_bonsai = BLOCKS.register("mystic_bonsai", () -> new BlockBonsai(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+			EnumBonsaiTypes.MYSTIC));
+
 	public static final RegistryObject<Block> mystic_grass = BLOCKS.register("mystic_grass",
 			() -> new TallGrassBlock(Block.Properties.from(Blocks.GRASS)));
 
@@ -303,6 +315,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.machine_glass.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.untold_easel.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
 
 		}

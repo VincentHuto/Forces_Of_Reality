@@ -29,6 +29,7 @@ import com.huto.hutosmod.render.entity.RenderSlug;
 import com.huto.hutosmod.render.entity.RenderSummonedBeast;
 import com.huto.hutosmod.render.entity.RenderTentacle;
 import com.huto.hutosmod.render.entity.RenderThrone;
+import com.huto.hutosmod.render.entity.RenderTulpa;
 import com.huto.hutosmod.render.entity.layer.ThermalLayerRender;
 import com.huto.hutosmod.render.entity.projectile.RenderCorruptNote;
 import com.huto.hutosmod.render.entity.projectile.RenderEldritchGrip;
@@ -131,6 +132,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_flare.get(), RenderHolyFlare::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.eldritch_grip.get(), RenderEldritchGrip::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tulpa.get(), RenderTulpa::new);
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.malformed_automaton.get(),

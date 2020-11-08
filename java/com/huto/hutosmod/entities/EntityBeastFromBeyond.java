@@ -99,31 +99,32 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 		// Attacks
 
 		int attackRoll = ticksExisted + rand.nextInt(5);
-		if (attackRoll % 50 * diffMult == 0) {
-			this.spawnWolfShot();
-		} else if (attackRoll % 120 * diffMult == 0) {
-			if (world.rand.nextBoolean()) {
-				// this.summonTentacleAid(rand.nextInt(10));
-			} else {
-				// this.summonSpawnAid(rand.nextInt(5));
+		if (this.deathTicks <= 0) {
+			if (attackRoll % 50 * diffMult == 0) {
+				this.spawnWolfShot();
+			} else if (attackRoll % 120 * diffMult == 0) {
+				if (world.rand.nextBoolean()) {
+					// this.summonTentacleAid(rand.nextInt(10));
+				} else {
+					// this.summonSpawnAid(rand.nextInt(5));
+				}
+			} else if (attackRoll % 130 * diffMult == 0) {
+				this.greatHowl();
 			}
-		} else if (attackRoll % 130 * diffMult == 0) {
-			this.greatHowl();
-		}
-		if (this.isOnGround()) {
-			if (attackRoll % 100 * diffMult == 0) {
-				this.summonHounds(rand.nextInt(1) + 2);
+			if (this.isOnGround()) {
+				if (attackRoll % 100 * diffMult == 0) {
+					this.summonHounds(rand.nextInt(1) + 2);
+				}
 			}
+
+			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
+			// though
+			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		}
-
-		// Removed Starstrikes to use on the seraphim, still has the one missle spawn
-		// though
-		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() + (double) f,
-				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-
 	}
 
 	@Override
@@ -231,9 +232,16 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 			if (this.deathTicks >= 100) {
+				this.world.addParticle(ParticleTypes.FALLING_LAVA, this.getPosX() + (double) f,
+						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			}
+			
+			
+			if (this.deathTicks >= 150) {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
+			
 		}
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);

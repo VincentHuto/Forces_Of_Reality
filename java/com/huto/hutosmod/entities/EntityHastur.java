@@ -78,6 +78,7 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		}
 
 		// Attacks
+		if (this.deathTicks <= 0) {
 		int attackRoll = ticksExisted + rand.nextInt(5);
 		if (attackRoll % 50 * diffMult == 0) {
 			this.spawnMissile();
@@ -104,7 +105,8 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 		this.world.addParticle(ParticleTypes.WARPED_SPORE, this.getPosX() + (double) f,
 				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		this.world.addParticle(ParticleTypes.CRIMSON_SPORE, this.getPosX() + (double) f,
-				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 	@Override

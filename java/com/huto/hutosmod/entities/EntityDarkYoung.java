@@ -34,10 +34,11 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.DrinkHelper;
-import net.minecraft.util.Hand;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -53,6 +54,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -63,7 +65,7 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 	private static final String TAG_SOURCE_Y = "sourceY";
 	private static final String TAG_SOURCE_Z = "sourcesZ";
 	private int attackTimer;
-
+	private int teleportTime;
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
 			BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
@@ -132,26 +134,34 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 		// Attacks
 
 		int attackRoll = ticksExisted + rand.nextInt(5);
-
-		if (attackRoll % 50 * diffMult == 0) {
-			if (getAttackTarget() != null) {
+		if (this.deathTicks <= 0) {
+			if (attackRoll % 50 * diffMult == 0) {
 				this.shock(getAttackTarget());
 			}
-		} else if (attackRoll % 130 * diffMult == 0) {
-			if (getAttackTarget() != null) {
+			if (attackRoll % 100 * diffMult == 0) {
 				this.beyondFlames(getAttackTarget());
 			}
-		}
+			if (attackRoll % 120 == 0) {
+				this.massBlind(getAttackTarget());
+			}
 
-		// Removed Starstrikes to use on the seraphim, still has the one missle spawn
-		// though
-		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
-				this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-		this.world.addParticle(ParticleTypes.REVERSE_PORTAL, this.getPosX() + (double) f,
-				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			// Random Teleportation
+			if (this.getAttackTarget() != null) {
+				if (this.teleportTime++ >= rand.nextInt(1000) && this.teleportToEntity(this)) {
+					this.teleportTime = 0;
+				}
+			}
+
+			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
+			// though
+			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
+					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
+					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 	@Override
@@ -172,8 +182,67 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	@Override
 	protected void updateAITasks() {
+		/*
+		 * if (this.rand.nextFloat() * 30.0F < (10 - 0.4F) * 2.0F) {
+		 * this.teleportRandomly(); }
+		 */
 		super.updateAITasks();
 		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+	}
+
+	/**
+	 * Teleport to a random nearby position
+	 */
+	protected boolean teleportRandomly() {
+		if (!this.world.isRemote() && this.isAlive()) {
+			double d0 = this.getPosX() + (this.rand.nextDouble() - 0.5D) * 16.0D;
+			double d1 = this.getPosY() + (double) (this.rand.nextInt(64) - 32);
+			double d2 = this.getPosZ() + (this.rand.nextDouble() - 0.5D) * 16.0D;
+			return this.teleportTo(d0, d1, d2);
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Teleport to another entity
+	 */
+	private boolean teleportToEntity(Entity target) {
+		Vector3d vector3d = new Vector3d(this.getPosX() - target.getPosX(),
+				this.getPosYHeight(0.5D) - target.getPosYEye(), this.getPosZ() - target.getPosZ());
+		vector3d = vector3d.normalize();
+		double d1 = this.getPosX() + (this.rand.nextDouble() - 0.5D) * 8.0D - vector3d.x * 8.0D;
+		double d2 = this.getPosY() + (double) (this.rand.nextInt(16) - 8) - vector3d.y * 8.0D;
+		double d3 = this.getPosZ() + (this.rand.nextDouble() - 0.5D) * 8.0D - vector3d.z * 8.0D;
+		return this.teleportTo(d1, d2, d3);
+	}
+
+	/**
+	 * Teleport the boss
+	 */
+	private boolean teleportTo(double x, double y, double z) {
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(x, y, z);
+		while (blockpos$mutable.getY() > 0
+				&& !this.world.getBlockState(blockpos$mutable).getMaterial().blocksMovement()) {
+			blockpos$mutable.move(Direction.DOWN);
+		}
+		BlockState blockstate = this.world.getBlockState(blockpos$mutable);
+		boolean flag = blockstate.getMaterial().blocksMovement();
+		boolean flag1 = blockstate.getFluidState().isTagged(FluidTags.WATER);
+		if (flag && !flag1) {
+			EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
+			if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
+				return false;
+			boolean flag2 = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
+			if (flag2 && !this.isSilent()) {
+				this.world.playSound((PlayerEntity) null, this.prevPosX, this.prevPosY, this.prevPosZ,
+						SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
+				this.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+			}
+			return flag2;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -226,20 +295,6 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	}
 
-	@Override
-	public ActionResultType func_230254_b_(PlayerEntity player, Hand handIn) {
-		ItemStack itemstack = player.getHeldItem(handIn);
-		if (itemstack.getItem() == ItemInit.cured_clay_flask.get()) {
-			player.playSound(SoundEvents.ENTITY_BLAZE_AMBIENT, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.fill(itemstack, player,
-					ItemInit.breath_of_the_beast.get().getDefaultInstance());
-			player.setHeldItem(handIn, itemstack1);
-			return ActionResultType.func_233537_a_(this.world.isRemote);
-		} else {
-			return super.func_230254_b_(player, handIn);
-		}
-	}
-
 	// Death
 	/**
 	 * handles entity death timer, experience orb and particle creation
@@ -251,11 +306,27 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
-					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			this.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
+			if (this.deathTicks >= 70) {
+				this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + (double) f,
+						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			}
 			if (this.deathTicks >= 100) {
+				this.world.addParticle(ParticleTypes.SOUL, this.getPosX() + (double) f,
+						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			}
+			if (this.deathTicks >= 130) {
+				this.world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, this.getPosX() + (double) f,
+						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			}
+			if (this.deathTicks > 180) {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
+						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			}
+			if (this.deathTicks >= 200) {
+				this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
@@ -264,7 +335,7 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 		if (!this.world.isRemote && deathTicks % (15 + rand.nextInt(4)) == 0) {
 			ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(),
-					new ItemStack(ItemInit.discared_gear.get()));
+					new ItemStack(ItemInit.vitreous_humor.get()));
 			world.addEntity(outputItem);
 		}
 
@@ -314,28 +385,32 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 	}
 
 	private void shock(Entity target) {
-		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
-		this.setMotion(0, 0, 0);
-		Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
-		Vector3 endVec = Vector3.fromEntityCenter(target);
-		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
-		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-		HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-		if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(7)) {
-			target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
+		if (target != null) {
+			playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
+			this.setMotion(0, 0, 0);
+			Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
+			Vector3 endVec = Vector3.fromEntityCenter(target);
+			HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
+			HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+			HutosMod.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(7)) {
+				target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
+			}
 		}
 	}
 
 	private void beyondFlames(Entity target) {
-		playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .25F, 1f);
-		setFlame(target.getPosition().add(2, 0, 0));
-		setFlame(target.getPosition().add(-2, 0, 0));
-		setFlame(target.getPosition().add(0, 0, 2));
-		setFlame(target.getPosition().add(0, 0, -2));
-		setFlame(target.getPosition().add(-1, 0, 1));
-		setFlame(target.getPosition().add(1, 0, -1));
-		setFlame(target.getPosition().add(-1, 0, -1));
-		setFlame(target.getPosition().add(1, 0, 1));
+		if (target != null) {
+			playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .25F, 1f);
+			setFlame(target.getPosition().add(2, 0, 0));
+			setFlame(target.getPosition().add(-2, 0, 0));
+			setFlame(target.getPosition().add(0, 0, 2));
+			setFlame(target.getPosition().add(0, 0, -2));
+			setFlame(target.getPosition().add(-1, 0, 1));
+			setFlame(target.getPosition().add(1, 0, -1));
+			setFlame(target.getPosition().add(-1, 0, -1));
+			setFlame(target.getPosition().add(1, 0, 1));
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -346,14 +421,13 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 	}
 
 	@SuppressWarnings("unused")
-	private void greatHowl() {
-		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
-		this.setMotion(0, 0, 0);
-		this.setMotion(0, 0, 0);
-		this.setMotion(0, 0, 0);
-		this.setMotion(0, 0, 0);
-		repel(world, new AxisAlignedBB(this.getPositionVec().add(-8, -8, -8), this.getPositionVec().add(8, 8, 8)),
-				this.getPositionVec().getX() + 0.5, this.getPositionVec().getY(), this.getPositionVec().getZ() + 0.5);
+	private void massBlind(Entity target) {
+		if (target != null) {
+			if (target instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) target;
+				player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
+			}
+		}
 	}
 
 	public void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {

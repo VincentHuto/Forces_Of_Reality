@@ -1,6 +1,6 @@
 package com.huto.hutosmod.models.entity;
 
-import com.huto.hutosmod.entities.EntityDreamWalker;
+import com.huto.hutosmod.entities.EntityTulpa;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -8,17 +8,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ModelDreamWalker extends PlayerModel<EntityDreamWalker> {
-
-	public ModelDreamWalker() {
-
+public class ModelTulpa extends PlayerModel<EntityTulpa> {
+	public ModelTulpa() {
 		super(0.3f, Minecraft.getInstance().getRenderManager().getSkinMap().get("default") != null ? false : true);
 		textureWidth = 64;
 		textureHeight = 64;
 	}
 
 	@Override
-	public void setRotationAngles(EntityDreamWalker entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+	public void setRotationAngles(EntityTulpa entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 	}

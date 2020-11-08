@@ -33,6 +33,7 @@ public class CovenPageLib {
 	public static String SELF_PAGE_2 = "title.coventome.self.page.2.text";
 	public static String SELF_PAGE_3 = "title.coventome.self.page.3.text";
 	public static String SELF_PAGE_4 = "title.coventome.self.page.4.text";
+	public static String SELF_PAGE_5 = "title.coventome.self.page.5.text";
 
 	// HASTUR
 	public static String HASTUR_PAGE_1 = "title.coventome.hastur.page.1.text";
@@ -88,9 +89,10 @@ public class CovenPageLib {
 				new ItemStack(ItemInit.rune_blank.get()), I18n.format(SELF_PAGE_3)));
 		SelfPageList.add(new GuiCovenPage(4, EnumCovenants.SELF, "Escaping the pull", "The whole of the Law",
 				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(SELF_PAGE_4)));
-
+		SelfPageList.add(new GuiCovenImagePage(5, EnumCovenants.SELF, "Tulpa", "Inner Self", SELF_PAGE_5,
+				new GuiTomeImage(new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/self/tulpa.png"),
+						0, 0, 104, 104, 0.00970625F)));
 		// HASTUR
-
 		HasturPageList.add(new GuiCovenImagePage(1, EnumCovenants.HASTUR, "Hasturs", "Altar", HASTUR_PAGE_1,
 				new GuiTomeImage(
 						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/hastur/altar.png"), 0, 0,
@@ -144,7 +146,6 @@ public class CovenPageLib {
 				new GuiTomeImage(
 						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/altar.png"), 0, 0,
 						104, 104, 0.00970625F)));
-
 		MachinePageList.add(new GuiCovenPage(2, EnumCovenants.MACHINE, "The World of Machines", "Facts and Logic",
 				new ItemStack(ItemInit.auric_ingot.get()), I18n.format(MACHINE_PAGE_2)));
 		MachinePageList.add(new GuiCovenPage(3, EnumCovenants.MACHINE, "Sentient Machines", "T-1000",
@@ -156,12 +157,11 @@ public class CovenPageLib {
 				new GuiTomeImage(
 						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/spark.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenImagePage(6, EnumCovenants.MACHINE, "Malformed Automaton", "The Failed Creation",
-				MACHINE_PAGE_6,
+		MachinePageList.add(new GuiCovenImagePage(6, EnumCovenants.MACHINE, "Malformed Automaton",
+				"The Failed Creation", MACHINE_PAGE_6,
 				new GuiTomeImage(
-						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/automaton.png"), 0, 0,
-						104, 102, 0.0096625F)));
-		
+						new ResourceLocation(HutosMod.MOD_ID, "textures/gui/pageimages/coven/machina/automaton.png"), 0,
+						0, 104, 102, 0.0096625F)));
 
 		// Adding Chapters
 		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList,
@@ -177,7 +177,6 @@ public class CovenPageLib {
 		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.SELF, new ItemStack(ItemInit.purging_stone.get())));
 
 		// Adding the table of contents to each chapter
-
 		HasturPageList.add(0, TOCPageList.get(0));
 		EldritchPageList.add(0, TOCPageList.get(1));
 		AscendentPageList.add(0, TOCPageList.get(2));

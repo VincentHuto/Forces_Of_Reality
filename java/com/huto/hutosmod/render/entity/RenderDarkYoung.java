@@ -3,6 +3,8 @@ package com.huto.hutosmod.render.entity;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.EntityDarkYoung;
 import com.huto.hutosmod.models.entity.ModelDarkYoung;
+import com.huto.hutosmod.render.entity.layer.LayerDarkYoungDeath;
+import com.huto.hutosmod.render.entity.layer.LayerDarkYoungPendant;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -22,15 +24,14 @@ public class RenderDarkYoung extends MobRenderer<EntityDarkYoung, ModelDarkYoung
 
 	public RenderDarkYoung(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelDarkYoung(), 1.5f);
+		this.addLayer(new LayerDarkYoungPendant(this));
+		this.addLayer(new LayerDarkYoungDeath(this));
 	}
 
 	@Override
 	public void render(EntityDarkYoung entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
-		matrixStackIn.push();
-		matrixStackIn.pop();
 
 	}
 
@@ -40,6 +41,11 @@ public class RenderDarkYoung extends MobRenderer<EntityDarkYoung, ModelDarkYoung
 			float partialTickTime) {
 		super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
 		matrixStackIn.scale(2, 2, 2);
+		if (entitylivingbaseIn.deathTicks > 0) {
+			float d = entitylivingbaseIn.deathTicks;
+			//matrixStackIn.rotate(Vector3f.YP.rotation((float) ((d*0.005)*partialTickTime)));
+			matrixStackIn.translate(0,d*0.01, 0);
+		}
 	}
 
 	@Override

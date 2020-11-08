@@ -19,6 +19,7 @@ import com.huto.hutosmod.entities.EntitySlug;
 import com.huto.hutosmod.entities.EntitySummonedBeast;
 import com.huto.hutosmod.entities.EntityTentacle;
 import com.huto.hutosmod.entities.EntityThrone;
+import com.huto.hutosmod.entities.EntityTulpa;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
 import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
@@ -75,6 +76,11 @@ public class EntityInit {
 							.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
 							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
 
+	//Self
+	public static final RegistryObject<EntityType<EntityTulpa>> tulpa = ENTITY_TYPES.register("tulpa",
+			() -> EntityType.Builder.<EntityTulpa>create(EntityTulpa::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "tulpa").toString()));
+	
 	// Hastur
 	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
@@ -201,5 +207,7 @@ public class EntityInit {
 				EntityMalformedAutomaton.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.dark_young.get(),
 				EntityDarkYoung.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.tulpa.get(),
+				EntityTulpa.setAttributes().create());
 	}
 }

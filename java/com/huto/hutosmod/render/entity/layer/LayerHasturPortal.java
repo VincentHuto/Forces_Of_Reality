@@ -36,63 +36,63 @@ public class LayerHasturPortal extends LayerRenderer<EntityHastur, ModelHastur> 
 	@Override
 	public void render(MatrixStack matrix, IRenderTypeBuffer buf, int packedLight, EntityHastur entity, float limbSwing,
 			float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		matrix.push();
-		PlayerEntity player = Minecraft.getInstance().player;
-		Vector3d playerV = player.getEyePosition(partialTicks);
-		Vector3d portal = entity.getPositionVec();
+		if (entity.deathTicks > 0) {
+			matrix.push();
+			PlayerEntity player = Minecraft.getInstance().player;
+			Vector3d playerV = player.getEyePosition(partialTicks);
+			Vector3d portal = entity.getPositionVec();
+			float scale = 0.35F;
+			double yOffset = -1.5;
+			matrix.translate(0, yOffset, 0);
+			matrix.rotate(new Quaternion(new Vector3f(0, 1, 0), 90, true));
+			matrix.rotate(new Quaternion(new Vector3f(0, 1, 0), 180F - (float) angleOf(portal, playerV), true));
 
-		float scale = 0.35F;
-		double yOffset = -1.5;
+			float progress = ((entity.ticksExisted + partialTicks) % 90) / 90F;
+			scale += (float) Math.cos(2 * Math.PI * progress) / 6F;
 
-		matrix.translate(0, yOffset, 0);
-		matrix.rotate(new Quaternion(new Vector3f(0, 1, 0), 90, true));
-		matrix.rotate(new Quaternion(new Vector3f(0, 1, 0), 180F - (float) angleOf(portal, playerV), true));
+			if (entity.getClientTicks() == -1) {
+				entity.setClientTicks(entity.ticksExisted);
+			}
 
-		float progress = ((entity.ticksExisted + partialTicks) % 90) / 90F;
-		scale += (float) Math.cos(2 * Math.PI * progress) / 6F;
+			if (entity.getClientTicks() != -1)
 
-		if (entity.getClientTicks() == -1) {
-			entity.setClientTicks(entity.ticksExisted);
-		}
-
-		if (entity.getClientTicks() != -1)
-
-		{
-			progress = (entity.ticksExisted - entity.getClientTicks() + partialTicks) / 40;
-			if (progress >= 1.3F)
-				entity.setClientTicks(-1);
-			else {
-				if (progress <= 0.45F) {
-					float sin = (float) -Math.sin(Math.PI * progress / 0.45F) / 5F;
-					scale *= (1 + sin);
-				} else {
-					float sin = (float) Math.sin(Math.PI * (progress - 0.35F) * (progress - 0.35F));
-					float sinSq = sin * sin;
-					scale *= (1 + sinSq);
+			{
+				progress = (entity.ticksExisted - entity.getClientTicks() + partialTicks) / 40;
+				if (progress >= 1.3F)
+					entity.setClientTicks(-1);
+				else {
+					if (progress <= 0.45F) {
+						float sin = (float) -Math.sin(Math.PI * progress / 0.45F) / 5F;
+						scale *= (1 + sin);
+					} else {
+						float sin = (float) Math.sin(Math.PI * (progress - 0.35F) * (progress - 0.35F));
+						float sinSq = sin * sin;
+						scale *= (1 + sinSq);
+					}
 				}
 			}
+
+			matrix.scale(scale, scale, 1);
+
+			// this.renderManager.textureManager.bindTexture(this.getEntityTexture(entity));
+			IVertexBuilder builder = buf.getBuffer(RenderType.getEntityTranslucent(getEntityTexture(entity)));
+			int color = BossColorMap.getColor(entity.getBossInfo());
+			int r = color >> 16 & 255, g = color >> 8 & 255, b = color & 255;
+			builder.pos(matrix.getLast().getMatrix(), -1, -1, 0).color(r, g, b, 255).tex(1, 1)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 1, 0).endVertex();
+			builder.pos(matrix.getLast().getMatrix(), -1, 1, 0).color(r, g, b, 255).tex(1, 0)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 1, 0).endVertex();
+			builder.pos(matrix.getLast().getMatrix(), 1, 1, 0).color(r, g, b, 255).tex(0, 0)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 1, 0).endVertex();
+			builder.pos(matrix.getLast().getMatrix(), 1, -1, 0).color(r, g, b, 255).tex(0, 1)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 1, 0).endVertex();
+
+			matrix.pop();
 		}
-
-		matrix.scale(scale, scale, 1);
-
-		// this.renderManager.textureManager.bindTexture(this.getEntityTexture(entity));
-		IVertexBuilder builder = buf.getBuffer(RenderType.getEntityTranslucent(getEntityTexture(entity)));
-		int color = BossColorMap.getColor(entity.getBossInfo());
-		int r = color >> 16 & 255, g = color >> 8 & 255, b = color & 255;
-		builder.pos(matrix.getLast().getMatrix(), -1, -1, 0).color(r, g, b, 255).tex(1, 1)
-				.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight).normal(matrix.getLast().getNormal(), 0, 1, 0)
-				.endVertex();
-		builder.pos(matrix.getLast().getMatrix(), -1, 1, 0).color(r, g, b, 255).tex(1, 0)
-				.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight).normal(matrix.getLast().getNormal(), 0, 1, 0)
-				.endVertex();
-		builder.pos(matrix.getLast().getMatrix(), 1, 1, 0).color(r, g, b, 255).tex(0, 0)
-				.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight).normal(matrix.getLast().getNormal(), 0, 1, 0)
-				.endVertex();
-		builder.pos(matrix.getLast().getMatrix(), 1, -1, 0).color(r, g, b, 255).tex(0, 1)
-				.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight).normal(matrix.getLast().getNormal(), 0, 1, 0)
-				.endVertex();
-
-		matrix.pop();
 	}
 
 	public static double angleOf(Vector3d p1, Vector3d p2) {

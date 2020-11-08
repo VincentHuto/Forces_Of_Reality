@@ -185,7 +185,9 @@
 	"item.hutosmod.spawn_egg_throne": "Spawn Throne",
 	"item.hutosmod.spawn_egg_seraphim": "Spawn Holy Guardian Seraph",
 	"item.hutosmod.spawn_egg_summoned_beast": "Spawn Summoned Beast",
-	"item.hutosmod.spawn_egg_malformed_automaton": "Spawn Dark Young",
+	"item.hutosmod.spawn_egg_malformed_automaton": "Spawn Malformed Automaton",
+	"item.hutosmod.spawn_egg_dark_young": "Spawn Dark Young",
+	"item.hutosmod.spawn_egg_tulpa": "Spawn Tulpa",
 	"enchantment.hutosmod.bow_blade_power": "Bow Blade Power",
 	"enchantment.hutosmod.bow_blade_sharpness": "Bow Blade Sharpness",
 	"enchantment.hutosmod.bow_blade_smite": "Bow Blade Smite",
@@ -236,6 +238,8 @@
 	"block.hutosmod.karmic_altar": "Karmic Altar",
 	"block.hutosmod.occular_heap": "Occular Heap",
 	"block.hutosmod.untold_easel": "Untold Easel",
+	"block.hutosmod.anti_bonsai": "Bonsai",
+	"block.hutosmod.mystic_bonsai": "Bonsai",
 	"block.hutosmod.vibratory_fuser": "Vibratory Conglomerator",
 	"block.hutosmod.thermal_influxer": "Thermal Influxer",
 	"block.hutosmod.karmic_extractor": "Karmic Extractor",
@@ -291,6 +295,7 @@
 	"entity.hutosmod.tentacle": "Tentacle",
 	"entity.hutosmod.beast_from_beyond": "The Beast From Beyond",
 	"entity.hutosmod.dark_young": "Dark Young; One of a Thousand",
+	"entity.hutosmod.tulpa": "Self Reflection; Tulpa",
 	"button.runeInv": "Mind Runes",
 	"name.CONTRACT": "Contract Runes",
 	"name.RUNE": "Base Rune",
@@ -375,5 +380,6 @@
 	"title.coventome.self.page.1.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true",
 	"title.coventome.self.page.2.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
 	"title.coventome.self.page.3.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
-	"title.coventome.self.page.4.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with."
+	"title.coventome.self.page.4.text": "The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.",
+	"title.coventome.self.page.5.text": "Tulpa"
 }

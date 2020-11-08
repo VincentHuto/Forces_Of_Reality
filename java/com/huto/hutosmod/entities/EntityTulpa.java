@@ -1,10 +1,7 @@
 package com.huto.hutosmod.entities;
 
-import java.util.List;
-
-import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
-import com.huto.hutosmod.entities.projectiles.EntityJudgement;
-import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
+import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
+import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.sounds.SoundHandler;
@@ -12,9 +9,7 @@ import com.huto.hutosmod.sounds.SoundHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -26,7 +21,6 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -39,10 +33,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -52,71 +44,25 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSpawnData {
+public class EntityTulpa extends MonsterEntity implements IEntityAdditionalSpawnData {
 
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
 	private static final String TAG_SOURCE_Z = "sourcesZ";
-
+	protected int clientTickCounter = -1;
 	public int deathTicks;
-	private float heightOffset = 0.5F;
-	private int heightOffsetUpdateTime;
-	public float wingRotation;
-	public float destPos;
-	public float oFlapSpeed;
-	public float oFlap;
-	public float wingRotDelta = 1.0F;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
-			BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+			BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntitySeraphim(EntityType<? extends EntitySeraphim> type, World worldIn) {
+	public EntityTulpa(EntityType<? extends EntityTulpa> type, World worldIn) {
 		super(type, worldIn);
 
 	}
 
 	@Override
-	public boolean onLivingFall(float distance, float damageMultiplier) {
-		return false;
-	}
-
-	@Override
-	public void livingTick() {
-
-		if (!this.onGround && this.getMotion().y < 0.0D) {
-			this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
-		}
-
-		super.livingTick();
-		this.oFlap = this.wingRotation;
-		this.oFlapSpeed = this.destPos;
-		this.destPos = (float) ((double) this.destPos + (double) (4) * 0.3D);
-		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
-		if (!this.onGround) {
-			this.wingRotDelta = 4.0F;
-		} else {
-			this.wingRotDelta = 1.0F;
-		}
-		this.wingRotDelta = (float) ((double) this.wingRotDelta * 0.9D);
-		Vector3d vector3d = this.getMotion();
-		if (!this.onGround) {
-			this.setMotion(vector3d.mul(1.0D, 0.6D, 1.0D));
-		} else {
-			this.setMotion(vector3d.mul(1.0D, 0.6D, 1.0D));
-
-		}
-		this.wingRotation += this.wingRotDelta * 0.1F;
-		if (wingRotation > 1000) {
-			wingRotation = 0;
-		}
-	}
-
-	int timer = 200;
-
-	@Override
 	public void tick() {
 		super.tick();
-
 		float diffMult = 1f;
 
 		// Protection
@@ -132,105 +78,80 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 		}
 
 		// Attacks
-		int attackRoll = ticksExisted + rand.nextInt(5);
 		if (this.deathTicks <= 0) {
-
-			if (this.ticksExisted % 10 - rand.nextInt(10) > 20) {
-				pullPlayer(
-						new AxisAlignedBB(this.getPositionVec().add(-15, -15, -15),
-								this.getPositionVec().add(15, 15, 15)),
-						this.getPositionVec().getX() + 0.5, this.getPositionVec().getY() + 0.5,
-						this.getPositionVec().getZ() + 0.5);
-			}
-
-			if (attackRoll % 100 * diffMult == 0) {
+			int attackRoll = ticksExisted + rand.nextInt(5);
+			if (attackRoll % 50 * diffMult == 0) {
 				this.spawnMissile();
-			} else if (attackRoll % 110 * diffMult == 0) {
-				this.spawnMissileVortex(rand.nextInt(15));
-			} else if (attackRoll % 130 * diffMult == 0) {
-				this.summonThroneAid(rand.nextInt(2) + 2);
-			} else if (attackRoll % 160 * diffMult == 0) {
-				this.summonJudgement(rand.nextInt(3) + 3);
-
 			}
-			if (!this.isOnGround()) {
+			if (this.isOnGround()) {
 				if (attackRoll % 100 * diffMult == 0) {
-					this.summonHolyFlare(rand.nextInt(1) + 3);
-					playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+					this.summonEldritchGrip(rand.nextInt(1) + 3);
 				}
 			}
 
+			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
+			// though
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			this.world.addParticle(ParticleTypes.ENCHANT, this.getPosX() + (double) f,
+			this.world.addParticle(ParticleTypes.WARPED_SPORE, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-			this.world.addParticle(ParticleTypes.REVERSE_PORTAL, this.getPosX() + (double) f,
+			this.world.addParticle(ParticleTypes.CRIMSON_SPORE, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
 	@Override
-	public ItemStack getHeldItemOffhand() {
-		return new ItemStack(ItemInit.destruction_orb.get(), 1);
-	}
-
-	@Override
 	protected void registerGoals() {
-
+		/*
+		 * this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		 * this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+		 */
 		this.applyEntityAI();
 		this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 0.12));
 		this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 3d, 5));
 		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1d, true));
 		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.2f));
 		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(4, new LookAtGoal(this, AbstractVillagerEntity.class, 6.0F));
 
 	}
 
 	protected void applyEntityAI() {
 		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, true));
-
+		/*
+		 * this.targetSelector.addGoal(1, new NearestAttackableHasturAttacks<>(this,
+		 * PlayerEntity.class, true));
+		 * 
+		 * 
+		 * this.targetSelector.addGoal(1, new NearestAttackableTentacle<>(this,
+		 * PlayerEntity.class, rand.nextInt(2), true));
+		 */
 	}
 
 	public static AttributeModifierMap.MutableAttribute setAttributes() {
 		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
 	@Override
 	protected void updateAITasks() {
-		--this.heightOffsetUpdateTime;
-		if (this.heightOffsetUpdateTime <= 0) {
-			this.heightOffsetUpdateTime = 100;
-			this.heightOffset = 0.5F + (float) this.rand.nextGaussian() * 3.0F;
-		}
-
-		LivingEntity livingentity = this.getAttackTarget();
-		if (livingentity != null && livingentity.getPosYEye() > this.getPosYEye() + (double) this.heightOffset
-				&& this.canAttack(livingentity)) {
-			Vector3d vector3d = this.getMotion();
-			this.setMotion(this.getMotion().add(0.0D, ((double) 0.3F - vector3d.y) * (double) 0.3F, 0.0D));
-			this.isAirBorne = true;
-		}
-
 		super.updateAITasks();
-		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+		this.getBossInfo().setPercent(this.getHealth() / this.getMaxHealth());
 
 	}
 
 	@Override
 	public void addTrackingPlayer(ServerPlayerEntity player) {
 		super.addTrackingPlayer(player);
-		this.bossInfo.addPlayer(player);
+		this.getBossInfo().addPlayer(player);
 	}
 
 	@Override
 	public void removeTrackingPlayer(ServerPlayerEntity player) {
 		super.removeTrackingPlayer(player);
-		this.bossInfo.removePlayer(player);
+		this.getBossInfo().removePlayer(player);
 	}
 
 	@Override
@@ -240,24 +161,24 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundHandler.ENTITY_SERAPHIM_AMBIENT;
+		return SoundHandler.ENTITY_HASTUR_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundHandler.ENTITY_SERAPHIM_HURT;
+		return SoundHandler.ENTITY_HASTUR_HURT;
 
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.ENTITY_SERAPHIM_DEATH;
+		return SoundHandler.ENTITY_HASTUR_DEATH;
 
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.ENTITY_HOGLIN_STEP, 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -286,22 +207,16 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 			if (this.deathTicks >= 100) {
-				this.world.addParticle(ParticleTypes.WHITE_ASH, this.getPosX() + (double) f,
-						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-			}
-
-			if (this.deathTicks >= 150) {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
-
 		}
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);
 
 		if (!this.world.isRemote && deathTicks % (15 + rand.nextInt(4)) == 0) {
 			ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(),
-					new ItemStack(ItemInit.seraph_feather.get()));
+					new ItemStack(ItemInit.unsettling_fabric.get()));
 			world.addEntity(outputItem);
 		}
 
@@ -322,34 +237,10 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 	}
 
 	// Attack types
-	public void pullPlayer(AxisAlignedBB effectBounds, double x, double y, double z) {
-		List<Entity> list = world.getEntitiesWithinAABB(Entity.class, effectBounds);
-		for (Entity ent : list) {
-			if (ent instanceof PlayerEntity) {
-				Vector3d p = new Vector3d(x, y, z);
-				Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
-				double distance = p.distanceTo(t) + 0.1D;
-				Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
-				ent.setMotion(-r.x / 10.2D / distance * 3.3, -r.y / 10.2D / distance * 3.3,
-						-r.z / 10.2D / distance * 3.3);
-				if (world.isRemote) {
-					for (int countparticles = 0; countparticles <= 1; ++countparticles) {
-						ent.world.addParticle(ParticleTypes.PORTAL,
-								ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
-								ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
-										- (double) ent.getYOffset() - 0.5,
-								ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
-								0.0D);
-					}
-				}
-			}
-		}
-	}
-
-	public void summonThroneAid(int numTent) {
-		EntityThrone[] tentArray = new EntityThrone[numTent];
+	public void summonTentacleAid(int numTent) {
+		EntityTentacle[] tentArray = new EntityTentacle[numTent];
 		for (int i = 0; i < numTent; i++) {
-			tentArray[i] = new EntityThrone(EntityInit.throne.get(), world);
+			tentArray[i] = new EntityTentacle(EntityInit.tentacle.get(), world);
 			tentArray[i].setTentacleType(rand.nextInt(4));
 			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
@@ -357,22 +248,20 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
 					this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
-				playSound(SoundHandler.ENTITY_SERAPHIM_THRONE, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 				world.addEntity(tentArray[i]);
 
 			}
 		}
 	}
 
-	public void summonHolyFlare(int numTent) {
-		EntityHolyFlare[] tentArray = new EntityHolyFlare[numTent];
+	public void summonEldritchGrip(int numTent) {
+		EntityEldritchGrip[] tentArray = new EntityEldritchGrip[numTent];
 		for (int i = 0; i < numTent; i++) {
-			tentArray[i] = new EntityHolyFlare(EntityInit.holy_flare.get(), world);
+			tentArray[i] = new EntityEldritchGrip(EntityInit.eldritch_grip.get(), world);
 			float xMod = (this.rand.nextFloat() - 0.5F) * 16.0F;
-			float yMod = (this.rand.nextFloat() - 0.5F) * 2.0F;
+			// float yMod = (this.rand.nextFloat() - 0.5F) * 2.0F;
 			float zMod = (this.rand.nextFloat() - 0.5F) * 16.0F;
-			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
-					this.getPosZ() + 0.5 + zMod);
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 0.1, this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
 				world.addEntity(tentArray[i]);
 
@@ -381,49 +270,28 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 	}
 
 	private void spawnMissile() {
-		EntityStarStrike missile = new EntityStarStrike(this, true);
+		EntityTrackingOrb missile = new EntityTrackingOrb(this, true);
 		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
 				this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1), this.getPosZ() + (Math.random() - 0.5 * 0.1));
 		if (missile.findTarget()) {
 			playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
-
 			world.addEntity(missile);
 		}
 	}
 
-	public void summonJudgement(int numMiss) {
-		EntityJudgement[] missArray = new EntityJudgement[numMiss];
-		for (int i = 0; i < numMiss; i++) {
-			missArray[i] = new EntityJudgement(this, true);
+	public void summonDenizenAid(int numTent) {
+		EntityDenizen[] tentArray = new EntityDenizen[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityDenizen(EntityInit.denizen.get(), world);
+			tentArray[i].setDenizenType(rand.nextInt(7));
 			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			missArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
 					this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
-				playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+				world.addEntity(tentArray[i]);
 
-				world.addEntity(missArray[i]);
-
-			}
-		}
-	}
-
-	private void spawnMissileVortex(int numMiss) {
-
-		EntityStarStrike[] missArray = new EntityStarStrike[numMiss];
-		for (int i = 0; i < numMiss; i++) {
-			missArray[i] = new EntityStarStrike(this, true);
-
-			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			missArray[i].setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1) + 0.5 + xMod,
-					this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1) + yMod,
-					this.getPosZ() + (Math.random() - 0.5 * 0.1) + 0.5 + zMod);
-			if (missArray[i].findTarget()) {
-				playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
-				world.addEntity(missArray[i]);
 			}
 		}
 	}
@@ -431,7 +299,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 	@Override
 	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
 		super.dropSpecialItems(source, looting, recentlyHitIn);
-		ItemEntity itementity = this.entityDropItem(ItemInit.crossed_keys.get());
+		ItemEntity itementity = this.entityDropItem(ItemInit.yellow_sign.get());
 		if (itementity != null) {
 			itementity.setNoDespawn();
 		}
@@ -498,24 +366,36 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntitySeraphim seraph;
+		private final EntityTulpa hastur;
 
-		public HasturMusic(EntitySeraphim seraph) {
-			super(SoundHandler.ENTITY_SERAPHIM_MUSIC, SoundCategory.RECORDS);
+		public HasturMusic(EntityTulpa hastur) {
+			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
 
-			this.seraph = seraph;
-			this.x = seraph.getSource().getX();
-			this.y = seraph.getSource().getY();
-			this.z = seraph.getSource().getZ();
+			this.hastur = hastur;
+			this.x = hastur.getSource().getX();
+			this.y = hastur.getSource().getY();
+			this.z = hastur.getSource().getZ();
 			this.repeat = true; // TODO restore once LWJGL3/vanilla bug fixed?
 		}
 
 		@Override
 		public void tick() {
-			if (!seraph.isAlive()) {
+			if (!hastur.isAlive()) {
 				this.finishPlaying();
 			}
 		}
+	}
+
+	public int getClientTicks() {
+		return this.clientTickCounter;
+	}
+
+	public void setClientTicks(int ticks) {
+		this.clientTickCounter = ticks;
+	}
+
+	public ServerBossInfo getBossInfo() {
+		return bossInfo;
 	}
 
 }

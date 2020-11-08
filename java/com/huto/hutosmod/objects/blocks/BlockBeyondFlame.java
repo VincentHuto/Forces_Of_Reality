@@ -11,17 +11,19 @@ import com.huto.hutosmod.init.BlockInit;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.PortalSize;
 import net.minecraft.block.SixWayBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -39,7 +41,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BlockBeyondFlame extends AbstractFireBlock {
+public class BlockBeyondFlame extends Block {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_15;
 	public static final BooleanProperty NORTH = SixWayBlock.NORTH;
 	public static final BooleanProperty EAST = SixWayBlock.EAST;
@@ -50,6 +52,8 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 			.entrySet().stream().filter((facingProperty) -> {
 				return facingProperty.getKey() != Direction.DOWN;
 			}).collect(Util.toMapCollector());
+	private final float fireDamage;
+	protected static final VoxelShape shapeDown = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 	private static final VoxelShape FIRE_SHAPE_UP = Block.makeCuboidShape(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	private static final VoxelShape FIRE_SHAPE_WEST = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
 	private static final VoxelShape FIRE_SHAPE_EAST = Block.makeCuboidShape(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -59,8 +63,9 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 	private final Object2IntMap<Block> encouragements = new Object2IntOpenHashMap<>();
 	private final Object2IntMap<Block> flammabilities = new Object2IntOpenHashMap<>();
 
-	public BlockBeyondFlame(AbstractBlock.Properties builder) {
-		super(builder, 1.0F);
+	public BlockBeyondFlame(AbstractBlock.Properties builder, float fireDamageIn) {
+		super(builder);
+		this.fireDamage = fireDamageIn;
 		this.setDefaultState(
 				this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(NORTH, Boolean.valueOf(false))
 						.with(EAST, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false))
@@ -95,12 +100,6 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 		return voxelshape.isEmpty() ? shapeDown : voxelshape;
 	}
 
-	/**
-	 * Called periodically clientside on blocks near the player to show effects
-	 * (like furnace fire particles). Note that this method is unrelated to
-	 * {@link randomTick} and {@link #needsRandomTick}, and will always be called
-	 * regardless of whether the block can receive random update ticks
-	 */
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		if (rand.nextInt(24) == 0) {
@@ -165,6 +164,21 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 			}
 		}
 
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		if (!entityIn.isImmuneToFire()) {
+			entityIn.forceFireTicks(entityIn.getFireTimer() + 1);
+			if (entityIn.getFireTimer() == 0) {
+				entityIn.setFire(8);
+			}
+
+			entityIn.attackEntityFrom(DamageSource.IN_FIRE, this.fireDamage);
+		}
+
+		super.onEntityCollision(state, worldIn, pos, entityIn);
 	}
 
 	/**
@@ -254,12 +268,12 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 
 				boolean flag1 = worldIn.isBlockinHighHumidity(pos);
 				int k = flag1 ? -50 : 0;
-				this.tryCatchFire(worldIn, pos.east(), 300 + k, rand, i, Direction.WEST);
-				this.tryCatchFire(worldIn, pos.west(), 300 + k, rand, i, Direction.EAST);
-				this.tryCatchFire(worldIn, pos.down(), 250 + k, rand, i, Direction.UP);
-				this.tryCatchFire(worldIn, pos.up(), 250 + k, rand, i, Direction.DOWN);
-				this.tryCatchFire(worldIn, pos.north(), 300 + k, rand, i, Direction.SOUTH);
-				this.tryCatchFire(worldIn, pos.south(), 300 + k, rand, i, Direction.NORTH);
+				this.tryCatchFire(worldIn, pos.east(), 2 + k, rand, i, Direction.WEST);
+				this.tryCatchFire(worldIn, pos.west(), 2 + k, rand, i, Direction.EAST);
+				this.tryCatchFire(worldIn, pos.down(), 2 + k, rand, i, Direction.UP);
+				this.tryCatchFire(worldIn, pos.up(), 2 + k, rand, i, Direction.DOWN);
+				this.tryCatchFire(worldIn, pos.north(), 2 + k, rand, i, Direction.SOUTH);
+				this.tryCatchFire(worldIn, pos.south(), 2 + k, rand, i, Direction.NORTH);
 				BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 				for (int l = -1; l <= 1; ++l) {
@@ -329,6 +343,43 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 
 	}
 
+	@SuppressWarnings("deprecation")
+	public boolean canLightBlock(World world, BlockPos pos, Direction direction) {
+		BlockState blockstate = world.getBlockState(pos);
+		if (!blockstate.isAir()) {
+			return false;
+		} else {
+			return getFireForPlacement(world, pos).isValidPosition(world, pos)
+					|| shouldLightPortal(world, pos, direction);
+		}
+	}
+
+	public BlockState getFireForPlacement(IBlockReader reader, BlockPos pos) {
+		return getStateForPlacement(reader, pos);
+	}
+
+	private static boolean canLightPortal(World world) {
+		return world.getDimensionKey() == World.OVERWORLD || world.getDimensionKey() == World.THE_NETHER;
+	}
+
+	private static boolean shouldLightPortal(World world, BlockPos pos, Direction directionIn) {
+		if (!canLightPortal(world)) {
+			return false;
+		} else {
+			BlockPos.Mutable blockpos$mutable = pos.toMutable();
+			boolean flag = false;
+
+			for (Direction direction : Direction.values()) {
+				if (world.getBlockState(blockpos$mutable.setPos(pos).move(direction)).isIn(Blocks.OBSIDIAN)) {
+					flag = true;
+					break;
+				}
+			}
+
+			return flag && PortalSize.func_242964_a(world, pos, directionIn.rotateYCCW().getAxis()).isPresent();
+		}
+	}
+
 	private BlockState getFireWithAge(IWorld world, BlockPos pos, int age) {
 		BlockState blockstate = getFireForPlacement(world, pos);
 		return blockstate.isIn(BlockInit.beyond_flames.get()) ? blockstate.with(AGE, Integer.valueOf(age)) : blockstate;
@@ -364,6 +415,7 @@ public class BlockBeyondFlame extends AbstractFireBlock {
 		return this.getFireSpreadSpeed(state) > 0;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
 		worldIn.getPendingBlockTicks().scheduleTick(pos, this, getTickCooldown(worldIn.rand));
