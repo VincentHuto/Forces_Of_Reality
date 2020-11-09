@@ -286,6 +286,10 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Food
+	@SuppressWarnings("deprecation")
+	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).food(new Food.Builder().hunger(6)
+					.saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())))));
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",

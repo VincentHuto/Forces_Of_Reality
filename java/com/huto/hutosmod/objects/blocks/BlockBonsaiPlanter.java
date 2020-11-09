@@ -1,45 +1,25 @@
 package com.huto.hutosmod.objects.blocks;
 
-import java.util.List;
 import java.util.stream.Stream;
-
-import com.huto.hutosmod.font.ModTextFormatting;
-import com.huto.hutosmod.objects.blocks.util.EnumBonsaiTypes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
 
-public class BlockBonsai extends Block {
-	public static final IntegerProperty STAGE = BlockStateProperties.STAGE_0_1;
+public class BlockBonsaiPlanter extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream.of(
 			Block.makeCuboidShape(1.9999875000000022, 0, 3.9999874999999996, 4.999987500000002, 1, 6.9999875),
@@ -69,13 +49,10 @@ public class BlockBonsai extends Block {
 
 
 	private static final VoxelShape SHAPE_R = Block.makeCuboidShape(-8, 0, -7, 24, 32, 25);
-	EnumBonsaiTypes bonsaiType;
 
-	public BlockBonsai(Properties properties, EnumBonsaiTypes type) {
+	public BlockBonsaiPlanter(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
-		this.setDefaultState(this.stateContainer.getBaseState().with(STAGE, Integer.valueOf(0)));
-		this.bonsaiType = type;
 	}
 
 	@Override
@@ -121,30 +98,11 @@ public class BlockBonsai extends Block {
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder) {
 		builder.add(FACING);
-		builder.add(STAGE);
 	}
 
-	public EnumBonsaiTypes getBonsaiType() {
-		return bonsaiType;
-	}
 
-	public void setBonsaiType(EnumBonsaiTypes bonsaiType) {
-		this.bonsaiType = bonsaiType;
-	}
 
-	@Override
-	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
-			ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent(
-				TextFormatting.GREEN + "Species: " + ModTextFormatting.toProperCase(bonsaiType.name())));
-	}
-
-	public ItemStack getShearDrop() {
-		return new ItemStack(Items.AIR);
-	}
-
-	@Override
+/*	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItemMainhand();
@@ -160,5 +118,5 @@ public class BlockBonsai extends Block {
 		}
 
 	}
-
+*/
 }

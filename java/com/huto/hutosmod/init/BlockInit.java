@@ -1,26 +1,32 @@
 package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.objects.blocks.BlockAntiBonsai;
 import com.huto.hutosmod.objects.blocks.BlockAscendentAltar;
 import com.huto.hutosmod.objects.blocks.BlockAuspiciousBundle;
 import com.huto.hutosmod.objects.blocks.BlockBeyondFlame;
-import com.huto.hutosmod.objects.blocks.BlockBonsai;
+import com.huto.hutosmod.objects.blocks.BlockBonsaiPlanter;
 import com.huto.hutosmod.objects.blocks.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
 import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
 import com.huto.hutosmod.objects.blocks.BlockHasturPylon;
 import com.huto.hutosmod.objects.blocks.BlockIcoSphere;
+import com.huto.hutosmod.objects.blocks.BlockJungleBonsai;
 import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMachinaImperfecta;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
+import com.huto.hutosmod.objects.blocks.BlockMushroomBonsai;
+import com.huto.hutosmod.objects.blocks.BlockMysticBonsai;
+import com.huto.hutosmod.objects.blocks.BlockOakBonsai;
 import com.huto.hutosmod.objects.blocks.BlockOccularHeap;
 import com.huto.hutosmod.objects.blocks.BlockPassionFlower;
 import com.huto.hutosmod.objects.blocks.BlockRuneModStation;
 import com.huto.hutosmod.objects.blocks.BlockSacrificePyre;
 import com.huto.hutosmod.objects.blocks.BlockSingeriMushroom;
 import com.huto.hutosmod.objects.blocks.BlockSlimeRepelent;
+import com.huto.hutosmod.objects.blocks.BlockSpruceBonsai;
 import com.huto.hutosmod.objects.blocks.BlockStorageDrum;
 import com.huto.hutosmod.objects.blocks.BlockTeleporter;
 import com.huto.hutosmod.objects.blocks.BlockThermalInfluxer;
@@ -195,18 +201,35 @@ public class BlockInit {
 
 	// Plants
 
-	// Bonsai
-	public static final RegistryObject<Block> anti_bonsai = BLOCKS.register("anti_bonsai", () -> new BlockBonsai(
+	// Bonsais
+	
+	public static final RegistryObject<Block> bonsai_planter = BLOCKS.register("bonsai_planter", () -> new BlockBonsaiPlanter(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
+	
+	public static final RegistryObject<Block> anti_bonsai = BLOCKS.register("anti_bonsai", () -> new BlockAntiBonsai(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
 			EnumBonsaiTypes.ANTI));
-	
-	public static final RegistryObject<Block> mystic_bonsai = BLOCKS.register("mystic_bonsai", () -> new BlockBonsai(
+	public static final RegistryObject<Block> mystic_bonsai = BLOCKS.register("mystic_bonsai",
+			() -> new BlockMysticBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC));
+	public static final RegistryObject<Block> mushroom_bonsai = BLOCKS
+			.register("mushroom_bonsai",
+					() -> new BlockMushroomBonsai(Block.Properties.create(Material.ROCK)
+							.hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+							EnumBonsaiTypes.MUSHROOM));
+	public static final RegistryObject<Block> oak_bonsai = BLOCKS.register("oak_bonsai", () -> new BlockOakBonsai(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
-			EnumBonsaiTypes.MYSTIC));
+			EnumBonsaiTypes.OAK));
+	public static final RegistryObject<Block> spruce_bonzai = BLOCKS.register("spruce_bonzai",
+			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE));
+	public static final RegistryObject<Block> jungle_bonsai = BLOCKS.register("jungle_bonsai",
+			() -> new BlockJungleBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.JUNGLE));
 
+	// Misc
 	public static final RegistryObject<Block> mystic_grass = BLOCKS.register("mystic_grass",
 			() -> new TallGrassBlock(Block.Properties.from(Blocks.GRASS)));
-
 	public static final RegistryObject<Block> morel_mushroom = BLOCKS.register("morel_mushroom",
 			() -> new BlockMorelMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
@@ -315,8 +338,13 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.machine_glass.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.untold_easel.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.bonsai_planter.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonzai.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
 
 		}

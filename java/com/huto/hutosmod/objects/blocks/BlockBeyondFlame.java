@@ -268,12 +268,12 @@ public class BlockBeyondFlame extends Block {
 
 				boolean flag1 = worldIn.isBlockinHighHumidity(pos);
 				int k = flag1 ? -50 : 0;
-				this.tryCatchFire(worldIn, pos.east(), 2 + k, rand, i, Direction.WEST);
-				this.tryCatchFire(worldIn, pos.west(), 2 + k, rand, i, Direction.EAST);
-				this.tryCatchFire(worldIn, pos.down(), 2 + k, rand, i, Direction.UP);
-				this.tryCatchFire(worldIn, pos.up(), 2 + k, rand, i, Direction.DOWN);
-				this.tryCatchFire(worldIn, pos.north(), 2 + k, rand, i, Direction.SOUTH);
-				this.tryCatchFire(worldIn, pos.south(), 2 + k, rand, i, Direction.NORTH);
+				this.tryCatchFire(worldIn, pos.east(), 52 + k, rand, i, Direction.WEST);
+				this.tryCatchFire(worldIn, pos.west(), 52 + k, rand, i, Direction.EAST);
+				this.tryCatchFire(worldIn, pos.down(), 52 + k, rand, i, Direction.UP);
+				this.tryCatchFire(worldIn, pos.up(), 52 + k, rand, i, Direction.DOWN);
+				this.tryCatchFire(worldIn, pos.north(), 52 + k, rand, i, Direction.SOUTH);
+				this.tryCatchFire(worldIn, pos.south(), 52 + k, rand, i, Direction.NORTH);
 				BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 				for (int l = -1; l <= 1; ++l) {
@@ -453,6 +453,7 @@ public class BlockBeyondFlame extends Block {
 
 	public static void init() {
 		BlockBeyondFlame fireblock = (BlockBeyondFlame) BlockInit.beyond_flames.get();
+		fireblock.setFireInfo(Blocks.SAND, 5, 20);
 		fireblock.setFireInfo(Blocks.OAK_PLANKS, 5, 20);
 		fireblock.setFireInfo(Blocks.SPRUCE_PLANKS, 5, 20);
 		fireblock.setFireInfo(Blocks.BIRCH_PLANKS, 5, 20);

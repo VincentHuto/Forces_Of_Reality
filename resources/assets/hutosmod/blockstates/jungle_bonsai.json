@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/jungle_bonsai"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/jungle_bonsai",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/jungle_bonsai",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/jungle_bonsai",
+			"y": 90
+		}
+	}
+}
