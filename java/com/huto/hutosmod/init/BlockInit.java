@@ -220,7 +220,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> oak_bonsai = BLOCKS.register("oak_bonsai", () -> new BlockOakBonsai(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
 			EnumBonsaiTypes.OAK));
-	public static final RegistryObject<Block> spruce_bonzai = BLOCKS.register("spruce_bonzai",
+	public static final RegistryObject<Block> spruce_bonsai = BLOCKS.register("spruce_bonsai",
 			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE));
 	public static final RegistryObject<Block> jungle_bonsai = BLOCKS.register("jungle_bonsai",
@@ -344,7 +344,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonzai.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
 
 		}

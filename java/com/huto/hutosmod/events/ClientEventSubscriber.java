@@ -24,6 +24,7 @@ import com.huto.hutosmod.render.entity.RenderIbis;
 import com.huto.hutosmod.render.entity.RenderJudgement;
 import com.huto.hutosmod.render.entity.RenderMalformedAutomaton;
 import com.huto.hutosmod.render.entity.RenderManaDustItem;
+import com.huto.hutosmod.render.entity.RenderScuttlingOcculus;
 import com.huto.hutosmod.render.entity.RenderSeraphim;
 import com.huto.hutosmod.render.entity.RenderSlug;
 import com.huto.hutosmod.render.entity.RenderSummonedBeast;
@@ -126,6 +127,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.wolf_shot.get(), RenderWolfShot::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.scuttling_occulus.get(), RenderScuttlingOcculus::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.seraphim.get(), RenderSeraphim::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.throne.get(), RenderThrone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.judgement.get(), RenderJudgement::new);

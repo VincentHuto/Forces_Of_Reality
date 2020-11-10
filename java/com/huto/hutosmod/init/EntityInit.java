@@ -14,6 +14,7 @@ import com.huto.hutosmod.entities.EntityIbis;
 import com.huto.hutosmod.entities.EntityMalformedAutomaton;
 import com.huto.hutosmod.entities.EntityManaDustItem;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
+import com.huto.hutosmod.entities.EntityScuttlingOcculus;
 import com.huto.hutosmod.entities.EntitySeraphim;
 import com.huto.hutosmod.entities.EntitySlug;
 import com.huto.hutosmod.entities.EntitySummonedBeast;
@@ -113,6 +114,11 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityDarkYoung>> dark_young = ENTITY_TYPES.register("dark_young",
 			() -> EntityType.Builder.<EntityDarkYoung>create(EntityDarkYoung::new, EntityClassification.MONSTER)
 					.size(1.7f, 1.7f).build(new ResourceLocation(HutosMod.MOD_ID, "dark_young").toString()));
+	
+	public static final RegistryObject<EntityType<EntityScuttlingOcculus>> scuttling_occulus = ENTITY_TYPES.register("scuttling_occulus",
+			() -> EntityType.Builder.<EntityScuttlingOcculus>create(EntityScuttlingOcculus::new, EntityClassification.MONSTER)
+					.size(1f, 1f).build(new ResourceLocation(HutosMod.MOD_ID, "scuttling_occulus").toString()));
+	
 
 	// Beast
 	public static final RegistryObject<EntityType<EntityBeastFromBeyond>> beast_from_beyond = ENTITY_TYPES.register(
@@ -209,5 +215,7 @@ public class EntityInit {
 				EntityDarkYoung.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.tulpa.get(),
 				EntityTulpa.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.scuttling_occulus.get(),
+				EntityScuttlingOcculus.setAttributes().create());
 	}
 }
