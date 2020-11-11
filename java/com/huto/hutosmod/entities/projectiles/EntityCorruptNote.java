@@ -149,7 +149,7 @@ public class EntityCorruptNote extends ThrowableEntity {
 				remove();
 			}
 
-			if (evil && diffVec.mag() < 1)
+			if (evil && diffVec.mag() < 0)
 				remove();
 		}
 
@@ -175,7 +175,7 @@ public class EntityCorruptNote extends ThrowableEntity {
 		if (target != null)
 			setTarget(null);
 
-		double range = 12;
+		double range = 20;
 		AxisAlignedBB bounds = new AxisAlignedBB(getPosX() - range, getPosY() - range, getPosZ() - range,
 				getPosX() + range, getPosY() + range, getPosZ() + range);
 		@SuppressWarnings("rawtypes")

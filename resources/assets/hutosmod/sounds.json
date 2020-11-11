@@ -258,5 +258,36 @@
 				"stream": true
 			}
 		]
+	},
+	
+	"entity.dread_bot.ambient": {
+		"category": "entity",
+		"subtitle": "entity.dread_bot.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dread_bot/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.dread_bot.hurt": {
+		"category": "entity",
+		"subtitle": "entity.dread_bot.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dread_bot/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.dread_bot.death": {
+		"category": "entity",
+		"subtitle": "entity.dread_bot.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dread_bot/death",
+				"stream": true
+			}
+		]
 	}
 }

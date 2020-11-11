@@ -149,7 +149,7 @@ public class EntityStarStrike extends ThrowableEntity {
 				remove();
 			}
 
-			if (evil && diffVec.mag() < 1)
+			if (evil && diffVec.mag() < 0)
 				remove();
 		}
 
@@ -175,7 +175,7 @@ public class EntityStarStrike extends ThrowableEntity {
 		if (target != null)
 			setTarget(null);
 
-		double range = 20;
+		double range = 25;
 		AxisAlignedBB bounds = new AxisAlignedBB(getPosX() - range, getPosY() - range, getPosZ() - range,
 				getPosX() + range, getPosY() + range, getPosZ() + range);
 		@SuppressWarnings("rawtypes")

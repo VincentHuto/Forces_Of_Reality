@@ -16,6 +16,7 @@ import com.huto.hutosmod.render.entity.RenderColin;
 import com.huto.hutosmod.render.entity.RenderDarkYoung;
 import com.huto.hutosmod.render.entity.RenderDenizen;
 import com.huto.hutosmod.render.entity.RenderDenizenSage;
+import com.huto.hutosmod.render.entity.RenderDreadBot;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
 import com.huto.hutosmod.render.entity.RenderHastur;
 import com.huto.hutosmod.render.entity.RenderHasturClone;
@@ -33,6 +34,7 @@ import com.huto.hutosmod.render.entity.RenderThrone;
 import com.huto.hutosmod.render.entity.RenderTulpa;
 import com.huto.hutosmod.render.entity.layer.ThermalLayerRender;
 import com.huto.hutosmod.render.entity.projectile.RenderCorruptNote;
+import com.huto.hutosmod.render.entity.projectile.RenderDreadRocket;
 import com.huto.hutosmod.render.entity.projectile.RenderEldritchGrip;
 import com.huto.hutosmod.render.entity.projectile.RenderHolyFlare;
 import com.huto.hutosmod.render.entity.projectile.RenderPlayerTentacle;
@@ -125,6 +127,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.star_strike.get(), RenderStarStrike::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.corrupt_note.get(), RenderCorruptNote::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.wolf_shot.get(), RenderWolfShot::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket.get(), RenderDreadRocket::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.scuttling_occulus.get(), RenderScuttlingOcculus::new);
@@ -135,6 +138,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.eldritch_grip.get(), RenderEldritchGrip::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tulpa.get(), RenderTulpa::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_bot.get(), RenderDreadBot::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);

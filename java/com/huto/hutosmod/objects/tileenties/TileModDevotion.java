@@ -21,7 +21,8 @@ public class TileModDevotion extends TileEntity {
 	public int clientDevo = 0;
 	public static final String TAG_DEVO = "devotion";
 	public static final String TAG_MODIFIER = "modifier";
-	public int sacMod = 0;
+	public int sacMod = 1;
+
 	public TileModDevotion(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}

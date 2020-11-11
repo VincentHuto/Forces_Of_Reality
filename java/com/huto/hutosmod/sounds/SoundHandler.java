@@ -34,6 +34,10 @@ public class SoundHandler {
 	public static final SoundEvent ENTITY_SERAPHIM_HIT = makeSoundEvent("entity.seraphim.hit");
 	public static final SoundEvent ENTITY_SERAPHIM_FLARE = makeSoundEvent("entity.seraphim.flare");
 	public static final SoundEvent ENTITY_SERAPHIM_THRONE= makeSoundEvent("entity.seraphim.thronesummon");
+	public static final SoundEvent ENTITY_DREADBOT_AMBIENT = makeSoundEvent("entity.dread_bot.ambient");
+	public static final SoundEvent ENTITY_DREADBOT_HURT = makeSoundEvent("entity.dread_bot.hurt");
+	public static final SoundEvent ENTITY_DREADBOT_DEATH = makeSoundEvent("entity.dread_bot.death");
+	
 	
 	public static final SoundEvent ITEM_STAR_SLUG_STRIKE = makeSoundEvent("item.star_slug.strike");
 	public static final SoundEvent ITEM_STAR_SLUG_STORM = makeSoundEvent("item.star_slug.storm");
@@ -68,9 +72,9 @@ public class SoundHandler {
 		r.register(ENTITY_SERAPHIM_HURT);
 		r.register(ENTITY_SERAPHIM_DEATH);
 		r.register(ENTITY_SERAPHIM_MUSIC);
-		r.register(ENTITY_SERAPHIM_HIT);
-		r.register(ENTITY_SERAPHIM_FLARE);
-		r.register(ENTITY_SERAPHIM_THRONE);
+		r.register(ENTITY_DREADBOT_AMBIENT);
+		r.register(ENTITY_DREADBOT_HURT);
+		r.register(ENTITY_DREADBOT_DEATH);
 
 		r.register(ITEM_STAR_SLUG_STRIKE);
 		r.register(ITEM_STAR_SLUG_STORM);

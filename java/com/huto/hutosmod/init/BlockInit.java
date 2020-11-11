@@ -202,15 +202,16 @@ public class BlockInit {
 	// Plants
 
 	// Bonsais
-	
-	public static final RegistryObject<Block> bonsai_planter = BLOCKS.register("bonsai_planter", () -> new BlockBonsaiPlanter(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
-	
+
+	public static final RegistryObject<Block> bonsai_planter = BLOCKS.register("bonsai_planter",
+			() -> new BlockBonsaiPlanter(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
+
 	public static final RegistryObject<Block> anti_bonsai = BLOCKS.register("anti_bonsai", () -> new BlockAntiBonsai(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
 			EnumBonsaiTypes.ANTI));
 	public static final RegistryObject<Block> mystic_bonsai = BLOCKS.register("mystic_bonsai",
-			() -> new BlockMysticBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+			() -> new BlockMysticBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
 					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC));
 	public static final RegistryObject<Block> mushroom_bonsai = BLOCKS
 			.register("mushroom_bonsai",
@@ -218,13 +219,13 @@ public class BlockInit {
 							.hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
 							EnumBonsaiTypes.MUSHROOM));
 	public static final RegistryObject<Block> oak_bonsai = BLOCKS.register("oak_bonsai", () -> new BlockOakBonsai(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
 			EnumBonsaiTypes.OAK));
 	public static final RegistryObject<Block> spruce_bonsai = BLOCKS.register("spruce_bonsai",
-			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
 					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE));
 	public static final RegistryObject<Block> jungle_bonsai = BLOCKS.register("jungle_bonsai",
-			() -> new BlockJungleBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+			() -> new BlockJungleBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
 					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.JUNGLE));
 
 	// Misc

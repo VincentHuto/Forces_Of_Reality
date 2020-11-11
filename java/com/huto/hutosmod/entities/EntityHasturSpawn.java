@@ -61,7 +61,7 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 	private Vector3d orbitOffset = Vector3d.ZERO;
 	private BlockPos orbitPosition = BlockPos.ZERO;
 	private EntityHasturSpawn.AttackPhase attackPhase = EntityHasturSpawn.AttackPhase.CIRCLE;
-	private static final DataParameter<Integer> SPAWN_TYPE = EntityDataManager.createKey(EntityHasturSpawn1.class,
+	private static final DataParameter<Integer> SPAWN_TYPE = EntityDataManager.createKey(EntityHasturSpawn.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
 		p_213410_0_.put(0,
@@ -96,6 +96,8 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 		this.dataManager.set(SPAWN_TYPE, type);
 	}
 
+
+
 	protected BodyController createBodyController() {
 		return new EntityHasturSpawn.BodyHelperController(this);
 	}
@@ -112,7 +114,7 @@ public class EntityHasturSpawn extends FlyingEntity implements IMob {
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(SIZE, 0);
-		// this.dataManager.register(SPAWN_TYPE, 1);
+		this.dataManager.register(SPAWN_TYPE, 1);
 	}
 
 	public void setPhantomSize(int sizeIn) {

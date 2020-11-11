@@ -6,6 +6,12 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+
+// Made with Blockbench 3.7.4
+// Exported for Minecraft version 1.15
+// Paste this class into your mod and generate all required imports
+
 
 public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 	private final ModelRenderer whole;
@@ -61,41 +67,51 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 	private final ModelRenderer eye9;
 	private final ModelRenderer eye10;
 	private final ModelRenderer eye11;
-	private final ModelRenderer rock1;
+	private final ModelRenderer bone4;
 	private final ModelRenderer cube_r18;
+	private final ModelRenderer bone5;
 	private final ModelRenderer cube_r19;
+	private final ModelRenderer rock1;
 	private final ModelRenderer cube_r20;
-	private final ModelRenderer rock5;
 	private final ModelRenderer cube_r21;
+	private final ModelRenderer cube_r22;
+	private final ModelRenderer rock5;
+	private final ModelRenderer cube_r23;
 	private final ModelRenderer rock6;
 	private final ModelRenderer rock15;
+	private final ModelRenderer bone3;
 	private final ModelRenderer rock16;
-	private final ModelRenderer cube_r22;
-	private final ModelRenderer rock14;
-	private final ModelRenderer rock18;
-	private final ModelRenderer cube_r23;
+	private final ModelRenderer bone2;
 	private final ModelRenderer cube_r24;
-	private final ModelRenderer rock7;
+	private final ModelRenderer rock14;
+	private final ModelRenderer bone7;
+	private final ModelRenderer rock18;
 	private final ModelRenderer cube_r25;
-	private final ModelRenderer rock2;
 	private final ModelRenderer cube_r26;
-	private final ModelRenderer rock17;
+	private final ModelRenderer rock7;
 	private final ModelRenderer cube_r27;
+	private final ModelRenderer rock2;
+	private final ModelRenderer cube_r28;
+	private final ModelRenderer rock17;
+	private final ModelRenderer cube_r29;
+	private final ModelRenderer bone6;
 	private final ModelRenderer rock4;
 	private final ModelRenderer rock8;
 	private final ModelRenderer rock9;
 	private final ModelRenderer rock11;
 	private final ModelRenderer rock12;
-	private final ModelRenderer cube_r28;
+	private final ModelRenderer cube_r30;
 	private final ModelRenderer rock10;
 	private final ModelRenderer rock3;
 	private final ModelRenderer rightMicroLegs;
 	private final ModelRenderer leftMicroLegs;
 	private final ModelRenderer rightForeLimb;
+	private final ModelRenderer rightClaw;
 	private final ModelRenderer leftForeLimb;
+	private final ModelRenderer leftClaw;
 	private final ModelRenderer bone;
 	private final ModelRenderer rock13;
-	private final ModelRenderer cube_r29;
+	private final ModelRenderer cube_r31;
 
 	public ModelScuttlingOcculus() {
 		textureWidth = 64;
@@ -109,6 +125,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		frontLeftLeg = new ModelRenderer(this);
 		frontLeftLeg.setRotationPoint(4.0F, -3.5F, -0.75F);
 		whole.addChild(frontLeftLeg);
+		
 
 		segment1 = new ModelRenderer(this);
 		segment1.setRotationPoint(0.0F, -0.9F, 1.0F);
@@ -119,6 +136,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment2 = new ModelRenderer(this);
 		segment2.setRotationPoint(4.75F, 0.0F, 1.0F);
 		frontLeftLeg.addChild(segment2);
+		
 
 		cube_r1 = new ModelRenderer(this);
 		cube_r1.setRotationPoint(0.3695F, 4.3964F, -1.011F);
@@ -131,6 +149,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment3 = new ModelRenderer(this);
 		segment3.setRotationPoint(3.75F, 3.5F, 0.0F);
 		frontLeftLeg.addChild(segment3);
+		
 
 		cube_r2 = new ModelRenderer(this);
 		cube_r2.setRotationPoint(-1.2502F, -0.8749F, 0.01F);
@@ -141,11 +160,13 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		frontRightLeg = new ModelRenderer(this);
 		frontRightLeg.setRotationPoint(-4.0F, -3.5F, -0.75F);
 		whole.addChild(frontRightLeg);
+		
 
 		segment10 = new ModelRenderer(this);
 		segment10.setRotationPoint(-2.8871F, -2.4269F, -0.01F);
 		frontRightLeg.addChild(segment10);
 		setRotationAngle(segment10, 0.0F, 0.0F, -0.1745F);
+		
 
 		cube_r3 = new ModelRenderer(this);
 		cube_r3.setRotationPoint(1.7964F, 3.5226F, 0.01F);
@@ -156,6 +177,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment11 = new ModelRenderer(this);
 		segment11.setRotationPoint(12.75F, 0.0F, 1.0F);
 		frontRightLeg.addChild(segment11);
+		
 
 		cube_r4 = new ModelRenderer(this);
 		cube_r4.setRotationPoint(-17.7876F, 4.4985F, -1.001F);
@@ -167,6 +189,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment12 = new ModelRenderer(this);
 		segment12.setRotationPoint(11.75F, 3.5F, 0.0F);
 		frontRightLeg.addChild(segment12);
+		
 
 		cube_r5 = new ModelRenderer(this);
 		cube_r5.setRotationPoint(-14.1679F, -0.7728F, 0.02F);
@@ -177,11 +200,13 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		middleRightLeg = new ModelRenderer(this);
 		middleRightLeg.setRotationPoint(-4.0F, -3.5F, 1.75F);
 		whole.addChild(middleRightLeg);
+		
 
 		segment13 = new ModelRenderer(this);
 		segment13.setRotationPoint(-2.8871F, -2.4269F, -0.51F);
 		middleRightLeg.addChild(segment13);
 		setRotationAngle(segment13, 0.0F, 0.0F, -0.1745F);
+		
 
 		cube_r6 = new ModelRenderer(this);
 		cube_r6.setRotationPoint(1.7964F, 3.5226F, 0.01F);
@@ -192,6 +217,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment14 = new ModelRenderer(this);
 		segment14.setRotationPoint(12.75F, 0.0F, 0.5F);
 		middleRightLeg.addChild(segment14);
+		
 
 		cube_r7 = new ModelRenderer(this);
 		cube_r7.setRotationPoint(-17.7876F, 4.4985F, -1.001F);
@@ -209,6 +235,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment15 = new ModelRenderer(this);
 		segment15.setRotationPoint(11.75F, 3.5F, -0.5F);
 		middleRightLeg.addChild(segment15);
+		
 
 		cube_r9 = new ModelRenderer(this);
 		cube_r9.setRotationPoint(-14.1679F, -0.7728F, 0.02F);
@@ -219,11 +246,13 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		backRightLeg = new ModelRenderer(this);
 		backRightLeg.setRotationPoint(-4.0F, -3.5F, 4.25F);
 		whole.addChild(backRightLeg);
+		
 
 		segment16 = new ModelRenderer(this);
 		segment16.setRotationPoint(-2.8871F, -2.4269F, -0.01F);
 		backRightLeg.addChild(segment16);
 		setRotationAngle(segment16, 0.0F, 0.0F, -0.1745F);
+		
 
 		cube_r10 = new ModelRenderer(this);
 		cube_r10.setRotationPoint(1.7964F, 3.5226F, 0.01F);
@@ -234,6 +263,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment17 = new ModelRenderer(this);
 		segment17.setRotationPoint(12.75F, 0.0F, 1.0F);
 		backRightLeg.addChild(segment17);
+		
 
 		cube_r11 = new ModelRenderer(this);
 		cube_r11.setRotationPoint(-17.7876F, 4.4985F, -1.001F);
@@ -245,6 +275,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment18 = new ModelRenderer(this);
 		segment18.setRotationPoint(11.75F, 3.5F, 0.0F);
 		backRightLeg.addChild(segment18);
+		
 
 		cube_r12 = new ModelRenderer(this);
 		cube_r12.setRotationPoint(-14.1679F, -0.7728F, 0.02F);
@@ -255,6 +286,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		backLeftLeg = new ModelRenderer(this);
 		backLeftLeg.setRotationPoint(4.0F, -3.5F, 4.25F);
 		whole.addChild(backLeftLeg);
+		
 
 		segment4 = new ModelRenderer(this);
 		segment4.setRotationPoint(0.0F, -0.9F, 1.0F);
@@ -265,6 +297,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment5 = new ModelRenderer(this);
 		segment5.setRotationPoint(4.75F, 0.0F, 1.0F);
 		backLeftLeg.addChild(segment5);
+		
 
 		cube_r13 = new ModelRenderer(this);
 		cube_r13.setRotationPoint(0.3695F, 4.3964F, -1.011F);
@@ -281,6 +314,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment6 = new ModelRenderer(this);
 		segment6.setRotationPoint(3.75F, 3.5F, 0.0F);
 		backLeftLeg.addChild(segment6);
+		
 
 		cube_r15 = new ModelRenderer(this);
 		cube_r15.setRotationPoint(-1.2502F, -0.8749F, 0.01F);
@@ -291,6 +325,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		middleLeftLeg = new ModelRenderer(this);
 		middleLeftLeg.setRotationPoint(4.0F, -3.5F, 1.75F);
 		whole.addChild(middleLeftLeg);
+		
 
 		segment7 = new ModelRenderer(this);
 		segment7.setRotationPoint(0.0F, -0.9F, 0.5F);
@@ -301,6 +336,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment8 = new ModelRenderer(this);
 		segment8.setRotationPoint(4.75F, 0.0F, 0.5F);
 		middleLeftLeg.addChild(segment8);
+		
 
 		cube_r16 = new ModelRenderer(this);
 		cube_r16.setRotationPoint(0.3695F, 4.3964F, 0.989F);
@@ -313,6 +349,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		segment9 = new ModelRenderer(this);
 		segment9.setRotationPoint(3.75F, 3.5F, -0.5F);
 		middleLeftLeg.addChild(segment9);
+		
 
 		cube_r17 = new ModelRenderer(this);
 		cube_r17.setRotationPoint(-1.2502F, -0.8749F, 0.01F);
@@ -324,6 +361,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		head.setRotationPoint(0.0F, -2.5F, -3.75F);
 		whole.addChild(head);
 		setRotationAngle(head, 0.3491F, 0.0F, 0.0F);
+		
 
 		skull = new ModelRenderer(this);
 		skull.setRotationPoint(0.0F, 0.0F, 1.0F);
@@ -375,129 +413,178 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		head.addChild(eye11);
 		eye11.setTextureOffset(16, 25).addBox(-0.5F, -0.5864F, -3.6611F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 
+		bone4 = new ModelRenderer(this);
+		bone4.setRotationPoint(-2.8158F, -3.9228F, 5.9373F);
+		whole.addChild(bone4);
+		setRotationAngle(bone4, 2.2253F, 2.9234F, 1.0908F);
+		
+
+		cube_r18 = new ModelRenderer(this);
+		cube_r18.setRotationPoint(3.8158F, -1.5772F, -0.6873F);
+		bone4.addChild(cube_r18);
+		setRotationAngle(cube_r18, 0.0F, -0.2618F, 0.0F);
+		cube_r18.setTextureOffset(20, 36).addBox(-4.8158F, 0.5772F, -0.3127F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+
+		bone5 = new ModelRenderer(this);
+		bone5.setRotationPoint(-0.6692F, -5.7881F, 2.5984F);
+		whole.addChild(bone5);
+		setRotationAngle(bone5, 0.0F, 0.0F, -1.1781F);
+		
+
+		cube_r19 = new ModelRenderer(this);
+		cube_r19.setRotationPoint(0.6692F, 0.2881F, -0.3484F);
+		bone5.addChild(cube_r19);
+		setRotationAngle(cube_r19, -0.3491F, -1.0036F, 1.0908F);
+		cube_r19.setTextureOffset(34, 27).addBox(-1.6692F, -1.2881F, -0.6516F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+
 		rock1 = new ModelRenderer(this);
 		rock1.setRotationPoint(-2.0F, -5.5F, 4.25F);
 		whole.addChild(rock1);
 		setRotationAngle(rock1, -0.3927F, 0.0873F, 0.0F);
-
-		cube_r18 = new ModelRenderer(this);
-		cube_r18.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock1.addChild(cube_r18);
-		setRotationAngle(cube_r18, 0.0F, -0.2618F, 0.0F);
-		cube_r18.setTextureOffset(34, 12).addBox(-3.7219F, 1.402F, 0.0379F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		cube_r18.setTextureOffset(20, 36).addBox(-4.8158F, 0.5772F, -0.3127F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		cube_r18.setTextureOffset(37, 8).addBox(-3.92F, -0.4458F, -0.7014F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-
-		cube_r19 = new ModelRenderer(this);
-		cube_r19.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock1.addChild(cube_r19);
-		setRotationAngle(cube_r19, -2.4871F, -1.0036F, 1.0472F);
-		cube_r19.setTextureOffset(34, 27).addBox(-3.2811F, 2.7294F, 3.5032F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		cube_r19.setTextureOffset(34, 27).addBox(-1.5549F, 1.5246F, 1.3658F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		
 
 		cube_r20 = new ModelRenderer(this);
 		cube_r20.setRotationPoint(3.0F, 0.0F, 1.0F);
 		rock1.addChild(cube_r20);
-		setRotationAngle(cube_r20, 0.0F, -0.6981F, 0.0F);
-		cube_r20.setTextureOffset(0, 36).addBox(-1.9302F, -0.6439F, -0.7394F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		setRotationAngle(cube_r20, 0.0F, -0.2618F, 0.0F);
+		cube_r20.setTextureOffset(34, 12).addBox(-3.7219F, 1.402F, 0.0379F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		cube_r20.setTextureOffset(37, 8).addBox(-3.92F, -0.4458F, -0.7014F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+
+		cube_r21 = new ModelRenderer(this);
+		cube_r21.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock1.addChild(cube_r21);
+		setRotationAngle(cube_r21, -2.4871F, -1.0036F, 1.0472F);
+		cube_r21.setTextureOffset(34, 27).addBox(-1.5549F, 1.5246F, 1.3658F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+
+		cube_r22 = new ModelRenderer(this);
+		cube_r22.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock1.addChild(cube_r22);
+		setRotationAngle(cube_r22, 0.0F, -0.6981F, 0.0F);
+		cube_r22.setTextureOffset(0, 36).addBox(-1.9302F, -0.6439F, -0.7394F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock5 = new ModelRenderer(this);
 		rock5.setRotationPoint(-2.0F, -5.5F, -1.75F);
 		whole.addChild(rock5);
 		setRotationAngle(rock5, -0.3927F, 0.2618F, 0.0F);
+		
 
-		cube_r21 = new ModelRenderer(this);
-		cube_r21.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock5.addChild(cube_r21);
-		setRotationAngle(cube_r21, 0.0436F, 0.2182F, -0.1745F);
-		cube_r21.setTextureOffset(36, 16).addBox(-5.331F, -1.1811F, -0.9071F, 3.0F, 2.0F, 1.0F, 0.0F, false);
+		cube_r23 = new ModelRenderer(this);
+		cube_r23.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock5.addChild(cube_r23);
+		setRotationAngle(cube_r23, 0.0436F, 0.2182F, -0.1745F);
+		cube_r23.setTextureOffset(36, 16).addBox(-5.331F, -1.1811F, -0.9071F, 3.0F, 2.0F, 1.0F, 0.0F, false);
 
 		rock6 = new ModelRenderer(this);
-		rock6.setRotationPoint(0.0F, -5.5F, -1.75F);
+		rock6.setRotationPoint(1.7071F, -5.9687F, -0.6185F);
 		whole.addChild(rock6);
-		setRotationAngle(rock6, -0.3927F, 0.2618F, 0.0F);
-		rock6.setTextureOffset(36, 36).addBox(-0.2929F, -1.4687F, 0.1315F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		setRotationAngle(rock6, -0.3491F, 2.4435F, 0.2182F);
+		rock6.setTextureOffset(36, 36).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock15 = new ModelRenderer(this);
-		rock15.setRotationPoint(0.0F, -4.5F, -2.75F);
+		rock15.setRotationPoint(2.6025F, -5.3294F, 5.2906F);
 		whole.addChild(rock15);
-		setRotationAngle(rock15, -0.3927F, 0.2618F, 0.0F);
-		rock15.setTextureOffset(22, 32).addBox(-1.3975F, -3.601F, 7.8925F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		setRotationAngle(rock15, -1.2654F, -0.2618F, 0.9163F);
+		rock15.setTextureOffset(22, 32).addBox(-0.2337F, -0.6211F, -0.4812F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+
+		bone3 = new ModelRenderer(this);
+		bone3.setRotationPoint(-2.6842F, -5.8233F, 0.357F);
+		whole.addChild(bone3);
+		setRotationAngle(bone3, 0.48F, 0.0F, -0.7418F);
+		bone3.setTextureOffset(0, 32).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock16 = new ModelRenderer(this);
-		rock16.setRotationPoint(-1.0F, -3.5F, -2.75F);
+		rock16.setRotationPoint(1.6025F, -5.101F, 2.1425F);
 		whole.addChild(rock16);
-		setRotationAngle(rock16, -0.3927F, 0.2618F, 0.0F);
-		rock16.setTextureOffset(0, 32).addBox(-1.3975F, -3.601F, 7.8925F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		rock16.setTextureOffset(0, 32).addBox(0.673F, -0.6439F, 0.7533F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		setRotationAngle(rock16, -0.3927F, 0.2618F, 0.6545F);
+		rock16.setTextureOffset(0, 32).addBox(-0.2337F, -1.641F, -1.0433F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
-		cube_r22 = new ModelRenderer(this);
-		cube_r22.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock16.addChild(cube_r22);
-		setRotationAngle(cube_r22, 0.0F, -0.3054F, 0.0F);
-		cube_r22.setTextureOffset(31, 23).addBox(-0.0808F, -3.7991F, 7.3437F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		bone2 = new ModelRenderer(this);
+		bone2.setRotationPoint(2.9192F, -4.2991F, 6.5937F);
+		whole.addChild(bone2);
+		setRotationAngle(bone2, -0.4363F, -0.2618F, -0.2618F);
+		
+
+		cube_r24 = new ModelRenderer(this);
+		cube_r24.setRotationPoint(-0.9192F, 2.7991F, -8.3437F);
+		bone2.addChild(cube_r24);
+		setRotationAngle(cube_r24, 0.0F, -0.3054F, 0.0F);
+		cube_r24.setTextureOffset(31, 23).addBox(-0.0808F, -3.7991F, 7.3437F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock14 = new ModelRenderer(this);
 		rock14.setRotationPoint(-4.0F, -4.5F, 0.25F);
 		whole.addChild(rock14);
 		setRotationAngle(rock14, -0.3927F, 0.2618F, 0.0F);
 		rock14.setTextureOffset(30, 32).addBox(-0.2929F, -1.4687F, 0.1315F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		rock14.setTextureOffset(30, 32).addBox(0.4836F, -0.3598F, -2.5457F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+
+		bone7 = new ModelRenderer(this);
+		bone7.setRotationPoint(-2.5164F, -3.8598F, -1.2957F);
+		whole.addChild(bone7);
+		setRotationAngle(bone7, 2.1817F, 0.0873F, 1.2217F);
+		bone7.setTextureOffset(30, 32).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock18 = new ModelRenderer(this);
 		rock18.setRotationPoint(2.0F, -3.5F, -1.75F);
 		whole.addChild(rock18);
+		
 
-		cube_r23 = new ModelRenderer(this);
-		cube_r23.setRotationPoint(1.0F, 1.0F, 0.0F);
-		rock18.addChild(cube_r23);
-		setRotationAngle(cube_r23, 0.2618F, -0.3054F, 0.1745F);
-		cube_r23.setTextureOffset(31, 2).addBox(-5.2185F, -0.2837F, -0.0272F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		cube_r25 = new ModelRenderer(this);
+		cube_r25.setRotationPoint(1.0F, 1.0F, 0.0F);
+		rock18.addChild(cube_r25);
+		setRotationAngle(cube_r25, 0.2618F, -0.3054F, 0.1745F);
+		cube_r25.setTextureOffset(31, 2).addBox(-5.2185F, -0.2837F, -0.0272F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
-		cube_r24 = new ModelRenderer(this);
-		cube_r24.setRotationPoint(1.0F, 1.0F, 8.0F);
-		rock18.addChild(cube_r24);
-		setRotationAngle(cube_r24, 0.2618F, -0.3054F, 0.1745F);
-		cube_r24.setTextureOffset(31, 2).addBox(-5.2185F, -0.2837F, -0.0272F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		cube_r26 = new ModelRenderer(this);
+		cube_r26.setRotationPoint(1.0F, 1.0F, 8.0F);
+		rock18.addChild(cube_r26);
+		setRotationAngle(cube_r26, 0.2618F, -0.3054F, 0.1745F);
+		cube_r26.setTextureOffset(31, 2).addBox(-5.2185F, -0.2837F, -0.0272F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock7 = new ModelRenderer(this);
 		rock7.setRotationPoint(2.0F, -5.5F, -1.75F);
 		whole.addChild(rock7);
 		setRotationAngle(rock7, -0.3927F, 0.2618F, 0.0F);
+		
 
-		cube_r25 = new ModelRenderer(this);
-		cube_r25.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock7.addChild(cube_r25);
-		setRotationAngle(cube_r25, -0.0436F, 0.4363F, 0.4363F);
-		cube_r25.setTextureOffset(28, 36).addBox(-3.6079F, 0.6986F, -1.0305F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		cube_r27 = new ModelRenderer(this);
+		cube_r27.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock7.addChild(cube_r27);
+		setRotationAngle(cube_r27, -0.0436F, 0.4363F, 0.4363F);
+		cube_r27.setTextureOffset(28, 36).addBox(-3.6079F, 0.6986F, -1.0305F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock2 = new ModelRenderer(this);
 		rock2.setRotationPoint(-2.0F, -5.5F, 2.25F);
 		whole.addChild(rock2);
 		setRotationAngle(rock2, -0.3927F, 0.2618F, 0.0F);
+		
 
-		cube_r26 = new ModelRenderer(this);
-		cube_r26.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock2.addChild(cube_r26);
-		setRotationAngle(cube_r26, 0.0F, 0.0F, -0.2182F);
-		cube_r26.setTextureOffset(18, 25).addBox(-5.1727F, -1.4169F, -1.1076F, 3.0F, 2.0F, 2.0F, 0.0F, false);
+		cube_r28 = new ModelRenderer(this);
+		cube_r28.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock2.addChild(cube_r28);
+		setRotationAngle(cube_r28, 0.0F, 0.0F, -0.2182F);
+		cube_r28.setTextureOffset(18, 25).addBox(-5.1727F, -1.4169F, -1.1076F, 3.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock17 = new ModelRenderer(this);
 		rock17.setRotationPoint(3.0F, -4.5F, 4.25F);
 		whole.addChild(rock17);
 		setRotationAngle(rock17, -0.3927F, 0.2618F, 0.0F);
+		
 
-		cube_r27 = new ModelRenderer(this);
-		cube_r27.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock17.addChild(cube_r27);
-		setRotationAngle(cube_r27, 0.0F, 0.0F, -0.2182F);
-		cube_r27.setTextureOffset(0, 23).addBox(-5.1727F, -1.4169F, -1.1076F, 3.0F, 2.0F, 2.0F, 0.0F, false);
+		cube_r29 = new ModelRenderer(this);
+		cube_r29.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock17.addChild(cube_r29);
+		setRotationAngle(cube_r29, 0.0F, 0.0F, -0.2182F);
+		cube_r29.setTextureOffset(0, 23).addBox(-5.1727F, -1.4169F, -1.1076F, 3.0F, 2.0F, 2.0F, 0.0F, false);
+
+		bone6 = new ModelRenderer(this);
+		bone6.setRotationPoint(-0.9659F, -6.267F, 0.5109F);
+		whole.addChild(bone6);
+		setRotationAngle(bone6, 0.5236F, 0.0F, 0.0F);
+		bone6.setTextureOffset(37, 0).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock4 = new ModelRenderer(this);
 		rock4.setRotationPoint(0.0F, -5.5F, 0.25F);
 		whole.addChild(rock4);
 		setRotationAngle(rock4, -0.3927F, 0.2618F, 0.0F);
-		rock4.setTextureOffset(37, 0).addBox(-1.9659F, -0.901F, -1.2391F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 		rock4.setTextureOffset(37, 0).addBox(0.4836F, 0.5641F, -2.163F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock8 = new ModelRenderer(this);
@@ -524,13 +611,14 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		rock12.setRotationPoint(0.0F, -4.5F, 2.25F);
 		whole.addChild(rock12);
 		setRotationAngle(rock12, -0.6981F, -0.0873F, -0.48F);
+		
 
-		cube_r28 = new ModelRenderer(this);
-		cube_r28.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock12.addChild(cube_r28);
-		setRotationAngle(cube_r28, 0.0F, 0.0F, 0.3054F);
-		cube_r28.setTextureOffset(15, 16).addBox(-5.3447F, 1.4785F, -5.66F, 2.0F, 2.0F, 3.0F, 0.0F, false);
-		cube_r28.setTextureOffset(15, 16).addBox(-5.673F, -0.4323F, -3.3706F, 2.0F, 2.0F, 3.0F, 0.0F, false);
+		cube_r30 = new ModelRenderer(this);
+		cube_r30.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock12.addChild(cube_r30);
+		setRotationAngle(cube_r30, 0.0F, 0.0F, 0.3054F);
+		cube_r30.setTextureOffset(15, 16).addBox(-5.3447F, 1.4785F, -5.66F, 2.0F, 2.0F, 3.0F, 0.0F, false);
+		cube_r30.setTextureOffset(15, 16).addBox(-5.673F, -0.4323F, -3.3706F, 2.0F, 2.0F, 3.0F, 0.0F, false);
 
 		rock10 = new ModelRenderer(this);
 		rock10.setRotationPoint(3.0F, -4.5F, 3.25F);
@@ -539,7 +627,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		rock10.setTextureOffset(24, 13).addBox(-2.9659F, -0.901F, -1.2391F, 3.0F, 2.0F, 2.0F, 0.0F, false);
 
 		rock3 = new ModelRenderer(this);
-		rock3.setRotationPoint(0.0F, -5.5F, 0.25F);
+		rock3.setRotationPoint(-1.0F, -5.5F, 0.25F);
 		whole.addChild(rock3);
 		setRotationAngle(rock3, -0.3927F, 0.2618F, 0.0F);
 		rock3.setTextureOffset(14, 34).addBox(-1.9659F, -0.901F, -1.2391F, 2.0F, 2.0F, 2.0F, 0.0F, false);
@@ -552,6 +640,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		rightMicroLegs.setTextureOffset(15, 17).addBox(0.0F, -0.75F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		rightMicroLegs.setTextureOffset(21, 8).addBox(0.0F, -1.75F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		rightMicroLegs.setTextureOffset(9, 19).addBox(0.0F, -0.75F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
+		rightMicroLegs.setTextureOffset(9, 19).addBox(0.0F, -0.75F, 4.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		rightMicroLegs.setTextureOffset(4, 21).addBox(0.0F, -1.75F, 3.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 
 		leftMicroLegs = new ModelRenderer(this);
@@ -559,23 +648,32 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		whole.addChild(leftMicroLegs);
 		leftMicroLegs.setTextureOffset(17, 8).addBox(-1.0F, 3.0F, -7.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		leftMicroLegs.setTextureOffset(11, 19).addBox(-1.0F, 3.0F, -5.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
+		leftMicroLegs.setTextureOffset(11, 19).addBox(-1.0F, 3.0F, -3.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		leftMicroLegs.setTextureOffset(6, 21).addBox(-1.0F, 2.0F, -6.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		leftMicroLegs.setTextureOffset(20, 10).addBox(-1.0F, 2.0F, -4.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 		leftMicroLegs.setTextureOffset(20, 12).addBox(-1.0F, 2.0F, -8.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
 
 		rightForeLimb = new ModelRenderer(this);
-		rightForeLimb.setRotationPoint(1.0F, 0.75F, 6.0F);
+		rightForeLimb.setRotationPoint(1.0F, 0.75F, -3.0F);
 		whole.addChild(rightForeLimb);
-		setRotationAngle(rightForeLimb, -0.1745F, 0.0F, 0.0F);
-		rightForeLimb.setTextureOffset(3, 7).addBox(0.1F, -1.25F, -1.75F, 0.0F, 1.0F, 2.0F, 0.0F, false);
-		rightForeLimb.setTextureOffset(4, 0).addBox(0.1F, -0.25F, 0.25F, 0.0F, 2.0F, 1.0F, 0.0F, false);
+		setRotationAngle(rightForeLimb, 0.1745F, 0.0F, 0.0F);
+		rightForeLimb.setTextureOffset(3, 7).addBox(0.1F, -1.25F, 0.25F, 0.0F, 1.0F, 2.0F, 0.0F, false);
+
+		rightClaw = new ModelRenderer(this);
+		rightClaw.setRotationPoint(0.1F, -0.25F, 0.25F);
+		rightForeLimb.addChild(rightClaw);
+		rightClaw.setTextureOffset(4, 0).addBox(0.0F, 0.0F, -1.0F, 0.0F, 2.0F, 1.0F, 0.0F, false);
 
 		leftForeLimb = new ModelRenderer(this);
-		leftForeLimb.setRotationPoint(-1.0F, 0.75F, 6.0F);
+		leftForeLimb.setRotationPoint(-1.0F, 0.75F, -3.0F);
 		whole.addChild(leftForeLimb);
-		setRotationAngle(leftForeLimb, -0.2618F, 0.0F, 0.0F);
-		leftForeLimb.setTextureOffset(11, 7).addBox(-0.1F, -1.25F, -1.75F, 0.0F, 1.0F, 2.0F, 0.0F, false);
-		leftForeLimb.setTextureOffset(0, 3).addBox(-0.1F, -0.25F, 0.25F, 0.0F, 2.0F, 1.0F, 0.0F, false);
+		setRotationAngle(leftForeLimb, 0.1745F, 0.0F, 0.0F);
+		leftForeLimb.setTextureOffset(11, 7).addBox(-0.1F, -1.25F, 0.25F, 0.0F, 1.0F, 2.0F, 0.0F, false);
+
+		leftClaw = new ModelRenderer(this);
+		leftClaw.setRotationPoint(-0.1F, -0.25F, 0.25F);
+		leftForeLimb.addChild(leftClaw);
+		leftClaw.setTextureOffset(0, 3).addBox(0.0F, 0.0F, -1.0F, 0.0F, 2.0F, 1.0F, 0.0F, false);
 
 		bone = new ModelRenderer(this);
 		bone.setRotationPoint(3.0F, 17.0F, 1.0F);
@@ -588,36 +686,74 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		rock13.setRotationPoint(-3.0F, -1.0F, -1.0F);
 		bone.addChild(rock13);
 		setRotationAngle(rock13, -0.829F, 0.1309F, -0.7418F);
+		
 
-		cube_r29 = new ModelRenderer(this);
-		cube_r29.setRotationPoint(3.0F, 0.0F, 1.0F);
-		rock13.addChild(cube_r29);
-		setRotationAngle(cube_r29, 0.1745F, -0.4363F, -0.48F);
-		cube_r29.setTextureOffset(11, 11).addBox(-6.9565F, -0.324F, -3.0925F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-		cube_r29.setTextureOffset(11, 11).addBox(-5.5044F, -2.1503F, -1.2067F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+		cube_r31 = new ModelRenderer(this);
+		cube_r31.setRotationPoint(3.0F, 0.0F, 1.0F);
+		rock13.addChild(cube_r31);
+		setRotationAngle(cube_r31, 0.1745F, -0.4363F, -0.48F);
+		cube_r31.setTextureOffset(11, 11).addBox(-6.9565F, -0.324F, -3.0925F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+		cube_r31.setTextureOffset(11, 11).addBox(-5.5044F, -2.1503F, -1.2067F, 3.0F, 2.0F, 3.0F, 0.0F, false);
 	}
 
 	@Override
-	public void setRotationAngles(EntityScuttlingOcculus entity, float limbSwing, float limbSwingAmount,
-			float ageInTicks, float netHeadYaw, float headPitch) {
-		//Head
+	public void setRotationAngles(EntityScuttlingOcculus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		// Head
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
-			
-		//Legs
-		this.frontLeftLeg.rotateAngleY =(float)Math.min(limbSwingAmount, 0.25);
-		this.frontLeftLeg.rotateAngleZ =(float)Math.min(limbSwingAmount, 0.25);
-		this.frontRightLeg.rotateAngleY =(float)Math.min(limbSwingAmount, 0.25);
-		this.frontRightLeg.rotateAngleZ =-(float)Math.min(limbSwingAmount, 0.25);
-		this.middleLeftLeg.rotateAngleY =(float)Math.min(limbSwingAmount, 0.25);
-		this.middleLeftLeg.rotateAngleZ =-(float)Math.min(limbSwingAmount, 0.25);
-		this.middleRightLeg.rotateAngleY =(float)Math.min(limbSwingAmount, 0.25);
-		this.middleRightLeg.rotateAngleZ =(float)Math.min(limbSwingAmount, 0.25);
-		this.backLeftLeg.rotateAngleY =-(float)Math.min(limbSwingAmount, 0.25);
-		this.backLeftLeg.rotateAngleZ =(float)Math.min(limbSwingAmount, 0.25);
-		this.backRightLeg.rotateAngleY =-(float)Math.min(limbSwingAmount, 0.25);
-		this.backRightLeg.rotateAngleZ =-(float)Math.min(limbSwingAmount, 0.25);
+
+		// Legs
+		this.leftClaw.rotateAngleX = (MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * 0.6F)
+				* limbSwingAmount * 2;
+		this.rightClaw.rotateAngleX = -(MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * 0.6F)
+				* limbSwingAmount * 2;
 		
+		
+		
+		this.frontLeftLeg.rotateAngleZ = -(MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * 0.6F)
+				* limbSwingAmount * 2;
+		this.frontLeftLeg.rotateAngleY = (MathHelper.cos(limbSwing * 0.9662F * 1.0F + (float) Math.PI) * 0.6F)
+				* limbSwingAmount * 2;
+		this.frontRightLeg.rotateAngleZ = -(MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * 0.6F)
+				* limbSwingAmount * 2;
+		this.frontRightLeg.rotateAngleY = (MathHelper.cos(limbSwing * 0.9662F * 1.0F + (float) Math.PI) * 0.6F)
+				* limbSwingAmount * 2;
+		this.middleLeftLeg.rotateAngleZ = -(MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * 0.4F)
+				* limbSwingAmount * 2;
+		this.middleRightLeg.rotateAngleZ = -(MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * 0.4F)
+				* limbSwingAmount * 2;
+		this.backLeftLeg.rotateAngleZ = (MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * .5F)
+				* limbSwingAmount * 2;
+		this.backLeftLeg.rotateAngleY = -(MathHelper.cos(limbSwing * 0.9662F * 1.0F + (float) Math.PI) * .5F)
+				* limbSwingAmount * 2;
+		this.backRightLeg.rotateAngleZ = (MathHelper.sin(limbSwing * 0.3662F * 1.0F + (float) Math.PI) * .5F)
+				* limbSwingAmount * 2;
+		this.backRightLeg.rotateAngleY = -(MathHelper.cos(limbSwing * 0.9662F * 1.0F + (float) Math.PI) * .5F)
+				* limbSwingAmount * 2;
+
+		// Back stuff
+		this.rock6.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.rock6.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.rock14.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.rock14.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.rock16.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.rock16.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.rock17.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.rock17.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.rock7.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.rock7.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.bone2.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.bone2.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.bone4.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.bone4.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.bone5.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.bone5.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.bone6.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.bone6.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.bone3.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.bone3.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.bone7.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.bone7.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
 		// Eyes
 		this.eye2.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
 		this.eye2.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
@@ -636,12 +772,10 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 		this.eye10.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
 		this.eye10.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
 		this.eye11.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye11.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-	}
+		this.eye11.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red,
-			float green, float blue, float alpha) {
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		whole.render(matrixStack, buffer, packedLight, packedOverlay);
 		bone.render(matrixStack, buffer, packedLight, packedOverlay);
 	}

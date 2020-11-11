@@ -2,32 +2,34 @@ package com.huto.hutosmod.entities;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.entities.utils.GoalFireDreadRocket;
+import com.huto.hutosmod.sounds.SoundHandler;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
-public class EntityScuttlingOcculus extends MonsterEntity {
+public class EntityDreadBot extends MonsterEntity {
 	public float deathTicks = 1;
 
-	public EntityScuttlingOcculus(EntityType<? extends EntityScuttlingOcculus> type, World worldIn) {
+	public EntityDreadBot(EntityType<? extends EntityDreadBot> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -53,27 +55,47 @@ public class EntityScuttlingOcculus extends MonsterEntity {
 	}
 
 	@Override
-	public void onCollideWithPlayer(PlayerEntity entityIn) {
-		super.onCollideWithPlayer(entityIn);
-		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1f);
-		entityIn.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 50, 1));
+	public void tick() {
+		super.tick();
+	}
+
+	@Override
+	protected void onDeathUpdate() {
+		this.remove();
 
 	}
 
 	@Override
+	public void onCollideWithPlayer(PlayerEntity entityIn) {
+		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1f);
+
+	}
+
+	@Override
+	protected void collideWithEntity(Entity entityIn) {
+		super.collideWithEntity(entityIn);
+		if (!(entityIn instanceof EntityDreadBot || entityIn instanceof EntityHastur)) {
+			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
+		}
+
+	}
+
 	protected void registerGoals() {
-		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(6, new GoalFireDreadRocket(this));
+		this.targetSelector.addGoal(1, new GoalFireDreadRocket(this));
 
 	}
 
 	public static AttributeModifierMap.MutableAttribute setAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.15D)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
+		return LivingEntity.registerAttributes().createMutableAttribute(Attributes.FOLLOW_RANGE, 5.0D)
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2f)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 10.5f);
 	}
 
 	@Override
@@ -83,17 +105,16 @@ public class EntityScuttlingOcculus extends MonsterEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_SPIDER_AMBIENT;
+		return SoundHandler.ENTITY_DREADBOT_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_SPIDER_DEATH;
+		return SoundHandler.ENTITY_DREADBOT_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_SPIDER_HURT;
+		return SoundHandler.ENTITY_DREADBOT_HURT;
 	}
-
 }

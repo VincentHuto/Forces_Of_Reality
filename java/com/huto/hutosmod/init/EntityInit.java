@@ -6,6 +6,7 @@ import com.huto.hutosmod.entities.EntityColin;
 import com.huto.hutosmod.entities.EntityDarkYoung;
 import com.huto.hutosmod.entities.EntityDenizen;
 import com.huto.hutosmod.entities.EntityDenizenSage;
+import com.huto.hutosmod.entities.EntityDreadBot;
 import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityHastur;
 import com.huto.hutosmod.entities.EntityHasturClone;
@@ -22,6 +23,7 @@ import com.huto.hutosmod.entities.EntityTentacle;
 import com.huto.hutosmod.entities.EntityThrone;
 import com.huto.hutosmod.entities.EntityTulpa;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
+import com.huto.hutosmod.entities.projectiles.EntityDreadRocket;
 import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
 import com.huto.hutosmod.entities.projectiles.EntityJudgement;
@@ -77,11 +79,11 @@ public class EntityInit {
 							.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
 							.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "denizen_sage").toString()));
 
-	//Self
+	// Self
 	public static final RegistryObject<EntityType<EntityTulpa>> tulpa = ENTITY_TYPES.register("tulpa",
 			() -> EntityType.Builder.<EntityTulpa>create(EntityTulpa::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "tulpa").toString()));
-	
+
 	// Hastur
 	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
@@ -114,11 +116,12 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityDarkYoung>> dark_young = ENTITY_TYPES.register("dark_young",
 			() -> EntityType.Builder.<EntityDarkYoung>create(EntityDarkYoung::new, EntityClassification.MONSTER)
 					.size(1.7f, 1.7f).build(new ResourceLocation(HutosMod.MOD_ID, "dark_young").toString()));
-	
-	public static final RegistryObject<EntityType<EntityScuttlingOcculus>> scuttling_occulus = ENTITY_TYPES.register("scuttling_occulus",
-			() -> EntityType.Builder.<EntityScuttlingOcculus>create(EntityScuttlingOcculus::new, EntityClassification.MONSTER)
-					.size(1f, 1f).build(new ResourceLocation(HutosMod.MOD_ID, "scuttling_occulus").toString()));
-	
+
+	public static final RegistryObject<EntityType<EntityScuttlingOcculus>> scuttling_occulus = ENTITY_TYPES.register(
+			"scuttling_occulus",
+			() -> EntityType.Builder
+					.<EntityScuttlingOcculus>create(EntityScuttlingOcculus::new, EntityClassification.MONSTER)
+					.size(0.5f, 0.5f).build(new ResourceLocation(HutosMod.MOD_ID, "scuttling_occulus").toString()));
 
 	// Beast
 	public static final RegistryObject<EntityType<EntityBeastFromBeyond>> beast_from_beyond = ENTITY_TYPES.register(
@@ -136,7 +139,9 @@ public class EntityInit {
 			.register("malformed_automaton", () -> EntityType.Builder
 					.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new, EntityClassification.MONSTER)
 					.size(3.4f, 5.5f).build(new ResourceLocation(HutosMod.MOD_ID, "malformed_automaton").toString()));
-
+	public static final RegistryObject<EntityType<EntityDreadBot>> dread_bot = ENTITY_TYPES.register("dread_bot",
+			() -> EntityType.Builder.<EntityDreadBot>create(EntityDreadBot::new, EntityClassification.MONSTER)
+					.size(0.5F, 0.5F).build(new ResourceLocation(HutosMod.MOD_ID, "dread_bot").toString()));
 	// Machine
 
 	// Projectiles
@@ -149,7 +154,7 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityTrackingOrb>> tracking_orb = ENTITY_TYPES.register(
 			"tracking_orb",
 			() -> EntityType.Builder.<EntityTrackingOrb>create(EntityTrackingOrb::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "tracking_orb").toString()));
 
 	public static final RegistryObject<EntityType<EntityEldritchGrip>> eldritch_grip = ENTITY_TYPES
@@ -160,22 +165,28 @@ public class EntityInit {
 
 	public static final RegistryObject<EntityType<EntityWolfShot>> wolf_shot = ENTITY_TYPES.register("wolf_shot",
 			() -> EntityType.Builder.<EntityWolfShot>create(EntityWolfShot::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "wolf_shot").toString()));
+
+	public static final RegistryObject<EntityType<EntityDreadRocket>> dread_rocket = ENTITY_TYPES.register(
+			"dread_rocket",
+			() -> EntityType.Builder.<EntityDreadRocket>create(EntityDreadRocket::new, EntityClassification.MISC)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "wolf_shot").toString()));
 
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",
 			() -> EntityType.Builder.<EntityCorruptNote>create(EntityCorruptNote::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "corrupt_note").toString()));
 
 	public static final RegistryObject<EntityType<EntityStarStrike>> star_strike = ENTITY_TYPES.register("star_strike",
 			() -> EntityType.Builder.<EntityStarStrike>create(EntityStarStrike::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "star_strike").toString()));
 	public static final RegistryObject<EntityType<EntityJudgement>> judgement = ENTITY_TYPES.register("judgement",
 			() -> EntityType.Builder.<EntityJudgement>create(EntityJudgement::new, EntityClassification.MISC)
-					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.3F, 0.3F)
+					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "judgement").toString()));
 	public static final RegistryObject<EntityType<EntityHolyFlare>> holy_flare = ENTITY_TYPES.register("holy_flare",
 			() -> EntityType.Builder.<EntityHolyFlare>create(EntityHolyFlare::new, EntityClassification.MONSTER)
@@ -211,11 +222,10 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.summoned_beast.get(), EntitySummonedBeast.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.malformed_automaton.get(),
 				EntityMalformedAutomaton.setAttributes().create());
-		GlobalEntityTypeAttributes.put(EntityInit.dark_young.get(),
-				EntityDarkYoung.setAttributes().create());
-		GlobalEntityTypeAttributes.put(EntityInit.tulpa.get(),
-				EntityTulpa.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.dark_young.get(), EntityDarkYoung.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.tulpa.get(), EntityTulpa.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.scuttling_occulus.get(),
 				EntityScuttlingOcculus.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.dread_bot.get(), EntityDreadBot.setAttributes().create());
 	}
 }

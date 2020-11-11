@@ -1,16 +1,19 @@
 package com.huto.hutosmod.capabilities.covenant;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Map;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesApi;
+import com.huto.hutosmod.gui.pages.GuiUtil;
 import com.huto.hutosmod.init.EnchantmentInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -20,6 +23,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -37,6 +42,7 @@ public class CovenantEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof PlayerEntity) {
+			System.out.println("Attatches Capability");
 			event.addCapability(new ResourceLocation(HutosMod.MOD_ID, "covenant"), new CovenantProvider());
 		}
 	}
@@ -101,6 +107,7 @@ public class CovenantEvents {
 
 	private static FontRenderer fontRenderer;
 
+	@SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(receiveCanceled = true)
 	public static void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
@@ -111,11 +118,74 @@ public class CovenantEvents {
 		PlayerEntity player = Minecraft.getInstance().player;
 		if (player != null) {
 			if (player.isAlive()) {
+				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
+						.orElseThrow(IllegalArgumentException::new);
+				ItemStack stack = player.getHeldItemMainhand();
+				Item item = stack.getItem();
+
+				// Allegiance Identifier overlay
+				if (item == ItemInit.allegiance_identifier.get()) {
+					ResourceLocation stexture = new ResourceLocation(HutosMod.MOD_ID, "textures/items/steve.png");
+					ResourceLocation htexture = new ResourceLocation(HutosMod.MOD_ID, "textures/items/yellow_sign.png");
+					ResourceLocation etexture = new ResourceLocation(HutosMod.MOD_ID,
+							"textures/items/everwatchful_pendant_old.png");
+					ResourceLocation atexture = new ResourceLocation(HutosMod.MOD_ID,
+							"textures/items/crossed_keys.png");
+					ResourceLocation mtexture = new ResourceLocation(HutosMod.MOD_ID,
+							"textures/items/integral_cog.png");
+					ResourceLocation btexture = new ResourceLocation(HutosMod.MOD_ID,
+							"textures/items/breath_of_the_beast.png");
+					ResourceLocation texture;
+					int centerX = (Minecraft.getInstance().getMainWindow().getScaledWidth() / 2) - 5;
+					int centerY = (Minecraft.getInstance().getMainWindow().getScaledHeight() / 2) - 15;
+					double angleBetweenEach = 360.0 / EnumCovenants.values().length;
+					Point point = new Point(centerX - 60, centerY - 36), center = new Point(centerX, centerY);
+					for (int i = 0; i < coven.getDevotion().keySet().size(); i++) {
+						EnumCovenants selectedCoven = (EnumCovenants) coven.getDevotion().keySet().toArray()[i];
+						GlStateManager.pushMatrix();
+						fontRenderer.drawString(event.getMatrixStack(), selectedCoven.toString(), point.x, point.y + 20,
+								new Color(255, 0, 0, 255).getRGB());
+						fontRenderer.drawString(event.getMatrixStack(),
+								String.valueOf(coven.getDevotionByCoven(selectedCoven)), point.x, point.y + 30,
+								new Color(255, 0, 0, 255).getRGB());
+						GlStateManager.popMatrix();
+						if (selectedCoven.equals(EnumCovenants.SELF)) {
+							texture = stexture;
+						} else if (selectedCoven.equals(EnumCovenants.HASTUR)) {
+							texture = htexture;
+						} else if (selectedCoven.equals(EnumCovenants.ELDRITCH)) {
+							texture = etexture;
+						} else if (selectedCoven.equals(EnumCovenants.ASCENDENT)) {
+							texture = atexture;
+						} else if (selectedCoven.equals(EnumCovenants.MACHINE)) {
+							texture = mtexture;
+						} else if (selectedCoven.equals(EnumCovenants.BEAST)) {
+							texture = btexture;
+						} else {
+							texture = stexture;
+						}
+						Minecraft.getInstance().getTextureManager().bindTexture(texture);
+
+						GlStateManager.pushMatrix();
+						GlStateManager.enableAlphaTest();
+						GlStateManager.enableBlend();
+						GuiUtil.drawScaledTexturedModalRect(point.x, point.y, 0, 0, 16, 16, 0.062f);
+						GlStateManager.disableBlend();
+						GlStateManager.disableAlphaTest();
+						GlStateManager.popMatrix();
+						point = rotatePointAbout(point, center, angleBetweenEach);
+					}
+				}
+
+				// Redraws Icons so they dont get overwrote
+				// GuiUtil.drawTexturedModalRect(0, 0, 0, 0, 16, 16);
+				Minecraft.getInstance().textureManager
+						.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+
+				// Coven color Overlay
 				if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() != ItemInit.influence_supressor.get()
 						&& !(EnchantmentHelper.getEnchantments(player.getItemStackFromSlot(EquipmentSlotType.HEAD))
 								.containsKey(EnchantmentInit.influence_suppression.get()))) {
-					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
-							.orElseThrow(IllegalArgumentException::new);
 					for (EnumCovenants covens : coven.getDevotion().keySet()) {
 						if (coven.getDevotionByCoven(covens) >= 10) {
 							int devoMult = (coven.getDevotionByCoven(covens) / 3) < 250
@@ -178,6 +248,13 @@ public class CovenantEvents {
 				}
 			}
 		}
+	}
+
+	private static Point rotatePointAbout(Point in, Point about, double degrees) {
+		double rad = degrees * Math.PI / 180.0;
+		double newX = Math.cos(rad) * (in.x - about.x) - Math.sin(rad) * (in.y - about.y) + about.x;
+		double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
+		return new Point((int) newX, (int) newY);
 	}
 
 }

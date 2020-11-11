@@ -33,27 +33,27 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityJudgement extends ThrowableEntity {
-	public static EntityType<EntityJudgement> TYPE = EntityInit.judgement.get();
+public class EntityDreadRocket extends ThrowableEntity {
+	public static EntityType<EntityDreadRocket> TYPE = EntityInit.dread_rocket.get();
 
 	private static final String TAG_TIME = "time";
-	private static final DataParameter<Boolean> EVIL = EntityDataManager.createKey(EntityJudgement.class,
+	private static final DataParameter<Boolean> EVIL = EntityDataManager.createKey(EntityDreadRocket.class,
 			DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityJudgement.class,
+	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityDreadRocket.class,
 			DataSerializers.VARINT);
 
 	double lockX, lockY = -1, lockZ;
 	int time = 0;
 
-	public EntityJudgement(EntityType<EntityJudgement> type, World world) {
+	public EntityDreadRocket(EntityType<EntityDreadRocket> type, World world) {
 		super(type, world);
 	}
 
-	public EntityJudgement(World world) {
+	public EntityDreadRocket(World world) {
 		this(TYPE, world);
 	}
 
-	public EntityJudgement(LivingEntity thrower, boolean evil) {
+	public EntityDreadRocket(LivingEntity thrower, boolean evil) {
 		super(TYPE, thrower, thrower.world);
 		setEvil(evil);
 	}
@@ -113,9 +113,9 @@ public class EntityJudgement extends ThrowableEntity {
 		Vector3 particlePos = oldPos;
 
 		for (int i = 0; i < steps; i++) {
-			world.addParticle(ParticleTypes.FLAME, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
+			world.addParticle(ParticleTypes.ANGRY_VILLAGER, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
 			if (world.rand.nextInt(steps) <= 1)
-				world.addParticle(ParticleTypes.ENCHANT, particlePos.x + (Math.random() - 0.5) * 0.4,
+				world.addParticle(ParticleTypes.CRIT, particlePos.x + (Math.random() - 0.5) * 0.4,
 						particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0,
 						0);
 
@@ -136,7 +136,6 @@ public class EntityJudgement extends ThrowableEntity {
 			setMotion(motionVec.toVector3d());
 			if (time < 10)
 				setMotion(getMotion().getX(), Math.abs(getMotion().getY()), getMotion().getZ());
-
 			List<LivingEntity> targetList = world.getEntitiesWithinAABB(LivingEntity.class,
 					new AxisAlignedBB(getPosX() - 0.5, getPosY() - 0.5, getPosZ() - 0.5, getPosX() + 0.5,
 							getPosY() + 0.5, getPosZ() + 0.5));
@@ -152,7 +151,7 @@ public class EntityJudgement extends ThrowableEntity {
 				remove();
 			}
 
-			if (evil && diffVec.mag() <0)
+			if (evil && diffVec.mag() < 0)
 				remove();
 		}
 
@@ -178,7 +177,7 @@ public class EntityJudgement extends ThrowableEntity {
 		if (target != null)
 			setTarget(null);
 
-		double range = 35;
+		double range = 25;
 		AxisAlignedBB bounds = new AxisAlignedBB(getPosX() - range, getPosY() - range, getPosZ() - range,
 				getPosX() + range, getPosY() + range, getPosZ() + range);
 		@SuppressWarnings("rawtypes")
@@ -211,21 +210,17 @@ public class EntityJudgement extends ThrowableEntity {
 		switch (pos.getType()) {
 		case BLOCK: {
 			Block block = world.getBlockState(((BlockRayTraceResult) pos).getPos()).getBlock();
-
 			if (!(block instanceof BushBlock) && !(block instanceof LeavesBlock))
 				if (!world.isRemote) {
-					this.world.createExplosion(this, this.getPosX(),
-							this.getPosY() + (double) (this.getHeight() / 16.0F), this.getPosZ(), 4.0F,
-							Explosion.Mode.NONE);
+					this.world.createExplosion(this, this.getPosX(), this.getPosY() + (double) (this.getHeight() / 16.0F),
+							this.getPosZ(), 1.0F, Explosion.Mode.NONE);
 				}
-			remove();
+				remove();
 			break;
 		}
 		case ENTITY: {
 			if (((EntityRayTraceResult) pos).getEntity() == getTargetEntity())
-				if (!world.isRemote) {
-					getTargetEntity().addPotionEffect(new EffectInstance(Effects.SLOWNESS, 400, 2));
-				}
+				getTargetEntity().addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
 			remove();
 			break;
 		}
