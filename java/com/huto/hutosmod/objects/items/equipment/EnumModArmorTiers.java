@@ -18,6 +18,10 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			() -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
+	OLDIRON(HutosMod.MOD_ID + ":old_iron", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F,
+			() -> {
+				return Ingredient.fromItems(ItemInit.null_ingot.get());
+			}),
 	ELDER(HutosMod.MOD_ID + ":elder", 37, new int[] { 1, 2, 3, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.magatamabead.get());

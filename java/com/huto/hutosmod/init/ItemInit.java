@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.objects.items.ItemActualizationNode;
 import com.huto.hutosmod.objects.items.ItemChannelingIngot;
 import com.huto.hutosmod.objects.items.ItemCovenTome;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
@@ -10,7 +11,6 @@ import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemManaPowder;
 import com.huto.hutosmod.objects.items.ItemNullIngot;
-import com.huto.hutosmod.objects.items.ItemPurgingStone;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSlugBucket;
@@ -68,6 +68,7 @@ import com.huto.hutosmod.objects.items.tools.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.tools.ItemManaExtractor;
 import com.huto.hutosmod.objects.items.tools.ItemResonanceDestabalizer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfAnalyzer;
+import com.huto.hutosmod.objects.items.tools.ItemSelfReflectionMirror;
 import com.huto.hutosmod.objects.items.tools.ItemStarSlug;
 import com.huto.hutosmod.objects.items.tools.ItemTrickAxe;
 import com.huto.hutosmod.objects.items.tools.ItemWandConsumeVibes;
@@ -168,6 +169,9 @@ public class ItemInit {
 			() -> new ItemDestructOrb(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	// Karma
+	public static final RegistryObject<Item> node_of_actualization = ITEMS.register("node_of_actualization",
+			() -> new ItemActualizationNode(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
@@ -207,7 +211,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> old_iron_scrap = ITEMS.register("old_iron_scrap",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> cured_clay_flask = ITEMS.register("cured_clay_flask",
@@ -328,6 +333,22 @@ public class ItemInit {
 			() -> new ItemInfluenceSuppressor(EnumModArmorTiers.SUPPRESSOR, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(HutosModItemGroup.instance)));
 
+	public static final RegistryObject<Item> old_iron_helm = ITEMS.register("old_iron_helm",
+			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+
+	public static final RegistryObject<Item> old_iron_chestplate = ITEMS.register("old_iron_chestplate",
+			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+
+	public static final RegistryObject<Item> old_iron_leggings = ITEMS.register("old_iron_leggings",
+			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.LEGS,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+
+	public static final RegistryObject<Item> old_iron_boots = ITEMS.register("old_iron_boots",
+			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.FEET,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
 			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
@@ -374,7 +395,12 @@ public class ItemInit {
 	public static final RegistryObject<Item> auric_trick_axe = ITEMS.register("auric_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumModToolTiers.AURIC));
+	// Old Iron
+	public static final RegistryObject<Item> old_iron_sword = ITEMS.register("old_iron_sword",
+			() -> new SwordItem(EnumModToolTiers.OLD_IRON, 3, -2.4F,
+					new Item.Properties().group(HutosModItemGroup.instance)));
 
+	// Null
 	public static final RegistryObject<Item> null_pickaxe = ITEMS.register("null_pickaxe",
 			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
 					new Item.Properties().group(HutosModItemGroup.instance)));
@@ -442,6 +468,10 @@ public class ItemInit {
 			() -> new ItemUpgrade(new Item.Properties().group(HutosModItemGroup.instance)));
 
 	// Runes
+
+	public static final RegistryObject<Item> self_reflection_mirror = ITEMS.register("self_reflection_mirror",
+			() -> new ItemSelfReflectionMirror(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
@@ -628,9 +658,10 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_scuttling_occulus = ITEMS
 			.register("spawn_egg_scuttling_occulus", () -> new ModSpawnEggItem(EntityInit.scuttling_occulus, 12764357,
 					5767365, new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dread_bot = ITEMS
-			.register("spawn_egg_dread_bot", () -> new ModSpawnEggItem(EntityInit.dread_bot, 12743680,
-					12764357, new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dread_bot = ITEMS.register("spawn_egg_dread_bot",
+			() -> new ModSpawnEggItem(EntityInit.dread_bot, 12743680, 12764357,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
@@ -639,7 +670,7 @@ public class ItemInit {
 				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
 				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
-				ItemInit.spawn_egg_scuttling_occulus,ItemInit.spawn_egg_dread_bot);
+				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot);
 	}
 
 	@SuppressWarnings("unchecked")

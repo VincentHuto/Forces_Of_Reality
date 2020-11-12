@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.Optional;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.capabilities.karma.activation.IKarmaActivation;
+import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationProvider;
 import com.huto.hutosmod.dimension.DimensionInit;
 import com.huto.hutosmod.dimension.DimensionalPosition;
 import com.huto.hutosmod.init.ItemInit;
@@ -85,18 +87,22 @@ public class KarmaEvents {
 		if (event.getSource().getTrueSource() instanceof PlayerEntity) {
 			PlayerEntity p = (PlayerEntity) event.getSource().getTrueSource();
 			IKarma karma = p.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
-			if (event.getEntity() instanceof AnimalEntity) {
-				karma.subtractKarma(1);
-			} else if (event.getEntity() instanceof IMerchant || event.getEntity() instanceof PlayerEntity) {
-				karma.subtractKarma(10);
-			} else if (event.getEntity() instanceof MobEntity) {
-				karma.addKarma(1);
+			IKarmaActivation karmaAct = p.getCapability(KarmaActivationProvider.KARMA_CAPA)
+					.orElseThrow(IllegalStateException::new);
+			if (karmaAct.getActivation() != 0) {
+				if (event.getEntity() instanceof AnimalEntity) {
+					karma.subtractKarma(1);
+				} else if (event.getEntity() instanceof IMerchant || event.getEntity() instanceof PlayerEntity) {
+					karma.subtractKarma(10);
+				} else if (event.getEntity() instanceof MobEntity) {
+					karma.addKarma(1);
 
+				}
+				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) p),
+						new KarmaPacketServer(karma.getKarma()));
+				p.sendStatusMessage(
+						new StringTextComponent(" Current Karma: " + TextFormatting.GOLD + karma.getKarma()), false);
 			}
-			PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) p),
-					new KarmaPacketServer(karma.getKarma()));
-			p.sendStatusMessage(new StringTextComponent(" Current Karma: " + TextFormatting.GOLD + karma.getKarma()),
-					false);
 		}
 	}
 
@@ -116,31 +122,36 @@ public class KarmaEvents {
 							.get()) {
 						IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA)
 								.orElseThrow(IllegalArgumentException::new);
-						if (karma.getKarma() > 0) {
-							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
-									new Color(0, 0, 255, 3).getRGB());
-							fontRenderer.drawString(event.getMatrixStack(), "Positive View", 5, 20,
-									new Color(255, 0, 0, 255).getRGB());
-							Minecraft.getInstance().textureManager
-									.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
-						} else if (karma.getKarma() == 0) {
-							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000, new Color(0, 0, 0, 0).getRGB());
-							fontRenderer.drawString(event.getMatrixStack(), "Neutral View", 5, 20,
-									new Color(255, 0, 0, 255).getRGB());
-							Minecraft.getInstance().textureManager
-									.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
-						} else if (karma.getKarma() < 0) {
-							AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
-									new Color(255, 0, 0, 3).getRGB());
-							fontRenderer.drawString(event.getMatrixStack(), "Negative View", 5, 20,
-									new Color(255, 0, 0, 255).getRGB());
-							Minecraft.getInstance().textureManager
-									.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+						IKarmaActivation karmaAct = player.getCapability(KarmaActivationProvider.KARMA_CAPA)
+								.orElseThrow(IllegalStateException::new);
+						if (karmaAct.getActivation() != 0) {
+							if (karma.getKarma() > 0) {
+								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
+										new Color(0, 0, 255, 3).getRGB());
+								fontRenderer.drawString(event.getMatrixStack(), "Positive View", 5, 20,
+										new Color(255, 0, 0, 255).getRGB());
+								Minecraft.getInstance().textureManager
+										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+							} else if (karma.getKarma() == 0) {
+								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
+										new Color(0, 0, 0, 0).getRGB());
+								fontRenderer.drawString(event.getMatrixStack(), "Neutral View", 5, 20,
+										new Color(255, 0, 0, 255).getRGB());
+								Minecraft.getInstance().textureManager
+										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+							} else if (karma.getKarma() < 0) {
+								AbstractGui.fill(event.getMatrixStack(), 0, 0, 2000, 2000,
+										new Color(255, 0, 0, 3).getRGB());
+								fontRenderer.drawString(event.getMatrixStack(), "Negative View", 5, 20,
+										new Color(255, 0, 0, 255).getRGB());
+								Minecraft.getInstance().textureManager
+										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+							}
+
 						}
-
 					}
-				}
 
+				}
 			}
 		}
 
@@ -148,10 +159,13 @@ public class KarmaEvents {
 
 	@SubscribeEvent
 	public static void applyKarmaBuffs(PlayerTickEvent event) {
-		@SuppressWarnings("unused")
-		PlayerEntity player = event.player;
+		// PlayerEntity player = event.player;
+
 		/*
-		 * IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(
+		 * IKarmaActivation karmaAct =
+		 * player.getCapability(KarmaActivationProvider.KARMA_CAPA)
+		 * .orElseThrow(IllegalStateException::new); if (karmaAct.getActivation() == 0)
+		 * { IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(
 		 * IllegalStateException::new); // messing with caabilites gets sorta sticky
 		 * because they dont return back to // normal... change later if
 		 * (karma.getKarma() >= 1.0F) { // player.capabilities.setPlayerWalkSpeed(0.1F);
@@ -173,17 +187,7 @@ public class KarmaEvents {
 		 * EffectInstance(Effects.GLOWING, 100, 2));
 		 * 
 		 * } if (karma.getKarma() >= 100.0F) { // player.capabilities.isFlying= true; }
-		 */
-
-	}
-
-	@SubscribeEvent
-	public static void applyKarmaDebuffs(PlayerTickEvent event) {
-		/*
-		 * PlayerEntity player = event.player; IKarma karma =
-		 * player.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(
-		 * IllegalStateException::new); if (karma.getKarma() <= -20.0F) {
-		 * player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 1, 2)); } }
+		 * ?
 		 */
 
 	}
@@ -207,50 +211,53 @@ public class KarmaEvents {
 			} else if (serverPlayer.world.getDimensionKey() != DimensionInit.dreamlands) {
 				setLastOverworldPosition(player);
 			}
-
-			if (foundOnHead) {
-				// If player is in the Dreamlands
-				if (serverPlayer.world.getDimensionKey() == DimensionInit.dreamlands) {
-					Optional<DimensionalPosition> lastPos = getLastOverworldPosition(serverPlayer);
-					if (!lastPos.isPresent()) {
-						// Should be fine as youll never start in the dreamlands
-						serverPlayer.sendStatusMessage(new TranslationTextComponent("no_prev_position"), true);
-					} else {
-						// Teleport to Overworld
-						DimensionalPosition p = lastPos.get();
-						BlockPos bp = p.getPosition();
-						ResourceLocation dimRL = p.getDimension();
-						RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
-						ServerWorld ovw = world.getServer().getWorld(key);
-						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
-								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+			IKarmaActivation karmaAct = player.getCapability(KarmaActivationProvider.KARMA_CAPA)
+					.orElseThrow(IllegalStateException::new);
+			if (karmaAct.getActivation() != 0) {
+				if (foundOnHead) {
+					// If player is in the Dreamlands
+					if (serverPlayer.world.getDimensionKey() == DimensionInit.dreamlands) {
+						Optional<DimensionalPosition> lastPos = getLastOverworldPosition(serverPlayer);
+						if (!lastPos.isPresent()) {
+							// Should be fine as youll never start in the dreamlands
+							serverPlayer.sendStatusMessage(new TranslationTextComponent("no_prev_position"), true);
+						} else {
+							// Teleport to Overworld
+							DimensionalPosition p = lastPos.get();
+							BlockPos bp = p.getPosition();
+							ResourceLocation dimRL = p.getDimension();
+							RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
+							ServerWorld ovw = world.getServer().getWorld(key);
+							serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
+									serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+						}
 					}
-				}
-				// If player is in the overworld
-				else if (serverPlayer.world.getDimensionKey() != DimensionInit.dreamlands) {
-					Optional<DimensionalPosition> lastPos = getLastDreamPosition(serverPlayer);
-					if (!lastPos.isPresent()) {
-						// This is for the first join
-						DimensionalPosition p = new DimensionalPosition(DimensionInit.dreamlands.getLocation(),
-								new BlockPos(player.getPosX(), player.getPosY() + 200, player.getPosZ()));
-						BlockPos bp = p.getPosition();
-						ResourceLocation dimRL = p.getDimension();
-						RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
-						ServerWorld ovw = world.getServer().getWorld(key);
-						player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 200, 255, false, true));
-						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
-								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-					} else {
-						// Subsequent Joins
-						DimensionalPosition p = lastPos.get();
-						BlockPos bp = p.getPosition();
-						ServerWorld ovw = world.getServer().getWorld(
-								RegistryKey.getOrCreateKey(Registry.WORLD_KEY, DimensionInit.dreamlands.getLocation()));
-						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
-								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+					// If player is in the overworld
+					else if (serverPlayer.world.getDimensionKey() != DimensionInit.dreamlands) {
+						Optional<DimensionalPosition> lastPos = getLastDreamPosition(serverPlayer);
+						if (!lastPos.isPresent()) {
+							// This is for the first join
+							DimensionalPosition p = new DimensionalPosition(DimensionInit.dreamlands.getLocation(),
+									new BlockPos(player.getPosX(), player.getPosY() + 200, player.getPosZ()));
+							BlockPos bp = p.getPosition();
+							ResourceLocation dimRL = p.getDimension();
+							RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
+							ServerWorld ovw = world.getServer().getWorld(key);
+							player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 200, 255, false, true));
+							serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
+									serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+						} else {
+							// Subsequent Joins
+							DimensionalPosition p = lastPos.get();
+							BlockPos bp = p.getPosition();
+							ServerWorld ovw = world.getServer().getWorld(RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
+									DimensionInit.dreamlands.getLocation()));
+							serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
+									serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+						}
 					}
-				}
 
+				}
 			}
 		}
 

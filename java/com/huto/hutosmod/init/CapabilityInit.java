@@ -7,6 +7,9 @@ import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.Karma;
 import com.huto.hutosmod.capabilities.karma.KarmaStorage;
+import com.huto.hutosmod.capabilities.karma.activation.IKarmaActivation;
+import com.huto.hutosmod.capabilities.karma.activation.KarmaActivation;
+import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationStorage;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RuneCap.IRuneFactory;
@@ -29,6 +32,7 @@ public class CapabilityInit {
 
 	public static void init() {
 		CapabilityManager.INSTANCE.register(IVibrations.class, new VibrationStorage(), Vibrations::new);
+		CapabilityManager.INSTANCE.register(IKarmaActivation.class, new KarmaActivationStorage(), KarmaActivation::new);
 		CapabilityManager.INSTANCE.register(IKarma.class, new KarmaStorage(), Karma::new);
 		CapabilityManager.INSTANCE.register(ICovenant.class, new CovenantStorage(), Covenant::new);
 		CapabilityManager.INSTANCE.register(IDevotion.class, new DevotionStorage(), Devotion::new);

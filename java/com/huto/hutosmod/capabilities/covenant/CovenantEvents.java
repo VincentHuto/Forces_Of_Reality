@@ -7,12 +7,11 @@ import java.util.Map;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesApi;
-import com.huto.hutosmod.gui.pages.GuiUtil;
 import com.huto.hutosmod.init.EnchantmentInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.objects.items.runes.ItemContractRune;
+import com.huto.hutosmod.objects.items.runes.ItemRune;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
@@ -25,6 +24,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -34,7 +34,9 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -74,7 +76,24 @@ public class CovenantEvents {
 		ICovenant covenantNew = event.getEntity().getCapability(CovenantProvider.COVEN_CAPA)
 				.orElseThrow(IllegalStateException::new);
 		covenantNew.setDevotion(covenantOld.getDevotion());
-		if (!event.getPlayer().getEntityWorld().isRemote) {
+		/*
+		 * PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() ->
+		 * (ServerPlayerEntity) event.getPlayer()), new
+		 * CovenantPacketServer(covenantNew.getDevotion()));
+		 */
+
+	}
+
+	@SubscribeEvent
+	public static void respawn(PlayerRespawnEvent event) {
+
+	}
+
+	@SubscribeEvent
+	public static void onPickUp(ItemPickupEvent event) {
+		if (event.getOriginalEntity().getItem().getItem() == ItemInit.allegiance_identifier.get()) {
+			ICovenant covenantNew = event.getPlayer().getCapability(CovenantProvider.COVEN_CAPA)
+					.orElseThrow(IllegalStateException::new);
 			PacketHandler.CHANNELCOVENANT.send(
 					PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
 					new CovenantPacketServer(covenantNew.getDevotion()));
@@ -88,13 +107,13 @@ public class CovenantEvents {
 			PlayerEntity player = (PlayerEntity) e.getEntity();
 			IRunesItemHandler runes = RunesApi.getRunesHandler(player).orElseThrow(IllegalArgumentException::new);
 			for (int i = 0; i < runes.getSlots(); ++i) {
-				if (!runes.getStackInSlot(i).isEmpty()
-						&& runes.getStackInSlot(i).getItem() instanceof ItemContractRune) {
+				if (!runes.getStackInSlot(i).isEmpty() && runes.getStackInSlot(i).getItem() instanceof ItemRune) {
 					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 							.orElseThrow(IllegalArgumentException::new);
-					ItemContractRune contractRune = (ItemContractRune) runes.getStackInSlot(i).getItem();
+					ItemRune contractRune = (ItemRune) runes.getStackInSlot(i).getItem();
 					coven.setCovenDevotion(contractRune.getAssignedCovenant(),
-							(coven.getDevotionByCoven(contractRune.getAssignedCovenant()) - 10));
+							(coven.getDevotionByCoven(contractRune.getAssignedCovenant())
+									- contractRune.getDeepenAmount()));
 					player.sendStatusMessage(
 							new StringTextComponent(TextFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"),
 							false);
@@ -125,17 +144,7 @@ public class CovenantEvents {
 
 				// Allegiance Identifier overlay
 				if (item == ItemInit.allegiance_identifier.get()) {
-					ResourceLocation stexture = new ResourceLocation(HutosMod.MOD_ID, "textures/items/steve.png");
-					ResourceLocation htexture = new ResourceLocation(HutosMod.MOD_ID, "textures/items/yellow_sign.png");
-					ResourceLocation etexture = new ResourceLocation(HutosMod.MOD_ID,
-							"textures/items/everwatchful_pendant_old.png");
-					ResourceLocation atexture = new ResourceLocation(HutosMod.MOD_ID,
-							"textures/items/crossed_keys.png");
-					ResourceLocation mtexture = new ResourceLocation(HutosMod.MOD_ID,
-							"textures/items/integral_cog.png");
-					ResourceLocation btexture = new ResourceLocation(HutosMod.MOD_ID,
-							"textures/items/breath_of_the_beast.png");
-					ResourceLocation texture;
+					Item renderItem;
 					int centerX = (Minecraft.getInstance().getMainWindow().getScaledWidth() / 2) - 5;
 					int centerY = (Minecraft.getInstance().getMainWindow().getScaledHeight() / 2) - 15;
 					double angleBetweenEach = 360.0 / EnumCovenants.values().length;
@@ -150,26 +159,26 @@ public class CovenantEvents {
 								new Color(255, 0, 0, 255).getRGB());
 						GlStateManager.popMatrix();
 						if (selectedCoven.equals(EnumCovenants.SELF)) {
-							texture = stexture;
+							renderItem = Items.CRAFTING_TABLE;
 						} else if (selectedCoven.equals(EnumCovenants.HASTUR)) {
-							texture = htexture;
+							renderItem = ItemInit.yellow_sign.get();
 						} else if (selectedCoven.equals(EnumCovenants.ELDRITCH)) {
-							texture = etexture;
+							renderItem = ItemInit.everwatchful_pendant.get();
 						} else if (selectedCoven.equals(EnumCovenants.ASCENDENT)) {
-							texture = atexture;
+							renderItem = ItemInit.crossed_keys.get();
 						} else if (selectedCoven.equals(EnumCovenants.MACHINE)) {
-							texture = mtexture;
+							renderItem = ItemInit.integral_cog.get();
 						} else if (selectedCoven.equals(EnumCovenants.BEAST)) {
-							texture = btexture;
+							renderItem = ItemInit.breath_of_the_beast.get();
 						} else {
-							texture = stexture;
+							renderItem = Items.BARRIER;
 						}
-						Minecraft.getInstance().getTextureManager().bindTexture(texture);
-
 						GlStateManager.pushMatrix();
 						GlStateManager.enableAlphaTest();
 						GlStateManager.enableBlend();
-						GuiUtil.drawScaledTexturedModalRect(point.x, point.y, 0, 0, 16, 16, 0.062f);
+						Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(renderItem),
+								point.x, point.y);
+						// GuiUtil.drawScaledTexturedModalRect(point.x, point.y, 0, 0, 16, 16, 0.062f);
 						GlStateManager.disableBlend();
 						GlStateManager.disableAlphaTest();
 						GlStateManager.popMatrix();

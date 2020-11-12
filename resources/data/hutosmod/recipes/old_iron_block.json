@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "OOO",
+        "OOO",
+        "OOO"
+    ],
+   
+    "key":
+    {
+        "O":
+        {
+            "item": "hutosmod:old_iron_scrap"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:old_iron_block",
+        "count": 1
+    }
+}

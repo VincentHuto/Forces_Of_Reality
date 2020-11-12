@@ -98,7 +98,7 @@ public class ItemRune extends Item implements IRune {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(new StringTextComponent(
 				TextFormatting.GOLD + "Devoted Coven: " + ModTextFormatting.toProperCase(assignedCovenant.name())));
-		tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Devotionr Amount: " + deepenAmount));
+		tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Devotion Amount: " + deepenAmount));
 
 	}
 

@@ -2,6 +2,8 @@ package com.huto.hutosmod.objects.items;
 
 import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.KarmaProvider;
+import com.huto.hutosmod.capabilities.karma.activation.IKarmaActivation;
+import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationProvider;
 import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
 
@@ -26,19 +28,22 @@ public class ItemGrandPurgingStone extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (!worldIn.isRemote) {
 			IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
+			IKarmaActivation karmaAct = playerIn.getCapability(KarmaActivationProvider.KARMA_CAPA)
+					.orElseThrow(IllegalStateException::new);
+			if (karmaAct.getActivation() != 0) {
+				if (karma.getKarma() != 0) {
+					karma.setKarma(0);
+					playerIn.sendStatusMessage(
+							new StringTextComponent("Reduced Karma to: " + TextFormatting.GOLD + karma.getKarma()),
+							false);
+					// Sync Packet with server
+					PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+							new KarmaPacketServer(karma.getKarma()));
+					playerIn.getHeldItemMainhand().shrink(1);
+				}
 
-			if (karma.getKarma() != 0) {
-				karma.setKarma(0);
-				playerIn.sendStatusMessage(
-						new StringTextComponent("Reduced Karma to: " + TextFormatting.GOLD + karma.getKarma()), false);
-				// Sync Packet with server
-				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-						new KarmaPacketServer(karma.getKarma()));
-				playerIn.getHeldItemMainhand().shrink(1);
 			}
-
 		}
-
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 

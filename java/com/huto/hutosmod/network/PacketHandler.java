@@ -42,7 +42,12 @@ public class PacketHandler {
 				KarmaPacketClient::decode, KarmaPacketClient::handle);
 		CHANNELKARMA.registerMessage(networkID++, KarmaPacketServer.class, KarmaPacketServer::encode,
 				KarmaPacketServer::decode, KarmaPacketServer::handle);
-
+		CHANNELKARMA.registerMessage(networkID++, KarmaActivationPacketClient.class,
+				KarmaActivationPacketClient::encode, KarmaActivationPacketClient::decode,
+				KarmaActivationPacketClient::handle);
+		CHANNELKARMA.registerMessage(networkID++, KarmaActivationPacketServer.class,
+				KarmaActivationPacketServer::encode, KarmaActivationPacketServer::decode,
+				KarmaActivationPacketServer::handle);
 		// Covenant
 		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketClient.class, CovenantPacketClient::encode,
 				CovenantPacketClient::decode, CovenantPacketClient::handle);

@@ -18,6 +18,8 @@ public enum EnumModToolTiers implements IItemTier {
 		return Ingredient.fromItems(ItemInit.emanating_ingot.get());
 	}), AURIC(6, 2048, 9.0F, 5.0F, 30, () -> {
 		return Ingredient.fromItems(ItemInit.auric_ingot.get());
+	}), OLD_IRON(5, 1024, 3.0F, 7.0F, 10, () -> {
+		return Ingredient.fromItems(ItemInit.old_iron_scrap.get());
 	});
 
 	private final int harvestLevel;
