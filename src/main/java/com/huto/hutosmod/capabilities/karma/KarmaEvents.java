@@ -60,8 +60,12 @@ public class KarmaEvents {
 		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
 		int amount = KarmaProvider.getPlayerKarma(player);
 		PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> player), new KarmaPacketServer(amount));
-		player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
-				false);
+		IKarmaActivation act = player.getCapability(KarmaActivationProvider.KARMA_CAPA)
+				.orElseThrow(IllegalStateException::new);
+		if (act.getEnabled()) {
+			player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
+					false);
+		}
 	}
 
 	@SubscribeEvent
@@ -69,8 +73,12 @@ public class KarmaEvents {
 		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
 		int amount = KarmaProvider.getPlayerKarma(player);
 		PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> player), new KarmaPacketServer(amount));
-		player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
-				false);
+		IKarmaActivation act = player.getCapability(KarmaActivationProvider.KARMA_CAPA)
+				.orElseThrow(IllegalStateException::new);
+		if (act.getEnabled()) {
+			player.sendStatusMessage(new StringTextComponent("Welcome! Current Karma: " + TextFormatting.GOLD + amount),
+					false);
+		}
 	}
 
 	@SubscribeEvent

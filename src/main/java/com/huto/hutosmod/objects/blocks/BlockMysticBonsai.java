@@ -1,20 +1,17 @@
 package com.huto.hutosmod.objects.blocks;
 
-import java.util.Random;
-
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.EnumBonsaiTypes;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 
 public class BlockMysticBonsai extends BlockBonsai {
-	public BlockMysticBonsai(Properties properties, EnumBonsaiTypes type) {
-		super(properties, type);
+	public BlockMysticBonsai(Properties properties, EnumBonsaiTypes type,int stage) {
+		super(properties, type,stage);
 	}
-
-	public ItemStack getShearDrop() {
-		Random rand = new Random();
-		return new ItemStack(ItemInit.akebi_pod.get(), rand.nextInt(4));
+	@Override
+	public Item getShearDrop() {
+		return ItemInit.akebi_pod.get();
 	}
 
 }

@@ -30,8 +30,7 @@ public class ItemActualizationNode extends Item {
 			IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
 			IKarmaActivation karmaAct = playerIn.getCapability(KarmaActivationProvider.KARMA_CAPA)
 					.orElseThrow(IllegalStateException::new);
-			if (karmaAct.getActivation() == 0) {
-				//karma.setKarma(0);
+			if (!karmaAct.getEnabled()) {
 				playerIn.sendStatusMessage(new StringTextComponent("Activating Karma!"), false);
 				karmaAct.setKarmaActivation(1);
 				// Sync Packet with server
@@ -42,9 +41,7 @@ public class ItemActualizationNode extends Item {
 				playerIn.getHeldItemMainhand().shrink(1);
 				return super.onItemRightClick(worldIn, playerIn, handIn);
 
-			}
-			if (karmaAct.getActivation() == 1) {
-				//karma.setKarma(0);
+			} else {
 				playerIn.sendStatusMessage(new StringTextComponent("Deactivating Karma!"), false);
 				karmaAct.setKarmaActivation(0);
 				// Sync Packet with server

@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"FNF",
+		"FFF",
+		"F F"
+	],
+	"key": {
+		"N": {
+			"item": "minecraft:dirt"
+		},
+		"F": {
+			"item": "minecraft:brick"
+		}
+	},
+	"result": {
+		"item": "hutosmod:bonsai_planter",
+		"count": 1
+	}
+}

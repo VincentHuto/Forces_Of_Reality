@@ -30,7 +30,7 @@ public class ItemGrandPurgingStone extends Item {
 			IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
 			IKarmaActivation karmaAct = playerIn.getCapability(KarmaActivationProvider.KARMA_CAPA)
 					.orElseThrow(IllegalStateException::new);
-			if (karmaAct.getActivation() != 0) {
+			if (karmaAct.getEnabled()) {
 				if (karma.getKarma() != 0) {
 					karma.setKarma(0);
 					playerIn.sendStatusMessage(

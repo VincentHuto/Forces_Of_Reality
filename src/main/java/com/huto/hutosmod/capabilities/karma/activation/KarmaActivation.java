@@ -13,4 +13,10 @@ public class KarmaActivation implements IKarmaActivation {
 		return activ;
 	}
 
+	@Override
+	public boolean getEnabled() {
+		boolean toggle = activ == 0 ? false : true;
+		return toggle;
+	}
+
 }

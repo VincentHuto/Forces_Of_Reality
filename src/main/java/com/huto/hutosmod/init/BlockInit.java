@@ -70,7 +70,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			HutosMod.MOD_ID);
-
 	// TELEPORTEROS
 	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
 			() -> new BlockTeleporter(
@@ -201,33 +200,76 @@ public class BlockInit {
 					.sound(SoundType.ANVIL).notSolid()));
 
 	// Plants
-
 	// Bonsais
-
 	public static final RegistryObject<Block> bonsai_planter = BLOCKS.register("bonsai_planter",
 			() -> new BlockBonsaiPlanter(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
-
-	public static final RegistryObject<Block> anti_bonsai = BLOCKS.register("anti_bonsai", () -> new BlockAntiBonsai(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
-			EnumBonsaiTypes.ANTI));
-	public static final RegistryObject<Block> mystic_bonsai = BLOCKS.register("mystic_bonsai",
+	// Mystic
+	public static final RegistryObject<Block> mystic_bonsai_stage_1 = BLOCKS.register("mystic_bonsai_stage_1",
 			() -> new BlockMysticBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
-					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC));
-	public static final RegistryObject<Block> mushroom_bonsai = BLOCKS
-			.register("mushroom_bonsai",
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC, 1));
+	public static final RegistryObject<Block> mystic_bonsai_stage_2 = BLOCKS.register("mystic_bonsai_stage_2",
+			() -> new BlockMysticBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC, 2));
+	public static final RegistryObject<Block> mystic_bonsai_stage_3 = BLOCKS.register("mystic_bonsai_stage_3",
+			() -> new BlockMysticBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC, 3));
+	// Anti
+	public static final RegistryObject<Block> anti_bonsai_stage_1 = BLOCKS.register("anti_bonsai_stage_1",
+			() -> new BlockAntiBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.ANTI, 1));
+	public static final RegistryObject<Block> anti_bonsai_stage_2 = BLOCKS.register("anti_bonsai_stage_2",
+			() -> new BlockAntiBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.ANTI, 2));
+	public static final RegistryObject<Block> anti_bonsai_stage_3 = BLOCKS.register("anti_bonsai_stage_3",
+			() -> new BlockAntiBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.ANTI, 3));
+	// Mushroom
+	public static final RegistryObject<Block> mushroom_bonsai_stage_1 = BLOCKS
+			.register("mushroom_bonsai_stage_1",
 					() -> new BlockMushroomBonsai(Block.Properties.create(Material.ROCK)
 							.hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
-							EnumBonsaiTypes.MUSHROOM));
-	public static final RegistryObject<Block> oak_bonsai = BLOCKS.register("oak_bonsai", () -> new BlockOakBonsai(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
-			EnumBonsaiTypes.OAK));
-	public static final RegistryObject<Block> spruce_bonsai = BLOCKS.register("spruce_bonsai",
+							EnumBonsaiTypes.MUSHROOM, 1));
+	public static final RegistryObject<Block> mushroom_bonsai_stage_2 = BLOCKS
+			.register("mushroom_bonsai_stage_2",
+					() -> new BlockMushroomBonsai(Block.Properties.create(Material.ROCK)
+							.hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+							EnumBonsaiTypes.MUSHROOM, 2));
+	public static final RegistryObject<Block> mushroom_bonsai_stage_3 = BLOCKS
+			.register("mushroom_bonsai_stage_3",
+					() -> new BlockMushroomBonsai(Block.Properties.create(Material.ROCK)
+							.hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid(),
+							EnumBonsaiTypes.MUSHROOM, 3));
+	// Oak
+	public static final RegistryObject<Block> oak_bonsai_stage_1 = BLOCKS.register("oak_bonsai_stage_1",
+			() -> new BlockOakBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.OAK, 1));
+	public static final RegistryObject<Block> oak_bonsai_stage_2 = BLOCKS.register("oak_bonsai_stage_2",
+			() -> new BlockOakBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.OAK, 2));
+	public static final RegistryObject<Block> oak_bonsai_stage_3 = BLOCKS.register("oak_bonsai_stage_3",
+			() -> new BlockOakBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.OAK, 3));
+	// Spruce
+	public static final RegistryObject<Block> spruce_bonsai_stage_1 = BLOCKS.register("spruce_bonsai_stage_1",
 			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
-					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE));
-	public static final RegistryObject<Block> jungle_bonsai = BLOCKS.register("jungle_bonsai",
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE, 1));
+	public static final RegistryObject<Block> spruce_bonsai_stage_2 = BLOCKS.register("spruce_bonsai_stage_2",
+			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE, 2));
+	public static final RegistryObject<Block> spruce_bonsai_stage_3 = BLOCKS.register("spruce_bonsai_stage_3",
+			() -> new BlockSpruceBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.SPRUCE, 3));
+	// Jungle
+	public static final RegistryObject<Block> jungle_bonsai_stage_1 = BLOCKS.register("jungle_bonsai_stage_1",
 			() -> new BlockJungleBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
-					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.JUNGLE));
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.JUNGLE, 1));
+	public static final RegistryObject<Block> jungle_bonsai_stage_2 = BLOCKS.register("jungle_bonsai_stage_2",
+			() -> new BlockJungleBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.JUNGLE, 2));
+	public static final RegistryObject<Block> jungle_bonsai_stage_3 = BLOCKS.register("jungle_bonsai_stage_3",
+			() -> new BlockJungleBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
+					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.JUNGLE, 3));
 
 	// Misc
 	public static final RegistryObject<Block> mystic_grass = BLOCKS.register("mystic_grass",
@@ -341,12 +383,28 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.untold_easel.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.bonsai_planter.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai.get(), RenderType.getCutoutMipped());
+
+			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_1.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_1.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai_stage_1.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai_stage_1.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_1.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_1.get(), RenderType.getCutoutMipped());
+
+			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+
+			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.mystic_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+
 			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
 
 		}
