@@ -26,6 +26,8 @@ import com.huto.hutosmod.init.ParticleInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
+import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
+import com.huto.hutosmod.recipes.CopyMechanGloveDataRecipe;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
@@ -133,7 +135,7 @@ public class HutosMod {
 		ModChiselRecipes.init();
 		PacketHandler.registerChannels();
 		PacketHandler.registerRuneBinderChannels();
-
+		PacketHandler.registerMechanGloveChannels();
 		event.enqueueWork(() -> {
 			ModOreGen.registerConfiguredFeatures();
 		});
@@ -194,11 +196,29 @@ public class HutosMod {
 		}
 		return ItemStack.EMPTY;
 	}
+	
+	
+	public static ItemStack findMechanGlove(PlayerEntity player) {
+		if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove)
+			return player.getHeldItemMainhand();
+		if (player.getHeldItemOffhand().getItem() instanceof ItemMechanGlove)
+			return player.getHeldItemOffhand();
+		PlayerInventory inventory = player.inventory;
+		for (int i = 0; i <= 35; i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			if (stack.getItem() instanceof ItemMechanGlove)
+				return stack;
+		}
+		return ItemStack.EMPTY;
+	}
+	
 
 	@SubscribeEvent
 	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
 		event.getRegistry().register(new CopyRuneBinderDataRecipe.Serializer()
 				.setRegistryName(new ResourceLocation(MOD_ID, "rune_binder_upgrade")));
+		event.getRegistry().register(new CopyMechanGloveDataRecipe.Serializer()
+				.setRegistryName(new ResourceLocation(MOD_ID, "mechan_glove_upgrade")));
 	}
 
 }

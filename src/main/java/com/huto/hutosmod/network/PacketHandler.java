@@ -80,8 +80,6 @@ public class PacketHandler {
 
 	}
 
-	public static ResourceLocation channelName;
-	public String networkVersion;
 	public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(HutosMod.MOD_ID, "runebindernetwork"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
@@ -94,6 +92,16 @@ public class PacketHandler {
 		RUNEBINDER.messageBuilder(ToggleMessageMessage.class, networkID++).decoder(ToggleMessageMessage::decode)
 				.encoder(ToggleMessageMessage::encode).consumer(ToggleMessageMessage::handle).add();
 		return RUNEBINDER;
+	}
+
+	public static SimpleChannel MECHANGLOVE = NetworkRegistry.newSimpleChannel(
+			new ResourceLocation(HutosMod.MOD_ID, "mechanglovenetwork"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
+
+	public static SimpleChannel registerMechanGloveChannels() {
+		MECHANGLOVE.messageBuilder(MechanGloveOpenMessage.class, networkID++).decoder(MechanGloveOpenMessage::decode)
+				.encoder(MechanGloveOpenMessage::encode).consumer(MechanGloveOpenMessage::handle).add();
+		return MECHANGLOVE;
 	}
 
 }

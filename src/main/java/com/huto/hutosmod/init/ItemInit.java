@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.objects.items.ItemActualizationNode;
 import com.huto.hutosmod.objects.items.ItemChannelingIngot;
 import com.huto.hutosmod.objects.items.ItemCovenTome;
@@ -66,6 +67,7 @@ import com.huto.hutosmod.objects.items.tools.ItemFrequencyMatcher;
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.items.tools.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.tools.ItemManaExtractor;
+import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
 import com.huto.hutosmod.objects.items.tools.ItemResonanceDestabalizer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfReflectionMirror;
@@ -276,20 +278,27 @@ public class ItemInit {
 					(new Item.Properties()).group(HutosModItemGroup.instance)));
 
 	// Machine
-	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog",
-			() -> new ItemIntegralCog(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					EnumCovenants.MACHINE, 10));
+	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog", () -> new ItemIntegralCog(
+			new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC).maxStackSize(1),
+			EnumCovenants.MACHINE, 10));
 	public static final RegistryObject<Item> discared_gear = ITEMS.register("discared_gear",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE,
-					1));
+			() -> new ItemSacrificial(
+					new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC),
+					EnumCovenants.MACHINE, 1));
 	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
-			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.MACHINE,
-					3));
+			() -> new ItemSacrificial(
+					new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC),
+					EnumCovenants.MACHINE, 3));
 	public static final RegistryObject<Item> auric_ingot = ITEMS.register("auric_ingot",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
+			() -> new ItemMechanGlove("mechan_glove", 3, Rarity.UNCOMMON));
+	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
+			() -> new ItemMechanGlove("mechan_glove_superior", 6, ModTextFormatting.AURIC));
+	public static final RegistryObject<Item> mechan_glove_masterpiece = ITEMS.register("mechan_glove_masterpiece",
+			() -> new ItemMechanGlove("mechan_glove_masterpiece", 9, Rarity.EPIC));
 	// Food
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",

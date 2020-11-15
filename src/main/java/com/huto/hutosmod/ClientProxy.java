@@ -2,6 +2,7 @@ package com.huto.hutosmod;
 
 import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.events.ClientEventSubscriber;
+import com.huto.hutosmod.gui.GuiMechanGloveViewer;
 import com.huto.hutosmod.gui.GuiRuneBinderViewer;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.models.entity.ModelOldIronChestPlate;
@@ -36,8 +37,13 @@ public class ClientProxy implements IProxy {
 	}
 
 	@Override
-	public void openMyGui() {
+	public void openBinderGui() {
 		Minecraft.getInstance().displayGuiScreen(new GuiRuneBinderViewer(new ItemStack(ItemInit.rune_binder.get()),
+				ClientEventSubscriber.getClientPlayer()));
+	}
+	@Override
+	public void openMechanGui() {
+		Minecraft.getInstance().displayGuiScreen(new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()),
 				ClientEventSubscriber.getClientPlayer()));
 	}
 

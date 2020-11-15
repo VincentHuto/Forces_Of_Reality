@@ -46,16 +46,17 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 public class ItemRuneBinder extends Item {
+
+	String name;
+	Integer size;
+	Rarity rarity;
+
 	public ItemRuneBinder(String name, Integer size, Rarity rarity) {
 		super(new Item.Properties().maxStackSize(1).group(HutosModItemGroup.instance));
 		this.name = name;
 		this.size = size;
 		this.rarity = rarity;
 	}
-
-	String name;
-	Integer size;
-	Rarity rarity;
 
 	@Override
 	public Rarity getRarity(ItemStack stack) {
@@ -64,7 +65,6 @@ public class ItemRuneBinder extends Item {
 
 	public ItemRuneBinder setName() {
 		setRegistryName(HutosMod.MOD_ID, name);
-
 		return this;
 	}
 
@@ -77,7 +77,7 @@ public class ItemRuneBinder extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (worldIn.isRemote) {
 			if (!playerIn.isSneaking()) {
-				HutosMod.proxy.openMyGui();
+				HutosMod.proxy.openBinderGui();
 				playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 			}
 		}

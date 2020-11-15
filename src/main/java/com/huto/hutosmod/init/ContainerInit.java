@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.ContainerChiselStation;
+import com.huto.hutosmod.containers.ContainerMechanGlove;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.containers.ContainerVirtuousEnchanter;
 import com.huto.hutosmod.containers.PlayerExpandedContainer;
@@ -51,6 +52,8 @@ public class ContainerInit {
 	public static void onContainerRegister(final RegistryEvent.Register<ContainerType<?>> event) {
 		event.getRegistry().registerAll(RUNECONTAINER.toArray(new ContainerType[0]));
 		event.getRegistry().register(ContainerRuneBinder.type);
+		event.getRegistry().register(ContainerMechanGlove.type);
+
 	}
 
 	@SubscribeEvent

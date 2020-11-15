@@ -3,8 +3,10 @@ package com.huto.hutosmod.events;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.containers.ContainerMechanGlove;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.gui.GuiChiselStation;
+import com.huto.hutosmod.gui.GuiMechanGlove;
 import com.huto.hutosmod.gui.GuiRuneBinder;
 import com.huto.hutosmod.gui.GuiVirtuousEnchanter;
 import com.huto.hutosmod.gui.mindrunes.PlayerExpandedScreen;
@@ -114,6 +116,7 @@ public class ClientEventSubscriber {
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
 		ScreenManager.registerFactory(ContainerInit.PLAYER_RUNES, PlayerExpandedScreen::new);
 		ScreenManager.registerFactory(ContainerRuneBinder.type, GuiRuneBinder::new);
+		ScreenManager.registerFactory(ContainerMechanGlove.type, GuiMechanGlove::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);

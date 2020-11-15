@@ -1,5 +1,6 @@
 package com.huto.hutosmod.font;
 
+import net.minecraft.item.Rarity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,6 +16,9 @@ public class ModTextFormatting {
 	 * @param parReturnToBlack
 	 * @return
 	 */
+	
+	public static Rarity AURIC = Rarity.create("Auric", TextFormatting.GOLD);
+	
 	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {
 		int stringLength = parString.length();
 		if (stringLength < 1) {

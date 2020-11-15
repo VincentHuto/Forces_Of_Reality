@@ -7,9 +7,10 @@ public interface IProxy {
 	default void registerHandlers() {
 	}
 
-	default void openMyGui() {
+	default void openBinderGui() {
 	}
-
+	default void openMechanGui() {
+	}
 	default void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, int colorOuter,
 			int colorInner) {
 		lightningFX(vectorStart, vectorEnd, ticksPerMeter, System.nanoTime(), colorOuter, colorInner);

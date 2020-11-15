@@ -109,6 +109,10 @@
 	"item.hutosmod.mystic_trick_axe": "Mystic Trick Axe",
 	"item.hutosmod.neurotic_mechanism": "Neurotic Mechanism",
 	"item.hutosmod.attraction_charm": "Attraction Charm",
+	"item.hutosmod.mechan_glove": "Mechan Glove",
+		"item.hutosmod.mechan_glove_superior": "Mechan Glove",
+		"item.hutosmod.mechan_glove_masterpiece": "Mechan Glove",
+	
 	"item.hutosmod.rune_binder.info": "Basic Rune Binder",
 	"item.hutosmod.rune_binder.info2": "Holds 18 Rune Patterns",
 	"item.hutosmod.rune_binder_upgraded.info": "Upgraded Rune Binder",
