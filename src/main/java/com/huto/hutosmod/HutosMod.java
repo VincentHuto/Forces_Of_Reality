@@ -9,6 +9,7 @@ import com.huto.hutosmod.capabilities.covenant.CovenantEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaEvents;
 import com.huto.hutosmod.capabilities.karma.KarmaHudEventHandler;
 import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationEvents;
+import com.huto.hutosmod.capabilities.moduletiers.ModuleEvents;
 import com.huto.hutosmod.capabilities.tiledevotion.DevotionEvents;
 import com.huto.hutosmod.capabilities.vibes.SeerEventHandler;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
@@ -103,6 +104,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(ModuleEvents.class);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}

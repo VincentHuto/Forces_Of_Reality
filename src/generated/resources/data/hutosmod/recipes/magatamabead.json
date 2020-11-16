@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NNN",
+    " PN"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:obsidian"
+    },
+    "P": {
+      "item": "hutosmod:mana_powder"
+    }
+  },
+  "result": {
+    "item": "hutosmod:magatamabead"
+  }
+}

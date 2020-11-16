@@ -7,7 +7,7 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;
-import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
+import com.huto.hutosmod.objects.items.modules.ItemMechanModuleBase;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -69,11 +69,11 @@ public class GuiMechanGloveViewer extends Screen {
 				ItemStack stack = HutosMod.findMechanGlove(player);
 				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 						.orElseThrow(NullPointerException::new);
-				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemRunePattern) {
-					ItemRunePattern pat = (ItemRunePattern) binderHandler.getStackInSlot(i).getItem();
+				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+					ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
 					List<ITextComponent> text = new ArrayList<ITextComponent>();
 					text.add(new StringTextComponent(
-							I18n.format(pat.getRecipe().getOutput().getDisplayName().getString())));
+							I18n.format(pat.getItem().getName().getString())));
 					func_243308_b(matrixStack, text, mouseX, mouseY);
 				}
 			}
@@ -93,10 +93,10 @@ public class GuiMechanGloveViewer extends Screen {
 				for (int i = 0; i < buttons.size(); i++) {
 					GlStateManager.translatef(0, 0, 1);
 					RenderHelper.enableStandardItemLighting();
-					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemRunePattern) {
-						ItemRunePattern pat = (ItemRunePattern) binderHandler.getStackInSlot(i).getItem();
+					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+						ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
 						Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(
-								pat.getRecipe().getOutput(), (buttons.get(i).x + 2), buttons.get(i).y + 2);
+								new ItemStack(pat.getItem()), (buttons.get(i).x + 2), buttons.get(i).y + 2);
 					}
 				}
 			}
@@ -144,10 +144,10 @@ public class GuiMechanGloveViewer extends Screen {
 									if (press instanceof GuiButtonTextured) {
 										player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 										if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
-												.getItem() instanceof ItemRunePattern) {
-											ItemRunePattern pat = (ItemRunePattern) binderHandler
+												.getItem() instanceof ItemMechanModuleBase) {
+											ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
-											Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
+											//Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
 										}
 									}
 								}
@@ -160,10 +160,10 @@ public class GuiMechanGloveViewer extends Screen {
 									if (press instanceof GuiButtonTextured) {
 										player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 										if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
-												.getItem() instanceof ItemRunePattern) {
-											ItemRunePattern pat = (ItemRunePattern) binderHandler
+												.getItem() instanceof ItemMechanModuleBase) {
+											ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
-											Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
+											//Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
 										}
 									}
 								}
@@ -176,10 +176,10 @@ public class GuiMechanGloveViewer extends Screen {
 									if (press instanceof GuiButtonTextured) {
 										player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 										if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
-												.getItem() instanceof ItemRunePattern) {
-											ItemRunePattern pat = (ItemRunePattern) binderHandler
+												.getItem() instanceof ItemMechanModuleBase) {
+											ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
-											Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
+									//		Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
 										}
 									}
 								}

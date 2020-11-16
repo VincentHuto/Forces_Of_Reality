@@ -16,9 +16,9 @@ public class ModTextFormatting {
 	 * @param parReturnToBlack
 	 * @return
 	 */
-	
+
 	public static Rarity AURIC = Rarity.create("Auric", TextFormatting.GOLD);
-	
+
 	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {
 		int stringLength = parString.length();
 		if (stringLength < 1) {
@@ -148,8 +148,30 @@ public class ModTextFormatting {
 
 			}
 		}
-
 		return newString;
+	}
+
+	public static String convertInitToLang(String text) {
+		if (text == null || text.isEmpty()) {
+			return text;
+		}
+
+		StringBuilder converted = new StringBuilder();
+		boolean convertNext = true;
+		for (char ch : text.toCharArray()) {
+			if (ch == '_') {
+				ch = ' ';
+				convertNext = true;
+			} else if (convertNext) {
+				ch = Character.toTitleCase(ch);
+				convertNext = false;
+			} else {
+				ch = Character.toLowerCase(ch);
+			}
+			converted.append(ch);
+		}
+
+		return converted.toString();
 	}
 
 }

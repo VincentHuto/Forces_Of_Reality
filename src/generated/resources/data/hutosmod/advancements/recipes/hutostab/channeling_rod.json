@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:channeling_rod"
+    ]
+  },
+  "criteria": {
+    "has_mana_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:mana_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:channeling_rod"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mana_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

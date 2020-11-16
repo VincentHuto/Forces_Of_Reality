@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:obsidian_knapper"
+    ]
+  },
+  "criteria": {
+    "has_runed_obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:runed_obsidian"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:obsidian_knapper"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_runed_obsidian",
+      "has_the_recipe"
+    ]
+  ]
+}

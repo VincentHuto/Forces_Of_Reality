@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.HutosMod.HutosModItemGroup;
 import com.huto.hutosmod.containers.ContainerMechanGlove;
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
 import com.huto.hutosmod.font.ModTextFormatting;
@@ -41,8 +40,8 @@ public class ItemMechanGlove extends Item {
 	Integer size;
 	Rarity rare;
 
-	public ItemMechanGlove(String name, Integer size, Rarity rarity) {
-		super(new Item.Properties().rarity(rarity).maxStackSize(1).group(HutosModItemGroup.instance));
+	public ItemMechanGlove(Properties props,String name, Integer size, Rarity rarity) {
+		super(props);
 		this.name = name;
 		this.size = size;
 		this.rare = rarity;

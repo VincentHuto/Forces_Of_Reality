@@ -3,7 +3,7 @@ package com.huto.hutosmod.containers.slots;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
-import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
+import com.huto.hutosmod.objects.items.modules.ItemMechanModuleBase;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -21,8 +21,7 @@ public class SlotMechanGlove extends SlotItemHandler {
 
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack) {
-		// check for shulkers.
-		if (stack.getItem() instanceof ItemRunePattern) {
+		if (stack.getItem() instanceof ItemMechanModuleBase) {
 			return true;
 		} else {
 			return false;

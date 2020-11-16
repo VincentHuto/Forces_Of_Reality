@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:mystic_planks"
+    ]
+  },
+  "criteria": {
+    "has_mystic_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:mystic_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:mystic_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mystic_log",
+      "has_the_recipe"
+    ]
+  ]
+}

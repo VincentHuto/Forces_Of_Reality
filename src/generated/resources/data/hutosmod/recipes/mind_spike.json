@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  N",
+    "EBE",
+    "BBE"
+  ],
+  "key": {
+    "B": {
+      "item": "hutosmod:null_ingot"
+    },
+    "E": {
+      "item": "hutosmod:essence_drop"
+    },
+    "N": {
+      "item": "hutosmod:null_rod"
+    }
+  },
+  "result": {
+    "item": "hutosmod:mind_spike"
+  }
+}

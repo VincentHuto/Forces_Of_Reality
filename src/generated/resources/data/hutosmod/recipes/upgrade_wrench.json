@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  U",
+    " C ",
+    "R  "
+  ],
+  "key": {
+    "R": {
+      "item": "hutosmod:channeling_rod"
+    },
+    "C": {
+      "item": "hutosmod:channeling_ingot"
+    },
+    "U": {
+      "item": "hutosmod:upgrade_blank"
+    }
+  },
+  "result": {
+    "item": "hutosmod:upgrade_wrench"
+  }
+}

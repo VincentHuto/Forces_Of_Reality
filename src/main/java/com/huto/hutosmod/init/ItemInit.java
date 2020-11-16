@@ -34,6 +34,7 @@ import com.huto.hutosmod.objects.items.equipment.ItemSlimeRepulsionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.equipment.ItemWatchfulPendant;
 import com.huto.hutosmod.objects.items.equipment.ItemYellowSign;
+import com.huto.hutosmod.objects.items.modules.ItemMechanModuleBase;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.objects.items.runes.ItemGuidanceRune;
 import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
@@ -293,12 +294,21 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	//Modules
+	public static final RegistryObject<Item> mechan_module = ITEMS.register("mechan_module",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	//Gloves
 	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
-			() -> new ItemMechanGlove("mechan_glove", 3, Rarity.UNCOMMON));
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(HutosModItemGroup.instance),
+					"mechan_glove", 3, Rarity.UNCOMMON));
 	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
-			() -> new ItemMechanGlove("mechan_glove_superior", 6, ModTextFormatting.AURIC));
+			() -> new ItemMechanGlove(new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
+					.group(HutosModItemGroup.instance), "mechan_glove_superior", 6, ModTextFormatting.AURIC));
 	public static final RegistryObject<Item> mechan_glove_masterpiece = ITEMS.register("mechan_glove_masterpiece",
-			() -> new ItemMechanGlove("mechan_glove_masterpiece", 9, Rarity.EPIC));
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(HutosModItemGroup.instance),
+					"mechan_glove_masterpiece", 9, Rarity.EPIC));
 	// Food
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",

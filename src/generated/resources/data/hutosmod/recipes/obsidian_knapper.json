@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    " N ",
+    "N  "
+  ],
+  "key": {
+    "N": {
+      "item": "hutosmod:null_rod"
+    },
+    "P": {
+      "item": "hutosmod:runed_obsidian"
+    }
+  },
+  "result": {
+    "item": "hutosmod:obsidian_knapper"
+  }
+}

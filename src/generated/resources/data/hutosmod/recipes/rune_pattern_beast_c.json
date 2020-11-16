@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:rune_pattern"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    },
+    {
+      "item": "hutosmod:blooddrawn_fang"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:rune_pattern_beast_c"
+  }
+}

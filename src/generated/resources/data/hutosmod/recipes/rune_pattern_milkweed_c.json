@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:rune_pattern"
+    },
+    {
+      "item": "hutosmod:suspicious_eye"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:rune_pattern_milkweed_c"
+  }
+}

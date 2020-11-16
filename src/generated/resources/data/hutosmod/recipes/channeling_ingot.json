@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/iron"
+    },
+    {
+      "item": "hutosmod:mana_powder"
+    },
+    {
+      "item": "hutosmod:mana_powder"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:channeling_ingot"
+  }
+}

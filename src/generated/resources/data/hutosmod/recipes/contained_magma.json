@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NON",
+    "OPO",
+    "NON"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:ingots/nether_brick"
+    },
+    "O": {
+      "item": "minecraft:magma_block"
+    },
+    "P": {
+      "item": "hutosmod:nullifying_powder"
+    }
+  },
+  "result": {
+    "item": "hutosmod:contained_magma"
+  }
+}

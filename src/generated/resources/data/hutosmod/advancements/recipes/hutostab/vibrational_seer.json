@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:vibrational_seer"
+    ]
+  },
+  "criteria": {
+    "has_essence_drop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:essence_drop"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:vibrational_seer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_essence_drop",
+      "has_the_recipe"
+    ]
+  ]
+}
