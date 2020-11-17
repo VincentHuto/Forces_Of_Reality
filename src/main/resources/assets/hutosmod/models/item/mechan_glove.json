@@ -647,9 +647,17 @@
 		"firstperson_lefthand": {
 			"translation": [10.5, -2.5, -9.5]
 		},
+		"ground": {
+			"translation": [0, 0.5, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
 		"gui": {
 			"rotation": [38, -82, 7],
 			"translation": [0, 1.75, 0]
+		},
+		"fixed": {
+			"rotation": [45, 91, -45],
+			"translation": [0, 3.5, -2]
 		}
 	},
 	"groups": [

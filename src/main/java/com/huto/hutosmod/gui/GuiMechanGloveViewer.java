@@ -5,9 +5,14 @@ import java.util.List;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
+import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.PacketUpdateChiselRunes;
+import com.huto.hutosmod.network.PacketUpdateMechanModule;
 import com.huto.hutosmod.objects.items.modules.ItemMechanModuleBase;
+import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -72,8 +77,7 @@ public class GuiMechanGloveViewer extends Screen {
 				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
 					ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
 					List<ITextComponent> text = new ArrayList<ITextComponent>();
-					text.add(new StringTextComponent(
-							I18n.format(pat.getItem().getName().getString())));
+					text.add(new StringTextComponent(I18n.format(pat.getItem().getName().getString())));
 					func_243308_b(matrixStack, text, mouseX, mouseY);
 				}
 			}
@@ -147,7 +151,8 @@ public class GuiMechanGloveViewer extends Screen {
 												.getItem() instanceof ItemMechanModuleBase) {
 											ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
-											//Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
+											PacketHandler.HANDLER.sendToServer(
+													new PacketUpdateMechanModule(((GuiButtonTextured) press).getId()));
 										}
 									}
 								}
@@ -163,7 +168,8 @@ public class GuiMechanGloveViewer extends Screen {
 												.getItem() instanceof ItemMechanModuleBase) {
 											ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
-											//Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
+											PacketHandler.HANDLER.sendToServer(
+													new PacketUpdateMechanModule(((GuiButtonTextured) press).getId()));
 										}
 									}
 								}
@@ -179,7 +185,8 @@ public class GuiMechanGloveViewer extends Screen {
 												.getItem() instanceof ItemMechanModuleBase) {
 											ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
-									//		Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
+											PacketHandler.HANDLER.sendToServer(
+													new PacketUpdateMechanModule(((GuiButtonTextured) press).getId()));
 										}
 									}
 								}

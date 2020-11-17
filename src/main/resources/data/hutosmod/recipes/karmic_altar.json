@@ -1,30 +1,28 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "EBE",
-        "RAR",
-        "NRN"
-    ],
-    "key": {
-        
-        "R": {
-            "item": "hutosmod:runed_obsidian"
-        },
-        "E": {
-            "item": "hutosmod:energy_focus"
-        },
-        "A": {
-            "item": "hutosmod:activated_obsidian"
-        },
-        "N": {
-            "item": "hutosmod:nether_block"
-        },
-        "B": {
-            "item": "minecraft:blaze_powder"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EBE",
+    "RAR",
+    "NRN"
+  ],
+  "key": {
+    "R": {
+      "item": "hutosmod:runed_obsidian"
     },
-    "result": {
-        "item": "hutosmod:karmic_altar",
-        "count": 1
+    "E": {
+      "item": "hutosmod:energy_focus"
+    },
+    "A": {
+      "item": "hutosmod:activated_obsidian"
+    },
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "B": {
+      "item": "minecraft:blaze_powder"
     }
+  },
+  "result": {
+    "item": "hutosmod:karmic_altar"
+  }
 }

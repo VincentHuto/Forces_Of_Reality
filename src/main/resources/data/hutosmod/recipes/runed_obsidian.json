@@ -1,15 +1,14 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "minecraft:obsidian"
-        },
-        {
-            "item": "minecraft:flint"
-        }
-    ],
-    "result": {
-        "item": "hutosmod:runed_obsidian",
-        "count": 1
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "tag": "forge:obsidian"
     }
+  ],
+  "result": {
+    "item": "hutosmod:runed_obsidian"
+  }
 }

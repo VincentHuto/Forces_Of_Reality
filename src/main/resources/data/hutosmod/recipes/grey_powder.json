@@ -1,21 +1,24 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-			"item": "minecraft:bone_meal"
-		},
-		{
-			"item": "minecraft:bone_meal"
-		},
-		{
-			"item": "minecraft:gunpowder"
-		},
-		{
-			"item": "minecraft:quartz"
-		}
-	],
-	"result": {
-		"item": "hutosmod:grey_powder",
-		"count": 3
-	}
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:gunpowder"
+    },
+    {
+      "tag": "forge:gems/quartz"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:grey_powder",
+    "count": 3
+  }
 }

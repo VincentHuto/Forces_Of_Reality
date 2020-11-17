@@ -1,36 +1,23 @@
 {
-    "type": "minecraft:crafting_shaped",
-   
-    "pattern":
-    [
-        "ORO",
-        "RGR",
-        "ORO"
-    ],
-   
-    "key":
-    {
-        "R":
-        {
-            "item": "minecraft:redstone"
-        },
-        
-        "G":
-        {
-            "item": "minecraft:glass"
-        },
-        
-         "O":
-        {
-            "item": "minecraft:obsidian"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ORO",
+    "RGR",
+    "ORO"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
     },
-    
-    
-   
-    "result":
-    {
-        "item": "hutosmod:readied_pane",
-        "count": 4
+    "G": {
+      "tag": "forge:glass"
+    },
+    "O": {
+      "tag": "forge:obsidian"
     }
+  },
+  "result": {
+    "item": "hutosmod:readied_pane",
+    "count": 4
+  }
 }

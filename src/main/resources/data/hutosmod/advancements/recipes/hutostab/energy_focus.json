@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:energy_focus"
+    ]
+  },
+  "criteria": {
+    "has_phantasmal_pane": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:phantasmal_pane"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:energy_focus"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_phantasmal_pane",
+      "has_the_recipe"
+    ]
+  ]
+}

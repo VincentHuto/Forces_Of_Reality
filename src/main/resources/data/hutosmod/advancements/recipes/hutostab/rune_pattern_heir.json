@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:rune_pattern_heir"
+    ]
+  },
+  "criteria": {
+    "has_rune_pattern": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:rune_pattern"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:rune_pattern_heir"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rune_pattern",
+      "has_the_recipe"
+    ]
+  ]
+}

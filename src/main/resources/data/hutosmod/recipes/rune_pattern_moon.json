@@ -1,15 +1,14 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-			"item": "hutosmod:rune_pattern"
-		},
-		{
-			"item": "minecraft:ghast_tear"
-		}
-	],
-	"result": {
-		"item": "hutosmod:rune_pattern_moon",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:rune_pattern"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:rune_pattern_moon"
+  }
 }

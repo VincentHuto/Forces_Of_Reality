@@ -10,6 +10,7 @@ import com.huto.hutosmod.containers.ContainerMechanGlove;
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
 import com.huto.hutosmod.font.ModTextFormatting;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,6 +28,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -40,7 +42,10 @@ public class ItemMechanGlove extends Item {
 	Integer size;
 	Rarity rare;
 
-	public ItemMechanGlove(Properties props,String name, Integer size, Rarity rarity) {
+	public static int selectedModule;
+	public static String TAG_SELECTED = "selected";
+
+	public ItemMechanGlove(Properties props, String name, Integer size, Rarity rarity) {
 		super(props);
 		this.name = name;
 		this.size = size;
@@ -53,9 +58,18 @@ public class ItemMechanGlove extends Item {
 
 	}
 
+	public void setSelectedModule(int selectedModuleIn) {
+		selectedModule = selectedModuleIn;
+	}
+
+	public int getSelectedModule() {
+		return selectedModule;
+	}
+
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return false;
+	public boolean shouldSyncTag() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override
@@ -65,8 +79,8 @@ public class ItemMechanGlove extends Item {
 				HutosMod.proxy.openMechanGui();
 				playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 			}
-		}
 
+		}
 		if (!worldIn.isRemote) {
 			if (playerIn.isSneaking()) {
 				// open
@@ -87,6 +101,14 @@ public class ItemMechanGlove extends Item {
 
 			}
 		}
+		ItemStack stack = playerIn.getHeldItemMainhand();
+		IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+				.orElseThrow(IllegalArgumentException::new);
+
+		ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
+		System.out.println(selectedModuleStack);
+
+		// NBT TAG
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 
 	}
@@ -94,9 +116,31 @@ public class ItemMechanGlove extends Item {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent(
-				TextFormatting.LIGHT_PURPLE + "Rarity: " + ModTextFormatting.toProperCase(rare.name())));
-		tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Size: " + size));
+		if (worldIn != null) {
+			IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+					.orElseThrow(IllegalArgumentException::new);
+
+			if (handler != null) {
+				tooltip.add(new StringTextComponent(
+						TextFormatting.LIGHT_PURPLE + "Rarity: " + ModTextFormatting.toProperCase(rare.name())));
+				tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Size: " + size));
+				ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
+				if (stack.hasTag()) {
+					tooltip.add(new TranslationTextComponent(
+							TextFormatting.GOLD + "Selected Module: " + stack.getTag().getInt(TAG_SELECTED)));
+					 handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
+					tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Selected Module: "
+							+ I18n.format(selectedModuleStack.getTranslationKey())));
+					/*
+					 * if (selectedModuleStack.getItem() != null && selectedModuleStack.getItem()
+					 * instanceof ItemMechanModuleBase) { tooltip.add(new TranslationTextComponent(
+					 * TextFormatting.GOLD + "Module Tier: " + selectedModuleStack.getTag()));
+					 * 
+					 * }
+					 */
+				}
+			}
+		}
 	}
 
 	@Nullable

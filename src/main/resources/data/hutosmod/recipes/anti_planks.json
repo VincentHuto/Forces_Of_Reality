@@ -1,12 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "hutosmod:anti_planks"
-        }
-    ],
-    "result": {
-        "item": "hutosmod:anti_planks",
-        "count": 4
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:anti_log"
     }
+  ],
+  "result": {
+    "item": "hutosmod:anti_planks",
+    "count": 4
+  }
 }

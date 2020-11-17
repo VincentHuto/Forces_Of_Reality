@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:gilded_wool"
+    ]
+  },
+  "criteria": {
+    "has_nuggets_gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/gold"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:gilded_wool"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nuggets_gold",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -4,46 +4,68 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.huto.hutosmod.capabilities.moduletiers.IModule;
-import com.huto.hutosmod.capabilities.moduletiers.ModuleProvider;
-
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemMechanModuleBase extends Item {
+public class ItemMechanModuleBase extends Item implements IHasModuleUse {
+	public static String TAG_TIER = "tier";
 
 	public ItemMechanModuleBase(Properties properties) {
 		super(properties);
 	}
 
-	public void moduleUse(ItemUseContext context) {
-		context.getPlayer().sendStatusMessage(new StringTextComponent("Base Module Function"), true);
-	}
-/*	@Nullable
 	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-		if(stack !=null){
-		return new ModuleProvider();
-		}else{
-		return null;
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		// NBT TAG
+		ItemStack stack = playerIn.getHeldItemMainhand();
+
+		if (!stack.hasTag()) {
+			stack.setTag(new CompoundNBT());
+			CompoundNBT compound = stack.getTag();
+			compound.putInt(TAG_TIER, 0);
+		}
+		CompoundNBT compound = stack.getTag();
+		if (stack.getTag() != null) {
+			int sel = compound.getInt(TAG_TIER);
+			compound.putInt(TAG_TIER, sel + 1);
+			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
+		}
+		stack.setTag(compound);
+
+		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+
+	}
+
+	@Override
+	public void moduleUse(ItemUseContext context) {
 		
-	}*/
+	}
+
 	@Nullable
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-	if (stack != null) {
-			IModule tier = stack.getCapability(ModuleProvider.TIER_CAPA).orElseThrow(IllegalArgumentException::new);
-			if (tier != null) {
-				tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Tier: " + tier.getTier()));
-			}
+		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Use: Base Module"));
+		if (stack.getTag() != null) {
+			tooltip.add(new StringTextComponent(TextFormatting.GOLD + "" + stack.getTag().getInt(TAG_TIER)));
+		} else {
+			tooltip.add(new StringTextComponent(TextFormatting.GOLD + "" + 0));
 		}
 	}
 
+	@Override
+	public boolean shouldSyncTag() {
+		return true;
+	}
 }

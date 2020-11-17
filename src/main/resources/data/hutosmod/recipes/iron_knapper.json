@@ -1,32 +1,19 @@
 {
-    "type": "minecraft:crafting_shaped",
-   
-    "pattern":
-    [
-        "  I",
-        " S ",
-        "S  "
-    ],
-   
-    "key":
-    {
-        "S":
-        {
-            "item": "minecraft:stick"
-        },
-        
-        "I":
-        {
-            "item": "minecraft:iron_ingot"
-        }
-        
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    " N ",
+    "N  "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:stick"
     },
-    
-    
-   
-    "result":
-    {
-        "item": "hutosmod:iron_knapper",
-        "count": 1
+    "P": {
+      "tag": "forge:ingots/iron"
     }
+  },
+  "result": {
+    "item": "hutosmod:iron_knapper"
+  }
 }

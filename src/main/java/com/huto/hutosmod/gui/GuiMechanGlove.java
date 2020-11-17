@@ -2,15 +2,21 @@ package com.huto.hutosmod.gui;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.ContainerMechanGlove;
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
@@ -70,12 +76,22 @@ public class GuiMechanGlove extends ContainerScreen<ContainerMechanGlove> {
 	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
 		this.font.drawString(matrixStack, "Modules", 7, 6, TextFormatting.GOLD.getColor());
 	}
-
+	@SuppressWarnings("deprecation")
 	@Override
 	public void render(MatrixStack matrixStack, int p_render_1_, int p_render_2_, float p_render_3_) {
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, p_render_1_, p_render_2_, p_render_3_);
 		this.renderHoveredTooltip(matrixStack, p_render_1_, p_render_2_);
+		GlStateManager.pushMatrix();
+		GlStateManager.scalef(2, 2, 2);
+		matrixStack.push();
+		double time = ClientTickHandler.ticksInGame ;
+		matrixStack.rotate(Vector3f.YP.rotationDegrees((float) time));
+		Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(ItemInit.mechan_glove.get()),
+				guiLeft-20, guiTop-15);
+		
+		matrixStack.pop();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

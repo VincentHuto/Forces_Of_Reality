@@ -1,26 +1,25 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"F F",
-		"NCN",
-		"SSS"
-	],
-	"key": {
-		"N": {
-			"item": "hutosmod:nether_block"
-		},
-		"F": {
-			"item": "hutosmod:energy_focus"
-		},
-		"C": {
-			"item": "hutosmod:mana_crystal"
-		},
-		"S": {
-			"item": "hutosmod:enchanted_stone_smooth"
-		}
-	},
-	"result": {
-		"item": "hutosmod:maker_activator",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "NCN",
+    "SSS"
+  ],
+  "key": {
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "F": {
+      "item": "hutosmod:energy_focus"
+    },
+    "C": {
+      "item": "hutosmod:mana_crystal"
+    },
+    "S": {
+      "item": "hutosmod:enchanted_stone_smooth"
+    }
+  },
+  "result": {
+    "item": "hutosmod:maker_activator"
+  }
 }

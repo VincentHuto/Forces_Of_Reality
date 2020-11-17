@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:raw_morel_on_a_stick"
+    ]
+  },
+  "criteria": {
+    "has_morel_mushroom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:morel_mushroom"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:raw_morel_on_a_stick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_morel_mushroom",
+      "has_the_recipe"
+    ]
+  ]
+}

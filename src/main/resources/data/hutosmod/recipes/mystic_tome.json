@@ -1,15 +1,20 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "minecraft:book"
-        },
-        {
-            "item": "hutosmod:mana_powder"
-        }
-    ],
-    "result": {
-        "item": "hutosmod:mystic_tome",
-        "count": 1
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:mana_powder"
+    },
+    {
+      "item": "hutosmod:mana_powder"
+    },
+    {
+      "item": "hutosmod:mana_powder"
+    },
+    {
+      "item": "minecraft:book"
     }
+  ],
+  "result": {
+    "item": "hutosmod:mystic_tome"
+  }
 }

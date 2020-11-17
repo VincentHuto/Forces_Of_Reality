@@ -77,6 +77,9 @@ public class PacketHandler {
 				PacketUpdateChiselRunes::decode, PacketUpdateChiselRunes.Handler::handle);
 		HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class, PacketChiselCraftingEvent::encode,
 				PacketChiselCraftingEvent::decode, PacketChiselCraftingEvent.Handler::handle);
+		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
+				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
+		
 
 		// MindRunes
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(HutosMod.MOD_ID, "runechannel"), () -> "1.0",

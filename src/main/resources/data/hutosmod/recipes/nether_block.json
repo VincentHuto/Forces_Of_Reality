@@ -1,36 +1,22 @@
 {
-    "type": "minecraft:crafting_shaped",
-   
-    "pattern":
-    [
-        "NON",
-        "OPO",
-        "NON"
-    ],
-   
-    "key":
-    {
-        "N":
-        {
-            "item": "minecraft:nether_brick"
-        },
-        
-        "O":
-        {
-            "item": "minecraft:obsidian"
-        },
-        
-         "P":
-        {
-            "item": "hutosmod:nullifying_powder"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NON",
+    "OPO",
+    "NON"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:ingots/nether_brick"
     },
-    
-    
-   
-    "result":
-    {
-        "item": "hutosmod:nether_block",
-        "count": 1
+    "O": {
+      "tag": "forge:obsidian"
+    },
+    "P": {
+      "item": "hutosmod:nullifying_powder"
     }
+  },
+  "result": {
+    "item": "hutosmod:nether_block"
+  }
 }

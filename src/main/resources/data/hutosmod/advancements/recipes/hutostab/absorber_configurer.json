@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:absorber_configurer"
+    ]
+  },
+  "criteria": {
+    "has_null_rod": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:null_rod"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:absorber_configurer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_null_rod",
+      "has_the_recipe"
+    ]
+  ]
+}

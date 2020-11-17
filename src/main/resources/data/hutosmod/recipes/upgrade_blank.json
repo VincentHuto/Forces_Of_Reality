@@ -1,31 +1,19 @@
 {
-    "type": "minecraft:crafting_shaped",
-   
-    "pattern":
-    [
-        " G ",
-        "GNG",
-        " G "
-    ],
-   
-    "key":
-    {
-        "G":
-        {
-            "item": "minecraft:gold_ingot"
-        },
-        
-        "N":
-        {
-            "item": "hutosmod:nullifying_powder"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GRG",
+    "GGG"
+  ],
+  "key": {
+    "R": {
+      "item": "hutosmod:nullifying_powder"
     },
-    
-    
-   
-    "result":
-    {
-        "item": "hutosmod:upgrade_blank",
-        "count": 1
+    "G": {
+      "tag": "forge:ingots/gold"
     }
+  },
+  "result": {
+    "item": "hutosmod:upgrade_blank"
+  }
 }

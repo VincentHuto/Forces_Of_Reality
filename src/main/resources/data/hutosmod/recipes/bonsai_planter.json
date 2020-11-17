@@ -1,20 +1,19 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"FNF",
-		"FFF",
-		"F F"
-	],
-	"key": {
-		"N": {
-			"item": "minecraft:dirt"
-		},
-		"F": {
-			"item": "minecraft:brick"
-		}
-	},
-	"result": {
-		"item": "hutosmod:bonsai_planter",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FNF",
+    "FFF",
+    "F F"
+  ],
+  "key": {
+    "F": {
+      "tag": "forge:ingots/brick"
+    },
+    "N": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "result": {
+    "item": "hutosmod:bonsai_planter"
+  }
 }

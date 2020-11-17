@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EOE",
+    "RNR",
+    "AAA"
+  ],
+  "key": {
+    "R": {
+      "item": "hutosmod:runed_obsidian"
+    },
+    "E": {
+      "item": "hutosmod:energy_focus"
+    },
+    "A": {
+      "item": "hutosmod:activated_obsidian"
+    },
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "hutosmod:vibratory_accelerometer"
+  }
+}

@@ -1,15 +1,14 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-			"item": "hutosmod:rune_pattern"
-		},
-		{
-			"item": "minecraft:water_bucket"
-		}
-	],
-	"result": {
-		"item": "hutosmod:rune_pattern_lake",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:rune_pattern"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:rune_pattern_lake"
+  }
 }

@@ -34,7 +34,6 @@ public class KarmaProvider implements ICapabilitySerializable<IntNBT> {
 	public void deserializeNBT(IntNBT nbt) {
 		KARMA_CAPA.getStorage().readNBT(KARMA_CAPA,
 				instance.orElseThrow(() -> new IllegalArgumentException("LazyOptional cannot be empty!")), null, nbt);
-
 	}
 
 	public static int getPlayerKarma(PlayerEntity player) {

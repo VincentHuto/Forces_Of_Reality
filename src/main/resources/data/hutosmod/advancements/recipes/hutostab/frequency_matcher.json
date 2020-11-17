@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:frequency_matcher"
+    ]
+  },
+  "criteria": {
+    "has_gem_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:gem_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:frequency_matcher"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gem_opal",
+      "has_the_recipe"
+    ]
+  ]
+}

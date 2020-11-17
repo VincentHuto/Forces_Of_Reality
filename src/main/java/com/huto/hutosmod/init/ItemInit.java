@@ -294,10 +294,16 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	//Modules
+	// Modules
 	public static final RegistryObject<Item> mechan_module = ITEMS.register("mechan_module",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
-	//Gloves
+	public static final RegistryObject<Item> mechan_module_rocket = ITEMS.register("mechan_module_rocket",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> mechan_module_salvo = ITEMS.register("mechan_module_salvo",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> mechan_module_shortcircuit = ITEMS.register("mechan_module_shortcircuit",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	// Gloves
 	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
 			() -> new ItemMechanGlove(
 					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(HutosModItemGroup.instance),

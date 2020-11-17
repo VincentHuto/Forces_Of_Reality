@@ -1,20 +1,19 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "SSS",
-        "SKS",
-        "SSS"
-    ],
-    "key": {
-        "K": {
-            "item": "hutosmod:essence_drop"
-        },
-        "S": {
-            "item": "hutosmod:nullifying_powder"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SKS",
+    "SSS"
+  ],
+  "key": {
+    "K": {
+      "item": "hutosmod:essence_drop"
     },
-    "result": {
-        "item": "hutosmod:anti_tear",
-        "count": 1
+    "S": {
+      "item": "hutosmod:nullifying_powder"
     }
+  },
+  "result": {
+    "item": "hutosmod:anti_tear"
+  }
 }

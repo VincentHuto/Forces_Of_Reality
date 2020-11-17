@@ -1,37 +1,22 @@
 {
-    "type": "minecraft:crafting_shaped",
-   
-    "pattern":
-    [
-        "SPS",
-        "SKS",
-        "SSS"
-    ],
-   
-    "key":
-    {
-        "K":
-        {
-            "item": "hutosmod:karmic_drop"
-        },
-        
-        "S":
-        {
-            "item": "minecraft:stone",
-            "data": 0     
-        },
-        
-         "P":
-        {
-            "item": "hutosmod:nullifying_powder"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SAS",
+    "SKS",
+    "SSS"
+  ],
+  "key": {
+    "K": {
+      "tag": "forge:stone"
     },
-    
-    
-   
-    "result":
-    {
-        "item": "hutosmod:purging_stone",
-        "count": 1
+    "S": {
+      "item": "hutosmod:karmic_drop"
+    },
+    "A": {
+      "item": "hutosmod:nullifying_powder"
     }
+  },
+  "result": {
+    "item": "hutosmod:purging_stone"
+  }
 }
