@@ -31,7 +31,6 @@ public class PacketHandler {
 	public static final SimpleChannel CHANNELMODULETIER = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(HutosMod.MOD_ID, "modulechannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
 			PROTOCOL_VERSION::equals);
-	
 
 	public static void registerChannels() {
 		// Register Networking packets
@@ -41,13 +40,6 @@ public class PacketHandler {
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketServer.class, VibrationPacketServer::encode,
 				VibrationPacketServer::decode, VibrationPacketServer::handle);
 
-		
-		// Module Tiers
-		CHANNELMODULETIER.registerMessage(networkID++, ModulePacketClient.class, ModulePacketClient::encode,
-				ModulePacketClient::decode, ModulePacketClient::handle);
-		CHANNELMODULETIER.registerMessage(networkID++, ModulePacketServer.class, ModulePacketServer::encode,
-				ModulePacketServer::decode, ModulePacketServer::handle);
-		
 		// Karma
 		CHANNELKARMA.registerMessage(networkID++, KarmaPacketClient.class, KarmaPacketClient::encode,
 				KarmaPacketClient::decode, KarmaPacketClient::handle);
@@ -79,7 +71,6 @@ public class PacketHandler {
 				PacketChiselCraftingEvent::decode, PacketChiselCraftingEvent.Handler::handle);
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
-		
 
 		// MindRunes
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(HutosMod.MOD_ID, "runechannel"), () -> "1.0",

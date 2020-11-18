@@ -16,9 +16,6 @@ import com.huto.hutosmod.capabilities.mindrunes.RuneCap.IRuneFactory;
 import com.huto.hutosmod.capabilities.mindrunes.RuneCap.IRuneStorage;
 import com.huto.hutosmod.capabilities.mindrunes.RunesItemHandlerCap.IRunesItemHandlerFactory;
 import com.huto.hutosmod.capabilities.mindrunes.RunesItemHandlerCap.IRunesItemHandlerStorage;
-import com.huto.hutosmod.capabilities.moduletiers.IModule;
-import com.huto.hutosmod.capabilities.moduletiers.ModuleStorage;
-import com.huto.hutosmod.capabilities.moduletiers.Module;
 import com.huto.hutosmod.capabilities.tiledevotion.Devotion;
 import com.huto.hutosmod.capabilities.tiledevotion.DevotionStorage;
 import com.huto.hutosmod.capabilities.tiledevotion.IDevotion;
@@ -42,7 +39,6 @@ public class CapabilityInit {
 		CapabilityManager.INSTANCE.register(IRune.class, new IRuneStorage(), new IRuneFactory());
 		CapabilityManager.INSTANCE.register(IRunesItemHandler.class, new IRunesItemHandlerStorage(),
 				new IRunesItemHandlerFactory());
-		CapabilityManager.INSTANCE.register(IModule.class, new ModuleStorage(), Module::new);
 
 	}
 

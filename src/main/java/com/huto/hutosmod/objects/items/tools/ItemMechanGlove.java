@@ -8,10 +8,22 @@ import javax.annotation.Nullable;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.ContainerMechanGlove;
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
+import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
+import com.huto.hutosmod.entities.projectiles.EntityDreadRocket;
+import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.font.ModTextFormatting;
+import com.huto.hutosmod.gui.pages.GuiButtonTextured;
+import com.huto.hutosmod.init.EntityInit;
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.PacketUpdateMechanModule;
+import com.huto.hutosmod.sounds.SoundHandler;
 
+import net.java.games.input.Keyboard;
+import net.minecraft.client.KeyboardListener;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -34,6 +46,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -41,8 +54,9 @@ public class ItemMechanGlove extends Item {
 	String name;
 	Integer size;
 	Rarity rare;
-
-	public static int selectedModule;
+	ItemStack moduleStack;
+	public static String TAG_SELECTEDSTACK = "selectedstack";
+	public static int selectedModuleSlot;
 	public static String TAG_SELECTED = "selected";
 
 	public ItemMechanGlove(Properties props, String name, Integer size, Rarity rarity) {
@@ -58,17 +72,8 @@ public class ItemMechanGlove extends Item {
 
 	}
 
-	public void setSelectedModule(int selectedModuleIn) {
-		selectedModule = selectedModuleIn;
-	}
-
-	public int getSelectedModule() {
-		return selectedModule;
-	}
-
 	@Override
 	public boolean shouldSyncTag() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -101,12 +106,6 @@ public class ItemMechanGlove extends Item {
 
 			}
 		}
-		ItemStack stack = playerIn.getHeldItemMainhand();
-		IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-				.orElseThrow(IllegalArgumentException::new);
-
-		ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
-		System.out.println(selectedModuleStack);
 
 		// NBT TAG
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
@@ -117,30 +116,73 @@ public class ItemMechanGlove extends Item {
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if (worldIn != null) {
-			IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-					.orElseThrow(IllegalArgumentException::new);
+			if (stack != null) {
+				IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+						.orElseThrow(IllegalArgumentException::new);
+				if (handler != null) {
+					tooltip.add(new StringTextComponent(
+							TextFormatting.LIGHT_PURPLE + "Rarity: " + ModTextFormatting.toProperCase(rare.name())));
+					tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Size: " + size));
+					if (stack.hasTag()) {
+						ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
+						tooltip.add(new TranslationTextComponent(
+								TextFormatting.GOLD + "Selected Module: " + stack.getTag().getInt(TAG_SELECTED)));
+						handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
+						tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Selected Module: "
+								+ I18n.format(selectedModuleStack.getTranslationKey())));
+						tooltip.add(new TranslationTextComponent(
+								TextFormatting.GOLD + "Module: " + stack.getTag().get(TAG_SELECTEDSTACK)));
 
-			if (handler != null) {
-				tooltip.add(new StringTextComponent(
-						TextFormatting.LIGHT_PURPLE + "Rarity: " + ModTextFormatting.toProperCase(rare.name())));
-				tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Size: " + size));
-				ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
-				if (stack.hasTag()) {
-					tooltip.add(new TranslationTextComponent(
-							TextFormatting.GOLD + "Selected Module: " + stack.getTag().getInt(TAG_SELECTED)));
-					 handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
-					tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Selected Module: "
-							+ I18n.format(selectedModuleStack.getTranslationKey())));
-					/*
-					 * if (selectedModuleStack.getItem() != null && selectedModuleStack.getItem()
-					 * instanceof ItemMechanModuleBase) { tooltip.add(new TranslationTextComponent(
-					 * TextFormatting.GOLD + "Module Tier: " + selectedModuleStack.getTag()));
-					 * 
-					 * }
-					 */
+					}
 				}
 			}
 		}
+
+	}
+
+	@Override
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+		if (ClientEventSubscriber.keyBinds.get(0).isPressed()) {
+			if (this.getModuleStack() != null) {
+				if (this.getModuleStack().getItem() == ItemInit.mechan_module_salvo.get()) {
+					EntityCorruptNote[] missArray = new EntityCorruptNote[5];
+					for (int i = 0; i < 5; i++) {
+						missArray[i] = new EntityCorruptNote((PlayerEntity) entityIn, false);
+						missArray[i].setPosition(entityIn.getPosX() + ((Math.random() - 0.5) * 3.5),
+								entityIn.getPosY() + 0.8, entityIn.getPosZ() + ((Math.random() - 0.5) * 3.5));
+						worldIn.addEntity(missArray[i]);
+
+					}
+
+				} else if (this.getModuleStack().getItem() == ItemInit.mechan_module_rocket.get()) {
+					EntityDreadRocket miss = new EntityDreadRocket((PlayerEntity) entityIn, false);
+					miss.setPosition(entityIn.getPosX() + ((Math.random() - 0.5) * 3.5), entityIn.getPosY() + 0.8,
+							entityIn.getPosZ() + ((Math.random() - 0.5) * 3.5));
+					worldIn.addEntity(miss);
+				}
+			}
+
+		}
+	}
+
+
+	
+
+	public ItemStack getModuleStack() {
+		return moduleStack;
+	}
+
+	public void setModuleStack(ItemStack moduleStackIn) {
+		this.moduleStack = moduleStackIn;
+	}
+
+	public void setSelectedModuleSlot(int selectedModuleIn) {
+		selectedModuleSlot = selectedModuleIn;
+	}
+
+	public int getSelectedModuleSlot() {
+		return selectedModuleSlot;
 	}
 
 	@Nullable
