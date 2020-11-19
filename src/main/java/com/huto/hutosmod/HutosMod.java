@@ -12,6 +12,7 @@ import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationEvents;
 import com.huto.hutosmod.capabilities.tiledevotion.DevotionEvents;
 import com.huto.hutosmod.capabilities.vibes.SeerEventHandler;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
+import com.huto.hutosmod.events.MechanGloveEvents;
 import com.huto.hutosmod.events.RuneBinderEvents;
 import com.huto.hutosmod.gui.pages.coven.CovenPageLib;
 import com.huto.hutosmod.gui.pages.guide.TomePageLib;
@@ -95,6 +96,8 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::pickupEvent);
 		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::onClientTick);
+		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::pickupEvent);
+		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::onClientTick);
 		// Register Capability Events
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(DevotionEvents.class);
@@ -196,8 +199,7 @@ public class HutosMod {
 		}
 		return ItemStack.EMPTY;
 	}
-	
-	
+
 	public static ItemStack findMechanGlove(PlayerEntity player) {
 		if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove)
 			return player.getHeldItemMainhand();
@@ -211,7 +213,6 @@ public class HutosMod {
 		}
 		return ItemStack.EMPTY;
 	}
-	
 
 	@SubscribeEvent
 	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {

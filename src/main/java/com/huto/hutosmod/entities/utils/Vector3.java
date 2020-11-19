@@ -1,11 +1,3 @@
-/*
- * This class is distributed as part of the Botania Mod.
- * Get the Source Code in github:
- * https://github.com/Vazkii/Botania
- *
- * Botania is Open Source and distributed under the
- * Botania License: http://botaniamod.net/license.php
- */
 package com.huto.hutosmod.entities.utils;
 
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -127,7 +119,8 @@ public class Vector3 {
 	@Override
 	public String toString() {
 		MathContext cont = new MathContext(4, RoundingMode.HALF_UP);
-		return "Vector3(" + new BigDecimal(x, cont) + ", " + new BigDecimal(y, cont) + ", " + new BigDecimal(z, cont) + ")";
+		return "Vector3(" + new BigDecimal(x, cont) + ", " + new BigDecimal(y, cont) + ", " + new BigDecimal(z, cont)
+				+ ")";
 	}
 
 	public Vector3 perpendicular() {

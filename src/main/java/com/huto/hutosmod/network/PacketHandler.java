@@ -106,6 +106,9 @@ public class PacketHandler {
 	public static SimpleChannel registerMechanGloveChannels() {
 		MECHANGLOVE.messageBuilder(MechanGloveOpenMessage.class, networkID++).decoder(MechanGloveOpenMessage::decode)
 				.encoder(MechanGloveOpenMessage::encode).consumer(MechanGloveOpenMessage::handle).add();
+		MECHANGLOVE.messageBuilder(MechanGloveActionMessage.class, networkID++)
+				.decoder(MechanGloveActionMessage::decode).encoder(MechanGloveActionMessage::encode)
+				.consumer(MechanGloveActionMessage::handle).add();
 		return MECHANGLOVE;
 	}
 

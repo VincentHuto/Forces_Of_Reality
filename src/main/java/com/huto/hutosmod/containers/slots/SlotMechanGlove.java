@@ -3,7 +3,7 @@ package com.huto.hutosmod.containers.slots;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.containers.MechanGloveItemHandler;
-import com.huto.hutosmod.objects.items.modules.ItemMechanModuleBase;
+import com.huto.hutosmod.objects.items.tools.ItemMechanModuleBase;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

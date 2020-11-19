@@ -24,9 +24,12 @@ import com.huto.hutosmod.entities.EntityThrone;
 import com.huto.hutosmod.entities.EntityTulpa;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
 import com.huto.hutosmod.entities.projectiles.EntityDreadRocket;
+import com.huto.hutosmod.entities.projectiles.EntityDreadRocketDirected;
 import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
 import com.huto.hutosmod.entities.projectiles.EntityJudgement;
+import com.huto.hutosmod.entities.projectiles.EntityShortCircuit;
+import com.huto.hutosmod.entities.projectiles.EntityShorting;
 import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.entities.projectiles.EntityThrownAxe;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
@@ -172,8 +175,26 @@ public class EntityInit {
 			"dread_rocket",
 			() -> EntityType.Builder.<EntityDreadRocket>create(EntityDreadRocket::new, EntityClassification.MISC)
 					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
-					.build(new ResourceLocation(HutosMod.MOD_ID, "wolf_shot").toString()));
+					.build(new ResourceLocation(HutosMod.MOD_ID, "dread_rocket").toString()));
 
+	public static final RegistryObject<EntityType<EntityDreadRocketDirected>> dread_rocket_directed = ENTITY_TYPES
+			.register("dread_rocket_directed", () -> EntityType.Builder
+					.<EntityDreadRocketDirected>create(EntityDreadRocketDirected::new, EntityClassification.MISC)
+					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.4F, 0.4F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "dread_rocket_directed").toString()));
+
+	public static final RegistryObject<EntityType<EntityShortCircuit>> short_circuit = ENTITY_TYPES.register(
+			"short_circuit",
+			() -> EntityType.Builder.<EntityShortCircuit>create(EntityShortCircuit::new, EntityClassification.MISC)
+					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.4F, 0.4F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "short_circuit").toString()));
+	
+	public static final RegistryObject<EntityType<EntityShorting>> shorting = ENTITY_TYPES.register(
+			"shorting",
+			() -> EntityType.Builder.<EntityShorting>create(EntityShorting::new, EntityClassification.MISC)
+					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.4F, 0.4F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "shorting").toString()));
+	
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",
 			() -> EntityType.Builder.<EntityCorruptNote>create(EntityCorruptNote::new, EntityClassification.MISC)

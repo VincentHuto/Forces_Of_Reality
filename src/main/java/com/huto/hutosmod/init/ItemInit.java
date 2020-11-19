@@ -34,7 +34,6 @@ import com.huto.hutosmod.objects.items.equipment.ItemSlimeRepulsionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.equipment.ItemWatchfulPendant;
 import com.huto.hutosmod.objects.items.equipment.ItemYellowSign;
-import com.huto.hutosmod.objects.items.modules.ItemMechanModuleBase;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.objects.items.runes.ItemGuidanceRune;
 import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
@@ -69,6 +68,7 @@ import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.items.tools.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.tools.ItemManaExtractor;
 import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
+import com.huto.hutosmod.objects.items.tools.ItemMechanModuleBase;
 import com.huto.hutosmod.objects.items.tools.ItemResonanceDestabalizer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfReflectionMirror;
@@ -303,18 +303,29 @@ public class ItemInit {
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> mechan_module_shortcircuit = ITEMS.register("mechan_module_shortcircuit",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> mechan_module_laser = ITEMS.register("mechan_module_laser",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> mechan_module_blade= ITEMS.register("mechan_module_blade",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Gloves
 	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
 			() -> new ItemMechanGlove(
 					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(HutosModItemGroup.instance),
 					"mechan_glove", 3, Rarity.UNCOMMON));
+
 	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
-			() -> new ItemMechanGlove(new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
-					.group(HutosModItemGroup.instance), "mechan_glove_superior", 6, ModTextFormatting.AURIC));
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.RARE).maxStackSize(1).group(HutosModItemGroup.instance),
+					"mechan_glove_superior", 6, Rarity.RARE));
+
 	public static final RegistryObject<Item> mechan_glove_masterpiece = ITEMS.register("mechan_glove_masterpiece",
 			() -> new ItemMechanGlove(
 					new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(HutosModItemGroup.instance),
 					"mechan_glove_masterpiece", 9, Rarity.EPIC));
+
+	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS.register("mechan_glove_godlike",
+			() -> new ItemMechanGlove(new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
+					.group(HutosModItemGroup.instance), "mechan_glove_godlike", 9, ModTextFormatting.AURIC));
 	// Food
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",
@@ -731,6 +742,64 @@ public class ItemInit {
 				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
 					return p_239428_2_ != null && p_239428_2_.isHandActive()
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
+				});
+
+		// Mechan Glove
+		ItemModelsProperties.registerProperty(mechan_glove.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("swordstate")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(mechan_glove_superior.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("swordstate")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(mechan_glove_masterpiece.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("swordstate")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		ItemModelsProperties.registerProperty(mechan_glove_godlike.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("swordstate")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
 				});
 
 		// Attract Charm

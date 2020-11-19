@@ -30,16 +30,12 @@ public class PacketUpdateMechanModule {
 	}
 
 	public static class Handler {
-
 		public static void handle(final PacketUpdateMechanModule msg, Supplier<NetworkEvent.Context> ctx) {
 			ctx.get().enqueueWork(() -> {
 				ItemStack stack = ctx.get().getSender().getHeldItemMainhand();
 				if (stack.getItem() instanceof ItemMechanGlove) {
-					ItemMechanGlove glove = (ItemMechanGlove) stack.getItem();
-					stack.getShareTag().putInt(ItemMechanGlove.TAG_SELECTED, msg.selected);
-					stack.getShareTag().put(ItemMechanGlove.TAG_SELECTEDSTACK, msg.stack.write(new CompoundNBT()));
-					glove.setSelectedModuleSlot(msg.selected);
-					glove.setModuleStack(msg.stack);
+					stack.getShareTag().putInt("selected", msg.selected);
+					stack.getShareTag().put("selectedstack", msg.stack.write(new CompoundNBT()));
 				}
 			});
 			ctx.get().setPacketHandled(true);

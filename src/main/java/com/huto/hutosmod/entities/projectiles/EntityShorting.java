@@ -1,10 +1,11 @@
 package com.huto.hutosmod.entities.projectiles;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.base.Predicates;
+import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.EntityInit;
 
@@ -21,41 +22,50 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityDreadRocket extends ThrowableEntity {
-	public static EntityType<EntityDreadRocket> TYPE = EntityInit.dread_rocket.get();
-
+public class EntityShorting extends ThrowableEntity {
+	public static EntityType<EntityShorting> TYPE = EntityInit.shorting.get();
 	private static final String TAG_TIME = "time";
-	private static final DataParameter<Boolean> EVIL = EntityDataManager.createKey(EntityDreadRocket.class,
+	private static final DataParameter<Boolean> EVIL = EntityDataManager.createKey(EntityShorting.class,
 			DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityDreadRocket.class,
+	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityShorting.class,
 			DataSerializers.VARINT);
-
+	public static LivingEntity secondHandThrower;
 	double lockX, lockY = -1, lockZ;
 	int time = 0;
 
-	public EntityDreadRocket(EntityType<EntityDreadRocket> type, World world) {
+	public EntityShorting(EntityType<EntityShorting> type, World world) {
 		super(type, world);
 	}
 
-	public EntityDreadRocket(World world) {
+	public EntityShorting(World world) {
 		this(TYPE, world);
+		setEvil(true);
+
 	}
 
-	public EntityDreadRocket(LivingEntity thrower, boolean evil) {
+	public EntityShorting(World world, boolean evil) {
+		this(TYPE, world);
+		setEvil(evil);
+
+	}
+
+	public EntityShorting(LivingEntity thrower, boolean evil) {
 		super(TYPE, thrower, thrower.world);
 		setEvil(evil);
+	}
+
+	public EntityShorting(LivingEntity secondHandThrowerIn, World world) {
+		this(TYPE, world);
+		setEvil(false);
+		secondHandThrower = secondHandThrowerIn;
 	}
 
 	@Override
@@ -93,34 +103,21 @@ public class EntityDreadRocket extends ThrowableEntity {
 
 	@Override
 	public void tick() {
-		double lastTickPosX = this.lastTickPosX;
-		double lastTickPosY = this.lastTickPosY;
-		double lastTickPosZ = this.lastTickPosZ;
-
 		super.tick();
 
 		if (!world.isRemote && (!findTarget() || time > 40)) {
 			remove();
 			return;
 		}
+		Random rand = new Random();
+		Vector3 endVec = Vector3.fromEntityCenter(this).add(rand.nextInt(2) - rand.nextInt(2),
+				rand.nextInt(2) - rand.nextInt(2), rand.nextInt(2) - rand.nextInt(2));
+		if (this.rand.nextInt(10) % 3 == 0) {
+			HutosMod.proxy.lightningFX(Vector3.fromEntityCenter(this), endVec, 7f, 0x0000, 0xFFAA00);
+		}
 
 		boolean evil = isEvil();
 		Vector3 thisVec = Vector3.fromEntityCenter(this);
-		Vector3 oldPos = new Vector3(lastTickPosX, lastTickPosY, lastTickPosZ);
-		Vector3 diff = thisVec.subtract(oldPos);
-		Vector3 step = diff.normalize().multiply(0.05);
-		int steps = (int) (diff.mag() / step.mag());
-		Vector3 particlePos = oldPos;
-
-		for (int i = 0; i < steps; i++) {
-			world.addParticle(ParticleTypes.ANGRY_VILLAGER, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
-			if (world.rand.nextInt(steps) <= 1)
-				world.addParticle(ParticleTypes.CRIT, particlePos.x + (Math.random() - 0.5) * 0.4,
-						particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0,
-						0);
-
-			particlePos = particlePos.add(step);
-		}
 
 		LivingEntity target = getTargetEntity();
 		if (target != null) {
@@ -140,14 +137,15 @@ public class EntityDreadRocket extends ThrowableEntity {
 					new AxisAlignedBB(getPosX() - 0.5, getPosY() - 0.5, getPosZ() - 0.5, getPosX() + 0.5,
 							getPosY() + 0.5, getPosZ() + 0.5));
 			if (targetList.contains(target)) {
-				LivingEntity thrower = (LivingEntity) func_234616_v_();
+				LivingEntity thrower = secondHandThrower;
 				if (thrower != null) {
 					PlayerEntity player = thrower instanceof PlayerEntity ? (PlayerEntity) thrower : null;
-					target.attackEntityFrom(player == null ? DamageSource.causeMobDamage(thrower)
-							: DamageSource.causePlayerDamage(player), evil ? 12 : 7);
+					if (thrower != null)
+						target.attackEntityFrom(player == null ? DamageSource.causeMobDamage(thrower)
+								: DamageSource.causePlayerDamage(player), evil ? 12 : 7);
+
 				} else
 					target.attackEntityFrom(DamageSource.GENERIC, evil ? 12 : 7);
-
 				remove();
 			}
 
@@ -172,23 +170,18 @@ public class EntityDreadRocket extends ThrowableEntity {
 
 	public boolean findTarget() {
 		LivingEntity target = getTargetEntity();
-		if (target != null && target.isAlive())
+		if (target != null && target.isAlive() && target != func_234616_v_())
 			return true;
 		if (target != null)
 			setTarget(null);
 
-		double range = 25;
+		double range = 20;
 		AxisAlignedBB bounds = new AxisAlignedBB(getPosX() - range, getPosY() - range, getPosZ() - range,
 				getPosX() + range, getPosY() + range, getPosZ() + range);
 		@SuppressWarnings("rawtypes")
-		List entities;
-		if (isEvil()) {
-			entities = world.getEntitiesWithinAABB(PlayerEntity.class, bounds);
-		} else {
-			entities = world.getEntitiesWithinAABB(Entity.class, bounds, (Predicates.instanceOf(LivingEntity.class)));
-			if (entities.contains(this.func_234616_v_())) {
-				entities.remove(this.func_234616_v_());
-			}
+		List entities = world.getEntitiesWithinAABBExcludingEntity(secondHandThrower, bounds);
+		if (entities.contains(this.func_234616_v_())) {
+			entities.remove(this.func_234616_v_());
 		}
 		while (entities.size() > 0) {
 			Entity e = (Entity) entities.get(world.rand.nextInt(entities.size()));
@@ -211,18 +204,12 @@ public class EntityDreadRocket extends ThrowableEntity {
 		case BLOCK: {
 			Block block = world.getBlockState(((BlockRayTraceResult) pos).getPos()).getBlock();
 			if (!(block instanceof BushBlock) && !(block instanceof LeavesBlock))
-				if (!world.isRemote) {
-					this.world.createExplosion(this, this.getPosX(),
-							this.getPosY() + (double) (this.getHeight() / 16.0F), this.getPosZ(), 1.0F,
-							Explosion.Mode.NONE);
-				}
-			remove();
+				remove();
 			break;
 		}
 		case ENTITY: {
 			if (((EntityRayTraceResult) pos).getEntity() == getTargetEntity())
-				getTargetEntity().addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
-			remove();
+				remove();
 			break;
 		}
 		default: {

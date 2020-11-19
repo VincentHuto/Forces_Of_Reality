@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.items.modules;
+package com.huto.hutosmod.objects.items.tools;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -18,7 +17,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemMechanModuleBase extends Item implements IHasModuleUse {
+public class ItemMechanModuleBase extends Item   {
 	public static String TAG_TIER = "tier";
 
 	public ItemMechanModuleBase(Properties properties) {
@@ -47,10 +46,6 @@ public class ItemMechanModuleBase extends Item implements IHasModuleUse {
 
 	}
 
-	@Override
-	public void moduleUse(ItemUseContext context) {
-		
-	}
 
 	@Nullable
 	@Override
