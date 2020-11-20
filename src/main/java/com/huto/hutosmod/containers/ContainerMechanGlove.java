@@ -77,8 +77,27 @@ public class ContainerMechanGlove extends Container {
 		if (clickTypeIn == ClickType.SWAP)
 			return ItemStack.EMPTY;
 
-		if (slot >= 0)
-			getSlot(slot).inventory.markDirty();
+		if (slot >= 0) {
+			/*
+			 * if (((ItemMechanGlove) findMechanGlove(player).getItem()).getModuleStack() !=
+			 * null) { ItemStack moduleStack = ((ItemMechanGlove)
+			 * findMechanGlove(player).getItem()).getModuleStack(); if
+			 * (getSlot(slot).getHasStack()) { if (getSlot(slot).getStack().getItem() ==
+			 * moduleStack.getItem()) { System.out.println("t"); if
+			 * (findMechanGlove(player).hasTag()) { if
+			 * (findMechanGlove(player).getTag().get("selectedstack") != null) {
+			 * findMechanGlove(player).getTag().put("selectedstack",
+			 * ItemStack.EMPTY.write(new CompoundNBT())); ((ItemMechanGlove)
+			 * findMechanGlove(player).getItem()).setModuleStack(ItemStack.EMPTY); if
+			 * (getSlot(slot).getStack().getItem() == ItemInit.mechan_module_blade.get()) {
+			 * ((ItemMechanGlove) findMechanGlove(player).getItem()).setSwordState(false); }
+			 * } } }
+			 * 
+			 * } } System.out.println(((ItemMechanGlove)
+			 * findMechanGlove(player).getItem()).getModuleStack());
+			 */ getSlot(slot).inventory.markDirty();
+		}
+
 		return super.slotClick(slot, dragType, clickTypeIn, player);
 	}
 

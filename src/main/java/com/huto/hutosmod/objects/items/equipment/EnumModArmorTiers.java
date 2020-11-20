@@ -40,7 +40,11 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			}),
 	SKULL(HutosMod.MOD_ID + ":skull", 1, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
-				return Ingredient.fromItems(ItemInit.null_ingot.get());
+				return Ingredient.fromItems(ItemInit.beastly_bone.get());
+			}),
+	MANTLE(HutosMod.MOD_ID + ":mantle", 1, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			});
 	;
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };

@@ -507,7 +507,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 			this.x = seraph.getSource().getX();
 			this.y = seraph.getSource().getY();
 			this.z = seraph.getSource().getZ();
-			this.repeat = true; // TODO restore once LWJGL3/vanilla bug fixed?
+			this.repeat = true; // 
 		}
 
 		@Override

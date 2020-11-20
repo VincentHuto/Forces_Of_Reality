@@ -46,7 +46,6 @@ public class ItemRunePatternRadianceContract extends ItemRunePattern  {
 
 	@Override
 	public GuiRunePattern getPatternGui() {
-		// TODO Auto-generated method stub
 		return new GuiRunePattern(new ItemStack(ItemInit.rune_radiance_c.get()),
 				ModChiselRecipes.recipeRadianceContract, text);
 	}

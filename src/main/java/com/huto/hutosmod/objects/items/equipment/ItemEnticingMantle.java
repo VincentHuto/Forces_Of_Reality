@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.items.equipment;
 
-import com.huto.hutosmod.models.entity.ModelSkullHelmetNew;
+import com.huto.hutosmod.models.entity.ModelEnticingMantle;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemSkullHelmet extends ArmorItem {
+public class ItemEnticingMantle extends ArmorItem {
 
-	public ItemSkullHelmet(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+	public ItemEnticingMantle(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
 	}
 
@@ -24,8 +24,8 @@ public class ItemSkullHelmet extends ArmorItem {
 			EquipmentSlotType armorSlot, A _default) {
 		if (itemStack != ItemStack.EMPTY) {
 			if (itemStack.getItem() instanceof ArmorItem) {
-				ModelSkullHelmetNew model = new ModelSkullHelmetNew();
-				model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD;
+				ModelEnticingMantle model = new ModelEnticingMantle();
+				model.bipedBody.showModel = armorSlot == EquipmentSlotType.CHEST;
 				model.isChild = _default.isChild;
 				model.isSneak = _default.isSneak;
 				model.isSitting = _default.isSitting;

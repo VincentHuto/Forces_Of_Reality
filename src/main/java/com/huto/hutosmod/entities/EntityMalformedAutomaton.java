@@ -449,7 +449,7 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 			this.x = hastur.getSource().getX();
 			this.y = hastur.getSource().getY();
 			this.z = hastur.getSource().getZ();
-			this.repeat = true; // TODO restore once LWJGL3/vanilla bug fixed?
+			this.repeat = true;
 		}
 
 		@Override

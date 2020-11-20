@@ -22,7 +22,9 @@ import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.equipment.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.equipment.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.equipment.ItemBeastBreath;
+import com.huto.hutosmod.objects.items.equipment.ItemClovenHooves;
 import com.huto.hutosmod.objects.items.equipment.ItemCrossedKeys;
+import com.huto.hutosmod.objects.items.equipment.ItemEnticingMantle;
 import com.huto.hutosmod.objects.items.equipment.ItemInfluenceSuppressor;
 import com.huto.hutosmod.objects.items.equipment.ItemIntegralCog;
 import com.huto.hutosmod.objects.items.equipment.ItemMysteriousMask;
@@ -277,7 +279,15 @@ public class ItemInit {
 	public static final RegistryObject<Item> skull_helmet = ITEMS.register("skull_helmet",
 			() -> new ItemSkullHelmet(EnumModArmorTiers.SKULL, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> enticing_mantle = ITEMS.register("enticing_mantle",
+			() -> new ItemEnticingMantle(EnumModArmorTiers.MANTLE, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> legs_of_fawn = ITEMS.register("legs_of_fawn",
+			() -> new ArmorItem(EnumModArmorTiers.MANTLE, EquipmentSlotType.LEGS,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> cloven_hooves = ITEMS.register("cloven_hooves",
+			() -> new ItemClovenHooves(EnumModArmorTiers.MANTLE, EquipmentSlotType.FEET,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
 	// Machine
 	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog", () -> new ItemIntegralCog(
 			new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC).maxStackSize(1),

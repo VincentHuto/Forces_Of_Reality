@@ -26,7 +26,6 @@ public class ItemRunePatternHeir extends ItemRunePattern  {
 
 	@Override
 	public GuiRunePattern getPatternGui() {
-		// TODO Auto-generated method stub
 		return new GuiRunePattern(new ItemStack(ItemInit.rune_heir.get()), ModChiselRecipes.recipeHeir, text);
 	}
 }

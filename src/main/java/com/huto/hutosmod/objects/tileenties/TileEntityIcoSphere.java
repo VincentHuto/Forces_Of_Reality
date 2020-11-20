@@ -19,7 +19,6 @@ public class TileEntityIcoSphere extends TileEntity implements ITickableTileEnti
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		
 	}
 

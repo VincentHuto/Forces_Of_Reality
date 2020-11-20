@@ -16,6 +16,7 @@ import com.huto.hutosmod.init.ItemInit;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -27,6 +28,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
@@ -42,6 +44,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+//TODO Everythings good, Add Lasers
 public class ItemMechanGlove extends Item {
 	String name;
 	Integer size;
@@ -127,19 +130,19 @@ public class ItemMechanGlove extends Item {
 							TextFormatting.LIGHT_PURPLE + "Rarity: " + ModTextFormatting.toProperCase(rare.name())));
 					tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Supported Modules: " + size));
 					if (stack.hasTag()) {
-
-						if (stack.getTag().getBoolean(TAG_SWORDSTATE)) {
-							tooltip.add(new TranslationTextComponent("State: On").mergeStyle(TextFormatting.BLUE));
-						} else {
-							tooltip.add(new TranslationTextComponent("State: Off").mergeStyle(TextFormatting.RED));
-						}
-
 						ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
 						if (selectedModuleStack.getItem() != Items.AIR) {
 							tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Selected Module: "
 									+ I18n.format(selectedModuleStack.getTranslationKey())));
 						} else {
 							tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "No Module Selected"));
+						}
+						if (!stack.getTag().getBoolean(TAG_SWORDSTATE)) {
+							tooltip.add(new TranslationTextComponent(
+									TextFormatting.DARK_GREEN + "Damage:" + getHitDamage(rare)));
+						} else {
+							tooltip.add(new TranslationTextComponent(
+									TextFormatting.DARK_GREEN + "Damage:" + getHitDamage(rare) * 3f));
 						}
 					} else {
 						tooltip.add(new TranslationTextComponent(TextFormatting.RED + "No Modules Inserted"));
@@ -174,28 +177,64 @@ public class ItemMechanGlove extends Item {
 					miss.setDirectionMotion(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 5.0F, 1.0F);
 					worldIn.addEntity(miss);
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
-
-					System.out.println("This is where id put my laser, IF I HAD ONE");
+					
+				//TODO "This is where id put my laser, IF I HAD ONE"
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_blade.get()) {
-					if (!itemStack.hasTag()) {
-						itemStack.setTag(new CompoundNBT());
-						CompoundNBT compound = itemStack.getTag();
-						compound.putBoolean(TAG_SWORDSTATE, false);
-					}
-					CompoundNBT compound = itemStack.getTag();
-					if (!compound.getBoolean(TAG_SWORDSTATE)) {
-						playerIn.playSound(SoundEvents.ITEM_TRIDENT_HIT, 0.40f, 1F);
-						compound.putBoolean(TAG_SWORDSTATE, true);
+					if (!itemStack.getTag().getBoolean(TAG_SWORDSTATE)) {
+						itemStack.getTag().putBoolean(TAG_SWORDSTATE, true);
 					} else {
-						playerIn.playSound(SoundEvents.ITEM_TRIDENT_HIT, 0.40f, 1F);
-						compound.putBoolean(TAG_SWORDSTATE,false);
+						itemStack.getTag().putBoolean(TAG_SWORDSTATE, false);
 					}
-					itemStack.setTag(compound);
 
 				}
 			}
 		}
 
+	}
+
+	public float getHitDamage(Rarity rareIn) {
+		if (rareIn == Rarity.COMMON) {
+			return 1f;
+		} else if (rareIn == Rarity.UNCOMMON) {
+			return 2f;
+		} else if (rareIn == Rarity.RARE) {
+			return 3f;
+		} else if (rareIn == Rarity.EPIC) {
+			return 4f;
+		} else if (rareIn == ModTextFormatting.AURIC) {
+			return 5f;
+		} else {
+			return 1f;
+
+		}
+
+	}
+
+	@SuppressWarnings("static-access")
+	@Override
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		DamageSource mechanGloveSource = DamageSource.causePlayerDamage((PlayerEntity) attacker);
+		if (stack.getTag() != null) {
+			if (stack.getTag().get(TAG_SELECTEDSTACK) != null) {
+				ItemStack moduleStack = stack.read((CompoundNBT) stack.getTag().get(TAG_SELECTEDSTACK));
+				if (moduleStack.getItem() == ItemInit.mechan_module_blade.get()) {
+					if (!stack.hasTag()) {
+						stack.setTag(new CompoundNBT());
+						CompoundNBT compound = stack.getTag();
+						compound.putBoolean(TAG_SWORDSTATE, false);
+					}
+					CompoundNBT compound = stack.getTag();
+					if (!compound.getBoolean(TAG_SWORDSTATE)) {
+						target.attackEntityFrom(mechanGloveSource, getHitDamage(rare));
+					} else {
+						target.attackEntityFrom(mechanGloveSource, getHitDamage(rare) * 3f);
+
+					}
+				}
+			}
+		}
+
+		return super.hitEntity(stack, target, attacker);
 	}
 
 	public ItemStack getModuleStack() {

@@ -150,7 +150,6 @@ public class BlockVibeAbsorber extends Block {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-		// TODO Auto-generated method stub
 		super.onBlockClicked(state, worldIn, pos, player);
 	}
 
