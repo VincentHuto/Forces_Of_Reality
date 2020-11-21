@@ -7,6 +7,8 @@ import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
 import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.particles.glow.GlowParticleData;
+import com.huto.hutosmod.particles.glow.ParticleColor;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
@@ -56,29 +58,48 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAdditionalSpawnData {
+public class EntityMechan extends MonsterEntity implements IEntityAdditionalSpawnData {
 
-	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.createKey(EntityMalformedAutomaton.class,
+	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.createKey(EntityMechan.class,
 			DataSerializers.BYTE);
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
 	private static final String TAG_SOURCE_Z = "sourcesZ";
+	public static final DataParameter<Integer> RED = EntityDataManager.createKey(EntityMechan.class,
+			DataSerializers.VARINT);
+	public static final DataParameter<Integer> GREEN = EntityDataManager.createKey(EntityMechan.class,
+			DataSerializers.VARINT);
+	public static final DataParameter<Integer> BLUE = EntityDataManager.createKey(EntityMechan.class,
+			DataSerializers.VARINT);
 	private int attackTimer;
 
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
-			BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+			BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntityMalformedAutomaton(EntityType<? extends EntityMalformedAutomaton> type, World worldIn) {
+	public EntityMechan(EntityType<? extends EntityMechan> type, World worldIn) {
 		super(type, worldIn);
-
 	}
 
 	@Override
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason,
 			ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+	}
+
+	public ParticleColor getParticleColor() {
+		return new ParticleColor(dataManager.get(RED), dataManager.get(GREEN), dataManager.get(BLUE));
+	}
+
+	public ParticleColor.IntWrapper getParticleColorWrapper() {
+		return new ParticleColor.IntWrapper(dataManager.get(RED), dataManager.get(GREEN), dataManager.get(BLUE));
+	}
+
+	public void setColor(ParticleColor.IntWrapper colors) {
+		dataManager.set(RED, colors.r);
+		dataManager.set(GREEN, colors.g);
+		dataManager.set(BLUE, colors.b);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -113,12 +134,18 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void tick() {
 		super.tick();
-		float diffMult = 1f;
 
+		float diffMult = 1f;
+		float particleMod = (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3f;
+		if(world.isRemote) {
+		world.addParticle(ParticleTypes.SMOKE, getPosX() + particleMod, getPosY() + 1.87f + particleMod,
+				getPosZ() + particleMod, 0, 0.01f, 0);
+		world.addParticle(GlowParticleData.createData(getParticleColor()), getPosX(), getPosY() + 1.87f, getPosZ(), 0,
+				world.rand.nextFloat() * 0.01f, 0);
+		}
 		// Protection
 		if (isArmored()) {
 			heal(0.05f);
@@ -146,11 +173,13 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 
 			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
 			// though
-			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+		/*	float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			this.world.addParticle(RedstoneParticleData.REDSTONE_DUST, this.getPosX() + (double) f,
-					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;*/
+			
+			//TODO KEEP WORKING ON FIRE EFFECT
+			/*this.world.addParticle(RedstoneParticleData.REDSTONE_DUST, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);*/
 		}
 
 	}
@@ -225,6 +254,16 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 	public void heal(float amount) {
 		super.heal(amount);
 
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+		this.world.addParticle(ParticleTypes.SOUL, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
+				this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+		return super.attackEntityFrom(source, amount);
 	}
 
 	// Death
@@ -304,7 +343,6 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void shock(Entity target) {
 		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
 		this.setMotion(0, 0, 0);
@@ -401,6 +439,9 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(PLAYER_CREATED, (byte) 0);
+		this.dataManager.register(RED, 255);
+		this.dataManager.register(GREEN, 180);
+		this.dataManager.register(BLUE, 0);
 	}
 
 	@Override
@@ -422,6 +463,17 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		cmp.putInt(TAG_SOURCE_X, source.getX());
 		cmp.putInt(TAG_SOURCE_Y, source.getY());
 		cmp.putInt(TAG_SOURCE_Z, source.getZ());
+		cmp.putInt("red", dataManager.get(RED));
+		cmp.putInt("green", dataManager.get(GREEN));
+		cmp.putInt("blue", dataManager.get(BLUE));
+	}
+
+	@Override
+	public void read(CompoundNBT compound) {
+		super.read(compound);
+		dataManager.set(RED, compound.getInt("red"));
+		dataManager.set(GREEN, compound.getInt("green"));
+		dataManager.set(BLUE, compound.getInt("blue"));
 	}
 
 	@Override
@@ -439,9 +491,9 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntityMalformedAutomaton hastur;
+		private final EntityMechan hastur;
 
-		public HasturMusic(EntityMalformedAutomaton hastur) {
+		public HasturMusic(EntityMechan hastur) {
 			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
 
 			this.hastur = hastur;

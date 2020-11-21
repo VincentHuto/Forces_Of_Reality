@@ -9,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 // Paste this class into your mod and generate all required imports
 
 public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
-
 	public ModelSkullHelmetNew() {
 		super(1.0f, 0, 64, 64);
 
@@ -27,7 +26,8 @@ public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
 
 		ModelRenderer bone31 = new ModelRenderer(this);
 		bone31.setRotationPoint(6.0F, -13.0F, -5.0F);
-		bone31.setTextureOffset(0, 56).addBox(3.0F, -4.0F, 9.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		bone31.setTextureOffset(0, 56).addBox(3.0F, -4.0F, 10.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		bone31.setTextureOffset(0, 56).addBox(3.0F, -4.0F, -1.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);;
 
 		ModelRenderer bone24 = new ModelRenderer(this);
 		bone24.setRotationPoint(6.3F, -8.0F, -7.4F);
@@ -35,23 +35,28 @@ public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
 
 		ModelRenderer bone29 = new ModelRenderer(this);
 		bone29.setRotationPoint(-7.0F, -11.0F, -9.0F);
-		bone29.setTextureOffset(0, 57).addBox(1.0F, -2.0F, 9.0F, 1.0F, 2.0F, 5.0F, 0.0F, false);
-
+		bone29.setTextureOffset(0, 57).addBox(1.0F, -2.0F, 11.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
+		bone29.setTextureOffset(0, 57).addBox(1.0F, -2.0F, 5.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
+		
 		ModelRenderer bone30 = new ModelRenderer(this);
 		bone30.setRotationPoint(6.0F, -13.0F, -5.0F);
-		bone30.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 8.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
-
+		bone30.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 9.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		bone30.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 0.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		
 		ModelRenderer bone33 = new ModelRenderer(this);
 		bone33.setRotationPoint(-13.0F, -15.0F, -4.0F);
-		bone33.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 8.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
-
+		bone33.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 9.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		bone33.setTextureOffset(0, 56).addBox(1.0F, -2.0F, -2.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		
 		ModelRenderer bone32 = new ModelRenderer(this);
 		bone32.setRotationPoint(-11.0F, -13.0F, -5.0F);
-		bone32.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 8.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		bone32.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 9.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+		bone32.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 0.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
 
 		ModelRenderer bone34 = new ModelRenderer(this);
 		bone34.setRotationPoint(2.0F, -10.0F, -9.0F);
-		bone34.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 9.0F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+		bone34.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 10.0F, 3.0F, 2.0F, 2.0F, 0.0F, false);
+		bone34.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 6.0F, 3.0F, 2.0F, 2.0F, 0.0F, false);
 
 		ModelRenderer bone19 = new ModelRenderer(this);
 		bone19.setRotationPoint(0.0F, -10.0F, -17.0F);
@@ -59,7 +64,8 @@ public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
 
 		ModelRenderer bone28 = new ModelRenderer(this);
 		bone28.setRotationPoint(5.0F, -11.0F, -9.0F);
-		bone28.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 9.0F, 1.0F, 2.0F, 5.0F, 0.0F, false);
+		bone28.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 11.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
+		bone28.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 5.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
 
 		ModelRenderer bone20 = new ModelRenderer(this);
 		bone20.setRotationPoint(0.0F, -10.0F, -17.0F);
@@ -71,7 +77,9 @@ public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
 
 		ModelRenderer bone35 = new ModelRenderer(this);
 		bone35.setRotationPoint(-6.0F, -10.0F, -9.0F);
-		bone35.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 9.0F, 3.0F, 2.0F, 3.0F, 0.0F, false);
+		bone35.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 10.0F, 3.0F, 2.0F, 2.0F, 0.0F, false);
+		bone35.setTextureOffset(0, 56).addBox(1.0F, -2.0F, 6.0F, 3.0F, 2.0F, 2.0F, 0.0F, false);
+
 
 		ModelRenderer bone18 = new ModelRenderer(this);
 		bone18.setRotationPoint(0.0F, -10.0F, -17.0F);
@@ -160,7 +168,7 @@ public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
 
 		ModelRenderer bone15 = new ModelRenderer(this);
 		bone15.setRotationPoint(0.0F, -7.0F, -17.0F);
-		bone15.setTextureOffset(0, 56).addBox(3.0F, 1.2081F, 5.3523F, 1.0F, 2.0F, 7.0F, 0.0F, false);
+		bone15.setTextureOffset(0, 51).addBox(3.0F, 1.2081F, 5.3523F, 1.0F, 2.0F, 7.0F, 0.0F, false);
 
 		ModelRenderer bone2 = new ModelRenderer(this);
 		bone2.setRotationPoint(0.0F, -6.9456F, -8.347F);
@@ -169,7 +177,7 @@ public class ModelSkullHelmetNew extends BipedModel<LivingEntity> {
 
 		ModelRenderer bone43 = new ModelRenderer(this);
 		bone43.setRotationPoint(0.0F, -7.0F, -17.0F);
-		bone43.setTextureOffset(0, 56).addBox(-3.0F, 0.9667F, 4.5818F, 6.0F, 1.0F, 9.0F, 0.0F, false);
+		bone43.setTextureOffset(0, 51).addBox(-3.0F, 0.9667F, 4.5818F, 6.0F, 1.0F, 9.0F, 0.0F, false);
 
 		ModelRenderer bone3 = new ModelRenderer(this);
 		bone3.setRotationPoint(0.0F, -7.0F, -8.0F);

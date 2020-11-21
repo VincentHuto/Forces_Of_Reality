@@ -27,6 +27,7 @@ import com.huto.hutosmod.render.entity.RenderIbis;
 import com.huto.hutosmod.render.entity.RenderJudgement;
 import com.huto.hutosmod.render.entity.RenderMalformedAutomaton;
 import com.huto.hutosmod.render.entity.RenderManaDustItem;
+import com.huto.hutosmod.render.entity.RenderMechan;
 import com.huto.hutosmod.render.entity.RenderScuttlingOcculus;
 import com.huto.hutosmod.render.entity.RenderSeraphim;
 import com.huto.hutosmod.render.entity.RenderSlug;
@@ -55,6 +56,7 @@ import com.huto.hutosmod.render.tile.RenderIcoSphere;
 import com.huto.hutosmod.render.tile.RenderKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderMachinaImperfecta;
+import com.huto.hutosmod.render.tile.RenderMagicLight;
 import com.huto.hutosmod.render.tile.RenderOccularHeap;
 import com.huto.hutosmod.render.tile.RenderResonator;
 import com.huto.hutosmod.render.tile.RenderRuneModStation;
@@ -114,12 +116,14 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.occular_heap.get(), RenderOccularHeap::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.untold_easel.get(), RenderUntoldEasel::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_block.get(), RenderMagicLight::new);
+
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
+		
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
 		ScreenManager.registerFactory(ContainerInit.PLAYER_RUNES, PlayerExpandedScreen::new);
 		ScreenManager.registerFactory(ContainerRuneBinder.type, GuiRuneBinder::new);
 		ScreenManager.registerFactory(ContainerMechanGlove.type, GuiMechanGlove::new);
-
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur.get(), RenderHastur::new);
@@ -145,6 +149,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_clone.get(), RenderHasturClone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tulpa.get(), RenderTulpa::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_bot.get(), RenderDreadBot::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mechan.get(), RenderMechan::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.short_circuit.get(), RenderShortCircuit::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.shorting.get(), RenderShorting::new);
 

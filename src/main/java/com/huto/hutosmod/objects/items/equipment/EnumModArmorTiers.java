@@ -26,23 +26,23 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.magatamabead.get());
 			}),
-	CIRCLET(HutosMod.MOD_ID + ":vibrational_seer", 1, new int[] { 1, 1, 1, 1 }, 15,
+	CIRCLET(HutosMod.MOD_ID + ":vibrational_seer", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	MASK(HutosMod.MOD_ID + ":mysterious_mask", 1, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+	MASK(HutosMod.MOD_ID + ":mysterious_mask", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
 			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	SUPPRESSOR(HutosMod.MOD_ID + ":influence_supressor", 1, new int[] { 1, 1, 1, 1 }, 15,
+	SUPPRESSOR(HutosMod.MOD_ID + ":influence_supressor", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	SKULL(HutosMod.MOD_ID + ":skull", 1, new int[] { 1, 1, 1, 1 }, 15,
+	SKULL(HutosMod.MOD_ID + ":skull", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			}),
-	MANTLE(HutosMod.MOD_ID + ":mantle", 1, new int[] { 1, 1, 1, 1 }, 15,
+	MANTLE(HutosMod.MOD_ID + ":mantle", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			});

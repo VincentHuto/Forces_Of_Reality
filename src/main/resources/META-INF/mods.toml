@@ -28,7 +28,8 @@ logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 credits='''
 Thanks to these Folks! Whos sources I looked at for help!
-Vazkii,WolfShotz,Direwolf20
+Vazkii,WolfShotz,Direwolf20,baileyholl, and many others!
+And to the entire Forge Discord!
 '''
 
 # A text field displayed in the mod UI

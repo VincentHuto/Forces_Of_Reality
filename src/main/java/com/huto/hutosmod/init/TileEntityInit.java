@@ -11,6 +11,7 @@ import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
+import com.huto.hutosmod.objects.tileenties.TileEntityMagicLight;
 import com.huto.hutosmod.objects.tileenties.TileEntityOccularHeap;
 import com.huto.hutosmod.objects.tileenties.TileEntityRuneModStation;
 import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
@@ -127,5 +128,11 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityUntoldEasel>> untold_easel = TILES.register(
 			"untold_easel",
 			() -> TileEntityType.Builder.create(TileEntityUntoldEasel::new, BlockInit.untold_easel.get()).build(null));
+	
+	public static final RegistryObject<TileEntityType<TileEntityMagicLight>> light_block = TILES.register(
+			"light_block",
+			() -> TileEntityType.Builder.create(TileEntityMagicLight::new, BlockInit.light_block.get()).build(null));
+	
+	
 
 }

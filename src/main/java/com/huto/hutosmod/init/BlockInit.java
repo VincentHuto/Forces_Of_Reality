@@ -16,6 +16,7 @@ import com.huto.hutosmod.objects.blocks.BlockJungleBonsai;
 import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMachinaImperfecta;
+import com.huto.hutosmod.objects.blocks.BlockMagicLight;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockMushroomBonsai;
 import com.huto.hutosmod.objects.blocks.BlockMysticBonsai;
@@ -70,10 +71,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			HutosMod.MOD_ID);
+
+	public static final RegistryObject<BlockMagicLight> light_block = BLOCKS.register("light_block",
+			() -> new BlockMagicLight());
+
 	// TELEPORTEROS
 	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
 			() -> new BlockTeleporter(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
+
 	// Random
 	public static final RegistryObject<Block> runed_obsidian = BLOCKS.register("runed_obsidian", () -> new Block(
 			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));

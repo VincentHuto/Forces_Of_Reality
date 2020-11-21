@@ -14,6 +14,7 @@ import com.huto.hutosmod.entities.EntityHasturSpawn;
 import com.huto.hutosmod.entities.EntityIbis;
 import com.huto.hutosmod.entities.EntityMalformedAutomaton;
 import com.huto.hutosmod.entities.EntityManaDustItem;
+import com.huto.hutosmod.entities.EntityMechan;
 import com.huto.hutosmod.entities.EntityPlayerTentacle;
 import com.huto.hutosmod.entities.EntityScuttlingOcculus;
 import com.huto.hutosmod.entities.EntitySeraphim;
@@ -138,6 +139,10 @@ public class EntityInit {
 					.size(0.5F, 0.5F).build(new ResourceLocation(HutosMod.MOD_ID, "summoned_beast").toString()));
 
 	// Machine
+	public static final RegistryObject<EntityType<EntityMechan>> mechan = ENTITY_TYPES.register("mechan",
+			() -> EntityType.Builder.<EntityMechan>create(EntityMechan::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "mechan").toString()));
+	
 	public static final RegistryObject<EntityType<EntityMalformedAutomaton>> malformed_automaton = ENTITY_TYPES
 			.register("malformed_automaton", () -> EntityType.Builder
 					.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new, EntityClassification.MONSTER)
@@ -248,5 +253,6 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.scuttling_occulus.get(),
 				EntityScuttlingOcculus.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.dread_bot.get(), EntityDreadBot.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.mechan.get(), EntityMechan.setAttributes().create());
 	}
 }
