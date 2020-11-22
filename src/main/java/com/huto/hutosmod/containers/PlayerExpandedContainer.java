@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 
 import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
-import com.huto.hutosmod.containers.slots.ArmorSlot;
-import com.huto.hutosmod.containers.slots.OffHandSlot;
+import com.huto.hutosmod.containers.slots.SlotRuneArmor;
+import com.huto.hutosmod.containers.slots.SlotRuneOffHand;
 import com.huto.hutosmod.containers.slots.SlotContractRune;
 import com.huto.hutosmod.containers.slots.SlotRune;
 import com.huto.hutosmod.init.ContainerInit;
@@ -60,7 +60,7 @@ public class PlayerExpandedContainer extends Container {
 
 		for (int k = 0; k < 4; ++k) {
 			final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
-			this.addSlot(new ArmorSlot(playerInventory, 36 + (3 - k), 8, 8 + k * 18, equipmentslottype, this.player));
+			this.addSlot(new SlotRuneArmor(playerInventory, 36 + (3 - k), 8, 8 + k * 18, equipmentslottype, this.player));
 		}
 
 		this.addSlot(new SlotContractRune(player, runes, 0, 78, 8));
@@ -78,7 +78,7 @@ public class PlayerExpandedContainer extends Container {
 			this.addSlot(new Slot(playerInventory, i1, 8 + i1 * 18, 142));
 		}
 
-		this.addSlot(new OffHandSlot(playerInventory, 40, 96 - 19, 62));
+		this.addSlot(new SlotRuneOffHand(playerInventory, 40, 96 - 19, 62));
 	}
 
 	@Override

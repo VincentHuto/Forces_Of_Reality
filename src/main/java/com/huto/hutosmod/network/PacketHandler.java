@@ -1,9 +1,28 @@
 package com.huto.hutosmod.network;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.network.coven.CovenantPacketClient;
+import com.huto.hutosmod.network.coven.CovenantPacketServer;
+import com.huto.hutosmod.network.coven.MechanGloveActionMessage;
+import com.huto.hutosmod.network.coven.MechanGloveOpenMessage;
+import com.huto.hutosmod.network.coven.PacketUpdateMechanModule;
+import com.huto.hutosmod.network.coven.SetFlyPKT;
+import com.huto.hutosmod.network.karma.KarmaActivationPacketClient;
+import com.huto.hutosmod.network.karma.KarmaActivationPacketServer;
+import com.huto.hutosmod.network.karma.KarmaPacketClient;
+import com.huto.hutosmod.network.karma.KarmaPacketServer;
 import com.huto.hutosmod.network.mindrunes.OpenNormalInvPacket;
 import com.huto.hutosmod.network.mindrunes.OpenRunesInvPacket;
+import com.huto.hutosmod.network.mindrunes.PacketBinderTogglePickup;
+import com.huto.hutosmod.network.mindrunes.PacketChiselCraftingEvent;
+import com.huto.hutosmod.network.mindrunes.PacketOpenRuneBinder;
+import com.huto.hutosmod.network.mindrunes.PacketToggleBinderMessage;
+import com.huto.hutosmod.network.mindrunes.PacketUpdateChiselRunes;
 import com.huto.hutosmod.network.mindrunes.SyncPacket;
+import com.huto.hutosmod.network.vibes.ExportVibePacket;
+import com.huto.hutosmod.network.vibes.ImportVibePacket;
+import com.huto.hutosmod.network.vibes.VibrationPacketClient;
+import com.huto.hutosmod.network.vibes.VibrationPacketServer;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -90,12 +109,12 @@ public class PacketHandler {
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
 
 	public static SimpleChannel registerRuneBinderChannels() {
-		RUNEBINDER.messageBuilder(TogglePickupMessage.class, networkID++).decoder(TogglePickupMessage::decode)
-				.encoder(TogglePickupMessage::encode).consumer(TogglePickupMessage::handle).add();
-		RUNEBINDER.messageBuilder(OpenMessage.class, networkID++).decoder(OpenMessage::decode)
-				.encoder(OpenMessage::encode).consumer(OpenMessage::handle).add();
-		RUNEBINDER.messageBuilder(ToggleMessageMessage.class, networkID++).decoder(ToggleMessageMessage::decode)
-				.encoder(ToggleMessageMessage::encode).consumer(ToggleMessageMessage::handle).add();
+		RUNEBINDER.messageBuilder(PacketBinderTogglePickup.class, networkID++).decoder(PacketBinderTogglePickup::decode)
+				.encoder(PacketBinderTogglePickup::encode).consumer(PacketBinderTogglePickup::handle).add();
+		RUNEBINDER.messageBuilder(PacketOpenRuneBinder.class, networkID++).decoder(PacketOpenRuneBinder::decode)
+				.encoder(PacketOpenRuneBinder::encode).consumer(PacketOpenRuneBinder::handle).add();
+		RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++).decoder(PacketToggleBinderMessage::decode)
+				.encoder(PacketToggleBinderMessage::encode).consumer(PacketToggleBinderMessage::handle).add();
 		return RUNEBINDER;
 	}
 

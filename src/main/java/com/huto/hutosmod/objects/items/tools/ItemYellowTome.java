@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.items.tools;
 import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
-import com.huto.hutosmod.entities.EntityPlayerTentacle;
+import com.huto.hutosmod.entities.summons.EntityPlayerTentacle;
 import com.huto.hutosmod.init.EntityInit;
 
 import net.minecraft.entity.LivingEntity;

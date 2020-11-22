@@ -1,32 +1,26 @@
 package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityBeastFromBeyond;
-import com.huto.hutosmod.entities.EntityColin;
-import com.huto.hutosmod.entities.EntityDarkYoung;
-import com.huto.hutosmod.entities.EntityDenizen;
-import com.huto.hutosmod.entities.EntityDenizenSage;
-import com.huto.hutosmod.entities.EntityDreadBot;
-import com.huto.hutosmod.entities.EntityDreamWalker;
-import com.huto.hutosmod.entities.EntityHastur;
-import com.huto.hutosmod.entities.EntityHasturClone;
-import com.huto.hutosmod.entities.EntityHasturSpawn;
-import com.huto.hutosmod.entities.EntityIbis;
-import com.huto.hutosmod.entities.EntityMalformedAutomaton;
-import com.huto.hutosmod.entities.EntityManaDustItem;
-import com.huto.hutosmod.entities.EntityMechan;
-import com.huto.hutosmod.entities.EntityPlayerTentacle;
-import com.huto.hutosmod.entities.EntityScuttlingOcculus;
-import com.huto.hutosmod.entities.EntitySeraphim;
-import com.huto.hutosmod.entities.EntitySlug;
-import com.huto.hutosmod.entities.EntitySummonedBeast;
-import com.huto.hutosmod.entities.EntityTentacle;
-import com.huto.hutosmod.entities.EntityThrone;
-import com.huto.hutosmod.entities.EntityTulpa;
+import com.huto.hutosmod.entities.guardians.EntityBeastFromBeyond;
+import com.huto.hutosmod.entities.guardians.EntityColin;
+import com.huto.hutosmod.entities.guardians.EntityDarkYoung;
+import com.huto.hutosmod.entities.guardians.EntityHastur;
+import com.huto.hutosmod.entities.guardians.EntityMalformedAutomaton;
+import com.huto.hutosmod.entities.guardians.EntitySeraphim;
+import com.huto.hutosmod.entities.guardians.EntityTulpa;
+import com.huto.hutosmod.entities.item.EntityManaDustItem;
+import com.huto.hutosmod.entities.lords.EntityMechan;
+import com.huto.hutosmod.entities.lords.EntityVeritas;
+import com.huto.hutosmod.entities.mobs.EntityDreadBot;
+import com.huto.hutosmod.entities.mobs.EntityScuttlingOcculus;
+import com.huto.hutosmod.entities.passive.EntityDenizen;
+import com.huto.hutosmod.entities.passive.EntityDenizenSage;
+import com.huto.hutosmod.entities.passive.EntityDreamWalker;
+import com.huto.hutosmod.entities.passive.EntityIbis;
+import com.huto.hutosmod.entities.passive.EntitySlug;
 import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
 import com.huto.hutosmod.entities.projectiles.EntityDreadRocket;
 import com.huto.hutosmod.entities.projectiles.EntityDreadRocketDirected;
-import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
 import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
 import com.huto.hutosmod.entities.projectiles.EntityJudgement;
 import com.huto.hutosmod.entities.projectiles.EntityShortCircuit;
@@ -35,6 +29,13 @@ import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.entities.projectiles.EntityThrownAxe;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
+import com.huto.hutosmod.entities.summons.EntityEldritchGrip;
+import com.huto.hutosmod.entities.summons.EntityHasturClone;
+import com.huto.hutosmod.entities.summons.EntityHasturSpawn;
+import com.huto.hutosmod.entities.summons.EntityPlayerTentacle;
+import com.huto.hutosmod.entities.summons.EntitySummonedBeast;
+import com.huto.hutosmod.entities.summons.EntityTentacle;
+import com.huto.hutosmod.entities.summons.EntityThrone;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -87,6 +88,9 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityTulpa>> tulpa = ENTITY_TYPES.register("tulpa",
 			() -> EntityType.Builder.<EntityTulpa>create(EntityTulpa::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "tulpa").toString()));
+	public static final RegistryObject<EntityType<EntityVeritas>> veritas = ENTITY_TYPES.register("veritas",
+			() -> EntityType.Builder.<EntityVeritas>create(EntityVeritas::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "veritas").toString()));
 
 	// Hastur
 	public static final RegistryObject<EntityType<EntityHastur>> hastur = ENTITY_TYPES.register("hastur",
@@ -254,5 +258,7 @@ public class EntityInit {
 				EntityScuttlingOcculus.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.dread_bot.get(), EntityDreadBot.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.mechan.get(), EntityMechan.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.veritas.get(), EntityVeritas.setAttributes().create());
+
 	}
 }

@@ -2,8 +2,8 @@ package com.huto.hutosmod.events;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.ContainerMechanGlove;
-import com.huto.hutosmod.network.MechanGloveActionMessage;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.coven.MechanGloveActionMessage;
 import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
 
 import net.minecraft.entity.player.PlayerInventory;

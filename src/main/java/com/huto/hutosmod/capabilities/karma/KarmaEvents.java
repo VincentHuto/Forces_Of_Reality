@@ -9,8 +9,8 @@ import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationProvider;
 import com.huto.hutosmod.dimension.DimensionInit;
 import com.huto.hutosmod.dimension.DimensionalPosition;
 import com.huto.hutosmod.init.ItemInit;
-import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.karma.KarmaPacketServer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;

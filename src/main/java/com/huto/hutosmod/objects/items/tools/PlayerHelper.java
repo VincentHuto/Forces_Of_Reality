@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.SetFlyPKT;
+import com.huto.hutosmod.network.coven.SetFlyPKT;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

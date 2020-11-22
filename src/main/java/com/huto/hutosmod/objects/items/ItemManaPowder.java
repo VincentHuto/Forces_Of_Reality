@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.items;
 
-import com.huto.hutosmod.entities.EntityManaDustItem;
+import com.huto.hutosmod.entities.item.EntityManaDustItem;
 import com.huto.hutosmod.init.EntityInit;
 
 import net.minecraft.entity.Entity;

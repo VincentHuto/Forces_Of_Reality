@@ -3,8 +3,8 @@ package com.huto.hutosmod.render.entity.projectile;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityPlayerTentacle;
-import com.huto.hutosmod.models.entity.ModelPlayerTentacle;
+import com.huto.hutosmod.entities.summons.EntityPlayerTentacle;
+import com.huto.hutosmod.models.entity.mobs.ModelPlayerTentacle;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

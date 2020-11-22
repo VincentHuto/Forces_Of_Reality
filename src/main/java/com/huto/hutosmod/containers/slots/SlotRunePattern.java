@@ -1,7 +1,7 @@
 package com.huto.hutosmod.containers.slots;
 
-import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.objects.items.runes.patterns.ItemRunePattern;
+import com.huto.hutosmod.objects.items.tools.ItemRuneBinder;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;

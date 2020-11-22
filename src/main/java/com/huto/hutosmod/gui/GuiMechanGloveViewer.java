@@ -8,7 +8,7 @@ import com.huto.hutosmod.containers.MechanGloveItemHandler;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.PacketUpdateMechanModule;
+import com.huto.hutosmod.network.coven.PacketUpdateMechanModule;
 import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
 import com.huto.hutosmod.objects.items.tools.ItemMechanModuleBase;
 import com.mojang.blaze3d.matrix.MatrixStack;

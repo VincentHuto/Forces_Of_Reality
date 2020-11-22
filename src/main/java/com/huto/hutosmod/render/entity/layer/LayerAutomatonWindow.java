@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityMalformedAutomaton;
-import com.huto.hutosmod.models.entity.ModelMalformedAutomaton;
+import com.huto.hutosmod.entities.guardians.EntityMalformedAutomaton;
+import com.huto.hutosmod.models.entity.guardians.ModelMalformedAutomaton;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

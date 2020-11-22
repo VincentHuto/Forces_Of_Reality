@@ -26,15 +26,15 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.ParticleInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
 import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
+import com.huto.hutosmod.objects.items.tools.ItemRuneBinder;
 import com.huto.hutosmod.recipes.CopyMechanGloveDataRecipe;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
-import com.huto.hutosmod.render.rune.RunesRenderLayer;
+import com.huto.hutosmod.render.entity.layer.RunesRenderLayer;
 import com.huto.hutosmod.worldgen.ModOreGen;
 
 import net.minecraft.client.Minecraft;

@@ -3,8 +3,8 @@ package com.huto.hutosmod.events;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.containers.ContainerRuneBinder;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.TogglePickupMessage;
-import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
+import com.huto.hutosmod.network.mindrunes.PacketBinderTogglePickup;
+import com.huto.hutosmod.objects.items.tools.ItemRuneBinder;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -34,7 +34,7 @@ public class RuneBinderEvents {
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (ClientEventSubscriber.keyBinds.get(0).isPressed())
-			PacketHandler.RUNEBINDER.sendToServer(new TogglePickupMessage());
+			PacketHandler.RUNEBINDER.sendToServer(new PacketBinderTogglePickup());
 	}
 	
 	

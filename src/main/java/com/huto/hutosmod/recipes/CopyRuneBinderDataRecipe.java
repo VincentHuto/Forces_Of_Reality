@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
+import com.huto.hutosmod.objects.items.tools.ItemRuneBinder;
 
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;

@@ -6,7 +6,7 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.VibrationPacketServer;
+import com.huto.hutosmod.network.vibes.VibrationPacketServer;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.entity.LivingEntity;

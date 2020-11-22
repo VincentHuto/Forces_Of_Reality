@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityDarkYoung;
-import com.huto.hutosmod.models.entity.ModelDarkYoung;
+import com.huto.hutosmod.entities.guardians.EntityDarkYoung;
+import com.huto.hutosmod.models.entity.guardians.ModelDarkYoung;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -44,7 +44,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-//TODO Everythings good, Add Lasers
 public class ItemMechanGlove extends Item {
 	String name;
 	Integer size;

@@ -13,10 +13,10 @@ import com.huto.hutosmod.capabilities.karma.KarmaProvider;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.dimension.DimensionalPosition;
-import com.huto.hutosmod.network.CovenantPacketServer;
-import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.VibrationPacketServer;
+import com.huto.hutosmod.network.coven.CovenantPacketServer;
+import com.huto.hutosmod.network.karma.KarmaPacketServer;
+import com.huto.hutosmod.network.vibes.VibrationPacketServer;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.client.gui.screen.Screen;

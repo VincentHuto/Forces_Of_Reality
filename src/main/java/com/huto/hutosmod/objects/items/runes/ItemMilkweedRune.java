@@ -6,7 +6,7 @@ import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesCapabilities;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.huto.hutosmod.render.rune.IRenderRunes;
+import com.huto.hutosmod.render.entity.layer.IRenderRunes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 

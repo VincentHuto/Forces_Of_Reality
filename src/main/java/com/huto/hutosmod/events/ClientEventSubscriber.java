@@ -13,29 +13,24 @@ import com.huto.hutosmod.gui.mindrunes.PlayerExpandedScreen;
 import com.huto.hutosmod.init.ContainerInit;
 import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.TileEntityInit;
-import com.huto.hutosmod.render.entity.RenderBeastFromBeyond;
-import com.huto.hutosmod.render.entity.RenderColin;
-import com.huto.hutosmod.render.entity.RenderDarkYoung;
-import com.huto.hutosmod.render.entity.RenderDenizen;
-import com.huto.hutosmod.render.entity.RenderDenizenSage;
-import com.huto.hutosmod.render.entity.RenderDreadBot;
-import com.huto.hutosmod.render.entity.RenderDreamWalker;
-import com.huto.hutosmod.render.entity.RenderHastur;
-import com.huto.hutosmod.render.entity.RenderHasturClone;
-import com.huto.hutosmod.render.entity.RenderHasturSpawn;
-import com.huto.hutosmod.render.entity.RenderIbis;
-import com.huto.hutosmod.render.entity.RenderJudgement;
-import com.huto.hutosmod.render.entity.RenderMalformedAutomaton;
-import com.huto.hutosmod.render.entity.RenderManaDustItem;
-import com.huto.hutosmod.render.entity.RenderMechan;
-import com.huto.hutosmod.render.entity.RenderScuttlingOcculus;
-import com.huto.hutosmod.render.entity.RenderSeraphim;
-import com.huto.hutosmod.render.entity.RenderSlug;
-import com.huto.hutosmod.render.entity.RenderSummonedBeast;
-import com.huto.hutosmod.render.entity.RenderTentacle;
-import com.huto.hutosmod.render.entity.RenderThrone;
-import com.huto.hutosmod.render.entity.RenderTulpa;
+import com.huto.hutosmod.render.entity.guardians.RenderBeastFromBeyond;
+import com.huto.hutosmod.render.entity.guardians.RenderColin;
+import com.huto.hutosmod.render.entity.guardians.RenderDarkYoung;
+import com.huto.hutosmod.render.entity.guardians.RenderHastur;
+import com.huto.hutosmod.render.entity.guardians.RenderMalformedAutomaton;
+import com.huto.hutosmod.render.entity.guardians.RenderSeraphim;
+import com.huto.hutosmod.render.entity.guardians.RenderTulpa;
+import com.huto.hutosmod.render.entity.item.RenderManaDustItem;
 import com.huto.hutosmod.render.entity.layer.ThermalLayerRender;
+import com.huto.hutosmod.render.entity.lords.RenderMechan;
+import com.huto.hutosmod.render.entity.lords.RenderVeritas;
+import com.huto.hutosmod.render.entity.mobs.RenderDreadBot;
+import com.huto.hutosmod.render.entity.mobs.RenderScuttlingOcculus;
+import com.huto.hutosmod.render.entity.passive.RenderDenizen;
+import com.huto.hutosmod.render.entity.passive.RenderDenizenSage;
+import com.huto.hutosmod.render.entity.passive.RenderDreamWalker;
+import com.huto.hutosmod.render.entity.passive.RenderIbis;
+import com.huto.hutosmod.render.entity.passive.RenderSlug;
 import com.huto.hutosmod.render.entity.projectile.RenderCorruptNote;
 import com.huto.hutosmod.render.entity.projectile.RenderDreadRocket;
 import com.huto.hutosmod.render.entity.projectile.RenderDreadRocketDirected;
@@ -47,26 +42,32 @@ import com.huto.hutosmod.render.entity.projectile.RenderShorting;
 import com.huto.hutosmod.render.entity.projectile.RenderStarStrike;
 import com.huto.hutosmod.render.entity.projectile.RenderTrackingOrb;
 import com.huto.hutosmod.render.entity.projectile.RenderWolfShot;
-import com.huto.hutosmod.render.tile.RenderAbsorber;
-import com.huto.hutosmod.render.tile.RenderAscendentAltar;
-import com.huto.hutosmod.render.tile.RenderCapacitor;
-import com.huto.hutosmod.render.tile.RenderChiselStation;
-import com.huto.hutosmod.render.tile.RenderHasturPylon;
-import com.huto.hutosmod.render.tile.RenderIcoSphere;
-import com.huto.hutosmod.render.tile.RenderKarmicAltar;
-import com.huto.hutosmod.render.tile.RenderKarmicExtractor;
-import com.huto.hutosmod.render.tile.RenderMachinaImperfecta;
-import com.huto.hutosmod.render.tile.RenderMagicLight;
-import com.huto.hutosmod.render.tile.RenderOccularHeap;
-import com.huto.hutosmod.render.tile.RenderResonator;
-import com.huto.hutosmod.render.tile.RenderRuneModStation;
-import com.huto.hutosmod.render.tile.RenderSacrificialPyre;
-import com.huto.hutosmod.render.tile.RenderStorageDrum;
-import com.huto.hutosmod.render.tile.RenderThermalInfluxer;
-import com.huto.hutosmod.render.tile.RenderUntoldEasel;
-import com.huto.hutosmod.render.tile.RenderVibeFuser;
-import com.huto.hutosmod.render.tile.RenderVirtuousEnchanter;
-import com.huto.hutosmod.render.tile.RenderWandMaker;
+import com.huto.hutosmod.render.entity.summons.RenderHasturClone;
+import com.huto.hutosmod.render.entity.summons.RenderHasturSpawn;
+import com.huto.hutosmod.render.entity.summons.RenderJudgement;
+import com.huto.hutosmod.render.entity.summons.RenderSummonedBeast;
+import com.huto.hutosmod.render.entity.summons.RenderTentacle;
+import com.huto.hutosmod.render.entity.summons.RenderThrone;
+import com.huto.hutosmod.render.tiles.RenderAbsorber;
+import com.huto.hutosmod.render.tiles.RenderAscendentAltar;
+import com.huto.hutosmod.render.tiles.RenderCapacitor;
+import com.huto.hutosmod.render.tiles.RenderChiselStation;
+import com.huto.hutosmod.render.tiles.RenderHasturPylon;
+import com.huto.hutosmod.render.tiles.RenderIcoSphere;
+import com.huto.hutosmod.render.tiles.RenderKarmicAltar;
+import com.huto.hutosmod.render.tiles.RenderKarmicExtractor;
+import com.huto.hutosmod.render.tiles.RenderMachinaImperfecta;
+import com.huto.hutosmod.render.tiles.RenderMagicLight;
+import com.huto.hutosmod.render.tiles.RenderOccularHeap;
+import com.huto.hutosmod.render.tiles.RenderResonator;
+import com.huto.hutosmod.render.tiles.RenderRuneModStation;
+import com.huto.hutosmod.render.tiles.RenderSacrificialPyre;
+import com.huto.hutosmod.render.tiles.RenderStorageDrum;
+import com.huto.hutosmod.render.tiles.RenderThermalInfluxer;
+import com.huto.hutosmod.render.tiles.RenderUntoldEasel;
+import com.huto.hutosmod.render.tiles.RenderVibeFuser;
+import com.huto.hutosmod.render.tiles.RenderVirtuousEnchanter;
+import com.huto.hutosmod.render.tiles.RenderWandMaker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -119,7 +120,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_block.get(), RenderMagicLight::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
-		
+
 		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
 		ScreenManager.registerFactory(ContainerInit.PLAYER_RUNES, PlayerExpandedScreen::new);
 		ScreenManager.registerFactory(ContainerRuneBinder.type, GuiRuneBinder::new);
@@ -137,10 +138,12 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.corrupt_note.get(), RenderCorruptNote::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.wolf_shot.get(), RenderWolfShot::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket.get(), RenderDreadRocket::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket_directed.get(), RenderDreadRocketDirected::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket_directed.get(),
+				RenderDreadRocketDirected::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.scuttling_occulus.get(), RenderScuttlingOcculus::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.scuttling_occulus.get(),
+				RenderScuttlingOcculus::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.seraphim.get(), RenderSeraphim::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.throne.get(), RenderThrone::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.judgement.get(), RenderJudgement::new);
@@ -152,13 +155,13 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mechan.get(), RenderMechan::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.short_circuit.get(), RenderShortCircuit::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.shorting.get(), RenderShorting::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.veritas.get(), RenderVeritas::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.malformed_automaton.get(),
 				RenderMalformedAutomaton::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dark_young.get(),
-				RenderDarkYoung::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dark_young.get(), RenderDarkYoung::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.thrown_axe.get(),
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));

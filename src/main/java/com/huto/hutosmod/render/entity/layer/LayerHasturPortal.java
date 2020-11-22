@@ -1,9 +1,9 @@
 package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityHastur;
-import com.huto.hutosmod.models.entity.ModelHastur;
-import com.huto.hutosmod.render.entity.BossColorMap;
+import com.huto.hutosmod.entities.guardians.EntityHastur;
+import com.huto.hutosmod.models.entity.guardians.ModelHastur;
+import com.huto.hutosmod.render.entity.guardians.BossColorMap;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

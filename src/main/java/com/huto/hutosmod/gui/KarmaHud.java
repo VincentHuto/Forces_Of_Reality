@@ -8,9 +8,9 @@ import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.KarmaProvider;
 import com.huto.hutosmod.capabilities.karma.activation.IKarmaActivation;
 import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationProvider;
-import com.huto.hutosmod.network.KarmaActivationPacketClient;
-import com.huto.hutosmod.network.KarmaPacketClient;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.karma.KarmaActivationPacketClient;
+import com.huto.hutosmod.network.karma.KarmaPacketClient;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;

@@ -1,8 +1,8 @@
 package com.huto.hutosmod.capabilities.karma.activation;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.karma.KarmaPacketServer;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

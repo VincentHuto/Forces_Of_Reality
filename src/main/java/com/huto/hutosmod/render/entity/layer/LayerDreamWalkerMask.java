@@ -1,9 +1,9 @@
 package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityDreamWalker;
-import com.huto.hutosmod.models.entity.ModelDreamWalker;
-import com.huto.hutosmod.models.entity.ModelMysteriousMask;
+import com.huto.hutosmod.entities.passive.EntityDreamWalker;
+import com.huto.hutosmod.models.armor.ModelMysteriousMask;
+import com.huto.hutosmod.models.entity.passive.ModelDreamWalker;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

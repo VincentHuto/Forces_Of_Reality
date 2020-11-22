@@ -5,7 +5,7 @@ import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.GuiMechanGloveViewer;
 import com.huto.hutosmod.gui.GuiRuneBinderViewer;
 import com.huto.hutosmod.init.ItemInit;
-import com.huto.hutosmod.models.entity.ModelOldIronChestPlate;
+import com.huto.hutosmod.models.armor.ModelOldIronChestPlate;
 import com.huto.hutosmod.render.effects.FXLightning;
 import com.huto.hutosmod.render.effects.LightningHandler;
 

@@ -4,9 +4,9 @@ import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.KarmaProvider;
 import com.huto.hutosmod.capabilities.karma.activation.IKarmaActivation;
 import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationProvider;
-import com.huto.hutosmod.network.KarmaActivationPacketServer;
-import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.karma.KarmaActivationPacketServer;
+import com.huto.hutosmod.network.karma.KarmaPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;

@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.items.tools;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.VibrationPacketServer;
+import com.huto.hutosmod.network.vibes.VibrationPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;

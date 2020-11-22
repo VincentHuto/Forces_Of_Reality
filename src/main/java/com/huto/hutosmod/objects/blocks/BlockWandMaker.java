@@ -1,12 +1,8 @@
 package com.huto.hutosmod.objects.blocks;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
-
 import com.huto.hutosmod.init.ItemInit;
-import com.huto.hutosmod.init.ParticleInit;
 import com.huto.hutosmod.objects.blocks.util.IActivatable;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.TileEntityWandMaker;
@@ -18,7 +14,6 @@ import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -83,30 +78,6 @@ public class BlockWandMaker extends Block implements IActivatable {
 		}
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 		return ActionResultType.SUCCESS;
-	}
-
-	@Override
-	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
-			@Nonnull Random random) {
-		TileEntityWandMaker tile = (TileEntityWandMaker) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityWandMaker) {
-			int count = (int) (10 * 0.5f);
-			if (count > 0) {
-				for (int i = 0; i < random.nextInt(count); i++) {
-					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
-					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
-					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-					/*
-					 * world.addParticle(new GenericParticleData(false, 0.0f, 1.0f, 0.0f, 1.0f,
-					 * 100), pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 0.0f, 0.0f,
-					 * 0.0f);
-					 */
-					world.addParticle((BasicParticleType) ParticleInit.RADIATION.getParticleType(), randX, randY, randZ,
-							0, 0, 0);
-
-				}
-			}
-		}
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemManaPowder;
+import com.huto.hutosmod.objects.items.ItemMysticTome;
 import com.huto.hutosmod.objects.items.ItemNullIngot;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
@@ -19,23 +20,21 @@ import com.huto.hutosmod.objects.items.ItemSoakingAgent;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ModSpawnEggItem;
-import com.huto.hutosmod.objects.items.equipment.EnumModArmorTiers;
-import com.huto.hutosmod.objects.items.equipment.ItemAttractionCharm;
-import com.huto.hutosmod.objects.items.equipment.ItemBeastBreath;
-import com.huto.hutosmod.objects.items.equipment.ItemClovenHooves;
-import com.huto.hutosmod.objects.items.equipment.ItemCrossedKeys;
-import com.huto.hutosmod.objects.items.equipment.ItemEnticingMantle;
-import com.huto.hutosmod.objects.items.equipment.ItemInfluenceSuppressor;
-import com.huto.hutosmod.objects.items.equipment.ItemIntegralCog;
-import com.huto.hutosmod.objects.items.equipment.ItemMysteriousMask;
-import com.huto.hutosmod.objects.items.equipment.ItemMysticTome;
-import com.huto.hutosmod.objects.items.equipment.ItemRepulsionCharm;
-import com.huto.hutosmod.objects.items.equipment.ItemRuneBinder;
-import com.huto.hutosmod.objects.items.equipment.ItemSkullHelmet;
-import com.huto.hutosmod.objects.items.equipment.ItemSlimeRepulsionCharm;
-import com.huto.hutosmod.objects.items.equipment.ItemVibeSeer;
-import com.huto.hutosmod.objects.items.equipment.ItemWatchfulPendant;
-import com.huto.hutosmod.objects.items.equipment.ItemYellowSign;
+import com.huto.hutosmod.objects.items.armor.EnumModArmorTiers;
+import com.huto.hutosmod.objects.items.armor.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.armor.ItemClovenHooves;
+import com.huto.hutosmod.objects.items.armor.ItemEnticingMantle;
+import com.huto.hutosmod.objects.items.armor.ItemInfluenceSuppressor;
+import com.huto.hutosmod.objects.items.armor.ItemMysteriousMask;
+import com.huto.hutosmod.objects.items.armor.ItemRepulsionCharm;
+import com.huto.hutosmod.objects.items.armor.ItemSkullHelmet;
+import com.huto.hutosmod.objects.items.armor.ItemSlimeRepulsionCharm;
+import com.huto.hutosmod.objects.items.armor.ItemVibeSeer;
+import com.huto.hutosmod.objects.items.fidelity.ItemBeastBreath;
+import com.huto.hutosmod.objects.items.fidelity.ItemCrossedKeys;
+import com.huto.hutosmod.objects.items.fidelity.ItemIntegralCog;
+import com.huto.hutosmod.objects.items.fidelity.ItemWatchfulPendant;
+import com.huto.hutosmod.objects.items.fidelity.ItemYellowSign;
 import com.huto.hutosmod.objects.items.runes.ItemContractRune;
 import com.huto.hutosmod.objects.items.runes.ItemGuidanceRune;
 import com.huto.hutosmod.objects.items.runes.ItemMilkweedRune;
@@ -72,6 +71,7 @@ import com.huto.hutosmod.objects.items.tools.ItemManaExtractor;
 import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
 import com.huto.hutosmod.objects.items.tools.ItemMechanModuleBase;
 import com.huto.hutosmod.objects.items.tools.ItemResonanceDestabalizer;
+import com.huto.hutosmod.objects.items.tools.ItemRuneBinder;
 import com.huto.hutosmod.objects.items.tools.ItemSelfAnalyzer;
 import com.huto.hutosmod.objects.items.tools.ItemSelfReflectionMirror;
 import com.huto.hutosmod.objects.items.tools.ItemStarSlug;
@@ -315,7 +315,7 @@ public class ItemInit {
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> mechan_module_laser = ITEMS.register("mechan_module_laser",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> mechan_module_blade= ITEMS.register("mechan_module_blade",
+	public static final RegistryObject<Item> mechan_module_blade = ITEMS.register("mechan_module_blade",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Gloves
 	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
@@ -710,6 +710,9 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_mechan = ITEMS.register("spawn_egg_mechan",
 			() -> new ModSpawnEggItem(EntityInit.mechan, 12743680, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_veritas = ITEMS.register("spawn_egg_veritas",
+			() -> new ModSpawnEggItem(EntityInit.veritas, 0xFFFFFF, 0xFFFFFF,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -719,7 +722,8 @@ public class ItemInit {
 				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
 				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
-				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot,ItemInit.spawn_egg_mechan);
+				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
+				ItemInit.spawn_egg_veritas);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -786,8 +790,8 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		ItemModelsProperties.registerProperty(mechan_glove_masterpiece.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(mechan_glove_masterpiece.get(),
+				new ResourceLocation(HutosMod.MOD_ID, "on"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {

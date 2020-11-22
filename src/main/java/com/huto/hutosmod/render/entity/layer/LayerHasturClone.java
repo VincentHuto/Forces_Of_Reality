@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityHasturClone;
-import com.huto.hutosmod.models.entity.ModelHasturClone;
+import com.huto.hutosmod.entities.summons.EntityHasturClone;
+import com.huto.hutosmod.models.entity.summons.ModelHasturClone;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

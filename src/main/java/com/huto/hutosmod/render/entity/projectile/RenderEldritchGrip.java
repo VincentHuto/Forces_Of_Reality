@@ -1,8 +1,8 @@
 package com.huto.hutosmod.render.entity.projectile;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.projectiles.EntityEldritchGrip;
-import com.huto.hutosmod.models.entity.ModelEldritchGrip;
+import com.huto.hutosmod.entities.summons.EntityEldritchGrip;
+import com.huto.hutosmod.models.entity.summons.ModelEldritchGrip;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

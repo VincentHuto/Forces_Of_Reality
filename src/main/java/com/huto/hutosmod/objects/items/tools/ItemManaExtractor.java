@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.items.tools;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.VibrationPacketClient;
+import com.huto.hutosmod.network.vibes.VibrationPacketClient;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;

@@ -9,8 +9,8 @@ import com.huto.hutosmod.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.hutosmod.capabilities.mindrunes.RunesApi;
 import com.huto.hutosmod.init.EnchantmentInit;
 import com.huto.hutosmod.init.ItemInit;
-import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.coven.CovenantPacketServer;
 import com.huto.hutosmod.objects.items.runes.ItemRune;
 import com.mojang.blaze3d.platform.GlStateManager;
 

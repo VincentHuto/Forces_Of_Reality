@@ -8,8 +8,8 @@ import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.capabilities.mindrunes.IRune;
 import com.huto.hutosmod.capabilities.mindrunes.RuneType;
 import com.huto.hutosmod.font.ModTextFormatting;
-import com.huto.hutosmod.network.CovenantPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.coven.CovenantPacketServer;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

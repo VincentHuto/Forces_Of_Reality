@@ -2,7 +2,7 @@ package com.huto.hutosmod.entities.utils;
 
 import java.util.EnumSet;
 
-import com.huto.hutosmod.entities.EntityDreadBot;
+import com.huto.hutosmod.entities.mobs.EntityDreadBot;
 import com.huto.hutosmod.entities.projectiles.EntityDreadRocket;
 
 import net.minecraft.entity.LivingEntity;

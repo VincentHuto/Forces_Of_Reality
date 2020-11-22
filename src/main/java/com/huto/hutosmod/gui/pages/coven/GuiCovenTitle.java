@@ -1,7 +1,7 @@
 package com.huto.hutosmod.gui.pages.coven;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntitySeraphim;
+import com.huto.hutosmod.entities.guardians.EntitySeraphim;
 import com.huto.hutosmod.events.ClientEventSubscriber;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.gui.pages.GuiUtil;

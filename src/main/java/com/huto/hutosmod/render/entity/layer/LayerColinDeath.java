@@ -3,8 +3,8 @@ package com.huto.hutosmod.render.entity.layer;
 import java.util.Random;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.entities.EntityColin;
-import com.huto.hutosmod.models.entity.ModelColin;
+import com.huto.hutosmod.entities.guardians.EntityColin;
+import com.huto.hutosmod.models.entity.guardians.ModelColin;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

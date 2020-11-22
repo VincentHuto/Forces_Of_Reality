@@ -2,8 +2,8 @@ package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.capabilities.karma.IKarma;
 import com.huto.hutosmod.capabilities.karma.KarmaProvider;
-import com.huto.hutosmod.network.KarmaPacketServer;
 import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.karma.KarmaPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
