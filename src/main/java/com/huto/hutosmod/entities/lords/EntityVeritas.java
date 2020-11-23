@@ -12,7 +12,13 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.particles.ParticleColor;
 import com.huto.hutosmod.particles.ParticleUtil;
-import com.huto.hutosmod.particles.data.GlowParticleData;
+import com.huto.hutosmod.particles.data.AjnaParticleData;
+import com.huto.hutosmod.particles.data.AnahataParticleData;
+import com.huto.hutosmod.particles.data.ManipuraParticleData;
+import com.huto.hutosmod.particles.data.MuladharaaParticleData;
+import com.huto.hutosmod.particles.data.SahasraraParticleData;
+import com.huto.hutosmod.particles.data.SvadhishthanaParticleData;
+import com.huto.hutosmod.particles.data.VishuddhaParticleData;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
@@ -40,6 +46,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -122,27 +129,42 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 
 	int timer = 200;
 
+	@SuppressWarnings("unused")
 	@Override
 	public void tick() {
 		super.tick();
-		List<ParticleColor> chakraColors = new ArrayList<ParticleColor>();
-		Collections.addAll(chakraColors, new ParticleColor(162, 86, 160), new ParticleColor(96, 96, 186),
-				new ParticleColor(66, 184, 212), new ParticleColor(110, 200, 80), new ParticleColor(255, 165, 44),
-				new ParticleColor(243, 124, 59), new ParticleColor(229, 60, 81));
+		List<IParticleData> chakraData = new ArrayList<IParticleData>();
+		Collections.addAll(chakraData, SahasraraParticleData.createData(new ParticleColor(162, 86, 160)),
+				AjnaParticleData.createData(new ParticleColor(96, 96, 186)),
+				VishuddhaParticleData.createData(new ParticleColor(66, 184, 212)),
+				AnahataParticleData.createData(new ParticleColor(110, 200, 80)),
+				ManipuraParticleData.createData(new ParticleColor(255, 165, 44)),
+				SvadhishthanaParticleData.createData(new ParticleColor(243, 124, 59)),
+				MuladharaaParticleData.createData(new ParticleColor(229, 60, 81)));
+		Collections.reverse(chakraData);
 
 		World world = this.getEntityWorld();
 		BlockPos pos = this.getPosition();
 		double time = world.getGameTime() * 0.2f;
+
 		// Random rand = world.rand;
-		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
-					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosY() + (j * 0.5) + ParticleUtil.inRange(-0.1, 0.1),
+		for (int j = 0; j < chakraData.size(); j++) {
+
+			world.addParticle(chakraData.get(j), getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
+					getPosY() + (j * 0.5) + 0.1 + ParticleUtil.inRange(-0.1, 0.1),
 					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-			world.addParticle(ParticleTypes.WHITE_ASH,
-					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosY() + (j * 0.5) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+
+			/*
+			 * world.addParticle(GlowParticleData.createData(chakraColors.get(j)), getPosX()
+			 * + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j
+			 * * 0.5) + ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time -
+			 * j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+			 * 
+			 * world.addParticle(ParticleTypes.WHITE_ASH, getPosX() + 0.5 + Math.cos(time -
+			 * j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
+			 * ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j) +
+			 * ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+			 */
 		}
 
 		@SuppressWarnings("unused")
@@ -296,8 +318,6 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
-					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 			if (this.deathTicks >= 100) {
 				this.world.addParticle(ParticleTypes.WHITE_ASH, this.getPosX() + (double) f,
@@ -394,6 +414,7 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void spawnMissile() {
 		EntityStarStrike missile = new EntityStarStrike(this, true);
 		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
@@ -423,6 +444,7 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void spawnMissileVortex(int numMiss) {
 
 		EntityStarStrike[] missArray = new EntityStarStrike[numMiss];

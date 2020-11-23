@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.particles.ParticleType;
 
 public class SparkleParticleType extends ParticleType<ColoredDynamicTypeData> {
-    public SparkleParticleType() {
+	public SparkleParticleType() {
         super(false, ColoredDynamicTypeData.DESERIALIZER);
     }
 
