@@ -4,8 +4,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
+import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.coven.CovenantPacketServer;
 import com.huto.hutosmod.objects.blocks.util.EnumBonsaiTypes;
 
 import net.minecraft.block.Block;
@@ -14,6 +19,7 @@ import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,6 +47,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class BlockBonsai extends Block {
 	public static final IntegerProperty STAGE = BlockStateProperties.STAGE_0_1;
@@ -115,86 +122,88 @@ public class BlockBonsai extends Block {
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		switch (this.getBonsaiType()) {
-		case ACACIA:
-			break;
-		case ANTI:
-			if (this.getStage() == 1) {
-				worldIn.setBlockState(pos,
-						BlockInit.anti_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			if (this.getStage() == 2) {
-				worldIn.setBlockState(pos,
-						BlockInit.anti_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			break;
-		case BIRCH:
-			break;
-		case DARKOAK:
-			break;
-		case JUNGLE:
-			if (this.getStage() == 1) {
-				worldIn.setBlockState(pos,
-						BlockInit.jungle_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			if (this.getStage() == 2) {
-				worldIn.setBlockState(pos,
-						BlockInit.jungle_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			break;
-		case MUSHROOM:
-			if (this.getStage() == 1) {
-				worldIn.setBlockState(pos,
-						BlockInit.mushroom_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			if (this.getStage() == 2) {
-				worldIn.setBlockState(pos,
-						BlockInit.mushroom_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			break;
-		case MYSTIC:
-			if (this.getStage() == 1) {
-				worldIn.setBlockState(pos,
-						BlockInit.mystic_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			if (this.getStage() == 2) {
-				worldIn.setBlockState(pos,
-						BlockInit.mystic_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			break;
-		case OAK:
-			if (this.getStage() == 1) {
-				worldIn.setBlockState(pos,
-						BlockInit.oak_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			if (this.getStage() == 2) {
-				worldIn.setBlockState(pos,
-						BlockInit.oak_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			break;
-		case SPRUCE:
-			if (this.getStage() == 1) {
-				worldIn.setBlockState(pos,
-						BlockInit.spruce_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			if (this.getStage() == 2) {
-				worldIn.setBlockState(pos,
-						BlockInit.spruce_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
-			}
-			break;
-		default:
-			break;
+		if (random.nextBoolean()) {
+			switch (this.getBonsaiType()) {
+			case ACACIA:
+				break;
+			case ANTI:
+				if (this.getStage() == 1) {
+					worldIn.setBlockState(pos,
+							BlockInit.anti_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				if (this.getStage() == 2) {
+					worldIn.setBlockState(pos,
+							BlockInit.anti_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				break;
+			case BIRCH:
+				break;
+			case DARKOAK:
+				break;
+			case JUNGLE:
+				if (this.getStage() == 1) {
+					worldIn.setBlockState(pos,
+							BlockInit.jungle_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				if (this.getStage() == 2) {
+					worldIn.setBlockState(pos,
+							BlockInit.jungle_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				break;
+			case MUSHROOM:
+				if (this.getStage() == 1) {
+					worldIn.setBlockState(pos,
+							BlockInit.mushroom_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				if (this.getStage() == 2) {
+					worldIn.setBlockState(pos,
+							BlockInit.mushroom_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				break;
+			case MYSTIC:
+				if (this.getStage() == 1) {
+					worldIn.setBlockState(pos,
+							BlockInit.mystic_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				if (this.getStage() == 2) {
+					worldIn.setBlockState(pos,
+							BlockInit.mystic_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				break;
+			case OAK:
+				if (this.getStage() == 1) {
+					worldIn.setBlockState(pos,
+							BlockInit.oak_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				if (this.getStage() == 2) {
+					worldIn.setBlockState(pos,
+							BlockInit.oak_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				break;
+			case SPRUCE:
+				if (this.getStage() == 1) {
+					worldIn.setBlockState(pos,
+							BlockInit.spruce_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				if (this.getStage() == 2) {
+					worldIn.setBlockState(pos,
+							BlockInit.spruce_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+				}
+				break;
+			default:
+				break;
 
-		}
-		int count = (int) (10 * 0.5f);
-		if (count > 0) {
-			for (int i = 0; i < random.nextInt(count); i++) {
-				double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
-				double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
-				double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-				worldIn.addParticle(ParticleTypes.REVERSE_PORTAL, randX, randY, randZ, 0, 0, 0);
-				worldIn.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
+			}
+			int count = (int) (10 * 0.5f);
+			if (count > 0) {
+				for (int i = 0; i < random.nextInt(count); i++) {
+					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
+					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
+					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
+					worldIn.addParticle(ParticleTypes.REVERSE_PORTAL, randX, randY, randZ, 0, 0, 0);
+					worldIn.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
 
+				}
 			}
 		}
 	}
@@ -256,12 +265,30 @@ public class BlockBonsai extends Block {
 		return null;
 	}
 
+	public void updatePlayerDevotion(World worldIn, PlayerEntity player) {
+		if (!worldIn.isRemote) {
+			ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+			Random rand = new Random();
+			if (rand.nextInt(20) == 17) {
+				coven.setCovenDevotion(EnumCovenants.SELF, 1);
+				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+						new CovenantPacketServer(coven.getDevotion()));
+				player.sendStatusMessage(
+						new StringTextComponent(TextFormatting.AQUA + "Your Patience has been Rewarded"), true);
+			} else {
+				player.sendStatusMessage(new StringTextComponent(TextFormatting.AQUA + "Patience, All in due time..."),
+						true);
+			}
+		}
+	}
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItemMainhand();
 		Random rand = new Random();
 		Item item = stack.getItem();
+
 		if (item == Items.SHEARS && this.getStage() > 1) {
 			ItemEntity outputItem = new ItemEntity(worldIn, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
 					new ItemStack(getShearDrop(), rand.nextInt(2) * this.stage));
@@ -273,10 +300,13 @@ public class BlockBonsai extends Block {
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
 							BlockInit.anti_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
 							BlockInit.anti_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				break;
 			case BIRCH:
@@ -287,50 +317,70 @@ public class BlockBonsai extends Block {
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
 							BlockInit.jungle_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
 							BlockInit.jungle_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				break;
 			case MUSHROOM:
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
 							BlockInit.mushroom_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
 							BlockInit.mushroom_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				break;
 			case MYSTIC:
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
 							BlockInit.mystic_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
 							BlockInit.mystic_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				break;
 			case OAK:
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
 							BlockInit.oak_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
 							BlockInit.oak_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				break;
 			case SPRUCE:
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
 							BlockInit.spruce_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
 							BlockInit.spruce_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					updatePlayerDevotion(worldIn, player);
+
 				}
 				break;
 			default:

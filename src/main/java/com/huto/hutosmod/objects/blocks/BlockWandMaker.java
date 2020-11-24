@@ -65,13 +65,13 @@ public class BlockWandMaker extends Block implements IActivatable {
 			return ActionResultType.SUCCESS;
 		}
 		// If there is something in your hand add it to the block if its not an //
-		if (!stack.isEmpty() && !(stack.getItem() == ItemInit.enhancedmagatama.get())) {
+		if (!stack.isEmpty() && !(stack.getItem() == ItemInit.enhanced_magatama.get())) {
 			te.addItem(player, stack, handIn);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return ActionResultType.SUCCESS;
 		}
 		// Upgrade clause
-		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getLevel() < 9) {
+		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getLevel() < 9) {
 			te.addLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 

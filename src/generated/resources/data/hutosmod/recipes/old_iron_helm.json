@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "R R"
+  ],
+  "key": {
+    "R": {
+      "item": "hutosmod:old_iron_scrap"
+    }
+  },
+  "result": {
+    "item": "hutosmod:old_iron_helm"
+  }
+}

@@ -12,13 +12,7 @@ import com.huto.hutosmod.init.EntityInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.particles.ParticleColor;
 import com.huto.hutosmod.particles.ParticleUtil;
-import com.huto.hutosmod.particles.data.AjnaParticleData;
-import com.huto.hutosmod.particles.data.AnahataParticleData;
-import com.huto.hutosmod.particles.data.ManipuraParticleData;
-import com.huto.hutosmod.particles.data.MuladharaaParticleData;
-import com.huto.hutosmod.particles.data.SahasraraParticleData;
-import com.huto.hutosmod.particles.data.SvadhishthanaParticleData;
-import com.huto.hutosmod.particles.data.VishuddhaParticleData;
+import com.huto.hutosmod.particles.data.GlowParticleData;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
@@ -46,7 +40,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -97,9 +90,9 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 	public void livingTick() {
 
 		if (!this.onGround && this.getMotion().y < 0.0D) {
-			this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
+		//	this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
 		} else if (this.onGround && this.getMotion().y < 0.0D) {
-			this.setMotion(0, Math.sin(this.world.getGameTime()) * 0.15f, 0);
+		//	this.setMotion(0, Math.sin(this.world.getGameTime()) * 0.15f, 0);
 
 		}
 
@@ -133,38 +126,35 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 	@Override
 	public void tick() {
 		super.tick();
-		List<IParticleData> chakraData = new ArrayList<IParticleData>();
-		Collections.addAll(chakraData, SahasraraParticleData.createData(new ParticleColor(162, 86, 160)),
-				AjnaParticleData.createData(new ParticleColor(96, 96, 186)),
-				VishuddhaParticleData.createData(new ParticleColor(66, 184, 212)),
-				AnahataParticleData.createData(new ParticleColor(110, 200, 80)),
-				ManipuraParticleData.createData(new ParticleColor(255, 165, 44)),
-				SvadhishthanaParticleData.createData(new ParticleColor(243, 124, 59)),
-				MuladharaaParticleData.createData(new ParticleColor(229, 60, 81)));
-		Collections.reverse(chakraData);
 
 		World world = this.getEntityWorld();
 		BlockPos pos = this.getPosition();
 		double time = world.getGameTime() * 0.2f;
-
-		// Random rand = world.rand;
-		for (int j = 0; j < chakraData.size(); j++) {
-
-			world.addParticle(chakraData.get(j), getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
+		List<ParticleColor> chakraColors = new ArrayList<ParticleColor>();
+		Collections.addAll(chakraColors, new ParticleColor(162, 86, 160), new ParticleColor(96, 96, 186),
+				new ParticleColor(66, 184, 212), new ParticleColor(110, 200, 80), new ParticleColor(255, 165, 44),
+				new ParticleColor(243, 124, 59), new ParticleColor(229, 60, 81));
+		Collections.reverse(chakraColors);
+	/*	for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
+			world.addParticle(ParticleInit.chakraData.get(j),
+					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
 					getPosY() + (j * 0.5) + 0.1 + ParticleUtil.inRange(-0.1, 0.1),
 					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+			world.addParticle(ParticleTypes.WHITE_ASH,
+					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
+					getPosY() + (j * 0.5) + ParticleUtil.inRange(-0.1, 0.1),
+					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
 
-			/*
-			 * world.addParticle(GlowParticleData.createData(chakraColors.get(j)), getPosX()
-			 * + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j
-			 * * 0.5) + ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time -
-			 * j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-			 * 
-			 * world.addParticle(ParticleTypes.WHITE_ASH, getPosX() + 0.5 + Math.cos(time -
-			 * j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
-			 * ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j) +
-			 * ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-			 */
+		}*/
+		for (int j = 0; j < chakraColors.size(); j++) {
+			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.1, 0.1),
+					pos.getY() + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
+					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.1, 0.1),
+					pos.getY() + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
+					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0.005, 0);
 		}
 
 		@SuppressWarnings("unused")

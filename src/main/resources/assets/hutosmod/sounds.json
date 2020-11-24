@@ -289,5 +289,65 @@
 				"stream": true
 			}
 		]
+	},
+	"entity.beast_from_beyond.ambient": {
+		"category": "entity",
+		"subtitle": "entity.beast_from_beyond.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/beast_from_beyond/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.beast_from_beyond.hurt": {
+		"category": "entity",
+		"subtitle": "entity.beast_from_beyond.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/beast_from_beyond/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.beast_from_beyond.death": {
+		"category": "entity",
+		"subtitle": "entity.beast_from_beyond.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/beast_from_beyond/death",
+				"stream": true
+			}
+		]
+	},
+	"entity.beast_from_beyond.music": {
+		"category": "entity",
+		"subtitle": "entity.beast_from_beyond.music",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/beast_from_beyond/music",
+				"stream": true
+			}
+		]
+	},
+	"entity.beast_from_beyond.hit": {
+		"category": "entity",
+		"subtitle": "entity.beast_from_beyond.hit",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/beast_from_beyond/hit",
+				"stream": true
+			}
+		]
+	},
+	"entity.beast_from_beyond.step": {
+		"category": "entity",
+		"subtitle": "entity.beast_from_beyond.step",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/beast_from_beyond/step",
+				"stream": true
+			}
+		]
 	}
 }

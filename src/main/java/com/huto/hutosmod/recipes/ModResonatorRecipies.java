@@ -39,7 +39,7 @@ public class ModResonatorRecipies {
 				new ItemStack(ItemInit.resonant_fuel.get(), 1), 30, EnumEssecenceType.MANA,
 				Ingredient.fromItems(Items.COAL));
 		recipeEnhancedMagatama = registerRecipe(new ResourceLocation("recipeenhancedmagatama"),
-				new ItemStack(ItemInit.enhancedmagatama.get(), 1), 30, EnumEssecenceType.KARMIC,
+				new ItemStack(ItemInit.enhanced_magatama.get(), 1), 30, EnumEssecenceType.KARMIC,
 				Ingredient.fromItems(ItemInit.magatamabead.get()));
 		recipeNullRod = registerRecipe(new ResourceLocation("recipenullrod"), new ItemStack(ItemInit.null_rod.get(), 1),
 				50, EnumEssecenceType.KARMIC, Ingredient.fromItems(ItemInit.channeling_rod.get()));

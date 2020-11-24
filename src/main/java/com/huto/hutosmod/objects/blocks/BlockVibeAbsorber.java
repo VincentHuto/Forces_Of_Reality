@@ -76,7 +76,7 @@ public class BlockVibeAbsorber extends Block {
 			return ActionResultType.SUCCESS;
 		}
 		// Upgrade clause
-		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 3) {
+		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getTankLevel() < 3) {
 			te.addTankLevel(1);
 			te.checkTransferRate();
 			te.checkTankSize();

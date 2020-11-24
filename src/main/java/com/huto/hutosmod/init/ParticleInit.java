@@ -1,16 +1,29 @@
 package com.huto.hutosmod.init;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.particles.ParticleColor;
+import com.huto.hutosmod.particles.data.AjnaParticleData;
+import com.huto.hutosmod.particles.data.AnahataParticleData;
 import com.huto.hutosmod.particles.data.ColorParticleTypeData;
 import com.huto.hutosmod.particles.data.ColoredDynamicTypeData;
 import com.huto.hutosmod.particles.data.GlowParticleData;
+import com.huto.hutosmod.particles.data.ManipuraParticleData;
+import com.huto.hutosmod.particles.data.MuladharaaParticleData;
 import com.huto.hutosmod.particles.data.ParticleLineData;
 import com.huto.hutosmod.particles.data.ParticleSparkleData;
+import com.huto.hutosmod.particles.data.SahasraraParticleData;
+import com.huto.hutosmod.particles.data.SvadhishthanaParticleData;
+import com.huto.hutosmod.particles.data.VishuddhaParticleData;
 import com.huto.hutosmod.particles.types.GlowParticleType;
 import com.huto.hutosmod.particles.types.LineParticleType;
 import com.huto.hutosmod.particles.types.SparkleParticleType;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -26,6 +39,9 @@ public class ParticleInit {
 
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister
 			.create(ForgeRegistries.PARTICLE_TYPES, HutosMod.MOD_ID);
+
+	public static List<IParticleData> chakraData = new ArrayList<IParticleData>();
+	public static List<IParticleData> chakraDataReverse = new ArrayList<IParticleData>();
 
 	// Wisp
 	@ObjectHolder(HutosMod.MOD_ID + ":" + ParticleSparkleData.NAME)
@@ -45,8 +61,8 @@ public class ParticleInit {
 			() -> new SparkleParticleType());
 	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> vishuddha = PARTICLE_TYPES
 			.register("vishuddha", () -> new SparkleParticleType());
-	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> anahata = PARTICLE_TYPES.register("anahata",
-			() -> new SparkleParticleType());
+	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> anahata = PARTICLE_TYPES
+			.register("anahata", () -> new SparkleParticleType());
 	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> manipura = PARTICLE_TYPES
 			.register("manipura", () -> new SparkleParticleType());
 	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> svadhishthana = PARTICLE_TYPES
@@ -68,5 +84,21 @@ public class ParticleInit {
 		Minecraft.getInstance().particles.registerFactory(svadhishthana.get(), ParticleSparkleData::new);
 		Minecraft.getInstance().particles.registerFactory(muladharaa.get(), ParticleSparkleData::new);
 
+		Collections.addAll(chakraData, MuladharaaParticleData.createData(new ParticleColor(229, 60, 81)),
+				SvadhishthanaParticleData.createData(new ParticleColor(243, 124, 59)),
+				ManipuraParticleData.createData(new ParticleColor(255, 165, 44)),
+				AnahataParticleData.createData(new ParticleColor(110, 200, 80)),
+				VishuddhaParticleData.createData(new ParticleColor(66, 184, 212)),
+				VishuddhaParticleData.createData(new ParticleColor(66, 184, 212)),
+				AjnaParticleData.createData(new ParticleColor(96, 96, 186)),
+				SahasraraParticleData.createData(new ParticleColor(162, 86, 160)));
+
+		Collections.addAll(chakraDataReverse, SahasraraParticleData.createData(new ParticleColor(162, 86, 160)),
+				AjnaParticleData.createData(new ParticleColor(96, 96, 186)),
+				VishuddhaParticleData.createData(new ParticleColor(66, 184, 212)),
+				AnahataParticleData.createData(new ParticleColor(110, 200, 80)),
+				ManipuraParticleData.createData(new ParticleColor(255, 165, 44)),
+				SvadhishthanaParticleData.createData(new ParticleColor(243, 124, 59)),
+				MuladharaaParticleData.createData(new ParticleColor(229, 60, 81)));
 	}
 }

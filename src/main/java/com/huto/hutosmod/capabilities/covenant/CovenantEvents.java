@@ -205,7 +205,7 @@ public class CovenantEvents {
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
 										event.getWindow().getHeight(), new Color(255, 255, 0, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Hasturs View", 5, 5,
-										new Color(255, 0, 0, 255).getRGB());
+										new Color(255, 0, 0, 15).getRGB());
 								Minecraft.getInstance().textureManager
 										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 								break;
@@ -213,7 +213,7 @@ public class CovenantEvents {
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
 										event.getWindow().getHeight(), new Color(255, 0, 255, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Azathoth View", 5, 5,
-										new Color(255, 0, 0, 255).getRGB());
+										new Color(255, 0, 0, 15).getRGB());
 								Minecraft.getInstance().textureManager
 										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 								break;
@@ -221,7 +221,7 @@ public class CovenantEvents {
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
 										event.getWindow().getHeight(), new Color(255, 255, 255, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Seraph View", 5, 5,
-										new Color(255, 0, 0, 255).getRGB());
+										new Color(255, 0, 0, 15).getRGB());
 								Minecraft.getInstance().textureManager
 										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 								break;
@@ -229,7 +229,7 @@ public class CovenantEvents {
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
 										event.getWindow().getHeight(), new Color(255, 0, 0, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Beast View", 5, 5,
-										new Color(255, 0, 0, 255).getRGB());
+										new Color(255, 0, 0, 15).getRGB());
 								Minecraft.getInstance().textureManager
 										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 								break;
@@ -238,7 +238,14 @@ public class CovenantEvents {
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
 										event.getWindow().getHeight(), new Color(218, 96, 28, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Machine View", 5, 5,
-										new Color(255, 0, 0, 255).getRGB());
+										new Color(255, 0, 0, 15).getRGB());
+								Minecraft.getInstance().textureManager
+										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+								break;
+
+							case SELF:
+								fontRenderer.drawString(event.getMatrixStack(), "Self Devotee", 5, 5,
+										new Color(255, 0, 0, 15).getRGB());
 								Minecraft.getInstance().textureManager
 										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 								break;

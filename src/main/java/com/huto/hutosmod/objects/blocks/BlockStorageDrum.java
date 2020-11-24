@@ -77,7 +77,7 @@ public class BlockStorageDrum extends Block {
 
 		}
 		// Upgrade clause
-		if (stack.getItem() == ItemInit.enhancedmagatama.get() && te.getTankLevel() < 9) {
+		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getTankLevel() < 9) {
 			te.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 

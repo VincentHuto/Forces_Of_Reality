@@ -473,5 +473,39 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("GGG")
 				.addCriterion("has_nullifying_powder", hasItem(ItemInit.nullifying_powder.get())).build(consumer);
 			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.old_iron_helm.get())
+				.key('R', ItemInit.old_iron_scrap.get())
+				.patternLine("RRR")
+				.patternLine("R R")
+				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.old_iron_chestplate.get())
+				.key('R', ItemInit.old_iron_scrap.get())
+				.patternLine("R R")
+				.patternLine("RRR")
+				.patternLine("RRR")
+				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
+			
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.old_iron_leggings.get())
+				.key('R', ItemInit.old_iron_scrap.get())
+				.patternLine("RRR")
+				.patternLine("R R")
+				.patternLine("R R")
+				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.old_iron_boots.get())
+				.key('R', ItemInit.old_iron_scrap.get())
+				.patternLine("R R")
+				.patternLine("R R")
+				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.old_iron_sword.get())
+				.key('R', ItemInit.old_iron_scrap.get())
+				.key('N', ItemInit.null_rod.get())
+				.patternLine("R")
+				.patternLine("R")
+				.patternLine("N")
+				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
 	}
 }

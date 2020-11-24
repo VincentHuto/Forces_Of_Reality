@@ -212,7 +212,7 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> magatamabead = ITEMS.register("magatamabead",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> enhancedmagatama = ITEMS.register("enhancedmagatama",
+	public static final RegistryObject<Item> enhanced_magatama = ITEMS.register("enhanced_magatama",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));

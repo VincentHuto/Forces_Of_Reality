@@ -173,24 +173,24 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_WOLF_AMBIENT;
+		return SoundHandler.ENTITY_BEAST_FROM_BEYOND_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_WOLF_HURT;
+		return SoundHandler.ENTITY_BEAST_FROM_BEYOND_HURT;
 
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_WOLF_DEATH;
+		return SoundHandler.ENTITY_BEAST_FROM_BEYOND_DEATH;
 
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
+		this.playSound(SoundHandler.ENTITY_BEAST_FROM_BEYOND_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -236,13 +236,12 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 				this.world.addParticle(ParticleTypes.FALLING_LAVA, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
-			
-			
+
 			if (this.deathTicks >= 150) {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
-			
+
 		}
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);
@@ -404,13 +403,13 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 		private final EntityBeastFromBeyond hastur;
 
 		public HasturMusic(EntityBeastFromBeyond hastur) {
-			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
+			super(SoundHandler.ENTITY_BEAST_FROM_BEYOND_MUSIC, SoundCategory.RECORDS);
 
 			this.hastur = hastur;
 			this.x = hastur.getSource().getX();
 			this.y = hastur.getSource().getY();
 			this.z = hastur.getSource().getZ();
-			this.repeat = true; 
+			this.repeat = true;
 		}
 
 		@Override

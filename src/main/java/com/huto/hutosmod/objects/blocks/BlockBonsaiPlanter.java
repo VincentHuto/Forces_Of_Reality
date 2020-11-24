@@ -148,6 +148,7 @@ public class BlockBonsaiPlanter extends Block {
 		if (sapling == Item.getItemFromBlock(BlockInit.mystic_sapling.get())) {
 			worldIn.setBlockState(pos,
 					BlockInit.mystic_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+
 			return ActionResultType.SUCCESS;
 		} else {
 			return ActionResultType.PASS;
