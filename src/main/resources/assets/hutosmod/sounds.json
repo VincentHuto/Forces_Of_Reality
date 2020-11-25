@@ -60,8 +60,8 @@
 		]
 	},
 	"entity.hastur.music": {
-		"category": "entity",
-		"subtitle": "entity.hastur.death",
+		"category": "music",
+		"subtitle": "entity.hastur.music",
 		"sounds": [
 			{
 				"name": "hutosmod:entity/hastur/music",
@@ -220,7 +220,7 @@
 		]
 	},
 	"entity.seraphim.music": {
-		"category": "entity",
+		"category": "music",
 		"subtitle": "entity.seraphim.death",
 		"sounds": [
 			{
@@ -321,7 +321,7 @@
 		]
 	},
 	"entity.beast_from_beyond.music": {
-		"category": "entity",
+		"category": "music",
 		"subtitle": "entity.beast_from_beyond.music",
 		"sounds": [
 			{
@@ -346,6 +346,76 @@
 		"sounds": [
 			{
 				"name": "hutosmod:entity/beast_from_beyond/step",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.ambient": {
+		"category": "entity",
+		"subtitle": "entity.dark_young.ambient",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/ambient",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.hurt": {
+		"category": "entity",
+		"subtitle": "entity.dark_young.hurt",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/hurt",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.death": {
+		"category": "entity",
+		"subtitle": "entity.dark_young.death",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/death",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.music": {
+		"category": "music",
+		"subtitle": "entity.dark_young.music",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/music",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.hit": {
+		"category": "entity",
+		"subtitle": "entity.dark_young.hit",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/hit",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.hurtother": {
+		"category": "entity",
+		"subtitle": "entity.dark_young.hurtother",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/hurtother",
+				"stream": true
+			}
+		]
+	},
+	"entity.dark_young.teleport": {
+		"category": "entity",
+		"subtitle": "entity.dark_young.teleport",
+		"sounds": [
+			{
+				"name": "hutosmod:entity/dark_young/teleport",
 				"stream": true
 			}
 		]

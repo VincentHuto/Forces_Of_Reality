@@ -237,8 +237,8 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 			boolean flag2 = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
 			if (flag2 && !this.isSilent()) {
 				this.world.playSound((PlayerEntity) null, this.prevPosX, this.prevPosY, this.prevPosZ,
-						SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
-				this.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+						SoundHandler.ENTITY_DARK_YOUNG_TELEPORT, this.getSoundCategory(), 0.5f, 0.5f);
+				this.playSound(SoundHandler.ENTITY_DARK_YOUNG_TELEPORT, 0.5f, 0.5f);
 			}
 			return flag2;
 		} else {
@@ -265,18 +265,18 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_WOLF_AMBIENT;
+		return SoundHandler.ENTITY_DARK_YOUNG_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_WOLF_HURT;
+		return SoundHandler.ENTITY_DARK_YOUNG_HURT;
 
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_WOLF_DEATH;
+		return SoundHandler.ENTITY_DARK_YOUNG_DEATH;
 
 	}
 
@@ -387,7 +387,7 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	private void shock(Entity target) {
 		if (target != null) {
-			playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
+			playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
 			this.setMotion(0, 0, 0);
 			Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
 			Vector3 endVec = Vector3.fromEntityCenter(target);
@@ -447,7 +447,7 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 									- (double) ent.getYOffset() - 0.5,
 							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
 							0.0D);
-					ent.playSound(SoundEvents.ENTITY_WOLF_HOWL, .15F, 1f + (float) Math.random() * 0.2F);
+					playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
 
 				}
 			}
@@ -532,13 +532,19 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 		private final EntityDarkYoung hastur;
 
 		public HasturMusic(EntityDarkYoung hastur) {
-			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
+			super(SoundHandler.ENTITY_DARK_YOUNG_MUSIC, SoundCategory.RECORDS);
 
 			this.hastur = hastur;
 			this.x = hastur.getSource().getX();
 			this.y = hastur.getSource().getY();
 			this.z = hastur.getSource().getZ();
-			this.repeat = true; 
+			this.repeat = true;
+		}
+
+		@Override
+		public float getVolume() {
+			// TODO Auto-generated method stub
+			return super.getVolume();
 		}
 
 		@Override

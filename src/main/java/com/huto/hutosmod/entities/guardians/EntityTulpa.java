@@ -377,7 +377,13 @@ public class EntityTulpa extends MonsterEntity implements IEntityAdditionalSpawn
 			this.x = hastur.getSource().getX();
 			this.y = hastur.getSource().getY();
 			this.z = hastur.getSource().getZ();
-			this.repeat = true; 
+			this.repeat = true;
+		}
+
+		@Override
+		public float getVolume() {
+			// TODO Auto-generated method stub
+			return super.getVolume() / 2;
 		}
 
 		@Override

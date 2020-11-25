@@ -83,32 +83,32 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 
 		// Attacks
 		if (this.deathTicks <= 0) {
-		int attackRoll = ticksExisted + rand.nextInt(5);
-		if (attackRoll % 50 * diffMult == 0) {
-			this.spawnMissile();
-		} else if (attackRoll % 120 * diffMult == 0) {
-			if (world.rand.nextBoolean()) {
-				this.summonTentacleAid(rand.nextInt(10));
-			} else {
-				this.summonSpawnAid(rand.nextInt(5));
+			int attackRoll = ticksExisted + rand.nextInt(5);
+			if (attackRoll % 50 * diffMult == 0) {
+				this.spawnMissile();
+			} else if (attackRoll % 120 * diffMult == 0) {
+				if (world.rand.nextBoolean()) {
+					this.summonTentacleAid(rand.nextInt(10));
+				} else {
+					this.summonSpawnAid(rand.nextInt(5));
+				}
+			} else if (attackRoll % 130 * diffMult == 0) {
+				this.summonClones(rand.nextInt(2));
 			}
-		} else if (attackRoll % 130 * diffMult == 0) {
-			this.summonClones(rand.nextInt(2));
-		}
-		if (this.isOnGround()) {
-			if (attackRoll % 100 * diffMult == 0) {
-				this.summonEldritchGrip(rand.nextInt(1) + 3);
+			if (this.isOnGround()) {
+				if (attackRoll % 100 * diffMult == 0) {
+					this.summonEldritchGrip(rand.nextInt(1) + 3);
+				}
 			}
-		}
 
-		// Removed Starstrikes to use on the seraphim, still has the one missle spawn
-		// though
-		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-		this.world.addParticle(ParticleTypes.WARPED_SPORE, this.getPosX() + (double) f,
-				this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-		this.world.addParticle(ParticleTypes.CRIMSON_SPORE, this.getPosX() + (double) f,
+			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
+			// though
+			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.world.addParticle(ParticleTypes.WARPED_SPORE, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			this.world.addParticle(ParticleTypes.CRIMSON_SPORE, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		}
 	}
@@ -420,7 +420,13 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 			this.x = hastur.getSource().getX();
 			this.y = hastur.getSource().getY();
 			this.z = hastur.getSource().getZ();
-			this.repeat = true; 
+			this.repeat = true;
+		}
+
+		@Override
+		public float getVolume() {
+			// TODO Auto-generated method stub
+			return super.getVolume() / 2;
 		}
 
 		@Override
@@ -442,6 +448,5 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 	public ServerBossInfo getBossInfo() {
 		return bossInfo;
 	}
-
 
 }

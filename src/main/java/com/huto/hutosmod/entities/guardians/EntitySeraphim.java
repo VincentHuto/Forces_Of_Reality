@@ -512,6 +512,12 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 		}
 
 		@Override
+		public float getVolume() {
+			// TODO Auto-generated method stub
+			return super.getVolume() / 2;
+		}
+
+		@Override
 		public void tick() {
 			if (!seraph.isAlive()) {
 				this.finishPlaying();

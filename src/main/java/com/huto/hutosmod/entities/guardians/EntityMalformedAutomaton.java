@@ -59,8 +59,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAdditionalSpawnData {
 
-	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.createKey(EntityMalformedAutomaton.class,
-			DataSerializers.BYTE);
+	protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager
+			.createKey(EntityMalformedAutomaton.class, DataSerializers.BYTE);
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
@@ -450,6 +450,12 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 			this.y = hastur.getSource().getY();
 			this.z = hastur.getSource().getZ();
 			this.repeat = true;
+		}
+
+		@Override
+		public float getVolume() {
+			// TODO Auto-generated method stub
+			return super.getVolume() / 2;
 		}
 
 		@Override
