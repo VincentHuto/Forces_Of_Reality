@@ -64,6 +64,7 @@ import com.huto.hutosmod.objects.items.tools.ItemDebugTool;
 import com.huto.hutosmod.objects.items.tools.ItemDestructOrb;
 import com.huto.hutosmod.objects.items.tools.ItemDestructOrbContained;
 import com.huto.hutosmod.objects.items.tools.ItemDiscordantBell;
+import com.huto.hutosmod.objects.items.tools.ItemDivineFeather;
 import com.huto.hutosmod.objects.items.tools.ItemFrequencyMatcher;
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.items.tools.ItemMakerActivator;
@@ -252,6 +253,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
 			() -> new ItemDiscordantBell(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> divine_feather = ITEMS.register("divine_feather",
+			() -> new ItemDivineFeather(
+					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
 	// Eldritch
 	public static final RegistryObject<Item> everwatchful_pendant = ITEMS.register("everwatchful_pendant",
@@ -713,6 +717,9 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_veritas = ITEMS.register("spawn_egg_veritas",
 			() -> new ModSpawnEggItem(EntityInit.veritas, 0xFFFFFF, 0xFFFFFF,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_black_goat = ITEMS.register("spawn_egg_black_goat",
+			() -> new ModSpawnEggItem(EntityInit.black_goat, 0xF23FaF, 0xF23FaF,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -723,7 +730,7 @@ public class ItemInit {
 				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
 				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
-				ItemInit.spawn_egg_veritas);
+				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat);
 	}
 
 	@SuppressWarnings("unchecked")

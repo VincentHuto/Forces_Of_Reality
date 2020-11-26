@@ -17,6 +17,7 @@ import com.huto.hutosmod.objects.blocks.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.BlockMachinaImperfecta;
 import com.huto.hutosmod.objects.blocks.BlockMagicLight;
+import com.huto.hutosmod.objects.blocks.BlockMagicRingLight;
 import com.huto.hutosmod.objects.blocks.BlockMorelMushroom;
 import com.huto.hutosmod.objects.blocks.BlockMushroomBonsai;
 import com.huto.hutosmod.objects.blocks.BlockMysticBonsai;
@@ -74,11 +75,13 @@ public class BlockInit {
 
 	public static final RegistryObject<BlockMagicLight> light_block = BLOCKS.register("light_block",
 			() -> new BlockMagicLight());
+	public static final RegistryObject<BlockMagicRingLight> light_ring_block = BLOCKS.register("light_ring_block",
+			() -> new BlockMagicRingLight());
 
 	// TELEPORTEROS
 	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
-			() -> new BlockTeleporter(
-					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
+			() -> new BlockTeleporter(Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f)
+					.sound(SoundType.STONE).notSolid()));
 
 	// Random
 	public static final RegistryObject<Block> runed_obsidian = BLOCKS.register("runed_obsidian", () -> new Block(
@@ -171,7 +174,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> untold_easel = BLOCKS.register("untold_easel",
 			() -> new BlockUntoldEasel(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15f)
 					.harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOD).notSolid()));
-
 	// Seraph
 	public static final RegistryObject<Block> gilded_wool = BLOCKS.register("gilded_wool",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)

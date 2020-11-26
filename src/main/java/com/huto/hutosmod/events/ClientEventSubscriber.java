@@ -36,12 +36,14 @@ import com.huto.hutosmod.render.entity.projectile.RenderDreadRocket;
 import com.huto.hutosmod.render.entity.projectile.RenderDreadRocketDirected;
 import com.huto.hutosmod.render.entity.projectile.RenderEldritchGrip;
 import com.huto.hutosmod.render.entity.projectile.RenderHolyFlare;
+import com.huto.hutosmod.render.entity.projectile.RenderHolySpirit;
 import com.huto.hutosmod.render.entity.projectile.RenderPlayerTentacle;
 import com.huto.hutosmod.render.entity.projectile.RenderShortCircuit;
 import com.huto.hutosmod.render.entity.projectile.RenderShorting;
 import com.huto.hutosmod.render.entity.projectile.RenderStarStrike;
 import com.huto.hutosmod.render.entity.projectile.RenderTrackingOrb;
 import com.huto.hutosmod.render.entity.projectile.RenderWolfShot;
+import com.huto.hutosmod.render.entity.summons.RenderBlackGoat;
 import com.huto.hutosmod.render.entity.summons.RenderHasturClone;
 import com.huto.hutosmod.render.entity.summons.RenderHasturSpawn;
 import com.huto.hutosmod.render.entity.summons.RenderJudgement;
@@ -58,6 +60,7 @@ import com.huto.hutosmod.render.tiles.RenderKarmicAltar;
 import com.huto.hutosmod.render.tiles.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tiles.RenderMachinaImperfecta;
 import com.huto.hutosmod.render.tiles.RenderMagicLight;
+import com.huto.hutosmod.render.tiles.RenderMagicRingLight;
 import com.huto.hutosmod.render.tiles.RenderOccularHeap;
 import com.huto.hutosmod.render.tiles.RenderResonator;
 import com.huto.hutosmod.render.tiles.RenderRuneModStation;
@@ -118,6 +121,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.occular_heap.get(), RenderOccularHeap::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.untold_easel.get(), RenderUntoldEasel::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_block.get(), RenderMagicLight::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_ring_block.get(), RenderMagicRingLight::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 
@@ -140,6 +144,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket.get(), RenderDreadRocket::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket_directed.get(),
 				RenderDreadRocketDirected::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_spirit.get(), RenderHolySpirit::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.scuttling_occulus.get(),
@@ -156,6 +161,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.short_circuit.get(), RenderShortCircuit::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.shorting.get(), RenderShorting::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.veritas.get(), RenderVeritas::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.black_goat.get(), RenderBlackGoat::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);

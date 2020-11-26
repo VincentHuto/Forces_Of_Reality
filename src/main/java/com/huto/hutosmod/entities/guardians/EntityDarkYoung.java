@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
+import com.huto.hutosmod.entities.summons.EntityBlackGoat;
 import com.huto.hutosmod.entities.summons.EntitySummonedBeast;
 import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.BlockInit;
@@ -145,7 +146,9 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 			if (attackRoll % 120 == 0) {
 				this.massBlind(getAttackTarget());
 			}
-
+			if (attackRoll % 170 == 0) {
+				this.summonGoats(3);
+			}
 			// Random Teleportation
 			if (this.getAttackTarget() != null) {
 				if (this.teleportTime++ >= rand.nextInt(1000) && this.teleportToEntity(this)) {
@@ -276,7 +279,7 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.ENTITY_DARK_YOUNG_DEATH;
+		return null;
 
 	}
 
@@ -303,10 +306,17 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 	@Override
 	protected void onDeathUpdate() {
 		++this.deathTicks;
+		float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+		float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+		float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+		if (this.deathTicks == 1) {
+			if (world.isRemote) {
+				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundHandler.ENTITY_DARK_YOUNG_DEATH,
+						SoundCategory.HOSTILE, 0.5f, 0.9f, false);
+			}
+		}
 		if (this.deathTicks >= 100 && this.deathTicks <= 200) {
-			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+
 			this.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
@@ -358,11 +368,10 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 	// Attack types
 
-	public void summonHounds(int numTent) {
-		EntitySummonedBeast[] tentArray = new EntitySummonedBeast[numTent];
+	public void summonGoats(int numTent) {
+		EntityBlackGoat[] tentArray = new EntityBlackGoat[numTent];
 		for (int i = 0; i < numTent; i++) {
-			tentArray[i] = new EntitySummonedBeast(EntityInit.summoned_beast.get(), world);
-			tentArray[i].setBeastType(rand.nextInt(4));
+			tentArray[i] = new EntityBlackGoat(EntityInit.black_goat.get(), world);
 			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;

@@ -22,6 +22,7 @@ import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
 import com.huto.hutosmod.entities.projectiles.EntityDreadRocket;
 import com.huto.hutosmod.entities.projectiles.EntityDreadRocketDirected;
 import com.huto.hutosmod.entities.projectiles.EntityHolyFlare;
+import com.huto.hutosmod.entities.projectiles.EntityHolySpirit;
 import com.huto.hutosmod.entities.projectiles.EntityJudgement;
 import com.huto.hutosmod.entities.projectiles.EntityShortCircuit;
 import com.huto.hutosmod.entities.projectiles.EntityShorting;
@@ -29,6 +30,7 @@ import com.huto.hutosmod.entities.projectiles.EntityStarStrike;
 import com.huto.hutosmod.entities.projectiles.EntityThrownAxe;
 import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 import com.huto.hutosmod.entities.projectiles.EntityWolfShot;
+import com.huto.hutosmod.entities.summons.EntityBlackGoat;
 import com.huto.hutosmod.entities.summons.EntityEldritchGrip;
 import com.huto.hutosmod.entities.summons.EntityHasturClone;
 import com.huto.hutosmod.entities.summons.EntityHasturSpawn;
@@ -131,6 +133,9 @@ public class EntityInit {
 					.<EntityScuttlingOcculus>create(EntityScuttlingOcculus::new, EntityClassification.MONSTER)
 					.size(0.5f, 0.5f).build(new ResourceLocation(HutosMod.MOD_ID, "scuttling_occulus").toString()));
 
+	public static final RegistryObject<EntityType<EntityBlackGoat>> black_goat = ENTITY_TYPES.register("black_goat",
+			() -> EntityType.Builder.<EntityBlackGoat>create(EntityBlackGoat::new, EntityClassification.MONSTER)
+					.size(0.5F, 0.5F).build(new ResourceLocation(HutosMod.MOD_ID, "black_goat").toString()));
 	// Beast
 	public static final RegistryObject<EntityType<EntityBeastFromBeyond>> beast_from_beyond = ENTITY_TYPES.register(
 			"beast_from_beyond",
@@ -146,7 +151,7 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityMechan>> mechan = ENTITY_TYPES.register("mechan",
 			() -> EntityType.Builder.<EntityMechan>create(EntityMechan::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "mechan").toString()));
-	
+
 	public static final RegistryObject<EntityType<EntityMalformedAutomaton>> malformed_automaton = ENTITY_TYPES
 			.register("malformed_automaton", () -> EntityType.Builder
 					.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new, EntityClassification.MONSTER)
@@ -197,12 +202,17 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityShortCircuit>create(EntityShortCircuit::new, EntityClassification.MISC)
 					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.4F, 0.4F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "short_circuit").toString()));
-	
-	public static final RegistryObject<EntityType<EntityShorting>> shorting = ENTITY_TYPES.register(
-			"shorting",
+
+	public static final RegistryObject<EntityType<EntityShorting>> shorting = ENTITY_TYPES.register("shorting",
 			() -> EntityType.Builder.<EntityShorting>create(EntityShorting::new, EntityClassification.MISC)
 					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.4F, 0.4F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "shorting").toString()));
+	public static final RegistryObject<EntityType<EntityHolySpirit>> holy_spirit = ENTITY_TYPES.register(
+			"holy_spirit",
+			() -> EntityType.Builder
+					.<EntityHolySpirit>create(EntityHolySpirit::new, EntityClassification.MISC)
+					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.25F, 0.25F)
+					.build(new ResourceLocation(HutosMod.MOD_ID, "holy_spirit").toString()));
 	
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",
@@ -259,6 +269,7 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.dread_bot.get(), EntityDreadBot.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.mechan.get(), EntityMechan.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.veritas.get(), EntityVeritas.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.black_goat.get(), EntityBlackGoat.setAttributes().create());
 
 	}
 }
