@@ -454,7 +454,6 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 
 		@Override
 		public float getVolume() {
-			// TODO Auto-generated method stub
 			return super.getVolume() / 2;
 		}
 

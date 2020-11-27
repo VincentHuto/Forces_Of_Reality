@@ -552,7 +552,6 @@ public class EntityDarkYoung extends MonsterEntity implements IEntityAdditionalS
 
 		@Override
 		public float getVolume() {
-			// TODO Auto-generated method stub
 			return super.getVolume();
 		}
 

@@ -49,7 +49,7 @@ public class EntityHolySpirit extends DamagingProjectileEntity {
 		if (ticksExisted > 75) {
 			if (!world.isRemote) {
 				this.world.createExplosion(this, this.getPosX(), this.getPosY() + (double) (this.getHeight() / 16.0F),
-						this.getPosZ(), 3.0F, Explosion.Mode.DESTROY);
+						this.getPosZ(), 3.0F, Explosion.Mode.NONE);
 			}
 			remove();
 		}
@@ -94,7 +94,7 @@ public class EntityHolySpirit extends DamagingProjectileEntity {
 	 * original motion.
 	 */
 	protected float getMotionFactor() {
-		return 0.95F;
+		return 1F;
 	}
 
 	public void writeAdditional(CompoundNBT compound) {
@@ -179,11 +179,7 @@ public class EntityHolySpirit extends DamagingProjectileEntity {
 	}
 
 	public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-		Vector3d vector3d = (new Vector3d(x, y, z)).normalize()
-				.add(this.rand.nextGaussian() * (double) 0.0075F * (double) inaccuracy,
-						this.rand.nextGaussian() * (double) 0.0075F * (double) inaccuracy,
-						this.rand.nextGaussian() * (double) 0.0075F * (double) inaccuracy)
-				.scale((double) velocity);
+		Vector3d vector3d = (new Vector3d(x, y, z)).normalize().scale((double) velocity);
 		this.setMotion(vector3d);
 		float f = MathHelper.sqrt(horizontalMag(vector3d));
 		this.rotationYaw = (float) (MathHelper.atan2(vector3d.x, vector3d.z) * (double) (180F / (float) Math.PI));
@@ -198,7 +194,7 @@ public class EntityHolySpirit extends DamagingProjectileEntity {
 		float f2 = MathHelper.cos(y * ((float) Math.PI / 180F)) * MathHelper.cos(x * ((float) Math.PI / 180F));
 		this.shoot((double) f, (double) f1, (double) f2, velocity, inaccuracy);
 		Vector3d vector3d = shooter.getMotion();
-		this.setMotion(this.getMotion().add(vector3d.x, shooter.isOnGround() ? 0.0D : vector3d.y, vector3d.z));
+		this.setMotion(this.getMotion().add(vector3d.x, vector3d.y, vector3d.z));
 	}
 
 	/**

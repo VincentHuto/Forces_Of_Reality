@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.altars;
 
 import java.util.stream.Stream;
 

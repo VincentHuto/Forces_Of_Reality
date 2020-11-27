@@ -4,12 +4,14 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.objects.tileenties.TileEntityWandMaker;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
+import com.huto.hutosmod.render.effects.RenderShapes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.AtlasTexture;
@@ -22,6 +24,8 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class RenderWandMaker extends TileEntityRenderer<TileEntityWandMaker> {
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
+	public static final ResourceLocation GLASSTEXTURE = new ResourceLocation(HutosMod.MOD_ID,
+			"textures/blocks/machine_glass.png");
 
 	public RenderWandMaker(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -31,6 +35,20 @@ public class RenderWandMaker extends TileEntityRenderer<TileEntityWandMaker> {
 	@Override
 	public void render(TileEntityWandMaker te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+		matrixStackIn.push();
+		//matrixStackIn.rotate(Vector3f.YP.rotationDegrees(te.getWorld().getGameTime()));
+
+		RenderShapes.renderSizedCube(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
+				bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 0f, 0f, -1f, 1, 1);
+		RenderShapes.renderSizedPyramid(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
+				bufferIn.getBuffer(RenderType.getEntityGlintDirect()), 1f, 1f, 0f, 1, 1, 1, 1);
+		RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
+				bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 2f, 1f, 1, 1, 1, 1);
+		RenderShapes.renderSizedHouse(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
+				bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 0f, 0f, 1, 1, 1, 1, 1, 1);
+
+		matrixStackIn.pop();
+
 		GlStateManager.pushMatrix();
 		GlStateManager.color4f(1F, 1F, 1F, 1F);
 		GlStateManager.translated(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
@@ -97,15 +115,15 @@ public class RenderWandMaker extends TileEntityRenderer<TileEntityWandMaker> {
 			float z = (float) (radiusZ * Math.sin(rad));
 			float y = (float) Math.cos((ticks + 50 * i) / 15F);
 
-		//	float xRotate = (float) Math.sin(ticks * rotationModifier) /15F;
+			// float xRotate = (float) Math.sin(ticks * rotationModifier) /15F;
 			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 2.5F);
-			//float zRotate = (float) Math.cos(ticks * rotationModifier) / 15f;
+			// float zRotate = (float) Math.cos(ticks * rotationModifier) / 15f;
 
 			matrixStackIn.push();
 			matrixStackIn.translate(x, y, z);
-			matrixStackIn.rotate(Vector3f.YN.rotation(yRotate /12));
+			matrixStackIn.rotate(Vector3f.YN.rotation(yRotate / 12));
 			matrixStackIn.rotate(Vector3f.ZP.rotation(135));
-			//matrixStackIn.rotate(Vector3f.XP.rotation(xRotate / 12));
+			// matrixStackIn.rotate(Vector3f.XP.rotation(xRotate / 12));
 
 			IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
@@ -117,4 +135,5 @@ public class RenderWandMaker extends TileEntityRenderer<TileEntityWandMaker> {
 			matrixStackIn.pop();
 		}
 	}
+
 }

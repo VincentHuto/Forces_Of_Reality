@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.vibes;
 
 import java.util.Random;
 import java.util.stream.Stream;

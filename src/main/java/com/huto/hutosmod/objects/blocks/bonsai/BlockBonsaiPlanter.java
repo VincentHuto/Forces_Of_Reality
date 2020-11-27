@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.bonsai;
 
 import java.util.Map;
 import java.util.stream.Stream;

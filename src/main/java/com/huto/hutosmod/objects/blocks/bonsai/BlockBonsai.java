@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.bonsai;
 
 import java.util.List;
 import java.util.Random;

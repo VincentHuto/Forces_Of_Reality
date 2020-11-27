@@ -1,14 +1,12 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.vibes;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
-import com.huto.hutosmod.objects.items.ItemUpgrade;
-import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
@@ -33,22 +31,47 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-public class BlockVibeAbsorber extends Block {
+public class BlockKarmicAltar extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream
-			.of(Block.makeCuboidShape(4, 0, 4, 12, 1, 12), Block.makeCuboidShape(5, 1, 5, 11, 2, 11),
-					Block.makeCuboidShape(11, 2, 4, 12, 3, 5), Block.makeCuboidShape(4, 2, 4, 5, 3, 5),
-					Block.makeCuboidShape(11, 2, 11, 12, 3, 12), Block.makeCuboidShape(4, 2, 11, 5, 3, 12),
-					Block.makeCuboidShape(7, 2, 7, 9, 7, 9), Block.makeCuboidShape(7, 8, 7, 9, 10, 9))
+	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(0, 0, 0, 16, 1, 16),
+			Block.makeCuboidShape(2, 4, 2, 14, 10, 14), Block.makeCuboidShape(3, 0, 3, 13, 5, 13),
+			Block.makeCuboidShape(1, 7, 1, 3, 13, 3), Block.makeCuboidShape(13, 7, 1, 15, 13, 3),
+			Block.makeCuboidShape(13, 7, 13, 15, 13, 15), Block.makeCuboidShape(1, 7, 13, 3, 13, 15))
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-			}).get();
+			}).get();;
 
-	public BlockVibeAbsorber(Properties properties) {
+	public BlockKarmicAltar(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+
+	}
+
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isRemote)
+			return ActionResultType.SUCCESS;
+		TileEntityKarmicAltar te = (TileEntityKarmicAltar) worldIn.getTileEntity(pos);
+		ItemStack stack = player.getHeldItem(handIn);
+		if (player.isSneaking()) {
+			ModInventoryVibeHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
+			return ActionResultType.SUCCESS;
+		}
+		if (!stack.isEmpty()) {
+			if (stack.getItem().isFood()) {
+				te.addItem(player, stack, handIn);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+				return ActionResultType.SUCCESS;
+			}
+		}
+
+		return ActionResultType.FAIL;
 
 	}
 
@@ -58,58 +81,21 @@ public class BlockVibeAbsorber extends Block {
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote)
-			return ActionResultType.PASS;
-		TileEntityAbsorber te = (TileEntityAbsorber) worldIn.getTileEntity(pos);
-		ItemStack stack = player.getHeldItem(handIn);
-		if (stack.getItem() == ItemInit.upgrade_wrench.get()) {
-			ModInventoryVibeHelper.withdrawFromInventory(te, player);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-		}
-		// If there is something in your hand add it to the block if its not an //
-		if (!stack.isEmpty() && stack.getItem() instanceof ItemUpgrade) {
-			te.addItem(player, stack, handIn);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-		}
-		// Upgrade clause
-		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getTankLevel() < 3) {
-			te.addTankLevel(1);
-			te.checkTransferRate();
-			te.checkTankSize();
-			player.getHeldItemMainhand().shrink(1);
-			player.getHeldItemOffhand().shrink(1);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-		}
-		// Cycle Clause
-		if (stack.getItem() == ItemInit.absorber_configurer.get()) {
-			te.cycleEnumMode();
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-
-		}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-		return ActionResultType.FAIL;
-
+	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
 	}
 
 	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
 			@Nonnull Random random) {
-		TileEntityAbsorber tile = (TileEntityAbsorber) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityAbsorber) {
-			int count = (int) (4 * 0.5f);
+		TileEntityKarmicAltar tile = (TileEntityKarmicAltar) world.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityKarmicAltar) {
+			int count = (int) (10 * 0.5f);
 			if (count > 0) {
 				for (int i = 0; i < random.nextInt(count); i++) {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-
-					world.addParticle(ParticleTypes.PORTAL, randX, randY, randZ, 0, 0, 0);
+					world.addParticle(ParticleTypes.CRIMSON_SPORE, randX, randY, randZ, 1, 1, 1);
 
 				}
 			}
@@ -144,7 +130,7 @@ public class BlockVibeAbsorber extends Block {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileEntityAbsorber();
+		return new TileEntityKarmicAltar();
 	}
 
 	@SuppressWarnings("deprecation")

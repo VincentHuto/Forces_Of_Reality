@@ -39,21 +39,20 @@ public class ItemDivineFeather extends Item {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
 
 			if (!worldIn.isRemote) {
-				// RayTraceResult result = entityLiving.pick(100, 0, false);
-				// Vector3d hitVec = result.getHitVec();
+
 				ICovenant coven = entityLiving.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
-				if (coven.getDevotionByCoven(EnumCovenants.ASCENDENT) >= 0) {
+				if (coven.getDevotionByCoven(EnumCovenants.ASCENDENT) > 3) {
 					if (!worldIn.isRemote) {
 						EntityHolySpirit miss = new EntityHolySpirit(EntityInit.holy_spirit.get(), worldIn);
 						miss.setPosition(playerentity.getPosX(), playerentity.getPosY() + 1.5, playerentity.getPosZ());
 						miss.setDirectionMotion(playerentity, playerentity.rotationPitch, playerentity.rotationYaw,
-								0.0F, 0.45F, 0F);
+								0.0F, 0.65F, 0F);
 						worldIn.addEntity(miss);
 					}
 				} else {
 					playerentity.sendStatusMessage(new StringTextComponent("Lord Seraph does not grant you his power"),
-							false);
+							true);
 				}
 				stack.damageItem(1, playerentity, (p_220009_1_) -> {
 					p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());

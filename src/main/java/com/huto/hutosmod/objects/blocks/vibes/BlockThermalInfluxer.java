@@ -1,11 +1,11 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.vibes;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeGatherer;
+import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,17 +28,21 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-public class BlockVibeGatherer extends Block {
+public class BlockThermalInfluxer extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(3, 0, 3, 13, 1, 13),
-			Block.makeCuboidShape(4, 1, 4, 12, 2, 12), Block.makeCuboidShape(7, 10, 7, 9, 11, 9),
-			Block.makeCuboidShape(11, 2, 4, 12, 3, 5), Block.makeCuboidShape(7, 2, 7, 9, 10, 9),
-			Block.makeCuboidShape(7, 11, 7, 9, 13, 9), Block.makeCuboidShape(4, 2, 4, 5, 3, 5),
-			Block.makeCuboidShape(11, 2, 11, 12, 3, 12), Block.makeCuboidShape(4, 2, 11, 5, 3, 12)).reduce((v1, v2) -> {
+	private static final VoxelShape SHAPE_N = Stream
+			.of(Block.makeCuboidShape(0, 8, 0, 16, 9, 16), Block.makeCuboidShape(3, 9, 3, 13, 14, 13),
+					Block.makeCuboidShape(0, 0, 0.109, 3, 8, 3), Block.makeCuboidShape(0, 9, 0.109, 3, 13, 3),
+					Block.makeCuboidShape(13, 0, 0, 16, 8, 3), Block.makeCuboidShape(13, 9, 0, 16, 13, 3),
+					Block.makeCuboidShape(13, 0, 13, 16, 8, 16), Block.makeCuboidShape(13, 9, 13, 16, 13, 16),
+					Block.makeCuboidShape(0, 0, 13, 3, 8, 16), Block.makeCuboidShape(0, 9, 13, 3, 13, 16),
+					Block.makeCuboidShape(13, 9, 3, 15, 13, 13), Block.makeCuboidShape(1, 9, 3, 3, 13, 13),
+					Block.makeCuboidShape(3, 9, 13, 13, 13, 15), Block.makeCuboidShape(3, 9, 1, 13, 13, 3))
+			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-			}).get();;
+			}).get();
 
-	public BlockVibeGatherer(Properties properties) {
+	public BlockThermalInfluxer(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 
@@ -57,16 +61,16 @@ public class BlockVibeGatherer extends Block {
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
 			boolean isMoving) {
 		TileEntity te = worldIn.getTileEntity(pos);
-		if (te instanceof TileEntityVibeGatherer) {
-			((TileEntityVibeGatherer) te).checkStructure();
+		if (te instanceof TileEntityThermalInfluxer) {
+			((TileEntityThermalInfluxer) te).checkStructure();
 		}
 	}
 
 	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
 			@Nonnull Random random) {
-		TileEntityVibeGatherer tile = (TileEntityVibeGatherer) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityVibeGatherer) {
+		TileEntityThermalInfluxer tile = (TileEntityThermalInfluxer) world.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityThermalInfluxer) {
 			int count = (int) (10 * 0.5f);
 			if (count > 0) {
 				for (int i = 0; i < random.nextInt(count); i++) {
@@ -74,7 +78,7 @@ public class BlockVibeGatherer extends Block {
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
 					if (tile.canGenerate()) {
-						world.addParticle(ParticleTypes.DOLPHIN, randX, randY, randZ, 0, 0, 0);
+						world.addParticle(ParticleTypes.FALLING_LAVA, randX, randY, randZ, 0, 0, 0);
 					}
 				}
 			}
@@ -109,7 +113,7 @@ public class BlockVibeGatherer extends Block {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileEntityVibeGatherer();
+		return new TileEntityThermalInfluxer();
 	}
 
 	@SuppressWarnings("deprecation")

@@ -3,6 +3,7 @@ package com.huto.hutosmod.objects.items.tools;
 import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
+import com.huto.hutosmod.entities.guardians.EntityHastur;
 import com.huto.hutosmod.entities.summons.EntityPlayerTentacle;
 import com.huto.hutosmod.init.EntityInit;
 
@@ -48,9 +49,18 @@ public class ItemYellowTome extends Item {
 					if (!worldIn.isRemote) {
 						this.summonTentacleAid(worldIn.rand.nextInt(10), worldIn, (PlayerEntity) entityLiving, hitVec);
 					}
+					if (coven.getDevotionByCoven(EnumCovenants.HASTUR) >= 30
+							&& playerentity.getRNG().nextInt(20) == 19) {
+						EntityHastur summon = new EntityHastur(EntityInit.hastur.get(), worldIn);
+						summon.setPosition(playerentity.getPosX() + 0.5, playerentity.getPosY() + 0.5,
+								playerentity.getPosZ() + 0.5);
+						playerentity.sendStatusMessage(new StringTextComponent("Lord Hastur decided to check in..."),
+								true);
+						worldIn.addEntity(summon);
+					}
 				} else {
 					playerentity.sendStatusMessage(new StringTextComponent("Lord Hastur does not grant you his power"),
-							false);
+							true);
 				}
 
 				stack.damageItem(1, playerentity, (p_220009_1_) -> {

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.altars;
 
 import java.util.stream.Stream;
 
@@ -222,9 +222,9 @@ public class BlockOccularHeap extends Block implements IBlockDevotionStation {
 								true);
 						worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 						worldIn.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 1.0F, Explosion.Mode.NONE);
-						EntityDarkYoung summon = new EntityDarkYoung(EntityInit.dark_young.get(), worldIn);
-						summon.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-						worldIn.addEntity(summon);
+									EntityDarkYoung summon = new EntityDarkYoung(EntityInit.dark_young.get(), worldIn);
+									summon.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+									worldIn.addEntity(summon);
 						return ActionResultType.SUCCESS;
 					}
 				}

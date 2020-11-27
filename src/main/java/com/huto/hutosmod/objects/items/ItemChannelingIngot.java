@@ -45,31 +45,26 @@ public class ItemChannelingIngot extends Item {
 			IVibrations vibes = playerentity.getCapability(VibrationProvider.VIBE_CAPA)
 					.orElseThrow(IllegalStateException::new);
 			int i = this.getUseDuration(stack) - timeLeft;
-			if (i > 21) {
-				if (vibes.getVibes() > 10) {
-					if (!worldIn.isRemote) {
-						vibes.subtractVibes(10);
-						playerentity.sendStatusMessage(
-								new StringTextComponent(
-										"Reduced Resonance to: " + TextFormatting.BLUE + vibes.getVibes() + "Hz"),
-								false);
-						// Sync Packet with server
-						PacketHandler.CHANNELVIBES.send(
-								PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerentity),
-								new VibrationPacketServer(vibes.getVibes()));
-						ItemStack output = new ItemStack(ItemInit.emanating_ingot.get(), 1);
-						ItemEntity outputItem = new ItemEntity(worldIn, entityLiving.getPosX() + 0.5,
-								entityLiving.getPosY() + 1.5, entityLiving.getPosZ() + 0.5, output);
-						worldIn.addEntity(outputItem);
-						stack.shrink(1);
+			if (i > 21 && vibes.getVibes() > 10) {
+				if (!worldIn.isRemote) {
+					vibes.subtractVibes(10);
+					playerentity.sendStatusMessage(new StringTextComponent(
+							"Reduced Resonance to: " + TextFormatting.BLUE + vibes.getVibes() + "Hz"), false);
+					// Sync Packet with server
+					PacketHandler.CHANNELVIBES.send(
+							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerentity),
+							new VibrationPacketServer(vibes.getVibes()));
+					ItemStack output = new ItemStack(ItemInit.emanating_ingot.get(), 1);
+					ItemEntity outputItem = new ItemEntity(worldIn, entityLiving.getPosX() + 0.5,
+							entityLiving.getPosY() + 1.5, entityLiving.getPosZ() + 0.5, output);
+					worldIn.addEntity(outputItem);
+					stack.shrink(1);
 
-					} else {
-						worldIn.playSound(playerentity, playerentity.getPosition(), SoundHandler.ITEM_STAR_SLUG_STORM,
-								SoundCategory.PLAYERS, 1, 1);
-					}
+				} else {
+					worldIn.playSound(playerentity, playerentity.getPosition(), SoundHandler.ITEM_STAR_SLUG_STORM,
+							SoundCategory.PLAYERS, 1, 1);
 				}
 			}
-
 		}
 	}
 

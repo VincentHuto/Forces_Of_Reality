@@ -382,7 +382,6 @@ public class EntityTulpa extends MonsterEntity implements IEntityAdditionalSpawn
 
 		@Override
 		public float getVolume() {
-			// TODO Auto-generated method stub
 			return super.getVolume() / 2;
 		}
 

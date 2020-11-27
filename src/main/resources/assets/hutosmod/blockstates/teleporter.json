@@ -1,5 +1,19 @@
 {
-    "variants": {
-        "": { "model": "hutosmod:block/teleporter" }
-    }
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/teleporter"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/teleporter",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/teleporter",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/teleporter",
+			"y": 90
+		}
+	}
 }

@@ -34,7 +34,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -76,28 +75,18 @@ public class CovenantEvents {
 		ICovenant covenantNew = event.getEntity().getCapability(CovenantProvider.COVEN_CAPA)
 				.orElseThrow(IllegalStateException::new);
 		covenantNew.setDevotion(covenantOld.getDevotion());
-		/*
-		 * PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() ->
-		 * (ServerPlayerEntity) event.getPlayer()), new
-		 * CovenantPacketServer(covenantNew.getDevotion()));
-		 */
+		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
+				new CovenantPacketServer(covenantNew.getDevotion()));
 
 	}
 
 	@SubscribeEvent
 	public static void respawn(PlayerRespawnEvent event) {
-
-	}
-
-	@SubscribeEvent
-	public static void onPickUp(ItemPickupEvent event) {
-		if (event.getOriginalEntity().getItem().getItem() == ItemInit.allegiance_identifier.get()) {
-			ICovenant covenantNew = event.getPlayer().getCapability(CovenantProvider.COVEN_CAPA)
-					.orElseThrow(IllegalStateException::new);
-			PacketHandler.CHANNELCOVENANT.send(
-					PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
-					new CovenantPacketServer(covenantNew.getDevotion()));
-		}
+		//TODO "Fixed" the player respawn Updates Client Info on playe respawn, like identifier overlay and the coven overlay
+		ICovenant covenantNew = event.getEntity().getCapability(CovenantProvider.COVEN_CAPA)
+				.orElseThrow(IllegalStateException::new);
+		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
+				new CovenantPacketServer(covenantNew.getDevotion()));
 	}
 
 	// SWITCHED TO CLIENTRENDEREVENT.THERMALLAYERHELPER

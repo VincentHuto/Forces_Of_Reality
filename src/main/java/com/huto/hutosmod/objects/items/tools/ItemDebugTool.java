@@ -27,35 +27,42 @@ public class ItemDebugTool extends Item {
 
 	@Override
 	public ActionResultType onItemUse(ItemUseContext ctx) {
-		PlayerEntity player = ctx.getPlayer();
 		World world = ctx.getWorld();
-		@SuppressWarnings("unused")
-		ItemStack stack = ctx.getItem();
-		BlockPos blockPos = ctx.getPos();
-		BlockState blockState = world.getBlockState(blockPos);
-		TileEntity te = world.getTileEntity(blockPos);
-		DecimalFormat df = new DecimalFormat("0.00");
-		if (te instanceof TileModVibes) {
-			IVibrations vibes = te.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-			if (!world.isRemote) {
-				player.sendStatusMessage(new StringTextComponent(
-						TextFormatting.GOLD + I18n.format(blockState.getBlock().getTranslationKey()) + " Contains:"
-								+ df.format(vibes.getVibes())),
-						false);
-			}
-		}
+		if (!world.isRemote) {
+			PlayerEntity player = ctx.getPlayer();
 
-		if (te instanceof TileVibeSimpleInventory) {
-			IVibrations vibes = te.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-			if (!world.isRemote) {
-				player.sendStatusMessage(new StringTextComponent(
-						TextFormatting.GOLD + I18n.format(blockState.getBlock().getTranslationKey()) + " Contains: "
-								+ df.format(vibes.getVibes())),
-						false);
+			@SuppressWarnings("unused")
+			ItemStack stack = ctx.getItem();
+			BlockPos blockPos = ctx.getPos();
+			BlockState blockState = world.getBlockState(blockPos);
+			TileEntity te = world.getTileEntity(blockPos);
+			DecimalFormat df = new DecimalFormat("0.00");
+			if (te instanceof TileModVibes) {
+				IVibrations vibes = te.getCapability(VibrationProvider.VIBE_CAPA)
+						.orElseThrow(IllegalStateException::new);
+				if (!world.isRemote) {
+					player.sendStatusMessage(new StringTextComponent(
+							TextFormatting.GOLD + I18n.format(blockState.getBlock().getTranslationKey()) + " Contains:"
+									+ df.format(vibes.getVibes())),
+							false);
+				}
 			}
-		}
 
-		return super.onItemUse(ctx);
+			if (te instanceof TileVibeSimpleInventory) {
+				IVibrations vibes = te.getCapability(VibrationProvider.VIBE_CAPA)
+						.orElseThrow(IllegalStateException::new);
+				if (!world.isRemote) {
+					player.sendStatusMessage(new StringTextComponent(
+							TextFormatting.GOLD + I18n.format(blockState.getBlock().getTranslationKey()) + " Contains: "
+									+ df.format(vibes.getVibes())),
+							false);
+				}
+			}
+
+			return super.onItemUse(ctx);
+		} else {
+			return ActionResultType.FAIL;
+		}
 	}
 
 }

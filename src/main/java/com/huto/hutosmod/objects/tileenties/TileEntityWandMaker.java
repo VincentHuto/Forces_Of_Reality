@@ -5,7 +5,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
+import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
@@ -132,6 +134,12 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			if (cooldown > 0) {
 				cooldown--;
 			}
+		}
+		if (world.isRemote) {
+			Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
+			Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
+			//HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(), 0xFF00FF, 0x000000);
+
 		}
 	}
 

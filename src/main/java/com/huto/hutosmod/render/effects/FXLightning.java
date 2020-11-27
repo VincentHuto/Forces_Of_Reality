@@ -120,7 +120,10 @@ public class FXLightning extends Particle {
 			int b = color & 0xFF;
 			int a = (int) (mainAlpha * rendersegment.light * 0xFF);
 			int fullbright = 0xF000F0;
-
+			
+			
+			
+			
 			endvec.subtract(diff2).vertex(mat, wr);
 			wr.color(r, g, b, a).tex(0.5F, 0).lightmap(fullbright).endVertex();
 			startvec.subtract(diff1).vertex(mat, wr);

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.vibes;
 
 import java.util.Random;
 import java.util.stream.Stream;
@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
-import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
@@ -41,19 +41,17 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-public class BlockCapacitor extends Block {
+public class BlockStorageDrum extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream
-			.of(Block.makeCuboidShape(4, 0, 4, 12, 1, 12), Block.makeCuboidShape(4, 12, 4, 12, 13, 12),
-					Block.makeCuboidShape(9, 13, 9, 11, 14, 11), Block.makeCuboidShape(11, 1, 4, 12, 12, 5),
-					Block.makeCuboidShape(4, 1, 4, 5, 12, 5), Block.makeCuboidShape(11, 1, 11, 12, 12, 12),
-					Block.makeCuboidShape(4, 1, 11, 5, 12, 12), Block.makeCuboidShape(5, 13, 5, 7, 14, 7),
-					Block.makeCuboidShape(9, 13, 5, 11, 14, 7), Block.makeCuboidShape(5, 13, 9, 7, 14, 11))
+	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(1, 0, 1, 15, 1, 15),
+			Block.makeCuboidShape(1, 22, 1, 15, 23, 15), Block.makeCuboidShape(2, 23, 2, 14, 24, 14),
+			Block.makeCuboidShape(14, 1, 1, 15, 22, 2), Block.makeCuboidShape(1, 1, 1, 2, 22, 2),
+			Block.makeCuboidShape(14, 1, 14, 15, 22, 15), Block.makeCuboidShape(1, 1, 14, 2, 22, 15))
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();;
 
-	public BlockCapacitor(Properties properties) {
+	public BlockStorageDrum(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 
@@ -64,7 +62,7 @@ public class BlockCapacitor extends Block {
 			Hand handIn, BlockRayTraceResult hit) {
 		if (worldIn.isRemote)
 			return ActionResultType.SUCCESS;
-		TileEntityCapacitor te = (TileEntityCapacitor) worldIn.getTileEntity(pos);
+		TileEntityStorageDrum te = (TileEntityStorageDrum) worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(handIn);
 		if (stack.getItem() == ItemInit.upgrade_wrench.get()) {
 			ModInventoryVibeHelper.withdrawFromInventory(te, player);
@@ -79,8 +77,7 @@ public class BlockCapacitor extends Block {
 
 		}
 		// Upgrade clause
-
-		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getTankLevel() < 3) {
+		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getTankLevel() < 9) {
 			te.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 
@@ -107,16 +104,15 @@ public class BlockCapacitor extends Block {
 	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
 			@Nonnull Random random) {
-		TileEntityCapacitor tile = (TileEntityCapacitor) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityCapacitor) {
+		TileEntityStorageDrum tile = (TileEntityStorageDrum) world.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityStorageDrum) {
 			int count = (int) (10 * 0.5f);
 			if (count > 0) {
 				for (int i = 0; i < random.nextInt(count); i++) {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
-					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
+					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.5;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
 					world.addParticle(ParticleTypes.REVERSE_PORTAL, randX, randY, randZ, 0, 0, 0);
-
 				}
 			}
 		}
@@ -127,7 +123,7 @@ public class BlockCapacitor extends Block {
 		super.onPlayerDestroy(worldIn, pos, state);
 
 		// inner ring
-		for (int j = 0; j < 10; j++) {
+		for (int j = 0; j < 30; j++) {
 
 			worldIn.addParticle(ParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
 					Math.sin(j) / 9, Math.sin(j) / 3, Math.cos(j) / 9);
@@ -140,7 +136,7 @@ public class BlockCapacitor extends Block {
 
 		}
 		// outer ring
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 30; i++) {
 			worldIn.addParticle(ParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
 					Math.sin(i) / 3, Math.sin(i) / 3, Math.cos(i) / 3);
 			worldIn.addParticle(ParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
@@ -150,7 +146,8 @@ public class BlockCapacitor extends Block {
 			worldIn.addParticle(ParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
 					Math.cos(-i) / 3, Math.sin(i) / 3, Math.sin(-i) / 3);
 		}
-		worldIn.playSound(null, pos, SoundEvents.BLOCK_BEACON_DEACTIVATE, SoundCategory.AMBIENT, 0.1f, 0.3F);
+
+		worldIn.playSound(null, pos, SoundEvents.BLOCK_BEACON_DEACTIVATE, SoundCategory.AMBIENT, 10f, 0.01F);
 
 	}
 
@@ -182,7 +179,7 @@ public class BlockCapacitor extends Block {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileEntityCapacitor();
+		return new TileEntityStorageDrum();
 	}
 
 	@SuppressWarnings("deprecation")

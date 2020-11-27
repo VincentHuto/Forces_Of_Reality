@@ -425,7 +425,6 @@ public class EntityHastur extends MonsterEntity implements IEntityAdditionalSpaw
 
 		@Override
 		public float getVolume() {
-			// TODO Auto-generated method stub
 			return super.getVolume() / 2;
 		}
 

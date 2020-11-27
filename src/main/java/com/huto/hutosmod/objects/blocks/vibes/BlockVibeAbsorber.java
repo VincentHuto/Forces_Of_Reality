@@ -1,20 +1,22 @@
-package com.huto.hutosmod.objects.blocks;
+package com.huto.hutosmod.objects.blocks.vibes;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.init.TileEntityInit;
-import com.huto.hutosmod.objects.tileenties.TileEntityVirtuousEnchant;
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
+import com.huto.hutosmod.objects.items.ItemUpgrade;
+import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -31,21 +33,20 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockVirtuousEnchant extends Block {
+public class BlockVibeAbsorber extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream
-			.of(Block.makeCuboidShape(2, 0, 2, 14, 1, 14), Block.makeCuboidShape(5, 1, 5, 11, 2, 11),
-					Block.makeCuboidShape(6, 2, 6, 10, 9, 10), Block.makeCuboidShape(3, 10, 3, 13, 12, 13),
-					Block.makeCuboidShape(4, 12, 4, 12, 13, 12), Block.makeCuboidShape(5, 9, 5, 11, 10, 11))
+			.of(Block.makeCuboidShape(4, 0, 4, 12, 1, 12), Block.makeCuboidShape(5, 1, 5, 11, 2, 11),
+					Block.makeCuboidShape(11, 2, 4, 12, 3, 5), Block.makeCuboidShape(4, 2, 4, 5, 3, 5),
+					Block.makeCuboidShape(11, 2, 11, 12, 3, 12), Block.makeCuboidShape(4, 2, 11, 5, 3, 12),
+					Block.makeCuboidShape(7, 2, 7, 9, 7, 9), Block.makeCuboidShape(7, 8, 7, 9, 10, 9))
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-			}).get();;
+			}).get();
 
-	public BlockVirtuousEnchant(Properties properties) {
+	public BlockVibeAbsorber(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 
@@ -57,21 +58,58 @@ public class BlockVirtuousEnchant extends Block {
 	}
 
 	@Override
-	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isRemote)
+			return ActionResultType.PASS;
+		TileEntityAbsorber te = (TileEntityAbsorber) worldIn.getTileEntity(pos);
+		ItemStack stack = player.getHeldItem(handIn);
+		if (stack.getItem() == ItemInit.upgrade_wrench.get()) {
+			ModInventoryVibeHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return ActionResultType.SUCCESS;
+		}
+		// If there is something in your hand add it to the block if its not an //
+		if (!stack.isEmpty() && stack.getItem() instanceof ItemUpgrade) {
+			te.addItem(player, stack, handIn);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return ActionResultType.SUCCESS;
+		}
+		// Upgrade clause
+		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getTankLevel() < 3) {
+			te.addTankLevel(1);
+			te.checkTransferRate();
+			te.checkTankSize();
+			player.getHeldItemMainhand().shrink(1);
+			player.getHeldItemOffhand().shrink(1);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return ActionResultType.SUCCESS;
+		}
+		// Cycle Clause
+		if (stack.getItem() == ItemInit.absorber_configurer.get()) {
+			te.cycleEnumMode();
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return ActionResultType.SUCCESS;
+
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+		return ActionResultType.FAIL;
+
 	}
 
 	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
 			@Nonnull Random random) {
-		TileEntityVirtuousEnchant tile = (TileEntityVirtuousEnchant) world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityVirtuousEnchant) {
-			int count = (int) (10 * 0.5f);
+		TileEntityAbsorber tile = (TileEntityAbsorber) world.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityAbsorber) {
+			int count = (int) (4 * 0.5f);
 			if (count > 0) {
 				for (int i = 0; i < random.nextInt(count); i++) {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-					world.addParticle(ParticleTypes.ENCHANT, randX, randY, randZ, 0, 0, 0);
+
+					world.addParticle(ParticleTypes.PORTAL, randX, randY, randZ, 0, 0, 0);
 
 				}
 			}
@@ -106,36 +144,13 @@ public class BlockVirtuousEnchant extends Block {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return TileEntityInit.virtuous_enchanter.get().create();
+		return new TileEntityAbsorber();
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		super.onBlockClicked(state, worldIn, pos, player);
-	}
-
-	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult result) {
-		if (!worldIn.isRemote) {
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile instanceof TileEntityVirtuousEnchant) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (TileEntityVirtuousEnchant) tile, pos);
-				return ActionResultType.SUCCESS;
-			}
-		}
-		return ActionResultType.FAIL;
-	}
-
-	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof TileEntityVirtuousEnchant) {
-				InventoryHelper.dropItems(worldIn, pos, ((TileEntityVirtuousEnchant) te).getItems());
-			}
-		}
 	}
 
 }
