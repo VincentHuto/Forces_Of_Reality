@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGB",
+    "POP",
+    "BOB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:quartz_block"
+    },
+    "P": {
+      "item": "minecraft:quartz_pillar"
+    },
+    "O": {
+      "item": "minecraft:gold_block"
+    },
+    "G": {
+      "item": "hutosmod:gilded_wool"
+    }
+  },
+  "result": {
+    "item": "hutosmod:ascendent_altar"
+  }
+}

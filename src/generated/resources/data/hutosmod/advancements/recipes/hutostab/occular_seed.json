@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:occular_seed"
+    ]
+  },
+  "criteria": {
+    "has_ball_of_eyes": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:ball_of_eyes"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:occular_seed"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ball_of_eyes",
+      "has_the_recipe"
+    ]
+  ]
+}

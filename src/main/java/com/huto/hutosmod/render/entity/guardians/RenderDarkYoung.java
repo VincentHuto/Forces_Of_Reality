@@ -43,9 +43,18 @@ public class RenderDarkYoung extends MobRenderer<EntityDarkYoung, ModelDarkYoung
 		matrixStackIn.scale(2, 2, 2);
 		if (entitylivingbaseIn.deathTicks > 0) {
 			float d = entitylivingbaseIn.deathTicks;
-			//matrixStackIn.rotate(Vector3f.YP.rotation((float) ((d*0.005)*partialTickTime)));
-			matrixStackIn.translate(0,d*0.01, 0);
+			float scaleFactor = 1 - d * 0.0075f;
+			if (scaleFactor > 0) {
+				matrixStackIn.scale(1, scaleFactor, 1);
+			} else {
+				matrixStackIn.scale(1, 0, 1);
+
+			}
+			matrixStackIn.translate(0, d * 0.01, 0);
+			// matrixStackIn.scale(1,1-d*0.01f, 1);
+
 		}
+
 	}
 
 	@Override

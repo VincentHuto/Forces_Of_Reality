@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:ascendent_altar"
+    ]
+  },
+  "criteria": {
+    "has_gilded_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:gilded_wool"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:ascendent_altar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gilded_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

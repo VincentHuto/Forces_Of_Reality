@@ -6,11 +6,15 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.summons.EntityBlackGoat;
 import com.huto.hutosmod.models.entity.summons.ModelBlackGoat;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -18,6 +22,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat> {
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(HutosMod.MOD_ID,
 			"textures/entity/black_goat/model_black_goat.png");
+	public static final ResourceLocation GLASSTEXTURE = new ResourceLocation(HutosMod.MOD_ID,
+			"textures/blocks/end_portal_circle.png");
 
 	public RenderBlackGoat(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelBlackGoat(), 0.5f);
@@ -25,10 +31,75 @@ public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat
 	}
 
 	@Override
-	public void render(EntityBlackGoat entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
-			IRenderTypeBuffer bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+	public void render(EntityBlackGoat entityIn, float entityYaw, float partialTicks, MatrixStack matrix,
+			IRenderTypeBuffer buf, int packedLight) {
+		super.render(entityIn, entityYaw, partialTicks, matrix, buf, packedLight);
+		// Chest Panel
+		float e = entityIn.ticksExisted;
+		float escale = e * 0.005f + 0.8f;
+		matrix.push();
+		if (entityIn.isOnGround()) {
+			if (80 > e) {
+				// matrix.scale(scale, scale, scale);
+				matrix.translate(0, 0.1, 0);
+				matrix.scale(1, 1, 1);
+				if (escale < 5) {
+					escale += 0.08f;
+					matrix.scale(escale, escale, escale);
+				}
+				matrix.rotate(Vector3f.YP.rotation(e * escale * 0.3f));
+				IVertexBuilder builder = buf.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE));
+				int color = 0xB6B900;
+				int r = color >> 16 & 255, g = color & 255, b = color >> 16 & 255;
+				builder.pos(matrix.getLast().getMatrix(), 1f, 0f, 1).color(r, g, b, 255).tex(1, 1)
+						.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+						.normal(matrix.getLast().getNormal(), 0, 1, 0).endVertex();
+				builder.pos(matrix.getLast().getMatrix(), 1f, 0, -1).color(r, g, b, 255).tex(1, 0)
+						.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+						.normal(matrix.getLast().getNormal(), 0, 0, 0).endVertex();
+				builder.pos(matrix.getLast().getMatrix(), -1f, 0, -1).color(r, g, b, 255).tex(0, 0)
+						.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+						.normal(matrix.getLast().getNormal(), 0, 0, 0).endVertex();
+				builder.pos(matrix.getLast().getMatrix(), -1f, 0, 1).color(r, g, b, 255).tex(0, 1)
+						.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+						.normal(matrix.getLast().getNormal(), 0, 0, 0).endVertex();
 
+			}
+		}
+		matrix.pop();
+
+		/*matrix.push();
+		
+		float d = entityIn.deathTicks;
+		float dscale = d * 0.005f + 0.8f;
+		if (d > 0) {
+			// matrix.scale(scale, scale, scale);
+			matrix.translate(0, 0.1, 0);
+			matrix.scale(1, 1, 1);
+			if (dscale > 5) {
+				dscale -= 0.08f;
+				matrix.scale(dscale, dscale, dscale);
+			}
+			matrix.rotate(Vector3f.YP.rotation(d * dscale * 0.3f));
+			IVertexBuilder builder = buf.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE));
+			int color = 0xB6B900;
+			int r = color >> 16 & 255, g = color & 255, b = color >> 16 & 255;
+			builder.pos(matrix.getLast().getMatrix(), 1f, 0f, 1).color(r, g, b, 255).tex(1, 1)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 1, 0).endVertex();
+			builder.pos(matrix.getLast().getMatrix(), 1f, 0, -1).color(r, g, b, 255).tex(1, 0)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 0, 0).endVertex();
+			builder.pos(matrix.getLast().getMatrix(), -1f, 0, -1).color(r, g, b, 255).tex(0, 0)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 0, 0).endVertex();
+			builder.pos(matrix.getLast().getMatrix(), -1f, 0, 1).color(r, g, b, 255).tex(0, 1)
+					.overlay(OverlayTexture.NO_OVERLAY).lightmap(packedLight)
+					.normal(matrix.getLast().getNormal(), 0, 0, 0).endVertex();
+
+		}
+		matrix.pop();
+*/
 	}
 
 	// Growth Scaling

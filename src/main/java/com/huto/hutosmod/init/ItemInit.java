@@ -267,6 +267,8 @@ public class ItemInit {
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
 			() -> new ItemSacrificial(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ELDRITCH,
 					3));
+	public static final RegistryObject<Item> occular_seed = ITEMS.register("occular_seed",
+			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> vitreous_humor = ITEMS.register("vitreous_humor",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> writhing_thread = ITEMS.register("writhing_thread",

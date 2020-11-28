@@ -1,6 +1,7 @@
 package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
+import com.huto.hutosmod.objects.blocks.BlockAbyssalSilt;
 import com.huto.hutosmod.objects.blocks.BlockBeyondFlame;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
@@ -46,7 +47,6 @@ import com.huto.hutosmod.objects.blocks.vibes.BlockWaveGatherer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.RotatedPillarBlock;
@@ -185,7 +185,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> occular_heap = BLOCKS.register("occular_heap", () -> new BlockOccularHeap(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> abyssal_silt = BLOCKS.register("abyssal_silt",
-			() -> new FallingBlock(Block.Properties.from(Blocks.SAND)));
+			() -> new BlockAbyssalSilt(Block.Properties.from(Blocks.SAND)));
 	public static final RegistryObject<Block> beyond_flames = BLOCKS.register("beyond_flames",
 			() -> new BlockBeyondFlame(Block.Properties.from(Blocks.FIRE), 1.5f));
 

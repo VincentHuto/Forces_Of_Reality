@@ -26,6 +26,27 @@ public class GeneratorRecipes extends RecipeProvider {
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ItemInit.raw_clay_flask.get()), ItemInit.cured_clay_flask.get(), 1f, 200);
 		
 		//Rune Patterns
+	
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.ball_of_eyes.get()).
+			addIngredient(ItemInit.suspicious_eye.get(),3).
+			addIngredient(ItemInit.vitreous_humor.get(),2).
+			addCriterion("has_beastly_bone", hasItem(ItemInit.suspicious_eye.get())).build(consumer);
+		
+		
+		ShapelessRecipeBuilder.shapelessRecipe(BlockInit.auspicious_bundle.get()).
+			addIngredient(Items.BONE,2).
+			addIngredient(Items.STICK,3)
+		  .addIngredient(ItemInit.beastly_bone.get(),2)
+		  .addIngredient(Blocks.DIRT,2)
+		  .addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
+		
+		
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.auric_ingot.get()).
+		  addIngredient(Items.IRON_INGOT)
+		  .addIngredient(ItemInit.machina_soul.get(),3)
+		  .addCriterion("has_machina_soul", hasItem(ItemInit.machina_soul.get())).build(consumer);
+		
+		
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern.get()).
 		  addIngredient(Items.PAPER)
 		  .addIngredient(ItemInit.rune_blank.get())
@@ -507,5 +528,35 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("R")
 				.patternLine("N")
 				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.ascendent_altar.get())
+				.key('B', Items.QUARTZ_BLOCK)
+				.key('P', Items.QUARTZ_PILLAR)
+				.key('O', Items.GOLD_BLOCK)
+				.key('G', BlockInit.gilded_wool.get())
+				.patternLine("BGB")
+				.patternLine("POP")
+				.patternLine("BOB")
+				.addCriterion("has_gilded_wool", hasItem(BlockInit.gilded_wool.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.untold_easel.get())
+				.key('N', ItemInit.null_rod.get())
+				.key('T', ItemInit.unsettling_tapestry.get())
+				.key('P', Items.FLOWER_POT)
+				.key('Y', ItemInit.yellow_sign.get())
+				.patternLine("TTT")
+				.patternLine("PNY")
+				.patternLine("N N")
+				.addCriterion("has_yellow_sign", hasItem(ItemInit.yellow_sign.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.occular_seed.get())
+				.key('W', ItemInit.writhing_thread.get())
+				.key('E', ItemInit.ball_of_eyes.get())
+				.patternLine("W W")
+				.patternLine(" E ")
+				.patternLine("W W")
+				.addCriterion("has_ball_of_eyes", hasItem(ItemInit.ball_of_eyes.get())).build(consumer);
+			
+			
 	}
 }

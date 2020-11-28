@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "hutosmod:machina_soul"
+    },
+    {
+      "item": "hutosmod:machina_soul"
+    },
+    {
+      "item": "hutosmod:machina_soul"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:auric_ingot"
+  }
+}

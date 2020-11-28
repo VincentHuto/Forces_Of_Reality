@@ -4,14 +4,12 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.objects.tileenties.TileEntityWandMaker;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.huto.hutosmod.render.effects.RenderShapes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.AtlasTexture;
@@ -36,17 +34,45 @@ public class RenderWandMaker extends TileEntityRenderer<TileEntityWandMaker> {
 	public void render(TileEntityWandMaker te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		matrixStackIn.push();
-		//matrixStackIn.rotate(Vector3f.YP.rotationDegrees(te.getWorld().getGameTime()));
+		// matrixStackIn.rotate(Vector3f.YP.rotationDegrees(te.getWorld().getGameTime()));
+		/*
+		 * RenderShapes.renderSizedCube(matrixStackIn, bufferIn, combinedLightIn,
+		 * combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 0f, 0f,
+		 * -1f, 1, 1); RenderShapes.renderSizedCubes(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 5,-2f, 1f,
+		 * -1f, 1, 1); RenderShapes.renderSizedRectangles(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 5,-2f, 1f,
+		 * -2f, 1, 1,2); RenderShapes.renderSizedTunnels(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 5,-3f, 1f,
+		 * 1f, 1, 1,1); RenderShapes.renderSizedTunnel(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 1f,
+		 * -1f, 1, 1+ te.getWorld().rand.nextFloat(),2 +
+		 * te.getWorld().rand.nextFloat());
+		 * RenderShapes.renderSizedPyramid(matrixStackIn, bufferIn, combinedLightIn,
+		 * combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 1f,
+		 * 0f, 1, 1, 1, 1); RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 2f,
+		 * 1f, 1, 1, 1, 1); RenderShapes.renderSizedHouse(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 0f,
+		 * 0f, 1, 1, 1, 1, 1, 1);
+		 */
+		/*
+		 * RenderShapes.renderSizedSlantedRectangles(matrixStackIn, bufferIn,
+		 * combinedLightIn, combinedOverlayIn,
+		 * bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)),3,0f, 1f,
+		 * 0f, 1f, 1, 0.3f,0.5f,1,-0.5f);
+		 */
 
-		RenderShapes.renderSizedCube(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
-				bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 0f, 0f, -1f, 1, 1);
-		RenderShapes.renderSizedPyramid(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
-				bufferIn.getBuffer(RenderType.getEntityGlintDirect()), 1f, 1f, 0f, 1, 1, 1, 1);
-		RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
-				bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 2f, 1f, 1, 1, 1, 1);
-		RenderShapes.renderSizedHouse(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
-				bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)), 1f, 0f, 0f, 1, 1, 1, 1, 1, 1);
-
+		//RenderShapes.renderSizedTunnels(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)),3, 2, 1, 1, 3, 2, 2);
+		
 		matrixStackIn.pop();
 
 		GlStateManager.pushMatrix();
