@@ -7,6 +7,9 @@ import javax.annotation.Nonnull;
 import com.google.common.base.Predicates;
 import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.init.EntityInit;
+import com.huto.hutosmod.particles.ParticleColor;
+import com.huto.hutosmod.particles.ParticleUtil;
+import com.huto.hutosmod.particles.data.GlowParticleData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;
@@ -116,6 +119,9 @@ public class EntityTrackingOrb extends ThrowableEntity {
 				world.addParticle(ParticleTypes.ASH, particlePos.x + (Math.random() - 0.5) * 0.4,
 						particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0,
 						0);
+			world.addParticle(GlowParticleData.createData(new ParticleColor(200, 0, 200)),
+					getPosX() + ParticleUtil.inRange(-0.1, 0.1), getPosY() + ParticleUtil.inRange(-0.1, 0.1),
+					getPosZ() + ParticleUtil.inRange(-0.1, 0.1), 0, 0.005, 0);
 
 			particlePos = particlePos.add(step);
 		}

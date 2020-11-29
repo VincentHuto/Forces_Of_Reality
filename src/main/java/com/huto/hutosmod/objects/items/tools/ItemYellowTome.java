@@ -6,9 +6,12 @@ import com.huto.hutosmod.capabilities.covenant.ICovenant;
 import com.huto.hutosmod.entities.guardians.EntityHastur;
 import com.huto.hutosmod.entities.summons.EntityPlayerTentacle;
 import com.huto.hutosmod.init.EntityInit;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.coven.CovenantPacketServer;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
@@ -18,7 +21,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemYellowTome extends Item {
 
@@ -47,6 +52,19 @@ public class ItemYellowTome extends Item {
 						.orElseThrow(IllegalArgumentException::new);
 				if (coven.getDevotionByCoven(EnumCovenants.HASTUR) >= 10) {
 					if (!worldIn.isRemote) {
+						if (worldIn.rand.nextInt(10) == 6) {
+
+							coven.setCovenDevotion(EnumCovenants.HASTUR,
+									coven.getDevotionByCoven(EnumCovenants.HASTUR) - 1);
+							PacketHandler.CHANNELCOVENANT.send(
+									PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerentity),
+									new CovenantPacketServer(coven.getDevotion()));
+							playerentity.sendStatusMessage(
+									new StringTextComponent(
+											TextFormatting.YELLOW + "Abuse of Power does not come without consequence"),
+									true);
+						}
+
 						this.summonTentacleAid(worldIn.rand.nextInt(10), worldIn, (PlayerEntity) entityLiving, hitVec);
 					}
 					if (coven.getDevotionByCoven(EnumCovenants.HASTUR) >= 30

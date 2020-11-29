@@ -105,7 +105,7 @@ public class EntityShorting extends ThrowableEntity {
 	public void tick() {
 		super.tick();
 
-		if (!world.isRemote && (!findTarget() || time > 40)) {
+		if (!world.isRemote && (!findTarget() || time > 30)) {
 			remove();
 			return;
 		}
@@ -113,7 +113,7 @@ public class EntityShorting extends ThrowableEntity {
 		Vector3 endVec = Vector3.fromEntityCenter(this).add(rand.nextInt(2) - rand.nextInt(2),
 				rand.nextInt(2) - rand.nextInt(2), rand.nextInt(2) - rand.nextInt(2));
 		if (this.rand.nextInt(10) % 3 == 0) {
-			HutosMod.proxy.lightningFX(Vector3.fromEntityCenter(this), endVec, 7f, 0x0000, 0xFFAA00);
+			HutosMod.proxy.lightningFX(Vector3.fromEntityCenter(this), endVec, 2.5f, 0xFF00FF, 0xFFAA00);
 		}
 
 		boolean evil = isEvil();
@@ -175,7 +175,7 @@ public class EntityShorting extends ThrowableEntity {
 		if (target != null)
 			setTarget(null);
 
-		double range = 20;
+		double range = 5;
 		AxisAlignedBB bounds = new AxisAlignedBB(getPosX() - range, getPosY() - range, getPosZ() - range,
 				getPosX() + range, getPosY() + range, getPosZ() + range);
 		@SuppressWarnings("rawtypes")
@@ -208,8 +208,12 @@ public class EntityShorting extends ThrowableEntity {
 			break;
 		}
 		case ENTITY: {
-			if (((EntityRayTraceResult) pos).getEntity() == getTargetEntity())
+			if (((EntityRayTraceResult) pos).getEntity() == getTargetEntity()) {
+				((EntityRayTraceResult) pos).getEntity().attackEntityFrom(DamageSource.GENERIC, 2f);
 				remove();
+
+			}
+			remove();
 			break;
 		}
 		default: {

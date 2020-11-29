@@ -64,7 +64,6 @@ public class ItemRune extends Item implements IRune {
 					PacketHandler.CHANNELCOVENANT.send(
 							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEnt),
 							new CovenantPacketServer(coven.getDevotion()));
-
 				}
 			}
 		}

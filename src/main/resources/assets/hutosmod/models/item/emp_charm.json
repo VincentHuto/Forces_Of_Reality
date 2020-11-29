@@ -1,0 +1,20 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "hutosmod:items/emp_charm"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"hutosmod:on": 0
+			},
+			"model": "hutosmod:item/emp_charm"
+		},
+		{
+			"predicate": {
+				"hutosmod:on": 1
+			},
+			"model": "hutosmod:item/emp_charm_on"
+		}
+	]
+}

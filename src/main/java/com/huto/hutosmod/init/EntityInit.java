@@ -205,7 +205,7 @@ public class EntityInit {
 
 	public static final RegistryObject<EntityType<EntityShorting>> shorting = ENTITY_TYPES.register("shorting",
 			() -> EntityType.Builder.<EntityShorting>create(EntityShorting::new, EntityClassification.MISC)
-					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.4F, 0.4F)
+					.setTrackingRange(20).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.6F, 0.6F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "shorting").toString()));
 	public static final RegistryObject<EntityType<EntityHolySpirit>> holy_spirit = ENTITY_TYPES.register(
 			"holy_spirit",

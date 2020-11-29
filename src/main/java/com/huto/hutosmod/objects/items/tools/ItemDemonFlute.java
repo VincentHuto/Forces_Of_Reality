@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.items.tools;
 import com.huto.hutosmod.capabilities.covenant.CovenantProvider;
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.capabilities.covenant.ICovenant;
-import com.huto.hutosmod.entities.projectiles.EntityCorruptNote;
+import com.huto.hutosmod.entities.projectiles.EntityTrackingOrb;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.coven.CovenantPacketServer;
 import com.huto.hutosmod.sounds.SoundHandler;
@@ -23,9 +23,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class ItemDiscordantBell extends Item {
+public class ItemDemonFlute extends Item {
 
-	public ItemDiscordantBell(Properties properties) {
+	public ItemDemonFlute(Properties properties) {
 		super(properties);
 	}
 
@@ -44,33 +44,30 @@ public class ItemDiscordantBell extends Item {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
 			ICovenant coven = entityLiving.getCapability(CovenantProvider.COVEN_CAPA)
 					.orElseThrow(IllegalArgumentException::new);
-			if (coven.getDevotionByCoven(EnumCovenants.ASCENDENT) > 3) {
+			if (coven.getDevotionByCoven(EnumCovenants.ELDRITCH) > 3) {
 				if (!worldIn.isRemote) {
 					if (worldIn.rand.nextInt(10) == 6) {
-
-						coven.setCovenDevotion(EnumCovenants.ASCENDENT,- 1);
+						coven.setCovenDevotion(EnumCovenants.ELDRITCH, -1);
 						PacketHandler.CHANNELCOVENANT.send(
 								PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerentity),
 								new CovenantPacketServer(coven.getDevotion()));
-						playerentity.sendStatusMessage(
-								new StringTextComponent(TextFormatting.DARK_AQUA +"Abuse of Power does not come without consequence"), true);
+						playerentity.sendStatusMessage(new StringTextComponent(
+								TextFormatting.DARK_PURPLE + "Abuse of Power does not come without consequence"), true);
 					}
-					
-					
 					if (playerentity.isCrouching()) {
 						this.summonNoteStorm(worldIn.rand.nextInt(3), worldIn, playerentity);
 					} else {
 						this.summomCorruptNote(worldIn, playerentity);
 					}
 				} else {
-					playerentity.playSound(SoundEvents.BLOCK_NOTE_BLOCK_BELL, 0.6F,
+					playerentity.playSound(SoundEvents.ENTITY_HOGLIN_CONVERTED_TO_ZOMBIFIED, 0.2F,
 							0.8F + (float) Math.random() * 0.2F);
 				}
 				stack.damageItem(1, playerentity, (p_220009_1_) -> {
 					p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
 				});
 			} else {
-				playerentity.sendStatusMessage(new StringTextComponent("Lord Seraph does not grant you his power"),
+				playerentity.sendStatusMessage(new StringTextComponent("Lord Azathoth does not grant you his power"),
 						true);
 			}
 		}
@@ -86,13 +83,13 @@ public class ItemDiscordantBell extends Item {
 
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.BOW;
+		return UseAction.NONE;
 	}
 
 	public void summomCorruptNote(World world, PlayerEntity player) {
-		EntityCorruptNote missile = new EntityCorruptNote(player, false);
-		missile.setPosition(player.getPosX() + (Math.random() - 0.5 * 0.1),
-				player.getPosY() + 0.8 + (Math.random() - 0.5 * 0.1), player.getPosZ() + (Math.random() - 0.5 * 0.1));
+		EntityTrackingOrb missile = new EntityTrackingOrb(player, false);
+		missile.setPosition(player.getPosX() + (Math.random() - 0.5 * 0.1), player.getPosY() + 0.8f,
+				player.getPosZ() + (Math.random() - 0.5 * 0.1));
 		if (missile.findTarget()) {
 			player.playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 			world.addEntity(missile);
@@ -100,11 +97,11 @@ public class ItemDiscordantBell extends Item {
 	}
 
 	public void summonNoteStorm(int numMiss, World world, PlayerEntity player) {
-		EntityCorruptNote[] missArray = new EntityCorruptNote[numMiss];
+		EntityTrackingOrb[] missArray = new EntityTrackingOrb[numMiss];
 		for (int i = 0; i < numMiss; i++) {
-			missArray[i] = new EntityCorruptNote(player, false);
-			missArray[i].setPosition(player.getPosX() + ((Math.random() - 0.5) * 3.5), player.getPosY() + 0.8,
-					player.getPosZ() + ((Math.random() - 0.5) * 3.5));
+			missArray[i] = new EntityTrackingOrb(player, false);
+			missArray[i].setPosition(player.getPosX() + ((Math.random() - 0.5) * 1.5), player.getPosY() + 0.8f,
+					player.getPosZ() + ((Math.random() - 0.5) * 1.5));
 			if (!world.isRemote) {
 				player.playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 				world.addEntity(missArray[i]);

@@ -23,12 +23,14 @@ import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.armor.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.armor.ItemAttractionCharm;
 import com.huto.hutosmod.objects.items.armor.ItemClovenHooves;
+import com.huto.hutosmod.objects.items.armor.ItemEmpCharm;
 import com.huto.hutosmod.objects.items.armor.ItemEnticingMantle;
 import com.huto.hutosmod.objects.items.armor.ItemInfluenceSuppressor;
 import com.huto.hutosmod.objects.items.armor.ItemMysteriousMask;
 import com.huto.hutosmod.objects.items.armor.ItemRepulsionCharm;
 import com.huto.hutosmod.objects.items.armor.ItemSkullHelmet;
 import com.huto.hutosmod.objects.items.armor.ItemSlimeRepulsionCharm;
+import com.huto.hutosmod.objects.items.armor.ItemSparkDirector;
 import com.huto.hutosmod.objects.items.armor.ItemVibeSeer;
 import com.huto.hutosmod.objects.items.fidelity.ItemBeastBreath;
 import com.huto.hutosmod.objects.items.fidelity.ItemCrossedKeys;
@@ -61,6 +63,7 @@ import com.huto.hutosmod.objects.items.tools.EnumModToolTiers;
 import com.huto.hutosmod.objects.items.tools.ItemAllegianceIdentifier;
 import com.huto.hutosmod.objects.items.tools.ItemBowBlade;
 import com.huto.hutosmod.objects.items.tools.ItemDebugTool;
+import com.huto.hutosmod.objects.items.tools.ItemDemonFlute;
 import com.huto.hutosmod.objects.items.tools.ItemDestructOrb;
 import com.huto.hutosmod.objects.items.tools.ItemDestructOrbContained;
 import com.huto.hutosmod.objects.items.tools.ItemDiscordantBell;
@@ -273,6 +276,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> writhing_thread = ITEMS.register("writhing_thread",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> demon_flute = ITEMS.register("demon_flute", () -> new ItemDemonFlute(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
 	// Beast
 	public static final RegistryObject<Item> breath_of_the_beast = ITEMS.register("breath_of_the_beast",
@@ -310,6 +315,12 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> emp_charm = ITEMS.register("emp_charm", () -> new ItemEmpCharm(
+			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> machina_spark_director = ITEMS.register("machina_spark_director",
+			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
+
 	// Modules
 	public static final RegistryObject<Item> mechan_module = ITEMS.register("mechan_module",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
@@ -819,6 +830,22 @@ public class ItemInit {
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
 							if (stack.getTag().getBoolean("swordstate")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+
+		// EMP Charm
+		ItemModelsProperties.registerProperty(emp_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
 								return 1;
 							} else {
 								return 0;
