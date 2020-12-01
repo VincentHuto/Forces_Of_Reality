@@ -13,13 +13,13 @@
       "item": "hutosmod:energy_focus"
     },
     "C": {
-      "item": "hutosmod:mana_crystal"
+      "item": "hutosmod:somnolent_crystal"
     },
     "R": {
       "item": "hutosmod:runed_obsidian"
     },
     "P": {
-      "item": "hutosmod:mana_powder"
+      "item": "hutosmod:somnolent_powder"
     }
   },
   "result": {

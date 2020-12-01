@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "hutosmod:items/somnolent_trick_axe_pulling_0"
+    }
+}

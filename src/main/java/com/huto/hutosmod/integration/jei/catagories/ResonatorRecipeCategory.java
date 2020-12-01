@@ -119,8 +119,8 @@ public class ResonatorRecipeCategory implements IRecipeCategory<RecipeResonator>
 		GlStateManager.scaled(1.2, 4.2, 1.2);
 
 		Block catalyst;
-		if (recipe.getRecipeType() == EnumEssecenceType.MANA) {
-			catalyst = BlockInit.mystic_media.get();
+		if (recipe.getRecipeType() == EnumEssecenceType.SOMNOLENT) {
+			catalyst = BlockInit.somnolent_media.get();
 		} else if (recipe.getRecipeType() == EnumEssecenceType.KARMIC) {
 			catalyst = BlockInit.activated_obsidian.get();
 
@@ -137,7 +137,7 @@ public class ResonatorRecipeCategory implements IRecipeCategory<RecipeResonator>
 			catalyst = BlockInit.anti_media.get();
 
 		} else {
-			catalyst = BlockInit.enchanted_stone_smooth.get();
+			catalyst = BlockInit.somnolent_stone_smooth.get();
 
 		}
 		ItemStack catalystStack = new ItemStack(catalyst);

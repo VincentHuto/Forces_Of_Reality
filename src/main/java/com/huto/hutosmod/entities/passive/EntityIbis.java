@@ -1,6 +1,7 @@
 package com.huto.hutosmod.entities.passive;
 
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -48,8 +49,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
 
 public class EntityIbis extends AnimalEntity {
@@ -220,6 +221,17 @@ public class EntityIbis extends AnimalEntity {
 		return this.chickenJockey;
 	}
 
+	@Override
+	public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
+	/*	if (world.getBiomeManager().getBiome(getPosition()) == ForgeRegistries.BIOMES
+				.getValue(Biomes.LUKEWARM_OCEAN.getLocation())) {
+			return true;
+		} else {
+			return super.;
+		}*/
+		return super.canSpawn(worldIn, spawnReasonIn);
+	}
+
 	/**
 	 * Sets whether this chicken is a jockey or not.
 	 */
@@ -242,22 +254,16 @@ public class EntityIbis extends AnimalEntity {
 	@Override
 	protected void registerData() {
 		super.registerData();
-		this.dataManager.register(IBIS_TYPE, 1);
+		Random rand = new Random();
+		this.dataManager.register(IBIS_TYPE, rand.nextInt(3));
+
 	}
 
 	@Nullable
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason,
 			@Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		this.setIbisType(this.rand.nextInt(4));
-
-		World world = worldIn.getWorld();
-		if (world instanceof ServerWorld && ((ServerWorld) world).func_241112_a_()
-				.getStructureStart(this.getPosition(), true, Structure.SWAMP_HUT).isValid()) {
-			this.setIbisType(1);
-			this.enablePersistence();
-		}
-		return spawnDataIn;
+		this.setIbisType(this.rand.nextInt(3));
+		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 
 	}
 

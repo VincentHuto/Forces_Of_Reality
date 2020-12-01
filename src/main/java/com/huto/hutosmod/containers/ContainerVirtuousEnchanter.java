@@ -430,7 +430,7 @@ public class ContainerVirtuousEnchanter extends Container {
 
 	private float getPower(net.minecraft.world.World world, net.minecraft.util.math.BlockPos pos) {
 
-		if (world.getBlockState(pos).getBlock() == BlockInit.end_crystal_mystic.get()
+		if (world.getBlockState(pos).getBlock() == BlockInit.end_crystal_somnolent.get()
 				|| world.getBlockState(pos).getBlock() == BlockInit.end_crystal_nightmare.get()) {
 			return 3f;
 		} else {

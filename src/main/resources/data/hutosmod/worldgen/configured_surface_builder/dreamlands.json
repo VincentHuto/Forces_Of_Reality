@@ -4,13 +4,13 @@
       "Properties": {
         "snowy": "false"
       },
-      "Name": "hutosmod:mystic_earth"
+      "Name": "hutosmod:somnolent_earth"
     },
     "under_material": {
-      "Name": "hutosmod:enchanted_stone"
+      "Name": "hutosmod:somnolent_stone"
     },
     "underwater_material": {
-      "Name": "hutosmod:mystic_media"
+      "Name": "hutosmod:somnolent_media"
     }
   },
   "type": "minecraft:default"

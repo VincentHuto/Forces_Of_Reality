@@ -36,7 +36,7 @@ public class ModResonatorRecipies {
 				new ItemStack(ItemInit.anti_tear.get(), 1), 30, EnumEssecenceType.KARMIC,
 				Ingredient.fromItems(ItemInit.essence_drop.get()));
 		recipeResonantFuel = registerRecipe(new ResourceLocation("reciperesonantfuel"),
-				new ItemStack(ItemInit.resonant_fuel.get(), 1), 30, EnumEssecenceType.MANA,
+				new ItemStack(ItemInit.resonant_fuel.get(), 1), 30, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(Items.COAL));
 		recipeEnhancedMagatama = registerRecipe(new ResourceLocation("recipeenhancedmagatama"),
 				new ItemStack(ItemInit.enhanced_magatama.get(), 1), 30, EnumEssecenceType.KARMIC,
@@ -45,10 +45,10 @@ public class ModResonatorRecipies {
 				50, EnumEssecenceType.KARMIC, Ingredient.fromItems(ItemInit.channeling_rod.get()));
 		recipeNullCrystal = registerRecipe(new ResourceLocation("recipenullcrystal"),
 				new ItemStack(ItemInit.null_crystal.get(), 1), 50, EnumEssecenceType.KARMIC,
-				Ingredient.fromItems(ItemInit.mana_crystal.get()));
+				Ingredient.fromItems(ItemInit.somnolent_crystal.get()));
 		recipeNullPowder = registerRecipe(new ResourceLocation("recipenullpowder"),
 				new ItemStack(ItemInit.nullifying_powder.get(), 1), 50, EnumEssecenceType.KARMIC,
-				Ingredient.fromItems(ItemInit.mana_powder.get()));
+				Ingredient.fromItems(ItemInit.somnolent_powder.get()));
 		recipeEnhancedPick = registerRecipe(new ResourceLocation("recipeenhancedpick"),
 				new ItemStack(ItemInit.null_pickaxe.get(), 1), 100, EnumEssecenceType.KARMIC,
 				Ingredient.fromItems(Items.DIAMOND_PICKAXE));
@@ -65,7 +65,7 @@ public class ModResonatorRecipies {
 				new ItemStack(ItemInit.null_hoe.get(), 1), 100, EnumEssecenceType.KARMIC,
 				Ingredient.fromItems(Items.DIAMOND_HOE));
 		recipeDualPick1 = registerRecipe(new ResourceLocation("recipedualpick1"),
-				new ItemStack(ItemInit.duality_pick.get(), 1), 100, EnumEssecenceType.MANA,
+				new ItemStack(ItemInit.duality_pick.get(), 1), 100, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(ItemInit.null_pickaxe.get()));
 		recipeDualPick2 = registerRecipe(new ResourceLocation("recipedualpick2"),
 				new ItemStack(ItemInit.duality_pick.get(), 1), 200, EnumEssecenceType.BOTH,
@@ -73,23 +73,23 @@ public class ModResonatorRecipies {
 		recipeDualPick3 = registerRecipe(new ResourceLocation("recipedualpick3"),
 				new ItemStack(ItemInit.duality_pick.get(), 1), 50, EnumEssecenceType.GREY,
 				Ingredient.fromItems(Items.NETHERITE_PICKAXE));
-		recipeManaGem = registerRecipe(new ResourceLocation("recipemanagem"),
-				new ItemStack(ItemInit.mana_crystal.get(), 1), 15, EnumEssecenceType.MANA,
+		recipeManaGem = registerRecipe(new ResourceLocation("recipesomnolentgem"),
+				new ItemStack(ItemInit.somnolent_crystal.get(), 1), 15, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(ItemInit.grey_crystal.get()));
-		recipeManaDust = registerRecipe(new ResourceLocation("recipemanadust"),
-				new ItemStack(ItemInit.mana_powder.get(), 1), 10, EnumEssecenceType.MANA,
+		recipeManaDust = registerRecipe(new ResourceLocation("recipesomnolentdust"),
+				new ItemStack(ItemInit.somnolent_powder.get(), 1), 10, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(ItemInit.grey_powder.get()));
-		recipeEnchantedStone = registerRecipe(new ResourceLocation("recipeenchantedstone"),
-				new ItemStack(BlockInit.enchanted_stone.get(), 1), 10, EnumEssecenceType.MANA,
+		recipeEnchantedStone = registerRecipe(new ResourceLocation("recipesomnolentstone"),
+				new ItemStack(BlockInit.somnolent_stone.get(), 1), 10, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(Blocks.STONE));
-		recipeEnchantedEarth = registerRecipe(new ResourceLocation("recipeenchantedearth"),
-				new ItemStack(BlockInit.mystic_earth.get(), 1), 10, EnumEssecenceType.MANA,
+		recipeEnchantedEarth = registerRecipe(new ResourceLocation("recipesomnolentearth"),
+				new ItemStack(BlockInit.somnolent_earth.get(), 1), 10, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(Blocks.GRASS_BLOCK));
-		recipeEnchantedMedia = registerRecipe(new ResourceLocation("recipeenchantedmedia"),
-				new ItemStack(BlockInit.mystic_media.get(), 1), 10, EnumEssecenceType.MANA,
+		recipeEnchantedMedia = registerRecipe(new ResourceLocation("recipesomnolentmedia"),
+				new ItemStack(BlockInit.somnolent_media.get(), 1), 10, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(Blocks.COBBLESTONE));
-		recipeEnchantedSapling = registerRecipe(new ResourceLocation("recipeenchantedsapling"),
-				new ItemStack(BlockInit.mystic_sapling.get(), 1), 10, EnumEssecenceType.MANA,
+		recipeEnchantedSapling = registerRecipe(new ResourceLocation("recipesomnolentsapling"),
+				new ItemStack(BlockInit.somnolent_sapling.get(), 1), 10, EnumEssecenceType.SOMNOLENT,
 				Ingredient.fromItems(Blocks.ACACIA_SAPLING));
 		recipeEnhancedHelm = registerRecipe(new ResourceLocation("recipeenhancedhelm"),
 				new ItemStack(ItemInit.null_helmet.get(), 1), 200, EnumEssecenceType.KARMIC,

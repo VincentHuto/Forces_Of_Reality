@@ -151,7 +151,7 @@ public class CovenPageLib {
 		MachinePageList.add(new GuiCovenPage(3, EnumCovenants.MACHINE, "Sentient Machines", "T-1000",
 				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_3)));
 		MachinePageList.add(new GuiCovenPage(4, EnumCovenants.MACHINE, "Trick Tools", "Mechanical Advantage",
-				new ItemStack(ItemInit.mystic_trick_axe.get()), I18n.format(MACHINE_PAGE_4)));
+				new ItemStack(ItemInit.somnolent_trick_axe.get()), I18n.format(MACHINE_PAGE_4)));
 		MachinePageList.add(new GuiCovenImagePage(5, EnumCovenants.MACHINE, "Machina Soul", "Life Spark",
 				MACHINE_PAGE_5,
 				new GuiTomeImage(

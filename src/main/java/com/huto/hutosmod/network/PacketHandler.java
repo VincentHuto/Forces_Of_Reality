@@ -5,8 +5,11 @@ import com.huto.hutosmod.network.coven.CovenantPacketClient;
 import com.huto.hutosmod.network.coven.CovenantPacketServer;
 import com.huto.hutosmod.network.coven.MechanGloveActionMessage;
 import com.huto.hutosmod.network.coven.MechanGloveOpenMessage;
+import com.huto.hutosmod.network.coven.PacketDirectorToggleFlightMode;
+import com.huto.hutosmod.network.coven.PacketToggleDirectorFlightModeMessage;
 import com.huto.hutosmod.network.coven.PacketUpdateMechanModule;
 import com.huto.hutosmod.network.coven.SetFlyPKT;
+import com.huto.hutosmod.network.coven.SetGlidePkt;
 import com.huto.hutosmod.network.karma.KarmaActivationPacketClient;
 import com.huto.hutosmod.network.karma.KarmaActivationPacketServer;
 import com.huto.hutosmod.network.karma.KarmaPacketClient;
@@ -79,6 +82,8 @@ public class PacketHandler {
 		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
 				SetFlyPKT.Handler::handle);
+		HANDLER.registerMessage(networkID++, SetGlidePkt.class, SetGlidePkt::encode, SetGlidePkt::decode,
+				SetGlidePkt.Handler::handle);
 		HANDLER.registerMessage(networkID++, ImportVibePacket.class, ImportVibePacket::encode, ImportVibePacket::decode,
 				ImportVibePacket.Handler::handle);
 		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
@@ -113,8 +118,9 @@ public class PacketHandler {
 				.encoder(PacketBinderTogglePickup::encode).consumer(PacketBinderTogglePickup::handle).add();
 		RUNEBINDER.messageBuilder(PacketOpenRuneBinder.class, networkID++).decoder(PacketOpenRuneBinder::decode)
 				.encoder(PacketOpenRuneBinder::encode).consumer(PacketOpenRuneBinder::handle).add();
-		RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++).decoder(PacketToggleBinderMessage::decode)
-				.encoder(PacketToggleBinderMessage::encode).consumer(PacketToggleBinderMessage::handle).add();
+		RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++)
+				.decoder(PacketToggleBinderMessage::decode).encoder(PacketToggleBinderMessage::encode)
+				.consumer(PacketToggleBinderMessage::handle).add();
 		return RUNEBINDER;
 	}
 
@@ -128,6 +134,15 @@ public class PacketHandler {
 		MECHANGLOVE.messageBuilder(MechanGloveActionMessage.class, networkID++)
 				.decoder(MechanGloveActionMessage::decode).encoder(MechanGloveActionMessage::encode)
 				.consumer(MechanGloveActionMessage::handle).add();
+
+		MECHANGLOVE.messageBuilder(PacketDirectorToggleFlightMode.class, networkID++)
+				.decoder(PacketDirectorToggleFlightMode::decode).encoder(PacketDirectorToggleFlightMode::encode)
+				.consumer(PacketDirectorToggleFlightMode::handle).add();
+		MECHANGLOVE.messageBuilder(PacketToggleDirectorFlightModeMessage.class, networkID++)
+				.decoder(PacketToggleDirectorFlightModeMessage::decode)
+				.encoder(PacketToggleDirectorFlightModeMessage::encode)
+				.consumer(PacketToggleDirectorFlightModeMessage::handle).add();
+
 		return MECHANGLOVE;
 	}
 

@@ -163,7 +163,7 @@ public class EntityThrownAxe extends ThrowableEntity implements IRendersAsItem {
 			} else if (isAuric()) {
 				return new ItemStack(ItemInit.auric_trick_axe.get());
 			} else {
-				return new ItemStack(ItemInit.mystic_trick_axe.get());
+				return new ItemStack(ItemInit.somnolent_trick_axe.get());
 			}
 		}
 		return stack.copy();

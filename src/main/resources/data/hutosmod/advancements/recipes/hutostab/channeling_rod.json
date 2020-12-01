@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_mana_powder": {
+    "has_somnolent_powder": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "hutosmod:mana_powder"
+            "item": "hutosmod:somnolent_powder"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_mana_powder",
+      "has_somnolent_powder",
       "has_the_recipe"
     ]
   ]

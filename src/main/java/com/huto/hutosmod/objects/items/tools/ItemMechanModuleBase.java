@@ -17,11 +17,13 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemMechanModuleBase extends Item   {
+public class ItemMechanModuleBase extends Item {
 	public static String TAG_TIER = "tier";
+	String useText;
 
-	public ItemMechanModuleBase(Properties properties) {
+	public ItemMechanModuleBase(Properties properties, String useTextIn) {
 		super(properties);
+		this.useText = useTextIn;
 	}
 
 	@Override
@@ -46,12 +48,11 @@ public class ItemMechanModuleBase extends Item   {
 
 	}
 
-
 	@Nullable
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Use: Base Module"));
+		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Use: " + useText));
 		if (stack.getTag() != null) {
 			tooltip.add(new StringTextComponent(TextFormatting.GOLD + "" + stack.getTag().getInt(TAG_TIER)));
 		} else {

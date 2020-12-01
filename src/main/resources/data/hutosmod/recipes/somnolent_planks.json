@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:somnolent_log"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:somnolent_planks",
+    "count": 4
+  }
+}

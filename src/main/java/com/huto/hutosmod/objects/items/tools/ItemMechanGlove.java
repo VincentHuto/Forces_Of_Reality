@@ -176,8 +176,16 @@ public class ItemMechanGlove extends Item {
 					miss.setDirectionMotion(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 5.0F, 1.0F);
 					worldIn.addEntity(miss);
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
-					
-				//TODO "This is where id put my laser, IF I HAD ONE"
+					// TODO "This is where id put my laser, IF I HAD ONE"
+				} else if (moduleStack.getItem() == ItemInit.mechan_module_thruster.get()) {
+					if (playerIn.inventory.armorInventory.get(2).getItem() == ItemInit.machina_spark_director.get()) {
+						ItemStack armor = playerIn.inventory.armorInventory.get(2);
+						if (armor.getOrCreateTag().getFloat("heightmodifier") == 0.1f) {
+							armor.getOrCreateTag().putFloat("heightmodifier", 0.2f);
+						} else {
+							armor.getOrCreateTag().putFloat("heightmodifier", 0.1f);
+						}
+					}
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_blade.get()) {
 					if (!itemStack.getTag().getBoolean(TAG_SWORDSTATE)) {
 						itemStack.getTag().putBoolean(TAG_SWORDSTATE, true);
@@ -189,6 +197,16 @@ public class ItemMechanGlove extends Item {
 			}
 		}
 
+	}
+
+	public void clearOldModuleUse(PlayerEntity playerIn, ItemStack itemStack, World worldIn) {
+		if (itemStack.getTag().getBoolean(TAG_SWORDSTATE)) {
+			itemStack.getTag().putBoolean(TAG_SWORDSTATE, false);
+		}
+		if (playerIn.inventory.armorInventory.get(2).getItem() == ItemInit.machina_spark_director.get()) {
+			ItemStack armor = playerIn.inventory.armorInventory.get(2);
+			armor.getOrCreateTag().putFloat("heightmodifier", 0.1f);
+		}
 	}
 
 	public float getHitDamage(Rarity rareIn) {
@@ -224,8 +242,10 @@ public class ItemMechanGlove extends Item {
 					}
 					CompoundNBT compound = stack.getTag();
 					if (!compound.getBoolean(TAG_SWORDSTATE)) {
+						System.out.println("blade in");
 						target.attackEntityFrom(mechanGloveSource, getHitDamage(rare));
 					} else {
+						System.out.println("blade out");
 						target.attackEntityFrom(mechanGloveSource, getHitDamage(rare) * 3f);
 
 					}

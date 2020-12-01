@@ -75,18 +75,19 @@ public class CovenantEvents {
 		ICovenant covenantNew = event.getEntity().getCapability(CovenantProvider.COVEN_CAPA)
 				.orElseThrow(IllegalStateException::new);
 		covenantNew.setDevotion(covenantOld.getDevotion());
-		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
-				new CovenantPacketServer(covenantNew.getDevotion()));
-
 	}
 
 	@SubscribeEvent
 	public static void respawn(PlayerRespawnEvent event) {
-		//TODO "Fixed" the player respawn Updates Client Info on playe respawn, like identifier overlay and the coven overlay
-		ICovenant covenantNew = event.getEntity().getCapability(CovenantProvider.COVEN_CAPA)
-				.orElseThrow(IllegalStateException::new);
-		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
-				new CovenantPacketServer(covenantNew.getDevotion()));
+		if (event.getEntity() instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) event.getEntity();
+			if (!player.getEntityWorld().isRemote) {
+				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
+						.orElseThrow(IllegalArgumentException::new);
+				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+						new CovenantPacketServer(coven.getDevotion()));
+			}
+		}
 	}
 
 	// SWITCHED TO CLIENTRENDEREVENT.THERMALLAYERHELPER
@@ -100,9 +101,7 @@ public class CovenantEvents {
 					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 							.orElseThrow(IllegalArgumentException::new);
 					ItemRune contractRune = (ItemRune) runes.getStackInSlot(i).getItem();
-					coven.setCovenDevotion(contractRune.getAssignedCovenant(),
-							(coven.getDevotionByCoven(contractRune.getAssignedCovenant())
-									- contractRune.getDeepenAmount()));
+					coven.setCovenDevotion(contractRune.getAssignedCovenant(), -contractRune.getDeepenAmount());
 					player.sendStatusMessage(
 							new StringTextComponent(TextFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"),
 							false);

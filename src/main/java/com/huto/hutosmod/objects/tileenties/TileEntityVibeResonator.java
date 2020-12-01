@@ -83,8 +83,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
 		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
 
-		if (blockUnder == BlockInit.mystic_media.get()) {
-			resonantState = EnumEssecenceType.MANA;
+		if (blockUnder == BlockInit.somnolent_media.get()) {
+			resonantState = EnumEssecenceType.SOMNOLENT;
 		} else if (blockUnder == BlockInit.activated_obsidian.get()) {
 			resonantState = EnumEssecenceType.KARMIC;
 		} else if (blockUnder == BlockInit.reversion_catalyst.get()) {

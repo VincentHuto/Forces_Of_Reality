@@ -159,26 +159,26 @@ public class GeneratorRecipes extends RecipeProvider {
 		  .addCriterion("has_singeri_mushroom", hasItem(BlockInit.singeri_mushroom.get()
 				  )).build(consumer);
 		
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.mystic_tome.get()).
-		  addIngredient(ItemInit.mana_powder.get(),3)
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.somnolent_tome.get()).
+		  addIngredient(ItemInit.somnolent_powder.get(),3)
 		  .addIngredient(Items.BOOK)
-		  .addCriterion("has_mana_powder", hasItem(ItemInit.mana_powder.get())).build(consumer);
+		  .addCriterion("has_somnolent_powder", hasItem(ItemInit.somnolent_powder.get())).build(consumer);
 		
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.raw_morel_on_a_stick.get()).
 		  addIngredient(BlockInit.morel_mushroom.get(),3)
 		  .addIngredient(Items.STICK)
 		  .addCriterion("has_morel_mushroom", hasItem(BlockInit.morel_mushroom.get())).build(consumer);
 		
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.mana_bottle.get()).
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.somnolent_bottle.get()).
 		  addIngredient(BlockInit.passion_flower.get())
-		  .addIngredient(ItemInit.mana_powder.get(),2)
+		  .addIngredient(ItemInit.somnolent_powder.get(),2)
 		  .addIngredient(Items.GLASS_BOTTLE)
 		  .addCriterion("has_passion_flower", hasItem(BlockInit.passion_flower.get())).build(consumer);
 		
 		
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.channeling_ingot.get()).
 			  addIngredient(Tags.Items.INGOTS_IRON)
-			  .addIngredient(ItemInit.mana_powder.get(),2)
+			  .addIngredient(ItemInit.somnolent_powder.get(),2)
 			  .addCriterion("has_iron_ingot", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
 		
 		 ShapelessRecipeBuilder.shapelessRecipe(ItemInit.grey_powder.get(),3).
@@ -188,7 +188,7 @@ public class GeneratorRecipes extends RecipeProvider {
 			 .addCriterion("has_runed_obsidian", hasItem(Items.BONE_MEAL)).build(consumer);
 
 		  ShapelessRecipeBuilder.shapelessRecipe(ItemInit.nullifying_powder.get(),3).
-			  addIngredient(ItemInit.mana_powder.get())
+			  addIngredient(ItemInit.somnolent_powder.get())
 			  .addIngredient(ItemInit.grey_powder.get())
 			 .addIngredient(Tags.Items.GUNPOWDER)
 			 .addIngredient(Items.REDSTONE,3)		  
@@ -203,14 +203,14 @@ public class GeneratorRecipes extends RecipeProvider {
 		  addIngredient(BlockInit.anti_log.get())
 		  .addCriterion("has_anti_log", hasItem(BlockInit.anti_log.get())).build(consumer);
 		  
-		  ShapelessRecipeBuilder.shapelessRecipe(BlockInit.mystic_planks.get(),4).
-		  addIngredient(BlockInit.mystic_log.get())
-		  .addCriterion("has_mystic_log", hasItem(BlockInit.mystic_log.get())).build(consumer);
+		  ShapelessRecipeBuilder.shapelessRecipe(BlockInit.somnolent_planks.get(),4).
+		  addIngredient(BlockInit.somnolent_log.get())
+		  .addCriterion("has_somnolent_log", hasItem(BlockInit.somnolent_log.get())).build(consumer);
 		 
 		  ShapelessRecipeBuilder.shapelessRecipe(ItemInit.channeling_rod.get(),1).
-		  addIngredient(ItemInit.mana_powder.get(),3)
+		  addIngredient(ItemInit.somnolent_powder.get(),3)
 		  .addIngredient(Items.STICK)
-		  .addCriterion("has_mana_powder", hasItem(ItemInit.mana_powder.get())).build(consumer);
+		  .addCriterion("has_somnolent_powder", hasItem(ItemInit.somnolent_powder.get())).build(consumer);
 		  
 		  ShapedRecipeBuilder.shapedRecipe(BlockInit.contained_magma.get())
 			.key('N', Tags.Items.INGOTS_NETHER_BRICK)
@@ -296,13 +296,13 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addCriterion("has_karmic_drop", hasItem( ItemInit.karmic_drop.get())).build(consumer);
 		  
 		  
-		  ShapedRecipeBuilder.shapedRecipe(BlockInit.enchanted_stone.get())
+		  ShapedRecipeBuilder.shapedRecipe(BlockInit.somnolent_stone.get())
 			.key('K', Tags.Items.STONE)
-			.key('S', ItemInit.mana_powder.get())
+			.key('S', ItemInit.somnolent_powder.get())
 			.patternLine("SSS")
 			.patternLine("SKS")
 			.patternLine("SSS")
-			.addCriterion("has_mana_powder", hasItem(ItemInit.mana_powder.get())).build(consumer);
+			.addCriterion("has_somnolent_powder", hasItem(ItemInit.somnolent_powder.get())).build(consumer);
 		  
 		  ShapedRecipeBuilder.shapedRecipe(BlockInit.auric_block.get())
 			.key('A', ItemInit.auric_ingot.get())
@@ -377,7 +377,7 @@ public class GeneratorRecipes extends RecipeProvider {
 		  
 			ShapedRecipeBuilder.shapedRecipe(ItemInit.magatamabead.get())
 				.key('N',Tags.Items.OBSIDIAN)
-				.key('P', ItemInit.mana_powder.get())
+				.key('P', ItemInit.somnolent_powder.get())
 				.patternLine("NNN")
 				.patternLine("NNN")
 				.patternLine(" PN")
@@ -386,8 +386,8 @@ public class GeneratorRecipes extends RecipeProvider {
 			ShapedRecipeBuilder.shapedRecipe(ItemInit.maker_activator.get())
 				.key('N', BlockInit.nether_block.get())
 				.key('F', ItemInit.energy_focus.get())
-				.key('C',ItemInit.mana_crystal.get())
-				.key('S', BlockInit.enchanted_stone_smooth.get())
+				.key('C',ItemInit.somnolent_crystal.get())
+				.key('S', BlockInit.somnolent_stone_smooth.get())
 				.patternLine("F F")
 				.patternLine("NCN")
 				.patternLine("SSS")
@@ -408,9 +408,9 @@ public class GeneratorRecipes extends RecipeProvider {
 			ShapedRecipeBuilder.shapedRecipe(ItemInit.mana_extractor.get())
 				.key('N', BlockInit.nether_block.get())
 				.key('F', ItemInit.energy_focus.get())
-				.key('C',ItemInit.mana_crystal.get())
+				.key('C',ItemInit.somnolent_crystal.get())
 				.key('R', BlockInit.runed_obsidian.get())
-				.key('P', ItemInit.mana_powder.get())
+				.key('P', ItemInit.somnolent_powder.get())
 				.patternLine("F F")
 				.patternLine("NCN")
 				.patternLine("RPR")

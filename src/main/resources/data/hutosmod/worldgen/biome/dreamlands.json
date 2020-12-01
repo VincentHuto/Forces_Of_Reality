@@ -34,13 +34,13 @@
 		[],
 		[
 			"minecraft:ore_coal",
-			"hutosmod:ore_mystic"
+			"hutosmod:ore_somnolent"
 		],
 		[],
 		[
 			"hutosmod:dreamlands_vegetation",
 			"hutosmod:dreamlands_flowers",
-			"hutosmod:patch_mysticgrass_plain",
+			"hutosmod:patch_somnolentgrass_plain",
 			"minecraft:brown_mushroom_normal",
 			"minecraft:red_mushroom_normal",
 			"minecraft:spring_water"
@@ -65,6 +65,12 @@
 				"weight": 12,
 				"minCount": 4,
 				"maxCount": 4
+			},
+			{
+				"type": "hutosmod:slug",
+				"weight": 9,
+				"minCount": 2,
+				"maxCount": 5
 			},
 			{
 				"type": "hutosmod:denizen",

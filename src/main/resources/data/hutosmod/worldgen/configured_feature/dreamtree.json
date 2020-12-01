@@ -15,7 +15,7 @@
         "Properties": {
           "axis": "y"
         },
-        "Name": "hutosmod:mystic_log"
+        "Name": "hutosmod:somnolent_log"
       },
       "type": "minecraft:simple_state_provider"
     },
@@ -25,7 +25,7 @@
           "persistent": "false",
           "distance": "7"
         },
-        "Name": "hutosmod:mystic_leaves"
+        "Name": "hutosmod:somnolent_leaves"
       },
       "type": "minecraft:simple_state_provider"
     },

@@ -34,6 +34,8 @@ public class PacketUpdateMechanModule {
 			ctx.get().enqueueWork(() -> {
 				ItemStack stack = ctx.get().getSender().getHeldItemMainhand();
 				if (stack.getItem() instanceof ItemMechanGlove) {
+					ItemMechanGlove glove = (ItemMechanGlove) stack.getItem();
+					glove.clearOldModuleUse(ctx.get().getSender(), stack, ctx.get().getSender().getEntityWorld());
 					stack.getShareTag().putInt("selected", msg.selected);
 					stack.getShareTag().put("selectedstack", msg.stack.write(new CompoundNBT()));
 				}

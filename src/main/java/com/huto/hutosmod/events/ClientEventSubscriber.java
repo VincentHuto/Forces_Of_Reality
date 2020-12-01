@@ -175,8 +175,11 @@ public class ClientEventSubscriber {
 
 		keyBinds.add(0, new KeyBinding("key.hutosmod.runebinderpickup.desc", GLFW.GLFW_KEY_B, "key.hutosmod.category"));
 		keyBinds.add(1, new KeyBinding("key.hutosmod.mechanglovemode.desc", GLFW.GLFW_KEY_V, "key.hutosmod.category"));
+		keyBinds.add(2, new KeyBinding("key.hutosmod.sparkdirector.desc", GLFW.GLFW_KEY_M, "key.hutosmod.category"));
+
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(1));
+		ClientRegistry.registerKeyBinding(keyBinds.get(2));
 
 	}
 

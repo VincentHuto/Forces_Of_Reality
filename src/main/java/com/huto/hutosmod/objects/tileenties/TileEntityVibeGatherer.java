@@ -57,8 +57,8 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 	}
 
 	public boolean checkStructure() {
-		Set<Block> allowedBlocks = Sets.newHashSet(BlockInit.enchanted_stone.get(),
-				BlockInit.enchanted_stone_smooth.get());
+		Set<Block> allowedBlocks = Sets.newHashSet(BlockInit.somnolent_stone.get(),
+				BlockInit.somnolent_stone_smooth.get());
 		BlockPos adj = getPos().offset(Direction.DOWN);
 		BlockState blockState = world.getBlockState(adj);
 		Block block = blockState.getBlock();

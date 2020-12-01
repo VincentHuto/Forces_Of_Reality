@@ -11,7 +11,7 @@ import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemManaPowder;
-import com.huto.hutosmod.objects.items.ItemMysticTome;
+import com.huto.hutosmod.objects.items.ItemSomnolentTome;
 import com.huto.hutosmod.objects.items.ItemNullIngot;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
@@ -132,8 +132,8 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 
 	// Books
-	public static final RegistryObject<Item> mystic_tome = ITEMS.register("mystic_tome",
-			() -> new ItemMysticTome(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+	public static final RegistryObject<Item> somnolent_tome = ITEMS.register("somnolent_tome",
+			() -> new ItemSomnolentTome(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new ItemElderTome(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> coven_tome = ITEMS.register("coven_tome",
@@ -154,9 +154,9 @@ public class ItemInit {
 			() -> new ItemChannelingIngot(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> emanating_ingot = ITEMS.register("emanating_ingot",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> mana_powder = ITEMS.register("mana_powder",
+	public static final RegistryObject<Item> somnolent_powder = ITEMS.register("somnolent_powder",
 			() -> new ItemManaPowder(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> mana_crystal = ITEMS.register("mana_crystal",
+	public static final RegistryObject<Item> somnolent_crystal = ITEMS.register("somnolent_crystal",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> channeling_rod = ITEMS.register("channeling_rod",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -323,17 +323,26 @@ public class ItemInit {
 
 	// Modules
 	public static final RegistryObject<Item> mechan_module = ITEMS.register("mechan_module",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Base Module"));
 	public static final RegistryObject<Item> mechan_module_rocket = ITEMS.register("mechan_module_rocket",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Fires a singluar exploding rocket at an angle"));
 	public static final RegistryObject<Item> mechan_module_salvo = ITEMS.register("mechan_module_salvo",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Fire Several homing rockets that track down targets around player"));
 	public static final RegistryObject<Item> mechan_module_shortcircuit = ITEMS.register("mechan_module_shortcircuit",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Fires a ball of electricity that leaps between targets"));
 	public static final RegistryObject<Item> mechan_module_laser = ITEMS.register("mechan_module_laser",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Fires a concetrated burst of energy from the glove"));
 	public static final RegistryObject<Item> mechan_module_blade = ITEMS.register("mechan_module_blade",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Extrudes a small blade from the glove increasing damage dealt"));
+	public static final RegistryObject<Item> mechan_module_thruster = ITEMS.register("mechan_module_thruster",
+			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
+					"Increases the power of an equiped Machina Spark Director, Allows for boosting"));
 	// Gloves
 	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
 			() -> new ItemMechanGlove(
@@ -366,7 +375,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> cooked_morel_on_a_stick = ITEMS.register("cooked_morel_on_a_stick",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).food(new Food.Builder().hunger(6)
 					.saturation(1.5f).effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build())));
-	public static final RegistryObject<Item> mana_bottle = ITEMS.register("mana_bottle",
+	public static final RegistryObject<Item> somnolent_bottle = ITEMS.register("somnolent_bottle",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> bucket_slug = ITEMS.register("bucket_slug",
 			() -> new ItemSlugBucket(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
@@ -441,8 +450,8 @@ public class ItemInit {
 	// Tools
 	public static final RegistryObject<Item> null_bow_blade = ITEMS.register("null_bow_blade", () -> new ItemBowBlade(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));
-	public static final RegistryObject<Item> mystic_bow_blade = ITEMS
-			.register("mystic_bow_blade",
+	public static final RegistryObject<Item> somnolent_bow_blade = ITEMS
+			.register("somnolent_bow_blade",
 					() -> new ItemBowBlade(
 							new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(512), 1,
 							6, 1));
@@ -452,7 +461,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> null_trick_axe = ITEMS.register("null_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumModToolTiers.NULL));
-	public static final RegistryObject<Item> mystic_trick_axe = ITEMS.register("mystic_trick_axe",
+	public static final RegistryObject<Item> somnolent_trick_axe = ITEMS.register("somnolent_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumModToolTiers.MYSTIC));
 	public static final RegistryObject<Item> auric_trick_axe = ITEMS.register("auric_trick_axe",
@@ -950,8 +959,8 @@ public class ItemInit {
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
-		// Mystic
-		ItemModelsProperties.registerProperty(mystic_bow_blade.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+		// Somnolent
+		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
@@ -965,7 +974,7 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		ItemModelsProperties.registerProperty(mystic_bow_blade.get(), new ResourceLocation("pull"),
+		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new ResourceLocation("pull"),
 				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
 					if (p_239429_2_ == null) {
 						return 0.0F;
@@ -974,7 +983,7 @@ public class ItemInit {
 								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
 					}
 				});
-		ItemModelsProperties.registerProperty(mystic_bow_blade.get(), new ResourceLocation("pulling"),
+		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new ResourceLocation("pulling"),
 				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
 					return p_239428_2_ != null && p_239428_2_.isHandActive()
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
@@ -1041,8 +1050,8 @@ public class ItemInit {
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
-		// Mystic
-		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
+		// Somnolent
+		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
 				new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
@@ -1056,7 +1065,7 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation("pull"),
+		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new ResourceLocation("pull"),
 				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
 					if (p_239429_2_ == null) {
 						return 0.0F;
@@ -1065,13 +1074,13 @@ public class ItemInit {
 								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
 					}
 				});
-		ItemModelsProperties.registerProperty(mystic_trick_axe.get(), new ResourceLocation("pulling"),
+		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new ResourceLocation("pulling"),
 				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
 					return p_239428_2_ != null && p_239428_2_.isHandActive()
 							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
-		// Mystic
+		// Somnolent
 		ItemModelsProperties.registerProperty(auric_trick_axe.get(), new ResourceLocation(HutosMod.MOD_ID, "open"),
 				new IItemPropertyGetter() {
 					@Override

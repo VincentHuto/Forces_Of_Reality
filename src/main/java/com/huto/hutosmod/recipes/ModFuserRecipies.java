@@ -42,8 +42,8 @@ public class ModFuserRecipies {
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
-		recipeMysticBowBlade = registerRecipe(new ResourceLocation("mystic_bow_blade"),
-				new ItemStack(ItemInit.mystic_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
+		recipeMysticBowBlade = registerRecipe(new ResourceLocation("somnolent_bow_blade"),
+				new ItemStack(ItemInit.somnolent_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
@@ -59,8 +59,8 @@ public class ModFuserRecipies {
 				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
-		recipeMysticTrickAxe = registerRecipe(new ResourceLocation("mystic_trick_axe"),
-				new ItemStack(ItemInit.mystic_trick_axe.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_AXE),
+		recipeMysticTrickAxe = registerRecipe(new ResourceLocation("somnolent_trick_axe"),
+				new ItemStack(ItemInit.somnolent_trick_axe.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_AXE),
 				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
@@ -77,7 +77,7 @@ public class ModFuserRecipies {
 				new ItemStack(ItemInit.phantasmal_pane.get(), 1), 10, Ingredient.fromItems(ItemInit.readied_pane.get()),
 				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(ItemInit.anti_tear.get()));
 		recipeUpgradeBlock = registerRecipe(new ResourceLocation("upgrade_block"),
-				new ItemStack(ItemInit.upgrade_block.get(), 1), 50, Ingredient.fromItems(ItemInit.mana_crystal.get()),
+				new ItemStack(ItemInit.upgrade_block.get(), 1), 50, Ingredient.fromItems(ItemInit.somnolent_crystal.get()),
 				Ingredient.fromItems(ItemInit.upgrade_blank.get()));
 		recipeUpgradeAnimal = registerRecipe(new ResourceLocation("upgrade_animal"),
 				new ItemStack(ItemInit.upgrade_animal.get(), 1), 50, Ingredient.fromItems(Blocks.GRASS_BLOCK),
@@ -93,7 +93,7 @@ public class ModFuserRecipies {
 				Ingredient.fromItems(ItemInit.upgrade_blank.get()));
 		recipeElderTome = registerRecipe(new ResourceLocation("elder_tome"),
 				new ItemStack(ItemInit.elder_tome.get(), 1), 150, Ingredient.fromItems(ItemInit.karmic_bar.get()),
-				Ingredient.fromItems(ItemInit.mystic_tome.get()));
+				Ingredient.fromItems(ItemInit.somnolent_tome.get()));
 
 		recipeOpal = registerRecipe(new ResourceLocation("gem_opal"), new ItemStack(ItemInit.gem_opal.get(), 1), 150,
 				Ingredient.fromItems(ItemInit.gem_amethyst.get()), Ingredient.fromItems(ItemInit.gem_hematite.get()),

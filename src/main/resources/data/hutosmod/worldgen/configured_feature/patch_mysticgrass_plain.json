@@ -15,7 +15,7 @@
             "tries": 32,
             "state_provider": {
               "state": {
-                "Name": "hutosmod:mystic_grass"
+                "Name": "hutosmod:somnolent_grass"
               },
               "type": "minecraft:simple_state_provider"
             },

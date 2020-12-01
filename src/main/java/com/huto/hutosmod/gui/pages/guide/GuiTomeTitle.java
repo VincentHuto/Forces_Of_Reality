@@ -47,7 +47,7 @@ public class GuiTomeTitle extends Screen {
 	static String title = " Table of Contents";
 	static StringTextComponent titleComponent = new StringTextComponent(title);
 	String subtitle = " Duality of Nature";
-	ItemStack icon = new ItemStack(ItemInit.mana_crystal.get());
+	ItemStack icon = new ItemStack(ItemInit.somnolent_crystal.get());
 	GuiButtonTextured buttonclose, whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton,
 			cyanButton, darkBlueButton, eyeButton;
 	boolean isElder;
@@ -98,8 +98,8 @@ public class GuiTomeTitle extends Screen {
 			GlStateManager.translatef(18, 25, 0);
 			// Enables lighting so it doesnt look dark
 			RenderHelper.enableStandardItemLighting();
-			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.mystic_sapling.get()), 0, -4);
-			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.mystic_earth.get()), 0, 8);
+			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.somnolent_sapling.get()), 0, -4);
+			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.somnolent_earth.get()), 0, 8);
 
 			GlStateManager.pushMatrix();
 			GlStateManager.translatef(3, -5, 0);

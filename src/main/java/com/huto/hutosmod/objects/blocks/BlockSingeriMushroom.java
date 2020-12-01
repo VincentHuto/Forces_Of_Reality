@@ -71,8 +71,8 @@ public class BlockSingeriMushroom extends BushBlock implements IGrowable {
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK) || blockstate.getBlock() == BlockInit.mystic_earth.get()
-				|| blockstate.getBlock() == BlockInit.enchanted_stone.get()) {
+		if (blockstate.isIn(BlockTags.MUSHROOM_GROW_BLOCK) || blockstate.getBlock() == BlockInit.somnolent_earth.get()
+				|| blockstate.getBlock() == BlockInit.somnolent_stone.get()) {
 			return true;
 		} else {
 			return worldIn.getLightSubtracted(pos, 0) < 13

@@ -34,57 +34,57 @@ public class TomePageLib {
 	public static List<List<GuiTomePage>> ChapterList = new ArrayList<List<GuiTomePage>>();
 
 	// Text Locations
-	public static String INTRO_PAGE_1 = "title.mystictome.intro.page.1.text";
-	public static String INTRO_PAGE_2 = "title.mystictome.intro.page.2.text";
-	public static String INTRO_PAGE_3 = "title.mystictome.intro.page.3.text";
-	public static String INTRO_PAGE_4 = "title.mystictome.intro.page.4.text";
-	public static String INTRO_PAGE_5 = "title.mystictome.intro.page.5.text";
-	public static String INTRO_PAGE_6 = "title.mystictome.intro.page.6.text";
-	public static String INTRO_PAGE_7 = "title.mystictome.intro.page.7.text";
-	public static String INTRO_PAGE_8 = "title.mystictome.intro.page.8.text";
+	public static String INTRO_PAGE_1 = "title.somnolenttome.intro.page.1.text";
+	public static String INTRO_PAGE_2 = "title.somnolenttome.intro.page.2.text";
+	public static String INTRO_PAGE_3 = "title.somnolenttome.intro.page.3.text";
+	public static String INTRO_PAGE_4 = "title.somnolenttome.intro.page.4.text";
+	public static String INTRO_PAGE_5 = "title.somnolenttome.intro.page.5.text";
+	public static String INTRO_PAGE_6 = "title.somnolenttome.intro.page.6.text";
+	public static String INTRO_PAGE_7 = "title.somnolenttome.intro.page.7.text";
+	public static String INTRO_PAGE_8 = "title.somnolenttome.intro.page.8.text";
 
 	// World
-	public static String WORLD_PAGE_1 = "title.mystictome.world.page.1.text";
-	public static String WORLD_PAGE_2 = "title.mystictome.world.page.2.text";
-	public static String WORLD_PAGE_3 = "title.mystictome.world.page.3.text";
-	public static String WORLD_PAGE_4 = "title.mystictome.world.page.4.text";
-	public static String WORLD_PAGE_5 = "title.mystictome.world.page.5.text";
+	public static String WORLD_PAGE_1 = "title.somnolenttome.world.page.1.text";
+	public static String WORLD_PAGE_2 = "title.somnolenttome.world.page.2.text";
+	public static String WORLD_PAGE_3 = "title.somnolenttome.world.page.3.text";
+	public static String WORLD_PAGE_4 = "title.somnolenttome.world.page.4.text";
+	public static String WORLD_PAGE_5 = "title.somnolenttome.world.page.5.text";
 
 	// Equips
-	public static String EQUIP_PAGE_1 = "title.mystictome.equip.page.1.text";
-	public static String EQUIP_PAGE_2 = "title.mystictome.equip.page.2.text";
-	public static String EQUIP_PAGE_3 = "title.mystictome.equip.page.3.text";
+	public static String EQUIP_PAGE_1 = "title.somnolenttome.equip.page.1.text";
+	public static String EQUIP_PAGE_2 = "title.somnolenttome.equip.page.2.text";
+	public static String EQUIP_PAGE_3 = "title.somnolenttome.equip.page.3.text";
 
 	// Machines
-	public static String MACHINE_PAGE_1 = "title.mystictome.blocks.page.1.text";
-	public static String MACHINE_PAGE_2 = "title.mystictome.blocks.page.2.text";
-	public static String MACHINE_PAGE_3 = "title.mystictome.blocks.page.3.text";
-	public static String MACHINE_PAGE_4 = "title.mystictome.blocks.page.4.text";
-	public static String MACHINE_PAGE_5 = "title.mystictome.blocks.page.5.text";
-	public static String MACHINE_PAGE_6 = "title.mystictome.blocks.page.6.text";
-	public static String MACHINE_PAGE_7 = "title.mystictome.blocks.page.7.text";
-	public static String MACHINE_PAGE_8 = "title.mystictome.blocks.page.8.text";
+	public static String MACHINE_PAGE_1 = "title.somnolenttome.blocks.page.1.text";
+	public static String MACHINE_PAGE_2 = "title.somnolenttome.blocks.page.2.text";
+	public static String MACHINE_PAGE_3 = "title.somnolenttome.blocks.page.3.text";
+	public static String MACHINE_PAGE_4 = "title.somnolenttome.blocks.page.4.text";
+	public static String MACHINE_PAGE_5 = "title.somnolenttome.blocks.page.5.text";
+	public static String MACHINE_PAGE_6 = "title.somnolenttome.blocks.page.6.text";
+	public static String MACHINE_PAGE_7 = "title.somnolenttome.blocks.page.7.text";
+	public static String MACHINE_PAGE_8 = "title.somnolenttome.blocks.page.8.text";
 
 	// Generate
-	public static String GENERATION_PAGE_1 = "title.mystictome.blocks.page.1.text";
-	public static String GENERATION_PAGE_2 = "title.mystictome.blocks.page.2.text";
-	public static String GENERATION_PAGE_3 = "title.mystictome.blocks.page.3.text";
+	public static String GENERATION_PAGE_1 = "title.somnolenttome.blocks.page.1.text";
+	public static String GENERATION_PAGE_2 = "title.somnolenttome.blocks.page.2.text";
+	public static String GENERATION_PAGE_3 = "title.somnolenttome.blocks.page.3.text";
 
 	// Wands
-	public static String WANDS_PAGE_1 = "title.mystictome.wands.page.1.text";
-	public static String WANDS_PAGE_2 = "title.mystictome.wands.page.2.text";
-	public static String WANDS_PAGE_3 = "title.mystictome.wands.page.3.text";
+	public static String WANDS_PAGE_1 = "title.somnolenttome.wands.page.1.text";
+	public static String WANDS_PAGE_2 = "title.somnolenttome.wands.page.2.text";
+	public static String WANDS_PAGE_3 = "title.somnolenttome.wands.page.3.text";
 
 	// Runes
-	public static String RUNES_PAGE_1 = "title.mystictome.runes.page.1.text";
-	public static String RUNES_PAGE_2 = "title.mystictome.runes.page.2.text";
+	public static String RUNES_PAGE_1 = "title.somnolenttome.runes.page.1.text";
+	public static String RUNES_PAGE_2 = "title.somnolenttome.runes.page.2.text";
 
 	// Karma
-	public static String KARMA_PAGE_1 = "title.mystictome.karma.page.1.text";
+	public static String KARMA_PAGE_1 = "title.somnolenttome.karma.page.1.text";
 	// Elder
-	public static String ELDER_PAGE_1 = "title.mystictome.elder.page.1.text";
-	public static String ELDER_PAGE_2 = "title.mystictome.elder.page.2.text";
-	public static String ELDER_PAGE_3 = "title.mystictome.elder.page.3.text";
+	public static String ELDER_PAGE_1 = "title.somnolenttome.elder.page.1.text";
+	public static String ELDER_PAGE_2 = "title.somnolenttome.elder.page.2.text";
+	public static String ELDER_PAGE_3 = "title.somnolenttome.elder.page.3.text";
 
 	public static void registerPages() {
 
@@ -150,11 +150,11 @@ public class TomePageLib {
 				new ItemStack(ItemInit.karmic_drop.get()), I18n.format(KARMA_PAGE_1)));
 		// World Gen
 		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "The World", "Its all Natural!",
-				new ItemStack(BlockInit.mystic_earth.get()), I18n.format(WORLD_PAGE_1)));
+				new ItemStack(BlockInit.somnolent_earth.get()), I18n.format(WORLD_PAGE_1)));
 		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Plants", "Vibrational Flora",
-				new ItemStack(BlockInit.mystic_sapling.get()), I18n.format(WORLD_PAGE_2)));
+				new ItemStack(BlockInit.somnolent_sapling.get()), I18n.format(WORLD_PAGE_2)));
 		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "DreamScape", "Page 3",
-				new ItemStack(BlockInit.mystic_media.get()), I18n.format(WORLD_PAGE_3)));
+				new ItemStack(BlockInit.somnolent_media.get()), I18n.format(WORLD_PAGE_3)));
 		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Access", "Mysterious Mask",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(WORLD_PAGE_4)));
 		WorldGenPageList.add(new GuiTomePage(5, EnumTomeCatagories.WORLDGEN, "Nightmares", "The Bad Place",
@@ -216,7 +216,7 @@ public class TomePageLib {
 				BlocksPageList, GeneratePageList, WandsPageList, RunesPageList, ElderPageList);
 
 		// TOC PAGES
-		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.mana_powder.get())));
+		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.somnolent_powder.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.KARMA, new ItemStack(ItemInit.purging_stone.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WORLDGEN, new ItemStack(BlockInit.morel_mushroom.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.EQUIPS, new ItemStack(ItemInit.null_helmet.get())));

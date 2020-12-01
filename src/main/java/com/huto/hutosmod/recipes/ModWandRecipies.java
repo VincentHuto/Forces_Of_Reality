@@ -24,7 +24,7 @@ public class ModWandRecipies {
 		recipeManaAbsorbtion = registerRecipe(new ResourceLocation("wand_gain_vibes"),
 				new ItemStack(ItemInit.wand_gain_vibes.get(), 1), 0,
 				Ingredient.fromItems(ItemInit.channeling_ingot.get()),
-				Ingredient.fromItems(ItemInit.channeling_rod.get()), Ingredient.fromItems(ItemInit.mana_crystal.get()));
+				Ingredient.fromItems(ItemInit.channeling_rod.get()), Ingredient.fromItems(ItemInit.somnolent_crystal.get()));
 		test = registerRecipe(new ResourceLocation("anti_tear"),
 				new ItemStack(ItemInit.anti_tear.get(), 1), 0, Ingredient.fromItems(ItemInit.drying_agent.get()),
 				Ingredient.fromItems(ItemInit.storming_agent.get()),

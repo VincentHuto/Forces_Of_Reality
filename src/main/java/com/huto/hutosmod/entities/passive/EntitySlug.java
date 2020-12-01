@@ -84,7 +84,7 @@ public class EntitySlug extends AnimalEntity {
 			// System.out.println(world.getBlockState(this.getPosition().add(0, 1,
 			// 0)).getBlock());
 			if (world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock() instanceof CropsBlock) {
-				//Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
+				// Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
 				if (timer <= 150) {
 					timer++;
 					if (timer % 15 == 0) {
@@ -204,7 +204,7 @@ public class EntitySlug extends AnimalEntity {
 	@Override
 	protected void registerData() {
 		super.registerData();
-		this.dataManager.register(SLUG_TYPE, 1);
+		this.dataManager.register(SLUG_TYPE, rand.nextInt(3));
 	}
 
 	@Nullable

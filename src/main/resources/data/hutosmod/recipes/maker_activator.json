@@ -13,10 +13,10 @@
       "item": "hutosmod:energy_focus"
     },
     "C": {
-      "item": "hutosmod:mana_crystal"
+      "item": "hutosmod:somnolent_crystal"
     },
     "S": {
-      "item": "hutosmod:enchanted_stone_smooth"
+      "item": "hutosmod:somnolent_stone_smooth"
     }
   },
   "result": {

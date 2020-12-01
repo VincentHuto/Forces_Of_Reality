@@ -100,7 +100,7 @@ public class EntityDenizenSage extends AnimalEntity {
 	@Override
 	protected void registerData() {
 		super.registerData();
-		this.dataManager.register(DENIZEN_TYPE, 1);
+		this.dataManager.register(DENIZEN_TYPE, rand.nextInt(6));
 
 	}
 

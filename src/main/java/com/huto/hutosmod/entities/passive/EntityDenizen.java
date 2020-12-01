@@ -52,11 +52,14 @@ public class EntityDenizen extends AnimalEntity {
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
 		p_213410_0_.put(0, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_grey.png"));
-		p_213410_0_.put(1, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_grey_cloak.png"));
+		p_213410_0_.put(1,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_grey_cloak.png"));
 		p_213410_0_.put(2, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_red.png"));
-		p_213410_0_.put(3, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_red_cloak.png"));
+		p_213410_0_.put(3,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_red_cloak.png"));
 		p_213410_0_.put(4, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_white.png"));
-		p_213410_0_.put(5, new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_white_cloak.png"));
+		p_213410_0_.put(5,
+				new ResourceLocation(HutosMod.MOD_ID, "textures/entity/denizen/model_denizen_white_cloak.png"));
 	});
 
 	public EntityDenizen(EntityType<? extends EntityDenizen> type, World worldIn) {
@@ -83,7 +86,7 @@ public class EntityDenizen extends AnimalEntity {
 	@Override
 	protected void registerData() {
 		super.registerData();
-		this.dataManager.register(DENIZEN_TYPE, 1);
+		this.dataManager.register(DENIZEN_TYPE, rand.nextInt(6));
 
 	}
 
@@ -133,7 +136,6 @@ public class EntityDenizen extends AnimalEntity {
 	protected float getSoundVolume() {
 		return 0.4F;
 	}
-
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

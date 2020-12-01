@@ -145,9 +145,9 @@ public class BlockBonsaiPlanter extends Block {
 					BlockInit.anti_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
 			return ActionResultType.SUCCESS;
 		}
-		if (sapling == Item.getItemFromBlock(BlockInit.mystic_sapling.get())) {
+		if (sapling == Item.getItemFromBlock(BlockInit.somnolent_sapling.get())) {
 			worldIn.setBlockState(pos,
-					BlockInit.mystic_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+					BlockInit.somnolent_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
 
 			return ActionResultType.SUCCESS;
 		} else {

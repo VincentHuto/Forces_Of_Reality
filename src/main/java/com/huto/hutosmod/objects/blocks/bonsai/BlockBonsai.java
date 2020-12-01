@@ -163,11 +163,11 @@ public class BlockBonsai extends Block {
 			case MYSTIC:
 				if (this.getStage() == 1) {
 					worldIn.setBlockState(pos,
-							BlockInit.mystic_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+							BlockInit.somnolent_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
-							BlockInit.mystic_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
+							BlockInit.somnolent_bonsai_stage_3.get().getDefaultState().with(FACING, state.get(FACING)));
 				}
 				break;
 			case OAK:
@@ -344,13 +344,13 @@ public class BlockBonsai extends Block {
 			case MYSTIC:
 				if (this.getStage() == 3) {
 					worldIn.setBlockState(pos,
-							BlockInit.mystic_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
+							BlockInit.somnolent_bonsai_stage_2.get().getDefaultState().with(FACING, state.get(FACING)));
 					updatePlayerDevotion(worldIn, player);
 
 				}
 				if (this.getStage() == 2) {
 					worldIn.setBlockState(pos,
-							BlockInit.mystic_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
+							BlockInit.somnolent_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
 					updatePlayerDevotion(worldIn, player);
 
 				}

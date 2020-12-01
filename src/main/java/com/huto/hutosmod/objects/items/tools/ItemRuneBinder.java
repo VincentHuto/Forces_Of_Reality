@@ -150,9 +150,7 @@ public class ItemRuneBinder extends Item {
 
 	public void togglePickup(PlayerEntity playerEntity, ItemStack stack) {
 		CompoundNBT nbt = stack.getOrCreateTag();
-
 		boolean Pickup = !nbt.getBoolean("Pickup");
-
 		nbt.putBoolean("Pickup", Pickup);
 		if (playerEntity instanceof ServerPlayerEntity)
 			PacketHandler.RUNEBINDER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEntity),
