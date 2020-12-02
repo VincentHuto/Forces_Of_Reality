@@ -183,6 +183,8 @@ public class ClientEventSubscriber {
 
 	}
 
+
+
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}

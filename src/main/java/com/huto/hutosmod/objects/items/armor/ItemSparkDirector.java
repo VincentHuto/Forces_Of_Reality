@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.models.armor.ModelSparkDirector;
+import com.huto.hutosmod.models.armor.ModelSparkDirectorArmored;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.coven.PacketToggleDirectorFlightModeMessage;
 import com.huto.hutosmod.network.coven.SetGlidePkt;
@@ -38,13 +39,20 @@ public class ItemSparkDirector extends ArmorItem {
 	boolean flightMode;
 	public float heightModifier;
 	public String TAG_MODIFIER = "heightmodifier";
+	boolean isArmored;
 
-	public ItemSparkDirector(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+	public ItemSparkDirector(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn,
+			boolean isArmoredIn) {
 		super(materialIn, slot, builderIn);
+		this.isArmored = isArmoredIn;
 	}
 
 	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowGliding) {
 		PacketHandler.HANDLER.sendToServer(new SetGlidePkt(allowGliding));
+	}
+
+	public boolean isArmored() {
+		return isArmored;
 	}
 
 	// float heightModifier = 0.1f;
@@ -60,7 +68,7 @@ public class ItemSparkDirector extends ArmorItem {
 		double dz = player.getPosZ() - (newVec.getZ() * 0.8);
 		boolean flightActive = stack.getOrCreateTag().getBoolean("flightmode");
 		if (flightActive) {
-			if ( stack.getOrCreateTag().getFloat(TAG_MODIFIER)== 0.2f) {
+			if (stack.getOrCreateTag().getFloat(TAG_MODIFIER) == 0.2f) {
 				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f, 0);
 				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f, 0);
 				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 60, 0)), dx, dy, dz, 0, 0.06f, 0);
@@ -76,7 +84,8 @@ public class ItemSparkDirector extends ArmorItem {
 					jumpTicks--;
 					player.setMotion(
 							player.getMotion().add(0 + world.rand.nextFloat() * 0.1f - world.rand.nextFloat() * 0.1f,
-									 stack.getOrCreateTag().getFloat(TAG_MODIFIER) + world.rand.nextFloat() * 0.1f - world.rand.nextFloat() * 0.1f,
+									stack.getOrCreateTag().getFloat(TAG_MODIFIER) + world.rand.nextFloat() * 0.1f
+											- world.rand.nextFloat() * 0.1f,
 									0 + world.rand.nextFloat() * 0.1f - world.rand.nextFloat() * 0.1f));
 					if (!world.isRemote) {
 						if (!((PlayerEntity) player).isCreative()) {
@@ -97,7 +106,6 @@ public class ItemSparkDirector extends ArmorItem {
 		}
 
 	}
-
 
 	public boolean isFlightMode() {
 		return flightMode;
@@ -139,6 +147,12 @@ public class ItemSparkDirector extends ArmorItem {
 		String translationKey = getTranslationKey();
 
 		boolean pickupEnabled = stack.getOrCreateTag().getBoolean("flightmode");
+		if (isArmored) {
+			tooltip.add(new StringTextComponent(I18n.format("Armor: +7")).mergeStyle(TextFormatting.GREEN));
+		} else {
+			tooltip.add(new StringTextComponent(I18n.format("Armor: +0")).mergeStyle(TextFormatting.RED));
+		}
+
 		tooltip.add(
 				new StringTextComponent(I18n.format("Glide Modifier: " + stack.getOrCreateTag().getFloat(TAG_MODIFIER)))
 						.mergeStyle(TextFormatting.GOLD));
@@ -180,15 +194,30 @@ public class ItemSparkDirector extends ArmorItem {
 			EquipmentSlotType armorSlot, A _default) {
 		if (itemStack != ItemStack.EMPTY) {
 			if (itemStack.getItem() instanceof ArmorItem) {
-				ModelSparkDirector model = new ModelSparkDirector();
-				model.bipedBody.showModel = armorSlot == EquipmentSlotType.CHEST;
-				model.isChild = _default.isChild;
-				model.isSneak = _default.isSneak;
-				model.isSitting = _default.isSitting;
-				model.rightArmPose = _default.rightArmPose;
-				model.leftArmPose = _default.leftArmPose;
+				if (!isArmored) {
+					ModelSparkDirector model = new ModelSparkDirector();
+					model.bipedBody.showModel = armorSlot == EquipmentSlotType.CHEST;
+					model.isChild = _default.isChild;
+					model.isSneak = _default.isSneak;
+					model.isSitting = _default.isSitting;
+					model.rightArmPose = _default.rightArmPose;
+					model.leftArmPose = _default.leftArmPose;
 
-				return (A) model;
+					return (A) model;
+				}
+
+				else if (isArmored) {
+					ModelSparkDirectorArmored model = new ModelSparkDirectorArmored();
+					model.bipedBody.showModel = armorSlot == EquipmentSlotType.CHEST;
+					model.isChild = _default.isChild;
+					model.isSneak = _default.isSneak;
+					model.isSitting = _default.isSitting;
+					model.rightArmPose = _default.rightArmPose;
+					model.leftArmPose = _default.leftArmPose;
+
+					return (A) model;
+				}
+
 			}
 		}
 		return null;

@@ -22,6 +22,7 @@ import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ModSpawnEggItem;
 import com.huto.hutosmod.objects.items.armor.EnumModArmorTiers;
 import com.huto.hutosmod.objects.items.armor.ItemAttractionCharm;
+import com.huto.hutosmod.objects.items.armor.ItemAuricHelm;
 import com.huto.hutosmod.objects.items.armor.ItemClovenHooves;
 import com.huto.hutosmod.objects.items.armor.ItemEmpCharm;
 import com.huto.hutosmod.objects.items.armor.ItemEnticingMantle;
@@ -317,10 +318,42 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> emp_charm = ITEMS.register("emp_charm", () -> new ItemEmpCharm(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> auric_helm = ITEMS.register("auric_helm",
+			() -> new ItemAuricHelm(EnumModArmorTiers.AURICHELM, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> auric_chest = ITEMS.register("auric_chest",
+			() -> new ArmorItem(EnumModArmorTiers.AURICCHEST, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> auric_leggings = ITEMS.register("auric_leggings",
+			() -> new ArmorItem(EnumModArmorTiers.AURICCHEST, EquipmentSlotType.LEGS,
+					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> auric_boots = ITEMS.register("auric_boots",
+			() -> new ArmorItem(EnumModArmorTiers.AURICCHEST, EquipmentSlotType.FEET,
+					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_spark_director = ITEMS.register("machina_spark_director",
 			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(HutosModItemGroup.instance)));
+					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC), false));
+	public static final RegistryObject<Item> machina_spark_director_armored = ITEMS.register("machina_spark_director_armored",
+			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR_ARMORED, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC), true));
 
+
+	// Gloves
+	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(HutosModItemGroup.instance),
+					"mechan_glove", 3, Rarity.UNCOMMON));
+	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.RARE).maxStackSize(1).group(HutosModItemGroup.instance),
+					"mechan_glove_superior", 6, Rarity.RARE));
+	public static final RegistryObject<Item> mechan_glove_masterpiece = ITEMS.register("mechan_glove_masterpiece",
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(HutosModItemGroup.instance),
+					"mechan_glove_masterpiece", 9, Rarity.EPIC));
+	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS.register("mechan_glove_godlike",
+			() -> new ItemMechanGlove(new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
+					.group(HutosModItemGroup.instance), "mechan_glove_godlike", 9, ModTextFormatting.AURIC));
 	// Modules
 	public static final RegistryObject<Item> mechan_module = ITEMS.register("mechan_module",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
@@ -343,25 +376,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> mechan_module_thruster = ITEMS.register("mechan_module_thruster",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"Increases the power of an equiped Machina Spark Director, Allows for boosting"));
-	// Gloves
-	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
-			() -> new ItemMechanGlove(
-					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(HutosModItemGroup.instance),
-					"mechan_glove", 3, Rarity.UNCOMMON));
-
-	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
-			() -> new ItemMechanGlove(
-					new Item.Properties().rarity(Rarity.RARE).maxStackSize(1).group(HutosModItemGroup.instance),
-					"mechan_glove_superior", 6, Rarity.RARE));
-
-	public static final RegistryObject<Item> mechan_glove_masterpiece = ITEMS.register("mechan_glove_masterpiece",
-			() -> new ItemMechanGlove(
-					new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(HutosModItemGroup.instance),
-					"mechan_glove_masterpiece", 9, Rarity.EPIC));
-
-	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS.register("mechan_glove_godlike",
-			() -> new ItemMechanGlove(new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
-					.group(HutosModItemGroup.instance), "mechan_glove_godlike", 9, ModTextFormatting.AURIC));
+	
 	// Food
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",

@@ -18,9 +18,15 @@ public class ModFuserRecipies {
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
 			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade,
-			recipeAuricBowBlade, recipeNullTrickAxe, recipeMysticTrickAxe, recipeAuricTrickAxe, recipeIdentifier;
+			recipeAuricBowBlade, recipeNullTrickAxe, recipeMysticTrickAxe, recipeAuricTrickAxe, recipeIdentifier,
+			recipeArmoredDirector;
 
 	public static void init() {
+
+		recipeArmoredDirector = registerRecipe(new ResourceLocation("machina_spark_director_armored"),
+				new ItemStack(ItemInit.machina_spark_director_armored.get(), 1), 150,
+				Ingredient.fromItems(ItemInit.machina_spark_director.get()),
+				Ingredient.fromItems(ItemInit.auric_chest.get()));
 
 		recipeIdentifier = registerRecipe(new ResourceLocation("allegeiance_identifier"),
 				new ItemStack(ItemInit.allegiance_identifier.get(), 1), 30,
@@ -77,7 +83,8 @@ public class ModFuserRecipies {
 				new ItemStack(ItemInit.phantasmal_pane.get(), 1), 10, Ingredient.fromItems(ItemInit.readied_pane.get()),
 				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(ItemInit.anti_tear.get()));
 		recipeUpgradeBlock = registerRecipe(new ResourceLocation("upgrade_block"),
-				new ItemStack(ItemInit.upgrade_block.get(), 1), 50, Ingredient.fromItems(ItemInit.somnolent_crystal.get()),
+				new ItemStack(ItemInit.upgrade_block.get(), 1), 50,
+				Ingredient.fromItems(ItemInit.somnolent_crystal.get()),
 				Ingredient.fromItems(ItemInit.upgrade_blank.get()));
 		recipeUpgradeAnimal = registerRecipe(new ResourceLocation("upgrade_animal"),
 				new ItemStack(ItemInit.upgrade_animal.get(), 1), 50, Ingredient.fromItems(Blocks.GRASS_BLOCK),

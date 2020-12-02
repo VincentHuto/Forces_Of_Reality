@@ -13,6 +13,7 @@ import com.huto.hutosmod.entities.projectiles.EntityDreadRocketDirected;
 import com.huto.hutosmod.entities.projectiles.EntityShortCircuit;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.items.armor.ItemSparkDirector;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -178,7 +179,7 @@ public class ItemMechanGlove extends Item {
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
 					// TODO "This is where id put my laser, IF I HAD ONE"
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_thruster.get()) {
-					if (playerIn.inventory.armorInventory.get(2).getItem() == ItemInit.machina_spark_director.get()) {
+					if (playerIn.inventory.armorInventory.get(2).getItem() instanceof ItemSparkDirector	) {
 						ItemStack armor = playerIn.inventory.armorInventory.get(2);
 						if (armor.getOrCreateTag().getFloat("heightmodifier") == 0.1f) {
 							armor.getOrCreateTag().putFloat("heightmodifier", 0.2f);
@@ -203,7 +204,7 @@ public class ItemMechanGlove extends Item {
 		if (itemStack.getTag().getBoolean(TAG_SWORDSTATE)) {
 			itemStack.getTag().putBoolean(TAG_SWORDSTATE, false);
 		}
-		if (playerIn.inventory.armorInventory.get(2).getItem() == ItemInit.machina_spark_director.get()) {
+		if (playerIn.inventory.armorInventory.get(2).getItem() instanceof ItemSparkDirector) {
 			ItemStack armor = playerIn.inventory.armorInventory.get(2);
 			armor.getOrCreateTag().putFloat("heightmodifier", 0.1f);
 		}

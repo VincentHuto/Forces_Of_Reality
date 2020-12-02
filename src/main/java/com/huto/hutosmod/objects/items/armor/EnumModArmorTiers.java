@@ -49,7 +49,19 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 	SPARKDIRECTOR(HutosMod.MOD_ID + ":spark_director", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
-			});
+			}),
+	AURICHELM(HutosMod.MOD_ID + ":auric_helm", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
+			0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.auric_ingot.get());
+			}),
+	SPARKDIRECTOR_ARMORED(HutosMod.MOD_ID + ":spark_director_armored", 37, new int[] { 7, 7,7, 7 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F,
+			0.3F, () -> {
+				return Ingredient.fromItems(ItemInit.auric_ingot.get());
+			}),
+	AURICCHEST(HutosMod.MOD_ID + ":auric_chest", 37, new int[] { 5, 5,5, 5 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F,
+			0.3F, () -> {
+				return Ingredient.fromItems(ItemInit.auric_ingot.get());
+			});;
 	;
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;
