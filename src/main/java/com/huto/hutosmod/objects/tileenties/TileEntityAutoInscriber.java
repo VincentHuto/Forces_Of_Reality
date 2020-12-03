@@ -11,8 +11,8 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipes.ModWandRecipies;
-import com.huto.hutosmod.recipes.RecipeWandMaker;
+import com.huto.hutosmod.recipes.ModInscriberRecipes;
+import com.huto.hutosmod.recipes.RecipeAutoInscriber;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -27,22 +27,22 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
-public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
+public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	int cooldown = 0;
 	int recipeKeepTicks = 0;
-	float maxVibes = 400;
+	float maxVibes = 200;
 	public final String TAG_SIZE = "tankSize";
 	List<ItemStack> lastRecipe = null;
-	RecipeWandMaker currentRecipe;
+	RecipeAutoInscriber currentRecipe;
 	public final String TAG_LEVEL = "level";
 	public int level = 1;
 	public float clientVibes = 0.0f;
 
-	public TileEntityWandMaker() {
-		super(TileEntityInit.wand_maker.get());
+	public TileEntityAutoInscriber() {
+		super(TileEntityInit.auto_inscriber.get());
 	}
 
 	@Override
@@ -74,8 +74,8 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		this.maxVibes = maxVibes;
 	}
 
-	public RecipeWandMaker getCurrentRecipe() {
-		for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+	public RecipeAutoInscriber getCurrentRecipe() {
+		for (RecipeAutoInscriber recipe_ : ModInscriberRecipes.inscriberRecipies) {
 			if (recipe_.matches(itemHandler)) {
 				currentRecipe = recipe_;
 			}
@@ -85,7 +85,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 	}
 
 	public boolean hasValidRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+		for (RecipeAutoInscriber recipe : ModInscriberRecipes.inscriberRecipies)
 			if (recipe.matches(itemHandler))
 				return true;
 
@@ -93,7 +93,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 	}
 
 	public void updateRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+		for (RecipeAutoInscriber recipe : ModInscriberRecipes.inscriberRecipies)
 			if (recipe.matches(itemHandler)) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -122,7 +122,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			}
 
 		if (did)
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
 
@@ -134,9 +134,10 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			}
 		}
 		if (world.isRemote) {
-			//Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
-			//Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
-			//HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(), 0xFF00FF, 0x000000);
+			// Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
+			// Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
+			// HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(),
+			// 0xFF00FF, 0x000000);
 
 		}
 	}
@@ -251,11 +252,11 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 	}
 
 	public void onActivated(PlayerEntity player, ItemStack wand) {
-		RecipeWandMaker recipe = null;
+		RecipeAutoInscriber recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
-			for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+			for (RecipeAutoInscriber recipe_ : ModInscriberRecipes.inscriberRecipies) {
 
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;

@@ -303,7 +303,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 					world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
 				}
 				world.addEntity(outputItem);
-				vibes.setVibes(vibes.getVibes() - recipe.getManaUsage());
+				vibes.setVibes(vibes.getVibes() - manaCost);
 				currentRecipe = null;
 				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
 				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);

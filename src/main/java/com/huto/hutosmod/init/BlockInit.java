@@ -30,6 +30,7 @@ import com.huto.hutosmod.objects.blocks.bonsai.BlockOakBonsai;
 import com.huto.hutosmod.objects.blocks.bonsai.BlockSomnolentBonsai;
 import com.huto.hutosmod.objects.blocks.bonsai.BlockSpruceBonsai;
 import com.huto.hutosmod.objects.blocks.util.EnumBonsaiTypes;
+import com.huto.hutosmod.objects.blocks.vibes.BlockAutoInscriber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicExtractor;
@@ -331,10 +332,13 @@ public class BlockInit {
 	public static final RegistryObject<Block> vibratory_accelerometer = BLOCKS.register("vibratory_accelerometer",
 			() -> new BlockVibeAccel(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
 	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
 			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> auto_inscriber = BLOCKS.register("auto_inscriber",
+			() -> new BlockAutoInscriber(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
 
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",

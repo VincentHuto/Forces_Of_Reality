@@ -49,7 +49,7 @@ public class TileEntityCapacitor extends TileVibeSimpleInventory
 		if (tankLevel == 0) {
 			return this.maxVibes = 100;
 		} else if (tankLevel > 0 && tankLevel < 4) {
-			return this.maxVibes = (tankLevel + 1) * 100;
+			return this.maxVibes = (tankLevel + 1) * 50;
 		} else {
 			return maxVibes;
 		}

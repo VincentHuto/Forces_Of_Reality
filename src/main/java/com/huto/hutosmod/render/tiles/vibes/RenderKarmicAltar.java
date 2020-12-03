@@ -1,4 +1,4 @@
-package com.huto.hutosmod.render.tiles;
+package com.huto.hutosmod.render.tiles.vibes;
 
 import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.render.tiles;
+package com.huto.hutosmod.render.tiles.coven;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelFloatingCandle;

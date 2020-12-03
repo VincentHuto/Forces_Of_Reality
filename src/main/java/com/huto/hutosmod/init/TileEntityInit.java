@@ -4,6 +4,7 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
 import com.huto.hutosmod.objects.tileenties.TileEntityAuspiciousBundle;
+import com.huto.hutosmod.objects.tileenties.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
 import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
@@ -129,15 +130,15 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityUntoldEasel>> untold_easel = TILES.register(
 			"untold_easel",
 			() -> TileEntityType.Builder.create(TileEntityUntoldEasel::new, BlockInit.untold_easel.get()).build(null));
-	
-	public static final RegistryObject<TileEntityType<TileEntityMagicLight>> light_block = TILES.register(
-			"light_block",
+
+	public static final RegistryObject<TileEntityType<TileEntityMagicLight>> light_block = TILES.register("light_block",
 			() -> TileEntityType.Builder.create(TileEntityMagicLight::new, BlockInit.light_block.get()).build(null));
-	
-	public static final RegistryObject<TileEntityType<TileEntityMagicRingLight>> light_ring_block = TILES.register(
-			"light_ring_block",
-			() -> TileEntityType.Builder.create(TileEntityMagicRingLight::new, BlockInit.light_ring_block.get()).build(null));
-	
-	
+
+	public static final RegistryObject<TileEntityType<TileEntityMagicRingLight>> light_ring_block = TILES
+			.register("light_ring_block", () -> TileEntityType.Builder
+					.create(TileEntityMagicRingLight::new, BlockInit.light_ring_block.get()).build(null));
+	public static final RegistryObject<TileEntityType<TileEntityAutoInscriber>> auto_inscriber = TILES
+			.register("auto_inscriber", () -> TileEntityType.Builder
+					.create(TileEntityAutoInscriber::new, BlockInit.auto_inscriber.get()).build(null));
 
 }

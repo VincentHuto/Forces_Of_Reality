@@ -1,8 +1,8 @@
-package com.huto.hutosmod.render.tiles;
+package com.huto.hutosmod.render.tiles.vibes;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
+import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -20,16 +20,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderVibeFuser extends TileEntityRenderer<TileEntityVibeFuser> {
+public class RenderResonator extends TileEntityRenderer<TileEntityVibeResonator> {
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
 
-	public RenderVibeFuser(TileEntityRendererDispatcher rendererDispatcherIn) {
+	public RenderResonator(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void render(TileEntityVibeFuser te, float partialTicks, MatrixStack matrixStackIn,
+	public void render(TileEntityVibeResonator te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		GlStateManager.pushMatrix();
 		GlStateManager.color4f(1F, 1F, 1F, 1F);
@@ -53,15 +53,15 @@ public class RenderVibeFuser extends TileEntityRenderer<TileEntityVibeFuser> {
 		Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 		for (int i = 0; i < te.getSizeInventory(); i++) {
 			matrixStackIn.push();
-			matrixStackIn.translate(0.5F, 1.5f, 0.5F);
+			matrixStackIn.translate(0.5F, 1.25F, 0.5F);
 			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(angles[i] + (float) time));
 			// Edit True Radius
-			matrixStackIn.translate(.1, -1.4F, 0.2F);
+			matrixStackIn.translate(0.025F, -0.5F, 0.025F);
 			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90f));
 			// Edit Radius Movement
-			matrixStackIn.translate(0D, 0.175f + 0.25, 0F);
+			matrixStackIn.translate(0D, 0.175D + i * 0.55, 0F);
 			// Block/Item Scale
-			matrixStackIn.scale(0.3f, 0.3f, 0.3f);
+			matrixStackIn.scale(0.5f, 0.5f, 0.5f);
 			ItemStack stack = te.getItemHandler().getStackInSlot(i);
 			Minecraft mc = Minecraft.getInstance();
 			if (!stack.isEmpty()) {
@@ -71,8 +71,8 @@ public class RenderVibeFuser extends TileEntityRenderer<TileEntityVibeFuser> {
 			matrixStackIn.pop();
 		}
 		GlStateManager.popMatrix();
-		matrixStackIn.translate(0.5, 1.8, 0.5);
-		matrixStackIn.scale(0.75f, 0.75f, 0.75f);
+		matrixStackIn.translate(0.5, 1.2, 0.5);
+		matrixStackIn.scale(0.5f, 0.5f, 0.5f);
 		// Cubes
 		for (int i = 1; i < te.getLevel(); i++) {
 			double ticks = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks - 1.3;
@@ -105,7 +105,7 @@ public class RenderVibeFuser extends TileEntityRenderer<TileEntityVibeFuser> {
 			IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
 			IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(magatamas
-					.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal_red.png")));
+					.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal.png")));
 			magatamas.render(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
 					1.0F);
 			irendertypebuffer$impl.finish();

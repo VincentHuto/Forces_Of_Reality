@@ -1,8 +1,8 @@
-package com.huto.hutosmod.render.tiles;
+package com.huto.hutosmod.render.tiles.vibes;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
+import com.huto.hutosmod.objects.tileenties.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -20,17 +20,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderResonator extends TileEntityRenderer<TileEntityVibeResonator> {
+public class RenderAutoInscriber extends TileEntityRenderer<TileEntityAutoInscriber> {
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
 
-	public RenderResonator(TileEntityRendererDispatcher rendererDispatcherIn) {
+	public RenderAutoInscriber(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void render(TileEntityVibeResonator te, float partialTicks, MatrixStack matrixStackIn,
+	public void render(TileEntityAutoInscriber te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+		matrixStackIn.push();
+	
+		matrixStackIn.pop();
+
 		GlStateManager.pushMatrix();
 		GlStateManager.color4f(1F, 1F, 1F, 1F);
 		GlStateManager.translated(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
@@ -59,7 +63,7 @@ public class RenderResonator extends TileEntityRenderer<TileEntityVibeResonator>
 			matrixStackIn.translate(0.025F, -0.5F, 0.025F);
 			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90f));
 			// Edit Radius Movement
-			matrixStackIn.translate(0D, 0.175D + i * 0.55, 0F);
+			matrixStackIn.translate(0D, 0.175D + i * 0.25, 0F);
 			// Block/Item Scale
 			matrixStackIn.scale(0.5f, 0.5f, 0.5f);
 			ItemStack stack = te.getItemHandler().getStackInSlot(i);
@@ -71,15 +75,15 @@ public class RenderResonator extends TileEntityRenderer<TileEntityVibeResonator>
 			matrixStackIn.pop();
 		}
 		GlStateManager.popMatrix();
-		matrixStackIn.translate(0.5, 1.2, 0.5);
-		matrixStackIn.scale(0.5f, 0.5f, 0.5f);
+		matrixStackIn.translate(0.5, 1.8, 0.5);
+		matrixStackIn.scale(0.4f, 0.4f, 0.4f);
 		// Cubes
 		for (int i = 1; i < te.getLevel(); i++) {
 			double ticks = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks - 1.3;
-			final float modifier = 6F;
-			final float rotationModifier = 0.2F;
-			final float radiusBase = 0.9F;
-			final float radiusMod = 0.0F;
+			final float modifier = 16F;
+			final float rotationModifier = 0.3F;
+			final float radiusBase = 0.55F;
+			final float radiusMod = 0.01F;
 			int cubes;
 			if (te.getLevel() > 1) {
 				cubes = te.getLevel() - 1;
@@ -87,29 +91,35 @@ public class RenderResonator extends TileEntityRenderer<TileEntityVibeResonator>
 				cubes = 1;
 
 			}
-			float offsetPerCube = 360 / cubes;
+			float offsetPerCube = 135 / cubes;
 			float offset = offsetPerCube * i;
 			float deg = (int) (ticks / rotationModifier % 360F + offset);
-			float rad = deg * (float) Math.PI / 180F;
+			float rad = deg * (float) Math.PI / 90f;
 			float radiusX = (float) (radiusBase + radiusMod * Math.sin(ticks / modifier));
 			float radiusZ = (float) (radiusBase + radiusMod * Math.cos(ticks / modifier));
 			float x = (float) (radiusX * Math.cos(rad));
 			float z = (float) (radiusZ * Math.sin(rad));
-			float y = (float) Math.cos((ticks + 50 * i) / 5F) / 10F;
+			float y = (float) Math.cos((ticks + 50 * i) / 15F);
+
+			// float xRotate = (float) Math.sin(ticks * rotationModifier) /15F;
+			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 2.5F);
+			// float zRotate = (float) Math.cos(ticks * rotationModifier) / 15f;
+
 			matrixStackIn.push();
 			matrixStackIn.translate(x, y, z);
-			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 0.5F);
-			matrixStackIn.rotate(Vector3f.YP.rotation(yRotate));
+			matrixStackIn.rotate(Vector3f.YN.rotation(yRotate / 12));
 			matrixStackIn.rotate(Vector3f.ZP.rotation(135));
+			// matrixStackIn.rotate(Vector3f.XP.rotation(xRotate / 12));
 
 			IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
 			IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(magatamas
-					.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal.png")));
+					.getRenderType(new ResourceLocation(HutosMod.MOD_ID + ":textures/blocks/end_portal_red.png")));
 			magatamas.render(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
 					1.0F);
 			irendertypebuffer$impl.finish();
 			matrixStackIn.pop();
 		}
 	}
+
 }

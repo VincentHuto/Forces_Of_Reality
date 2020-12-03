@@ -1,4 +1,4 @@
-package com.huto.hutosmod.render.tiles;
+package com.huto.hutosmod.render.tiles.vibes;
 
 import java.util.List;
 import java.util.Random;
@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
-import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -27,7 +27,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
+public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum> {
+
+	/** The texture for the book above the enchantment table. */
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
 
 	// Portal Sctuff
@@ -38,34 +40,37 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		return RenderType.getEndPortal(p_228882_0_ + 1);
 	}).collect(ImmutableList.toImmutableList());
 
-	public RenderCapacitor(TileEntityRendererDispatcher rendererDispatcherIn) {
+	public RenderStorageDrum(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void render(TileEntityCapacitor te, float partialTicks, MatrixStack matrixStackIn,
+	public void render(TileEntityStorageDrum te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
 		float vibe = te.clientVibes;
-		float heightMod = 0;
+		//System.out.println(te.getUpdateTag().get(te.TAG_VIBES));
 
-		// Check System that increments the vibe based on amount and color
-		if (vibe >= 0 && vibe <= 50)
-			heightMod = (float) (vibe / 50 * 0.75);
-		if (vibe > 50 && vibe <= 100)
-			heightMod = (float) (((vibe - 50) / 100) * 1.6 + 0.065);
-		if (vibe > 100 && vibe <= 150) {
-			heightMod = (float) (((vibe - 90) / 150) * 1.9);
-		} else if (vibe > 150) {
-			heightMod = (float) (((vibe - 140) / 200) * 1 + 0.02);
+		float heightMod = 0;
+		// Check System that increments the mana based on amount and color
+		if (vibe > 0 && vibe <= 300)
+			heightMod = (float) (vibe / 300 * 1.7);
+		if (vibe > 300 && vibe <= 600)
+			heightMod = (float) (((vibe - 280) / 300) * 1.4);
+		if (vibe > 600 && vibe <= 900) {
+			heightMod = (float) (((vibe - 580) / 300) * 1.4);
+		} else if (vibe > 900) {
+			heightMod = (float) (((vibe - 880) / 300) * 3.5);
 		}
-		if (heightMod > 0.75) {
-			heightMod = (float) 0.75;
+		if (heightMod > 1.4) {
+			heightMod = (float) 1.4;
 		}
-		
-		double manaRatioColor = vibe / 50;
-		float colorMod =0;
+
+		double manaRatioColor = vibe / 300;
+		manaRatioColor=manaRatioColor+0.1;
+
+		float colorMod = 0;
 		// Higher F1 = more blue
 		if (manaRatioColor <= 1) {
 			colorMod = 0.35F;
@@ -76,17 +81,16 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 			colorMod = 12.4F;
 
 		}
-
 		// Portal Schtuff
 		RANDOM.setSeed(31100L);
 		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
 		int p = this.getPasses(d0);
 		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-		this.renderCube(te,  0.15f,colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
+		this.renderCube(te, 0.15f, colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
 		for (int j = 1; j < p; ++j) {
-			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)), heightMod);
+			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)),
+					heightMod);
 		}
-	
 
 		// Add items above block
 		int items = 0;
@@ -104,11 +108,10 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		Minecraft.getInstance().textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 		for (int k = 0; k < te.getSizeInventory(); k++) {
 			matrixStackIn.push();
-			matrixStackIn.translate(0.5F, 1.3F, 0.5F);
-			matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(angles[k] + (float) time));
-			matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angles[k] + (float) time));
-			matrixStackIn.rotate(Vector3f.YN.rotationDegrees(angles[k] + (float) time));
-
+			matrixStackIn.translate(0.5F, 2F, 0.5F);
+			matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(angles[k] + (float) time * 0.8f));
+			matrixStackIn.rotate(Vector3f.XP.rotationDegrees(angles[k] + (float) time * 0.8f));
+			matrixStackIn.rotate(Vector3f.YN.rotationDegrees(angles[k] + (float) time * 0.8f));
 			// Edit True Radius
 			matrixStackIn.translate(0.025F, -0.5F, 0.025F);
 			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90f));
@@ -124,8 +127,8 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 			}
 			matrixStackIn.pop();
 		}
-		matrixStackIn.translate(0.5, 1.2, 0.5);
-		matrixStackIn.scale(0.5f, 0.5f, 0.5f);
+		matrixStackIn.translate(0.5, 1.8, 0.5);
+		matrixStackIn.scale(0.75f, 0.75f, 0.75f);
 		// Cubes
 		for (int i = 0; i < te.getTankLevel(); i++) {
 			double ticks = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks - 1.3;
@@ -160,28 +163,28 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		}
 	}
 
-	private void renderCube(TileEntityCapacitor te, float offset, float fIn, Matrix4f matrix, IVertexBuilder vertx,	float heightModIn) {
+	private void renderCube(TileEntityStorageDrum te, float offset, float fIn, Matrix4f matrix, IVertexBuilder vertx,
+			float heightModIn) {
 		float r = (RANDOM.nextFloat() * 0.5F + 0.1F) * fIn;
 		float g = (RANDOM.nextFloat() * 0.5F + 0.4F) * fIn;
 		float b = (RANDOM.nextFloat() * 0.5F + 0.5F) * fIn;
 		float a = 1f;
-
-		this.renderFace(te, matrix, vertx, 0.31f, .69f, 0.0f, heightModIn, .69f, .69f, .69f, .69f, r, g, b, a,
+		this.renderFace(te, matrix, vertx, 0.125F, .875F, 0.0625F, heightModIn, .875F, .875F, .875F, .875F, r, g, b, a,
 				Direction.SOUTH);
-		this.renderFace(te, matrix, vertx, 0.31f, .69f, heightModIn, 0.0f, 0.31f, 0.31f, 0.31f, 0.31f, r, g, b, a,
-				Direction.NORTH);
-		this.renderFace(te, matrix, vertx, 0.69f, 0.69f, heightModIn, 0.0625F, 0.31f, 0.69f, 0.69f, 0.31f, r, g, b, a,
-				Direction.EAST);
-		this.renderFace(te, matrix, vertx, 0.31f, 0.31f, 0.0f, heightModIn, 0.31f, 0.69f, 0.69f, 0.31f, r, g, b, a,
-				Direction.WEST);
+		this.renderFace(te, matrix, vertx, 0.125F, .875F, heightModIn, 0.00F, 0.125F, 0.125F, 0.125F, 0.125F, r, g, b,
+				a, Direction.NORTH);
+		this.renderFace(te, matrix, vertx, 0.875F, 0.875F, heightModIn, 0.0625F, 0.125F, 0.875F, 0.875F, 0.125F, r, g,
+				b, a, Direction.EAST);
+		this.renderFace(te, matrix, vertx, 0.125F, 0.125F, 0.00F, heightModIn, 0.125F, 0.875F, 0.875F, 0.125F, r, g, b,
+				a, Direction.WEST);
 		// Down isnt really needed because itll never be seen
 		// this.renderFace(te, matrix, vertx, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F,
 		// 1.0F, r, g, b, a, Direction.DOWN);
-		this.renderFace(te, matrix, vertx, 0.31f, 0.69f, heightModIn, heightModIn, 0.69f, 0.69f, 0.31f, 0.31f, r, g, b, a,
-				Direction.UP);
+		this.renderFace(te, matrix, vertx, 0.125F, 0.875F, heightModIn, heightModIn, 0.875F, 0.875F, 0.125F, 0.125F, r,
+				g, b, a, Direction.UP);
 	}
 
-	private void renderFace(TileEntityCapacitor te, Matrix4f matrix, IVertexBuilder vertextBuilder, float x, float y,
+	private void renderFace(TileEntityStorageDrum te, Matrix4f matrix, IVertexBuilder vertextBuilder, float x, float y,
 			float z, float x1, float y1, float z1, float f1, float f2, float r, float g, float b, float a,
 			Direction direction) {
 		if (true) {
@@ -216,4 +219,5 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 	protected float getOffset() {
 		return 0.75F;
 	}
+
 }

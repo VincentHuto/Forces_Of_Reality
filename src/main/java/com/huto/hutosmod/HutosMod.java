@@ -33,6 +33,7 @@ import com.huto.hutosmod.recipes.CopyMechanGloveDataRecipe;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
+import com.huto.hutosmod.recipes.ModInscriberRecipes;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
 import com.huto.hutosmod.render.entity.layer.RunesRenderLayer;
@@ -139,6 +140,7 @@ public class HutosMod {
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
 		ModChiselRecipes.init();
+		ModInscriberRecipes.init();
 		PacketHandler.registerChannels();
 		PacketHandler.registerRuneBinderChannels();
 		PacketHandler.registerMechanGloveChannels();

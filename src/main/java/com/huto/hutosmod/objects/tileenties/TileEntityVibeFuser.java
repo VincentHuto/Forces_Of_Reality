@@ -262,6 +262,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 			}
 
 		if (recipe != null) {
+			System.out.println(recipe.getManaUsage());
 			float manaCost = recipe.getManaUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 				ItemStack output = recipe.getOutput().copy();
@@ -271,7 +272,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 					world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
 				}
 				world.addEntity(outputItem);
-				vibes.setVibes(vibes.getVibes() - recipe.getManaUsage());
+				vibes.setVibes(vibes.getVibes() - manaCost);
 				currentRecipe = null;
 				world.addBlockEvent(getPos(), BlockInit.vibratory_fuser.get(), SET_COOLDOWN_EVENT, 60);
 				world.addBlockEvent(getPos(), BlockInit.vibratory_fuser.get(), CRAFT_EFFECT_EVENT, 0);
