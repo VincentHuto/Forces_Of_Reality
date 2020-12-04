@@ -11,7 +11,7 @@ import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.coven.CovenantPacketServer;
 import com.huto.hutosmod.objects.blocks.util.IBlockDevotionStation;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
-import com.huto.hutosmod.objects.tileenties.TileEntityOccularHeap;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityOccularHeap;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;

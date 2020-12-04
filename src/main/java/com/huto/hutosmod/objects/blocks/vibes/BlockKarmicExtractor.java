@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.objects.blocks.util.IActivatable;
-import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicExtractor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

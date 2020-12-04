@@ -3,8 +3,8 @@ package com.huto.hutosmod.capabilities.vibes;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.vibes.VibrationPacketServer;
-import com.huto.hutosmod.objects.tileenties.TileModVibes;
-import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.TileModVibes;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

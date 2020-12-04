@@ -2,8 +2,8 @@ package com.huto.hutosmod.objects.items.tools;
 
 import java.util.List;
 
-import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -122,7 +122,7 @@ public class ItemFrequencyMatcher extends Item {
 						Vector3d teVec = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
 						Vector3d readVec = new Vector3d(readPos.getX(), readPos.getY(), readPos.getZ());
 						double distance = teVec.distanceTo(readVec);
-						if (distance < 4) {
+						if (distance < 7) {
 							te.addToLinkedBlocks(readPos);
 							VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 							return ActionResultType.SUCCESS;
@@ -145,7 +145,7 @@ public class ItemFrequencyMatcher extends Item {
 				Vector3d teVec = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
 				Vector3d readVec = new Vector3d(readPos.getX(), readPos.getY(), readPos.getZ());
 				double distance = teVec.distanceTo(readVec);
-				if (distance < 4) {
+				if (distance < 7) {
 					te.removeFromLinkedBlocks(readPos);
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 					return ActionResultType.SUCCESS;
@@ -173,8 +173,13 @@ public class ItemFrequencyMatcher extends Item {
 			if (stack.getTag().getBoolean(TAG_STATE)) {
 				tooltip.add(new TranslationTextComponent("State: Link").mergeStyle(TextFormatting.BLUE));
 			} else {
-				tooltip.add(new TranslationTextComponent("State: Unlinke").mergeStyle(TextFormatting.RED));
+				tooltip.add(new TranslationTextComponent("State: Unlink").mergeStyle(TextFormatting.RED));
 			}
 		}
 	}
+
+    public static BlockPos getConnectionPos(ItemStack wrench) {
+        CompoundNBT compound = wrench.getOrCreateTag();
+        return  NBTUtil.readBlockPos(compound.getCompound(TAG_POS_NAME));
+    }
 }

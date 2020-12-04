@@ -2,7 +2,7 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"NON",
-		"OPO",
+		"O O",
 		"NON"
 	],
 	"key": {
@@ -11,14 +11,6 @@
 		},
 		"O": {
 			"item": "hutosmod:morel_stem"
-		},
-		"P": {
-			"type": "minecraft:item_nbt",
-			"item": "forge:bucketFilled",
-			"nbt": {
-				"FluidName": "primal_ooze",
-				"Amount": 1000
-			}
 		}
 	},
 	"result": {

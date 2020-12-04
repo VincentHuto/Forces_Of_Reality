@@ -5,8 +5,8 @@ import java.util.stream.Stream;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.IActivatable;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
-import com.huto.hutosmod.objects.tileenties.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

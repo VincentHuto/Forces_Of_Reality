@@ -4,9 +4,9 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.RenderTypeInit;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.models.block.ModelFloatingCube;
-import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.huto.hutosmod.objects.tileenties.util.EnumAbsorberStates;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

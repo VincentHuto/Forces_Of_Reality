@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.tiles.coven;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelFloatingCandle;
-import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityAscendentAltar;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

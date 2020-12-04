@@ -9,7 +9,7 @@ import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.coven.CovenantPacketServer;
 import com.huto.hutosmod.objects.blocks.util.IBlockDevotionStation;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
-import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityAscendentAltar;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.sounds.SoundHandler;
 

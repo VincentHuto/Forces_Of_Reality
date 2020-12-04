@@ -1,33 +1,34 @@
 package com.huto.hutosmod.init;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.objects.tileenties.TileEntityAbsorber;
-import com.huto.hutosmod.objects.tileenties.TileEntityAscendentAltar;
-import com.huto.hutosmod.objects.tileenties.TileEntityAuspiciousBundle;
-import com.huto.hutosmod.objects.tileenties.TileEntityAutoInscriber;
-import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.TileEntityChiselStation;
-import com.huto.hutosmod.objects.tileenties.TileEntityHasturPylon;
 import com.huto.hutosmod.objects.tileenties.TileEntityIcoSphere;
-import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
-import com.huto.hutosmod.objects.tileenties.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.hutosmod.objects.tileenties.TileEntityMagicLight;
 import com.huto.hutosmod.objects.tileenties.TileEntityMagicRingLight;
-import com.huto.hutosmod.objects.tileenties.TileEntityOccularHeap;
 import com.huto.hutosmod.objects.tileenties.TileEntityRuneModStation;
-import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.TileEntitySlimeRepelent;
-import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.TileEntityTeleporter;
-import com.huto.hutosmod.objects.tileenties.TileEntityThermalInfluxer;
-import com.huto.hutosmod.objects.tileenties.TileEntityUntoldEasel;
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeFuser;
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeGatherer;
-import com.huto.hutosmod.objects.tileenties.TileEntityVibeResonator;
 import com.huto.hutosmod.objects.tileenties.TileEntityVirtuousEnchant;
-import com.huto.hutosmod.objects.tileenties.TileEntityWandMaker;
-import com.huto.hutosmod.objects.tileenties.TileEntityWaveGatherer;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityAscendentAltar;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityAuspiciousBundle;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityHasturPylon;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityOccularHeap;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntitySacrificePyre;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityUntoldEasel;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicAltar;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicExtractor;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntitySomnolentHopper;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityStorageDrum;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityThermalInfluxer;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityVibeFuser;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityVibeGatherer;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityVibeResonator;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityWandMaker;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityWaveGatherer;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -137,8 +138,13 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityMagicRingLight>> light_ring_block = TILES
 			.register("light_ring_block", () -> TileEntityType.Builder
 					.create(TileEntityMagicRingLight::new, BlockInit.light_ring_block.get()).build(null));
+	
 	public static final RegistryObject<TileEntityType<TileEntityAutoInscriber>> auto_inscriber = TILES
 			.register("auto_inscriber", () -> TileEntityType.Builder
 					.create(TileEntityAutoInscriber::new, BlockInit.auto_inscriber.get()).build(null));
+	
+	public static final RegistryObject<TileEntityType<TileEntitySomnolentHopper>> somnolent_hopper = TILES
+			.register("somnolent_hopper", () -> TileEntityType.Builder
+					.create(TileEntitySomnolentHopper::new, BlockInit.somnolent_hopper.get()).build(null));
 
 }

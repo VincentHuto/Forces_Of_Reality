@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hutosmod:anti_bonsai"
+          "name": "hutosmod:bonsai_planter"
         }
       ]
     }

@@ -34,6 +34,7 @@ import com.huto.hutosmod.objects.blocks.vibes.BlockAutoInscriber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicExtractor;
+import com.huto.hutosmod.objects.blocks.vibes.BlockSomnolentHopper;
 import com.huto.hutosmod.objects.blocks.vibes.BlockStorageDrum;
 import com.huto.hutosmod.objects.blocks.vibes.BlockThermalInfluxer;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeAbsorber;
@@ -337,6 +338,9 @@ public class BlockInit {
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> auto_inscriber = BLOCKS.register("auto_inscriber",
 			() -> new BlockAutoInscriber(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> somnolent_hopper = BLOCKS.register("somnolent_hopper",
+			() -> new BlockSomnolentHopper(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	
 

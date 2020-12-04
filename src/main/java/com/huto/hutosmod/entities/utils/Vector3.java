@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
@@ -203,4 +204,32 @@ public class Vector3 {
 	public int hashCode() {
 		return Objects.hash(x, y, z);
 	}
+
+	/**
+	 * Euclidean distance between this and the specified vector, returned as double.
+	 */
+	public double distanceTo(Vector3 vec) {
+		double d0 = vec.x - this.x;
+		double d1 = vec.y - this.y;
+		double d2 = vec.z - this.z;
+		return (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+	}
+
+	/**
+	 * The square of the Euclidean distance between this and the specified vector.
+	 */
+	public double squareDistanceTo(Vector3 vec) {
+		double d0 = vec.x - this.x;
+		double d1 = vec.y - this.y;
+		double d2 = vec.z - this.z;
+		return d0 * d0 + d1 * d1 + d2 * d2;
+	}
+
+	public double squareDistanceTo(double xIn, double yIn, double zIn) {
+		double d0 = xIn - this.x;
+		double d1 = yIn - this.y;
+		double d2 = zIn - this.z;
+		return d0 * d0 + d1 * d1 + d2 * d2;
+	}
+
 }

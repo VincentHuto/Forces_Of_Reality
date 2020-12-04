@@ -3,7 +3,7 @@ package com.huto.hutosmod.render.tiles.coven;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelFloatingSkull;
 import com.huto.hutosmod.models.block.ModelHorizontalBone;
-import com.huto.hutosmod.objects.tileenties.TileEntitySacrificePyre;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntitySacrificePyre;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

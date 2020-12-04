@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.objects.tileenties.TileEntityWaveGatherer;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityWaveGatherer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -62,7 +62,7 @@ import com.huto.hutosmod.render.tiles.coven.RenderMachinaImperfecta;
 import com.huto.hutosmod.render.tiles.coven.RenderOccularHeap;
 import com.huto.hutosmod.render.tiles.coven.RenderSacrificialPyre;
 import com.huto.hutosmod.render.tiles.coven.RenderUntoldEasel;
-import com.huto.hutosmod.render.tiles.vibes.RenderAbsorber;
+import com.huto.hutosmod.render.tiles.vibes.RenderAbsorberNew;
 import com.huto.hutosmod.render.tiles.vibes.RenderAutoInscriber;
 import com.huto.hutosmod.render.tiles.vibes.RenderCapacitor;
 import com.huto.hutosmod.render.tiles.vibes.RenderKarmicAltar;
@@ -110,7 +110,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_storage_drum.get(), RenderStorageDrum::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_capacitor.get(), RenderCapacitor::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_fuser.get(), RenderVibeFuser::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_absorber.get(), RenderAbsorber::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_absorber.get(), RenderAbsorberNew::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
@@ -185,9 +185,9 @@ public class ClientEventSubscriber {
 
 	}
 
-
-
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
+
+
 }

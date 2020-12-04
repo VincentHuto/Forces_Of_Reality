@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
-import com.huto.hutosmod.objects.tileenties.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityStorageDrum;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -43,33 +43,33 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 	public RenderStorageDrum(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
 	}
-
+	public static double roundAvoid(double value, int places) {
+	    double scale = Math.pow(10, places);
+	    return Math.round(value * scale) / scale;
+	}
 	@SuppressWarnings("deprecation")
 	@Override
 	public void render(TileEntityStorageDrum te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
-		float vibe = te.clientVibes;
-		//System.out.println(te.getUpdateTag().get(te.TAG_VIBES));
+		double vibe = roundAvoid(te.clientVibes,1)-0.15;
+		// System.out.println(te.getUpdateTag().get(te.TAG_VIBES));
 
 		float heightMod = 0;
 		// Check System that increments the mana based on amount and color
 		if (vibe > 0 && vibe <= 300)
 			heightMod = (float) (vibe / 300 * 1.7);
 		if (vibe > 300 && vibe <= 600)
-			heightMod = (float) (((vibe - 280) / 300) * 1.4);
+			heightMod = (float) (((vibe - 280) / 300) * 1.3);
 		if (vibe > 600 && vibe <= 900) {
-			heightMod = (float) (((vibe - 580) / 300) * 1.4);
+			heightMod = (float) (((vibe - 580) / 300) * 1.3);
 		} else if (vibe > 900) {
-			heightMod = (float) (((vibe - 880) / 300) * 3.5);
+			heightMod = (float) (((vibe - 880) / 300) * 3.4);
 		}
 		if (heightMod > 1.4) {
-			heightMod = (float) 1.4;
+			heightMod = (int) 1.4;
 		}
-
 		double manaRatioColor = vibe / 300;
-		manaRatioColor=manaRatioColor+0.1;
-
 		float colorMod = 0;
 		// Higher F1 = more blue
 		if (manaRatioColor <= 1) {

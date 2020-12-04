@@ -39,8 +39,8 @@ public class AutoInscriberRecipeCategory implements IRecipeCategory<RecipeAutoIn
 	public AutoInscriberRecipeCategory(IGuiHelper guiHelper) {
 		background = guiHelper.createBlankDrawable(150, 110);
 		localizedName = I18n.format("hutosmod.jei.auto_inscriber");
-		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/auto_inscriber_overlay.png"), 0,
-				0, 150, 110);
+		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/auto_inscriber_overlay.png"),
+				0, 0, 150, 110);
 		icon = guiHelper.createDrawableIngredient(new ItemStack(BlockInit.auto_inscriber.get()));
 	}
 
@@ -90,7 +90,7 @@ public class AutoInscriberRecipeCategory implements IRecipeCategory<RecipeAutoIn
 		GlStateManager.enableAlphaTest();
 		GlStateManager.enableBlend();
 		overlay.draw(matrixStack);
-		matrixStack.translate(25, 90, 0);
+		matrixStack.translate(5, 90, 0);
 		// TileEntityVibeResonator te = new TileEntityVibeResonator();
 		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 		fontRenderer.drawString(matrixStack,
@@ -104,26 +104,20 @@ public class AutoInscriberRecipeCategory implements IRecipeCategory<RecipeAutoIn
 	@Override
 	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull RecipeAutoInscriber recipe,
 			@Nonnull IIngredients ingredients) {
-		recipeLayout.getItemStacks().init(0, true, 64, 52);
+		recipeLayout.getItemStacks().init(0, true, 39, 60);
 		GlStateManager.pushMatrix();
 		GlStateManager.scaled(1.2, 4.2, 1.2);
 		recipeLayout.getItemStacks().set(0, new ItemStack(BlockInit.auto_inscriber.get()));
 		GlStateManager.popMatrix();
 
-		int index = 1;
-		ingredients.getInputs(VanillaTypes.ITEM).size();
-		Point point = new Point(64,25);
-		new Point(64, 52);
+		recipeLayout.getItemStacks().init(1, true, 70, 17);
+		recipeLayout.getItemStacks().set(1, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
-		for (List<ItemStack> o : ingredients.getInputs(VanillaTypes.ITEM)) {
-			recipeLayout.getItemStacks().init(index, true, point.x, point.y);
-			recipeLayout.getItemStacks().set(index, o);
-			index += 1;
-			point = new Point(64, -40 + ((index + 1) * 15));
-		}
+		recipeLayout.getItemStacks().init(2, true, 40, 45);
+		recipeLayout.getItemStacks().set(2, ingredients.getInputs(VanillaTypes.ITEM).get(1));
 
-		recipeLayout.getItemStacks().init(index, false, 103, 17);
-		recipeLayout.getItemStacks().set(index, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+		recipeLayout.getItemStacks().init(3, false, 100, 45);
+		recipeLayout.getItemStacks().set(3, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 
 	}
 

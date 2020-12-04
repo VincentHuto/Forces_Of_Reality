@@ -1,7 +1,7 @@
 package com.huto.hutosmod.render.tiles.vibes;
 
-import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicAltar;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 

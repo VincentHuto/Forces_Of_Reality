@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.tiles.coven;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelFloatingEye;
-import com.huto.hutosmod.objects.tileenties.TileEntityOccularHeap;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityOccularHeap;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

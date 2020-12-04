@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
-import com.huto.hutosmod.objects.tileenties.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCapacitor;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -42,18 +42,22 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		super(rendererDispatcherIn);
 	}
 
+	public static double roundAvoid(double value, int places) {
+		double scale = Math.pow(10, places);
+		return Math.round(value * scale) / scale;
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void render(TileEntityCapacitor te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
-		float vibe = te.clientVibes;
+		double vibe = roundAvoid(te.clientVibes, 1)-0.25;
 		float heightMod = 0;
-
 		// Check System that increments the vibe based on amount and color
 		if (vibe >= 0 && vibe <= 50)
 			heightMod = (float) (vibe / 50 * 0.75);
-		if (vibe > 50 && vibe <= 100)
+		if (vibe > 50 && vibe <=100)
 			heightMod = (float) (((vibe - 50) / 100) * 1.6 + 0.065);
 		if (vibe > 100 && vibe <= 150) {
 			heightMod = (float) (((vibe - 90) / 150) * 1.9);
@@ -63,10 +67,11 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		if (heightMod > 0.75) {
 			heightMod = (float) 0.75;
 		}
-		heightMod = heightMod -0.01f;
+		heightMod= (float) roundAvoid(heightMod, 1);
+
 		double manaRatioColor = vibe / 50;
-		float colorMod =0;
-		manaRatioColor=manaRatioColor-0.15;
+		float colorMod = 0;
+		manaRatioColor = manaRatioColor - 0.15;
 		// Higher F1 = more blue
 		if (manaRatioColor <= 1) {
 			colorMod = 0.35F;
@@ -83,11 +88,11 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
 		int p = this.getPasses(d0);
 		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-		this.renderCube(te,  0.15f,colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
+		this.renderCube(te, 0.15f, colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
 		for (int j = 1; j < p; ++j) {
-			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)), heightMod);
+			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)),
+					heightMod);
 		}
-	
 
 		// Add items above block
 		int items = 0;
@@ -161,7 +166,8 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		}
 	}
 
-	private void renderCube(TileEntityCapacitor te, float offset, float fIn, Matrix4f matrix, IVertexBuilder vertx,	float heightModIn) {
+	private void renderCube(TileEntityCapacitor te, float offset, float fIn, Matrix4f matrix, IVertexBuilder vertx,
+			float heightModIn) {
 		float r = (RANDOM.nextFloat() * 0.5F + 0.1F) * fIn;
 		float g = (RANDOM.nextFloat() * 0.5F + 0.4F) * fIn;
 		float b = (RANDOM.nextFloat() * 0.5F + 0.5F) * fIn;
@@ -178,8 +184,8 @@ public class RenderCapacitor extends TileEntityRenderer<TileEntityCapacitor> {
 		// Down isnt really needed because itll never be seen
 		// this.renderFace(te, matrix, vertx, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F,
 		// 1.0F, r, g, b, a, Direction.DOWN);
-		this.renderFace(te, matrix, vertx, 0.31f, 0.69f, heightModIn, heightModIn, 0.69f, 0.69f, 0.31f, 0.31f, r, g, b, a,
-				Direction.UP);
+		this.renderFace(te, matrix, vertx, 0.31f, 0.69f, heightModIn, heightModIn, 0.69f, 0.69f, 0.31f, 0.31f, r, g, b,
+				a, Direction.UP);
 	}
 
 	private void renderFace(TileEntityCapacitor te, Matrix4f matrix, IVertexBuilder vertextBuilder, float x, float y,

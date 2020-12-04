@@ -30,8 +30,7 @@ public class RecipeAutoInscriber implements IModRecipe {
 
 	public boolean matches(IItemHandler inv) {
 		List<Ingredient> ingredientsMissing = new ArrayList<>(inputs);
-
-		for (int i = 0; i < inv.getSlots(); i++) {
+		for (int i = 0; i <= 1; i++) {
 			ItemStack input = inv.getStackInSlot(i);
 			if (input.isEmpty())
 				break;
@@ -47,8 +46,10 @@ public class RecipeAutoInscriber implements IModRecipe {
 			}
 
 			if (stackIndex != -1)
+
 				ingredientsMissing.remove(stackIndex);
 			else
+
 				return false;
 		}
 		return ingredientsMissing.isEmpty();

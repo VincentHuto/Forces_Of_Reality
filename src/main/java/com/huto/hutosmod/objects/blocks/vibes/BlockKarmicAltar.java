@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
-import com.huto.hutosmod.objects.tileenties.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicAltar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

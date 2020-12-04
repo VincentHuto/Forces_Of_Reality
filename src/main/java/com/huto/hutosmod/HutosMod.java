@@ -110,7 +110,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
+		//MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}
 
@@ -151,7 +151,7 @@ public class HutosMod {
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
-		TomePageLib.registerPages();
+			TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		this.addLayers();
 	}

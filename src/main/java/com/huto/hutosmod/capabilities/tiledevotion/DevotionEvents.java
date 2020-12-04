@@ -1,7 +1,7 @@
 package com.huto.hutosmod.capabilities.tiledevotion;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.objects.tileenties.TileModDevotion;
+import com.huto.hutosmod.objects.tileenties.vibes.TileModDevotion;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

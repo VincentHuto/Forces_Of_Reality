@@ -1,7 +1,7 @@
 
 package com.huto.hutosmod.objects.blocks.util;
 
-import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

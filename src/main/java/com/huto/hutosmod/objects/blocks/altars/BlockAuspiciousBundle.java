@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.blocks.altars;
 import java.util.stream.Stream;
 
 import com.huto.hutosmod.init.BlockInit;
-import com.huto.hutosmod.objects.tileenties.TileEntityAuspiciousBundle;
+import com.huto.hutosmod.objects.tileenties.coven.TileEntityAuspiciousBundle;
 import com.huto.hutosmod.sounds.SoundHandler;
 
 import net.minecraft.block.Block;

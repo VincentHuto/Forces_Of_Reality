@@ -2,8 +2,8 @@ package com.huto.hutosmod.objects.items.tools;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
-import com.huto.hutosmod.objects.tileenties.TileModVibes;
-import com.huto.hutosmod.objects.tileenties.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.TileModVibes;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 import com.ibm.icu.text.DecimalFormat;
 
 import net.minecraft.block.BlockState;
