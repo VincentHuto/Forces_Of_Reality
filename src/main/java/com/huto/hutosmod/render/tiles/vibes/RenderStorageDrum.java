@@ -52,22 +52,22 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 	public void render(TileEntityStorageDrum te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
-		double vibe = roundAvoid(te.clientVibes,1)-0.15;
+		double vibe = roundAvoid(te.clientVibes,1)-0.25;
 		// System.out.println(te.getUpdateTag().get(te.TAG_VIBES));
-
+		vibe= vibe-25;
 		float heightMod = 0;
 		// Check System that increments the mana based on amount and color
 		if (vibe > 0 && vibe <= 300)
 			heightMod = (float) (vibe / 300 * 1.7);
 		if (vibe > 300 && vibe <= 600)
-			heightMod = (float) (((vibe - 280) / 300) * 1.3);
+			heightMod = (float) (((vibe - 280) / 300) * 1.4);
 		if (vibe > 600 && vibe <= 900) {
-			heightMod = (float) (((vibe - 580) / 300) * 1.3);
+			heightMod = (float) (((vibe - 580) / 300) * 1.4);
 		} else if (vibe > 900) {
-			heightMod = (float) (((vibe - 880) / 300) * 3.4);
+			heightMod = (float) (((vibe+25 - 880) / 300) * 3.4);
 		}
 		if (heightMod > 1.4) {
-			heightMod = (int) 1.4;
+			heightMod = (float) 1.4;
 		}
 		double manaRatioColor = vibe / 300;
 		float colorMod = 0;

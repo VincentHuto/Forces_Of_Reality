@@ -11,12 +11,12 @@ import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
 import com.huto.hutosmod.objects.items.ItemManaPowder;
-import com.huto.hutosmod.objects.items.ItemSomnolentTome;
 import com.huto.hutosmod.objects.items.ItemNullIngot;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
 import com.huto.hutosmod.objects.items.ItemShatterIngot;
 import com.huto.hutosmod.objects.items.ItemSlugBucket;
 import com.huto.hutosmod.objects.items.ItemSoakingAgent;
+import com.huto.hutosmod.objects.items.ItemSomnolentTome;
 import com.huto.hutosmod.objects.items.ItemStormingAgent;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.items.ModSpawnEggItem;
@@ -71,6 +71,7 @@ import com.huto.hutosmod.objects.items.tools.ItemDiscordantBell;
 import com.huto.hutosmod.objects.items.tools.ItemDivineFeather;
 import com.huto.hutosmod.objects.items.tools.ItemFrequencyMatcher;
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
+import com.huto.hutosmod.objects.items.tools.ItemMachinaCage;
 import com.huto.hutosmod.objects.items.tools.ItemMakerActivator;
 import com.huto.hutosmod.objects.items.tools.ItemManaExtractor;
 import com.huto.hutosmod.objects.items.tools.ItemMechanGlove;
@@ -316,6 +317,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+	public static final RegistryObject<Item> machina_cage = ITEMS.register("machina_cage",
+			() -> new ItemMachinaCage(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> emp_charm = ITEMS.register("emp_charm", () -> new ItemEmpCharm(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> auric_helm = ITEMS.register("auric_helm",

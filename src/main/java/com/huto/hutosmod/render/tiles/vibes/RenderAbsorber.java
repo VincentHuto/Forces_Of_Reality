@@ -1,5 +1,11 @@
 package com.huto.hutosmod.render.tiles.vibes;
 
+import java.awt.Color;
+import java.util.List;
+import java.util.Set;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.init.RenderTypeInit;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
@@ -7,6 +13,7 @@ import com.huto.hutosmod.models.block.ModelFloatingCube;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
 import com.huto.hutosmod.objects.tileenties.util.EnumAbsorberStates;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
+import com.huto.hutosmod.render.effects.BlockOverlayRender;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -18,20 +25,20 @@ import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Matrix3f;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.math.vector.Vector4f;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
 	private final ModelFloatingCube cube = new ModelFloatingCube();
+	public static long lastRefreshTime;
 
 	public RenderAbsorber(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -41,6 +48,41 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 	@Override
 	public void render(TileEntityAbsorber te, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
+
+		// draw Laser Connection
+		float r = 122 / 255f;
+		float g = 122 / 255f;
+		float b = 122 / 255f;
+		// Switch Colors
+		if (te.clientEnumMode == EnumAbsorberStates.DEFAULT) {
+			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
+			g = 122 / 255f;
+			b = 122 / 255f;
+		} else if (te.clientEnumMode == EnumAbsorberStates.IMPORT) {
+			r = 192 + te.getWorld().rand.nextInt(35) / 255f;
+			g = 122 / 255f;
+			b = 255 / 255f;
+		} else if (te.clientEnumMode == EnumAbsorberStates.EXPORT) {
+			r = 122 / 255f;
+			g = 1 / 255f;
+			b = 1 / 255f;
+		} else if (te.clientEnumMode == EnumAbsorberStates.BOTH) {
+			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
+			g = 1 / 255f;
+			b = 122 / 255f;
+		} else {
+			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
+			g = 122 / 255f;
+			b = 122 / 255f;
+		}
+
+		PlayerEntity player = Minecraft.getInstance().player;
+		World world = player.getEntityWorld();
+		List<PlayerEntity> players = world.getEntitiesWithinAABB(PlayerEntity.class,
+				te.getRenderBoundingBox().grow(10));
+		if (players.contains(player)) {
+			drawLasers(matrixStackIn, te.getLasers(), r, g, b);
+		}
 		// Add items above block
 		int items = 0;
 		for (int i = 0; i < te.getSizeInventory(); i++)
@@ -144,145 +186,115 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		irendertypebuffer$impl.finish();
 		matrixStackIn.pop();
 
-		// draw Laser Connection
-
-		float r = 122 + te.getWorld().rand.nextInt(35) / 255f;
-		float g = 122 / 255f;
-		float b = 122 / 255f;
-
-		// Switch Colors
-		if (te.clientEnumMode == EnumAbsorberStates.DEFAULT) {
-			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
-			g = 122 / 255f;
-			b = 122 / 255f;
-		} else if (te.clientEnumMode == EnumAbsorberStates.IMPORT) {
-			r = 192 + te.getWorld().rand.nextInt(35) / 255f;
-			g = 122 / 255f;
-			b = 255 / 255f;
-		} else if (te.clientEnumMode == EnumAbsorberStates.EXPORT) {
-			r = 122 / 255f;
-			g = 1 / 255f;
-			b = 1 / 255f;
-		} else if (te.clientEnumMode == EnumAbsorberStates.BOTH) {
-			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
-			g = 1 / 255f;
-			b = 122 / 255f;
-		} else {
-			r = 122 + te.getWorld().rand.nextInt(35) / 255f;
-			g = 122 / 255f;
-			b = 122 / 255f;
-		}
-
-		matrixStackIn.push();
-		matrixStackIn.translate(0.5, 0, 0.5);
-
-		// matrixStackIn.scale(5f, 5f, 5f);
-		Vector3d vecPosOther;
-		Vector3d vecPos = new Vector3d(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
-		if (te.linkedBlocks != null) {
-			for (int i = 0; i < te.linkedBlocks.size(); i++) {
-				vecPosOther = new Vector3d(te.linkedBlocks.get(i).getX(), te.linkedBlocks.get(i).getY(),
-						te.linkedBlocks.get(i).getZ());
-				Vector3d test2 = vecPosOther.subtract(vecPos);
-				RayTraceResult trace = te.getWorld().rayTraceBlocks(new RayTraceContext(vecPos, test2,
-						RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, null));
-				double distance2 = vecPos.distanceTo(vecPosOther);
-				distance2 = (int) distance2;
-				drawLasers(matrixStackIn, vecPos, trace, test2.x * distance2, test2.y * distance2, test2.z * distance2,
-						r, g, b, (.08f), (float) ticks, .09f, te);
-
-			}
-		}
-		matrixStackIn.pop();
-
 	}
 
-	private static void drawLasers(MatrixStack matrixStack, Vector3d from, RayTraceResult trace, double xOffset,
-			double yOffset, double zOffset, float r, float g, float b, float thickness, float ticks,
-			float speedModifier, TileEntityAbsorber tile) {
+	public static void renderSelectedBlock(RenderWorldLastEvent evt, BlockPos pos) {
+		final Minecraft mc = Minecraft.getInstance();
 
-		IVertexBuilder builder;
-		double distance = Math.max(0, 1 - (from.subtract(trace.getHitVec()).length()));
-		long gameTime = tile.getWorld().getGameTime();
-		double v = gameTime * speedModifier;
-		// How wide the blur is on the beam
-		float additiveThickness = (thickness * 9.5f) * calculateLaserFlickerModifier(gameTime);
-
-		// Core Color
-		float beam2r = 255 / 255f;
-		float beam2g = 255 / 255f;
-		float beam2b = 255 / 255f;
-
-		Vector3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
 		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
 
-		matrixStack.push();
+		Vector3d view = mc.gameRenderer.getActiveRenderInfo().getProjectedView();
 
-		matrixStack.translate(-view.getX(), -view.getY(), -view.getZ());
-		matrixStack.translate(from.x, from.y, from.z);
+		MatrixStack matrix = evt.getMatrixStack();
+		matrix.push();
+		matrix.translate(-view.getX(), -view.getY(), -view.getZ());
 
-		MatrixStack.Entry matrixstack$entry = matrixStack.getLast();
-		Matrix3f matrixNormal = matrixstack$entry.getNormal();
-		Matrix4f positionMatrix = matrixstack$entry.getMatrix();
+		IVertexBuilder builder;
+		builder = buffer.getBuffer(RenderTypeInit.SolidBlockOverlay);
 
-		// additive laser beam
+		matrix.push();
+		matrix.translate(pos.getX(), pos.getY(), pos.getZ());
+		matrix.translate(-0.005f, -0.005f, -0.005f);
+		matrix.scale(1.01f, 1.01f, 1.01f);
+		matrix.rotate(Vector3f.YP.rotationDegrees(-90.0F));
+		Matrix4f positionMatrix = matrix.getLast().getMatrix();
+		BlockOverlayRender.render(positionMatrix, builder, pos, Color.GREEN);
+		matrix.pop();
+
+		buffer.finish(RenderTypeInit.SolidBlockOverlay);
+	}
+
+	public static void drawLasers(MatrixStack matrixStackIn, SetMultimap<BlockPos, BlockPos> lasers, float r, float g,
+			float b) {
+		final Minecraft mc = Minecraft.getInstance();
+		World world = mc.world;
+		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+		long gameTime = world.getGameTime();
+		double v = gameTime * 0.04;
+		Vector3d view = mc.gameRenderer.getActiveRenderInfo().getProjectedView();
+		matrixStackIn.push();
+		matrixStackIn.translate(-view.getX(), -view.getY(), -view.getZ());
+		IVertexBuilder builder;
 		builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_ADDITIVE);
-		drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, additiveThickness, distance, 0.5, 1,
-				ticks, r, g, b, 0.7f);
+		SetMultimap<BlockPos, BlockPos> lasersCopy = HashMultimap.create(lasers);
+		lasersCopy.forEach((source, target) -> {
+			matrixStackIn.push();
 
-		// main laser, colored part
-		builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_BEAM);
-		drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness, distance, v,
-				v + distance * 1.5, ticks, r, g, b, 0.9f);
-
-		// core
-		builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_CORE);
-		drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness / 2, distance, v,
-				v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
-		matrixStack.pop();
-		buffer.finish();
+			matrixStackIn.translate(source.getX(), source.getY(), source.getZ());
+			matrixStackIn.scale(2, 2, 2);
+			float diffX = target.getX() + .5f - source.getX();
+			float diffY = target.getY() + .5f - source.getY();
+			float diffZ = target.getZ() + .5f - source.getZ();
+			Vector3f startLaser = new Vector3f(0.5f, .5f, 0.5f);
+			Vector3f endLaser = new Vector3f(diffX, diffY, diffZ);
+			Vector3f sortPos = new Vector3f(source.getX(), source.getY(), source.getZ());
+			Matrix4f positionMatrix = matrixStackIn.getLast().getMatrix();
+			drawLaser(builder, positionMatrix, endLaser, startLaser, r, g, b, 1f, 0.025f, v, v + diffY * -5.5, sortPos);
+			matrixStackIn.pop();
+		});
+		matrixStackIn.pop();
+		buffer.finish(RenderTypeInit.LASER_MAIN_ADDITIVE);
 	}
 
-	private static float calculateLaserFlickerModifier(long gameTime) {
-		return 0.9f + 0.1f * MathHelper.sin(gameTime * 0.9f) * MathHelper.sin(gameTime * 0.3f)
-				* MathHelper.sin(gameTime * 0.1f);
+	public static Vector3f adjustBeamToEyes(Vector3f from, Vector3f to, Vector3f sortPos) {
+		// This method takes the player's position into account, and adjusts the beam so
+		// that its rendered properly whereever you stand
+		PlayerEntity player = Minecraft.getInstance().player;
+		Vector3f P = new Vector3f((float) player.getPosX() - sortPos.getX(),
+				(float) player.getPosYEye() - sortPos.getY(), (float) player.getPosZ() - sortPos.getZ());
+
+		Vector3f PS = from.copy();
+		PS.sub(P);
+		Vector3f SE = to.copy();
+		SE.sub(from);
+
+		Vector3f adjustedVec = PS.copy();
+		adjustedVec.cross(SE);
+		adjustedVec.normalize();
+		return adjustedVec;
 	}
 
-	private static void drawBeam(double xOffset, double yOffset, double zOffset, IVertexBuilder builder,
-			Matrix4f positionMatrix, Matrix3f matrixNormalIn, float thickness, double distance, double v1, double v2,
-			float ticks, float r, float g, float b, float alpha) {
-		Vector3f vector3f = new Vector3f(0.0f, 1.0f, 0.0f);
-		vector3f.transform(matrixNormalIn);
+	public static void drawLaser(IVertexBuilder builder, Matrix4f positionMatrix, Vector3f from, Vector3f to, float r,
+			float g, float b, float alpha, float thickness, double v1, double v2, Vector3f sortPos) {
+		Vector3f adjustedVec = adjustBeamToEyes(from, to, sortPos);
+		adjustedVec.mul(thickness); // Determines how thick the beam is
 
-		Vector4f vec1 = new Vector4f(0, -thickness + 0, 0, 1.0F);
-		vec1.transform(positionMatrix);
-		Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset,
-				1.0F);
-		vec2.transform(positionMatrix);
-		Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset,
-				1.0F);
-		vec3.transform(positionMatrix);
-		Vector4f vec4 = new Vector4f(0, thickness + 0, 0, 1.0F);
-		vec4.transform(positionMatrix);
+		Vector3f p1 = from.copy();
+		p1.add(adjustedVec);
+		Vector3f p2 = from.copy();
+		p2.sub(adjustedVec);
+		Vector3f p3 = to.copy();
+		p3.add(adjustedVec);
+		Vector3f p4 = to.copy();
+		p4.sub(adjustedVec);
 
-		builder.addVertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		builder.addVertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		builder.addVertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		builder.addVertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
-		// be necessary with culling disabled but here we are....
-		builder.addVertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		builder.addVertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		builder.addVertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
-		builder.addVertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1,
-				OverlayTexture.NO_OVERLAY, 15728880, vector3f.getX(), vector3f.getY(), vector3f.getZ());
+		builder.pos(positionMatrix, p1.getX(), p1.getY(), p1.getZ()).color(r, g, b, alpha).tex(1, (float) v1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(15728880).endVertex();
+		builder.pos(positionMatrix, p3.getX(), p3.getY(), p3.getZ()).color(r, g, b, alpha).tex(1, (float) v2)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(15728880).endVertex();
+		builder.pos(positionMatrix, p4.getX(), p4.getY(), p4.getZ()).color(r, g, b, alpha).tex(0, (float) v2)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(15728880).endVertex();
+		builder.pos(positionMatrix, p2.getX(), p2.getY(), p2.getZ()).color(r, g, b, alpha).tex(0, (float) v1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(15728880).endVertex();
+	}
 
+	public static boolean canAdd(BlockPos sourcePos, BlockPos targetPos) {
+		SetMultimap<BlockPos, BlockPos> lasers = HashMultimap.create();
+		if (!lasers.containsKey(targetPos))
+			return true;
+		Set<BlockPos> tempSet = lasers.get(targetPos);
+		if (!tempSet.contains(sourcePos))
+			return true;
+		return false;
 	}
 }

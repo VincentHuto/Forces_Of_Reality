@@ -7,7 +7,6 @@ import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 import com.ibm.icu.text.DecimalFormat;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,7 +33,6 @@ public class ItemDebugTool extends Item {
 			@SuppressWarnings("unused")
 			ItemStack stack = ctx.getItem();
 			BlockPos blockPos = ctx.getPos();
-			BlockState blockState = world.getBlockState(blockPos);
 			TileEntity te = world.getTileEntity(blockPos);
 			DecimalFormat df = new DecimalFormat("0.00");
 			if (te instanceof TileModVibes) {
@@ -42,9 +40,7 @@ public class ItemDebugTool extends Item {
 						.orElseThrow(IllegalStateException::new);
 				if (!world.isRemote) {
 					player.sendStatusMessage(new StringTextComponent(
-							TextFormatting.GOLD + I18n.format(blockState.getBlock().getTranslationKey()) + " Contains:"
-									+ df.format(vibes.getVibes())),
-							false);
+							TextFormatting.GOLD + "Block Contains:" + df.format(vibes.getVibes())), false);
 				}
 			}
 
@@ -53,9 +49,8 @@ public class ItemDebugTool extends Item {
 						.orElseThrow(IllegalStateException::new);
 				if (!world.isRemote) {
 					player.sendStatusMessage(new StringTextComponent(
-							TextFormatting.GOLD + I18n.format(blockState.getBlock().getTranslationKey()) + " Contains: "
-									+ df.format(vibes.getVibes())),
-							false);
+							TextFormatting.GOLD + "Block Contains:" + df.format(vibes.getVibes())), false);
+							
 				}
 			}
 

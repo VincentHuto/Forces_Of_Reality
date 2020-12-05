@@ -1,7 +1,6 @@
 
 package com.huto.hutosmod.integration.jei.catagories;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

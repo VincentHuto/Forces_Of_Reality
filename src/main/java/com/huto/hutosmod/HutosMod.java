@@ -36,6 +36,7 @@ import com.huto.hutosmod.recipes.ModFuserRecipies;
 import com.huto.hutosmod.recipes.ModInscriberRecipes;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
+import com.huto.hutosmod.recipes.UpgradeMachinaLampDataRecipe;
 import com.huto.hutosmod.render.entity.layer.RunesRenderLayer;
 import com.huto.hutosmod.worldgen.ModOreGen;
 
@@ -110,7 +111,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
 		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
-		//MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}
 
@@ -225,6 +226,8 @@ public class HutosMod {
 				.setRegistryName(new ResourceLocation(MOD_ID, "rune_binder_upgrade")));
 		event.getRegistry().register(new CopyMechanGloveDataRecipe.Serializer()
 				.setRegistryName(new ResourceLocation(MOD_ID, "mechan_glove_upgrade")));
+		event.getRegistry().register(new UpgradeMachinaLampDataRecipe.Serializer()
+				.setRegistryName(new ResourceLocation(MOD_ID, "machina_cage")));
 	}
 
 }

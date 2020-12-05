@@ -2,17 +2,15 @@ package com.huto.hutosmod.objects.blocks;
 
 import java.util.stream.Stream;
 
-import javax.annotation.Nullable;
-
 import com.huto.hutosmod.dimension.DimensionInit;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.objects.tileenties.TileEntityTeleporter;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -41,41 +39,93 @@ import net.minecraft.world.server.ServerWorld;
 
 public class BlockTeleporter extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(-11, 31, 0, 27, 32, 16),
-			Block.makeCuboidShape(-12, 29, -1, 28, 31, 17), Block.makeCuboidShape(-1, 0.1, 0, 16, 0.1, 15),
+	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(-12, 29, -1, 28, 31, 17),
+			Block.makeCuboidShape(-11, 31, 0, 27, 32, 16),
+			Block.makeCuboidShape(-1, 0.10000000000000009, 0, 16, 1.1, 15), Block.makeCuboidShape(0, 0, 15, 16, 29, 17),
+			Block.makeCuboidShape(-14, 0, -3, 0, 2, 19), Block.makeCuboidShape(-11, 3, 0, -8, 28, 3),
+			Block.makeCuboidShape(-3, 3, 0, 0, 28, 3), Block.makeCuboidShape(-9, 3, 3, -3, 28, 13),
+			Block.makeCuboidShape(-11, 3, 13, -8, 28, 16), Block.makeCuboidShape(-3, 3, 13, 0, 28, 16),
 			Block.makeCuboidShape(16, 3, 13, 19, 28, 16), Block.makeCuboidShape(16, 28, -2, 29, 29, 18),
 			Block.makeCuboidShape(16, 2, -2, 29, 3, 18), Block.makeCuboidShape(24, 3, 13, 27, 28, 16),
 			Block.makeCuboidShape(16, 0, -3, 30, 2, 19), Block.makeCuboidShape(-13, 28, -2, 0, 29, 18),
 			Block.makeCuboidShape(-13, 2, -2, 0, 3, 18), Block.makeCuboidShape(16, 3, 0, 19, 28, 3),
-			Block.makeCuboidShape(24, 3, 0, 27, 28, 3), Block.makeCuboidShape(18, 3, 3, 24, 28, 13),
-			Block.makeCuboidShape(-14, 0, -3, 0, 2, 19), Block.makeCuboidShape(-11, 3, 0, -8, 28, 3),
-			Block.makeCuboidShape(-3, 3, 0, 0, 28, 3), Block.makeCuboidShape(-9, 3, 3, -3, 28, 13),
-			Block.makeCuboidShape(-11, 3, 13, -8, 28, 16), Block.makeCuboidShape(-3, 3, 13, 0, 28, 16))
+			Block.makeCuboidShape(24, 3, 0, 27, 28, 3), Block.makeCuboidShape(18, 3, 3, 24, 28, 13))
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
 
+	private static final VoxelShape SHAPE_S = Stream
+			.of(Block.makeCuboidShape(-12.149999999999999, 29, -0.25, 27.85, 31, 17.75),
+					Block.makeCuboidShape(-11.149999999999999, 31, 0.75, 26.85, 32, 16.75),
+					Block.makeCuboidShape(-0.14999999999999947, 0.10000000000000009, 1.75, 16.85, 1.1, 16.75),
+					Block.makeCuboidShape(-0.14999999999999947, 0, -0.25, 15.85, 29, 1.75),
+					Block.makeCuboidShape(15.85, 0, -2.25, 29.85, 2, 19.75),
+					Block.makeCuboidShape(23.85, 3, 13.75, 26.85, 28, 16.75),
+					Block.makeCuboidShape(15.85, 3, 13.75, 18.85, 28, 16.75),
+					Block.makeCuboidShape(18.85, 3, 3.75, 24.85, 28, 13.75),
+					Block.makeCuboidShape(23.85, 3, 0.75, 26.85, 28, 3.75),
+					Block.makeCuboidShape(15.85, 3, 0.75, 18.85, 28, 3.75),
+					Block.makeCuboidShape(-3.1499999999999995, 3, 0.75, -0.14999999999999947, 28, 3.75),
+					Block.makeCuboidShape(-13.149999999999999, 28, -1.25, -0.14999999999999947, 29, 18.75),
+					Block.makeCuboidShape(-13.149999999999999, 2, -1.25, -0.14999999999999947, 3, 18.75),
+					Block.makeCuboidShape(-11.149999999999999, 3, 0.75, -8.149999999999999, 28, 3.75),
+					Block.makeCuboidShape(-14.149999999999999, 0, -2.25, -0.14999999999999947, 2, 19.75),
+					Block.makeCuboidShape(15.85, 28, -1.25, 28.85, 29, 18.75),
+					Block.makeCuboidShape(15.85, 2, -1.25, 28.85, 3, 18.75),
+					Block.makeCuboidShape(-3.1499999999999995, 3, 13.75, -0.14999999999999947, 28, 16.75),
+					Block.makeCuboidShape(-11.149999999999999, 3, 13.75, -8.149999999999999, 28, 16.75),
+					Block.makeCuboidShape(-8.149999999999999, 3, 3.75, -2.1499999999999995, 28, 13.75))
+			.reduce((v1, v2) -> {
+				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+			}).get();
 	private static final VoxelShape SHAPE_E = Stream
-			.of(Block.makeCuboidShape(-0.42499999999999627, 31, -10.724999999999996, 15.575, 32, 27.275),
-					Block.makeCuboidShape(-1.4249999999999963, 29, -11.724999999999996, 16.575, 31, 28.275),
-					Block.makeCuboidShape(-0.42499999999999627, 0.1, 0.27500000000000213, 14.575, 0.1, 17.275),
-					Block.makeCuboidShape(12.575, 3, -2.724999999999998, 15.575, 28, 0.27500000000000213),
-					Block.makeCuboidShape(-2.4249999999999963, 28, -12.724999999999996, 17.575, 29,
-							0.27500000000000213),
-					Block.makeCuboidShape(-2.4249999999999963, 2, -12.724999999999996, 17.575, 3, 0.27500000000000213),
-					Block.makeCuboidShape(12.575, 3, -10.724999999999996, 15.575, 28, -7.724999999999996),
-					Block.makeCuboidShape(-3.4249999999999963, 0, -13.724999999999996, 18.575, 2, 0.27500000000000213),
-					Block.makeCuboidShape(-2.4249999999999963, 28, 16.275, 17.575, 29, 29.275),
-					Block.makeCuboidShape(-2.4249999999999963, 2, 16.275, 17.575, 3, 29.275),
-					Block.makeCuboidShape(-0.42499999999999627, 3, -2.724999999999998, 2.575, 28, 0.27500000000000213),
-					Block.makeCuboidShape(-0.42499999999999627, 3, -10.724999999999996, 2.575, 28, -7.724999999999996),
-					Block.makeCuboidShape(2.575, 3, -7.724999999999996, 12.575, 28, -1.7249999999999979),
-					Block.makeCuboidShape(-3.4249999999999963, 0, 16.275, 18.575, 2, 30.275),
-					Block.makeCuboidShape(-0.42499999999999627, 3, 24.275, 2.575, 28, 27.275),
-					Block.makeCuboidShape(-0.42499999999999627, 3, 16.275, 2.575, 28, 19.275),
-					Block.makeCuboidShape(2.575, 3, 19.275, 12.575, 28, 25.275),
-					Block.makeCuboidShape(12.575, 3, 24.275, 15.575, 28, 27.275),
-					Block.makeCuboidShape(12.575, 3, 16.275, 15.575, 28, 19.275))
+			.of(Block.makeCuboidShape(-0.7000000000000002, 29, -11.55, 17.3, 31, 28.45),
+					Block.makeCuboidShape(0.2999999999999998, 31, -10.55, 16.3, 32, 27.45),
+					Block.makeCuboidShape(1.2999999999999998, 0.10000000000000009, -0.5500000000000007, 16.3, 1.1,
+							16.45),
+					Block.makeCuboidShape(-0.7000000000000002, 0, 0.4500000000000002, 1.2999999999999998, 29, 16.45),
+					Block.makeCuboidShape(-2.7, 0, -13.55, 19.3, 2, 0.4500000000000002),
+					Block.makeCuboidShape(13.3, 3, -10.55, 16.3, 28, -7.550000000000001),
+					Block.makeCuboidShape(13.3, 3, -2.5500000000000007, 16.3, 28, 0.4500000000000002),
+					Block.makeCuboidShape(3.3, 3, -8.55, 13.3, 28, -2.5500000000000007),
+					Block.makeCuboidShape(0.2999999999999998, 3, -10.55, 3.3, 28, -7.550000000000001),
+					Block.makeCuboidShape(0.2999999999999998, 3, -2.5500000000000007, 3.3, 28, 0.4500000000000002),
+					Block.makeCuboidShape(0.2999999999999998, 3, 16.45, 3.3, 28, 19.45),
+					Block.makeCuboidShape(-1.7000000000000002, 28, 16.45, 18.3, 29, 29.45),
+					Block.makeCuboidShape(-1.7000000000000002, 2, 16.45, 18.3, 3, 29.45),
+					Block.makeCuboidShape(0.2999999999999998, 3, 24.45, 3.3, 28, 27.45),
+					Block.makeCuboidShape(-2.7, 0, 16.45, 19.3, 2, 30.45),
+					Block.makeCuboidShape(-1.7000000000000002, 28, -12.55, 18.3, 29, 0.4500000000000002),
+					Block.makeCuboidShape(-1.7000000000000002, 2, -12.55, 18.3, 3, 0.4500000000000002),
+					Block.makeCuboidShape(13.3, 3, 16.45, 16.3, 28, 19.45),
+					Block.makeCuboidShape(13.3, 3, 24.45, 16.3, 28, 27.45),
+					Block.makeCuboidShape(3.3, 3, 18.45, 13.3, 28, 24.45))
+			.reduce((v1, v2) -> {
+				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+			}).get();
+
+	private static final VoxelShape SHAPE_W = Stream
+			.of(Block.makeCuboidShape(-1.4500000000000002, 29, -11.7, 16.55, 31, 28.3),
+					Block.makeCuboidShape(-0.4500000000000002, 31, -10.7, 15.55, 32, 27.3),
+					Block.makeCuboidShape(-0.4500000000000002, 0.10000000000000009, 0.3000000000000007, 14.55, 1.1,
+							17.3),
+					Block.makeCuboidShape(14.55, 0, 0.3000000000000007, 16.55, 29, 16.3),
+					Block.makeCuboidShape(-3.45, 0, 16.3, 18.55, 2, 30.3),
+					Block.makeCuboidShape(-0.4500000000000002, 3, 24.3, 2.55, 28, 27.3),
+					Block.makeCuboidShape(-0.4500000000000002, 3, 16.3, 2.55, 28, 19.3),
+					Block.makeCuboidShape(2.55, 3, 19.3, 12.55, 28, 25.3),
+					Block.makeCuboidShape(12.55, 3, 24.3, 15.55, 28, 27.3),
+					Block.makeCuboidShape(12.55, 3, 16.3, 15.55, 28, 19.3),
+					Block.makeCuboidShape(12.55, 3, -2.6999999999999993, 15.55, 28, 0.3000000000000007),
+					Block.makeCuboidShape(-2.45, 28, -12.7, 17.55, 29, 0.3000000000000007),
+					Block.makeCuboidShape(-2.45, 2, -12.7, 17.55, 3, 0.3000000000000007),
+					Block.makeCuboidShape(12.55, 3, -10.7, 15.55, 28, -7.699999999999999),
+					Block.makeCuboidShape(-3.45, 0, -13.7, 18.55, 2, 0.3000000000000007),
+					Block.makeCuboidShape(-2.45, 28, 16.3, 17.55, 29, 29.3),
+					Block.makeCuboidShape(-2.45, 2, 16.3, 17.55, 3, 29.3),
+					Block.makeCuboidShape(-0.4500000000000002, 3, -2.6999999999999993, 2.55, 28, 0.3000000000000007),
+					Block.makeCuboidShape(-0.4500000000000002, 3, -10.7, 2.55, 28, -7.699999999999999),
+					Block.makeCuboidShape(2.55, 3, -7.699999999999999, 12.55, 28, -1.6999999999999993))
 			.reduce((v1, v2) -> {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
@@ -96,11 +146,11 @@ public class BlockTeleporter extends Block {
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		switch ((Direction) state.get(FACING)) {
 		case NORTH:
-			return SHAPE_N;
+			return SHAPE_S;
 		case SOUTH:
 			return SHAPE_N;
 		case EAST:
-			return SHAPE_E;
+			return SHAPE_W;
 		case WEST:
 			return SHAPE_E;
 		default:
@@ -302,14 +352,22 @@ public class BlockTeleporter extends Block {
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState p_149645_1_) {
-		return BlockRenderType.MODEL;
+	public boolean hasTileEntity(BlockState state) {
+		return true;
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new TileEntityTeleporter();
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		super.onEntityCollision(state, worldIn, pos, entityIn);
+		if (entityIn instanceof ServerPlayerEntity) {
+			//transferPlayer((ServerPlayerEntity) entityIn, pos);
+		}
 	}
 
 }

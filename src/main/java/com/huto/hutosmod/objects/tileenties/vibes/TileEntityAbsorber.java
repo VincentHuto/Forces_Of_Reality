@@ -2,9 +2,12 @@ package com.huto.hutosmod.objects.tileenties.vibes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.TileEntityInit;
@@ -40,9 +43,11 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	public float transferRate = 0.0F;
 	public EnumAbsorberStates enumMode = EnumAbsorberStates.DEFAULT;
 	public List<BlockPos> linkedBlocks = new ArrayList<BlockPos>();
+	public List<BlockPos> clientLinkedBlocks = new ArrayList<BlockPos>();
 	public final String TAG_VIBES = "vibes";
 	public float clientVibes = 0.0f;
 	public EnumAbsorberStates clientEnumMode = EnumAbsorberStates.DEFAULT;
+	public SetMultimap<BlockPos, BlockPos> lasers;
 
 	public TileEntityAbsorber() {
 		super(TileEntityInit.vibe_absorber.get());
@@ -56,7 +61,6 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
-
 		if (linkedBlocks != null) {
 			for (int i = 0; i < linkedBlocks.size(); i++) {
 				if (world.getBlockState(linkedBlocks.get(i)).isAir()) {
@@ -111,7 +115,25 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 				}
 			}
 		}
+		lasers.clear();
+		List<BlockPos> connectedNodes = getLinkedBlocks();
+		for (BlockPos targetpos : connectedNodes) {
+			if (canAdd(getPos(), targetpos)) {
+				getLasers().put(getPos(), targetpos);
+				sendUpdates();
 
+			}
+		}
+	}
+
+	public static boolean canAdd(BlockPos sourcePos, BlockPos targetPos) {
+		SetMultimap<BlockPos, BlockPos> lasers = HashMultimap.create();
+		if (!lasers.containsKey(targetPos))
+			return true;
+		Set<BlockPos> tempSet = lasers.get(targetPos);
+		if (!tempSet.contains(sourcePos))
+			return true;
+		return false;
 	}
 
 	public boolean isImportState() {
@@ -130,6 +152,8 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		super.onLoad();
 		this.checkTankSize();
 		this.checkTransferRate();
+		setLasers(HashMultimap.create());
+
 	}
 
 	public List<BlockPos> getLinkedBlocks() {
@@ -317,6 +341,12 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		nbtTag.putFloat(TAG_VIBES, vibes.getVibes());
 		nbtTag.putString(TAG_ENUMMODE, enumMode.toString());
 		nbtTag.putString(TAG_CLIENTMODE, enumMode.toString());
+		ListNBT tagList = new ListNBT();
+		for (int i = 0; i < linkedBlocks.size(); i++) {
+			tagList.add(NBTUtil.writeBlockPos(linkedBlocks.get(i)));
+			NBTUtil.writeBlockPos(linkedBlocks.get(i));
+		}
+		nbtTag.put(TAG_LINKEDPOS, tagList);
 		return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
 	}
 
@@ -332,7 +362,13 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		clientVibes = tag.getFloat(TAG_VIBES);
 		enumMode = enumMode.valueOf(tag.getString(TAG_ENUMMODE));
 		clientEnumMode = enumMode.valueOf(tag.getString(TAG_CLIENTMODE));
-
+		ListNBT tagList = pkt.getNbtCompound().getList(TAG_LINKEDPOS, Constants.NBT.TAG_COMPOUND);
+		List<BlockPos> newLinkedList = new ArrayList<BlockPos>();
+		for (int i = 0; i < tagList.size(); i++) {
+			newLinkedList.add(NBTUtil.readBlockPos((CompoundNBT) tagList.get(i)));
+		}
+		this.linkedBlocks = newLinkedList;
+		clientLinkedBlocks = newLinkedList;
 	}
 
 	@SuppressWarnings("static-access")
@@ -344,6 +380,11 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 		clientVibes = tag.getFloat(TAG_VIBES);
 		enumMode = enumMode.valueOf(tag.getString(TAG_ENUMMODE));
 		clientEnumMode = enumMode.valueOf(tag.getString(TAG_CLIENTMODE));
+		if (tag.get(TAG_LINKEDPOS) != null) {
+			for (int i = 0; i < linkedBlocks.size(); i++) {
+				clientLinkedBlocks.add(linkedBlocks.get(i));
+			}
+		}
 	}
 
 	@Override
@@ -388,5 +429,13 @@ public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITick
 			return true;
 		}
 		return false;
+	}
+
+	public SetMultimap<BlockPos, BlockPos> getLasers() {
+		return lasers;
+	}
+
+	public void setLasers(SetMultimap<BlockPos, BlockPos> lasers) {
+		this.lasers = lasers;
 	}
 }
