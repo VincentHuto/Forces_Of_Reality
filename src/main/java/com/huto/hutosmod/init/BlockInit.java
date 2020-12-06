@@ -400,7 +400,9 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.occular_heap.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.untold_easel.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.bonsai_planter.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.teleporter.get(), RenderType.getCutoutMipped());
 
+			
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_1.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_1.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_bonsai_stage_1.get(), RenderType.getCutoutMipped());
