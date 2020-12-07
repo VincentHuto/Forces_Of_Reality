@@ -54,24 +54,22 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 
 		double vibe = roundAvoid(te.clientVibes,1)-0.25;
 		// System.out.println(te.getUpdateTag().get(te.TAG_VIBES));
-		vibe= vibe-25;
 		float heightMod = 0;
 		// Check System that increments the mana based on amount and color
 		if (vibe > 0 && vibe <= 300)
-			heightMod = (float) (vibe / 300 * 1.7);
+			heightMod = (float) (vibe / 300 * 1.5);
 		if (vibe > 300 && vibe <= 600)
-			heightMod = (float) (((vibe - 280) / 300) * 1.4);
+			heightMod = (float) (((vibe - 280) / 300) * 1.3);
 		if (vibe > 600 && vibe <= 900) {
 			heightMod = (float) (((vibe - 580) / 300) * 1.4);
 		} else if (vibe > 900) {
-			heightMod = (float) (((vibe+25 - 880) / 300) * 3.4);
+			heightMod = (float) (((vibe - 880) / 300) * 3.4);
 		}
 		if (heightMod > 1.4) {
 			heightMod = (float) 1.4;
 		}
 		double manaRatioColor = vibe / 300;
 		float colorMod = 0;
-		// Higher F1 = more blue
 		if (manaRatioColor <= 1) {
 			colorMod = 0.35F;
 		} else if (manaRatioColor > 1 && manaRatioColor <= 2) {
@@ -79,16 +77,21 @@ public class RenderStorageDrum extends TileEntityRenderer<TileEntityStorageDrum>
 
 		} else if (manaRatioColor > 2 && manaRatioColor <= 3) {
 			colorMod = 12.4F;
+		}else {
+			colorMod = 124f;
 
 		}
+		
 		// Portal Schtuff
 		RANDOM.setSeed(31100L);
 		double d0 = te.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);
 		int p = this.getPasses(d0);
 		Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-		this.renderCube(te, 0.15f, colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
+		float f = this.getOffset();
+
+		this.renderCube(te, f, 0.135f+colorMod, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)), heightMod);
 		for (int j = 1; j < p; ++j) {
-			this.renderCube(te, colorMod, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)),
+			this.renderCube(te, f, 48.0F / (float) (12 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)),
 					heightMod);
 		}
 

@@ -61,18 +61,28 @@ public class RenderTeleporter extends TileEntityRenderer<TileEntityTeleporter> {
 		// matrix.mul(new Quaternion(Vector3f.XP, (float) Math.sin(System.nanoTime()),
 		// false));
 		// matrix.invert();
-		this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, 0.075F, 1.85F, 1.0F, 1.0F, 1.0F, 1.0F, f2, f2,
-				f, Direction.SOUTH);
-		this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, 1.85F, 0.075F, 0.0F, 0.0F, 0.0F, 0.0F, f, f1,
-				f2, Direction.NORTH);
-		this.renderFace(tileEntityIn, matrix, vertxBuilder, 1.0F, 1.0F, 1.85F, 0.075F, 0.0F, 1.0F, 1.0F, 0.0F, f1, f,
+		
+		this.renderFace(tileEntityIn, matrix, vertxBuilder, 1.0F, 1.0F, 1.85F, 0.0f, 0.0F, 1.0F, 1.0F, 0.0F, f1, f,
 				f1, Direction.EAST);
+		
+		
 		this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 0.0F, 0.075F, 1.85F, 0.0F, 1.0F, 1.0F, 0.0F, f1, f, f,
 				Direction.WEST);
-				  this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, 0.0F, 0.0F,
-		  0.0F, 0.0F, 1.0F, 1.0F, f, f1, f2, Direction.DOWN);
-		  this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, offset,
-		  offset, 1.0F, 1.0F, 0.0F, 0.0F, f, f1, f2, Direction.UP);
+		
+		this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, 1.85F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, f, f1,
+				f2, Direction.NORTH);
+		
+		this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, 0.075F, 1.85F, 1.0F, 1.0F, 1.0F, 1.0F, f2, f2,
+				f, Direction.SOUTH);
+
+		
+	
+		
+		
+
+
+		
+		
 		 
 	}
 
@@ -104,59 +114,126 @@ public class RenderTeleporter extends TileEntityRenderer<TileEntityTeleporter> {
 					.getBlockState(currentPlayer.getPosition().add(0, -1, 0)).getBlock() == Blocks.QUARTZ_BLOCK) {*/
 				if (tileEntityIn.shouldRenderFace(direction) && direction.equals(Direction.EAST)) {
 				//Center
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_6_, p_228884_8_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_6_, p_228884_9_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_7_, p_228884_10_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_7_, p_228884_11_).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 1.85f, 0).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 1.85f, 1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 0, 1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 0, 0).color(r, g, b, alpha).endVertex();
 				//Left
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_6_, p_228884_8_+1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_+2, p_228884_6_+alpha, p_228884_9_+2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_+2, p_228884_7_, p_228884_10_+2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_7_, p_228884_11_+1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 1.85f, 0+1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1+2, 1.85f+alpha, 1+2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1+2, 0, 1+2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 0, 0+1).color(r, g, b, alpha).endVertex();
 				//Right
-				vertextBuilder.pos(matrix, p_228884_4_+2, p_228884_6_+alpha, p_228884_8_-2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_6_, p_228884_9_-1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_7_, p_228884_10_-1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_+2, p_228884_7_, p_228884_11_-2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1+2, 1.85f+alpha, 0-2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 1.85f, 1-1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 0, 1-1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1+2, 0, 0-2* alpha).color(r, g, b, alpha).endVertex();
 				//Top 
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_6_-0.1f, p_228884_11_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix,p_228884_4_+2.15f,  p_228884_6_-0.1f+alpha, p_228884_8_-2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_10_+2.85f* alpha,  p_228884_6_-0.1f+alpha,p_228884_9_+2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_6_-0.1f, p_228884_5_).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 1.85f-0.1f, 0).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,1+2.15f,  1.85f-0.1f+alpha, 0-2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1+2.85f* alpha,  1.85f-0.1f+alpha,1+2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1, 1.85f-0.1f, 1).color(r, g, b, alpha).endVertex();
 				//Bottom 
-				vertextBuilder.pos(matrix,p_228884_10_+2* alpha,  0.01f,p_228884_6_+ alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix,p_228884_10_+2* alpha, 0.01f, -2*alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_8_,0.01f, -0.5f).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_7_, 0.01f, 0.5f).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,1+2* alpha,  0.01f,1.85f+ alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,1+2* alpha, 0.01f, -2*alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 1,0.3f, -0.5f).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0.3f, 0.5f).color(r, g, b, alpha).endVertex();
 				}
 				if (tileEntityIn.shouldRenderFace(direction) && direction.equals(Direction.WEST)) {
 				//Center
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_6_, p_228884_8_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_6_, p_228884_9_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_7_, p_228884_10_).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_7_, p_228884_11_).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0, 0).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0, 1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 1.85f, 1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 1.85f, 0).color(r, g, b, alpha).endVertex();
 				//Left
-				vertextBuilder.pos(matrix, p_228884_4_-2, p_228884_6_-alpha, p_228884_8_-2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_6_, p_228884_9_-1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_, p_228884_7_, p_228884_10_-1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_-2, p_228884_7_+alpha, p_228884_11_-2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0-2, 0-alpha, 0-2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0, 1-1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 1.85f, 1-1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0-2, 1.85f+alpha, 0-2* alpha).color(r, g, b, alpha).endVertex();
 				//Right
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_6_, p_228884_8_+1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_-2, p_228884_6_-alpha, p_228884_9_+2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_5_-2, p_228884_7_+alpha, p_228884_10_+2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, p_228884_4_, p_228884_7_, p_228884_11_+1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0, 0+1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0-2, 0-alpha, 1+2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0-2, 1.85f+alpha, 1+2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 1.85f, 0+1).color(r, g, b, alpha).endVertex();
 				//Top
-				vertextBuilder.pos(matrix,0,p_228884_7_-0.1f,1).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix,-2* alpha,p_228884_7_-0.1f+alpha,3* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix,-2* alpha,p_228884_7_-0.1f+alpha,-2* alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix,0,p_228884_7_-0.1f,0).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,0,1.85f-0.1f,1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,-2* alpha,1.85f-0.1f+alpha,3* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,-2* alpha,1.85f-0.1f+alpha,-2* alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix,0,1.85f-0.1f,0).color(r, g, b, alpha).endVertex();
 				//Bottom
-				vertextBuilder.pos(matrix, 0f, 0.01f, 0f).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0.31f, 0).color(r, g, b, alpha).endVertex();
 				vertextBuilder.pos(matrix, -2f*alpha, 0.01f, -2*alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, -2f*alpha, 0.01f, 3*alpha).color(r, g, b, alpha).endVertex();
-				vertextBuilder.pos(matrix, 0, 0.01f, 1).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, -2f*alpha, 0.01f, 1.85f+1.2f*alpha).color(r, g, b, alpha).endVertex();
+				vertextBuilder.pos(matrix, 0, 0.31f, 1).color(r, g, b, alpha).endVertex();
 					
 				}
+				
+				if (tileEntityIn.shouldRenderFace(direction) && direction.equals(Direction.NORTH)) {
+					//Center
+					vertextBuilder.pos(matrix, 0, 1.85f, 0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 1.85f, 0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 0, 0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0, 0, 0).color(r, g, b, alpha).endVertex();
+					
+					//Left
+					vertextBuilder.pos(matrix, 0-2* alpha, 1.85f+alpha, 0-2* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0, 1.85f, 1-1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0, 0, 1-1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0-2* alpha, 0-alpha, 0-2* alpha).color(r, g, b, alpha).endVertex();
+					
+					//Right
+					vertextBuilder.pos(matrix, 0+1, 1.85f, 0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0+3* alpha, 1.85f+alpha, 1-3* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0+3* alpha, 0-alpha, 1-3* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0+1, 0, 0).color(r, g, b, alpha).endVertex();
+					
+					//Top
+					vertextBuilder.pos(matrix,-2*alpha*alpha, 1.75f+alpha,-2).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,3*alpha, 1.75f+alpha,-2).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,1, 1.75f,0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,0, 1.75f,0).color(r, g, b, alpha).endVertex();
+					
+					//Bottom
+					vertextBuilder.pos(matrix, 3* alpha, 0.01f,-2* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,-2* alpha* (alpha*1f), 0.01f,-2* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0, 0.3f, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 0.3f, 1).color(r, g, b, alpha).endVertex();
+
+				}
+				if (tileEntityIn.shouldRenderFace(direction) && direction.equals(Direction.SOUTH)) {
+					//Center
+					vertextBuilder.pos(matrix, 0, 0, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 0, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 1.85f, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0, 1.85f, 1).color(r, g, b, alpha).endVertex();
+						
+					//Left
+					vertextBuilder.pos(matrix, 1-3*alpha, 0, 0+3*alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1-1, 0, 1-0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1-1, 1.75f, 1-0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1-3*alpha, 1.75f+alpha, 0+3*alpha).color(r, g, b, alpha).endVertex();
+					
+					//Right
+					vertextBuilder.pos(matrix, 3*alpha, 0, 3* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,3*alpha, 1.75F+alpha,3* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,1, 1.75F, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 0, 1).color(r, g, b, alpha).endVertex();
+					
+					
+					//Top
+					vertextBuilder.pos(matrix,0, 1.5F,0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 1.5F, 0).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 3*alpha, 1.75F+alpha, 3* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,-2*alpha*alpha, 1.75F+alpha,3* alpha).color(r, g, b, alpha).endVertex();
+					
+					//Bottom
+					vertextBuilder.pos(matrix, 3*alpha, 0.01f,3* alpha).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 1, 0.3f, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix, 0, 0.3f, 1).color(r, g, b, alpha).endVertex();
+					vertextBuilder.pos(matrix,-2*alpha*alpha*alpha, 0.01f,3* alpha).color(r, g, b, alpha).endVertex();
+
+				}
+				
 			}
 		
 		}
