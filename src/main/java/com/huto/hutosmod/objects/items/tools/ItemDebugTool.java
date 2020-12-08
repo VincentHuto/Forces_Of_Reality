@@ -6,7 +6,6 @@ import com.huto.hutosmod.objects.tileenties.vibes.TileModVibes;
 import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 import com.ibm.icu.text.DecimalFormat;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -138,7 +138,10 @@ public class ModTextFormatting {
 
 	public static String toProperCase(String input) {
 		String newString = "";
+		String culledString = input.replaceAll("_", " ");
+		input = culledString;
 		for (int i = 0; i < input.length(); i++) {
+	
 			if (i == 0) {
 				String temp = StringUtils.toUpperCase(String.valueOf(input.charAt(i)));
 				newString = newString + temp;

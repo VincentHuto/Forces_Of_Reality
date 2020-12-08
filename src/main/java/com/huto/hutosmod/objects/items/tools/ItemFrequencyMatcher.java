@@ -7,7 +7,6 @@ import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,26 +55,11 @@ public class ItemFrequencyMatcher extends Item {
 		ItemFrequencyMatcher.linkedPos = linkedPos;
 	}
 
-	@Override
-	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-			CompoundNBT compound = stack.getTag();
-			compound.putBoolean(TAG_STATE, false);
-		}
-	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItemMainhand();
-
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-			CompoundNBT compound = stack.getTag();
-			compound.putBoolean(TAG_STATE, false);
-		}
-		CompoundNBT compound = stack.getTag();
+		CompoundNBT compound = stack.getOrCreateTag();
 		if (!compound.getBoolean(TAG_STATE)) {
 			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));

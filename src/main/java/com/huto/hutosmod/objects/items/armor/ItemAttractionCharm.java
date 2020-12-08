@@ -42,11 +42,7 @@ public class ItemAttractionCharm extends Item {
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-			CompoundNBT compound = stack.getTag();
-			compound.putBoolean(TAG_STATE, false);
-		}
+	
 		if (stack.getTag().getBoolean(TAG_STATE)) {
 			attractItems(worldIn,
 					new AxisAlignedBB(entityIn.getPositionVec().add(-4, -4, -4),
@@ -59,12 +55,8 @@ public class ItemAttractionCharm extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItemMainhand();
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-			CompoundNBT compound = stack.getTag();
-			compound.putBoolean(TAG_STATE, false);
-		}
-		CompoundNBT compound = stack.getTag();
+		CompoundNBT compound = stack.getOrCreateTag();
+
 		if (!compound.getBoolean(TAG_STATE)) {
 			playerIn.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);
 			compound.putBoolean(TAG_STATE, !compound.getBoolean(TAG_STATE));

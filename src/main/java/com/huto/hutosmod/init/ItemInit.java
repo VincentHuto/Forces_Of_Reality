@@ -10,6 +10,7 @@ import com.huto.hutosmod.objects.items.ItemCovenTome;
 import com.huto.hutosmod.objects.items.ItemDryingAgent;
 import com.huto.hutosmod.objects.items.ItemElderTome;
 import com.huto.hutosmod.objects.items.ItemGrandPurgingStone;
+import com.huto.hutosmod.objects.items.ItemHarmonicImprint;
 import com.huto.hutosmod.objects.items.ItemManaPowder;
 import com.huto.hutosmod.objects.items.ItemNullIngot;
 import com.huto.hutosmod.objects.items.ItemSacrificial;
@@ -196,6 +197,10 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Materials
 	// Gems
+	
+	
+	public static final RegistryObject<Item> harmonic_imprint = ITEMS.register("harmonic_imprint",
+			() -> new ItemHarmonicImprint(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> gem_ruby = ITEMS.register("gem_ruby",
@@ -865,7 +870,23 @@ public class ItemInit {
 						return 0;
 					}
 				});
-
+		//Imprint
+		ItemModelsProperties.registerProperty(harmonic_imprint.get(), new ResourceLocation(HutosMod.MOD_ID, "saved"),
+				new IItemPropertyGetter() {
+					@Override
+					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
+						if (stack.hasTag()) {
+							if (stack.getTag().getBoolean("state")) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+						return 0;
+					}
+				});
+		
+		
 		// EMP Charm
 		ItemModelsProperties.registerProperty(emp_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {
