@@ -18,8 +18,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityTeleporter extends TileModVibes implements ITickableTileEntity{
+public class TileEntityTeleporter extends TileModVibes implements ITickableTileEntity {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	String TAG_DIMPOS = "dim-lastpos";
+	String TAG_NAME = "location_name";
 
 	public TileEntityTeleporter() {
 		super(TileEntityInit.teleporter.get());
@@ -51,19 +53,33 @@ public class TileEntityTeleporter extends TileModVibes implements ITickableTileE
 		}
 	}
 
-	public void setTeleportPosition( World world, BlockPos pos, ResourceLocation resourceLocation, PlayerEntity player) {
+	public void setTeleportName(String nameIn) {
+		CompoundNBT data = getTileData();
+		data.putString(TAG_NAME, nameIn);
+	}
+
+	public String getTeleportName() {
+		CompoundNBT data = getTileData();
+		if (data.contains(TAG_NAME)) {
+			return data.getString(TAG_NAME);
+		} else {
+			return null;
+		}
+	}
+
+	public void setTeleportPosition(World world, BlockPos pos, ResourceLocation resourceLocation, PlayerEntity player) {
 		CompoundNBT data = getTileData();
 		DimensionalPosition dp = new DimensionalPosition(resourceLocation, pos);
 		CompoundNBT dimNbt = dp.serializeNBT();
-		data.put("dim-lastpos", dimNbt);
+		data.put(TAG_DIMPOS, dimNbt);
 	}
 
 	public Optional<DimensionalPosition> getTeleportPosition() {
 		CompoundNBT data = getTileData();
-		if (!data.contains("dim-lastpos")) {
+		if (!data.contains(TAG_DIMPOS)) {
 			return Optional.empty();
 		}
-		CompoundNBT pos = data.getCompound("dim-lastpos");
+		CompoundNBT pos = data.getCompound(TAG_DIMPOS);
 		return Optional.of(DimensionalPosition.fromNBT(pos));
 	}
 

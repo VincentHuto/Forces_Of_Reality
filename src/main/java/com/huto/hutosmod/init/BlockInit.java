@@ -83,7 +83,7 @@ public class BlockInit {
 	// TELEPORTEROS
 	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
 			() -> new BlockTeleporter(Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f)
-					.sound(SoundType.STONE).notSolid()));
+					.sound(SoundType.STONE)));
 
 	// Random
 	public static final RegistryObject<Block> runed_obsidian = BLOCKS.register("runed_obsidian", () -> new Block(

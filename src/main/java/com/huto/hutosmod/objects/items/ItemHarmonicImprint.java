@@ -46,7 +46,7 @@ public class ItemHarmonicImprint extends Item {
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		CompoundNBT compound = stack.getOrCreateTag();
-		return compound.getBoolean(TAG_STATE);
+		return compound.get(TAG_POS) != null;
 	}
 
 	@Override

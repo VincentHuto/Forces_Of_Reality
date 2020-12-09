@@ -199,8 +199,7 @@ public class ItemInit {
 	// Gems
 	
 	
-	public static final RegistryObject<Item> harmonic_imprint = ITEMS.register("harmonic_imprint",
-			() -> new ItemHarmonicImprint(new Item.Properties().group(HutosModItemGroup.instance)));
+
 	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> gem_ruby = ITEMS.register("gem_ruby",
@@ -233,7 +232,8 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> cured_clay_flask = ITEMS.register("cured_clay_flask",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-
+	public static final RegistryObject<Item> harmonic_imprint = ITEMS.register("harmonic_imprint",
+			() -> new ItemHarmonicImprint(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Hastur
 	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign",
 			() -> new ItemYellowSign(

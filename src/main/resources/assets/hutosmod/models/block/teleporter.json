@@ -4,7 +4,7 @@
 		"1": "hutosmod:blocks/quartz_block_bottom",
 		"2": "hutosmod:blocks/quartz_block_chiseled_top",
 		"3": "hutosmod:blocks/quartz_block_lines",
-		"particle": "hutosmod:blocks/eye2"
+		"particle": "hutosmod:blocks/quartz_block_chiseled_top"
 	},
 	"elements": [
 		{

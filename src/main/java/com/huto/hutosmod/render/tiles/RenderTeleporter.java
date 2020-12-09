@@ -77,14 +77,6 @@ public class RenderTeleporter extends TileEntityRenderer<TileEntityTeleporter> {
 		
 		this.renderFace(tileEntityIn, matrix, vertxBuilder, 0.0F, 1.0F, 0.075F, 1.85F, 1.0F, 1.0F, 1.0F, 1.0F, f2, f2,
 				f, Direction.SOUTH);
-
-		
-	
-		
-		
-
-
-		
 		
 		 
 	}

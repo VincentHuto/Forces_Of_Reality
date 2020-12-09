@@ -12,6 +12,7 @@ import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -184,6 +185,10 @@ public class BlockTeleporter extends Block {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
 			Hand hand, BlockRayTraceResult result) {
+		ItemStack stack = player.getHeldItemMainhand();
+		boolean isRenamed = !I18n.format(stack.getDisplayName().getString())
+				.equals(I18n.format(I18n.format(stack.getTranslationKey())));
+
 		if (hand == Hand.OFF_HAND) {
 			return ActionResultType.FAIL;
 		}
@@ -191,22 +196,26 @@ public class BlockTeleporter extends Block {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			TileEntityTeleporter te = (TileEntityTeleporter) world.getTileEntity(pos);
 
-			ItemStack stack = player.getHeldItemMainhand();
-			if (!player.isSneaking()) {
-				if (stack.getItem() instanceof ItemHarmonicImprint) {
-					DimensionalPosition dp = DimensionalPosition
-							.fromNBT(stack.getOrCreateTag().getCompound("LinkedPos"));
-					te.setTeleportPosition(world, dp.getPosition(), dp.getDimension(), player);
-					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			if (stack.getItem() instanceof ItemHarmonicImprint) {
+				DimensionalPosition dp = DimensionalPosition.fromNBT(stack.getOrCreateTag().getCompound("LinkedPos"));
+				te.setTeleportPosition(world, dp.getPosition(), dp.getDimension(), player);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
+				if (isRenamed) {
+					te.setTeleportName(I18n.format(stack.getDisplayName().getString()));
 				} else {
-					serverPlayer
-							.sendStatusMessage(
-									new TranslationTextComponent("Linked Position: " + te
-											.getTeleportPosition().orElseThrow(NullPointerException::new).getPosition().getCoordinatesAsString()
-											+ " In "
-											+ ModTextFormatting.toProperCase(te.getTeleportPosition()
-													.orElseThrow(NullPointerException::new).getDimension().getPath())),
-									true);
+					te.setTeleportName("Linked Position: "
+							+ te.getTeleportPosition().orElseThrow(NullPointerException::new).getPosition()
+									.getCoordinatesAsString()
+							+ " In " + ModTextFormatting.toProperCase(te.getTeleportPosition()
+									.orElseThrow(NullPointerException::new).getDimension().getPath()));
+
+				}
+			} else {
+				if (!te.getTeleportPosition().isPresent()) {
+					serverPlayer.sendStatusMessage(new TranslationTextComponent("No linked Position"), true);
+				} else {
+					serverPlayer.sendStatusMessage(new TranslationTextComponent(te.getTeleportName()), true);
 				}
 			}
 
@@ -223,6 +232,7 @@ public class BlockTeleporter extends Block {
 			}
 		}
 		return ActionResultType.FAIL;
+
 	}
 
 	@SuppressWarnings("deprecation")
