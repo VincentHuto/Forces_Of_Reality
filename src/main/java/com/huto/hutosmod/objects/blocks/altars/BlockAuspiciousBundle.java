@@ -1,8 +1,12 @@
 package com.huto.hutosmod.objects.blocks.altars;
 
+import java.util.Random;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+
 import com.huto.hutosmod.init.BlockInit;
+import com.huto.hutosmod.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.hutosmod.objects.tileenties.coven.TileEntityAuspiciousBundle;
 import com.huto.hutosmod.sounds.SoundHandler;
 
@@ -13,6 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -71,6 +76,25 @@ public class BlockAuspiciousBundle extends Block {
 
 	}
 
+	@Override
+	public void animateTick(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos,
+			@Nonnull Random random) {
+		TileEntityMachinaImperfecta tile = (TileEntityMachinaImperfecta) world.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityMachinaImperfecta) {
+			int count = (int) (6 * 0.5f);
+			if (count > 0) {
+				for (int i = 0; i < random.nextInt(count); i++) {
+					double randX = pos.getX() + random.nextDouble();
+					double randY = pos.getY() + random.nextDouble();
+					double randZ = pos.getZ() + random.nextDouble();
+					world.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
+
+				}
+			}
+		}
+	}
+
+	
 	@Override
 	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return SHAPE_R;

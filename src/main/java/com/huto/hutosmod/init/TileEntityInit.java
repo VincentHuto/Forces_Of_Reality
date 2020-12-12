@@ -21,6 +21,7 @@ import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCapacitor;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicExtractor;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityLectorTable;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntitySomnolentHopper;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityStorageDrum;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityThermalInfluxer;
@@ -147,4 +148,8 @@ public class TileEntityInit {
 			.register("somnolent_hopper", () -> TileEntityType.Builder
 					.create(TileEntitySomnolentHopper::new, BlockInit.somnolent_hopper.get()).build(null));
 
+	public static final RegistryObject<TileEntityType<TileEntityLectorTable>> lector_table = TILES
+			.register("lector_table", () -> TileEntityType.Builder
+					.create(TileEntityLectorTable::new, BlockInit.lector_table.get()).build(null));
+	
 }

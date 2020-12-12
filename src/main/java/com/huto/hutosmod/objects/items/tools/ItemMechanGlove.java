@@ -243,10 +243,8 @@ public class ItemMechanGlove extends Item {
 					}
 					CompoundNBT compound = stack.getTag();
 					if (!compound.getBoolean(TAG_SWORDSTATE)) {
-						System.out.println("blade in");
 						target.attackEntityFrom(mechanGloveSource, getHitDamage(rare));
 					} else {
-						System.out.println("blade out");
 						target.attackEntityFrom(mechanGloveSource, getHitDamage(rare) * 3f);
 
 					}

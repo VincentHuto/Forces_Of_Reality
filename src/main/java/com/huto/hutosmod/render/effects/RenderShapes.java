@@ -26,6 +26,24 @@ public class RenderShapes {
 
 	}
 
+	public static IVertexBuilder createVertex(MatrixStack matrixStackIn, IVertexBuilder builderIn, int combinedLightIn,
+			LectorGridPosVector gridIn, LectorVectorColorData colorDataIn) {
+		return builderIn.pos(matrixStackIn.getLast().getMatrix(), gridIn.getX(), gridIn.getY(), gridIn.getZ())
+				.color(colorDataIn.getRed(), colorDataIn.getGreen(), colorDataIn.getBlue(), colorDataIn.getAlpha()).tex(1, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0);
+	}
+
+	public static void createSquare(MatrixStack matrixStackIn, IVertexBuilder builderIn, int combinedLightIn,
+			LectorGridPosVector vec1, LectorGridPosVector vec2, LectorGridPosVector vec3, LectorGridPosVector vec4,
+			LectorVectorColorData colorDataIn) {
+		createVertex(matrixStackIn, builderIn, combinedLightIn, vec1, colorDataIn).endVertex();
+		createVertex(matrixStackIn, builderIn, combinedLightIn, vec2, colorDataIn).endVertex();
+		createVertex(matrixStackIn, builderIn, combinedLightIn, vec3, colorDataIn).endVertex();
+		createVertex(matrixStackIn, builderIn, combinedLightIn, vec4, colorDataIn).endVertex();
+
+	}
+
 	public static void renderSizedSlantedCube(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
 			int combinedLightIn, int combinedOverlayIn, IVertexBuilder builderIn, float xOffset, float yOffset,
 			float zOffset, float xScale, float yScale, float xSlant, float ySlant) {
@@ -38,6 +56,8 @@ public class RenderShapes {
 		matrixStackIn.translate(xOffset, yOffset, zOffset);
 
 		// Top
+
+
 		builder.pos(matrixStackIn.getLast().getMatrix(), 0, yScale * ySlant, 0).color(r, g, b, 255).tex(1, 1)
 				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
 				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();

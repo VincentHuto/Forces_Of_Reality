@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.items.armor;
 
-import com.huto.hutosmod.models.armor.ModelMysteriousMask;
+import com.huto.hutosmod.models.armor.ModelMysteriousMaskSleep;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
@@ -25,7 +25,7 @@ public class ItemMysteriousMask extends ArmorItem {
 		if (itemStack != ItemStack.EMPTY) {
 			if (itemStack.getItem() instanceof ArmorItem) {
 
-				ModelMysteriousMask model = new ModelMysteriousMask();
+				ModelMysteriousMaskSleep model = new ModelMysteriousMaskSleep();
 
 				model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD;
 

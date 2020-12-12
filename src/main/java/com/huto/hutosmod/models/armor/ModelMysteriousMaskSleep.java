@@ -8,13 +8,13 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 
 @SuppressWarnings("rawtypes")
-public class ModelMysteriousMask extends BipedModel {
+public class ModelMysteriousMaskSleep extends BipedModel {
 	private final ModelRenderer LeftBand;
 	private final ModelRenderer BackBand;
 	private final ModelRenderer RightBand;
 	private final ModelRenderer Mask;
 
-	public ModelMysteriousMask() {
+	public ModelMysteriousMaskSleep() {
 		super(1.0f);
 		textureWidth = 128;
 		textureHeight = 64;
@@ -35,6 +35,31 @@ public class ModelMysteriousMask extends BipedModel {
 		Mask = new ModelRenderer(this);
 		Mask.setRotationPoint(0.0F, 0.0F, 0.0F);
 		Mask.setTextureOffset(50, 34).addBox(-4.0F, -8.0F, -5.0F, 8.0F, 8.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-4.0F, -2.0F, -5.0F, 0.0F, 1.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-3.0F, -1.0F, -5.0F, 0.0F, 1.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(3.0F, -1.0F, -5.0F, 0.0F, 1.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(4.0F, -3.0F, -5.0F, 0.0F, 2.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, -5.0F, -5.0F, 0.0F, 2.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(3.0F, -5.0F, -5.0F, 0.0F, 2.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-3.0F, -5.0F, -5.0F, 0.0F, 2.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-1.0F, -5.0F, -5.0F, 0.0F, 2.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-4.0F, -1.0F, -5.0F, 1.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(0.0F, -1.0F, -5.0F, 1.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(3.0F, -1.0F, -5.0F, 1.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(3.0F, -2.0F, -4.0F, 1.0F, 1.0F, 0.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(3.0F, -3.0F, -4.0F, 1.0F, 1.0F, 0.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(2.0F, -1.0F, -4.0F, 1.0F, 1.0F, 0.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, -1.0F, -4.0F, 1.0F, 1.0F, 0.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, -2.0F, -4.0F, 1.0F, 1.0F, 0.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(2.0F, -2.0F, -4.0F, 1.0F, 1.0F, 0.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-3.0F, 0.0F, -5.0F, 3.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-3.0F, -4.0F, -5.0F, 3.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, -4.0F, -5.0F, 3.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, -3.0F, -5.0F, 3.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(-4.0F, -3.0F, -5.0F, 3.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, 0.0F, -5.0F, 2.0F, 0.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(0.0F, -1.0F, -5.0F, 0.0F, 1.0F, 1.0F, 0.0F, true);
+		Mask.setTextureOffset(50, 34).addBox(1.0F, -1.0F, -5.0F, 0.0F, 1.0F, 1.0F, 0.0F, true);
 		this.bipedHead.addChild(Mask);
 		this.bipedHead.addChild(LeftBand);
 		this.bipedHead.addChild(RightBand);

@@ -34,6 +34,7 @@ import com.huto.hutosmod.objects.blocks.vibes.BlockAutoInscriber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockCapacitor;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicExtractor;
+import com.huto.hutosmod.objects.blocks.vibes.BlockLectorTable;
 import com.huto.hutosmod.objects.blocks.vibes.BlockSomnolentHopper;
 import com.huto.hutosmod.objects.blocks.vibes.BlockStorageDrum;
 import com.huto.hutosmod.objects.blocks.vibes.BlockThermalInfluxer;
@@ -342,7 +343,9 @@ public class BlockInit {
 	public static final RegistryObject<Block> somnolent_hopper = BLOCKS.register("somnolent_hopper",
 			() -> new BlockSomnolentHopper(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+	public static final RegistryObject<Block> lector_table = BLOCKS.register("lector_table",
+			() -> new BlockLectorTable(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",

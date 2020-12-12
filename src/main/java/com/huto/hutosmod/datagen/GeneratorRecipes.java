@@ -557,6 +557,24 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("W W")
 				.addCriterion("has_ball_of_eyes", hasItem(ItemInit.ball_of_eyes.get())).build(consumer);
 			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.teleporter.get())
+				.key('Q', Blocks.QUARTZ_BLOCK)
+				.key('C', Blocks.CHISELED_QUARTZ_BLOCK)
+				.key('P', Blocks.QUARTZ_PILLAR)
+				.key('O', ItemInit.gem_opal.get())
+				.patternLine("QQQ")
+				.patternLine("POP")
+				.patternLine("CCC")
+				.addCriterion("has_opal", hasItem(ItemInit.gem_opal.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.harmonic_imprint.get())
+				.key('G',Items.GOLD_INGOT)
+				.key('N', ItemInit.nullifying_powder.get())
+				.key('O', ItemInit.gem_opal.get())
+				.patternLine("NON")
+				.patternLine("GOG")
+				.patternLine("NGN")
+				.addCriterion("has_opal", hasItem(ItemInit.harmonic_imprint.get())).build(consumer);
 			
 	}
 }

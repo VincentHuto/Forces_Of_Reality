@@ -2,7 +2,7 @@ package com.huto.hutosmod.render.entity.layer;
 
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.entities.passive.EntityDreamWalker;
-import com.huto.hutosmod.models.armor.ModelMysteriousMask;
+import com.huto.hutosmod.models.armor.ModelMysteriousMaskSleep;
 import com.huto.hutosmod.models.entity.passive.ModelDreamWalker;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -17,7 +17,7 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class LayerDreamWalkerMask extends LayerRenderer<EntityDreamWalker, ModelDreamWalker> {
 
-	ModelMysteriousMask mask = new ModelMysteriousMask();
+	ModelMysteriousMaskSleep mask = new ModelMysteriousMaskSleep();
 	public static final ResourceLocation texture = new ResourceLocation(
 			HutosMod.MOD_ID + ":textures/models/armor/mysterious_mask_layer_1.png");
 

@@ -68,6 +68,7 @@ import com.huto.hutosmod.render.tiles.vibes.RenderAutoInscriber;
 import com.huto.hutosmod.render.tiles.vibes.RenderCapacitor;
 import com.huto.hutosmod.render.tiles.vibes.RenderKarmicAltar;
 import com.huto.hutosmod.render.tiles.vibes.RenderKarmicExtractor;
+import com.huto.hutosmod.render.tiles.vibes.RenderLectorTable;
 import com.huto.hutosmod.render.tiles.vibes.RenderResonator;
 import com.huto.hutosmod.render.tiles.vibes.RenderStorageDrum;
 import com.huto.hutosmod.render.tiles.vibes.RenderThermalInfluxer;
@@ -126,6 +127,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_ring_block.get(), RenderMagicRingLight::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.auto_inscriber.get(), RenderAutoInscriber::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.teleporter.get(), RenderTeleporter::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.lector_table.get(), RenderLectorTable::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 
