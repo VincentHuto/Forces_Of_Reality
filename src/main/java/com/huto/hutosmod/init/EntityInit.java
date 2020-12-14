@@ -107,7 +107,7 @@ public class EntityInit {
 			.register("hastur_spawn",
 					() -> EntityType.Builder
 							.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
-							.size(0.4F, 0.7F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_spawn").toString()));
+							.size(0.4F, 1F).build(new ResourceLocation(HutosMod.MOD_ID, "hastur_spawn").toString()));
 
 	public static final RegistryObject<EntityType<EntityHasturClone>> hastur_clone = ENTITY_TYPES
 			.register("hastur_clone",
@@ -117,7 +117,7 @@ public class EntityInit {
 	// Seraphim
 	public static final RegistryObject<EntityType<EntitySeraphim>> seraphim = ENTITY_TYPES.register("seraphim",
 			() -> EntityType.Builder.<EntitySeraphim>create(EntitySeraphim::new, EntityClassification.MONSTER)
-					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "seraphim").toString()));
+					.size(0.9f, 1.6f).build(new ResourceLocation(HutosMod.MOD_ID, "seraphim").toString()));
 	public static final RegistryObject<EntityType<EntityThrone>> throne = ENTITY_TYPES.register("throne",
 			() -> EntityType.Builder.<EntityThrone>create(EntityThrone::new, EntityClassification.MONSTER).size(1F, 1F)
 					.build(new ResourceLocation(HutosMod.MOD_ID, "throne").toString()));
@@ -125,7 +125,7 @@ public class EntityInit {
 	// Eldritch
 	public static final RegistryObject<EntityType<EntityDarkYoung>> dark_young = ENTITY_TYPES.register("dark_young",
 			() -> EntityType.Builder.<EntityDarkYoung>create(EntityDarkYoung::new, EntityClassification.MONSTER)
-					.size(1.7f, 1.7f).build(new ResourceLocation(HutosMod.MOD_ID, "dark_young").toString()));
+					.size(1.7f, 2.5f).build(new ResourceLocation(HutosMod.MOD_ID, "dark_young").toString()));
 
 	public static final RegistryObject<EntityType<EntityScuttlingOcculus>> scuttling_occulus = ENTITY_TYPES.register(
 			"scuttling_occulus",
@@ -135,7 +135,7 @@ public class EntityInit {
 
 	public static final RegistryObject<EntityType<EntityBlackGoat>> black_goat = ENTITY_TYPES.register("black_goat",
 			() -> EntityType.Builder.<EntityBlackGoat>create(EntityBlackGoat::new, EntityClassification.MONSTER)
-					.size(0.5F, 0.5F).build(new ResourceLocation(HutosMod.MOD_ID, "black_goat").toString()));
+					.size(0.5F, 0.8F).build(new ResourceLocation(HutosMod.MOD_ID, "black_goat").toString()));
 	// Beast
 	public static final RegistryObject<EntityType<EntityBeastFromBeyond>> beast_from_beyond = ENTITY_TYPES.register(
 			"beast_from_beyond",
@@ -150,7 +150,7 @@ public class EntityInit {
 	// Machine
 	public static final RegistryObject<EntityType<EntityMechan>> mechan = ENTITY_TYPES.register("mechan",
 			() -> EntityType.Builder.<EntityMechan>create(EntityMechan::new, EntityClassification.MONSTER)
-					.size(0.9f, 1.3f).build(new ResourceLocation(HutosMod.MOD_ID, "mechan").toString()));
+					.size(0.9f, 1.7f).build(new ResourceLocation(HutosMod.MOD_ID, "mechan").toString()));
 
 	public static final RegistryObject<EntityType<EntityMalformedAutomaton>> malformed_automaton = ENTITY_TYPES
 			.register("malformed_automaton", () -> EntityType.Builder

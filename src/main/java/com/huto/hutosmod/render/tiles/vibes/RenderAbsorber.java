@@ -235,7 +235,7 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 			float diffX = target.getX() + .5f - source.getX();
 			float diffY = target.getY() + .5f - source.getY();
 			float diffZ = target.getZ() + .5f - source.getZ();
-			Vector3f startLaser = new Vector3f(0.5f, .5f, 0.5f);
+			Vector3f startLaser = new Vector3f(0.5f, .57f, 0.5f);
 			Vector3f endLaser = new Vector3f(diffX, diffY, diffZ);
 			Vector3f sortPos = new Vector3f(source.getX(), source.getY(), source.getZ());
 			Matrix4f positionMatrix = matrixStackIn.getLast().getMatrix();
