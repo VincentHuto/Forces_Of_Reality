@@ -12,6 +12,7 @@ import com.huto.hutosmod.capabilities.karma.activation.KarmaActivationEvents;
 import com.huto.hutosmod.capabilities.tiledevotion.DevotionEvents;
 import com.huto.hutosmod.capabilities.vibes.SeerEventHandler;
 import com.huto.hutosmod.capabilities.vibes.VibrationEvents;
+import com.huto.hutosmod.capabilities.vibes.chunk.ChunkVibrationEvents;
 import com.huto.hutosmod.events.MechanGloveEvents;
 import com.huto.hutosmod.events.RuneBinderEvents;
 import com.huto.hutosmod.events.SparkDirectorModEvents;
@@ -104,6 +105,7 @@ public class HutosMod {
 		MinecraftForge.EVENT_BUS.addListener(SparkDirectorModEvents::onClientTick);
 
 		// Register Capability Events
+		MinecraftForge.EVENT_BUS.register(ChunkVibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(DevotionEvents.class);
 		MinecraftForge.EVENT_BUS.register(KarmaActivationEvents.class);

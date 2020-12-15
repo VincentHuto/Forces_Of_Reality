@@ -22,6 +22,8 @@ import com.huto.hutosmod.capabilities.tiledevotion.IDevotion;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationStorage;
 import com.huto.hutosmod.capabilities.vibes.Vibrations;
+import com.huto.hutosmod.capabilities.vibes.chunk.ChunkVibrationStorage;
+import com.huto.hutosmod.capabilities.vibes.chunk.IChunkVibrations;
 
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -39,6 +41,7 @@ public class CapabilityInit {
 		CapabilityManager.INSTANCE.register(IRune.class, new IRuneStorage(), new IRuneFactory());
 		CapabilityManager.INSTANCE.register(IRunesItemHandler.class, new IRunesItemHandlerStorage(),
 				new IRunesItemHandlerFactory());
+		CapabilityManager.INSTANCE.register(IChunkVibrations.class, new ChunkVibrationStorage(),()->null);
 
 	}
 

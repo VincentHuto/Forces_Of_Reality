@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    "POP",
+    "CCC"
+  ],
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "C": {
+      "item": "minecraft:chiseled_quartz_block"
+    },
+    "P": {
+      "item": "minecraft:quartz_pillar"
+    },
+    "O": {
+      "item": "hutosmod:gem_opal"
+    }
+  },
+  "result": {
+    "item": "hutosmod:teleporter"
+  }
+}

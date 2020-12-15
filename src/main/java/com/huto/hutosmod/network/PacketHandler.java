@@ -24,6 +24,7 @@ import com.huto.hutosmod.network.mindrunes.PacketUpdateChiselRunes;
 import com.huto.hutosmod.network.mindrunes.SyncPacket;
 import com.huto.hutosmod.network.vibes.ExportVibePacket;
 import com.huto.hutosmod.network.vibes.ImportVibePacket;
+import com.huto.hutosmod.network.vibes.UpdateChunkEnergyValueMessage;
 import com.huto.hutosmod.network.vibes.VibrationPacketClient;
 import com.huto.hutosmod.network.vibes.VibrationPacketServer;
 
@@ -61,6 +62,9 @@ public class PacketHandler {
 				VibrationPacketClient::decode, VibrationPacketClient::handle);
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketServer.class, VibrationPacketServer::encode,
 				VibrationPacketServer::decode, VibrationPacketServer::handle);
+		CHANNELVIBES.registerMessage(networkID++, UpdateChunkEnergyValueMessage.class,
+				UpdateChunkEnergyValueMessage::encode, UpdateChunkEnergyValueMessage::decode,
+				UpdateChunkEnergyValueMessage::handle);
 
 		// Karma
 		CHANNELKARMA.registerMessage(networkID++, KarmaPacketClient.class, KarmaPacketClient::encode,

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.huto.hutosmod.HutosMod;
-import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.chunk.ChunkVibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.chunk.IChunkVibrations;
 import com.huto.hutosmod.entities.utils.Vector3;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityLectorTable;
 import com.huto.hutosmod.render.effects.LectorGridPosVector;
@@ -50,22 +50,32 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 		World world = player.getEntityWorld();
 
 		Chunk mainChunk = world.getChunkAt(te.getPos());
-		IVibrations chunkVibes = mainChunk.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(NullPointerException::new);
-		System.out.println(chunkVibes.getVibes());
+		IChunkVibrations mainChunkVibe = mainChunk.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+				.orElseThrow(NullPointerException::new);
+
 		List<Integer> mcBiomeList = Arrays.stream(mainChunk.getBiomes().getBiomeIds()).boxed()
 				.collect(Collectors.toList());
 		Chunk xpChunk = world.getChunkAt(te.getPos().add(16, 0, 0));
 		List<Integer> xpBiomeList = Arrays.stream(xpChunk.getBiomes().getBiomeIds()).boxed()
 				.collect(Collectors.toList());
+		IChunkVibrations xpChunkVibe = xpChunk.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+				.orElseThrow(NullPointerException::new);
 		Chunk xnChunk = world.getChunkAt(te.getPos().add(-16, 0, 0));
 		List<Integer> xnBiomeList = Arrays.stream(xnChunk.getBiomes().getBiomeIds()).boxed()
 				.collect(Collectors.toList());
+		IChunkVibrations xnChunkVibe = xnChunk.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+				.orElseThrow(NullPointerException::new);
 		Chunk zpChunk = world.getChunkAt(te.getPos().add(0, 0, 16));
 		List<Integer> zpBiomeList = Arrays.stream(zpChunk.getBiomes().getBiomeIds()).boxed()
 				.collect(Collectors.toList());
+		IChunkVibrations zpChunkVibe = zpChunk.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+				.orElseThrow(NullPointerException::new);
 		Chunk znChunk = world.getChunkAt(te.getPos().add(0, 0, -16));
 		List<Integer> znBiomeList = Arrays.stream(znChunk.getBiomes().getBiomeIds()).boxed()
 				.collect(Collectors.toList());
+		IChunkVibrations znChunkVibe = znChunk.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+				.orElseThrow(NullPointerException::new);
+
 		List<PlayerEntity> players = world.getEntitiesWithinAABB(PlayerEntity.class, te.getRenderBoundingBox().grow(8));
 		double closestDistance = 0;
 		if (players.contains(player)) {
@@ -88,21 +98,26 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 				matrixStackIn.translate(0.25, 0, 0.75);
 				if (mod > 0.0f) {
 					// Current Chunk
-					biomeColor = mcBiomeList.contains(6) ? green : red;
+					// biomeColor = mcBiomeList.contains(6) ? green : red;
+					biomeColor = isChunkVibeFull(mainChunkVibe) ? green : red;
+
 					createSquare(matrixStackIn, builder, combinedLightIn, new LectorGridPosVector(0, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, -0.5f),
 							new LectorGridPosVector(0, 0.8f + yMod, -0.5f), biomeColor);
 					// XP
 					matrixStackIn.translate(1, 0, 0);
-					biomeColor = xpBiomeList.contains(7) ? green : red;
+					// biomeColor = xpBiomeList.contains(7) ? green : red;
+					biomeColor = isChunkVibeFull(xpChunkVibe) ? green : red;
+
 					createSquare(matrixStackIn, builder, combinedLightIn, new LectorGridPosVector(0, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, -0.5f),
 							new LectorGridPosVector(0, 0.8f + yMod, -0.5f), biomeColor);
 
 					// XN
-					biomeColor = xnBiomeList.contains(6) ? green : red;
+					// biomeColor = xnBiomeList.contains(6) ? green : red;
+					biomeColor = isChunkVibeFull(xnChunkVibe) ? green : red;
 					matrixStackIn.translate(-2, 0, 0);
 					createSquare(matrixStackIn, builder, combinedLightIn, new LectorGridPosVector(0, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, 0),
@@ -110,14 +125,16 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 							new LectorGridPosVector(0, 0.8f + yMod, -0.5f), biomeColor);
 
 					// ZP
-					biomeColor = zpBiomeList.contains(1) ? green : red;
+					// biomeColor = zpBiomeList.contains(1) ? green : red;
+					biomeColor = isChunkVibeFull(zpChunkVibe) ? green : red;
 					matrixStackIn.translate(+1, 0, 1);
 					createSquare(matrixStackIn, builder, combinedLightIn, new LectorGridPosVector(0, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, -0.5f),
 							new LectorGridPosVector(0, 0.8f + yMod, -0.5f), biomeColor);
 					// ZN
-					biomeColor = znBiomeList.contains(7) ? green : red;
+					// biomeColor = znBiomeList.contains(7) ? green : red;
+					biomeColor = isChunkVibeFull(znChunkVibe) ? green : red;
 					matrixStackIn.translate(0, 0, -2);
 					createSquare(matrixStackIn, builder, combinedLightIn, new LectorGridPosVector(0, 0.8f + yMod, 0),
 							new LectorGridPosVector(0.5f, 0.8f + yMod, 0),
@@ -151,5 +168,9 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
 		matrixStackIn.pop();
 
+	}
+
+	public boolean isChunkVibeFull(IChunkVibrations currentChunkCap) {
+		return currentChunkCap.canReceive() ? false : true;
 	}
 }

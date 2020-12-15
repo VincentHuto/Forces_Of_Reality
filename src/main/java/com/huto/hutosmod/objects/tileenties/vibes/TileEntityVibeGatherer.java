@@ -5,6 +5,8 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.chunk.ChunkVibrationProvider;
+import com.huto.hutosmod.capabilities.vibes.chunk.IChunkVibrations;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
@@ -43,7 +45,12 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 
 	@Override
 	public void tick() {
-		if (canGenerate()) {
+		IChunkVibrations chunkVibe = world.getChunkAt(getPos())
+				.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+				.orElseThrow(NullPointerException::new);
+		// System.out.println(chunkVibe.getEnergyStored());
+		if (canGenerate() && chunkVibe.canExtract()) {
+			chunkVibe.extractEnergy(2);
 			vibes.addVibes(0.2f);
 		}
 	}
