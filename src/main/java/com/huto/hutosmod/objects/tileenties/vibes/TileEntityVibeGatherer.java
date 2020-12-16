@@ -48,7 +48,6 @@ public class TileEntityVibeGatherer extends TileModVibes implements ITickableTil
 		IChunkVibrations chunkVibe = world.getChunkAt(getPos())
 				.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
 				.orElseThrow(NullPointerException::new);
-		// System.out.println(chunkVibe.getEnergyStored());
 		if (canGenerate() && chunkVibe.canExtract()) {
 			chunkVibe.extractEnergy(2);
 			vibes.addVibes(0.2f);

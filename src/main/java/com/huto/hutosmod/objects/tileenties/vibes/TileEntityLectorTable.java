@@ -51,6 +51,24 @@ public class TileEntityLectorTable extends TileVibeSimpleInventory implements IT
 	@Override
 	public void onLoad() {
 		super.onLoad();
+
+	}
+
+	public int getGridScale() {
+		switch (this.level) {
+		case 1:
+			return 1;
+		case 2:
+			return 3;
+		case 3:
+			return 5;
+		case 4:
+			return 7;
+		case 5:
+			return 9;
+		default:
+			return 9;
+		}
 	}
 
 	public void addLevel(float valIn) {
@@ -131,6 +149,7 @@ public class TileEntityLectorTable extends TileVibeSimpleInventory implements IT
 
 	@Override
 	public void tick() {
+
 		if (!world.isRemote) {
 			if (cooldown > 0) {
 				cooldown--;

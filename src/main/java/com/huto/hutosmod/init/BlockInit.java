@@ -83,8 +83,8 @@ public class BlockInit {
 
 	// TELEPORTEROS
 	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
-			() -> new BlockTeleporter(Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f)
-					.sound(SoundType.STONE)));
+			() -> new BlockTeleporter(
+					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
 
 	// Random
 	public static final RegistryObject<Block> runed_obsidian = BLOCKS.register("runed_obsidian", () -> new Block(
@@ -132,11 +132,11 @@ public class BlockInit {
 			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> somnolent_ore = BLOCKS.register("somnolent_ore",
-			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f).harvestLevel(3)
-					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f)
+					.harvestTool(ToolType.PICKAXE).harvestLevel(6).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> somnolent_ore_somnolent = BLOCKS.register("somnolent_ore_somnolent",
-			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f).harvestLevel(3)
-					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f)
+					.harvestTool(ToolType.PICKAXE).harvestLevel(6).sound(SoundType.STONE)));
 	// Anti
 	public static final RegistryObject<Block> anti_earth = BLOCKS.register("anti_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
@@ -216,15 +216,21 @@ public class BlockInit {
 			() -> new BlockBonsaiPlanter(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
 	// Somnolent
-	public static final RegistryObject<Block> somnolent_bonsai_stage_1 = BLOCKS.register("somnolent_bonsai_stage_1",
-			() -> new BlockSomnolentBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
-					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC, 1));
-	public static final RegistryObject<Block> somnolent_bonsai_stage_2 = BLOCKS.register("somnolent_bonsai_stage_2",
-			() -> new BlockSomnolentBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
-					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC, 2));
-	public static final RegistryObject<Block> somnolent_bonsai_stage_3 = BLOCKS.register("somnolent_bonsai_stage_3",
-			() -> new BlockSomnolentBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
-					.sound(SoundType.STONE).notSolid(), EnumBonsaiTypes.MYSTIC, 3));
+	public static final RegistryObject<Block> somnolent_bonsai_stage_1 = BLOCKS
+			.register("somnolent_bonsai_stage_1",
+					() -> new BlockSomnolentBonsai(Block.Properties.create(Material.ROCK)
+							.hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
+							EnumBonsaiTypes.MYSTIC, 1));
+	public static final RegistryObject<Block> somnolent_bonsai_stage_2 = BLOCKS
+			.register("somnolent_bonsai_stage_2",
+					() -> new BlockSomnolentBonsai(Block.Properties.create(Material.ROCK)
+							.hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
+							EnumBonsaiTypes.MYSTIC, 2));
+	public static final RegistryObject<Block> somnolent_bonsai_stage_3 = BLOCKS
+			.register("somnolent_bonsai_stage_3",
+					() -> new BlockSomnolentBonsai(Block.Properties.create(Material.ROCK)
+							.hardnessAndResistance(10f, 1500f).sound(SoundType.STONE).notSolid(),
+							EnumBonsaiTypes.MYSTIC, 3));
 	// Anti
 	public static final RegistryObject<Block> anti_bonsai_stage_1 = BLOCKS.register("anti_bonsai_stage_1",
 			() -> new BlockAntiBonsai(Block.Properties.create(Material.ROCK).hardnessAndResistance(10f, 1500f)
@@ -343,9 +349,8 @@ public class BlockInit {
 	public static final RegistryObject<Block> somnolent_hopper = BLOCKS.register("somnolent_hopper",
 			() -> new BlockSomnolentHopper(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> lector_table = BLOCKS.register("lector_table",
-			() -> new BlockLectorTable(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> lector_table = BLOCKS.register("lector_table", () -> new BlockLectorTable(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
@@ -405,7 +410,6 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.bonsai_planter.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.teleporter.get(), RenderType.getCutoutMipped());
 
-			
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_1.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_1.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_bonsai_stage_1.get(), RenderType.getCutoutMipped());

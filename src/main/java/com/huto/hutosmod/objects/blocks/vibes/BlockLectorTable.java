@@ -2,6 +2,8 @@ package com.huto.hutosmod.objects.blocks.vibes;
 
 import java.util.stream.Stream;
 
+import com.huto.hutosmod.init.ItemInit;
+import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityLectorTable;
 
 import net.minecraft.block.Block;
@@ -9,6 +11,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -82,29 +85,18 @@ public class BlockLectorTable extends Block {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-	/*	if (worldIn.isRemote)
+		if (worldIn.isRemote)
 			return ActionResultType.SUCCESS;
-		TileEntityLecturTable te = (TileEntityLecturTable) worldIn.getTileEntity(pos);
+		TileEntityLectorTable te = (TileEntityLectorTable) worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItemMainhand();
 
-		if (stack.isEmpty()) {
-			ModInventoryVibeHelper.withdrawFromInventory(te, player);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-		}
-		// If there is something in your hand add it to the block if its not an //
-		if (!stack.isEmpty() && !(stack.getItem() == ItemInit.enhanced_magatama.get())) {
-			te.addItem(player, stack, handIn);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return ActionResultType.SUCCESS;
-		}
 		// Upgrade clause
-		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getLevel() < 9) {
+		if (stack.getItem() == ItemInit.enhanced_magatama.get() && te.getLevel() < 5) {
 			te.addLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 
 		}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);*/
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 		return ActionResultType.SUCCESS;
 	}
 

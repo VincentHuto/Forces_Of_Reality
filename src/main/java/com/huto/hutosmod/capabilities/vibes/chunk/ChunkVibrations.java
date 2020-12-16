@@ -11,7 +11,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class ChunkVibrations implements IChunkVibrations {
 	public World world;
 	public ChunkPos chunkPos;
-	protected int energy = 256;
+	protected int energy;
 	protected int capacity;
 	protected int maxReceive;
 	protected int maxExtract;
@@ -19,7 +19,7 @@ public class ChunkVibrations implements IChunkVibrations {
 	public ChunkVibrations(final int capacity, final World world, final ChunkPos chunkPos) {
 		this.world = world;
 		this.chunkPos = chunkPos;
-		energy = capacity;
+		this.energy = capacity;
 	}
 
 	@Override
@@ -46,12 +46,14 @@ public class ChunkVibrations implements IChunkVibrations {
 
 	}
 
-	public void setEnergy(final int energy) {
-		this.energy = energy;
+	@Override
+	public void setEnergy(final int energyIn) {
+		this.energy = energyIn;
 		onEnergyChanged();
 	}
 
-	protected void onEnergyChanged() {
+	@Override
+	public void onEnergyChanged() {
 		final World world = getWorld();
 		final ChunkPos chunkPos = getChunkPos();
 

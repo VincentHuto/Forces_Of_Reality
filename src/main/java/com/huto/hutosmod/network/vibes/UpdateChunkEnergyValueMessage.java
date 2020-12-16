@@ -57,9 +57,9 @@ public class UpdateChunkEnergyValueMessage {
 
 			optionalWorld.ifPresent(
 					world -> ChunkVibrationProvider.getChunkEnergy(world, message.chunkPos).ifPresent(chunkEnergy -> {
-						if (!(chunkEnergy instanceof ChunkVibrations))
+						if (!(chunkEnergy instanceof ChunkVibrations)) {
 							return;
-
+						}
 						((ChunkVibrations) chunkEnergy).setEnergy(message.energy);
 					}));
 		});

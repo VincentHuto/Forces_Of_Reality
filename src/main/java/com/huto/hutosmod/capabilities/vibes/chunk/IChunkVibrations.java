@@ -63,4 +63,6 @@ public interface IChunkVibrations {
 
 	void setEnergy(int int1);
 
+	void onEnergyChanged();
+
 }
