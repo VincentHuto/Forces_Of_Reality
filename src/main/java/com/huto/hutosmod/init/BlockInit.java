@@ -110,6 +110,10 @@ public class BlockInit {
 	public static final RegistryObject<Block> old_iron_block = BLOCKS.register("old_iron_block",
 			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.ANVIL)));
+	public static final RegistryObject<Block> opal_block = BLOCKS.register("opal_block",
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)));
+
 	// Somnolent
 	public static final RegistryObject<Block> somnolent_earth = BLOCKS.register("somnolent_earth",
 			() -> new GrassBlock(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f)

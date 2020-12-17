@@ -574,7 +574,38 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("NON")
 				.patternLine("GOG")
 				.patternLine("NGN")
-				.addCriterion("has_opal", hasItem(ItemInit.harmonic_imprint.get())).build(consumer);
+				.addCriterion("has_opal", hasItem(ItemInit.gem_opal.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.opal_block.get())
+				.key('O', ItemInit.gem_opal.get())
+				.patternLine("OOO")
+				.patternLine("OOO")
+				.patternLine("OOO")
+				.addCriterion("has_opal", hasItem(ItemInit.gem_opal.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.lector_table.get())
+				.key('G',BlockInit.gilded_wool.get())
+				.key('M', BlockInit.contained_magma.get())
+				.key('C', BlockInit.nether_block.get())
+				.key('O', BlockInit.opal_block.get())
+				.key('S', Blocks.DARK_OAK_LOG)
+				.key('A',BlockInit.activated_obsidian.get())
+				.patternLine("MOM")
+				.patternLine("SCS")
+				.patternLine("AGA")
+				.addCriterion("has_opal", hasItem(ItemInit.gem_opal.get())).build(consumer);
+			
+			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.vibe_gatherer.get())
+				.key('A',BlockInit.activated_obsidian.get())
+				.key('O', BlockInit.nether_block.get())
+				.key('S', Blocks.SPRUCE_LOG)
+				.key('L', BlockInit.somnolent_leaves.get())
+				.patternLine(" L ")
+				.patternLine("ASA")
+				.patternLine("OOO")
+				.addCriterion("has_nether_block", hasItem(BlockInit.nether_block.get())).build(consumer);
+			
 			
 	}
 }

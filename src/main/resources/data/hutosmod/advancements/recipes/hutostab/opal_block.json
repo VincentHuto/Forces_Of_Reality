@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "hutosmod:harmonic_imprint"
+      "hutosmod:opal_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "hutosmod:harmonic_imprint"
+        "recipe": "hutosmod:opal_block"
       }
     }
   },

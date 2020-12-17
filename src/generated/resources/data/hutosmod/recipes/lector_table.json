@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MOM",
+    "SCS",
+    "AGA"
+  ],
+  "key": {
+    "G": {
+      "item": "hutosmod:gilded_wool"
+    },
+    "M": {
+      "item": "hutosmod:contained_magma"
+    },
+    "C": {
+      "item": "hutosmod:nether_block"
+    },
+    "O": {
+      "item": "hutosmod:opal_block"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "A": {
+      "item": "hutosmod:activated_obsidian"
+    }
+  },
+  "result": {
+    "item": "hutosmod:lector_table"
+  }
+}
