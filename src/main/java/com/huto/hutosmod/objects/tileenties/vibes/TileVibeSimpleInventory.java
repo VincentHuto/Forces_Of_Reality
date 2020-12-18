@@ -92,7 +92,9 @@ public abstract class TileVibeSimpleInventory extends TileMod {
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		markDirty();
 	}
-
+	public boolean canHopperExtract() {
+		return false;
+	}
 	/*
 	 * Extension of ItemStackHandler that uses our own slot array, allows for
 	 * control of writing, allows control over stack limits, and allows for

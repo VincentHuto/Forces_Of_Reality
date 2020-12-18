@@ -113,6 +113,8 @@ public class BlockInit {
 	public static final RegistryObject<Block> opal_block = BLOCKS.register("opal_block",
 			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)));
+	public static final RegistryObject<Block> contained_crying_obsidian = BLOCKS.register("contained_crying_obsidian", () -> new Block(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	// Somnolent
 	public static final RegistryObject<Block> somnolent_earth = BLOCKS.register("somnolent_earth",
@@ -385,7 +387,10 @@ public class BlockInit {
 	public static final RegistryObject<Block> end_crystal_nightmare = BLOCKS.register("end_crystal_nightmare",
 			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
-
+	public static final RegistryObject<Block> raw_hematite = BLOCKS.register("raw_hematite",
+			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
+	
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -404,6 +409,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.obj_icosahedron.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_somnolent.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_grass.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.sacrificial_pyre.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.auspicious_bundle.get(), RenderType.getCutout());

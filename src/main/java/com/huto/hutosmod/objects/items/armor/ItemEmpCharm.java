@@ -94,8 +94,8 @@ public class ItemEmpCharm extends Item {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new TranslationTextComponent("Enable to have a chance\nto passivly shock enemies")
-				.mergeStyle(TextFormatting.GOLD));
+		tooltip.add(new TranslationTextComponent("Enable to have a chance to ").mergeStyle(TextFormatting.GOLD));
+		tooltip.add(new TranslationTextComponent("passivly shock enemies").mergeStyle(TextFormatting.GOLD));
 		if (stack.hasTag()) {
 			if (stack.getTag().getBoolean(TAG_STATE)) {
 				tooltip.add(new TranslationTextComponent("State: On").mergeStyle(TextFormatting.BLUE));

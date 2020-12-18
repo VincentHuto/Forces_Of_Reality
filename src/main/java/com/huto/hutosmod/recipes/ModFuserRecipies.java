@@ -19,9 +19,17 @@ public class ModFuserRecipies {
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
 			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade,
 			recipeAuricBowBlade, recipeNullTrickAxe, recipeMysticTrickAxe, recipeAuricTrickAxe, recipeIdentifier,
-			recipeArmoredDirector;
+			recipeArmoredDirector, recipeAuricIngot, recipeCryingObsidian;
 
 	public static void init() {
+
+		recipeCryingObsidian = registerRecipe(new ResourceLocation("crying_obsidian"),
+				new ItemStack(Blocks.CRYING_OBSIDIAN, 1), 15, Ingredient.fromItems(ItemInit.essence_drop.get()),
+				Ingredient.fromItems(Blocks.OBSIDIAN));
+
+		recipeAuricIngot = registerRecipe(new ResourceLocation("auric_ingot"),
+				new ItemStack(ItemInit.auric_ingot.get(), 1), 30, Ingredient.fromItems(ItemInit.machina_soul.get()),
+				Ingredient.fromItems(Items.IRON_INGOT), Ingredient.fromItems(ItemInit.machina_soul.get()));
 
 		recipeArmoredDirector = registerRecipe(new ResourceLocation("machina_spark_director_armored"),
 				new ItemStack(ItemInit.machina_spark_director_armored.get(), 1), 150,
@@ -115,5 +123,4 @@ public class ModFuserRecipies {
 		fuserRecipies.add(recipe);
 		return recipe;
 	}
-
 }

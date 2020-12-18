@@ -233,14 +233,13 @@ public class TileEntitySomnolentHopper extends LockableLootTileEntity implements
 		 * return ret; }
 		 */
 		TileVibeSimpleInventory iinventory = getSourceInventory(hopper);
-		// TileEntityEssecenceEnhancer enchancer = (TileEntityEssecenceEnhancer)
 		// iinventory;
 		if (iinventory != null) {
 			Direction enumfacing = Direction.DOWN;
 			if (isInventoryEmpty(iinventory, enumfacing)) {
 			}
 
-			if (iinventory instanceof TileVibeSimpleInventory) {
+			if (iinventory instanceof TileVibeSimpleInventory && iinventory.canHopperExtract()) {
 
 				ModInventoryVibeHelper.withdrawFromInventoryToInventory(iinventory,
 						getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, enumfacing)
@@ -271,7 +270,11 @@ public class TileEntitySomnolentHopper extends LockableLootTileEntity implements
 	private static boolean pullItemFromSlot(IHopper hopper, TileVibeSimpleInventory iinventory, int index,
 			Direction direction) {
 		ItemStack itemstack = iinventory.itemHandler.getStackInSlot(index);
-		if (!itemstack.isEmpty() && canExtractItemFromSlot(iinventory, itemstack, index, direction)) {
+		if (!iinventory.canHopperExtract()) {
+			return false;
+		}
+		if (!itemstack.isEmpty() && canExtractItemFromSlot(iinventory, itemstack, index, direction)
+				&& iinventory.canHopperExtract()) {
 			ItemStack itemstack1 = itemstack.copy();
 			ItemStack itemstack2 = putStackInInventoryAllSlots(iinventory, hopper,
 					iinventory.itemHandler.getStackInSlot(index), null);
@@ -288,9 +291,8 @@ public class TileEntitySomnolentHopper extends LockableLootTileEntity implements
 
 	public static ItemStack putStackInInventoryAllSlots(TileVibeSimpleInventory destination,
 			@Nullable IInventory source, ItemStack stack, @Nullable Direction direction) {
-		if (destination instanceof TileVibeSimpleInventory) {
+		if (destination instanceof TileVibeSimpleInventory && destination.canHopperExtract()) {
 			int i = destination.getItemHandler().getSlots();
-
 			for (int j = 0; j < i && !stack.isEmpty(); ++j) {
 				stack = insertStack(source, destination, stack, j, direction);
 				destination.addItem(null, stack, null);
@@ -325,6 +327,7 @@ public class TileEntitySomnolentHopper extends LockableLootTileEntity implements
 	public static ItemStack putStackInInventoryAllSlots(@Nullable IInventory source,
 			TileVibeSimpleInventory destination, ItemStack stack, @Nullable Direction direction) {
 		if (destination instanceof ISidedInventory && direction != null) {
+
 			ISidedInventory isidedinventory = (ISidedInventory) destination;
 			int[] aint = isidedinventory.getSlotsForFace(direction);
 
@@ -421,11 +424,11 @@ public class TileEntitySomnolentHopper extends LockableLootTileEntity implements
 			@Nullable Direction side) {
 
 		if (destination instanceof TileEntityAutoInscriber) {
-			if (destination.itemHandler.getStackInSlot(0).isEmpty()) {
-				return true;
-
+			for (int i = 0; i < destination.itemHandler.getSlots(); i++) {
+				if (destination.itemHandler.getStackInSlot(i).isEmpty()) {
+					return true;
+				}
 			}
-
 		} else {
 
 			for (int i = 0; i < destination.itemHandler.getSlots(); i++) {
@@ -457,6 +460,7 @@ public class TileEntitySomnolentHopper extends LockableLootTileEntity implements
 			ItemStack stack, int index, @Nullable Direction direction) {
 		ItemStack itemstack = destination.getItemHandler().getStackInSlot(index);
 		if (canInsertItemInSlot(destination, stack, index, direction)) {
+
 			boolean flag = false;
 			boolean flag1 = destination.itemHandler.getStackInSlot(index).isEmpty();
 			if (itemstack.isEmpty()) {

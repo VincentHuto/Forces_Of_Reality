@@ -69,7 +69,7 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 		float distMod = (float) (yMod * 1.2f + (0.05f * Math.sin(te.getWorld().getGameTime() * 0.25f)));
 		// biomeColor = mcBiomeList.contains(6) ? green : red;
 		// gridsize x gridsize
-		int gridSize = te.getGridScale() * 1;
+		int gridSize = te.getGridScale() * 5;
 		float gridSpacing = 0.5f;
 		// This isnt a perfect formula but it does work on the levels 1,3,5,7,9
 		int centerMod = gridSize == 1 ? 1 : gridSize != 3 ? ((gridSize + 2) % gridSize) + (gridSize / 3) : 2;
@@ -97,12 +97,12 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 				} else {
 					gridColor = new LectorVectorColorData(
 							(Math.max(0, Math.abs(250 - directedChunkVibe.getEnergyStored()))),
-							Math.max(directedChunkVibe.getEnergyStored()+ (chunkHeight * 0.95f) - 1 , 1), 0, 255);
+							Math.max(directedChunkVibe.getEnergyStored() + (chunkHeight * 0.95f) - 1, 1), 0, 255);
 				}
 				if (nextChunk == mainChunk) {
 					matrixStackIn.push();
-					RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn, 15728640, combinedOverlayIn,
-							builder, 1, gridSpacing * (x * 1.01f), 2.1f + yMod + distMod + chunkHeightMod,
+					RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn, 15728640, combinedOverlayIn, builder, 1,
+							gridSpacing * (x * 1.01f), 2.1f + yMod + distMod + chunkHeightMod,
 							gridSpacing * (z * 1.01f), 0.5f, 0.5f, 0.5f);
 					matrixStackIn.pop();
 				}

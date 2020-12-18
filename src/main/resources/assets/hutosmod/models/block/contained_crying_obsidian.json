@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "hutosmod:blocks/contained_crying_obsidian_bottom",
+        "side": "hutosmod:blocks/contained_crying_obsidian_side"
+    }
+}

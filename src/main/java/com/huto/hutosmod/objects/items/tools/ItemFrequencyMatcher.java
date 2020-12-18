@@ -78,11 +78,8 @@ public class ItemFrequencyMatcher extends Item {
 		World world = ctx.getWorld();
 		ItemStack stack = ctx.getItem();
 		BlockPos blockPos = ctx.getPos();
-		CompoundNBT compound = stack.getTag();
+		CompoundNBT compound = stack.getOrCreateTag();
 
-		if (!stack.hasTag()) {
-			stack.setTag(new CompoundNBT());
-		}
 		// Always Select a new block if player is sneaking
 		if (player.isSneaking()) {
 			player.playSound(SoundEvents.BLOCK_BEACON_ACTIVATE, 0.40f, 1F);

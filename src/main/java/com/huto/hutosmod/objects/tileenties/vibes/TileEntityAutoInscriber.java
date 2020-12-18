@@ -1,7 +1,5 @@
 package com.huto.hutosmod.objects.tileenties.vibes;
 
-import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -37,7 +35,7 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 	int recipeKeepTicks = 0;
 	float maxVibes = 200;
 	public final String TAG_SIZE = "tankSize";
-	List<ItemStack> lastRecipe = null;
+	RecipeAutoInscriber lastRecipe;
 	RecipeAutoInscriber currentRecipe;
 	public final String TAG_LEVEL = "level";
 	public int level = 1;
@@ -75,6 +73,17 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 
 	public void setMaxVibes(float maxVibes) {
 		this.maxVibes = maxVibes;
+	}
+
+	@Override
+	public boolean canHopperExtract() {
+		for (int i = 0; i < getItemHandler().getSlots(); i++) {
+			if (getItemHandler().getStackInSlot(i).getItem() != Items.OBSIDIAN
+					|| getItemHandler().getStackInSlot(i).getItem() != Items.CRYING_OBSIDIAN) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public RecipeAutoInscriber getCurrentRecipe() {
@@ -214,7 +223,6 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 	public int getSizeInventory() {
 		return 2;
 	}
-	
 
 	@Override
 	protected SimpleItemStackHandler createItemHandler() {
@@ -244,8 +252,8 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 			cooldown = param;
 			return true;
 		case CRAFT_EFFECT_EVENT: {
-			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.AMBIENT_CAVE, SoundCategory.BLOCKS, 1, 1,
-					false);
+			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_SHULKER_BOX_OPEN,
+					SoundCategory.BLOCKS, 1, 1, false);
 			return true;
 
 		}
@@ -255,11 +263,15 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 		}
 	}
 
+	public void saveLastRecipe(RecipeAutoInscriber recipeIn) {
+		lastRecipe = recipeIn;
+	}
+
 	public void onActivated(PlayerEntity player, ItemStack wand) {
 		RecipeAutoInscriber recipe = null;
-		if (currentRecipe != null)
+		if (currentRecipe != null) {
 			recipe = currentRecipe;
-		else
+		} else {
 			for (RecipeAutoInscriber recipe_ : ModInscriberRecipes.inscriberRecipies) {
 
 				if (recipe_.matches(itemHandler)) {
@@ -267,21 +279,19 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 					break;
 				}
 			}
-	//	isActive = false;
-
+		}
 		if (recipe != null) {
 			float manaCost = recipe.getManaUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 
 				ItemStack output = recipe.getOutput().copy();
-				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
-						output);
 				if (world.isRemote) {
 					world.addParticle(ParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
 				}
-				world.addEntity(outputItem);
+
+				saveLastRecipe(currentRecipe);
+				// world.addEntity(outputItem);
 				vibes.setVibes(vibes.getVibes() - manaCost);
-				currentRecipe = null;
 				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), SET_COOLDOWN_EVENT, 60);
 				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), CRAFT_EFFECT_EVENT, 0);
 				for (int i = 0; i < getItemHandler().getSlots(); i++) {
@@ -289,9 +299,9 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 						ItemStack stack = itemHandler.getStackInSlot(i);
 						if (!stack.isEmpty()) {
 							this.sendUpdates();
-							itemHandler.setStackInSlot(i, ItemStack.EMPTY);
-
+							itemHandler.setStackInSlot(i, output);
 						}
+
 					}
 					if (getItemHandler().getStackInSlot(i).getItem() instanceof ItemKnapper) {
 						ItemStack knapperIn = itemHandler.getStackInSlot(i);

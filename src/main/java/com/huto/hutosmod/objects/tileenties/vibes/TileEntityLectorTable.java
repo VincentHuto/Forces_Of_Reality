@@ -28,6 +28,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 
 public class TileEntityLectorTable extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	private static final int SET_KEEP_TICKS_EVENT = 0;
@@ -52,6 +53,12 @@ public class TileEntityLectorTable extends TileVibeSimpleInventory implements IT
 	public void onLoad() {
 		super.onLoad();
 
+	}
+	
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		// TODO Auto-generated method stub
+		return super.getRenderBoundingBox().grow(3);
 	}
 
 	public int getGridScale() {

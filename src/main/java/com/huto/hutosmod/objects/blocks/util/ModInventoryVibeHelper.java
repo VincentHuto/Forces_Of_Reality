@@ -1,6 +1,8 @@
 
 package com.huto.hutosmod.objects.blocks.util;
 
+import com.huto.hutosmod.objects.items.tools.ItemKnapper;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 
 import net.minecraft.block.BlockState;
@@ -17,30 +19,31 @@ public class ModInventoryVibeHelper {
 
 	public static InvWithLocation getInventoryWithLocation(World world, BlockPos pos) {
 		IItemHandler ret = getInventory(world, pos);
-		if(ret == null)
+		if (ret == null)
 			return null;
-		else return new InvWithLocation(ret, world, pos);
+		else
+			return new InvWithLocation(ret, world, pos);
 	}
 
 	public static IItemHandler getInventory(World world, BlockPos pos) {
 		TileEntity te = world.getTileEntity(pos);
 
-		if(te == null)
+		if (te == null)
 			return null;
 
 		IItemHandler ret = (IItemHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
-
-				return ret;
+		return ret;
 	}
 
 	public static void dropInventory(TileVibeSimpleInventory inv, World world, BlockState state, BlockPos pos) {
-		if(inv != null) {
-			for(int j1 = 0; j1 < inv.getSizeInventory(); ++j1) {
+		if (inv != null) {
+			for (int j1 = 0; j1 < inv.getSizeInventory(); ++j1) {
 				ItemStack itemstack = inv.getItemHandler().getStackInSlot(j1);
 
-				if(!itemstack.isEmpty()) {
-					net.minecraft.inventory.InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), itemstack);
+				if (!itemstack.isEmpty()) {
+					net.minecraft.inventory.InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(),
+							itemstack);
 				}
 			}
 
@@ -49,9 +52,9 @@ public class ModInventoryVibeHelper {
 	}
 
 	public static void withdrawFromInventory(TileVibeSimpleInventory inv, PlayerEntity player) {
-		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
+		for (int i = inv.getSizeInventory() - 1; i >= 0; i--) {
 			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
-			if(!stackAt.isEmpty()) {
+			if (!stackAt.isEmpty()) {
 				ItemStack copy = stackAt.copy();
 				ItemHandlerHelper.giveItemToPlayer(player, copy);
 				inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
@@ -62,13 +65,27 @@ public class ModInventoryVibeHelper {
 	}
 
 	public static void withdrawFromInventoryToInventory(TileVibeSimpleInventory inv, IItemHandler inventory) {
-		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
-			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
-			if(!stackAt.isEmpty()) {
-				//ItemStack copy = stackAt.copy();
-				ItemHandlerHelper.insertItem(inventory, stackAt, false);
-				inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
-				break;
+		if (inv instanceof TileEntityAutoInscriber) {
+			for (int i = 0; i < inv.getSizeInventory(); i++) {
+				ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
+				if (!stackAt.isEmpty() && !(stackAt.getItem() instanceof ItemKnapper)) {
+					// ItemStack copy = stackAt.copy();
+					ItemHandlerHelper.insertItem(inventory, stackAt, false);
+					inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
+					break;
+				}
+			}
+		} else {
+
+			for (int i = inv.getSizeInventory() - 1; i >= 0; i--) {
+				ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
+
+				if (!stackAt.isEmpty()) {
+					// ItemStack copy = stackAt.copy();
+					ItemHandlerHelper.insertItem(inventory, stackAt, false);
+					inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
+					break;
+				}
 			}
 		}
 	}

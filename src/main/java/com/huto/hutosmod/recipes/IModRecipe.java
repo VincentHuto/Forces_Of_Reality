@@ -7,7 +7,9 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 public interface IModRecipe {
-    List<Ingredient> getInputs();
-    ItemStack getOutput();
-    ResourceLocation getId();
+	List<Ingredient> getInputs();
+
+	ItemStack getOutput();
+
+	ResourceLocation getId();
 }

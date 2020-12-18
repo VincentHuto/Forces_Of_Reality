@@ -221,6 +221,14 @@ public class GeneratorRecipes extends RecipeProvider {
 			.patternLine("NON")
 			.addCriterion("has_nullifying_powder", hasItem( ItemInit.nullifying_powder.get())).build(consumer);
 		  
+		  ShapedRecipeBuilder.shapedRecipe(BlockInit.contained_crying_obsidian.get())
+			.key('N', Tags.Items.INGOTS_NETHER_BRICK)
+			.key('O', Blocks.CRYING_OBSIDIAN)
+			.key('P', ItemInit.nullifying_powder.get())
+			.patternLine("NON")
+			.patternLine("OPO")
+			.patternLine("NON")
+			.addCriterion("has_crying_obsidian", hasItem( Blocks.CRYING_OBSIDIAN)).build(consumer);
 		  
 		  ShapedRecipeBuilder.shapedRecipe(BlockInit.nether_block.get())
 			.key('N', Tags.Items.INGOTS_NETHER_BRICK)
