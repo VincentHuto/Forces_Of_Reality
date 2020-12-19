@@ -69,7 +69,7 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 		float distMod = (float) (yMod * 1.2f + (0.05f * Math.sin(te.getWorld().getGameTime() * 0.25f)));
 		// biomeColor = mcBiomeList.contains(6) ? green : red;
 		// gridsize x gridsize
-		int gridSize = te.getGridScale() * 5;
+		int gridSize = te.getGridScale() * 1;
 		float gridSpacing = 0.5f;
 		// This isnt a perfect formula but it does work on the levels 1,3,5,7,9
 		int centerMod = gridSize == 1 ? 1 : gridSize != 3 ? ((gridSize + 2) % gridSize) + (gridSize / 3) : 2;

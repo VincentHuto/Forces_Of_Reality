@@ -1,10 +1,10 @@
 package com.huto.hutosmod.objects.items;
 
 import com.huto.hutosmod.gui.pages.coven.GuiCovenTitle;
+import com.huto.hutosmod.render.entity.item.RenderItemTome;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
@@ -15,10 +15,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemCovenTome extends Item {
+public class ItemCovenTome extends ItemTome {
 
 	public ItemCovenTome(Properties prop) {
-		super(prop);
+		super(prop.setISTER(() -> RenderItemTome::new));
 	}
 
 	@Override

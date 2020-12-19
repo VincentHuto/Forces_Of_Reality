@@ -6,6 +6,7 @@ import com.huto.hutosmod.objects.blocks.BlockBeyondFlame;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
 import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
+import com.huto.hutosmod.objects.blocks.BlockGeode;
 import com.huto.hutosmod.objects.blocks.BlockHasturPylon;
 import com.huto.hutosmod.objects.blocks.BlockIcoSphere;
 import com.huto.hutosmod.objects.blocks.BlockMagicLight;
@@ -32,11 +33,13 @@ import com.huto.hutosmod.objects.blocks.bonsai.BlockSpruceBonsai;
 import com.huto.hutosmod.objects.blocks.util.EnumBonsaiTypes;
 import com.huto.hutosmod.objects.blocks.vibes.BlockAutoInscriber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockCapacitor;
+import com.huto.hutosmod.objects.blocks.vibes.BlockCrystalHarmonizer;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicAltar;
 import com.huto.hutosmod.objects.blocks.vibes.BlockKarmicExtractor;
 import com.huto.hutosmod.objects.blocks.vibes.BlockLectorTable;
 import com.huto.hutosmod.objects.blocks.vibes.BlockSomnolentHopper;
 import com.huto.hutosmod.objects.blocks.vibes.BlockStorageDrum;
+import com.huto.hutosmod.objects.blocks.vibes.BlockTectonicAbsorber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockThermalInfluxer;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeAbsorber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeAccel;
@@ -115,7 +118,9 @@ public class BlockInit {
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)));
 	public static final RegistryObject<Block> contained_crying_obsidian = BLOCKS.register("contained_crying_obsidian", () -> new Block(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-
+	public static final RegistryObject<Block> stone_geode = BLOCKS.register("stone_geode", () -> new BlockGeode(
+			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
+	
 	// Somnolent
 	public static final RegistryObject<Block> somnolent_earth = BLOCKS.register("somnolent_earth",
 			() -> new GrassBlock(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f)
@@ -349,14 +354,25 @@ public class BlockInit {
 	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
 			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
+	public static final RegistryObject<Block> crystal_harmonizer = BLOCKS.register("crystal_harmonizer",
+			() -> new BlockCrystalHarmonizer(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
 	public static final RegistryObject<Block> auto_inscriber = BLOCKS.register("auto_inscriber",
 			() -> new BlockAutoInscriber(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
 	public static final RegistryObject<Block> somnolent_hopper = BLOCKS.register("somnolent_hopper",
 			() -> new BlockSomnolentHopper(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> lector_table = BLOCKS.register("lector_table", () -> new BlockLectorTable(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	
+	
+	public static final RegistryObject<Block> tectonic_absorber = BLOCKS.register("tectonic_absorber",
+			() -> new BlockTectonicAbsorber(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
@@ -433,6 +449,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai_stage_2.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_2.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_2.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.stone_geode.get(), RenderType.getCutoutMipped());
 
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_3.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_3.get(), RenderType.getCutoutMipped());
@@ -440,6 +457,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.oak_bonsai_stage_3.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_3.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_3.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.tectonic_absorber.get(), RenderType.getCutoutMipped());
 
 			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
 

@@ -1,4 +1,4 @@
-21b085e3420f98dfb47b47625fa66e3ed2fe96b3 assets/hutosmod/lang/en_us.json
+48f54fb27b4e33f2f07213f22114be79cde59f47 assets/hutosmod/lang/en_us.json
 86a40ff2cd99d5eb56b5c6b31b4348859598de74 data/hutosmod/advancements/recipes/hutostab/absorber_configurer.json
 564c9e8cdd29e7d5b29646e3a03ac70c22e37b13 data/hutosmod/advancements/recipes/hutostab/anti_planks.json
 0fa3dd7b9673b17c2fc9cd94554cc26ab24a09a4 data/hutosmod/advancements/recipes/hutostab/anti_tear.json
@@ -65,6 +65,7 @@ de91a6726a9c9b4cf2a2560758f8fcfd0d0511db data/hutosmod/advancements/recipes/huto
 c713ef47a6d17caaaabe22f50cc40868ccde6fb7 data/hutosmod/advancements/recipes/hutostab/somnolent_planks.json
 ec508a75157ed2d7c1747f39c8f48490ae7a0456 data/hutosmod/advancements/recipes/hutostab/somnolent_stone.json
 bed876568b40a7a7523560c2ddc3e32a8f7662f5 data/hutosmod/advancements/recipes/hutostab/somnolent_tome.json
+704c892120ab96f163b1119afa14247e544b3138 data/hutosmod/advancements/recipes/hutostab/tectonic_absorber.json
 73632a4272f7da65e0fcd1b442f21e5813decf35 data/hutosmod/advancements/recipes/hutostab/teleporter.json
 81053c5b902a33297806f6e8b292086e48de5c31 data/hutosmod/advancements/recipes/hutostab/untold_easel.json
 fe041ef644e02834a83208d8ed5da33c68b6964e data/hutosmod/advancements/recipes/hutostab/upgrade_blank.json
@@ -143,6 +144,7 @@ b1b668659cdb8e51f2312200ccb00369c72fe7df data/hutosmod/recipes/somnolent_bottle.
 ef5d4f52c378c7d840dc907a2eac95b61aec5775 data/hutosmod/recipes/somnolent_planks.json
 de3b79829a306f576df564226f0d118103431fa2 data/hutosmod/recipes/somnolent_stone.json
 6eada4d8e36efb54bfe331872f78d8a228d1eb3f data/hutosmod/recipes/somnolent_tome.json
+b0e1c82f210c6888ce5093277b8b777bb8f0636f data/hutosmod/recipes/tectonic_absorber.json
 bd49417bc13bc15e67b2e7fb2fe7334802f8c148 data/hutosmod/recipes/teleporter.json
 4112c4203eebd9a6e5ae12ab1ea2101fef393157 data/hutosmod/recipes/untold_easel.json
 7cd8cf74c8beeb6e410514a0296202b58e2f932d data/hutosmod/recipes/upgrade_blank.json

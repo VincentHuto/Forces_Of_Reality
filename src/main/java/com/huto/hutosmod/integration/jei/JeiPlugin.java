@@ -8,11 +8,13 @@ import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.integration.jei.catagories.AutoInscriberRecipeCategory;
 import com.huto.hutosmod.integration.jei.catagories.ChiselRecipeCategory;
+import com.huto.hutosmod.integration.jei.catagories.HarmonizerRecipeCategory;
 import com.huto.hutosmod.integration.jei.catagories.ResonatorRecipeCategory;
 import com.huto.hutosmod.integration.jei.catagories.VibeFuserRecipeCategory;
 import com.huto.hutosmod.integration.jei.catagories.WandMakerRecipeCategory;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
+import com.huto.hutosmod.recipes.ModHarmonizerRecipes;
 import com.huto.hutosmod.recipes.ModInscriberRecipes;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
@@ -43,6 +45,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCategories(new VibeFuserRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new AutoInscriberRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new HarmonizerRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 
 	}
 
@@ -57,6 +60,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipes(ModFuserRecipies.fuserRecipies, VibeFuserRecipeCategory.UID);
 		registry.addRecipes(ModChiselRecipes.runeRecipies, ChiselRecipeCategory.UID);
 		registry.addRecipes(ModInscriberRecipes.inscriberRecipies, AutoInscriberRecipeCategory.UID);
+		registry.addRecipes(ModHarmonizerRecipes.harmonizerRecipes, HarmonizerRecipeCategory.UID);
 		registry.addIngredientInfo(new ItemStack(ItemInit.yellow_sign.get()), VanillaTypes.ITEM,
 				"The Yellow Sign of Lord Hastur Himself");
 
@@ -74,6 +78,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.vibratory_fuser.get()), VibeFuserRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.runic_chisel_station.get()), ChiselRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.auto_inscriber.get()), AutoInscriberRecipeCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.crystal_harmonizer.get()), HarmonizerRecipeCategory.UID);
 
 	}
 

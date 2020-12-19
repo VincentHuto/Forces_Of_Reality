@@ -19,11 +19,13 @@ import com.huto.hutosmod.objects.tileenties.coven.TileEntityUntoldEasel;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCrystalHarmonizer;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicAltar;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicExtractor;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityLectorTable;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntitySomnolentHopper;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityStorageDrum;
+import com.huto.hutosmod.objects.tileenties.vibes.TileEntityTectonicAbsorber;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityThermalInfluxer;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityVibeFuser;
 import com.huto.hutosmod.objects.tileenties.vibes.TileEntityVibeGatherer;
@@ -151,5 +153,16 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityLectorTable>> lector_table = TILES
 			.register("lector_table", () -> TileEntityType.Builder
 					.create(TileEntityLectorTable::new, BlockInit.lector_table.get()).build(null));
+	
+	
+	public static final RegistryObject<TileEntityType<TileEntityTectonicAbsorber>> tectonic_absorber = TILES
+			.register("tectonic_absorber", () -> TileEntityType.Builder
+					.create(TileEntityTectonicAbsorber::new, BlockInit.tectonic_absorber.get()).build(null));
+	
+	
+	
+	public static final RegistryObject<TileEntityType<TileEntityCrystalHarmonizer>> crystal_harmonizer = TILES
+			.register("crystal_harmonizer", () -> TileEntityType.Builder
+					.create(TileEntityCrystalHarmonizer::new, BlockInit.crystal_harmonizer.get()).build(null));
 	
 }

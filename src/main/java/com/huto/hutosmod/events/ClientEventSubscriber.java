@@ -66,6 +66,7 @@ import com.huto.hutosmod.render.tiles.coven.RenderUntoldEasel;
 import com.huto.hutosmod.render.tiles.vibes.RenderAbsorber;
 import com.huto.hutosmod.render.tiles.vibes.RenderAutoInscriber;
 import com.huto.hutosmod.render.tiles.vibes.RenderCapacitor;
+import com.huto.hutosmod.render.tiles.vibes.RenderCrystalHarmonizer;
 import com.huto.hutosmod.render.tiles.vibes.RenderKarmicAltar;
 import com.huto.hutosmod.render.tiles.vibes.RenderKarmicExtractor;
 import com.huto.hutosmod.render.tiles.vibes.RenderLectorTable;
@@ -103,7 +104,6 @@ public class ClientEventSubscriber {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(ThermalLayerRender::renderWorld);
 		forgeBus.addListener(ThermalLayerRender::renderEntities);
-
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_altar.get(), RenderKarmicAltar::new);
@@ -128,6 +128,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.auto_inscriber.get(), RenderAutoInscriber::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.teleporter.get(), RenderTeleporter::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.lector_table.get(), RenderLectorTable::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.crystal_harmonizer.get(), RenderCrystalHarmonizer::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 

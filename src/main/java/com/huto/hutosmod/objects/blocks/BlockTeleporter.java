@@ -137,7 +137,7 @@ public class BlockTeleporter extends Block {
 				DimensionalPosition dp = DimensionalPosition.fromNBT(stack.getOrCreateTag().getCompound("LinkedPos"));
 				te.setTeleportPosition(world, dp.getPosition(), dp.getDimension(), player);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-
+				te.sendUpdates();
 				if (isRenamed) {
 					te.setTeleportName(I18n.format(stack.getDisplayName().getString()));
 				} else {

@@ -34,6 +34,7 @@ import com.huto.hutosmod.recipes.CopyMechanGloveDataRecipe;
 import com.huto.hutosmod.recipes.CopyRuneBinderDataRecipe;
 import com.huto.hutosmod.recipes.ModChiselRecipes;
 import com.huto.hutosmod.recipes.ModFuserRecipies;
+import com.huto.hutosmod.recipes.ModHarmonizerRecipes;
 import com.huto.hutosmod.recipes.ModInscriberRecipes;
 import com.huto.hutosmod.recipes.ModResonatorRecipies;
 import com.huto.hutosmod.recipes.ModWandRecipies;
@@ -82,7 +83,6 @@ public class HutosMod {
 	@SuppressWarnings("deprecation")
 	public HutosMod() {
 		DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> proxy = new ClientProxy());
-
 		proxy.registerHandlers();
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -144,6 +144,7 @@ public class HutosMod {
 		ModFuserRecipies.init();
 		ModChiselRecipes.init();
 		ModInscriberRecipes.init();
+		ModHarmonizerRecipes.init();
 		PacketHandler.registerChannels();
 		PacketHandler.registerRuneBinderChannels();
 		PacketHandler.registerMechanGloveChannels();

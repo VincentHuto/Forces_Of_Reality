@@ -615,5 +615,16 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addCriterion("has_nether_block", hasItem(BlockInit.nether_block.get())).build(consumer);
 			
 			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.tectonic_absorber.get())
+				.key('A',BlockInit.activated_obsidian.get())
+				.key('O', BlockInit.nether_block.get())
+				.key('C', BlockInit.contained_crying_obsidian.get())
+				.key('M', BlockInit.contained_magma.get())
+				.key('F', ItemInit.energy_focus.get())
+				.patternLine("MFM")
+				.patternLine("ACA")
+				.patternLine("MOM")
+				.addCriterion("has_contained_magma", hasItem(BlockInit.contained_magma.get())).build(consumer);
+			
 	}
 }

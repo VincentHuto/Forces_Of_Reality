@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "hutosmod:block/crystal_harmonizer"
+		},
+		"facing=south": {
+			"model": "hutosmod:block/crystal_harmonizer",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "hutosmod:block/crystal_harmonizer",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "hutosmod:block/crystal_harmonizer",
+			"y": 90
+		}
+	}
+}
