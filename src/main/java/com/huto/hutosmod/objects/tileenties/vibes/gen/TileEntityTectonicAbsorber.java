@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.gen;
 
 import java.util.Set;
 
@@ -9,6 +9,7 @@ import com.huto.hutosmod.capabilities.vibes.chunk.ChunkVibrationProvider;
 import com.huto.hutosmod.capabilities.vibes.chunk.IChunkVibrations;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
+import com.huto.hutosmod.objects.tileenties.vibes.TileModVibes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.gen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.ITank;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -30,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class TileEntityAbsorber extends TileVibeSimpleInventory implements ITickableTileEntity, ITank {
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	public IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public final String TAG_LEVEL = "tankLevel";
 	public final String TAG_SIZE = "tankSize";
 	public final String TAG_RATE = "transRate";

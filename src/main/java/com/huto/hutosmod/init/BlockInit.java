@@ -3,6 +3,7 @@ package com.huto.hutosmod.init;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.objects.blocks.BlockAbyssalSilt;
 import com.huto.hutosmod.objects.blocks.BlockBeyondFlame;
+import com.huto.hutosmod.objects.blocks.BlockBreakoutPoint;
 import com.huto.hutosmod.objects.blocks.BlockChiselStation;
 import com.huto.hutosmod.objects.blocks.BlockCrystalObj;
 import com.huto.hutosmod.objects.blocks.BlockDisplayGlass;
@@ -43,6 +44,7 @@ import com.huto.hutosmod.objects.blocks.vibes.BlockTectonicAbsorber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockThermalInfluxer;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeAbsorber;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeAccel;
+import com.huto.hutosmod.objects.blocks.vibes.BlockVibeConcetrator;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeFuser;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeGatherer;
 import com.huto.hutosmod.objects.blocks.vibes.BlockVibeResonator;
@@ -84,7 +86,6 @@ public class BlockInit {
 	public static final RegistryObject<BlockMagicRingLight> light_ring_block = BLOCKS.register("light_ring_block",
 			() -> new BlockMagicRingLight());
 
-	// TELEPORTEROS
 	public static final RegistryObject<BlockTeleporter> teleporter = BLOCKS.register("teleporter",
 			() -> new BlockTeleporter(
 					Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
@@ -116,11 +117,13 @@ public class BlockInit {
 	public static final RegistryObject<Block> opal_block = BLOCKS.register("opal_block",
 			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.GILDED_BLACKSTONE)));
-	public static final RegistryObject<Block> contained_crying_obsidian = BLOCKS.register("contained_crying_obsidian", () -> new Block(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> stone_geode = BLOCKS.register("stone_geode", () -> new BlockGeode(
-			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE).notSolid()));
-	
+	public static final RegistryObject<Block> contained_crying_obsidian = BLOCKS.register("contained_crying_obsidian",
+			() -> new Block(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> stone_geode = BLOCKS.register("stone_geode",
+			() -> new BlockGeode(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
+
 	// Somnolent
 	public static final RegistryObject<Block> somnolent_earth = BLOCKS.register("somnolent_earth",
 			() -> new GrassBlock(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f)
@@ -309,9 +312,17 @@ public class BlockInit {
 			Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.5f, 15f).sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> morel_stem = BLOCKS.register("morel_stem", () -> new Block(
 			Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.5f, 15f).sound(SoundType.PLANT)));
+
 	public static final RegistryObject<Block> singeri_mushroom = BLOCKS.register("singeri_mushroom",
 			() -> new BlockSingeriMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement()
 					.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+
+	public static final RegistryObject<Block> essence_breakout_point = BLOCKS.register("essence_breakout_point",
+			() -> new BlockBreakoutPoint(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
+					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> null_breakout_point = BLOCKS.register("null_breakout_point",
+			() -> new BlockBreakoutPoint(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
+					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> passion_flower = BLOCKS.register("passion_flower",
 			() -> new BlockPassionFlower(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
@@ -334,6 +345,9 @@ public class BlockInit {
 	public static final RegistryObject<Block> vibe_gatherer = BLOCKS.register("vibe_gatherer",
 			() -> new BlockVibeGatherer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> vibe_concentrator = BLOCKS.register("vibe_concentrator",
+			() -> new BlockVibeConcetrator(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> karmic_altar = BLOCKS.register("karmic_altar", () -> new BlockKarmicAltar(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> virtuous_enchanter = BLOCKS.register("virtuous_enchanter",
@@ -354,22 +368,21 @@ public class BlockInit {
 	public static final RegistryObject<Block> thermal_influxer = BLOCKS.register("thermal_influxer",
 			() -> new BlockThermalInfluxer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> crystal_harmonizer = BLOCKS.register("crystal_harmonizer",
 			() -> new BlockCrystalHarmonizer(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> auto_inscriber = BLOCKS.register("auto_inscriber",
 			() -> new BlockAutoInscriber(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
+
 	public static final RegistryObject<Block> somnolent_hopper = BLOCKS.register("somnolent_hopper",
 			() -> new BlockSomnolentHopper(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> lector_table = BLOCKS.register("lector_table", () -> new BlockLectorTable(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
-	
-	
+
 	public static final RegistryObject<Block> tectonic_absorber = BLOCKS.register("tectonic_absorber",
 			() -> new BlockTectonicAbsorber(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
@@ -406,7 +419,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> raw_hematite = BLOCKS.register("raw_hematite",
 			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
-	
+
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -427,6 +440,8 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_grass.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.essence_breakout_point.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.null_breakout_point.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.sacrificial_pyre.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.auspicious_bundle.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.machina_imperfecta.get(), RenderType.getTranslucent());

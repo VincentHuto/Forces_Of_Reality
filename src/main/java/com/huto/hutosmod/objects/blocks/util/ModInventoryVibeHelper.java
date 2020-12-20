@@ -2,8 +2,8 @@
 package com.huto.hutosmod.objects.blocks.util;
 
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
 import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntityAutoInscriber;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

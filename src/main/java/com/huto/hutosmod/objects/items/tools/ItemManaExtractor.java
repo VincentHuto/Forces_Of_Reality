@@ -5,8 +5,8 @@ import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.vibes.VibrationPacketClient;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCapacitor;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityStorageDrum;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityStorageDrum;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;

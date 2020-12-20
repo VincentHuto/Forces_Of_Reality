@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableList;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityCapacitor;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityCapacitor;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityTectonicAbsorber;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityTectonicAbsorber;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

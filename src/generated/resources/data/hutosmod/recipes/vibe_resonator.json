@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FRF",
+    "NFN"
+  ],
+  "key": {
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "F": {
+      "item": "hutosmod:energy_focus"
+    },
+    "R": {
+      "item": "hutosmod:activated_obsidian"
+    }
+  },
+  "result": {
+    "item": "hutosmod:vibe_resonator"
+  }
+}

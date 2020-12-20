@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.gen;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -9,6 +9,7 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.ITank;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

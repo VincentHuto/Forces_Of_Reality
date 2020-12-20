@@ -3,7 +3,7 @@ package com.huto.hutosmod.render.tiles.vibes;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelFloatingCube;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityThermalInfluxer;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityThermalInfluxer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

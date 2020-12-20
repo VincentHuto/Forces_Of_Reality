@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.func;
 
 import java.util.List;
 
@@ -9,11 +9,15 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
+import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipes.ModWandRecipies;
-import com.huto.hutosmod.recipes.RecipeWandMaker;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.huto.hutosmod.recipes.ModResonatorRecipies;
+import com.huto.hutosmod.recipes.RecipeResonator;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,40 +30,31 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 
-public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
+public class TileEntityVibeResonator extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	int cooldown = 0;
 	int recipeKeepTicks = 0;
-	float maxVibes = 400;
+	float maxVibes = 300;
+	public float clientVibes = 0.0f;
 	public final String TAG_SIZE = "tankSize";
-	List<ItemStack> lastRecipe = null;
-	RecipeWandMaker currentRecipe;
 	public final String TAG_LEVEL = "level";
 	public int level = 1;
-	public float clientVibes = 0.0f;
+	public static EnumEssecenceType resonantState;
+	List<ItemStack> lastRecipe = null;
+	RecipeResonator currentRecipe;
 
-	public TileEntityWandMaker() {
-		super(TileEntityInit.wand_maker.get());
+	public TileEntityVibeResonator() {
+		super(TileEntityInit.vibe_resonator.get());
 	}
 
 	@Override
 	public void onLoad() {
 		super.onLoad();
-	}
 
-	public void addLevel(float valIn) {
-		this.level += valIn;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int levelIn) {
-		this.level = levelIn;
 	}
 
 	public IVibrations getVibeCap() {
@@ -74,8 +69,46 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		this.maxVibes = maxVibes;
 	}
 
-	public RecipeWandMaker getCurrentRecipe() {
-		for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+	public void addLevel(float valIn) {
+		this.level += valIn;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int levelIn) {
+		this.level = levelIn;
+	}
+
+	public void checkStructure() {
+		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
+		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
+
+		if (blockUnder == BlockInit.somnolent_media.get()) {
+			resonantState = EnumEssecenceType.SOMNOLENT;
+		} else if (blockUnder == BlockInit.activated_obsidian.get()) {
+			resonantState = EnumEssecenceType.KARMIC;
+		} else if (blockUnder == BlockInit.reversion_catalyst.get()) {
+			resonantState = EnumEssecenceType.REVERT;
+		} else if (blockUnder == BlockInit.mind_fog.get()) {
+			resonantState = EnumEssecenceType.GREY;
+		} else if (blockUnder == BlockInit.nightmare_media.get()) {
+			resonantState = EnumEssecenceType.BOTH;
+		} else if (blockUnder == BlockInit.anti_media.get()) {
+			resonantState = EnumEssecenceType.NULL;
+		} else {
+			resonantState = EnumEssecenceType.NONE;
+		}
+
+	}
+
+	public EnumEssecenceType getResonantState() {
+		return resonantState;
+	}
+
+	public RecipeResonator getCurrentRecipe() {
+		for (RecipeResonator recipe_ : ModResonatorRecipies.resonatorRecipies) {
 			if (recipe_.matches(itemHandler)) {
 				currentRecipe = recipe_;
 			}
@@ -84,16 +117,8 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		return currentRecipe;
 	}
 
-	public boolean hasValidRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
-			if (recipe.matches(itemHandler))
-				return true;
-
-		return false;
-	}
-
 	public void updateRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+		for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies)
 			if (recipe.matches(itemHandler)) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -103,12 +128,21 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 	}
 
+	public boolean hasValidRecipe() {
+		for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies)
+			if (recipe.matches(itemHandler))
+				return true;
+
+		return false;
+	}
+
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
-		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get() && stack.getItem().isFood())
+		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get())
 			return false;
 
 		boolean did = false;
+
 		for (int i = 0; i < getSizeInventory(); i++)
 			if (itemHandler.getStackInSlot(i).isEmpty()) {
 				did = true;
@@ -122,22 +156,17 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			}
 
 		if (did)
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
 
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
+			checkStructure();
 			if (cooldown > 0) {
 				cooldown--;
 			}
-		}
-		if (world.isRemote) {
-			//Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
-			//Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
-			//HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(), 0xFF00FF, 0x000000);
-
 		}
 	}
 
@@ -251,11 +280,14 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 	}
 
 	public void onActivated(PlayerEntity player, ItemStack wand) {
-		RecipeWandMaker recipe = null;
+		if (world.isRemote)
+			return;
+		checkStructure();
+		RecipeResonator recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
-			for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+			for (RecipeResonator recipe_ : ModResonatorRecipies.resonatorRecipies) {
 
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;
@@ -263,7 +295,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 				}
 			}
 
-		if (recipe != null) {
+		if (recipe != null && getResonantState() == recipe.getRecipeType()) {
 			float manaCost = recipe.getManaUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 				ItemStack output = recipe.getOutput().copy();
@@ -275,8 +307,8 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 				world.addEntity(outputItem);
 				vibes.setVibes(vibes.getVibes() - manaCost);
 				currentRecipe = null;
-				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), SET_COOLDOWN_EVENT, 60);
-				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), CRAFT_EFFECT_EVENT, 0);
+				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
+				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);
 
 				for (int i = 0; i < getSizeInventory(); i++) {
 					ItemStack stack = itemHandler.getStackInSlot(i);
@@ -311,4 +343,5 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			return false;
 		}
 	}
+
 }

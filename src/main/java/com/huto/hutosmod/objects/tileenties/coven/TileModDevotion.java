@@ -1,6 +1,10 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.coven;
 
 import javax.annotation.Nonnull;
+
+import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
+import com.huto.hutosmod.capabilities.tiledevotion.DevotionProvider;
+import com.huto.hutosmod.capabilities.tiledevotion.IDevotion;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -11,8 +15,15 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileMod extends TileEntity {
-	public TileMod(TileEntityType<?> tileEntityTypeIn) {
+public class TileModDevotion extends TileEntity {
+
+	public IDevotion devo = getCapability(DevotionProvider.DEVO_CAPA).orElseThrow(IllegalStateException::new);
+	public int clientDevo = 0;
+	public static final String TAG_DEVO = "devotion";
+	public static final String TAG_MODIFIER = "modifier";
+	public int sacMod = 1;
+
+	public TileModDevotion(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 
@@ -43,22 +54,49 @@ public class TileMod extends TileEntity {
 	}
 
 	public void writePacketNBT(CompoundNBT cmp) {
+		cmp.putInt(TAG_DEVO, devo.getDevotion());
+		cmp.putInt(TAG_MODIFIER, sacMod);
+
 	}
 
 	public void readPacketNBT(CompoundNBT cmp) {
+		clientDevo = cmp.getInt(TAG_DEVO);
+		sacMod = cmp.getInt(TAG_MODIFIER);
+
 	}
 
 	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		CompoundNBT tag = new CompoundNBT();
 		writePacketNBT(tag);
+		CompoundNBT nbtTag = new CompoundNBT();
+		nbtTag.putInt(TAG_DEVO, devo.getDevotion());
+		nbtTag.putInt(TAG_MODIFIER, sacMod);
+
 		return new SUpdateTileEntityPacket(pos, -999, tag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+		CompoundNBT tag = packet.getNbtCompound();
 		super.onDataPacket(net, packet);
 		readPacketNBT(packet.getNbtCompound());
+		clientDevo = tag.getInt(TAG_DEVO);
+		sacMod = tag.getInt(TAG_MODIFIER);
+
+	}
+
+	@Override
+	public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+		super.handleUpdateTag(state, tag);
+		clientDevo = tag.getInt(TAG_DEVO);
+		sacMod = tag.getInt(TAG_MODIFIER);
+
+	}
+
+	public EnumCovenants getCovenType() {
+		return EnumCovenants.SELF;
+
 	}
 
 }

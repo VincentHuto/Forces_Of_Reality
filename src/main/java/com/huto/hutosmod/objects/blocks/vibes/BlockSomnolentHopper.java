@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.blocks.vibes;
 
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntitySomnolentHopper;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntitySomnolentHopper;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;

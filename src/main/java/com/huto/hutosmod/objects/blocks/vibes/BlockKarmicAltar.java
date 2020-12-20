@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityKarmicAltar;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntityKarmicAltar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

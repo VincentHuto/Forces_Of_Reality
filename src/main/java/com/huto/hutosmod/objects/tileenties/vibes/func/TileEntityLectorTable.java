@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.func;
 
 import java.util.List;
 
@@ -9,17 +9,19 @@ import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
-import com.huto.hutosmod.objects.tileenties.util.EnumEssecenceType;
+import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipes.ModResonatorRecipies;
-import com.huto.hutosmod.recipes.RecipeResonator;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.huto.hutosmod.recipes.ModInscriberRecipes;
+import com.huto.hutosmod.recipes.RecipeAutoInscriber;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -28,25 +30,25 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
 
-public class TileEntityVibeResonator extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
+public class TileEntityLectorTable extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	int cooldown = 0;
 	int recipeKeepTicks = 0;
-	float maxVibes = 300;
-	public float clientVibes = 0.0f;
+	float maxVibes = 200;
 	public final String TAG_SIZE = "tankSize";
+	List<ItemStack> lastRecipe = null;
+	RecipeAutoInscriber currentRecipe;
 	public final String TAG_LEVEL = "level";
 	public int level = 1;
-	public static EnumEssecenceType resonantState;
-	List<ItemStack> lastRecipe = null;
-	RecipeResonator currentRecipe;
+	public float clientVibes = 0.0f;
+	public boolean isActive;
 
-	public TileEntityVibeResonator() {
-		super(TileEntityInit.vibe_resonator.get());
+	public TileEntityLectorTable() {
+		super(TileEntityInit.lector_table.get());
 	}
 
 	@Override
@@ -54,17 +56,28 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		super.onLoad();
 
 	}
-
-	public IVibrations getVibeCap() {
-		return vibes;
+	
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		// TODO Auto-generated method stub
+		return super.getRenderBoundingBox().grow(3);
 	}
 
-	public float getMaxVibes() {
-		return maxVibes;
-	}
-
-	public void setMaxVibes(float maxVibes) {
-		this.maxVibes = maxVibes;
+	public int getGridScale() {
+		switch (this.level) {
+		case 1:
+			return 1;
+		case 2:
+			return 3;
+		case 3:
+			return 5;
+		case 4:
+			return 7;
+		case 5:
+			return 9;
+		default:
+			return 9;
+		}
 	}
 
 	public void addLevel(float valIn) {
@@ -79,34 +92,20 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		this.level = levelIn;
 	}
 
-	public void checkStructure() {
-		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
-		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
-
-		if (blockUnder == BlockInit.somnolent_media.get()) {
-			resonantState = EnumEssecenceType.SOMNOLENT;
-		} else if (blockUnder == BlockInit.activated_obsidian.get()) {
-			resonantState = EnumEssecenceType.KARMIC;
-		} else if (blockUnder == BlockInit.reversion_catalyst.get()) {
-			resonantState = EnumEssecenceType.REVERT;
-		} else if (blockUnder == BlockInit.mind_fog.get()) {
-			resonantState = EnumEssecenceType.GREY;
-		} else if (blockUnder == BlockInit.nightmare_media.get()) {
-			resonantState = EnumEssecenceType.BOTH;
-		} else if (blockUnder == BlockInit.anti_media.get()) {
-			resonantState = EnumEssecenceType.NULL;
-		} else {
-			resonantState = EnumEssecenceType.NONE;
-		}
-
+	public IVibrations getVibeCap() {
+		return vibes;
 	}
 
-	public EnumEssecenceType getResonantState() {
-		return resonantState;
+	public float getMaxVibes() {
+		return maxVibes;
 	}
 
-	public RecipeResonator getCurrentRecipe() {
-		for (RecipeResonator recipe_ : ModResonatorRecipies.resonatorRecipies) {
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
+	}
+
+	public RecipeAutoInscriber getCurrentRecipe() {
+		for (RecipeAutoInscriber recipe_ : ModInscriberRecipes.inscriberRecipies) {
 			if (recipe_.matches(itemHandler)) {
 				currentRecipe = recipe_;
 			}
@@ -115,8 +114,16 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		return currentRecipe;
 	}
 
+	public boolean hasValidRecipe() {
+		for (RecipeAutoInscriber recipe : ModInscriberRecipes.inscriberRecipies)
+			if (recipe.matches(itemHandler))
+				return true;
+
+		return false;
+	}
+
 	public void updateRecipe() {
-		for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies)
+		for (RecipeAutoInscriber recipe : ModInscriberRecipes.inscriberRecipies)
 			if (recipe.matches(itemHandler)) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -126,21 +133,12 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 	}
 
-	public boolean hasValidRecipe() {
-		for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies)
-			if (recipe.matches(itemHandler))
-				return true;
-
-		return false;
-	}
-
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
 		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get())
 			return false;
 
 		boolean did = false;
-
 		for (int i = 0; i < getSizeInventory(); i++)
 			if (itemHandler.getStackInSlot(i).isEmpty()) {
 				did = true;
@@ -160,11 +158,18 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 
 	@Override
 	public void tick() {
+
 		if (!world.isRemote) {
-			checkStructure();
 			if (cooldown > 0) {
 				cooldown--;
 			}
+		}
+		if (world.isRemote) {
+			// Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
+			// Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
+			// HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(),
+			// 0xFF00FF, 0x000000);
+
 		}
 	}
 
@@ -235,7 +240,7 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 
 	@Override
 	public int getSizeInventory() {
-		return 4;
+		return 2;
 	}
 
 	@Override
@@ -278,24 +283,23 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 	}
 
 	public void onActivated(PlayerEntity player, ItemStack wand) {
-		if (world.isRemote)
-			return;
-		checkStructure();
-		RecipeResonator recipe = null;
+		RecipeAutoInscriber recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
-			for (RecipeResonator recipe_ : ModResonatorRecipies.resonatorRecipies) {
+			for (RecipeAutoInscriber recipe_ : ModInscriberRecipes.inscriberRecipies) {
 
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;
 					break;
 				}
 			}
+		// isActive = false;
 
-		if (recipe != null && getResonantState() == recipe.getRecipeType()) {
+		if (recipe != null) {
 			float manaCost = recipe.getManaUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
+
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
 						output);
@@ -305,16 +309,29 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 				world.addEntity(outputItem);
 				vibes.setVibes(vibes.getVibes() - manaCost);
 				currentRecipe = null;
-				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), SET_COOLDOWN_EVENT, 60);
-				world.addBlockEvent(getPos(), BlockInit.vibe_resonator.get(), CRAFT_EFFECT_EVENT, 0);
+				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), SET_COOLDOWN_EVENT, 60);
+				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), CRAFT_EFFECT_EVENT, 0);
+				for (int i = 0; i < getItemHandler().getSlots(); i++) {
+					if (getItemHandler().getStackInSlot(i).getItem() == Items.OBSIDIAN) {
+						ItemStack stack = itemHandler.getStackInSlot(i);
+						if (!stack.isEmpty()) {
+							this.sendUpdates();
+							itemHandler.setStackInSlot(i, ItemStack.EMPTY);
 
-				for (int i = 0; i < getSizeInventory(); i++) {
-					ItemStack stack = itemHandler.getStackInSlot(i);
-					if (!stack.isEmpty()) {
+						}
 					}
-					this.sendUpdates();
-					itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+					if (getItemHandler().getStackInSlot(i).getItem() instanceof ItemKnapper) {
+						ItemStack knapperIn = itemHandler.getStackInSlot(i);
+						if (knapperIn.getItem() instanceof ItemKnapper) {
+							ItemStack newKnapper = knapperIn.copy();
+							newKnapper.attemptDamageItem(2, world.rand, null);
+							itemHandler.setStackInSlot(i, newKnapper);
+						}
+
+					}
+
 				}
+
 			}
 		}
 	}
@@ -341,5 +358,4 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 			return false;
 		}
 	}
-
 }

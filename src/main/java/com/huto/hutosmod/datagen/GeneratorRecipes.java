@@ -485,6 +485,16 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("RRR")
 				.addCriterion("has_energy_focus", hasItem(ItemInit.energy_focus.get())).build(consumer);
 			
+			ShapedRecipeBuilder.shapedRecipe(BlockInit.vibe_resonator.get())
+				.key('N', BlockInit.nether_block.get())
+				.key('F', ItemInit.energy_focus.get())
+				.key('R', BlockInit.activated_obsidian.get())
+				.patternLine("FRF")
+				.patternLine("NFN")
+				.addCriterion("has_energy_focus", hasItem(ItemInit.energy_focus.get())).build(consumer);
+			
+			
+			
 			ShapedRecipeBuilder.shapedRecipe(ItemInit.upgrade_wrench.get())
 				.key('R', ItemInit.channeling_rod.get())
 				.key('C', ItemInit.channeling_ingot.get())

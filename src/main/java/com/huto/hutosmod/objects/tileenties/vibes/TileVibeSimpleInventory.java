@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
+import com.huto.hutosmod.objects.tileenties.util.TileMod;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,12 +22,12 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileVibeSimpleInventory extends TileMod {
 	public final String TAG_VIBES = "vibes";
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+	public IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public TileVibeSimpleInventory(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 
-	protected SimpleItemStackHandler itemHandler = createItemHandler();
+	public SimpleItemStackHandler itemHandler = createItemHandler();
 
 	@Override
 	public void readPacketNBT(CompoundNBT par1CompoundNBT) {
@@ -100,7 +101,7 @@ public abstract class TileVibeSimpleInventory extends TileMod {
 	 * control of writing, allows control over stack limits, and allows for
 	 * itemstack-slot validation
 	 */
-	protected static class SimpleItemStackHandler extends ItemStackHandler {
+	public static class SimpleItemStackHandler extends ItemStackHandler {
 
 		private final boolean allowWrite;
 		private final TileVibeSimpleInventory tile;

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.func;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -10,6 +10,8 @@ import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
 import com.huto.hutosmod.recipes.ModInscriberRecipes;
 import com.huto.hutosmod.recipes.RecipeAutoInscriber;
 

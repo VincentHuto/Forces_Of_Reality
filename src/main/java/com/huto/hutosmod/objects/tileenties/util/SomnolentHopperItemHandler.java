@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.tileenties.util;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntitySomnolentHopper;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntitySomnolentHopper;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.wrapper.InvWrapper;

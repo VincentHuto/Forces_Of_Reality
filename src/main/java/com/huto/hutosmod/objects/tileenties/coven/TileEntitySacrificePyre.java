@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.huto.hutosmod.capabilities.covenant.EnumCovenants;
 import com.huto.hutosmod.init.TileEntityInit;
-import com.huto.hutosmod.objects.tileenties.vibes.TileModDevotion;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;

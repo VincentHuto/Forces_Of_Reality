@@ -1,6 +1,6 @@
 package com.huto.hutosmod.objects.tileenties.util;
 
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
 
 public interface ITank {
 	public void importFromAbsorber(TileEntityAbsorber importFrom, float rate);

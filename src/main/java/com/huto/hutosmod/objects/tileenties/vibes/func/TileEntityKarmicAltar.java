@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.func;
 
 import java.util.List;
 import java.util.Random;
@@ -15,6 +15,8 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;

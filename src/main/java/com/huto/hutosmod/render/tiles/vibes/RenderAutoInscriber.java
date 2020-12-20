@@ -4,7 +4,7 @@ import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.models.block.ModelDrumMagatama;
 import com.huto.hutosmod.objects.items.tools.ItemKnapper;
 import com.huto.hutosmod.objects.tileenties.util.ClientTickHandler;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAutoInscriber;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntityAutoInscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

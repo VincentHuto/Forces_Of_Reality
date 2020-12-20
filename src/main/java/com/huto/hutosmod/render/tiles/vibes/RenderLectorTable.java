@@ -3,7 +3,7 @@ package com.huto.hutosmod.render.tiles.vibes;
 import com.huto.hutosmod.HutosMod;
 import com.huto.hutosmod.capabilities.vibes.chunk.ChunkVibrationProvider;
 import com.huto.hutosmod.capabilities.vibes.chunk.IChunkVibrations;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityLectorTable;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntityLectorTable;
 import com.huto.hutosmod.render.effects.LectorVectorColorData;
 import com.huto.hutosmod.render.effects.RenderShapes;
 import com.mojang.blaze3d.matrix.MatrixStack;

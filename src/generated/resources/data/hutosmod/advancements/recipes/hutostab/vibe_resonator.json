@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:vibe_resonator"
+    ]
+  },
+  "criteria": {
+    "has_energy_focus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:energy_focus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:vibe_resonator"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_energy_focus",
+      "has_the_recipe"
+    ]
+  ]
+}

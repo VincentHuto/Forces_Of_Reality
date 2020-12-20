@@ -6,7 +6,7 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.IActivatable;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityWandMaker;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntityWandMaker;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -1,9 +1,10 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.gen;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
 import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
+import com.huto.hutosmod.objects.tileenties.vibes.TileModVibes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,25 +16,22 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityWaveGatherer extends TileModVibes implements ITickableTileEntity, IExportableTile {
+public class TileEntityThermalInfluxer extends TileModVibes implements ITickableTileEntity, IExportableTile {
 
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 	public static final String TAG_VIBES = "vibes";
 	public final String TAG_SIZE = "tankSize";
-	float maxVibes = 50;
+	float maxVibes = 150;
 	public float clientVibes = 0.0f;
 
-	public TileEntityWaveGatherer() {
-		super(TileEntityInit.wave_gatherer.get());
+	public TileEntityThermalInfluxer() {
+		super(TileEntityInit.thermal_influxer.get());
 	}
 
 	@Override
 	public void tick() {
-		if (isVibeFull()) {
-
-		}
 		if (canGenerate()) {
-			vibes.addVibes(0.2f);
+			vibes.addVibes(0.4f);
 		}
 	}
 
@@ -41,7 +39,7 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 		BlockPos adj = getPos().offset(Direction.DOWN);
 		BlockState blockState = world.getBlockState(adj);
 		Block block = blockState.getBlock();
-		if (block == Blocks.WATER) {
+		if (block == Blocks.LAVA) {
 			return true;
 		} else {
 			return false;
@@ -87,6 +85,8 @@ public class TileEntityWaveGatherer extends TileModVibes implements ITickableTil
 			exportToIn.vibes.addVibes(rateIn);
 		}
 	}
+
+	@Override
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, getBlockState(), getBlockState());
 		world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);

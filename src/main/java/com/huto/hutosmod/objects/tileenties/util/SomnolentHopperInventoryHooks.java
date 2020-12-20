@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntitySomnolentHopper;
+import com.huto.hutosmod.objects.tileenties.vibes.func.TileEntitySomnolentHopper;
 
 import net.minecraft.block.DropperBlock;
 import net.minecraft.block.HopperBlock;

@@ -3,7 +3,7 @@ package com.huto.hutosmod.objects.items.tools;
 import java.util.List;
 
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

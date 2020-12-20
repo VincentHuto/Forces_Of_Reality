@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.func;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -11,6 +11,7 @@ import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.tileenties.util.SomnolentHopperInventoryHooks;
 import com.huto.hutosmod.objects.tileenties.util.SomnolentHopperItemHandler;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

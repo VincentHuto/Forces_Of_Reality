@@ -1,4 +1,4 @@
-package com.huto.hutosmod.objects.tileenties.vibes;
+package com.huto.hutosmod.objects.tileenties.vibes.func;
 
 import java.util.List;
 
@@ -6,14 +6,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.capabilities.vibes.IVibrations;
-import com.huto.hutosmod.capabilities.vibes.VibrationProvider;
 import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.init.TileEntityInit;
 import com.huto.hutosmod.objects.tileenties.util.IImportableTile;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipes.ModFuserRecipies;
-import com.huto.hutosmod.recipes.RecipeFuser;
+import com.huto.hutosmod.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.huto.hutosmod.recipes.ModWandRecipies;
+import com.huto.hutosmod.recipes.RecipeWandMaker;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -28,41 +29,27 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
-public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
-	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
-	int cooldown = 0;
-	int recipeKeepTicks = 0;
+public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITickableTileEntity, IImportableTile {
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
-	float maxVibes = 500;
-	public float clientVibes = 0.0f;
-	public final String TAG_VIBES = "vibes";
+	int cooldown = 0;
+	int recipeKeepTicks = 0;
+	float maxVibes = 400;
 	public final String TAG_SIZE = "tankSize";
+	List<ItemStack> lastRecipe = null;
+	RecipeWandMaker currentRecipe;
 	public final String TAG_LEVEL = "level";
 	public int level = 1;
-	List<ItemStack> lastRecipe = null;
-	RecipeFuser currentRecipe;
+	public float clientVibes = 0.0f;
 
-	public TileEntityVibeFuser() {
-		super(TileEntityInit.vibratory_fuser.get());
+	public TileEntityWandMaker() {
+		super(TileEntityInit.wand_maker.get());
 	}
 
 	@Override
 	public void onLoad() {
 		super.onLoad();
-	}
-
-	public IVibrations getVibeCap() {
-		return vibes;
-	}
-
-	public float getMaxVibes() {
-		return maxVibes;
-	}
-
-	public void setMaxVibes(float maxVibes) {
-		this.maxVibes = maxVibes;
 	}
 
 	public void addLevel(float valIn) {
@@ -77,8 +64,20 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 		this.level = levelIn;
 	}
 
-	public RecipeFuser getCurrentRecipe() {
-		for (RecipeFuser recipe_ : ModFuserRecipies.fuserRecipies) {
+	public IVibrations getVibeCap() {
+		return vibes;
+	}
+
+	public float getMaxVibes() {
+		return maxVibes;
+	}
+
+	public void setMaxVibes(float maxVibes) {
+		this.maxVibes = maxVibes;
+	}
+
+	public RecipeWandMaker getCurrentRecipe() {
+		for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
 			if (recipe_.matches(itemHandler)) {
 				currentRecipe = recipe_;
 			}
@@ -87,8 +86,16 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 		return currentRecipe;
 	}
 
+	public boolean hasValidRecipe() {
+		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+			if (recipe.matches(itemHandler))
+				return true;
+
+		return false;
+	}
+
 	public void updateRecipe() {
-		for (RecipeFuser recipe : ModFuserRecipies.fuserRecipies)
+		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
 			if (recipe.matches(itemHandler)) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -98,21 +105,12 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 	}
 
-	public boolean hasValidRecipe() {
-		for (RecipeFuser recipe : ModFuserRecipies.fuserRecipies)
-			if (recipe.matches(itemHandler))
-				return true;
-
-		return false;
-	}
-
 	@Override
 	public boolean addItem(@Nullable PlayerEntity player, ItemStack stack, @Nullable Hand hand) {
-		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get())
+		if (cooldown > 0 || stack.getItem() == ItemInit.maker_activator.get() && stack.getItem().isFood())
 			return false;
 
 		boolean did = false;
-
 		for (int i = 0; i < getSizeInventory(); i++)
 			if (itemHandler.getStackInSlot(i).isEmpty()) {
 				did = true;
@@ -126,7 +124,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 			}
 
 		if (did)
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
 
@@ -137,9 +135,15 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 				cooldown--;
 			}
 		}
+		if (world.isRemote) {
+			//Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
+			//Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
+			//HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(), 0xFF00FF, 0x000000);
+
+		}
 	}
 
-	// Nbt
+	// NBT data
 	@Override
 	public void readPacketNBT(CompoundNBT tag) {
 		super.readPacketNBT(tag);
@@ -206,7 +210,7 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 
 	@Override
 	public int getSizeInventory() {
-		return 6;
+		return 4;
 	}
 
 	@Override
@@ -249,11 +253,11 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 	}
 
 	public void onActivated(PlayerEntity player, ItemStack wand) {
-		RecipeFuser recipe = null;
+		RecipeWandMaker recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
-			for (RecipeFuser recipe_ : ModFuserRecipies.fuserRecipies) {
+			for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
 
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;
@@ -262,7 +266,6 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 			}
 
 		if (recipe != null) {
-			System.out.println(recipe.getManaUsage());
 			float manaCost = recipe.getManaUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 				ItemStack output = recipe.getOutput().copy();
@@ -274,8 +277,8 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 				world.addEntity(outputItem);
 				vibes.setVibes(vibes.getVibes() - manaCost);
 				currentRecipe = null;
-				world.addBlockEvent(getPos(), BlockInit.vibratory_fuser.get(), SET_COOLDOWN_EVENT, 60);
-				world.addBlockEvent(getPos(), BlockInit.vibratory_fuser.get(), CRAFT_EFFECT_EVENT, 0);
+				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), SET_COOLDOWN_EVENT, 60);
+				world.addBlockEvent(getPos(), BlockInit.wand_maker.get(), CRAFT_EFFECT_EVENT, 0);
 
 				for (int i = 0; i < getSizeInventory(); i++) {
 					ItemStack stack = itemHandler.getStackInSlot(i);
@@ -310,5 +313,4 @@ public class TileEntityVibeFuser extends TileVibeSimpleInventory implements ITic
 			return false;
 		}
 	}
-
 }

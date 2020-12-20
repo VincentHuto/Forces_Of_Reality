@@ -9,7 +9,7 @@ import com.huto.hutosmod.init.ItemInit;
 import com.huto.hutosmod.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.hutosmod.objects.items.ItemUpgrade;
 import com.huto.hutosmod.objects.tileenties.util.VanillaPacketDispatcher;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityStorageDrum;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityStorageDrum;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

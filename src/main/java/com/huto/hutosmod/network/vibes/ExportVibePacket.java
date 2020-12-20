@@ -3,7 +3,7 @@ package com.huto.hutosmod.network.vibes;
 import java.util.function.Supplier;
 
 import com.huto.hutosmod.objects.tileenties.util.IExportableTile;
-import com.huto.hutosmod.objects.tileenties.vibes.TileEntityAbsorber;
+import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
