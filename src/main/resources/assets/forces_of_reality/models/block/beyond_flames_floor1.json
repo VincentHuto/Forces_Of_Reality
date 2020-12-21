@@ -1,0 +1,7 @@
+
+{
+  "parent": "minecraft:block/template_fire_floor",
+  "textures": {
+    "fire": "forces_of_reality:blocks/beyond_flames"
+  }
+}

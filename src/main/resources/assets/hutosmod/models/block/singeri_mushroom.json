@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "hutosmod:blocks/singeri_mushroom"
-    }
-}

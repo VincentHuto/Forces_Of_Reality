@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_side_alt",
-  "textures": {
-    "pane": "hutosmod:blocks/phantasmal_pane",
-    "edge": "hutosmod:blocks/phantasmal_pane_top"
-  }
-}

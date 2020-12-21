@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures":
-    {
-        "end": "hutosmod:blocks/somnolent_earthtop",
-        "side": "hutosmod:blocks/somnolent_earthside"
-    }
-}

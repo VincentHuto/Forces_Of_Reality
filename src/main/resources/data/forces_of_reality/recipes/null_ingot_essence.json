@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "forces_of_reality:anti_tear"
+        },
+        {
+            "item": "forces_of_reality:anti_tear"
+        },
+        {
+            "item": "forces_of_reality:anti_tear"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    ],
+    "result": {
+        "item": "forces_of_reality:null_ingot",
+        "count": 1
+    }
+}

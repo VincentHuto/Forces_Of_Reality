@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "forces_of_reality:blocks/singeri_mushroom"
+    }
+}

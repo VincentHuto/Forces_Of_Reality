@@ -1,0 +1,40 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "forces_of_reality:items/somnolent_bow_blade"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"forces_of_reality:open": 0
+			},
+			"model": "forces_of_reality:item/somnolent_bow_blade"
+		},
+		{
+			"predicate": {
+				"forces_of_reality:open": 1
+			},
+			"model": "forces_of_reality:item/somnolent_bow_blade_open"
+		},
+		{
+			"predicate": {
+				"pulling": 1
+			},
+			"model": "forces_of_reality:item/somnolent_bow_blade_pulling_0"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.65
+			},
+			"model": "forces_of_reality:item/somnolent_bow_blade_pulling_1"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.9
+			},
+			"model": "forces_of_reality:item/somnolent_bow_blade_pulling_2"
+		}
+	]
+}

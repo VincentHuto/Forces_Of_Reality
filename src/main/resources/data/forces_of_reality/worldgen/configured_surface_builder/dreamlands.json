@@ -1,0 +1,17 @@
+{
+  "config": {
+    "top_material": {
+      "Properties": {
+        "snowy": "false"
+      },
+      "Name": "forces_of_reality:somnolent_earth"
+    },
+    "under_material": {
+      "Name": "forces_of_reality:somnolent_stone"
+    },
+    "underwater_material": {
+      "Name": "forces_of_reality:somnolent_media"
+    }
+  },
+  "type": "minecraft:default"
+}

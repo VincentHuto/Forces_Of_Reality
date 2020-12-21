@@ -1,0 +1,33 @@
+{
+  "config": {
+    "feature": {
+      "config": {
+        "features": [
+          {
+            "feature": "minecraft:huge_red_mushroom",
+            "chance": 0.025
+          },
+          {
+            "feature": "minecraft:huge_brown_mushroom",
+            "chance": 0.05
+          },
+          {
+            "feature": "forces_of_reality:dreamtree",
+            "chance": 0.6666667
+          },
+          {
+            "feature": "forces_of_reality:antitree",
+            "chance": 0.6666667
+          }
+        ],
+        "default": "forces_of_reality:antitree"
+      },
+      "type": "minecraft:random_selector"
+    },
+    "decorator": {
+      "config": {},
+      "type": "minecraft:dark_oak_tree"
+    }
+  },
+  "type": "minecraft:decorated"
+}

@@ -1,0 +1,20 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "forces_of_reality:items/frequency_matcher"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"forces_of_reality:clear": 0
+			},
+			"model": "forces_of_reality:item/frequency_matcher"
+		},
+		{
+			"predicate": {
+				"forces_of_reality:clear": 1
+			},
+			"model": "forces_of_reality:item/frequency_matcher_clear"
+		}
+	]
+}

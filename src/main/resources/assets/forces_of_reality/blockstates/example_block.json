@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"": {
+			"model": "forces_of_reality:block/example_block"
+		}
+	}
+}

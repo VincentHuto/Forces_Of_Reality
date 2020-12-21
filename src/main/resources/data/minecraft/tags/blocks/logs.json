@@ -1,7 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"hutosmod:somnolent_log",
-		"hutosmod:anti_log"
+		"forces_of_reality:somnolent_log",
+		"forces_of_reality:anti_log"
 	]
 }

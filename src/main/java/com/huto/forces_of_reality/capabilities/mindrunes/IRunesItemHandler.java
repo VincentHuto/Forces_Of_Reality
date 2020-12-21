@@ -1,0 +1,15 @@
+package com.huto.forces_of_reality.capabilities.mindrunes;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandlerModifiable;
+
+public interface IRunesItemHandler extends IItemHandlerModifiable {
+
+    boolean isItemValidForSlot(int slot, ItemStack stack);
+
+    boolean isEventBlocked();
+
+    void setEventBlock(boolean blockEvents);
+
+    void tick();
+}

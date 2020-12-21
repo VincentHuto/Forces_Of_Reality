@@ -1,8 +1,0 @@
-{
-  "parent":"forge:block/default",
-  "loader": "forge:obj",
-  "model": "hutosmod:models/block/end_crystal_somnolent.obj",
-  	"textures": {
-		"particle": "hutosmod:blocks/virtuous_enchanting_table_bottom"
-		}
-}

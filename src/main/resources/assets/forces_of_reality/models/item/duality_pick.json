@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "forces_of_reality:items/duality_pick"
+   }
+}

@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forces_of_reality:block/crystal_harmonizer"
+		},
+		"facing=south": {
+			"model": "forces_of_reality:block/crystal_harmonizer",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forces_of_reality:block/crystal_harmonizer",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forces_of_reality:block/crystal_harmonizer",
+			"y": 90
+		}
+	}
+}

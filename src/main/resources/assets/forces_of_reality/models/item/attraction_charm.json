@@ -1,0 +1,20 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "forces_of_reality:items/attraction_charm"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"forces_of_reality:on": 0
+			},
+			"model": "forces_of_reality:item/attraction_charm"
+		},
+		{
+			"predicate": {
+				"forces_of_reality:on": 1
+			},
+			"model": "forces_of_reality:item/attraction_charm_on"
+		}
+	]
+}

@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "hutosmod:blocks/essence_breakout_point"
-    }
-}

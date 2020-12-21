@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" BO",
+		" SB",
+		"S  "
+	],
+	"key": {
+		"S": {
+			"item": "forces_of_reality:null_rod"
+		},
+		"O": {
+			"item": "forces_of_reality:gem_opal"
+		},
+		"B": {
+			"item": "forces_of_reality:upgrade_blank"
+		}
+	},
+	"result": {
+		"item": "forces_of_reality:frequency_matcher",
+		"count": 1
+	}
+}

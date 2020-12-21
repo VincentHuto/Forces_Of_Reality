@@ -1,0 +1,8 @@
+{
+  "parent":"forge:block/default",
+  "loader": "forge:obj",
+  "model": "forces_of_reality:models/block/obj_icosahedron.obj",
+  	"textures": {
+		"particle": "forces_of_reality:blocks/virtuous_enchanting_table_bottom"
+		}
+}

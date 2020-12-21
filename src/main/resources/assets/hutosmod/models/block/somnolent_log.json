@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures":
-    {
-        "end": "hutosmod:blocks/somnolent_log_top",
-        "side": "hutosmod:blocks/somnolent_log"
-    }
-}

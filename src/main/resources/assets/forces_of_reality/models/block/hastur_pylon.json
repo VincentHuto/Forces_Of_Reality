@@ -1,0 +1,9 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "forces_of_reality:blocks/hastur_stone_core",
+		"1": "forces_of_reality:blocks/hastur_stone_smooth",
+		"particle": "forces_of_reality:blocks/hastur_stone_core"
+	}
+	}

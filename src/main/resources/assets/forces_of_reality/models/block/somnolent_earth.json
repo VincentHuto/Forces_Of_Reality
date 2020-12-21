@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "forces_of_reality:blocks/somnolent_earthtop",
+        "side": "forces_of_reality:blocks/somnolent_earthside"
+    }
+}

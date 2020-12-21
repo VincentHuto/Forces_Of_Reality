@@ -1,0 +1,22 @@
+{
+	"parent": "forces_of_reality:block/mana_storagedrum",
+	"display": {
+		"gui": {
+			"rotation": [
+				35,
+				40,
+				0
+			],
+			"translation": [
+				0,
+				-1.6,
+				0
+			],
+			"scale": [
+				0.5325,
+				0.5325,
+				0.5325
+			]
+		}
+	}
+}

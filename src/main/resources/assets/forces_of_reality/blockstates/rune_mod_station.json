@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forces_of_reality:block/rune_mod_station"
+		},
+		"facing=south": {
+			"model": "forces_of_reality:block/rune_mod_station",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forces_of_reality:block/rune_mod_station",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forces_of_reality:block/rune_mod_station",
+			"y": 90
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"NFN",
+		"P P",
+		"AAA"
+	],
+	"key": {
+		"N": {
+			"item": "forces_of_reality:nether_block"
+		},
+		"F": {
+			"item": "forces_of_reality:energy_focus"
+		},
+		"P": {
+			"item": "forces_of_reality:phantasmal_pane"
+		},
+		"A": {
+			"item": "forces_of_reality:activated_obsidian"
+		}
+	},
+	"result": {
+		"item": "forces_of_reality:vibratory_storage_drum",
+		"count": 1
+	}
+}
