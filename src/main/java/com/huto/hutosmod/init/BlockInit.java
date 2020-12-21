@@ -57,6 +57,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SoundType;
@@ -109,6 +110,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> phantasmal_glass = BLOCKS.register("phantasmal_glass",
 			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
 					.sound(SoundType.GLASS).notSolid()));
+	public static final RegistryObject<Block> phantasmal_pane = BLOCKS.register("phantasmal_pane",
+			() -> new PaneBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
+					.sound(SoundType.GLASS).notSolid()));
+	
+	
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 	public static final RegistryObject<Block> old_iron_block = BLOCKS.register("old_iron_block",
@@ -424,6 +430,7 @@ public class BlockInit {
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			RenderTypeLookup.setRenderLayer(BlockInit.phantasmal_glass.get(), RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(BlockInit.phantasmal_pane.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.display_glass.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.mind_fog.get(), RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(BlockInit.morel_mushroom.get(), RenderType.getCutout());

@@ -89,7 +89,7 @@ public class ModFuserRecipies {
 				new ItemStack(ItemInit.karmic_bar.get(), 1), 10, Ingredient.fromItems(ItemInit.karmic_drop.get()),
 				Ingredient.fromItems(ItemInit.grey_ingot.get()));
 		recipePhantasmalPane = registerRecipe(new ResourceLocation("phantasmal_pane"),
-				new ItemStack(ItemInit.phantasmal_pane.get(), 1), 10, Ingredient.fromItems(ItemInit.readied_pane.get()),
+				new ItemStack(BlockInit.phantasmal_pane.get(), 1), 10, Ingredient.fromItems(ItemInit.readied_pane.get()),
 				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(ItemInit.anti_tear.get()));
 
 		recipePhantasmalGlass = registerRecipe(new ResourceLocation("phantasmal_glass"),

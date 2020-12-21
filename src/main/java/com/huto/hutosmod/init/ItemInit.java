@@ -216,8 +216,6 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
-	public static final RegistryObject<Item> phantasmal_pane = ITEMS.register("phantasmal_pane",
-			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> resonant_fuel = ITEMS.register("resonant_fuel",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> magatamabead = ITEMS.register("magatamabead",

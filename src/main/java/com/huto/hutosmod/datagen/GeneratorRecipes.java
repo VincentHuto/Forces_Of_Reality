@@ -30,7 +30,7 @@ public class GeneratorRecipes extends RecipeProvider {
 			addIngredient(ItemInit.somnolent_powder.get(),1).
 			addCriterion("has_somnolent_powder", hasItem(ItemInit.somnolent_powder.get())).build(consumer);	
 		
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.phantasmal_pane.get(),1).
+		ShapelessRecipeBuilder.shapelessRecipe(BlockInit.phantasmal_pane.get(),1).
 			addIngredient(ItemInit.essence_drop.get(),3).
 			addIngredient(ItemInit.nullifying_powder.get(),3).
 			addCriterion("has_essence_drop", hasItem(ItemInit.essence_drop.get())).build(consumer);	
@@ -249,13 +249,13 @@ public class GeneratorRecipes extends RecipeProvider {
 			.addCriterion("has_nullifying_powder", hasItem( ItemInit.nullifying_powder.get())).build(consumer);
 		  
 		  ShapedRecipeBuilder.shapedRecipe(ItemInit.energy_focus.get())
-			.key('N', ItemInit.phantasmal_pane.get())
+			.key('N', BlockInit.phantasmal_pane.get())
 			.key('O', Tags.Items.INGOTS_GOLD)
 			.key('P', ItemInit.nullifying_powder.get())
 			.patternLine("NON")
 			.patternLine("OPO")
 			.patternLine("NON")
-			.addCriterion("has_phantasmal_pane", hasItem( ItemInit.phantasmal_pane.get())).build(consumer);
+			.addCriterion("has_phantasmal_pane", hasItem( BlockInit.phantasmal_pane.get())).build(consumer);
 		  
 		  ShapedRecipeBuilder.shapedRecipe(ItemInit.absorber_configurer.get())
 			.key('S', ItemInit.null_rod.get())
@@ -617,12 +617,12 @@ public class GeneratorRecipes extends RecipeProvider {
 		
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.influence_supressor.get())
 				.key('L',Items.LEATHER)
-				.key('P', ItemInit.phantasmal_pane.get())
+				.key('P', BlockInit.phantasmal_pane.get())
 				.key('I', ItemInit.null_ingot.get())
 				.patternLine("LLL")
 				.patternLine("PIP")
 				.patternLine("I I")
-				.addCriterion("has_phantasmal_pane", hasItem(ItemInit.phantasmal_pane.get())).build(consumer);
+				.addCriterion("has_phantasmal_pane", hasItem(BlockInit.phantasmal_pane.get())).build(consumer);
 			
 			
 			ShapedRecipeBuilder.shapedRecipe(BlockInit.opal_block.get())
