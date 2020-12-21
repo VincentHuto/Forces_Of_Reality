@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:essence_drop"
+    ]
+  },
+  "criteria": {
+    "has_somnolent_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:somnolent_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:essence_drop"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_somnolent_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

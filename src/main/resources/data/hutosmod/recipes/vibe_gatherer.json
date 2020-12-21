@@ -13,7 +13,7 @@
       "item": "hutosmod:nether_block"
     },
     "S": {
-      "item": "minecraft:spruce_log"
+      "tag": "minecraft:logs"
     },
     "L": {
       "item": "hutosmod:somnolent_leaves"

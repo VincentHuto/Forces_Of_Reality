@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:auto_inscriber"
+    ]
+  },
+  "criteria": {
+    "has_contained_magma": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:contained_magma"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:auto_inscriber"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_contained_magma",
+      "has_the_recipe"
+    ]
+  ]
+}

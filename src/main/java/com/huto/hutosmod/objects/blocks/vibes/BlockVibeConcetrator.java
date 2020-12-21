@@ -92,11 +92,9 @@ public class BlockVibeConcetrator extends Block {
 					double randX = pos.getX() - 0.1 + random.nextDouble() * 1.2;
 					double randY = pos.getY() - 0.1 + random.nextDouble() * 1.2;
 					double randZ = pos.getZ() - 0.1 + random.nextDouble() * 1.2;
-					if (tile.canGenerate()) {
-						world.addParticle(GlowParticleData.createData(new ParticleColor(200, 0, 0)),
-								pos.getX() + 0.5 + randX, pos.getY() + 0.8f + randY, pos.getZ() + 0.5 + randZ, 0,
-								world.rand.nextFloat() * 0.06f, 0);
-					}
+					world.addParticle(GlowParticleData.createData(new ParticleColor(200, 0, 0)),
+							pos.getX() + 0.5 + randX, pos.getY() + 0.8f + randY, pos.getZ() + 0.5 + randZ, 0,
+							world.rand.nextFloat() * 0.06f, 0);
 				}
 			}
 		}

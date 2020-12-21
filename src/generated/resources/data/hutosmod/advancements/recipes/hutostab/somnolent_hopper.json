@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:somnolent_hopper"
+    ]
+  },
+  "criteria": {
+    "has_channeling_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:channeling_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:somnolent_hopper"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_channeling_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

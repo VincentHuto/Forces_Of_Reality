@@ -51,7 +51,7 @@ public class TileEntityTectonicAbsorber extends TileModVibes implements ITickabl
 				.orElseThrow(NullPointerException::new);
 		if (canGenerate() && chunkVibe.canExtract()) {
 			chunkVibe.extractEnergy(1);
-			vibes.addVibes(0.6f);
+			vibes.addVibes(0.95f);
 		}
 	}
 

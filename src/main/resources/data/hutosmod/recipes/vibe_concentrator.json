@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NAN",
+    "AFA",
+    "LFL"
+  ],
+  "key": {
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "A": {
+      "item": "hutosmod:activated_obsidian"
+    },
+    "L": {
+      "item": "hutosmod:somnolent_log"
+    },
+    "F": {
+      "item": "hutosmod:energy_focus"
+    }
+  },
+  "result": {
+    "item": "hutosmod:vibe_concentrator"
+  }
+}

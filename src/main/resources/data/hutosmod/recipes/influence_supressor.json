@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "PIP",
+    "I I"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "P": {
+      "item": "hutosmod:phantasmal_pane"
+    },
+    "I": {
+      "item": "hutosmod:null_ingot"
+    }
+  },
+  "result": {
+    "item": "hutosmod:influence_supressor"
+  }
+}

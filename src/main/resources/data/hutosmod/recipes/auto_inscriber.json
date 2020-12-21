@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NAN",
+    "M M",
+    "MRM"
+  ],
+  "key": {
+    "A": {
+      "item": "hutosmod:activated_obsidian"
+    },
+    "R": {
+      "item": "hutosmod:runed_obsidian"
+    },
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "M": {
+      "item": "hutosmod:contained_magma"
+    }
+  },
+  "result": {
+    "item": "hutosmod:auto_inscriber"
+  }
+}

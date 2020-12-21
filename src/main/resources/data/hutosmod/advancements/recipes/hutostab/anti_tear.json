@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_essence_drop": {
+    "has_nullifying_powder": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "hutosmod:essence_drop"
+            "item": "hutosmod:nullifying_powder"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_essence_drop",
+      "has_nullifying_powder",
       "has_the_recipe"
     ]
   ]

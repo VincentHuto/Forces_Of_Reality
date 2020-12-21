@@ -158,18 +158,10 @@ public class TileEntityLectorTable extends TileVibeSimpleInventory implements IT
 
 	@Override
 	public void tick() {
-
 		if (!world.isRemote) {
-			if (cooldown > 0) {
-				cooldown--;
+			if(vibes.getVibes() > 1) {
+			vibes.subtractVibes(0.1f);
 			}
-		}
-		if (world.isRemote) {
-			// Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
-			// Vector3 belowVec = Vector3.fromTileEntityCenter(this).add(0, 0.2, 0);
-			// HutosMod.proxy.lightningFX(belowVec, vecabove, 15F, System.nanoTime(),
-			// 0xFF00FF, 0x000000);
-
 		}
 	}
 

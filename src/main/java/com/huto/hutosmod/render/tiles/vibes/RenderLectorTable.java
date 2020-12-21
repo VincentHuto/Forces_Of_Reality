@@ -99,18 +99,20 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 							(Math.max(0, Math.abs(250 - directedChunkVibe.getEnergyStored()))),
 							Math.max(directedChunkVibe.getEnergyStored() + (chunkHeight * 0.95f) - 1, 1), 0, 255);
 				}
-				if (nextChunk == mainChunk) {
-					matrixStackIn.push();
-					RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn, 15728640, combinedOverlayIn, builder, 1,
-							gridSpacing * (x * 1.01f), 2.1f + yMod + distMod + chunkHeightMod,
-							gridSpacing * (z * 1.01f), 0.5f, 0.5f, 0.5f);
-					matrixStackIn.pop();
-				}
+				if (te.clientVibes > 5) {
+					if (nextChunk == mainChunk) {
+						matrixStackIn.push();
+						RenderShapes.renderSizedOctahedron(matrixStackIn, bufferIn, 15728640, combinedOverlayIn,
+								builder, 1, gridSpacing * (x * 1.01f), 2.1f + yMod + distMod + chunkHeightMod,
+								gridSpacing * (z * 1.01f), 0.5f, 0.5f, 0.5f);
+						matrixStackIn.pop();
+					}
 
-				// Draws the grid
-				RenderShapes.renderSizedColorRectangle(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
-						builder, gridSpacing * (x * 1.001f), 1.1f + yMod + distMod + chunkHeightMod,
-						gridSpacing * (z * 1.001f), 0.5f, 0.5f, 0.5f, gridColor, -chunkHeightMod);
+					// Draws the grid
+					RenderShapes.renderSizedColorRectangle(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
+							builder, gridSpacing * (x * 1.001f), 1.1f + yMod + distMod + chunkHeightMod,
+							gridSpacing * (z * 1.001f), 0.5f, 0.5f, 0.5f, gridColor, -chunkHeightMod);
+				}
 			}
 		}
 		matrixStackIn.pop();

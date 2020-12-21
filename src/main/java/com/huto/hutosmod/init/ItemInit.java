@@ -197,8 +197,6 @@ public class ItemInit {
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1)));
 	// Materials
 	// Gems
-	
-	
 
 	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
@@ -343,10 +341,11 @@ public class ItemInit {
 	public static final RegistryObject<Item> machina_spark_director = ITEMS.register("machina_spark_director",
 			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR, EquipmentSlotType.CHEST,
 					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC), false));
-	public static final RegistryObject<Item> machina_spark_director_armored = ITEMS.register("machina_spark_director_armored",
-			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR_ARMORED, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC), true));
-
+	public static final RegistryObject<Item> machina_spark_director_armored = ITEMS
+			.register("machina_spark_director_armored",
+					() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR_ARMORED, EquipmentSlotType.CHEST,
+							(new Item.Properties()).group(HutosModItemGroup.instance).rarity(ModTextFormatting.AURIC),
+							true));
 
 	// Gloves
 	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
@@ -386,16 +385,17 @@ public class ItemInit {
 	public static final RegistryObject<Item> mechan_module_thruster = ITEMS.register("mechan_module_thruster",
 			() -> new ItemMechanModuleBase(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					"Increases the power of an equiped Machina Spark Director, Allows for boosting"));
-	
+
 	// Food
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).food(new Food.Builder().hunger(6)
-					.saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())))));
+					.saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())));
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance)));
+
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> cooked_morel_on_a_stick = ITEMS.register("cooked_morel_on_a_stick",
 			() -> new Item(new Item.Properties().group(HutosModItemGroup.instance).food(new Food.Builder().hunger(6)
@@ -590,42 +590,42 @@ public class ItemInit {
 	public static final RegistryObject<Item> rune_pattern_beast_c = ITEMS.register("rune_pattern_beast_c",
 			() -> new ItemRunePatternBeastContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_beast_c.text"));
+					"Beast Contract Rune, Unleash your inner beast, destroy your Ego and let the Id become all you are, a primal beast of pure strength."));
 	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 5));
 	public static final RegistryObject<Item> rune_pattern_corruption_c = ITEMS.register("rune_pattern_corruption_c",
 			() -> new ItemRunePatternCorruptionContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_corruption_c.text"));
+					"Corruption Contract Rune, Corrupted by those who wished you the worst, your faith has become dark, your dreams have become nightmares!"));
 	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 5));
 	public static final RegistryObject<Item> rune_pattern_impurity_c = ITEMS.register("rune_pattern_impurity_c",
 			() -> new ItemRunePatternImpurityContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_impurity_c.text"));
+					"Impurity Contract Rune, Your blood has become tainted and black, you hunger for all that is immoral and unclean..."));
 	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
 			() -> new ItemMilkweedRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 5));
 	public static final RegistryObject<Item> rune_pattern_milkweed_c = ITEMS.register("rune_pattern_milkweed_c",
 			() -> new ItemRunePatternMilkWeedContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_milkweed_c.text"));
+					"Milkweed Contract Rune, Gain contact with the outer beings from beyond all known realms, learn from them, if you dare..."));
 	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ASCENDENT, 5));
 	public static final RegistryObject<Item> rune_pattern_radiance_c = ITEMS.register("rune_pattern_radiance_c",
 			() -> new ItemRunePatternRadianceContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_radiance_c.text"));
+					"Radiance Contract Rune, Shining symbol of rioutous grace and fury, unleash your inner saint against all the heathens you face!"));
 	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
 			() -> new ItemContractRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 5));
 	public static final RegistryObject<Item> rune_pattern_hunter_c = ITEMS.register("rune_pattern_hunter_c",
 			() -> new ItemRunePatternHunterContract(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_hunter_c.text"));
+					"Hunter Contract Rune, A trained killer, set in your ways, a true hunter of hunters, weapons are your muse, the battle has become your muse."));
 
 	// Base Runes
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
@@ -634,74 +634,75 @@ public class ItemInit {
 	public static final RegistryObject<Item> rune_pattern_metamorphosis = ITEMS.register("rune_pattern_metamorphosis",
 			() -> new ItemRunePatternMetamorphosis(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_metamorphosis.text"));
+					"Anti Metamorphosis Rune, The crooked metamorphosis has begun, your vitatlity has increased, you feel like you could regrow anything!"));
 	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
+
 	public static final RegistryObject<Item> rune_pattern_metamorphosis_cw = ITEMS.register(
 			"rune_pattern_metamorphosis_cw",
 			() -> new ItemRunePatternMetamorphosisCW(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_metamorphosis_cw.text"));
+					"Metamorphois Rune, The proper metamorphosis has begun, your vitality has increased, you feel full of life anew!"));
 	public static final RegistryObject<Item> rune_lake = ITEMS.register("rune_lake",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_lake = ITEMS.register("rune_pattern_lake",
 			() -> new ItemRunePatternLake(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_lake.text"));
+					"Lake Rune, The rushing of sacred waters, the roar of a great ocean calls to you, you know your home, and it beckons you back.."));
 	public static final RegistryObject<Item> rune_clawmark = ITEMS.register("rune_clawmark",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> rune_pattern_clawmark = ITEMS.register("rune_pattern_clawmark",
 			() -> new ItemRunePatternClawmark(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_clawmark.text"));
+					"Clawmark Rune, Tooth and Nail is all you know, the endless fight has just begun, bring the armies home, they are no threat."));
 	public static final RegistryObject<Item> rune_rapture = ITEMS.register("rune_rapture",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_rapture = ITEMS.register("rune_pattern_rapture",
 			() -> new ItemRunePatternRapture(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_rapture.text"));
+					"Rapture Rune, The blood of war is your fuel, the lifeblood of your enemy becomes your own, absorb those who would oppose you!"));
 	public static final RegistryObject<Item> rune_oedon = ITEMS.register("rune_oedon",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_oedon = ITEMS.register("rune_pattern_oedon",
 			() -> new ItemRunePatternOedon(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_oedon.text"));
+					"Oedon Rune, You feel as if you have a false heart, one granted to you on contract, nevertheless this life is yours now, use it."));
 	public static final RegistryObject<Item> rune_eye = ITEMS.register("rune_eye",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_eye = ITEMS.register("rune_pattern_eye",
 			() -> new ItemRunePatternEye(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_eye.text"));
+					"Eye Rune, Your eyes, o' glorious eyes! do not faulter, do not die, for you shall see, beyond the veil, to see what the darkness entails..."));
 	public static final RegistryObject<Item> rune_moon = ITEMS.register("rune_moon",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_moon = ITEMS.register("rune_pattern_moon",
 			() -> new ItemRunePatternMoon(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_moon.text"));
+					"Moon Rune, The great moon above has become your muse, it is what drives you, turn away from the cursed sun, carpe noctum!"));
 	public static final RegistryObject<Item> rune_beast = ITEMS.register("rune_beast",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> rune_pattern_beast = ITEMS.register("rune_pattern_beast",
 			() -> new ItemRunePatternBeast(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_beast.text"));
+					"Beast Rune, The howl of a gale, the howl of the beast, it is one and all in you, run like the wind, endless and with drive!"));
 	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_heir = ITEMS.register("rune_pattern_heir",
 			() -> new ItemRunePatternHeir(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_pattern_heir.text"));
+					"Heir Rune, you develop this watchful sense,you, the spiritual succesor to a once great power, shall rekindle their former glory; Divine Heir."));
 	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
 			() -> new ItemGuidanceRune(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_guidance = ITEMS.register("rune_pattern_guidance",
 			() -> new ItemRunePatternGuidance(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_guidance.text"));
+					"Guidance Rune, The supernatural blessing, one of fortune and direction, may it guide you to your wants, as it has so many others before."));
 	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
 			() -> new ItemRune(new Item.Properties().group(HutosModItemGroup.instance), EnumCovenants.ASCENDENT, 1));
 	public static final RegistryObject<Item> rune_pattern_communion = ITEMS.register("rune_pattern_communion",
 			() -> new ItemRunePatternCommunion(new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1),
-					"runepattern.rune_communion.text"));
+					"Communion Rune, The call from beyond rings louder for you, you wish to join them, you must join them. join.joi,jo..."));
 
 	// Spawn Eggs
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_walker = ITEMS
@@ -872,7 +873,7 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		//Imprint
+		// Imprint
 		ItemModelsProperties.registerProperty(harmonic_imprint.get(), new ResourceLocation(HutosMod.MOD_ID, "saved"),
 				new IItemPropertyGetter() {
 					@Override
@@ -887,8 +888,7 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		
-		
+
 		// EMP Charm
 		ItemModelsProperties.registerProperty(emp_charm.get(), new ResourceLocation(HutosMod.MOD_ID, "on"),
 				new IItemPropertyGetter() {

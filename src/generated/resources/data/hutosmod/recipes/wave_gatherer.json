@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NMN",
+    "FNF",
+    "NGN"
+  ],
+  "key": {
+    "M": {
+      "item": "hutosmod:morel_cap"
+    },
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "G": {
+      "item": "hutosmod:phantasmal_glass"
+    },
+    "F": {
+      "item": "hutosmod:energy_focus"
+    }
+  },
+  "result": {
+    "item": "hutosmod:wave_gatherer"
+  }
+}

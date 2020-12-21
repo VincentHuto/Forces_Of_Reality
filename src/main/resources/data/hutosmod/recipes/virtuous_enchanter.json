@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AES",
+    "DND",
+    "NFN"
+  ],
+  "key": {
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "A": {
+      "item": "hutosmod:anti_tear"
+    },
+    "S": {
+      "item": "hutosmod:essence_drop"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "F": {
+      "item": "hutosmod:energy_focus"
+    },
+    "E": {
+      "item": "minecraft:enchanting_table"
+    }
+  },
+  "result": {
+    "item": "hutosmod:virtuous_enchanter"
+  }
+}

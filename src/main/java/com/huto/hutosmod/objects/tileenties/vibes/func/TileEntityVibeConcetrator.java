@@ -15,12 +15,15 @@ import com.huto.hutosmod.objects.tileenties.vibes.gen.TileEntityAbsorber;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
 
 public class TileEntityVibeConcetrator extends TileModVibes implements ITickableTileEntity, IImportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
@@ -47,21 +50,69 @@ public class TileEntityVibeConcetrator extends TileModVibes implements ITickable
 
 	@Override
 	public void tick() {
-		IChunkVibrations chunkVibe = world.getChunkAt(getPos())
-				.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
-				.orElseThrow(NullPointerException::new);
-		if (canGenerate() && chunkVibe.canExtract()) {
-			chunkVibe.extractEnergy(2);
-			// vibes.addVibes(0.2f);
+		if (!world.isRemote) {
+			IChunkVibrations chunkVibe = world.getChunkAt(getPos())
+					.getCapability(ChunkVibrationProvider.CHUNK_ENERGY_CHUNK_CAPABILITY)
+					.orElseThrow(NullPointerException::new);
+			if (!isVibeFull() && chunkVibe.canExtract()) {
+				chunkVibe.extractEnergy(1);
+				vibes.addVibes(1);
+			}
+			if (vibes.getVibes() >= 100) {
+				selectRandPos(world);
+			}
 		}
 	}
 
-	public boolean canGenerate() {
-		return !isVibeFull() ? true : false;
+	@SuppressWarnings("deprecation")
+	public BlockPos selectRandPos(World worldIn) {
+		Iterable<BlockPos> radiusPositions = BlockPos.getAllInBoxMutable(this.pos.add(5.0f, 2.0f, 5.0f),
+				this.pos.add(-5.0f, -2.0f, -5.0f));
+		for (BlockPos s : radiusPositions) {
+			if (isValidPosition(worldIn.getBlockState(s), worldIn, s)
+					&& worldIn.getBlockState(s.add(0, 1, 0)).isAir()) {
+				if (worldIn.rand.nextInt(7500) == 0) {
+					if (worldIn.rand.nextBoolean()) {
+						worldIn.setBlockState(s.add(0, 1, 0), BlockInit.essence_breakout_point.get().getDefaultState());
+					} else {
+						worldIn.setBlockState(s.add(0, 1, 0), BlockInit.null_breakout_point.get().getDefaultState());
+
+					}
+					vibes.subtractVibes(50);
+				}
+			}
+		}
+
+		return pos;
+	}
+
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos;
+		BlockState blockstate = worldIn.getBlockState(blockpos);
+		if (blockstate.getBlock() == Blocks.GRASS_BLOCK || blockstate.getBlock() == Blocks.STONE
+				|| blockstate.getBlock() == Blocks.DIRT || blockstate.getBlock() == BlockInit.somnolent_earth.get()
+				|| blockstate.getBlock() == BlockInit.somnolent_stone.get()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isSpotGrowable(World worldIn, BlockPos posIn) {
+		if (isValidPosition(worldIn.getBlockState(posIn), worldIn, posIn)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public boolean canGenerate(World worldIn, BlockPos posIn) {
+		return vibes.getVibes() > 5 && isSpotGrowable(worldIn, posIn) ? true : false;
 	}
 
 	public boolean isVibeFull() {
-		return vibes.getVibes() > maxVibes ? true : false;
+		return vibes.getVibes() >= maxVibes ? true : false;
 	}
 
 	public boolean checkStructure() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Preconditions;
+import com.huto.hutosmod.init.BlockInit;
 import com.huto.hutosmod.init.ItemInit;
 
 import net.minecraft.block.Blocks;
@@ -19,7 +20,7 @@ public class ModFuserRecipies {
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
 			recipeUpgradeExport, recipeElderTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade,
 			recipeAuricBowBlade, recipeNullTrickAxe, recipeMysticTrickAxe, recipeAuricTrickAxe, recipeIdentifier,
-			recipeArmoredDirector, recipeAuricIngot, recipeCryingObsidian;
+			recipeArmoredDirector, recipeAuricIngot, recipeCryingObsidian,recipePhantasmalGlass;
 
 	public static void init() {
 
@@ -90,6 +91,12 @@ public class ModFuserRecipies {
 		recipePhantasmalPane = registerRecipe(new ResourceLocation("phantasmal_pane"),
 				new ItemStack(ItemInit.phantasmal_pane.get(), 1), 10, Ingredient.fromItems(ItemInit.readied_pane.get()),
 				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(ItemInit.anti_tear.get()));
+
+		recipePhantasmalGlass = registerRecipe(new ResourceLocation("phantasmal_glass"),
+				new ItemStack(BlockInit.phantasmal_glass.get(), 1), 30, Ingredient.fromItems(Blocks.GLASS),
+				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(ItemInit.anti_tear.get()),
+				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(ItemInit.anti_tear.get()));
+
 		recipeUpgradeBlock = registerRecipe(new ResourceLocation("upgrade_block"),
 				new ItemStack(ItemInit.upgrade_block.get(), 1), 50,
 				Ingredient.fromItems(ItemInit.somnolent_crystal.get()),

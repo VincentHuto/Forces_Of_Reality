@@ -6,7 +6,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.loading.StringUtils;
 
-@OnlyIn(Dist.CLIENT)
 public class ModTextFormatting {
 
 	/***
@@ -16,7 +15,6 @@ public class ModTextFormatting {
 	 * @param parReturnToBlack
 	 * @return
 	 */
-
 	public static Rarity AURIC = Rarity.create("Auric", TextFormatting.GOLD);
 
 	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {

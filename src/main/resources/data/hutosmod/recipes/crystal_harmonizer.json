@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CFC",
+    "MNM",
+    "CGC"
+  ],
+  "key": {
+    "C": {
+      "item": "hutosmod:contained_crying_obsidian"
+    },
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "M": {
+      "item": "hutosmod:contained_magma"
+    },
+    "G": {
+      "item": "hutosmod:gilded_wool"
+    },
+    "F": {
+      "item": "hutosmod:energy_focus"
+    }
+  },
+  "result": {
+    "item": "hutosmod:crystal_harmonizer"
+  }
+}

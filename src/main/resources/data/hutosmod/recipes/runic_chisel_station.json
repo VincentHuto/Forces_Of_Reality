@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I O",
+    "SSS",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "item": "hutosmod:nether_block"
+    },
+    "S": {
+      "item": "hutosmod:somnolent_stone_smooth"
+    },
+    "O": {
+      "item": "hutosmod:obsidian_knapper"
+    },
+    "I": {
+      "item": "hutosmod:iron_knapper"
+    }
+  },
+  "result": {
+    "item": "hutosmod:runic_chisel_station"
+  }
+}

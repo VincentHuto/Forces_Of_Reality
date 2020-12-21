@@ -64,9 +64,8 @@ public class CovenPageLib {
 	public static String MACHINE_PAGE_2 = "title.coventome.machine.page.2.text";
 	public static String MACHINE_PAGE_3 = "title.coventome.machine.page.3.text";
 	public static String MACHINE_PAGE_4 = "title.coventome.machine.page.4.text";
-	public static String MACHINE_PAGE_5 = "title.coventome.machine.page.5.text";
-	public static String MACHINE_PAGE_6 = "title.coventome.machine.page.6.text";
-
+	public static String MACHINE_PAGE_5 = "To know the machine, to know the spark of life itself, just as you run on  spirit, as do machines, Create an artifical soul";
+	public static String MACHINE_PAGE_6 = "No matter how meticulous the great tinkerer is, when starting any new task, mistakes and hiccups are bound to occur. The Malformed Automaton is exactly that hiccup. Broken and Deranged, It was cast into the scrap heap of creation to slowly rust and decay. However its primeval spark still remains, waiting eagerly to inhabit its old vessel";
 	public static void registerPages() {
 
 		HasturPageList.clear();

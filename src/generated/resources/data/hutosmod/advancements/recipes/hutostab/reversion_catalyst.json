@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "hutosmod:reversion_catalyst"
+    ]
+  },
+  "criteria": {
+    "has_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "hutosmod:gem_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "hutosmod:reversion_catalyst"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_opal",
+      "has_the_recipe"
+    ]
+  ]
+}

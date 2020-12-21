@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hutosmod:essence_drop"
+    },
+    {
+      "item": "hutosmod:essence_drop"
+    },
+    {
+      "item": "hutosmod:essence_drop"
+    },
+    {
+      "item": "hutosmod:nullifying_powder"
+    },
+    {
+      "item": "hutosmod:nullifying_powder"
+    },
+    {
+      "item": "hutosmod:nullifying_powder"
+    }
+  ],
+  "result": {
+    "item": "hutosmod:phantasmal_pane"
+  }
+}

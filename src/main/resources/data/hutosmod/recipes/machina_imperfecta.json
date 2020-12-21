@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ADA",
+    "ANA",
+    "ADA"
+  ],
+  "key": {
+    "A": {
+      "item": "hutosmod:auric_block"
+    },
+    "N": {
+      "item": "hutosmod:neurotic_mechanism"
+    },
+    "D": {
+      "item": "hutosmod:discared_gear"
+    }
+  },
+  "result": {
+    "item": "hutosmod:machina_imperfecta"
+  }
+}

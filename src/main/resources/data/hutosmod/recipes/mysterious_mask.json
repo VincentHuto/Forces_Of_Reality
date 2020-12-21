@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "hutosmod:channeling_ingot"
+    }
+  },
+  "result": {
+    "item": "hutosmod:mysterious_mask"
+  }
+}
