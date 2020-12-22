@@ -12,6 +12,7 @@ import com.huto.forces_of_reality.entities.item.EntityManaDustItem;
 import com.huto.forces_of_reality.entities.lords.EntityMechan;
 import com.huto.forces_of_reality.entities.lords.EntityVeritas;
 import com.huto.forces_of_reality.entities.mobs.EntityDreadBot;
+import com.huto.forces_of_reality.entities.mobs.EntityHasturVassal;
 import com.huto.forces_of_reality.entities.mobs.EntityScuttlingOcculus;
 import com.huto.forces_of_reality.entities.passive.EntityDenizen;
 import com.huto.forces_of_reality.entities.passive.EntityDenizenSage;
@@ -65,11 +66,10 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.4F, 0.1F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "slug").toString()));
 
-	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES
-			.register("dream_walker",
-					() -> EntityType.Builder
-							.<EntityDreamWalker>create(EntityDreamWalker::new, EntityClassification.CREATURE)
-							.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dream_walker").toString()));
+	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES.register(
+			"dream_walker",
+			() -> EntityType.Builder.<EntityDreamWalker>create(EntityDreamWalker::new, EntityClassification.CREATURE)
+					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dream_walker").toString()));
 	// Elders
 	public static final RegistryObject<EntityType<EntityColin>> colin = ENTITY_TYPES.register("colin",
 			() -> EntityType.Builder.<EntityColin>create(EntityColin::new, EntityClassification.CREATURE)
@@ -80,11 +80,10 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityDenizen>create(EntityDenizen::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "denizen").toString()));
 
-	public static final RegistryObject<EntityType<EntityDenizenSage>> denizen_sage = ENTITY_TYPES
-			.register("denizen_sage",
-					() -> EntityType.Builder
-							.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
-							.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "denizen_sage").toString()));
+	public static final RegistryObject<EntityType<EntityDenizenSage>> denizen_sage = ENTITY_TYPES.register(
+			"denizen_sage",
+			() -> EntityType.Builder.<EntityDenizenSage>create(EntityDenizenSage::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "denizen_sage").toString()));
 
 	// Self
 	public static final RegistryObject<EntityType<EntityTulpa>> tulpa = ENTITY_TYPES.register("tulpa",
@@ -103,17 +102,22 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityTentacle>create(EntityTentacle::new, EntityClassification.MONSTER)
 					.size(0.4F, 0.7F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "tentacle").toString()));
 
-	public static final RegistryObject<EntityType<EntityHasturSpawn>> hastur_spawn = ENTITY_TYPES
-			.register("hastur_spawn",
-					() -> EntityType.Builder
-							.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
-							.size(0.4F, 1F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_spawn").toString()));
+	public static final RegistryObject<EntityType<EntityHasturVassal>> hastur_vassal = ENTITY_TYPES.register(
+			"hastur_vassal",
+			() -> EntityType.Builder
+					.<EntityHasturVassal>create(EntityHasturVassal::new, EntityClassification.WATER_CREATURE)
+					.size(0.8F, 0.8F).trackingRange(8)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_vassal").toString()));;
 
-	public static final RegistryObject<EntityType<EntityHasturClone>> hastur_clone = ENTITY_TYPES
-			.register("hastur_clone",
-					() -> EntityType.Builder
-							.<EntityHasturClone>create(EntityHasturClone::new, EntityClassification.MONSTER)
-							.size(1F, 1F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_clone").toString()));
+	public static final RegistryObject<EntityType<EntityHasturSpawn>> hastur_spawn = ENTITY_TYPES.register(
+			"hastur_spawn",
+			() -> EntityType.Builder.<EntityHasturSpawn>create(EntityHasturSpawn::new, EntityClassification.MONSTER)
+					.size(0.4F, 1F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_spawn").toString()));
+
+	public static final RegistryObject<EntityType<EntityHasturClone>> hastur_clone = ENTITY_TYPES.register(
+			"hastur_clone",
+			() -> EntityType.Builder.<EntityHasturClone>create(EntityHasturClone::new, EntityClassification.MONSTER)
+					.size(1F, 1F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_clone").toString()));
 	// Seraphim
 	public static final RegistryObject<EntityType<EntitySeraphim>> seraphim = ENTITY_TYPES.register("seraphim",
 			() -> EntityType.Builder.<EntitySeraphim>create(EntitySeraphim::new, EntityClassification.MONSTER)
@@ -131,7 +135,8 @@ public class EntityInit {
 			"scuttling_occulus",
 			() -> EntityType.Builder
 					.<EntityScuttlingOcculus>create(EntityScuttlingOcculus::new, EntityClassification.MONSTER)
-					.size(0.5f, 0.5f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "scuttling_occulus").toString()));
+					.size(0.5f, 0.5f)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "scuttling_occulus").toString()));
 
 	public static final RegistryObject<EntityType<EntityBlackGoat>> black_goat = ENTITY_TYPES.register("black_goat",
 			() -> EntityType.Builder.<EntityBlackGoat>create(EntityBlackGoat::new, EntityClassification.MONSTER)
@@ -141,7 +146,8 @@ public class EntityInit {
 			"beast_from_beyond",
 			() -> EntityType.Builder
 					.<EntityBeastFromBeyond>create(EntityBeastFromBeyond::new, EntityClassification.MONSTER)
-					.size(1.7f, 1.7f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "beast_from_beyond").toString()));
+					.size(1.7f, 1.7f)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "beast_from_beyond").toString()));
 	public static final RegistryObject<EntityType<EntitySummonedBeast>> summoned_beast = ENTITY_TYPES.register(
 			"summoned_beast",
 			() -> EntityType.Builder.<EntitySummonedBeast>create(EntitySummonedBeast::new, EntityClassification.MONSTER)
@@ -153,12 +159,15 @@ public class EntityInit {
 					.size(0.9f, 1.7f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "mechan").toString()));
 
 	public static final RegistryObject<EntityType<EntityMalformedAutomaton>> malformed_automaton = ENTITY_TYPES
-			.register("malformed_automaton", () -> EntityType.Builder
-					.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new, EntityClassification.MONSTER)
-					.size(3.4f, 5.5f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "malformed_automaton").toString()));
+			.register("malformed_automaton",
+					() -> EntityType.Builder
+							.<EntityMalformedAutomaton>create(EntityMalformedAutomaton::new,
+									EntityClassification.MONSTER)
+							.size(3.4f, 5.5f)
+							.build(new ResourceLocation(ForcesOfReality.MOD_ID, "malformed_automaton").toString()));
 	public static final RegistryObject<EntityType<EntityDreadBot>> dread_bot = ENTITY_TYPES.register("dread_bot",
 			() -> EntityType.Builder.<EntityDreadBot>create(EntityDreadBot::new, EntityClassification.MONSTER)
-					.size(0.5F, 0.5F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dread_bot").toString()));
+					.size(1.0F, 1.0F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dread_bot").toString()));
 	// Machine
 
 	// Projectiles
@@ -166,7 +175,8 @@ public class EntityInit {
 			"player_tentacle",
 			() -> EntityType.Builder
 					.<EntityPlayerTentacle>create(EntityPlayerTentacle::new, EntityClassification.CREATURE)
-					.size(1.4F, 1.5F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "player_tentacle").toString()));
+					.size(1.4F, 1.5F)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "player_tentacle").toString()));
 
 	public static final RegistryObject<EntityType<EntityTrackingOrb>> tracking_orb = ENTITY_TYPES.register(
 			"tracking_orb",
@@ -174,11 +184,10 @@ public class EntityInit {
 					.setTrackingRange(64).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.7F, 0.7F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "tracking_orb").toString()));
 
-	public static final RegistryObject<EntityType<EntityEldritchGrip>> eldritch_grip = ENTITY_TYPES
-			.register("eldritch_grip",
-					() -> EntityType.Builder
-							.<EntityEldritchGrip>create(EntityEldritchGrip::new, EntityClassification.MONSTER)
-							.size(0.3f, 0.3F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "eldritch_grip").toString()));
+	public static final RegistryObject<EntityType<EntityEldritchGrip>> eldritch_grip = ENTITY_TYPES.register(
+			"eldritch_grip",
+			() -> EntityType.Builder.<EntityEldritchGrip>create(EntityEldritchGrip::new, EntityClassification.MONSTER)
+					.size(0.3f, 0.3F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "eldritch_grip").toString()));
 
 	public static final RegistryObject<EntityType<EntityWolfShot>> wolf_shot = ENTITY_TYPES.register("wolf_shot",
 			() -> EntityType.Builder.<EntityWolfShot>create(EntityWolfShot::new, EntityClassification.MISC)
@@ -207,13 +216,11 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityShorting>create(EntityShorting::new, EntityClassification.MISC)
 					.setTrackingRange(20).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.6F, 0.6F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "shorting").toString()));
-	public static final RegistryObject<EntityType<EntityHolySpirit>> holy_spirit = ENTITY_TYPES.register(
-			"holy_spirit",
-			() -> EntityType.Builder
-					.<EntityHolySpirit>create(EntityHolySpirit::new, EntityClassification.MISC)
-					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true).size(0.25F, 0.25F)
-					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "holy_spirit").toString()));
-	
+	public static final RegistryObject<EntityType<EntityHolySpirit>> holy_spirit = ENTITY_TYPES.register("holy_spirit",
+			() -> EntityType.Builder.<EntityHolySpirit>create(EntityHolySpirit::new, EntityClassification.MISC)
+					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true)
+					.size(0.25F, 0.25F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "holy_spirit").toString()));
+
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",
 			() -> EntityType.Builder.<EntityCorruptNote>create(EntityCorruptNote::new, EntityClassification.MISC)
@@ -266,6 +273,7 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.tulpa.get(), EntityTulpa.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.scuttling_occulus.get(),
 				EntityScuttlingOcculus.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.hastur_vassal.get(), EntityHasturVassal.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.dread_bot.get(), EntityDreadBot.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.mechan.get(), EntityMechan.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.veritas.get(), EntityVeritas.setAttributes().create());

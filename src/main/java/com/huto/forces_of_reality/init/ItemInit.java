@@ -712,6 +712,9 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = ITEMS.register("spawn_egg_hastur",
 			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_vassal = ITEMS.register("spawn_egg_hastur_vassal",
+			() -> new ModSpawnEggItem(EntityInit.hastur_vassal, 10862336, 0x0000FF,
+					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tentacle = ITEMS.register("spawn_egg_tentacle",
 			() -> new ModSpawnEggItem(EntityInit.tentacle, 22073, 12371968,
 					new Item.Properties().group(ItemGroup.MISC).group(HutosModItemGroup.instance)));
@@ -769,7 +772,7 @@ public class ItemInit {
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
-		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
+		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
 				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
 				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
 				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,

@@ -25,6 +25,7 @@ import com.huto.forces_of_reality.render.entity.layer.ThermalLayerRender;
 import com.huto.forces_of_reality.render.entity.lords.RenderMechan;
 import com.huto.forces_of_reality.render.entity.lords.RenderVeritas;
 import com.huto.forces_of_reality.render.entity.mobs.RenderDreadBot;
+import com.huto.forces_of_reality.render.entity.mobs.RenderHasturVassal;
 import com.huto.forces_of_reality.render.entity.mobs.RenderScuttlingOcculus;
 import com.huto.forces_of_reality.render.entity.passive.RenderDenizen;
 import com.huto.forces_of_reality.render.entity.passive.RenderDenizenSage;
@@ -169,6 +170,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.shorting.get(), RenderShorting::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.veritas.get(), RenderVeritas::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.black_goat.get(), RenderBlackGoat::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_vassal.get(), RenderHasturVassal::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
