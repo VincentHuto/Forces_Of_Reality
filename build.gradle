@@ -92,7 +92,7 @@ sourceSets.main.resources {
 
 dependencies {
    
-    minecraft 'net.minecraftforge:forge:1.16.4-35.1.7'
+    minecraft 'net.minecraftforge:forge:1.16.4-35.1.13'
    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.57:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.57")
  

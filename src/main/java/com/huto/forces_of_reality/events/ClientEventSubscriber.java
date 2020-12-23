@@ -62,6 +62,7 @@ import com.huto.forces_of_reality.render.tiles.coven.RenderHasturPylon;
 import com.huto.forces_of_reality.render.tiles.coven.RenderIcoSphere;
 import com.huto.forces_of_reality.render.tiles.coven.RenderMachinaImperfecta;
 import com.huto.forces_of_reality.render.tiles.coven.RenderOccularHeap;
+import com.huto.forces_of_reality.render.tiles.coven.RenderRafflesiaOfFidelity;
 import com.huto.forces_of_reality.render.tiles.coven.RenderSacrificialPyre;
 import com.huto.forces_of_reality.render.tiles.coven.RenderUntoldEasel;
 import com.huto.forces_of_reality.render.tiles.vibes.RenderAbsorber;
@@ -130,6 +131,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.teleporter.get(), RenderTeleporter::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.lector_table.get(), RenderLectorTable::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.crystal_harmonizer.get(), RenderCrystalHarmonizer::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rafflesia_of_fidelity.get(), RenderRafflesiaOfFidelity::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 

@@ -10,5 +10,4 @@ import net.minecraft.world.World;
 public class DimensionInit {
 	public static final RegistryKey<World> dreamlands = RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 			new ResourceLocation(ForcesOfReality.MOD_ID, "dreamlands"));
-	
 }

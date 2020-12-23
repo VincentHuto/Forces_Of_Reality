@@ -219,57 +219,57 @@ public class KarmaEvents {
 			} else if (serverPlayer.world.getDimensionKey() != DimensionInit.dreamlands) {
 				setLastOverworldPosition(player);
 			}
-			IKarmaActivation karmaAct = player.getCapability(KarmaActivationProvider.KARMA_CAPA)
-					.orElseThrow(IllegalStateException::new);
-			if (karmaAct.getActivation() != 0) {
-				if (foundOnHead) {
-					// If player is in the Dreamlands
-					if (serverPlayer.world.getDimensionKey() == DimensionInit.dreamlands) {
-						Optional<DimensionalPosition> lastPos = getLastOverworldPosition(serverPlayer);
-						if (!lastPos.isPresent()) {
-							// Should be fine as youll never start in the dreamlands
-							serverPlayer.sendStatusMessage(new TranslationTextComponent("no_prev_position"), true);
-						} else {
-							// Teleport to Overworld
-							DimensionalPosition p = lastPos.get();
-							BlockPos bp = p.getPosition();
-							ResourceLocation dimRL = p.getDimension();
-							RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
-							ServerWorld ovw = world.getServer().getWorld(key);
-							serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
-									serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-						}
-					}
-					// If player is in the overworld
-					else if (serverPlayer.world.getDimensionKey() != DimensionInit.dreamlands) {
-						Optional<DimensionalPosition> lastPos = getLastDreamPosition(serverPlayer);
-						if (!lastPos.isPresent()) {
-							// This is for the first join
-							DimensionalPosition p = new DimensionalPosition(DimensionInit.dreamlands.getLocation(),
-									new BlockPos(player.getPosX(), player.getPosY() + 200, player.getPosZ()));
-							BlockPos bp = p.getPosition();
-							ResourceLocation dimRL = p.getDimension();
-							RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
-							ServerWorld ovw = world.getServer().getWorld(key);
-							player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 200, 255, false, true));
-							serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
-									serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-						} else {
-							// Subsequent Joins
-							DimensionalPosition p = lastPos.get();
-							BlockPos bp = p.getPosition();
-							ServerWorld ovw = world.getServer().getWorld(RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
-									DimensionInit.dreamlands.getLocation()));
-							serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
-									serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-						}
-					}
 
+			if (foundOnHead) {
+				// If player is in the Dreamlands
+				if (serverPlayer.world.getDimensionKey() == DimensionInit.dreamlands) {
+					Optional<DimensionalPosition> lastPos = getLastOverworldPosition(serverPlayer);
+					if (!lastPos.isPresent()) {
+						// Should be fine as youll never start in the dreamlands
+						serverPlayer.sendStatusMessage(new TranslationTextComponent("no_prev_position"), true);
+					} else {
+						// Teleport to Overworld
+						DimensionalPosition p = lastPos.get();
+						BlockPos bp = p.getPosition();
+						ResourceLocation dimRL = p.getDimension();
+						System.out.println(dimRL);
+						RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
+						ServerWorld ovw = world.getServer().getWorld(key);
+						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
+								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+					}
 				}
+				// If player is in the Overworld
+				else if (serverPlayer.world.getDimensionKey() != DimensionInit.dreamlands) {
+					Optional<DimensionalPosition> lastPos = getLastDreamPosition(serverPlayer);
+					if (!lastPos.isPresent()) {
+						// This is for the first join
+						DimensionalPosition p = new DimensionalPosition(DimensionInit.dreamlands.getLocation(),
+								new BlockPos(player.getPosX(), player.getPosY() + 200, player.getPosZ()));
+						BlockPos bp = p.getPosition();
+						ResourceLocation dimRL = p.getDimension();
+						RegistryKey<World> key = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, dimRL);
+						ServerWorld ovw = world.getServer().getWorld(key);
+						serverPlayer.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 200, 255, false, true));
+						System.out.println(ovw);
+						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
+								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+						} else {
+						// Subsequent Joins
+						DimensionalPosition p = lastPos.get();
+						BlockPos bp = p.getPosition();
+						ServerWorld ovw = world.getServer().getWorld(
+								RegistryKey.getOrCreateKey(Registry.WORLD_KEY, DimensionInit.dreamlands.getLocation()));
+						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
+								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+					}
+				}
+
 			}
 		}
 
 	}
+
 
 	// Saving player position to return too before and after teleport
 	public static Optional<DimensionalPosition> getLastOverworldPosition(PlayerEntity player) {

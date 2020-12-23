@@ -9,6 +9,7 @@ import com.huto.forces_of_reality.init.ItemInit;
 import com.huto.forces_of_reality.integration.jei.catagories.AutoInscriberRecipeCategory;
 import com.huto.forces_of_reality.integration.jei.catagories.ChiselRecipeCategory;
 import com.huto.forces_of_reality.integration.jei.catagories.HarmonizerRecipeCategory;
+import com.huto.forces_of_reality.integration.jei.catagories.RafflesiaRecipeCategory;
 import com.huto.forces_of_reality.integration.jei.catagories.ResonatorRecipeCategory;
 import com.huto.forces_of_reality.integration.jei.catagories.VibeFuserRecipeCategory;
 import com.huto.forces_of_reality.integration.jei.catagories.WandMakerRecipeCategory;
@@ -16,6 +17,7 @@ import com.huto.forces_of_reality.recipes.ModChiselRecipes;
 import com.huto.forces_of_reality.recipes.ModFuserRecipies;
 import com.huto.forces_of_reality.recipes.ModHarmonizerRecipes;
 import com.huto.forces_of_reality.recipes.ModInscriberRecipes;
+import com.huto.forces_of_reality.recipes.ModRafflesiaRecipies;
 import com.huto.forces_of_reality.recipes.ModResonatorRecipies;
 import com.huto.forces_of_reality.recipes.ModWandRecipies;
 
@@ -46,6 +48,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCategories(new ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new AutoInscriberRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new HarmonizerRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new RafflesiaRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 
 	}
 
@@ -61,6 +64,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipes(ModChiselRecipes.runeRecipies, ChiselRecipeCategory.UID);
 		registry.addRecipes(ModInscriberRecipes.inscriberRecipies, AutoInscriberRecipeCategory.UID);
 		registry.addRecipes(ModHarmonizerRecipes.harmonizerRecipes, HarmonizerRecipeCategory.UID);
+		registry.addRecipes(ModRafflesiaRecipies.rafflesiaRecipies, RafflesiaRecipeCategory.UID);
 		registry.addIngredientInfo(new ItemStack(ItemInit.yellow_sign.get()), VanillaTypes.ITEM,
 				"The Yellow Sign of Lord Hastur Himself");
 
@@ -79,6 +83,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.runic_chisel_station.get()), ChiselRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.auto_inscriber.get()), AutoInscriberRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.crystal_harmonizer.get()), HarmonizerRecipeCategory.UID);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.rafflesia_of_fidelity.get()), RafflesiaRecipeCategory.UID);
 
 	}
 

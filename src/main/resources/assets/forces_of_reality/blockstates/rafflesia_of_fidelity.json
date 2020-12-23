@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forces_of_reality:block/rafflesia_of_fidelity"
+		},
+		"facing=south": {
+			"model": "forces_of_reality:block/rafflesia_of_fidelity",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forces_of_reality:block/rafflesia_of_fidelity",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forces_of_reality:block/rafflesia_of_fidelity",
+			"y": 90
+		}
+	}
+}

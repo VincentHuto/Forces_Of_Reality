@@ -36,6 +36,7 @@ import com.huto.forces_of_reality.recipes.ModChiselRecipes;
 import com.huto.forces_of_reality.recipes.ModFuserRecipies;
 import com.huto.forces_of_reality.recipes.ModHarmonizerRecipes;
 import com.huto.forces_of_reality.recipes.ModInscriberRecipes;
+import com.huto.forces_of_reality.recipes.ModRafflesiaRecipies;
 import com.huto.forces_of_reality.recipes.ModResonatorRecipies;
 import com.huto.forces_of_reality.recipes.ModWandRecipies;
 import com.huto.forces_of_reality.recipes.UpgradeMachinaLampDataRecipe;
@@ -142,6 +143,7 @@ public class ForcesOfReality {
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
+		ModRafflesiaRecipies.init();
 		ModChiselRecipes.init();
 		ModInscriberRecipes.init();
 		ModHarmonizerRecipes.init();

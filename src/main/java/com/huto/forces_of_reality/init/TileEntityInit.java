@@ -21,6 +21,7 @@ import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityCrysta
 import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityKarmicAltar;
 import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityKarmicExtractor;
 import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityLectorTable;
+import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityRafflesiaOfFidelity;
 import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntitySomnolentHopper;
 import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityVibeConcetrator;
 import com.huto.forces_of_reality.objects.tileenties.vibes.func.TileEntityVibeFuser;
@@ -167,4 +168,8 @@ public class TileEntityInit {
 			.register("vibe_concentrator", () -> TileEntityType.Builder
 					.create(TileEntityVibeConcetrator::new, BlockInit.vibe_concentrator.get()).build(null));
 
+	public static final RegistryObject<TileEntityType<TileEntityRafflesiaOfFidelity>> rafflesia_of_fidelity = TILES
+			.register("rafflesia_of_fidelity", () -> TileEntityType.Builder
+					.create(TileEntityRafflesiaOfFidelity::new, BlockInit.rafflesia_of_fidelity.get()).build(null));
+	
 }

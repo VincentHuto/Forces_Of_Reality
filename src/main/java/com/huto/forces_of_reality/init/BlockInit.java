@@ -38,6 +38,7 @@ import com.huto.forces_of_reality.objects.blocks.vibes.BlockCrystalHarmonizer;
 import com.huto.forces_of_reality.objects.blocks.vibes.BlockKarmicAltar;
 import com.huto.forces_of_reality.objects.blocks.vibes.BlockKarmicExtractor;
 import com.huto.forces_of_reality.objects.blocks.vibes.BlockLectorTable;
+import com.huto.forces_of_reality.objects.blocks.vibes.BlockRafflesiaOfFidelity;
 import com.huto.forces_of_reality.objects.blocks.vibes.BlockSomnolentHopper;
 import com.huto.forces_of_reality.objects.blocks.vibes.BlockStorageDrum;
 import com.huto.forces_of_reality.objects.blocks.vibes.BlockTectonicAbsorber;
@@ -110,11 +111,9 @@ public class BlockInit {
 	public static final RegistryObject<Block> phantasmal_glass = BLOCKS.register("phantasmal_glass",
 			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
 					.sound(SoundType.GLASS).notSolid()));
-	public static final RegistryObject<Block> phantasmal_pane = BLOCKS.register("phantasmal_pane",
-			() -> new PaneBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
-					.sound(SoundType.GLASS).notSolid()));
-	
-	
+	public static final RegistryObject<Block> phantasmal_pane = BLOCKS.register("phantasmal_pane", () -> new PaneBlock(
+			Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f).sound(SoundType.GLASS).notSolid()));
+
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
 	public static final RegistryObject<Block> old_iron_block = BLOCKS.register("old_iron_block",
@@ -318,11 +317,9 @@ public class BlockInit {
 			Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.5f, 15f).sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> morel_stem = BLOCKS.register("morel_stem", () -> new Block(
 			Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.5f, 15f).sound(SoundType.PLANT)));
-
 	public static final RegistryObject<Block> singeri_mushroom = BLOCKS.register("singeri_mushroom",
 			() -> new BlockSingeriMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement()
 					.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-
 	public static final RegistryObject<Block> essence_breakout_point = BLOCKS.register("essence_breakout_point",
 			() -> new BlockBreakoutPoint(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
@@ -330,6 +327,9 @@ public class BlockInit {
 			() -> new BlockBreakoutPoint(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> passion_flower = BLOCKS.register("passion_flower",
+			() -> new BlockPassionFlower(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
+					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> rafflesia_flower = BLOCKS.register("rafflesia_flower",
 			() -> new BlockPassionFlower(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> somnolent_sapling = BLOCKS.register("somnolent_sapling",
@@ -393,6 +393,10 @@ public class BlockInit {
 			() -> new BlockTectonicAbsorber(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
+	public static final RegistryObject<Block> rafflesia_of_fidelity = BLOCKS.register("rafflesia_of_fidelity",
+			() -> new BlockRafflesiaOfFidelity(
+					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+
 	// Storage
 	public static final RegistryObject<Block> vibratory_storage_drum = BLOCKS.register("vibratory_storage_drum",
 			() -> new BlockStorageDrum(
@@ -436,6 +440,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.morel_mushroom.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.singeri_mushroom.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.passion_flower.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.rafflesia_flower.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_sapling.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_sapling.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.wand_maker.get(), RenderType.getCutout());
