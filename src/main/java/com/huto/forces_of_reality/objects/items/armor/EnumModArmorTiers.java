@@ -14,54 +14,60 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum EnumModArmorTiers implements IArmorMaterial {
-	NULL(ForcesOfReality.MOD_ID + ":null", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F,
-			() -> {
-				return Ingredient.fromItems(ItemInit.null_ingot.get());
-			}),
-	OLDIRON(ForcesOfReality.MOD_ID + ":old_iron", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
+	NULL(ForcesOfReality.MOD_ID + ":null", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	ELDER(ForcesOfReality.MOD_ID + ":elder", 37, new int[] { 1, 2, 3, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+	OLDIRON(ForcesOfReality.MOD_ID + ":old_iron", 37, new int[] { 3, 6, 8, 3 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.null_ingot.get());
+			}),
+	ELDER(ForcesOfReality.MOD_ID + ":elder", 37, new int[] { 1, 2, 3, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.magatamabead.get());
 			}),
 	CIRCLET(ForcesOfReality.MOD_ID + ":vibrational_seer", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	MASK(ForcesOfReality.MOD_ID + ":mysterious_mask", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-			3.0F, 0.1F, () -> {
+	MASK(ForcesOfReality.MOD_ID + ":mysterious_mask", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
 	SUPPRESSOR(ForcesOfReality.MOD_ID + ":influence_supressor", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	SKULL(ForcesOfReality.MOD_ID + ":skull", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+	SKULL(ForcesOfReality.MOD_ID + ":skull", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			}),
-	MANTLE(ForcesOfReality.MOD_ID + ":mantle", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+	MANTLE(ForcesOfReality.MOD_ID + ":mantle", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			}),
-	SPARKDIRECTOR(ForcesOfReality.MOD_ID + ":spark_director", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+
+	SPARKDIRECTOR(ForcesOfReality.MOD_ID + ":spark_director", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
-	AURICHELM(ForcesOfReality.MOD_ID + ":auric_helm", 37, new int[] { 1, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
+	AURICHELM(ForcesOfReality.MOD_ID + ":auric_helm", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
-	SPARKDIRECTOR_ARMORED(ForcesOfReality.MOD_ID + ":spark_director_armored", 37, new int[] { 7, 7,7, 7 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F,
-			0.3F, () -> {
+	SPARKDIRECTOR_ARMORED(ForcesOfReality.MOD_ID + ":spark_director_armored", 37, new int[] { 7, 7, 7, 7 }, 20,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F, 0.3F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
-	AURICCHEST(ForcesOfReality.MOD_ID + ":auric_chest", 37, new int[] { 5, 5,5, 5 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F,
-			0.3F, () -> {
+	AURICCHEST(ForcesOfReality.MOD_ID + ":auric_chest", 37, new int[] { 5, 5, 5, 5 }, 20,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F, 0.3F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
-			});;
+			}),
+	SERAPHWINGS(ForcesOfReality.MOD_ID + ":seraph_wings", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.seraph_feather.get());
+			});
+	;
 	;
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;

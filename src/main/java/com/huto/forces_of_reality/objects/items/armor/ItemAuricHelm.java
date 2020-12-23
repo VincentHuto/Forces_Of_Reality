@@ -25,6 +25,7 @@ public class ItemAuricHelm extends ArmorItem {
 		if (itemStack != ItemStack.EMPTY) {
 			if (itemStack.getItem() instanceof ArmorItem) {
 				ModelAuricHelm model = new ModelAuricHelm();
+		//		model.Head.rotateAngleX = (float) Math.sin(entityLiving.getEntityWorld().getGameTime())*0.1f;
 				model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD;
 				model.isChild = _default.isChild;
 				model.isSneak = _default.isSneak;

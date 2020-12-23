@@ -24,6 +24,7 @@ import com.huto.forces_of_reality.objects.items.ModSpawnEggItem;
 import com.huto.forces_of_reality.objects.items.armor.EnumModArmorTiers;
 import com.huto.forces_of_reality.objects.items.armor.ItemAttractionCharm;
 import com.huto.forces_of_reality.objects.items.armor.ItemAuricHelm;
+import com.huto.forces_of_reality.objects.items.armor.ItemBackWings;
 import com.huto.forces_of_reality.objects.items.armor.ItemClovenHooves;
 import com.huto.forces_of_reality.objects.items.armor.ItemEmpCharm;
 import com.huto.forces_of_reality.objects.items.armor.ItemEnticingMantle;
@@ -264,6 +265,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> divine_feather = ITEMS.register("divine_feather",
 			() -> new ItemDivineFeather(
 					new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> seraph_wings = ITEMS.register("seraph_wings",
+			() -> new ItemBackWings(EnumModArmorTiers.SERAPHWINGS, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance)));
 
 	// Eldritch
 	public static final RegistryObject<Item> everwatchful_pendant = ITEMS.register("everwatchful_pendant",
