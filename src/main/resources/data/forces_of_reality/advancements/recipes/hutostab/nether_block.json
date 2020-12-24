@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:nether_block"
+    ]
+  },
+  "criteria": {
+    "has_nullifying_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:nullifying_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:nether_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nullifying_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

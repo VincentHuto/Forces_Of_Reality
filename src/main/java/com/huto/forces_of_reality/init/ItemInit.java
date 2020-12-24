@@ -35,6 +35,8 @@ import com.huto.forces_of_reality.objects.items.armor.ItemSkullHelmet;
 import com.huto.forces_of_reality.objects.items.armor.ItemSlimeRepulsionCharm;
 import com.huto.forces_of_reality.objects.items.armor.ItemSparkDirector;
 import com.huto.forces_of_reality.objects.items.armor.ItemVibeSeer;
+import com.huto.forces_of_reality.objects.items.armor.ItemWrithingChest;
+import com.huto.forces_of_reality.objects.items.armor.ItemWrithingHelm;
 import com.huto.forces_of_reality.objects.items.fidelity.ItemBeastBreath;
 import com.huto.forces_of_reality.objects.items.fidelity.ItemCrossedKeys;
 import com.huto.forces_of_reality.objects.items.fidelity.ItemIntegralCog;
@@ -474,6 +476,20 @@ public class ItemInit {
 			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
 
+	public static final RegistryObject<Item> writhing_helmet = ITEMS.register("writhing_helmet",
+			() -> new ItemWrithingHelm(EnumModArmorTiers.WRITHINGHELM, EquipmentSlotType.HEAD,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+	public static final RegistryObject<Item> writhing_chestplate = ITEMS.register("writhing_chestplate",
+			() -> new ItemWrithingChest(EnumModArmorTiers.WRITHINGCHEST, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+	public static final RegistryObject<Item> writhing_leggings = ITEMS.register("writhing_leggings",
+			() -> new ArmorItem(EnumModArmorTiers.WRITHING, EquipmentSlotType.LEGS,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+	public static final RegistryObject<Item> writhing_boots = ITEMS.register("writhing_boots",
+			() -> new ArmorItem(EnumModArmorTiers.WRITHING, EquipmentSlotType.FEET,
+					(new Item.Properties()).group(HutosModItemGroup.instance).isImmuneToFire()));
+	
+	
 	// Tools
 	public static final RegistryObject<Item> null_bow_blade = ITEMS.register("null_bow_blade", () -> new ItemBowBlade(
 			new Item.Properties().group(HutosModItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));

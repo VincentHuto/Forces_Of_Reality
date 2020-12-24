@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:harmonic_imprint"
+    ]
+  },
+  "criteria": {
+    "has_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:gem_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:harmonic_imprint"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_opal",
+      "has_the_recipe"
+    ]
+  ]
+}

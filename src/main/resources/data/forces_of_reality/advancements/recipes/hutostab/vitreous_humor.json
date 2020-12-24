@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:vitreous_humor"
+    ]
+  },
+  "criteria": {
+    "has_suspicious_eye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:suspicious_eye"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:vitreous_humor"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_suspicious_eye",
+      "has_the_recipe"
+    ]
+  ]
+}

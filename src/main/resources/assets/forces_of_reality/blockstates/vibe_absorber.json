@@ -1,19 +1,31 @@
+
 {
 	"variants": {
-		"facing=north": {
-			"model": "forces_of_reality:block/vibe_absorber"
-		},
-		"facing=south": {
+		"facing=down": {
 			"model": "forces_of_reality:block/vibe_absorber",
-			"y": 180
-		},
-		"facing=west": {
-			"model": "forces_of_reality:block/vibe_absorber",
-			"y": 270
+			"x": 180
 		},
 		"facing=east": {
 			"model": "forces_of_reality:block/vibe_absorber",
+			"x": 90,
 			"y": 90
+		},
+		"facing=north": {
+			"model": "forces_of_reality:block/vibe_absorber",
+			"x": 90
+		},
+		"facing=south": {
+			"model": "forces_of_reality:block/vibe_absorber",
+			"x": 90,
+			"y": 180
+		},
+		"facing=up": {
+			"model": "forces_of_reality:block/vibe_absorber"
+		},
+		"facing=west": {
+			"model": "forces_of_reality:block/vibe_absorber",
+			"x": 90,
+			"y": 270
 		}
 	}
 }

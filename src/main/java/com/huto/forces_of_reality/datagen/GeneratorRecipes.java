@@ -785,5 +785,37 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("NFN")
 				.addCriterion("has_enchanting_table", hasItem(Blocks.ENCHANTING_TABLE)).build(consumer);
 		
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_helmet.get())
+				.key('R', ItemInit.writhing_thread.get())
+				.key('V', ItemInit.vitreous_humor.get())
+				.key('S', ItemInit.ball_of_eyes.get())
+				.patternLine("VSV")
+				.patternLine("RRR")
+				.patternLine("R R")
+				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_chestplate.get())
+				.key('R', ItemInit.writhing_thread.get())
+				.patternLine("R R")
+				.patternLine("RRR")
+				.patternLine("RRR")
+				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
+		
+		
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_leggings.get())
+				.key('R', ItemInit.writhing_thread.get())
+				.patternLine("RRR")
+				.patternLine("R R")
+				.patternLine("R R")
+				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_boots.get())
+				.key('R', ItemInit.writhing_thread.get())
+				.patternLine("R R")
+				.patternLine("R R")
+				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
+			
+			
 	}
 }

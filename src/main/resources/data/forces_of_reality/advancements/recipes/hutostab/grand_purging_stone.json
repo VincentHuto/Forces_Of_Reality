@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:grand_purging_stone"
+    ]
+  },
+  "criteria": {
+    "has_purging_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:purging_stone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:grand_purging_stone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_purging_stone",
+      "has_the_recipe"
+    ]
+  ]
+}

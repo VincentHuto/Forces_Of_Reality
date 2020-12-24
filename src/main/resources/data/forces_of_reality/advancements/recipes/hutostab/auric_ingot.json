@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:auric_ingot"
+    ]
+  },
+  "criteria": {
+    "has_machina_soul": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:machina_soul"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:auric_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_machina_soul",
+      "has_the_recipe"
+    ]
+  ]
+}

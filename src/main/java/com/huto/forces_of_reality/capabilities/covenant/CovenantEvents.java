@@ -11,6 +11,7 @@ import com.huto.forces_of_reality.init.EnchantmentInit;
 import com.huto.forces_of_reality.init.ItemInit;
 import com.huto.forces_of_reality.network.PacketHandler;
 import com.huto.forces_of_reality.network.coven.CovenantPacketServer;
+import com.huto.forces_of_reality.network.coven.SetFlyPKT;
 import com.huto.forces_of_reality.objects.items.runes.ItemRune;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -32,7 +33,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
@@ -109,6 +112,69 @@ public class CovenantEvents {
 							new CovenantPacketServer(coven.getDevotion()));
 				}
 			}
+		}
+	}
+
+	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying) {
+		updateClientServerFlight(player, allowFlying, allowFlying && player.abilities.isFlying);
+	}
+
+	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying, boolean isFlying) {
+		if (player != null) {
+			if (!player.world.isRemote)
+				PacketHandler.HANDLER.sendToServer(new SetFlyPKT(allowFlying, isFlying));
+			player.abilities.allowFlying = allowFlying;
+			player.abilities.isFlying = isFlying;
+		}
+	}
+
+	@SubscribeEvent
+	public static void checkArmor(LivingEquipmentChangeEvent e) {
+		if (e.getEntityLiving().ticksExisted > 100)
+			if (e.getEntityLiving() instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) e.getEntityLiving();
+				if (player != null) {
+					EquipmentSlotType slotChanged = e.getSlot();
+					if (slotChanged == EquipmentSlotType.CHEST) {
+						if (e.getTo().getItem() == ItemInit.seraph_wings.get()) {
+							// System.out.println("EQUIPED WINGS");
+							if (!player.getEntityWorld().isRemote) {
+								if (!((PlayerEntity) player).isCreative()) {
+									updateClientServerFlight((ServerPlayerEntity) player, true);
+								}
+							}
+						} else {
+							if (!((PlayerEntity) player).isCreative()) {
+								updateClientServerFlight((ServerPlayerEntity) player, false);
+
+							}
+						}
+					}
+				}
+			}
+	}
+
+	@SubscribeEvent
+	public static void checkArmor(PlayerTickEvent e) {
+		if (e.player.ticksExisted > 80 && e.player.ticksExisted < 100) {
+			PlayerEntity player = e.player;
+			if (!e.player.world.isRemote)
+				if (player != null) {
+					if (e.player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ItemInit.seraph_wings
+							.get()) {
+						// System.out.println("EQUIPED WINGS");
+						if (!player.getEntityWorld().isRemote) {
+							if (!((PlayerEntity) player).isCreative()) {
+								updateClientServerFlight((ServerPlayerEntity) player, true);
+							}
+						}
+					} else {
+						if (!((PlayerEntity) player).isCreative()) {
+							updateClientServerFlight((ServerPlayerEntity) player, false);
+
+						}
+					}
+				}
 		}
 	}
 

@@ -17,7 +17,9 @@ import com.huto.forces_of_reality.render.effects.BlockOverlayRender;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import net.minecraft.block.DirectionalBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.FaceDirection;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
@@ -27,6 +29,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Matrix4f;
@@ -39,6 +42,7 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
 	private final ModelFloatingCube cube = new ModelFloatingCube();
 	public static long lastRefreshTime;
+	public static final DirectionProperty FACING = DirectionalBlock.FACING;
 
 	public RenderAbsorber(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -122,11 +126,14 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		matrixStackIn.translate(0.5, 0.9, 0.5);
 		matrixStackIn.scale(0.5f, 0.5f, 0.5f);
 
-		ResourceLocation textureExport = new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_red.png");
-		ResourceLocation textureImport = new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_blue.png");
+		ResourceLocation textureExport = new ResourceLocation(
+				ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_red.png");
+		ResourceLocation textureImport = new ResourceLocation(
+				ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_blue.png");
 		ResourceLocation textureDefault = new ResourceLocation(
 				ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_default.png");
-		ResourceLocation textureBoth = new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_purple.png");
+		ResourceLocation textureBoth = new ResourceLocation(
+				ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_purple.png");
 		ResourceLocation textureMode;
 
 		// Switch Textures
@@ -177,7 +184,27 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		float y = (float) Math.cos((ticks + 50) / 5F) / 10F;
 		matrixStackIn.push();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees((float) ticks));
-		matrixStackIn.translate(-0.125, y - 0.75, -0.125);
+		if (te.getBlockState().getValues().get(FACING).toString().toUpperCase().equals(FaceDirection.UP.toString())
+				|| te.getBlockState().getValues().get(FACING).toString().toUpperCase()
+						.equals(FaceDirection.DOWN.toString())) {
+			matrixStackIn.translate(-0.125, y - 0.9, -0.125);
+		} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
+				.equals(FaceDirection.WEST.toString())) {
+			matrixStackIn.translate(-0.125, -0.9, -0.125 - (y * 1.3));
+
+		}else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
+				.equals(FaceDirection.EAST.toString())) {
+			matrixStackIn.translate(-0.125, -0.9, 0.125 - (y * 1.3));
+
+		}else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
+				.equals(FaceDirection.NORTH.toString())) {
+			matrixStackIn.translate(0.125 +y, -0.9, -0.125);
+
+		}else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
+				.equals(FaceDirection.SOUTH.toString())) {
+			matrixStackIn.translate(0.125 +y, -0.9, -0.125);
+
+		}
 		matrixStackIn.scale(4, 4, 4);
 		IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 				.getImpl(Tessellator.getInstance().getBuffer());

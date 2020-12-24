@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:vibration_debug_tool"
+    ]
+  },
+  "criteria": {
+    "has_essence_drop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:essence_drop"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:vibration_debug_tool"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_essence_drop",
+      "has_the_recipe"
+    ]
+  ]
+}

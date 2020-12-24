@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:somnolent_bottle"
+    ]
+  },
+  "criteria": {
+    "has_passion_flower": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:passion_flower"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:somnolent_bottle"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_passion_flower",
+      "has_the_recipe"
+    ]
+  ]
+}

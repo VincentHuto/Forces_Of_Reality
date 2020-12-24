@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:runic_chisel_station"
+    ]
+  },
+  "criteria": {
+    "has_iron_knapper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:iron_knapper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:runic_chisel_station"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_knapper",
+      "has_the_recipe"
+    ]
+  ]
+}

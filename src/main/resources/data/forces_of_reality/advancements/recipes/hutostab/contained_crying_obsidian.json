@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:contained_crying_obsidian"
+    ]
+  },
+  "criteria": {
+    "has_crying_obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:crying_obsidian"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:contained_crying_obsidian"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crying_obsidian",
+      "has_the_recipe"
+    ]
+  ]
+}

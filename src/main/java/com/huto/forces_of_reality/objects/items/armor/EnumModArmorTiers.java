@@ -66,8 +66,19 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 	SERAPHWINGS(ForcesOfReality.MOD_ID + ":seraph_wings", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.seraph_feather.get());
+			}),
+	WRITHING(ForcesOfReality.MOD_ID + ":writhing", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.writhing_thread.get());
+			}),
+	WRITHINGHELM(ForcesOfReality.MOD_ID + ":writhinghelm", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.suspicious_eye.get());
+			}),
+	WRITHINGCHEST(ForcesOfReality.MOD_ID + ":writhingchest", 37, new int[] { 1, 1, 1, 1 }, 15,
+			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
+				return Ingredient.fromItems(ItemInit.writhing_thread.get());
 			});
-	;
 	;
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;

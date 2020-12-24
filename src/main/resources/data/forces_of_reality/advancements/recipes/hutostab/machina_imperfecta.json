@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forces_of_reality:machina_imperfecta"
+    ]
+  },
+  "criteria": {
+    "has_discared_gear": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forces_of_reality:discared_gear"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forces_of_reality:machina_imperfecta"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_discared_gear",
+      "has_the_recipe"
+    ]
+  ]
+}
