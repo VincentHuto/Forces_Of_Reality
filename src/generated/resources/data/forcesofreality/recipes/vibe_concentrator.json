@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NAN",
+    "AFA",
+    "LFL"
+  ],
+  "key": {
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    },
+    "L": {
+      "item": "forcesofreality:somnolent_log"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:vibe_concentrator"
+  }
+}

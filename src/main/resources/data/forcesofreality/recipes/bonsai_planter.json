@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FNF",
+    "FFF",
+    "F F"
+  ],
+  "key": {
+    "F": {
+      "tag": "forge:ingots/brick"
+    },
+    "N": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:bonsai_planter"
+  }
+}

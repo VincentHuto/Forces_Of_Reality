@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:rune_pattern"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    },
+    {
+      "item": "forcesofreality:blooddrawn_fang"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:rune_pattern_beast_c"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CFC",
+    "MNM",
+    "CGC"
+  ],
+  "key": {
+    "C": {
+      "item": "forcesofreality:contained_crying_obsidian"
+    },
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "M": {
+      "item": "forcesofreality:contained_magma"
+    },
+    "G": {
+      "item": "forcesofreality:gilded_wool"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:crystal_harmonizer"
+  }
+}

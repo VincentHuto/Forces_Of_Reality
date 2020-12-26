@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "  I",
+        " S ",
+        "S  "
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "forcesofreality:null_rod"
+        },
+        
+        "I":
+        {
+            "item": "forcesofreality:runed_obsidian"
+        }
+        
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "forcesofreality:obsidian_knapper",
+        "count": 1
+    }
+}

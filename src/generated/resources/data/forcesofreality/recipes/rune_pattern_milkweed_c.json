@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:rune_pattern"
+    },
+    {
+      "item": "forcesofreality:suspicious_eye"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:rune_pattern_milkweed_c"
+  }
+}

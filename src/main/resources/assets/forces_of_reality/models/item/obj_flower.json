@@ -1,5 +1,0 @@
-{
-	"parent":"forge:item/default",
-	"loader": "forge:obj",
-	"model": "forces_of_reality:models/block/obj_flower.obj"
-}

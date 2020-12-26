@@ -70,7 +70,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
- 	    args '--mod', 'forces_of_reality', '--all',
+ 	    args '--mod', 'forcesofreality', '--all',
 		'--existing', file('src/main/resources').toString(),
 		'--existing', file('src/generated/resources').toString(),
 		'--output', file('src/generated/resources/')

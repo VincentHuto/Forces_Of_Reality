@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_post",
-  "textures": {
-    "pane": "forces_of_reality:blocks/phantasmal_pane",
-    "edge": "forces_of_reality:blocks/phantasmal_pane_top"
-  }
-}

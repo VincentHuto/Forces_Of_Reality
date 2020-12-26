@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I O",
+    "SSS",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "S": {
+      "item": "forcesofreality:somnolent_stone_smooth"
+    },
+    "O": {
+      "item": "forcesofreality:obsidian_knapper"
+    },
+    "I": {
+      "item": "forcesofreality:iron_knapper"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:runic_chisel_station"
+  }
+}

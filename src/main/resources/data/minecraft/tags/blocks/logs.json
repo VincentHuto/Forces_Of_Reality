@@ -1,7 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"forces_of_reality:somnolent_log",
-		"forces_of_reality:anti_log"
+		"forcesofreality:somnolent_log",
+		"forcesofreality:anti_log"
 	]
 }

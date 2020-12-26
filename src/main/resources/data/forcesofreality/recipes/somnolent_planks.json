@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:somnolent_log"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:somnolent_planks",
+    "count": 4
+  }
+}

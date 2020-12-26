@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GRG",
+    "NAN",
+    "LFL"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "forcesofreality:reversion_catalyst"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    },
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:rune_mod_station"
+  }
+}

@@ -1,6 +1,0 @@
-{
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "forces_of_reality:items/mechan_module_blade"
-   }
-}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  N",
+    "EBE",
+    "BBE"
+  ],
+  "key": {
+    "B": {
+      "item": "forcesofreality:null_ingot"
+    },
+    "E": {
+      "item": "forcesofreality:essence_drop"
+    },
+    "N": {
+      "item": "forcesofreality:null_rod"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:mind_spike"
+  }
+}

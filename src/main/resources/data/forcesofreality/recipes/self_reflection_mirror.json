@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AGA",
+    "GMG",
+    "ALA"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "A": {
+      "item": "forcesofreality:auric_ingot"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "M": {
+      "item": "forcesofreality:rune_mod_station"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:self_reflection_mirror"
+  }
+}

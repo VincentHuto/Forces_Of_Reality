@@ -1,8 +1,0 @@
-{
-  "parent":"forge:block/default",
-  "loader": "forge:obj",
-  "model": "forces_of_reality:models/block/end_crystal_nightmare.obj",
-  	"textures": {
-		"particle": "forces_of_reality:blocks/virtuous_enchanting_table_bottom"
-		}
-}

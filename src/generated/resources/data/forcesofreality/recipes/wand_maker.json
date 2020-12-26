@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MFM",
+    "MNM",
+    "RRR"
+  ],
+  "key": {
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    },
+    "R": {
+      "item": "forcesofreality:runed_obsidian"
+    },
+    "M": {
+      "item": "forcesofreality:magatamabead"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:wand_maker"
+  }
+}

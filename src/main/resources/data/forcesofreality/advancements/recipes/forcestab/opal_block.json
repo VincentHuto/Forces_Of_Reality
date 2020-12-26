@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:opal_block"
+    ]
+  },
+  "criteria": {
+    "has_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:gem_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:opal_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_opal",
+      "has_the_recipe"
+    ]
+  ]
+}

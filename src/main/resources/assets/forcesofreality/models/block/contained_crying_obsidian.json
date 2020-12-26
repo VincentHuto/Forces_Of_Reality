@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "forcesofreality:blocks/contained_crying_obsidian_bottom",
+        "side": "forcesofreality:blocks/contained_crying_obsidian_side"
+    }
+}

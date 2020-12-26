@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/karmic_extractor"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/karmic_extractor",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/karmic_extractor",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/karmic_extractor",
+			"y": 90
+		}
+	}
+}

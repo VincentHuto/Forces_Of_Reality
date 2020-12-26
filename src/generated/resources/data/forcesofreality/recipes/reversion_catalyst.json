@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GEG",
+    "GOG",
+    "GNG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "N": {
+      "item": "forcesofreality:nullifying_powder"
+    },
+    "O": {
+      "item": "forcesofreality:gem_opal"
+    },
+    "E": {
+      "item": "forcesofreality:essence_drop"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:reversion_catalyst"
+  }
+}

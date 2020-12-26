@@ -1,0 +1,32 @@
+{
+    "type": "forcesofreality:mechan_glove_upgrade",
+   
+    "pattern":
+    [
+        "SDS",
+        "DPD",
+        "SDS"
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "forcesofreality:neurotic_mechanism"
+        },
+         "D":
+        {
+            "item": "forcesofreality:discared_gear"
+        },
+         "P":
+        {
+            "item": "forcesofreality:mechan_glove"
+        }
+    },
+    
+    "result":
+    {
+        "item": "forcesofreality:mechan_glove_superior",
+        "count": 1
+    }
+}

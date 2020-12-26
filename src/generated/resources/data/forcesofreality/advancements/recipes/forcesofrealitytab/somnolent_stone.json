@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:somnolent_stone"
+    ]
+  },
+  "criteria": {
+    "has_somnolent_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:somnolent_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:somnolent_stone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_somnolent_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

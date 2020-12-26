@@ -1,6 +1,0 @@
-{
-   "parent": "item/handheld",
-   "textures": {
-       "layer0": "forces_of_reality:items/wand_lightning"
-   }
-}

@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"GGG",
+		"GEG",
+		" G "
+	],
+	"key": {
+		"E": {
+			"item": "forcesofreality:essence_drop"
+		},
+		"G": {
+			"item": "minecraft:gold_ingot"
+		}
+	},
+	"result": {
+		"item": "forcesofreality:vibrational_seer",
+		"count": 1
+	}
+}

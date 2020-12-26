@@ -1,0 +1,8 @@
+{
+  "parent":"forge:block/default",
+  "loader": "forge:obj",
+  "model": "forcesofreality:models/block/raw_hematite.obj",
+  	"textures": {
+		"particle": "forcesofreality:blocks/virtuous_enchanting_table_bottom"
+		}
+}

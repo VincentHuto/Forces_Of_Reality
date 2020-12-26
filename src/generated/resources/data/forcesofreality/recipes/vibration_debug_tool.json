@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EUE",
+    " C ",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "forcesofreality:channeling_ingot"
+    },
+    "U": {
+      "item": "forcesofreality:upgrade_blank"
+    },
+    "E": {
+      "item": "forcesofreality:essence_drop"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:vibration_debug_tool"
+  }
+}

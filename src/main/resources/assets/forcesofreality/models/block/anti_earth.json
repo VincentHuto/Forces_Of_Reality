@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "forcesofreality:blocks/anti_earthtop",
+        "side": "forcesofreality:blocks/anti_earthside"
+    }
+}

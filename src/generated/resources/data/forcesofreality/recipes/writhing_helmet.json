@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VSV",
+    "RRR",
+    "R R"
+  ],
+  "key": {
+    "R": {
+      "item": "forcesofreality:writhing_thread"
+    },
+    "V": {
+      "item": "forcesofreality:vitreous_humor"
+    },
+    "S": {
+      "item": "forcesofreality:ball_of_eyes"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:writhing_helmet"
+  }
+}

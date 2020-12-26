@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "forcesofreality:items/null_sword_freq"
+   }
+}

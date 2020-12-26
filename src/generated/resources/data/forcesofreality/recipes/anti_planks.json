@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:anti_log"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:anti_planks",
+    "count": 4
+  }
+}

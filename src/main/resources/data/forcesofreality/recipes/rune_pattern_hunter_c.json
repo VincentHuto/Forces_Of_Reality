@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:rune_pattern"
+    },
+    {
+      "item": "minecraft:golden_sword"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:rune_pattern_hunter_c"
+  }
+}

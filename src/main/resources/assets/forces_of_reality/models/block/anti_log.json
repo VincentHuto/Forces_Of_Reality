@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures":
-    {
-        "end": "forces_of_reality:blocks/anti_log_top",
-        "side": "forces_of_reality:blocks/anti_log"
-    }
-}

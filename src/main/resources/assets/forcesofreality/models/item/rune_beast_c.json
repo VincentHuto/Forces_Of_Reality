@@ -1,0 +1,6 @@
+{
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "forcesofreality:items/rune/rune_beast_c"
+   }
+}

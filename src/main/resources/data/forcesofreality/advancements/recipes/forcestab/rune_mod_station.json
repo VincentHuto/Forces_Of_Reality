@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:rune_mod_station"
+    ]
+  },
+  "criteria": {
+    "has_reversion_catalyst": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:reversion_catalyst"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:rune_mod_station"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_reversion_catalyst",
+      "has_the_recipe"
+    ]
+  ]
+}

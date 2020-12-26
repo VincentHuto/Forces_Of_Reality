@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MFM",
+    "ACA",
+    "MOM"
+  ],
+  "key": {
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    },
+    "O": {
+      "item": "forcesofreality:nether_block"
+    },
+    "C": {
+      "item": "forcesofreality:contained_crying_obsidian"
+    },
+    "M": {
+      "item": "forcesofreality:contained_magma"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:tectonic_absorber"
+  }
+}

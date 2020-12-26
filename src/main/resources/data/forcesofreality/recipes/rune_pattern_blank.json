@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "forcesofreality:rune_blank"
+		},
+		{
+			"item": "minecraft:paper"
+		}
+	],
+	"result": {
+		"item": "forcesofreality:rune_pattern",
+		"count": 1
+	}
+}

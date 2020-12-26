@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/thermal_influxer"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/thermal_influxer",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/thermal_influxer",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/thermal_influxer",
+			"y": 90
+		}
+	}
+}

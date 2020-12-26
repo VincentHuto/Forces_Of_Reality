@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/lector_table"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/lector_table",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/lector_table",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/lector_table",
+			"y": 90
+		}
+	}
+}

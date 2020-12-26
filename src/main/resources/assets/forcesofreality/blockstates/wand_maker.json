@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/wand_maker"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/wand_maker",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/wand_maker",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/wand_maker",
+			"y": 90
+		}
+	}
+}

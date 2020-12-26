@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "forcesofreality:raw_clay_flask"
+  },
+  "result": "forcesofreality:cured_clay_flask",
+  "experience": 1.0,
+  "cookingtime": 200
+}

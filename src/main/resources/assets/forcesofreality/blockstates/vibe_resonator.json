@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/vibe_resonator"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/vibe_resonator",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/vibe_resonator",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/vibe_resonator",
+			"y": 90
+		}
+	}
+}

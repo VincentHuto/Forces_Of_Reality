@@ -1,6 +1,0 @@
-{
-    "parent": "item/bow",
-    "textures": {
-        "layer0": "forces_of_reality:items/somnolent_trick_axe_pulling_1"
-    }
-}

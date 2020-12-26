@@ -1,0 +1,5 @@
+{
+	"parent":"forge:item/default",
+	"loader": "forge:obj",
+	"model": "forcesofreality:models/block/raw_hematite.obj"
+}

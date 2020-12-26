@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SKS",
+    "SSS"
+  ],
+  "key": {
+    "K": {
+      "item": "forcesofreality:purging_stone"
+    },
+    "S": {
+      "item": "forcesofreality:karmic_drop"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:grand_purging_stone"
+  }
+}

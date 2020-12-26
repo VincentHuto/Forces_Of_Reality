@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NAN",
+    "M M",
+    "MRM"
+  ],
+  "key": {
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    },
+    "R": {
+      "item": "forcesofreality:runed_obsidian"
+    },
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "M": {
+      "item": "forcesofreality:contained_magma"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:auto_inscriber"
+  }
+}

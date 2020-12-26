@@ -1,0 +1,31 @@
+
+{
+	"variants": {
+		"facing=down": {
+			"model": "forcesofreality:block/end_crystal_nightmare",
+			"x": 180
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/end_crystal_nightmare",
+			"x": 90,
+			"y": 90
+		},
+		"facing=north": {
+			"model": "forcesofreality:block/end_crystal_nightmare",
+			"x": 90
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/end_crystal_nightmare",
+			"x": 90,
+			"y": 180
+		},
+		"facing=up": {
+			"model": "forcesofreality:block/end_crystal_nightmare"
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/end_crystal_nightmare",
+			"x": 90,
+			"y": 270
+		}
+	}
+}

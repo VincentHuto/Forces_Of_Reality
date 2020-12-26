@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:overworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 1233491129,
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "seed": 1233491129,
+      "biome": "minecraft:plains"
+    },
+    "settings": "minecraft:overworld"
+  }
+}

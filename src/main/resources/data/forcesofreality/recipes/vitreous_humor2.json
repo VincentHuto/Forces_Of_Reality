@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "forcesofreality:ball_of_eyes"
+        }
+    
+    ],
+    "result": {
+        "item": "forcesofreality:vitreous_humor",
+        "count": 6
+    }
+}

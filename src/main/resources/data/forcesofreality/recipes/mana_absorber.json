@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "F F",
+        "ANA",
+        "ARA"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "forcesofreality:nether_block"
+        },
+        
+        "F":
+        {
+            "item": "forcesofreality:energy_focus"
+        },
+        
+         "A":
+        {
+            "item": "forcesofreality:activated_obsidian"
+        },
+         "R":
+        {
+            "item": "forcesofreality:runed_obsidian"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "forcesofreality:vibe_absorber",
+        "count": 1
+    }
+}

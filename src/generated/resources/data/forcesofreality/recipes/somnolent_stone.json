@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SKS",
+    "SSS"
+  ],
+  "key": {
+    "K": {
+      "tag": "forge:stone"
+    },
+    "S": {
+      "item": "forcesofreality:somnolent_powder"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:somnolent_stone"
+  }
+}

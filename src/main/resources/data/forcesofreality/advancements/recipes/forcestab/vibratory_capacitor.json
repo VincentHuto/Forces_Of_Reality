@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:vibratory_capacitor"
+    ]
+  },
+  "criteria": {
+    "has_vibratory_storage_drum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:vibratory_storage_drum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:vibratory_capacitor"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_vibratory_storage_drum",
+      "has_the_recipe"
+    ]
+  ]
+}

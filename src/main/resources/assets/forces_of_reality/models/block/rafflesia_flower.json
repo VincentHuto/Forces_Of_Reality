@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "forces_of_reality:blocks/rafflesia_flower"
-    }
-}

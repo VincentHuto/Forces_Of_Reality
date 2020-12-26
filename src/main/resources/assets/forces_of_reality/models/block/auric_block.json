@@ -1,6 +1,0 @@
-{
-   "parent": "block/cube_all",
-   "textures": {
-       "all": "forces_of_reality:blocks/auric_block"
-   }
-}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/iron"
+    },
+    {
+      "item": "forcesofreality:somnolent_powder"
+    },
+    {
+      "item": "forcesofreality:somnolent_powder"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:channeling_ingot"
+  }
+}

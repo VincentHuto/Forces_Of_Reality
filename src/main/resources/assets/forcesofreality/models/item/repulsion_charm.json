@@ -1,0 +1,20 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "forcesofreality:items/repulsion_charm"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"forcesofreality:on": 0
+			},
+			"model": "forcesofreality:item/repulsion_charm"
+		},
+		{
+			"predicate": {
+				"forcesofreality:on": 1
+			},
+			"model": "forcesofreality:item/repulsion_charm_on"
+		}
+	]
+}

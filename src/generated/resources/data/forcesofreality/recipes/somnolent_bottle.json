@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:passion_flower"
+    },
+    {
+      "item": "forcesofreality:somnolent_powder"
+    },
+    {
+      "item": "forcesofreality:somnolent_powder"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:somnolent_bottle"
+  }
+}

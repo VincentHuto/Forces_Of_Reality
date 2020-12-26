@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+    {
+        "end": "forcesofreality:blocks/netherblock_bottom",
+        "side": "forcesofreality:blocks/netherblock_side"
+    }
+}

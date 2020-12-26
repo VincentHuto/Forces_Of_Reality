@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ERE",
+    "N N",
+    "NAN"
+  ],
+  "key": {
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    },
+    "E": {
+      "item": "forcesofreality:energy_focus"
+    },
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "R": {
+      "item": "forcesofreality:runed_obsidian"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:vibratory_fuser"
+  }
+}

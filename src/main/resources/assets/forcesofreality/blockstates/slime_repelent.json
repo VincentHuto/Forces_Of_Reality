@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/slime_repelent"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/slime_repelent",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/slime_repelent",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/slime_repelent",
+			"y": 90
+		}
+	}
+}

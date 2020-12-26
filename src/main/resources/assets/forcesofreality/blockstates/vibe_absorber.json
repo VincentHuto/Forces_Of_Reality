@@ -1,0 +1,31 @@
+
+{
+	"variants": {
+		"facing=down": {
+			"model": "forcesofreality:block/vibe_absorber",
+			"x": 180
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/vibe_absorber",
+			"x": 90,
+			"y": 90
+		},
+		"facing=north": {
+			"model": "forcesofreality:block/vibe_absorber",
+			"x": 90
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/vibe_absorber",
+			"x": 90,
+			"y": 180
+		},
+		"facing=up": {
+			"model": "forcesofreality:block/vibe_absorber"
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/vibe_absorber",
+			"x": 90,
+			"y": 270
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  U",
+    " C ",
+    "R  "
+  ],
+  "key": {
+    "R": {
+      "item": "forcesofreality:channeling_rod"
+    },
+    "C": {
+      "item": "forcesofreality:channeling_ingot"
+    },
+    "U": {
+      "item": "forcesofreality:upgrade_blank"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:upgrade_wrench"
+  }
+}

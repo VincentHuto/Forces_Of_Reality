@@ -1,0 +1,29 @@
+{
+    "type": "forcesofreality:rune_binder_upgrade",
+   
+    "pattern":
+    [
+        "SSS",
+        "SPS",
+        "SSS"
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "forcesofreality:somnolent_powder"
+        },
+        
+         "P":
+        {
+            "item": "forcesofreality:rune_binder"
+        }
+    },
+    
+    "result":
+    {
+        "item": "forcesofreality:rune_binder_upgraded",
+        "count": 1
+    }
+}

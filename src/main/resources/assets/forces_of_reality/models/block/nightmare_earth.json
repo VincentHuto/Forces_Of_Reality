@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures":
-    {
-        "end": "forces_of_reality:blocks/nightmare_earthtop",
-        "side": "forces_of_reality:blocks/nightmare_earthside"
-    }
-}

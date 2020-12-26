@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/mushroom_bonsai_stage_1"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/mushroom_bonsai_stage_1",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/mushroom_bonsai_stage_1",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/mushroom_bonsai_stage_1",
+			"y": 90
+		}
+	}
+}

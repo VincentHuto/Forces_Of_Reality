@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:upgrade_wrench"
+    ]
+  },
+  "criteria": {
+    "has_upgrade_blank": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:upgrade_blank"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:upgrade_wrench"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_upgrade_blank",
+      "has_the_recipe"
+    ]
+  ]
+}
