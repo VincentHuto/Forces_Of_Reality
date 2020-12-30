@@ -1,0 +1,110 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"parent": "block/block",
+		"particle": "forcesofreality:blocks/akebi_stage0",
+		"akebi": "forcesofreality:blocks/akebi_stage0"
+	},
+	"elements": [
+		{
+			"from": [
+				6,
+				7,
+				11
+			],
+			"to": [
+				10,
+				12,
+				15
+			],
+			"faces": {
+				"down": {
+					"uv": [
+						0,
+						0,
+						4,
+						4
+					],
+					"texture": "#akebi"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						4,
+						4
+					],
+					"texture": "#akebi"
+				},
+				"north": {
+					"uv": [
+						11,
+						4,
+						15,
+						9
+					],
+					"texture": "#akebi"
+				},
+				"south": {
+					"uv": [
+						11,
+						4,
+						15,
+						9
+					],
+					"texture": "#akebi"
+				},
+				"west": {
+					"uv": [
+						11,
+						4,
+						15,
+						9
+					],
+					"texture": "#akebi"
+				},
+				"east": {
+					"uv": [
+						11,
+						4,
+						15,
+						9
+					],
+					"texture": "#akebi"
+				}
+			}
+		},
+		{
+			"from": [
+				8,
+				12,
+				12
+			],
+			"to": [
+				8,
+				16,
+				16
+			],
+			"faces": {
+				"west": {
+					"uv": [
+						12,
+						0,
+						16,
+						4
+					],
+					"texture": "#akebi"
+				},
+				"east": {
+					"uv": [
+						16,
+						0,
+						12,
+						4
+					],
+					"texture": "#akebi"
+				}
+			}
+		}
+	]
+}

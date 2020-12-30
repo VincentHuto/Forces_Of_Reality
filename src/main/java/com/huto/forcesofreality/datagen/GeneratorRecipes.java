@@ -54,12 +54,6 @@ public class GeneratorRecipes extends RecipeProvider {
 		  .addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
 		
 		
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.auric_ingot.get()).
-		  addIngredient(Items.IRON_INGOT)
-		  .addIngredient(ItemInit.machina_soul.get(),3)
-		  .addCriterion("has_machina_soul", hasItem(ItemInit.machina_soul.get())).build(consumer);
-		
-		
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern.get()).
 		  addIngredient(Items.PAPER)
 		  .addIngredient(ItemInit.rune_blank.get())

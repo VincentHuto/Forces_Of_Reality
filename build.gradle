@@ -37,10 +37,11 @@ repositories {
 
 minecraft {
 	mappings channel: 'snapshot', version: '20201028-1.16.3'
+
     runs {
         client {
             workingDirectory project.file('run')
- 
+
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
  

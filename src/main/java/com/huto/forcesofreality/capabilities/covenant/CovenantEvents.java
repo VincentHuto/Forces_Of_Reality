@@ -7,6 +7,7 @@ import java.util.Map;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.capabilities.mindrunes.IRunesItemHandler;
 import com.huto.forcesofreality.capabilities.mindrunes.RunesApi;
+import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.EnchantmentInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
@@ -206,7 +207,7 @@ public class CovenantEvents {
 					for (int i = 0; i < coven.getDevotion().keySet().size(); i++) {
 						EnumCovenants selectedCoven = (EnumCovenants) coven.getDevotion().keySet().toArray()[i];
 						GlStateManager.pushMatrix();
-						fontRenderer.drawString(event.getMatrixStack(), selectedCoven.toString(), point.x, point.y + 20,
+						fontRenderer.drawString(event.getMatrixStack(), ModTextFormatting.toProperCase(selectedCoven.toString()), point.x, point.y + 20,
 								new Color(255, 0, 0, 255).getRGB());
 						fontRenderer.drawString(event.getMatrixStack(),
 								String.valueOf(coven.getDevotionByCoven(selectedCoven)), point.x, point.y + 30,

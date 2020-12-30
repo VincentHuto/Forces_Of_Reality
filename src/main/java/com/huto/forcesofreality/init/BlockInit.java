@@ -2,6 +2,7 @@ package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.objects.blocks.BlockAbyssalSilt;
+import com.huto.forcesofreality.objects.blocks.BlockAkebi;
 import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
 import com.huto.forcesofreality.objects.blocks.BlockBreakoutPoint;
 import com.huto.forcesofreality.objects.blocks.BlockChiselStation;
@@ -157,6 +158,12 @@ public class BlockInit {
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f)
 					.harvestTool(ToolType.PICKAXE).harvestLevel(6).sound(SoundType.STONE)));
 	// Anti
+	public static final RegistryObject<Block> anti_stone = BLOCKS.register("anti_stone",
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> anti_stone_smooth = BLOCKS.register("anti_stone_smooth",
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> anti_earth = BLOCKS.register("anti_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
@@ -230,6 +237,10 @@ public class BlockInit {
 					.sound(SoundType.ANVIL).notSolid()));
 
 	// Plants
+	public static final RegistryObject<Block> akebi = BLOCKS.register("akebi",
+			() -> new BlockAkebi(AbstractBlock.Properties.create(Material.PLANTS).tickRandomly()
+					.hardnessAndResistance(0.2F, 3.0F).sound(SoundType.WOOD).notSolid()));
+
 	// Bonsais
 	public static final RegistryObject<Block> bonsai_planter = BLOCKS.register("bonsai_planter",
 			() -> new BlockBonsaiPlanter(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
@@ -477,6 +488,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_2.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_2.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.stone_geode.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.akebi.get(), RenderType.getCutoutMipped());
 
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_3.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.mushroom_bonsai_stage_3.get(), RenderType.getCutoutMipped());

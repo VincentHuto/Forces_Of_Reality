@@ -13,6 +13,7 @@ import com.huto.forcesofreality.objects.items.ItemGrandPurgingStone;
 import com.huto.forcesofreality.objects.items.ItemHarmonicImprint;
 import com.huto.forcesofreality.objects.items.ItemManaPowder;
 import com.huto.forcesofreality.objects.items.ItemNullIngot;
+import com.huto.forcesofreality.objects.items.ItemPurgingStone;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
 import com.huto.forcesofreality.objects.items.ItemShatterIngot;
 import com.huto.forcesofreality.objects.items.ItemSlugBucket;

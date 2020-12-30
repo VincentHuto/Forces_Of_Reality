@@ -20,7 +20,7 @@ public class ItemDestructOrb extends Item {
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
 		NovaExplosion explosion = new NovaExplosion(context.getWorld(), context.getPlayer(), context.getPos().getX(),
-				context.getPos().getY(), context.getPos().getZ(), 5, false, Explosion.Mode.BREAK);
+				context.getPos().getY(), context.getPos().getZ(), 4, false, Explosion.Mode.BREAK);
 		if (!MinecraftForge.EVENT_BUS.post(new ExplosionEvent.Start((context.getWorld()), explosion))) {
 			explosion.doExplosionA();
 			explosion.doExplosionB(true);
