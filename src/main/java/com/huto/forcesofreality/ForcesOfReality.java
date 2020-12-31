@@ -41,7 +41,9 @@ import com.huto.forcesofreality.recipes.ModResonatorRecipies;
 import com.huto.forcesofreality.recipes.ModWandRecipies;
 import com.huto.forcesofreality.recipes.UpgradeMachinaLampDataRecipe;
 import com.huto.forcesofreality.render.entity.layer.RunesRenderLayer;
+import com.huto.forcesofreality.worldgen.ModFeatures;
 import com.huto.forcesofreality.worldgen.ModOreGen;
+import com.huto.forcesofreality.worldgen.ModTreeDecorators;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
@@ -150,8 +152,12 @@ public class ForcesOfReality {
 		PacketHandler.registerChannels();
 		PacketHandler.registerRuneBinderChannels();
 		PacketHandler.registerMechanGloveChannels();
+		ModFeatures.setup();
+		MinecraftForge.EVENT_BUS.register(new ModFeatures());
+
 		event.enqueueWork(() -> {
 			ModOreGen.registerConfiguredFeatures();
+			ModTreeDecorators.registerConfiguredFeatures();
 		});
 
 	}

@@ -127,8 +127,14 @@ public class BlockInit {
 			() -> new Block(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> stone_geode = BLOCKS.register("stone_geode",
-			() -> new BlockGeode(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
-					.sound(SoundType.STONE).notSolid()));
+			() -> new BlockGeode(Block.Properties.create(Material.ROCK).setRequiresTool()
+					.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE).notSolid()));
+	public static final RegistryObject<Block> somnolent_geode = BLOCKS.register("somnolent_geode",
+			() -> new BlockGeode(Block.Properties.create(Material.ROCK).setRequiresTool()
+					.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE).notSolid()));
+	public static final RegistryObject<Block> anti_geode = BLOCKS.register("anti_geode",
+			() -> new BlockGeode(Block.Properties.create(Material.ROCK).setRequiresTool()
+					.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE).notSolid()));
 
 	// Somnolent
 	public static final RegistryObject<Block> somnolent_earth = BLOCKS.register("somnolent_earth",
@@ -333,10 +339,10 @@ public class BlockInit {
 					.tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 	public static final RegistryObject<Block> essence_breakout_point = BLOCKS.register("essence_breakout_point",
 			() -> new BlockBreakoutPoint(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
-					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
+					.zeroHardnessAndResistance().sound(SoundType.PLANT), false));
 	public static final RegistryObject<Block> null_breakout_point = BLOCKS.register("null_breakout_point",
 			() -> new BlockBreakoutPoint(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
-					.zeroHardnessAndResistance().sound(SoundType.PLANT)));
+					.zeroHardnessAndResistance().sound(SoundType.PLANT), true));
 	public static final RegistryObject<Block> passion_flower = BLOCKS.register("passion_flower",
 			() -> new BlockPassionFlower(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly()
 					.zeroHardnessAndResistance().sound(SoundType.PLANT)));

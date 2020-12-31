@@ -128,7 +128,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ItemInit {
 
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ForcesOfReality.MOD_ID);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
+			ForcesOfReality.MOD_ID);
 
 	// Return Rune
 	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
@@ -140,7 +141,8 @@ public class ItemInit {
 
 	// Books
 	public static final RegistryObject<Item> somnolent_tome = ITEMS.register("somnolent_tome",
-			() -> new ItemSomnolentTome(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemSomnolentTome(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
 			() -> new ItemElderTome(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> coven_tome = ITEMS.register("coven_tome",
@@ -186,8 +188,8 @@ public class ItemInit {
 
 	// Karma
 	public static final RegistryObject<Item> node_of_actualization = ITEMS.register("node_of_actualization",
-			() -> new ItemActualizationNode(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
+			() -> new ItemActualizationNode(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
+					.maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
@@ -235,18 +237,18 @@ public class ItemInit {
 	public static final RegistryObject<Item> cured_clay_flask = ITEMS.register("cured_clay_flask",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> harmonic_imprint = ITEMS.register("harmonic_imprint",
-			() -> new ItemHarmonicImprint(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemHarmonicImprint(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	// Hastur
-	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign",
-			() -> new ItemYellowSign(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON),
-					EnumCovenants.HASTUR, 10));
+	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign", () -> new ItemYellowSign(
+			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON),
+			EnumCovenants.HASTUR, 10));
 	public static final RegistryObject<Item> unsettling_fabric = ITEMS.register("unsettling_fabric",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.HASTUR,
-					1));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.HASTUR, 1));
 	public static final RegistryObject<Item> unsettling_tapestry = ITEMS.register("unsettling_tapestry",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.HASTUR,
-					3));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.HASTUR, 3));
 	public static final RegistryObject<Item> yellow_tome = ITEMS.register("yellow_tome", () -> new ItemYellowTome(
 			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
@@ -255,33 +257,34 @@ public class ItemInit {
 			() -> new ItemCrossedKeys(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ASCENDENT, 10));
 	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT,
-					1));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.ASCENDENT, 1));
 	public static final RegistryObject<Item> wing_fragment = ITEMS.register("wing_fragment",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT,
-					3));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.ASCENDENT, 3));
 	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
 			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
-			() -> new ItemDiscordantBell(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
+			() -> new ItemDiscordantBell(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)
+					.rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> divine_feather = ITEMS.register("divine_feather",
-			() -> new ItemDivineFeather(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+			() -> new ItemDivineFeather(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)
+					.rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> seraph_wings = ITEMS.register("seraph_wings",
 			() -> new ItemBackWings(EnumModArmorTiers.SERAPHWINGS, EquipmentSlotType.CHEST,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
 
 	// Eldritch
 	public static final RegistryObject<Item> everwatchful_pendant = ITEMS.register("everwatchful_pendant",
-			() -> new ItemWatchfulPendant(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemWatchfulPendant(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 10));
 	public static final RegistryObject<Item> suspicious_eye = ITEMS.register("suspicious_eye",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ELDRITCH,
-					1));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.ELDRITCH, 1));
 	public static final RegistryObject<Item> ball_of_eyes = ITEMS.register("ball_of_eyes",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ELDRITCH,
-					3));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.ELDRITCH, 3));
 	public static final RegistryObject<Item> occular_seed = ITEMS.register("occular_seed",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> vitreous_humor = ITEMS.register("vitreous_humor",
@@ -296,9 +299,11 @@ public class ItemInit {
 			() -> new ItemBeastBreath(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 10));
 	public static final RegistryObject<Item> blooddrawn_fang = ITEMS.register("blooddrawn_fang",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.BEAST, 1));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> beastly_bone = ITEMS.register("beastly_bone",
-			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.BEAST, 3));
+			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
+					EnumCovenants.BEAST, 3));
 	public static final RegistryObject<Item> skull_helmet = ITEMS.register("skull_helmet",
 			() -> new ItemSkullHelmet(EnumModArmorTiers.SKULL, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
@@ -312,9 +317,9 @@ public class ItemInit {
 			() -> new ItemClovenHooves(EnumModArmorTiers.MANTLE, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
 	// Machine
-	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog", () -> new ItemIntegralCog(
-			new Item.Properties().group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC).maxStackSize(1),
-			EnumCovenants.MACHINE, 10));
+	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog",
+			() -> new ItemIntegralCog(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
+					.rarity(ModTextFormatting.AURIC).maxStackSize(1), EnumCovenants.MACHINE, 10));
 	public static final RegistryObject<Item> discared_gear = ITEMS.register("discared_gear",
 			() -> new ItemSacrificial(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC),
@@ -323,14 +328,15 @@ public class ItemInit {
 			() -> new ItemSacrificial(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC),
 					EnumCovenants.MACHINE, 3));
-	public static final RegistryObject<Item> auric_ingot = ITEMS.register("auric_ingot",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> auric_ingot = ITEMS.register("auric_ingot", () -> new Item(
+			new Item.Properties().group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_soul = ITEMS.register("machina_soul",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> machina_cage = ITEMS.register("machina_cage",
 			() -> new ItemMachinaCage(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> emp_charm = ITEMS.register("emp_charm", () -> new ItemEmpCharm(
-			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(ModTextFormatting.AURIC)));
+	public static final RegistryObject<Item> emp_charm = ITEMS.register("emp_charm",
+			() -> new ItemEmpCharm(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)
+					.rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> auric_helm = ITEMS.register("auric_helm",
 			() -> new ItemAuricHelm(EnumModArmorTiers.AURICHELM, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC)));
@@ -345,18 +351,18 @@ public class ItemInit {
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC)));
 	public static final RegistryObject<Item> machina_spark_director = ITEMS.register("machina_spark_director",
 			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC), false));
-	public static final RegistryObject<Item> machina_spark_director_armored = ITEMS
-			.register("machina_spark_director_armored",
-					() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR_ARMORED, EquipmentSlotType.CHEST,
-							(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC),
-							true));
+					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC),
+					false));
+	public static final RegistryObject<Item> machina_spark_director_armored = ITEMS.register(
+			"machina_spark_director_armored",
+			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR_ARMORED, EquipmentSlotType.CHEST,
+					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC),
+					true));
 
 	// Gloves
-	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
-			() -> new ItemMechanGlove(
-					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
-					"mechan_glove", 3, Rarity.UNCOMMON));
+	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove", () -> new ItemMechanGlove(
+			new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
+			"mechan_glove", 3, Rarity.UNCOMMON));
 	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
 			() -> new ItemMechanGlove(
 					new Item.Properties().rarity(Rarity.RARE).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
@@ -365,37 +371,48 @@ public class ItemInit {
 			() -> new ItemMechanGlove(
 					new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
 					"mechan_glove_masterpiece", 9, Rarity.EPIC));
-	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS.register("mechan_glove_godlike",
-			() -> new ItemMechanGlove(new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
-					.group(ForcesOfRealityItemGroup.instance), "mechan_glove_godlike", 9, ModTextFormatting.AURIC));
+	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS
+			.register("mechan_glove_godlike",
+					() -> new ItemMechanGlove(
+							new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
+									.group(ForcesOfRealityItemGroup.instance),
+							"mechan_glove_godlike", 9, ModTextFormatting.AURIC));
 	// Modules
-	public static final RegistryObject<Item> mechan_module = ITEMS.register("mechan_module",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Base Module"));
+	public static final RegistryObject<Item> mechan_module = ITEMS
+			.register("mechan_module",
+					() -> new ItemMechanModuleBase(
+							new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+							"Base Module"));
 	public static final RegistryObject<Item> mechan_module_rocket = ITEMS.register("mechan_module_rocket",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMechanModuleBase(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a singluar exploding rocket at an angle"));
 	public static final RegistryObject<Item> mechan_module_salvo = ITEMS.register("mechan_module_salvo",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMechanModuleBase(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fire Several homing rockets that track down targets around player"));
 	public static final RegistryObject<Item> mechan_module_shortcircuit = ITEMS.register("mechan_module_shortcircuit",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMechanModuleBase(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a ball of electricity that leaps between targets"));
 	public static final RegistryObject<Item> mechan_module_laser = ITEMS.register("mechan_module_laser",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMechanModuleBase(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a concetrated burst of energy from the glove"));
 	public static final RegistryObject<Item> mechan_module_blade = ITEMS.register("mechan_module_blade",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMechanModuleBase(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Extrudes a small blade from the glove increasing damage dealt"));
 	public static final RegistryObject<Item> mechan_module_thruster = ITEMS.register("mechan_module_thruster",
-			() -> new ItemMechanModuleBase(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMechanModuleBase(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Increases the power of an equiped Machina Spark Director, Allows for boosting"));
 
 	// Food
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new Food.Builder().hunger(6)
-					.saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())));
+			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new Food.Builder()
+					.hunger(6).saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())));
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",
@@ -403,8 +420,9 @@ public class ItemInit {
 
 	@SuppressWarnings("deprecation")
 	public static final RegistryObject<Item> cooked_morel_on_a_stick = ITEMS.register("cooked_morel_on_a_stick",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new Food.Builder().hunger(6)
-					.saturation(1.5f).effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build())));
+			() -> new Item(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new Food.Builder().hunger(6)
+							.saturation(1.5f).effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build())));
 	public static final RegistryObject<Item> somnolent_bottle = ITEMS.register("somnolent_bottle",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> bucket_slug = ITEMS.register("bucket_slug",
@@ -412,11 +430,14 @@ public class ItemInit {
 
 	// Charms
 	public static final RegistryObject<Item> attraction_charm = ITEMS.register("attraction_charm",
-			() -> new ItemAttractionCharm(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemAttractionCharm(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> repulsion_charm = ITEMS.register("repulsion_charm",
-			() -> new ItemRepulsionCharm(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemRepulsionCharm(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> slime_charm = ITEMS.register("slime_charm",
-			() -> new ItemSlimeRepulsionCharm(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemSlimeRepulsionCharm(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
 			() -> new ItemDryingAgent(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
@@ -489,18 +510,20 @@ public class ItemInit {
 	public static final RegistryObject<Item> writhing_boots = ITEMS.register("writhing_boots",
 			() -> new ArmorItem(EnumModArmorTiers.WRITHING, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	
-	
+
 	// Tools
-	public static final RegistryObject<Item> null_bow_blade = ITEMS.register("null_bow_blade", () -> new ItemBowBlade(
-			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(1024), 2, 8, 1));
-	public static final RegistryObject<Item> somnolent_bow_blade = ITEMS
-			.register("somnolent_bow_blade",
-					() -> new ItemBowBlade(
-							new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(512), 1,
-							6, 1));
-	public static final RegistryObject<Item> auric_bow_blade = ITEMS.register("auric_bow_blade", () -> new ItemBowBlade(
-			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(2048), 3, 10, 1));
+	public static final RegistryObject<Item> null_bow_blade = ITEMS.register("null_bow_blade",
+			() -> new ItemBowBlade(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(1024), 2,
+					8, 1));
+	public static final RegistryObject<Item> somnolent_bow_blade = ITEMS.register("somnolent_bow_blade",
+			() -> new ItemBowBlade(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(512), 1, 6,
+					1));
+	public static final RegistryObject<Item> auric_bow_blade = ITEMS.register("auric_bow_blade",
+			() -> new ItemBowBlade(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(2048), 3,
+					10, 1));
 
 	public static final RegistryObject<Item> null_trick_axe = ITEMS.register("null_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
@@ -541,19 +564,22 @@ public class ItemInit {
 	public static final RegistryObject<Item> absorber_configurer = ITEMS.register("absorber_configurer",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> frequency_matcher = ITEMS.register("frequency_matcher",
-			() -> new ItemFrequencyMatcher(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemFrequencyMatcher(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	// Knappers
-	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper",
-			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON, new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<Item> iron_knapper = ITEMS.register("iron_knapper", () -> new ItemKnapper(25f, 1,
+			0, ItemTier.IRON, new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> obsidian_knapper = ITEMS.register("obsidian_knapper",
 			() -> new ItemKnapper(50f, 1, 0, EnumModToolTiers.NULL,
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 
 	// Hands
 	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
-			() -> new ItemManaExtractor(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemManaExtractor(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
-			() -> new ItemMakerActivator(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemMakerActivator(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> vibration_debug_tool = ITEMS.register("vibration_debug_tool",
 			() -> new ItemDebugTool(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> self_analyzer = ITEMS.register("self_analyzer",
@@ -561,9 +587,11 @@ public class ItemInit {
 
 	// Wands
 	public static final RegistryObject<Item> wand_consume_vibes = ITEMS.register("wand_consume_vibes",
-			() -> new ItemWandConsumeVibes(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemWandConsumeVibes(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> wand_gain_vibes = ITEMS.register("wand_gain_vibes",
-			() -> new ItemWandGainVibes(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+			() -> new ItemWandGainVibes(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
 	// Upgrades
 	public static final RegistryObject<Item> upgrade_wrench = ITEMS.register("upgrade_wrench",
@@ -586,8 +614,8 @@ public class ItemInit {
 	// Runes
 
 	public static final RegistryObject<Item> self_reflection_mirror = ITEMS.register("self_reflection_mirror",
-			() -> new ItemSelfReflectionMirror(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON)));
+			() -> new ItemSelfReflectionMirror(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
+					.maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
@@ -667,25 +695,29 @@ public class ItemInit {
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_lake = ITEMS.register("rune_pattern_lake",
-			() -> new ItemRunePatternLake(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternLake(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Lake Rune, The rushing of sacred waters, the roar of a great ocean calls to you, you know your home, and it beckons you back.."));
 	public static final RegistryObject<Item> rune_clawmark = ITEMS.register("rune_clawmark",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> rune_pattern_clawmark = ITEMS.register("rune_pattern_clawmark",
-			() -> new ItemRunePatternClawmark(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternClawmark(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Clawmark Rune, Tooth and Nail is all you know, the endless fight has just begun, bring the armies home, they are no threat."));
 	public static final RegistryObject<Item> rune_rapture = ITEMS.register("rune_rapture",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_rapture = ITEMS.register("rune_pattern_rapture",
-			() -> new ItemRunePatternRapture(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternRapture(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Rapture Rune, The blood of war is your fuel, the lifeblood of your enemy becomes your own, absorb those who would oppose you!"));
 	public static final RegistryObject<Item> rune_oedon = ITEMS.register("rune_oedon",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_oedon = ITEMS.register("rune_pattern_oedon",
-			() -> new ItemRunePatternOedon(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternOedon(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Oedon Rune, You feel as if you have a false heart, one granted to you on contract, nevertheless this life is yours now, use it."));
 	public static final RegistryObject<Item> rune_eye = ITEMS.register("rune_eye",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
@@ -697,30 +729,36 @@ public class ItemInit {
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_moon = ITEMS.register("rune_pattern_moon",
-			() -> new ItemRunePatternMoon(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternMoon(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Moon Rune, The great moon above has become your muse, it is what drives you, turn away from the cursed sun, carpe noctum!"));
 	public static final RegistryObject<Item> rune_beast = ITEMS.register("rune_beast",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> rune_pattern_beast = ITEMS.register("rune_pattern_beast",
-			() -> new ItemRunePatternBeast(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternBeast(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Beast Rune, The howl of a gale, the howl of the beast, it is one and all in you, run like the wind, endless and with drive!"));
 	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
 			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_heir = ITEMS.register("rune_pattern_heir",
-			() -> new ItemRunePatternHeir(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternHeir(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Heir Rune, you develop this watchful sense,you, the spiritual succesor to a once great power, shall rekindle their former glory; Divine Heir."));
 	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
 			() -> new ItemGuidanceRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_guidance = ITEMS.register("rune_pattern_guidance",
-			() -> new ItemRunePatternGuidance(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternGuidance(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Guidance Rune, The supernatural blessing, one of fortune and direction, may it guide you to your wants, as it has so many others before."));
 	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT, 1));
+			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT,
+					1));
 	public static final RegistryObject<Item> rune_pattern_communion = ITEMS.register("rune_pattern_communion",
-			() -> new ItemRunePatternCommunion(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemRunePatternCommunion(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Communion Rune, The call from beyond rings louder for you, you wish to join them, you must join them. join.joi,jo..."));
 
 	// Spawn Eggs
@@ -733,8 +771,8 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = ITEMS.register("spawn_egg_hastur",
 			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_vassal = ITEMS.register("spawn_egg_hastur_vassal",
-			() -> new ModSpawnEggItem(EntityInit.hastur_vassal, 10862336, 0x0000FF,
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_vassal = ITEMS
+			.register("spawn_egg_hastur_vassal", () -> new ModSpawnEggItem(EntityInit.hastur_vassal, 10862336, 0x0000FF,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tentacle = ITEMS.register("spawn_egg_tentacle",
 			() -> new ModSpawnEggItem(EntityInit.tentacle, 22073, 12371968,
@@ -766,9 +804,9 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_summoned_beast = ITEMS
 			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 8155760, 9450752,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_malformed_automaton = ITEMS
-			.register("spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton,
-					15576576, 41873, new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_malformed_automaton = ITEMS.register(
+			"spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton, 15576576, 41873,
+					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dark_young = ITEMS.register("spawn_egg_dark_young",
 			() -> new ModSpawnEggItem(EntityInit.dark_young, 0, 0xFA00FF,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
@@ -790,17 +828,22 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_black_goat = ITEMS.register("spawn_egg_black_goat",
 			() -> new ModSpawnEggItem(EntityInit.black_goat, 0xF23FaF, 0xF23FaF,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_angelic_fowl = ITEMS.register("spawn_egg_angelic_fowl",
+			() -> new ModSpawnEggItem(EntityInit.angelic_fowl
+					, 0xBDFFE2, 0xFFD25B,
+					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+	
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
-		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
-				ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage,
-				ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle, ItemInit.spawn_egg_hastur_spawn,
-				ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim, ItemInit.spawn_egg_throne,
-				ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
+		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
+				ItemInit.spawn_egg_hastur_vassal, ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen,
+				ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle,
+				ItemInit.spawn_egg_hastur_spawn, ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim,
+				ItemInit.spawn_egg_throne, ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
 				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
-				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat);
+				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -853,8 +896,8 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		ItemModelsProperties.registerProperty(mechan_glove_superior.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "on"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(mechan_glove_superior.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "on"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -881,8 +924,8 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		ItemModelsProperties.registerProperty(mechan_glove_godlike.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "on"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(mechan_glove_godlike.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "on"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -896,8 +939,8 @@ public class ItemInit {
 					}
 				});
 		// Imprint
-		ItemModelsProperties.registerProperty(harmonic_imprint.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "saved"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(harmonic_imprint.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "saved"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -928,8 +971,8 @@ public class ItemInit {
 				});
 
 		// Attract Charm
-		ItemModelsProperties.registerProperty(attraction_charm.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "on"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(attraction_charm.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "on"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -976,8 +1019,8 @@ public class ItemInit {
 				});
 
 		// Frequency Matcher
-		ItemModelsProperties.registerProperty(frequency_matcher.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "clear"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(frequency_matcher.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "clear"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -993,8 +1036,8 @@ public class ItemInit {
 
 		// Bow Blades
 		// Null
-		ItemModelsProperties.registerProperty(null_bow_blade.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "open"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(null_bow_blade.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -1023,8 +1066,8 @@ public class ItemInit {
 				});
 
 		// Somnolent
-		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "open"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -1053,8 +1096,8 @@ public class ItemInit {
 				});
 
 		// Auric
-		ItemModelsProperties.registerProperty(auric_bow_blade.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "open"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(auric_bow_blade.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -1084,8 +1127,8 @@ public class ItemInit {
 
 		// Trick Axe
 		// Null
-		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "open"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(null_trick_axe.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -1114,8 +1157,8 @@ public class ItemInit {
 				});
 
 		// Somnolent
-		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "open"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {
@@ -1144,8 +1187,8 @@ public class ItemInit {
 				});
 
 		// Somnolent
-		ItemModelsProperties.registerProperty(auric_trick_axe.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "open"),
-				new IItemPropertyGetter() {
+		ItemModelsProperties.registerProperty(auric_trick_axe.get(),
+				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
 					@Override
 					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
 						if (stack.hasTag()) {

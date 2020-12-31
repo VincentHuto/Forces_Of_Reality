@@ -27,6 +27,7 @@ import com.huto.forcesofreality.render.entity.lords.RenderVeritas;
 import com.huto.forcesofreality.render.entity.mobs.RenderDreadBot;
 import com.huto.forcesofreality.render.entity.mobs.RenderHasturVassal;
 import com.huto.forcesofreality.render.entity.mobs.RenderScuttlingOcculus;
+import com.huto.forcesofreality.render.entity.passive.RenderAngelicFowl;
 import com.huto.forcesofreality.render.entity.passive.RenderDenizen;
 import com.huto.forcesofreality.render.entity.passive.RenderDenizenSage;
 import com.huto.forcesofreality.render.entity.passive.RenderDreamWalker;
@@ -145,6 +146,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.denizen.get(), RenderDenizen::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.denizen_sage.get(), RenderDenizenSage::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.ibis.get(), RenderIbis::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.angelic_fowl.get(), RenderAngelicFowl::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tentacle.get(), RenderTentacle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.player_tentacle.get(), RenderPlayerTentacle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tracking_orb.get(), RenderTrackingOrb::new);

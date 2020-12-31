@@ -23,7 +23,7 @@ public class ModMobSpawning {
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.RIVER)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
-					new Spawners(EntityInit.hastur_vassal.get(), 12, 6, 10));
+					new Spawners(EntityInit.hastur_vassal.get(), 50, 1, 3));
 		}
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.PLAINS)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.FOREST)
@@ -31,12 +31,18 @@ public class ModMobSpawning {
 			event.getSpawns().withSpawner(EntityClassification.CREATURE,
 					new Spawners(EntityInit.ibis.get(), 12, 6, 10));
 		}
+		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.COLD)
+				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MOUNTAIN)
+				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SNOWY)) {
+			event.getSpawns().withSpawner(EntityClassification.CREATURE,
+					new Spawners(EntityInit.angelic_fowl.get(), 2, 1, 2));
+		}
 
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MESA)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SANDY)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
-					new Spawners(EntityInit.dread_bot.get(), 12, 6, 10));
+					new Spawners(EntityInit.dread_bot.get(), 50, 1, 2));
 		}
 
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.END)
@@ -44,7 +50,7 @@ public class ModMobSpawning {
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MUSHROOM)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SPOOKY)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
-					new Spawners(EntityInit.scuttling_occulus.get(), 12, 6, 10));
+					new Spawners(EntityInit.scuttling_occulus.get(), 50, 3, 5));
 		}
 
 		// func_242575_a(Entity Classification, new Spawners(Entity Type, Spawn Chance

@@ -21,9 +21,11 @@ import net.minecraft.world.server.ServerWorld;
 
 public class BlockBreakoutPoint extends BushBlock {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+	boolean isNull;
 
-	public BlockBreakoutPoint(AbstractBlock.Properties properties) {
+	public BlockBreakoutPoint(AbstractBlock.Properties properties, boolean isNullIn) {
 		super(properties);
+		this.isNull = isNullIn;
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -84,12 +86,19 @@ public class BlockBreakoutPoint extends BushBlock {
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.getBlock() == Blocks.GRASS_BLOCK || blockstate.getBlock() == BlockInit.somnolent_earth.get()
-				|| blockstate.getBlock() == BlockInit.somnolent_stone.get()) {
-			return true;
+		if (!isNull) {
+			if (blockstate.getBlock() == Blocks.GRASS_BLOCK || blockstate.getBlock() == BlockInit.somnolent_earth.get()
+					|| blockstate.getBlock() == BlockInit.somnolent_stone.get() || blockstate.getBlock() == Blocks.SAND
+					|| blockstate.getBlock() == Blocks.STONE || blockstate.getBlock() == Blocks.DIRT) {
+				return true;
+			}
 		} else {
-			return false;
+			if (blockstate.getBlock() == Blocks.GRASS_BLOCK || blockstate.getBlock() == Blocks.SAND
+					|| blockstate.getBlock() == Blocks.STONE || blockstate.getBlock() == Blocks.DIRT
+					|| blockstate.getBlock() == Blocks.NETHERRACK) {
+				return true;
+			}
 		}
+		return false;
 	}
-
 }

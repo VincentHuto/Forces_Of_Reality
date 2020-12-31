@@ -14,6 +14,7 @@ import com.huto.forcesofreality.entities.lords.EntityVeritas;
 import com.huto.forcesofreality.entities.mobs.EntityDreadBot;
 import com.huto.forcesofreality.entities.mobs.EntityHasturVassal;
 import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
+import com.huto.forcesofreality.entities.passive.EntityAngelicFowl;
 import com.huto.forcesofreality.entities.passive.EntityDenizen;
 import com.huto.forcesofreality.entities.passive.EntityDenizenSage;
 import com.huto.forcesofreality.entities.passive.EntityDreamWalker;
@@ -61,6 +62,11 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityIbis>> ibis = ENTITY_TYPES.register("ibis",
 			() -> EntityType.Builder.<EntityIbis>create(EntityIbis::new, EntityClassification.CREATURE).size(0.4F, 0.7F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "ibis").toString()));
+
+	public static final RegistryObject<EntityType<EntityAngelicFowl>> angelic_fowl = ENTITY_TYPES.register(
+			"angelic_fowl",
+			() -> EntityType.Builder.<EntityAngelicFowl>create(EntityAngelicFowl::new, EntityClassification.CREATURE)
+					.size(0.4F, 0.7F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "angelic_fowl").toString()));
 
 	public static final RegistryObject<EntityType<EntitySlug>> slug = ENTITY_TYPES.register("slug",
 			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.4F, 0.1F)
@@ -255,6 +261,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.denizen.get(), EntityDenizen.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.denizen_sage.get(), EntityDenizenSage.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.ibis.get(), EntityIbis.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.angelic_fowl.get(), EntityAngelicFowl.setAttributes().create());
+
 		GlobalEntityTypeAttributes.put(EntityInit.tentacle.get(), EntityTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.player_tentacle.get(), EntityPlayerTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur_spawn.get(), EntityHasturSpawn.setAttributes().create());

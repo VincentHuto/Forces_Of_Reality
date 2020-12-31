@@ -38,7 +38,8 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 	@Override
 	public void render(TileEntityLectorTable te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		ResourceLocation GLASSTEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/blocks/lector_square.png");
+		ResourceLocation GLASSTEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/blocks/lector_square.png");
 
 		matrixStackIn.push();
 		IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE));
@@ -95,9 +96,8 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 				} else if (directedChunkVibe.getEnergyStored() >= 512 && directedChunkVibe.getEnergyStored() < 768) {
 					gridColor = cyan;
 				} else {
-					gridColor = new LectorVectorColorData(
-							(Math.max(0, Math.abs(250 - directedChunkVibe.getEnergyStored()))),
-							Math.max(directedChunkVibe.getEnergyStored() + (chunkHeight * 0.95f) - 1, 1), 0, 255);
+					gridColor = new LectorVectorColorData(Math.abs(250 - directedChunkVibe.getEnergyStored()),
+							Math.max(directedChunkVibe.getEnergyStored() - 1, 1), chunkHeight * 0.95f, 255);
 				}
 				if (te.clientVibes > 5) {
 					if (nextChunk == mainChunk) {
