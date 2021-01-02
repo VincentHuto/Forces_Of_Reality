@@ -33,10 +33,6 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addIngredient(ItemInit.somnolent_powder.get(), 1)
 				.addCriterion("has_somnolent_powder", hasItem(ItemInit.somnolent_powder.get())).build(consumer);
 
-		ShapelessRecipeBuilder.shapelessRecipe(BlockInit.phantasmal_pane.get(), 1)
-				.addIngredient(ItemInit.essence_drop.get(), 3).addIngredient(ItemInit.nullifying_powder.get(), 3)
-				.addCriterion("has_essence_drop", hasItem(ItemInit.essence_drop.get())).build(consumer);
-
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.anti_tear.get(), 2)
 				.addIngredient(ItemInit.nullifying_powder.get(), 1)
 				.addCriterion("has_nullifying_powder", hasItem(ItemInit.nullifying_powder.get())).build(consumer);
@@ -148,8 +144,8 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addCriterion("has_morel_mushroom", hasItem(BlockInit.morel_mushroom.get())).build(consumer);
 
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.somnolent_bottle.get())
-				.addIngredient(BlockInit.passion_flower.get()).addIngredient(ItemInit.somnolent_powder.get(), 2)
-				.addIngredient(Items.GLASS_BOTTLE)
+				.addIngredient(BlockInit.passion_flower.get()).addIngredient(BlockInit.akebi.get())
+				.addIngredient(ItemInit.somnolent_powder.get(), 2).addIngredient(Items.GLASS_BOTTLE)
 				.addCriterion("has_passion_flower", hasItem(BlockInit.passion_flower.get())).build(consumer);
 
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.channeling_ingot.get()).addIngredient(Tags.Items.INGOTS_IRON)
@@ -236,7 +232,7 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.machina_cage.get()).key('A', ItemInit.old_iron_scrap.get())
-				.key('S', ItemInit.machina_soul.get()).patternLine("AAA").patternLine("ASA").patternLine(" A")
+				.key('S', ItemInit.machina_soul.get()).patternLine("AAA").patternLine("ASA").patternLine(" A ")
 				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.rune_blank.get()).key('N', BlockInit.runed_obsidian.get())
@@ -271,6 +267,12 @@ public class GeneratorRecipes extends RecipeProvider {
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.magatamabead.get()).key('N', Tags.Items.OBSIDIAN)
 				.key('P', ItemInit.somnolent_powder.get()).patternLine("NNN").patternLine("NNN").patternLine(" PN")
 				.addCriterion("has_obsidian", hasItem(Tags.Items.OBSIDIAN)).build(consumer);
+
+		ShapedRecipeBuilder.shapedRecipe(BlockInit.phantasmal_pane.get())
+		.key('N', BlockInit.phantasmal_glass.get())
+				.patternLine("NNN")
+				.patternLine("NNN")
+				.addCriterion("has_phantasmal_glass", hasItem(BlockInit.phantasmal_glass.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.maker_activator.get()).key('N', BlockInit.nether_block.get())
 				.key('F', ItemInit.energy_focus.get()).key('C', ItemInit.somnolent_crystal.get())
@@ -479,7 +481,7 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_chestplate.get()).key('R', ItemInit.writhing_thread.get())
-				.patternLine("R R").patternLine("RRR").patternLine("RRR")
+				.key('E', ItemInit.ball_of_eyes.get()).patternLine("R R").patternLine("RER").patternLine("RRR")
 				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_leggings.get()).key('R', ItemInit.writhing_thread.get())
@@ -489,6 +491,56 @@ public class GeneratorRecipes extends RecipeProvider {
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.writhing_boots.get()).key('R', ItemInit.writhing_thread.get())
 				.patternLine("R R").patternLine("R R")
 				.addCriterion("has_writhing_thread", hasItem(ItemInit.writhing_thread.get())).build(consumer);
-
+		
+		ShapedRecipeBuilder.shapedRecipe(BlockInit.rafflesia_of_fidelity.get())
+			.key('R', BlockInit.rafflesia_flower.get())
+			.key('I', BlockInit.old_iron_block.get())
+			.key('O', BlockInit.runed_obsidian.get())
+			.key('A', BlockInit.activated_obsidian.get())
+			.patternLine("IRI")
+			.patternLine("IOI")
+			.patternLine("AOA")
+			.addCriterion("has_rafflesia_flower", hasItem(BlockInit.rafflesia_flower.get())).build(consumer);
+	
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.skull_helmet.get())
+			.key('B', ItemInit.beastly_bone.get())
+			.key('F', ItemInit.unkept_hide.get())
+			.patternLine("BFB")
+			.patternLine("FFF")
+			.patternLine("FFF")
+			.addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
+		
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.enticing_mantle.get())
+				.key('B', ItemInit.beastly_bone.get())
+				.key('F', ItemInit.unkept_hide.get())
+				.patternLine("BFB")
+				.patternLine("FFF")
+				.patternLine("FFF")
+				.addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.legs_of_fawn.get())
+			.key('B', ItemInit.beastly_bone.get())
+			.key('F', ItemInit.unkept_hide.get())
+			.patternLine("BFB")
+			.patternLine("F F")
+			.patternLine("F F")
+			.addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.cloven_hooves.get())
+			.key('B', ItemInit.beastly_bone.get())
+			.key('F', ItemInit.unkept_hide.get())
+			.patternLine("BFB")
+			.patternLine("B B")
+			.addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.node_of_actualization.get())
+			.key('O', Blocks.OBSIDIAN)
+			.key('Q', Blocks.QUARTZ_BLOCK)
+			.key('K', ItemInit.karmic_drop.get())
+			.patternLine("OOO")
+			.patternLine("OKQ")
+			.patternLine("QQQ")
+			.addCriterion("has_karmic_drop", hasItem(ItemInit.karmic_drop.get())).build(consumer);
+		
 	}
 }

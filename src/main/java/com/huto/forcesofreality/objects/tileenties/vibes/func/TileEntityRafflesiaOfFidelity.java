@@ -264,8 +264,8 @@ public class TileEntityRafflesiaOfFidelity extends TileVibeSimpleInventory imple
 			}
 
 		if (recipe != null) {
-			System.out.println(recipe.getManaUsage());
-			float manaCost = recipe.getManaUsage() / this.level;
+			System.out.println(recipe.getVibeUsage());
+			float manaCost = recipe.getVibeUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,

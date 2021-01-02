@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "forcesofreality:oak_bonsai_stage_3"
+          "name": "forcesofreality:bonsai_planter"
         }
       ],
       "conditions": [

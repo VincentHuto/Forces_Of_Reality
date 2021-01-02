@@ -1,109 +1,94 @@
 {
+	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"parent": "block/block",
 		"particle": "forcesofreality:blocks/akebi_stage2",
 		"akebi": "forcesofreality:blocks/akebi_stage2"
 	},
 	"elements": [
 		{
-			"from": [
-				4,
-				3,
-				7
-			],
-			"to": [
-				12,
-				12,
-				15
-			],
+			"from": [5, 3, 8],
+			"to": [11, 12, 14],
 			"faces": {
-				"down": {
-					"uv": [
-						0,
-						0,
-						7,
-						7
-					],
-					"texture": "#akebi"
-				},
-				"up": {
-					"uv": [
-						0,
-						0,
-						7,
-						7
-					],
-					"texture": "#akebi"
-				},
-				"north": {
-					"uv": [
-						7,
-						4,
-						15,
-						13
-					],
-					"texture": "#akebi"
-				},
-				"south": {
-					"uv": [
-						7,
-						4,
-						15,
-						13
-					],
-					"texture": "#akebi"
-				},
-				"west": {
-					"uv": [
-						7,
-						4,
-						15,
-						13
-					],
-					"texture": "#akebi"
-				},
-				"east": {
-					"uv": [
-						7,
-						4,
-						15,
-						13
-					],
-					"texture": "#akebi"
-				}
+				"north": {"uv": [7, 4, 15, 13], "texture": "#akebi"},
+				"east": {"uv": [7, 4, 15, 13], "texture": "#akebi"},
+				"south": {"uv": [7, 4, 15, 13], "texture": "#akebi"},
+				"west": {"uv": [7, 4, 15, 13], "texture": "#akebi"},
+				"up": {"uv": [0, 0, 7, 7], "texture": "#akebi"},
+				"down": {"uv": [0, 0, 7, 7], "texture": "#akebi"}
 			}
 		},
 		{
-			"from": [
-				8,
-				12,
-				12
-			],
-			"to": [
-				8,
-				16,
-				16
-			],
+			"from": [4, 4, 9],
+			"to": [5, 11, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 8, 8]},
 			"faces": {
-				"west": {
-					"uv": [
-						12,
-						0,
-						16,
-						4
-					],
-					"texture": "#akebi"
-				},
-				"east": {
-					"uv": [
-						16,
-						0,
-						12,
-						4
-					],
-					"texture": "#akebi"
-				}
+				"north": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"east": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"south": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"west": {"uv": [9, 5, 13, 12], "texture": "#akebi"},
+				"up": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"down": {"uv": [7, 4, 8, 8], "texture": "#akebi"}
+			}
+		},
+		{
+			"from": [11, 4, 9],
+			"to": [12, 11, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 8]},
+			"faces": {
+				"north": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"east": {"uv": [8, 5, 12, 12], "texture": "#akebi"},
+				"south": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"west": {"uv": [9, 5, 13, 12], "texture": "#akebi"},
+				"up": {"uv": [7, 4, 8, 8], "texture": "#akebi"},
+				"down": {"uv": [7, 4, 8, 8], "texture": "#akebi"}
+			}
+		},
+		{
+			"from": [6, 4, 7],
+			"to": [10, 11, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 2]},
+			"faces": {
+				"north": {"uv": [9, 5, 13, 12], "texture": "#akebi"},
+				"east": {"uv": [0, 0, 4, 1], "texture": "#akebi"},
+				"south": {"uv": [0, 0, 4, 1], "texture": "#akebi"},
+				"west": {"uv": [0, 0, 4, 1], "texture": "#akebi"},
+				"up": {"uv": [0, 0, 4, 1], "texture": "#akebi"},
+				"down": {"uv": [0, 0, 4, 1], "texture": "#akebi"}
+			}
+		},
+		{
+			"from": [6, 12, 9],
+			"to": [10, 13, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 17, 8]},
+			"faces": {
+				"north": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"east": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"south": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"west": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"up": {"uv": [9, 6, 13, 10], "texture": "#akebi"},
+				"down": {"uv": [7, 4, 11, 5], "texture": "#akebi"}
+			}
+		},
+		{
+			"from": [6, 2, 9],
+			"to": [10, 3, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 8]},
+			"faces": {
+				"north": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"east": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"south": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"west": {"uv": [7, 4, 11, 5], "texture": "#akebi"},
+				"up": {"uv": [9, 6, 13, 10], "texture": "#akebi"},
+				"down": {"uv": [9, 6, 13, 10], "texture": "#akebi"}
+			}
+		},
+		{
+			"from": [8, 12, 12],
+			"to": [8, 16, 16],
+			"faces": {
+				"east": {"uv": [16, 0, 12, 4], "texture": "#akebi"},
+				"west": {"uv": [12, 0, 16, 4], "texture": "#akebi"}
 			}
 		}
 	]

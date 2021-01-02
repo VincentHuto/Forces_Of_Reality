@@ -266,7 +266,7 @@ public class TileEntityWandMaker extends TileVibeSimpleInventory implements ITic
 			}
 
 		if (recipe != null) {
-			float manaCost = recipe.getManaUsage() / this.level;
+			float manaCost = recipe.getVibeUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 				ItemStack output = recipe.getOutput().copy();
 				ItemEntity outputItem = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,

@@ -68,7 +68,7 @@ public class RecipeRafflesia implements IModRecipe {
 		return output;
 	}
 
-	public float getManaUsage() {
+	public float getVibeUsage() {
 		return vibes;
 	}
 

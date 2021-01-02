@@ -283,7 +283,7 @@ public class TileEntityAutoInscriber extends TileVibeSimpleInventory implements 
 			}
 		}
 		if (recipe != null) {
-			float manaCost = recipe.getManaUsage() / this.level;
+			float manaCost = recipe.getVibeUsage() / this.level;
 			if (vibes.getVibes() >= manaCost) {
 
 				ItemStack output = recipe.getOutput().copy();

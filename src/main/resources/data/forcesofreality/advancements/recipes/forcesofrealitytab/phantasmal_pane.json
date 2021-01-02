@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_essence_drop": {
+    "has_phantasmal_glass": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "forcesofreality:essence_drop"
+            "item": "forcesofreality:phantasmal_glass"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_essence_drop",
+      "has_phantasmal_glass",
       "has_the_recipe"
     ]
   ]

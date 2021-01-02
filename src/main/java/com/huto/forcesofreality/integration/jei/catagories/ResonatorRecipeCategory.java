@@ -98,7 +98,7 @@ public class ResonatorRecipeCategory implements IRecipeCategory<RecipeResonator>
 		// TileEntityVibeResonator te = new TileEntityVibeResonator();
 		FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 		fontRenderer.drawString(matrixStack,
-				"Vibrational Cost: " + TextFormatting.ITALIC + Float.toString(recipe.getManaUsage()) + "/Level", 0,
+				"Vibrational Cost: " + TextFormatting.ITALIC + Float.toString(recipe.getVibeUsage()) + "/Level", 0,
 				(int) (fontRenderer.FONT_HEIGHT), 0);
 		matrixStack.translate(0, -10, 0);
 		fontRenderer.drawString(matrixStack, "Phase:" + TextFormatting.ITALIC + recipe.getRecipeType().toString(), 0,

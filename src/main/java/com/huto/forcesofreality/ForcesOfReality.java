@@ -27,6 +27,7 @@ import com.huto.forcesofreality.init.FeatureInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.ParticleInit;
 import com.huto.forcesofreality.init.TileEntityInit;
+import com.huto.forcesofreality.init.TreeDecoratorInit;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
 import com.huto.forcesofreality.objects.items.tools.ItemRuneBinder;
@@ -43,7 +44,6 @@ import com.huto.forcesofreality.recipes.UpgradeMachinaLampDataRecipe;
 import com.huto.forcesofreality.render.entity.layer.RunesRenderLayer;
 import com.huto.forcesofreality.worldgen.ModFeatures;
 import com.huto.forcesofreality.worldgen.ModOreGen;
-import com.huto.forcesofreality.worldgen.ModTreeDecorators;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
@@ -99,6 +99,7 @@ public class ForcesOfReality {
 		FeatureInit.FEATURES.register(modEventBus);
 		EntityInit.ENTITY_TYPES.register(modEventBus);
 		EnchantmentInit.ENCHANTS.register(modEventBus);
+		TreeDecoratorInit.TREEDECORATORS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::pickupEvent);
@@ -157,7 +158,6 @@ public class ForcesOfReality {
 
 		event.enqueueWork(() -> {
 			ModOreGen.registerConfiguredFeatures();
-			ModTreeDecorators.registerConfiguredFeatures();
 		});
 
 	}

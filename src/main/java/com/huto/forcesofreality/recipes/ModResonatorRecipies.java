@@ -22,8 +22,8 @@ public class ModResonatorRecipies {
 			recipeEnhancedSword, recipeEnhancedShovel, recipeEnhancedAxe, recipeEnhancedHoe, recipeEnhancedHelm,
 			recipeEnhancedChestplate, recipeEnhancedPants, recipeEnhancedBoots, recipeManaGem, recipeChannelingRod,
 			recipeManaDust, recipeEnchantedEarth, recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling,
-			recipieGreyIngot, recipeElderHelm, recipeElderChestplate, recipeElderPants, recipeElderBoots,
-			recipeAuricBar, recipeNullSapling, recipeNulEarth, recipeNulStone, recipeNullMedia;
+			recipieGreyIngot, recipieGreyDust, recipeElderHelm, recipeElderChestplate, recipeElderPants,
+			recipeElderBoots, recipeAuricBar, recipeNullSapling, recipeNulEarth, recipeNulStone, recipeNullMedia;
 
 	// ReversionRecipies
 	public static RecipeResonator recipeAntiTearREVERT, recipeResonantFuelREVERT;
@@ -129,15 +129,20 @@ public class ModResonatorRecipies {
 		recipeElderBoots = registerRecipe(new ResourceLocation("recipeelderboots"),
 				new ItemStack(ItemInit.elder_boots.get(), 1), 200, EnumEssecenceType.KARMIC,
 				Ingredient.fromItems(Items.NETHERITE_BOOTS));
+		recipieGreyDust = registerRecipe(new ResourceLocation("recipiegreydust"),
+				new ItemStack(ItemInit.grey_powder.get(), 1), 20, EnumEssecenceType.GREY,
+				Ingredient.fromItems(ItemInit.somnolent_powder.get()));
+		recipieGreyIngot = registerRecipe(new ResourceLocation("recipiegreyingot"),
+				new ItemStack(ItemInit.grey_ingot.get(), 1), 20, EnumEssecenceType.GREY,
+				Ingredient.fromItems(ItemInit.channeling_ingot.get()));
 
-		// Reversion Recipies
-		recipeAntiTearREVERT = registerRecipe(new ResourceLocation("recipeantitearrevert"),
-				new ItemStack(ItemInit.essence_drop.get(), 1), 60, EnumEssecenceType.REVERT,
-				Ingredient.fromItems(ItemInit.anti_tear.get()));
-		recipeResonantFuelREVERT = registerRecipe(new ResourceLocation("reciperesonantfuelrevert"),
-				new ItemStack(Items.COAL, 1), 60, EnumEssecenceType.REVERT,
-				Ingredient.fromItems(ItemInit.resonant_fuel.get()));
+	}
 
+	public static RecipeResonator createReversionRecipe(RecipeResonator origRecipe) {
+		RecipeResonator newRecipe = new RecipeResonator(new ResourceLocation(origRecipe.getId().getPath() + "revert"),
+				origRecipe.getInputs().get(0).getMatchingStacks()[0], origRecipe.getVibeUsage() * 1.5f,
+				EnumEssecenceType.REVERT, Ingredient.fromStacks(origRecipe.getOutput()));
+		return newRecipe;
 	}
 
 	public static RecipeResonator registerRecipe(ResourceLocation rl, ItemStack output, float vibes,
@@ -145,6 +150,7 @@ public class ModResonatorRecipies {
 		Preconditions.checkArgument(inputs.length <= 1);
 		RecipeResonator recipe = new RecipeResonator(rl, output, vibes, type, inputs);
 		resonatorRecipies.add(recipe);
+		resonatorRecipies.add(createReversionRecipe(recipe));
 		return recipe;
 	}
 

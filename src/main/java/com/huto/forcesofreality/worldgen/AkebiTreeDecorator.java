@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import com.huto.forcesofreality.init.BlockInit;
+import com.huto.forcesofreality.init.TreeDecoratorInit;
 import com.huto.forcesofreality.objects.blocks.BlockAkebi;
 import com.mojang.serialization.Codec;
 
@@ -28,26 +29,26 @@ public class AkebiTreeDecorator extends TreeDecorator {
 		this.field_227417_b_ = p_i225868_1_;
 	}
 
-	protected TreeDecoratorType<?> func_230380_a_() {
-		return ModTreeDecorators.AKEBI;
+	public TreeDecoratorType<?> func_230380_a_() {
+		return TreeDecoratorInit.AKEBI;
 	}
 
-	public void func_225576_a_(ISeedReader p_225576_1_, Random p_225576_2_, List<BlockPos> p_225576_3_,
-			List<BlockPos> p_225576_4_, Set<BlockPos> p_225576_5_, MutableBoundingBox p_225576_6_) {
-		if (!(p_225576_2_.nextFloat() >= this.field_227417_b_)) {
-			int i = p_225576_3_.get(0).getY();
-			p_225576_3_.stream().filter((p_236867_1_) -> {
+	public void func_225576_a_(ISeedReader seedReader, Random rand, List<BlockPos> listBlockPos,
+			List<BlockPos> p_225576_4_, Set<BlockPos> setBlockPos, MutableBoundingBox boundingBox) {
+		if (!(rand.nextFloat() >= this.field_227417_b_)) {
+			int i = listBlockPos.get(0).getY();
+			listBlockPos.stream().filter((p_236867_1_) -> {
 				return p_236867_1_.getY() - i <= 2;
 			}).forEach((p_242865_5_) -> {
 				for (Direction direction : Direction.Plane.HORIZONTAL) {
-					if (p_225576_2_.nextFloat() <= 0.25F) {
+					if (rand.nextFloat() <= 0.25F) {
 						Direction direction1 = direction.getOpposite();
 						BlockPos blockpos = p_242865_5_.add(direction1.getXOffset(), 0, direction1.getZOffset());
-						if (Feature.isAirAt(p_225576_1_, blockpos)) {
+						if (Feature.isAirAt(seedReader, blockpos)) {
 							BlockState blockstate = BlockInit.akebi.get().getDefaultState()
-									.with(BlockAkebi.AGE, Integer.valueOf(p_225576_2_.nextInt(3)))
+									.with(BlockAkebi.AGE, Integer.valueOf(rand.nextInt(3)))
 									.with(BlockAkebi.HORIZONTAL_FACING, direction);
-							this.func_227423_a_(p_225576_1_, blockpos, blockstate, p_225576_5_, p_225576_6_);
+							this.func_227423_a_(seedReader, blockpos, blockstate, setBlockPos, boundingBox);
 						}
 					}
 				}

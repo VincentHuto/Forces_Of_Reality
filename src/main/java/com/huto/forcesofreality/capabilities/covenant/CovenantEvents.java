@@ -122,8 +122,9 @@ public class CovenantEvents {
 
 	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying, boolean isFlying) {
 		if (player != null) {
-			if (!player.world.isRemote)
+			if (player.world.isRemote) {
 				PacketHandler.HANDLER.sendToServer(new SetFlyPKT(allowFlying, isFlying));
+			}
 			player.abilities.allowFlying = allowFlying;
 			player.abilities.isFlying = isFlying;
 		}
@@ -131,7 +132,7 @@ public class CovenantEvents {
 
 	@SubscribeEvent
 	public static void checkArmor(LivingEquipmentChangeEvent e) {
-		if (e.getEntityLiving().ticksExisted > 100)
+		if (e.getEntityLiving().ticksExisted > 100) {
 			if (e.getEntityLiving() instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) e.getEntityLiving();
 				if (player != null) {
@@ -142,17 +143,15 @@ public class CovenantEvents {
 							if (!player.getEntityWorld().isRemote) {
 								if (!((PlayerEntity) player).isCreative()) {
 									updateClientServerFlight((ServerPlayerEntity) player, true);
+								} else {
+									updateClientServerFlight((ServerPlayerEntity) player, false);
 								}
-							}
-						} else {
-							if (!((PlayerEntity) player).isCreative()) {
-								updateClientServerFlight((ServerPlayerEntity) player, false);
-
 							}
 						}
 					}
 				}
 			}
+		}
 	}
 
 	@SubscribeEvent
@@ -167,12 +166,10 @@ public class CovenantEvents {
 						if (!player.getEntityWorld().isRemote) {
 							if (!((PlayerEntity) player).isCreative()) {
 								updateClientServerFlight((ServerPlayerEntity) player, true);
-							}
-						}
-					} else {
-						if (!((PlayerEntity) player).isCreative()) {
-							updateClientServerFlight((ServerPlayerEntity) player, false);
+							} else {
+								updateClientServerFlight((ServerPlayerEntity) player, false);
 
+							}
 						}
 					}
 				}
@@ -207,7 +204,8 @@ public class CovenantEvents {
 					for (int i = 0; i < coven.getDevotion().keySet().size(); i++) {
 						EnumCovenants selectedCoven = (EnumCovenants) coven.getDevotion().keySet().toArray()[i];
 						GlStateManager.pushMatrix();
-						fontRenderer.drawString(event.getMatrixStack(), ModTextFormatting.toProperCase(selectedCoven.toString()), point.x, point.y + 20,
+						fontRenderer.drawString(event.getMatrixStack(),
+								ModTextFormatting.toProperCase(selectedCoven.toString()), point.x, point.y + 20,
 								new Color(255, 0, 0, 255).getRGB());
 						fontRenderer.drawString(event.getMatrixStack(),
 								String.valueOf(coven.getDevotionByCoven(selectedCoven)), point.x, point.y + 30,

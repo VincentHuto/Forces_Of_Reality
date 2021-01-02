@@ -187,6 +187,9 @@ public class ItemInit {
 			() -> new ItemDestructOrb(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
 	// Karma
+	public static final RegistryObject<Item> karmic_harvester = ITEMS.register("karmic_harvester",
+			() -> new SwordItem(ItemTier.STONE, 3, -1.4F,
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> node_of_actualization = ITEMS.register("node_of_actualization",
 			() -> new ItemActualizationNode(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
 					.maxStackSize(1).rarity(Rarity.RARE)));
@@ -235,6 +238,8 @@ public class ItemInit {
 	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> cured_clay_flask = ITEMS.register("cured_clay_flask",
+			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<Item> obsidian_flakes = ITEMS.register("obsidian_flakes",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> harmonic_imprint = ITEMS.register("harmonic_imprint",
 			() -> new ItemHarmonicImprint(
@@ -304,6 +309,8 @@ public class ItemInit {
 	public static final RegistryObject<Item> beastly_bone = ITEMS.register("beastly_bone",
 			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
 					EnumCovenants.BEAST, 3));
+	public static final RegistryObject<Item> unkept_hide = ITEMS.register("unkept_hide",
+			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> skull_helmet = ITEMS.register("skull_helmet",
 			() -> new ItemSkullHelmet(EnumModArmorTiers.SKULL, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
@@ -409,10 +416,9 @@ public class ItemInit {
 					"Increases the power of an equiped Machina Spark Director, Allows for boosting"));
 
 	// Food
-	@SuppressWarnings("deprecation")
-	public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",
+	/*public static final RegistryObject<Item> akebi_pod = ITEMS.register("akebi_pod",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new Food.Builder()
-					.hunger(6).saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())));
+					.hunger(6).saturation(1.5f).effect(new EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())));*/
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",

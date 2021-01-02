@@ -2,12 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "R R",
-    "RRR",
+    "RER",
     "RRR"
   ],
   "key": {
     "R": {
       "item": "forcesofreality:writhing_thread"
+    },
+    "E": {
+      "item": "forcesofreality:ball_of_eyes"
     }
   },
   "result": {

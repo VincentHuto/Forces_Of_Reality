@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:legs_of_fawn"
+    ]
+  },
+  "criteria": {
+    "has_beastly_bone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:beastly_bone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:legs_of_fawn"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beastly_bone",
+      "has_the_recipe"
+    ]
+  ]
+}

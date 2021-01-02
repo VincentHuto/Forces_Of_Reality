@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IRI",
+    "IOI",
+    "AOA"
+  ],
+  "key": {
+    "R": {
+      "item": "forcesofreality:rafflesia_flower"
+    },
+    "I": {
+      "item": "forcesofreality:old_iron_block"
+    },
+    "O": {
+      "item": "forcesofreality:runed_obsidian"
+    },
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:rafflesia_of_fidelity"
+  }
+}

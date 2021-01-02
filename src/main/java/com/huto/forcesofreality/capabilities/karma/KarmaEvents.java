@@ -92,8 +92,14 @@ public class KarmaEvents {
 
 	@SubscribeEvent
 	public static void onPlayerKillsEntity(LivingDeathEvent event) {
+
 		if (event.getSource().getTrueSource() instanceof PlayerEntity) {
 			PlayerEntity p = (PlayerEntity) event.getSource().getTrueSource();
+			if (p.getHeldItemMainhand().getItem() == ItemInit.karmic_harvester.get()) {
+				event.getEntity().entityDropItem(ItemInit.karmic_drop.get(), event.getEntity().world.rand.nextInt(3));
+
+			}
+
 			IKarma karma = p.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
 			IKarmaActivation karmaAct = p.getCapability(KarmaActivationProvider.KARMA_CAPA)
 					.orElseThrow(IllegalStateException::new);
@@ -254,7 +260,7 @@ public class KarmaEvents {
 						System.out.println(ovw);
 						serverPlayer.teleport(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5,
 								serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-						} else {
+					} else {
 						// Subsequent Joins
 						DimensionalPosition p = lastPos.get();
 						BlockPos bp = p.getPosition();
@@ -269,7 +275,6 @@ public class KarmaEvents {
 		}
 
 	}
-
 
 	// Saving player position to return too before and after teleport
 	public static Optional<DimensionalPosition> getLastOverworldPosition(PlayerEntity player) {

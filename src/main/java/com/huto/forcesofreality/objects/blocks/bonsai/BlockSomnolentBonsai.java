@@ -1,6 +1,6 @@
 package com.huto.forcesofreality.objects.blocks.bonsai;
 
-import com.huto.forcesofreality.init.ItemInit;
+import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.objects.blocks.util.EnumBonsaiTypes;
 
 import net.minecraft.item.Item;
@@ -11,7 +11,7 @@ public class BlockSomnolentBonsai extends BlockBonsai {
 	}
 	@Override
 	public Item getShearDrop() {
-		return ItemInit.akebi_pod.get();
+		return BlockInit.akebi.get().asItem();
 	}
 
 }

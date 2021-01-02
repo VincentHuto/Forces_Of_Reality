@@ -152,23 +152,23 @@ public class BlockInit {
 			() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> somnolent_stone = BLOCKS.register("somnolent_stone",
-			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> somnolent_stone_smooth = BLOCKS.register("somnolent_stone_smooth",
-			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> somnolent_ore = BLOCKS.register("somnolent_ore",
-			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f)
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)
 					.harvestTool(ToolType.PICKAXE).harvestLevel(6).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> somnolent_ore_somnolent = BLOCKS.register("somnolent_ore_somnolent",
-			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5f, 15f)
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)
 					.harvestTool(ToolType.PICKAXE).harvestLevel(6).sound(SoundType.STONE)));
 	// Anti
 	public static final RegistryObject<Block> anti_stone = BLOCKS.register("anti_stone",
-			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> anti_stone_smooth = BLOCKS.register("anti_stone_smooth",
-			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
+			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
 	public static final RegistryObject<Block> anti_earth = BLOCKS.register("anti_earth",
 			() -> new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(0.5f, 15f).harvestLevel(1)

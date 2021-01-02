@@ -32,6 +32,7 @@ public class ModFeatures {
 
 	@SubscribeEvent
 	public void onBiomeLoadingEvent(BiomeLoadingEvent event) {
+
 		// spawn depend on biome type
 		if (event.getCategory() == Biome.Category.FOREST || event.getCategory() == Biome.Category.PLAINS
 				|| event.getCategory() == Biome.Category.TAIGA || event.getCategory() == Biome.Category.EXTREME_HILLS) {
@@ -51,6 +52,7 @@ public class ModFeatures {
 		Registry.register(r, new ResourceLocation(ForcesOfReality.MOD_ID, "breakout_point"), BREAKOUT_POINT_FEATURE);
 		Registry.register(r, new ResourceLocation(ForcesOfReality.MOD_ID, "null_breakout_point"),
 				NULL_BREAKOUT_POINT_FEATURE);
+
 	}
 
 }

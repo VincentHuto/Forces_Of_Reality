@@ -11,8 +11,8 @@
 		},
 		"decorators": [
 			{
-				"probability": 0.2,
-				"type": "minecraft:cocoa"
+				"probability": 0.1,
+				"type": "forcesofreality:akebi"
 			}
 		],
 		"trunk_provider": {
