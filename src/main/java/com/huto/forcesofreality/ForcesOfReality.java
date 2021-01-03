@@ -14,7 +14,6 @@ import com.huto.forcesofreality.capabilities.vibes.SeerEventHandler;
 import com.huto.forcesofreality.capabilities.vibes.VibrationEvents;
 import com.huto.forcesofreality.capabilities.vibes.chunk.ChunkVibrationEvents;
 import com.huto.forcesofreality.events.MechanGloveEvents;
-import com.huto.forcesofreality.events.RuneBinderEvents;
 import com.huto.forcesofreality.events.SparkDirectorModEvents;
 import com.huto.forcesofreality.gui.pages.coven.CovenPageLib;
 import com.huto.forcesofreality.gui.pages.guide.TomePageLib;
@@ -29,11 +28,8 @@ import com.huto.forcesofreality.init.ParticleInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.init.TreeDecoratorInit;
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
-import com.huto.forcesofreality.objects.items.tools.ItemRuneBinder;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 import com.huto.forcesofreality.recipes.CopyMechanGloveDataRecipe;
-import com.huto.forcesofreality.recipes.CopyRuneBinderDataRecipe;
-import com.huto.forcesofreality.recipes.ModChiselRecipes;
 import com.huto.forcesofreality.recipes.ModFuserRecipies;
 import com.huto.forcesofreality.recipes.ModHarmonizerRecipes;
 import com.huto.forcesofreality.recipes.ModInscriberRecipes;
@@ -41,7 +37,7 @@ import com.huto.forcesofreality.recipes.ModRafflesiaRecipies;
 import com.huto.forcesofreality.recipes.ModResonatorRecipies;
 import com.huto.forcesofreality.recipes.ModWandRecipies;
 import com.huto.forcesofreality.recipes.UpgradeMachinaLampDataRecipe;
-import com.huto.forcesofreality.render.entity.layer.RunesRenderLayer;
+import com.huto.forcesofreality.render.entity.layer.AdornmentsRenderLayer;
 import com.huto.forcesofreality.worldgen.ModFeatures;
 import com.huto.forcesofreality.worldgen.ModOreGen;
 
@@ -102,8 +98,8 @@ public class ForcesOfReality {
 		TreeDecoratorInit.TREEDECORATORS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::pickupEvent);
-		MinecraftForge.EVENT_BUS.addListener(RuneBinderEvents::onClientTick);
+		// MinecraftForge.EVENT_BUS.addListener(AdornmentBinderEvents::pickupEvent);
+		// MinecraftForge.EVENT_BUS.addListener(AdornmentBinderEvents::onClientTick);
 		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::pickupEvent);
 		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::onClientTick);
 		MinecraftForge.EVENT_BUS.addListener(SparkDirectorModEvents::onClientTick);
@@ -147,11 +143,11 @@ public class ForcesOfReality {
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
 		ModRafflesiaRecipies.init();
-		ModChiselRecipes.init();
+		// ModChiselRecipes.init();
 		ModInscriberRecipes.init();
 		ModHarmonizerRecipes.init();
 		PacketHandler.registerChannels();
-		PacketHandler.registerRuneBinderChannels();
+		// PacketHandler.registerAdornmentBinderChannels();
 		PacketHandler.registerMechanGloveChannels();
 		ModFeatures.setup();
 		MinecraftForge.EVENT_BUS.register(new ModFeatures());
@@ -192,32 +188,29 @@ public class ForcesOfReality {
 		}
 	}
 
-	// Rune Layers
+	// Adornment Layers
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+
 	@OnlyIn(Dist.CLIENT)
 	private void addLayers() {
 		Map<String, PlayerRenderer> skinMap = Minecraft.getInstance().getRenderManager().getSkinMap();
 		PlayerRenderer render;
 		render = skinMap.get("default");
-		render.addLayer(new RunesRenderLayer(render));
+		render.addLayer(new AdornmentsRenderLayer(render));
 		render = skinMap.get("slim");
-		render.addLayer(new RunesRenderLayer(render));
+		render.addLayer(new AdornmentsRenderLayer(render));
 	}
 
-	public static ItemStack findRuneBinder(PlayerEntity player) {
-		if (player.getHeldItemMainhand().getItem() instanceof ItemRuneBinder)
-			return player.getHeldItemMainhand();
-		if (player.getHeldItemOffhand().getItem() instanceof ItemRuneBinder)
-			return player.getHeldItemOffhand();
-		PlayerInventory inventory = player.inventory;
-		for (int i = 0; i <= 35; i++) {
-			ItemStack stack = inventory.getStackInSlot(i);
-			if (stack.getItem() instanceof ItemRuneBinder)
-				return stack;
-		}
-		return ItemStack.EMPTY;
-	}
-
+	/*
+	 * public static ItemStack findAdornmentBinder(PlayerEntity player) { if
+	 * (player.getHeldItemMainhand().getItem() instanceof ItemAdornmentBinder) return
+	 * player.getHeldItemMainhand(); if (player.getHeldItemOffhand().getItem()
+	 * instanceof ItemAdornmentBinder) return player.getHeldItemOffhand();
+	 * PlayerInventory inventory = player.inventory; for (int i = 0; i <= 35; i++) {
+	 * ItemStack stack = inventory.getStackInSlot(i); if (stack.getItem() instanceof
+	 * ItemAdornmentBinder) return stack; } return ItemStack.EMPTY; }
+	 */
 	public static ItemStack findMechanGlove(PlayerEntity player) {
 		if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove)
 			return player.getHeldItemMainhand();
@@ -234,8 +227,10 @@ public class ForcesOfReality {
 
 	@SubscribeEvent
 	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
-		event.getRegistry().register(new CopyRuneBinderDataRecipe.Serializer()
-				.setRegistryName(new ResourceLocation(MOD_ID, "rune_binder_upgrade")));
+		/*
+		 * event.getRegistry().register(new CopyAdornmentBinderDataRecipe.Serializer()
+		 * .setRegistryName(new ResourceLocation(MOD_ID, "rune_binder_upgrade")));
+		 */
 		event.getRegistry().register(new CopyMechanGloveDataRecipe.Serializer()
 				.setRegistryName(new ResourceLocation(MOD_ID, "mechan_glove_upgrade")));
 		event.getRegistry().register(new UpgradeMachinaLampDataRecipe.Serializer()

@@ -1,16 +1,16 @@
-package com.huto.forcesofreality.containers.slots;
+/*package com.huto.forcesofreality.containers.slots;
 
 import javax.annotation.Nonnull;
 
-import com.huto.forcesofreality.containers.RuneBinderItemHandler;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePattern;
+import com.huto.forcesofreality.containers.AdornmentBinderItemHandler;
+import com.huto.forcesofreality.objects.items.runes.patterns.ItemAdornmentPattern;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class SlotRuneBinder extends SlotItemHandler {
-	public SlotRuneBinder(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+public class SlotAdornmentBinder extends SlotItemHandler {
+	public SlotAdornmentBinder(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
 		super(itemHandler, index, xPosition, yPosition);
 	}
 
@@ -22,7 +22,7 @@ public class SlotRuneBinder extends SlotItemHandler {
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack) {
 		// check for shulkers.
-		if (stack.getItem() instanceof ItemRunePattern) {
+		if (stack.getItem() instanceof ItemAdornmentPattern) {
 			return true;
 		} else {
 			return false;
@@ -33,7 +33,7 @@ public class SlotRuneBinder extends SlotItemHandler {
 	@Override
 	public void onSlotChanged() {
 		super.onSlotChanged();
-		if (getItemHandler() instanceof RuneBinderItemHandler)
-			((RuneBinderItemHandler) getItemHandler()).setDirty();
+		if (getItemHandler() instanceof AdornmentBinderItemHandler)
+			((AdornmentBinderItemHandler) getItemHandler()).setDirty();
 	}
-}
+}*/

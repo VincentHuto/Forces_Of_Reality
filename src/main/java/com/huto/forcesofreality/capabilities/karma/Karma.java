@@ -19,4 +19,12 @@ public class Karma implements IKarma {
 		return this.Karma;
 	}
 
+	public boolean isKarmaGood() {
+		if (getKarma() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

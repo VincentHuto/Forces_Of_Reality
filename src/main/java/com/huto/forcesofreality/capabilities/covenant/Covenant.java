@@ -25,6 +25,27 @@ public class Covenant implements ICovenant {
 		}
 	}
 
+	public void subtractCovenCost(EnumCovenants covenIn, int value, boolean isKarmaAlign) {
+		if (devotion != null) {
+			if (isKarmaAlign) {
+				setCovenDevotion(covenIn, -Math.abs(value));
+			} else {
+				setCovenDevotion(covenIn, -Math.abs(value * 2));
+			}
+		}
+	}
+
+	public void addCovenDevotion(EnumCovenants covenIn, int value, boolean isKarmaAlign) {
+		if (devotion != null) {
+			if (isKarmaAlign) {
+				setCovenDevotion(covenIn, Math.abs(value));
+			} else {
+				setCovenDevotion(covenIn, Math.abs(value * 2));
+			}
+		}
+
+	}
+
 	public int getDevotionByCoven(EnumCovenants covenIn) {
 		if (devotion != null && devotion.get(covenIn) != null) {
 			return devotion.get(covenIn);
@@ -50,6 +71,26 @@ public class Covenant implements ICovenant {
 			return EnumCovenants.HASTUR;
 		default:
 			return null;
+		}
+	}
+
+	@Override
+	public boolean getCovenAlignment(EnumCovenants covenIn) {
+		switch (covenIn) {
+		case ASCENDENT:
+			return true;
+		case BEAST:
+			return false;
+		case ELDRITCH:
+			return false;
+		case HASTUR:
+			return false;
+		case MACHINE:
+			return true;
+		case SELF:
+			return true;
+		default:
+			return false;
 		}
 	}
 

@@ -1,12 +1,11 @@
 package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.objects.tileenties.TileEntityChiselStation;
 import com.huto.forcesofreality.objects.tileenties.TileEntityIcoSphere;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMagicLight;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMagicRingLight;
-import com.huto.forcesofreality.objects.tileenties.TileEntityRuneModStation;
+import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation;
 import com.huto.forcesofreality.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.forcesofreality.objects.tileenties.TileEntityTeleporter;
 import com.huto.forcesofreality.objects.tileenties.TileEntityVirtuousEnchant;
@@ -98,13 +97,13 @@ public class TileEntityInit {
 			.register("thermal_influxer", () -> TileEntityType.Builder
 					.create(TileEntityThermalInfluxer::new, BlockInit.thermal_influxer.get()).build(null));
 
-	public static final RegistryObject<TileEntityType<TileEntityChiselStation>> runic_chisel_station = TILES
+/*	public static final RegistryObject<TileEntityType<TileEntityChiselStation>> runic_chisel_station = TILES
 			.register("runic_chisel_station", () -> TileEntityType.Builder
 					.create(TileEntityChiselStation::new, BlockInit.runic_chisel_station.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityRuneModStation>> rune_mod_station = TILES
+*/
+	public static final RegistryObject<TileEntityType<TileEntityAdornmentModStation>> rune_mod_station = TILES
 			.register("rune_mod_station", () -> TileEntityType.Builder
-					.create(TileEntityRuneModStation::new, BlockInit.rune_mod_station.get()).build(null));
+					.create(TileEntityAdornmentModStation::new, BlockInit.rune_mod_station.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntitySlimeRepelent>> slime_repelent = TILES
 			.register("slime_repelent", () -> TileEntityType.Builder

@@ -242,9 +242,6 @@ public class GuiTomePageTOC extends GuiTomePage {
 		case WANDS:
 			chapterPages = TomePageLib.getWandsPageList();
 			break;
-		case RUNES:
-			chapterPages = TomePageLib.getRunesPageList();
-			break;
 		case GENERATION:
 			chapterPages = TomePageLib.getGeneratePageList();
 			break;
@@ -272,8 +269,7 @@ public class GuiTomePageTOC extends GuiTomePage {
 			return TomePageLib.getArmorPageList();
 		case WANDS:
 			return TomePageLib.getWandsPageList();
-		case RUNES:
-			return TomePageLib.getRunesPageList();
+
 		case GENERATION:
 			return TomePageLib.getGeneratePageList();
 		case MACHINES:

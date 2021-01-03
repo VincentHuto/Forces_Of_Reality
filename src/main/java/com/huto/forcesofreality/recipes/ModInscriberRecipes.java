@@ -15,14 +15,14 @@ import net.minecraft.util.ResourceLocation;
 public class ModInscriberRecipes {
 	public static final List<RecipeAutoInscriber> inscriberRecipies = new ArrayList<>();
 
-	public static RecipeAutoInscriber recipeRunedObsidianIron, recipeRunedObsidianObsidian, recipeActivatedObsidian;
+	public static RecipeAutoInscriber recipeAdornmentdObsidianIron, recipeAdornmentdObsidianObsidian, recipeActivatedObsidian;
 
 	public static void init() {
 
-		recipeRunedObsidianIron = registerRecipe(new ResourceLocation("runed_obsidian_iron"),
+		recipeAdornmentdObsidianIron = registerRecipe(new ResourceLocation("runed_obsidian_iron"),
 				new ItemStack(BlockInit.runed_obsidian.get(), 1), 50, Ingredient.fromItems(Blocks.OBSIDIAN),
 				Ingredient.fromItems(ItemInit.iron_knapper.get()));
-		recipeRunedObsidianObsidian = registerRecipe(new ResourceLocation("runed_obsidian_obsidian"),
+		recipeAdornmentdObsidianObsidian = registerRecipe(new ResourceLocation("runed_obsidian_obsidian"),
 				new ItemStack(BlockInit.runed_obsidian.get(), 1), 25, Ingredient.fromItems(Blocks.OBSIDIAN),
 				Ingredient.fromItems(ItemInit.obsidian_knapper.get()));
 		recipeActivatedObsidian = registerRecipe(new ResourceLocation("activated_obsidian_obsidian"),

@@ -13,4 +13,6 @@ public interface ICovenant {
 	public int getDevotionByCoven(EnumCovenants covenIn);
 
 	public EnumCovenants getOpposingCoven(EnumCovenants covenIn);
+
+	public boolean getCovenAlignment(EnumCovenants covenIn);
 }

@@ -233,8 +233,6 @@ public class GuiTomePage extends Screen {
 			return TomePageLib.getArmorPageList();
 		case WANDS:
 			return TomePageLib.getWandsPageList();
-		case RUNES:
-			return TomePageLib.getRunesPageList();
 		case GENERATION:
 			return TomePageLib.getGeneratePageList();
 		case MACHINES:

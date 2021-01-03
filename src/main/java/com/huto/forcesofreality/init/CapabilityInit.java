@@ -10,12 +10,12 @@ import com.huto.forcesofreality.capabilities.karma.KarmaStorage;
 import com.huto.forcesofreality.capabilities.karma.activation.IKarmaActivation;
 import com.huto.forcesofreality.capabilities.karma.activation.KarmaActivation;
 import com.huto.forcesofreality.capabilities.karma.activation.KarmaActivationStorage;
-import com.huto.forcesofreality.capabilities.mindrunes.IRune;
-import com.huto.forcesofreality.capabilities.mindrunes.IRunesItemHandler;
-import com.huto.forcesofreality.capabilities.mindrunes.RuneCap.IRuneFactory;
-import com.huto.forcesofreality.capabilities.mindrunes.RuneCap.IRuneStorage;
-import com.huto.forcesofreality.capabilities.mindrunes.RunesItemHandlerCap.IRunesItemHandlerFactory;
-import com.huto.forcesofreality.capabilities.mindrunes.RunesItemHandlerCap.IRunesItemHandlerStorage;
+import com.huto.forcesofreality.capabilities.adornments.IAdornment;
+import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
+import com.huto.forcesofreality.capabilities.adornments.AdornmentCap.IAdornmentFactory;
+import com.huto.forcesofreality.capabilities.adornments.AdornmentCap.IAdornmentStorage;
+import com.huto.forcesofreality.capabilities.adornments.AdornmentsItemHandlerCap.IAdornmentsItemHandlerFactory;
+import com.huto.forcesofreality.capabilities.adornments.AdornmentsItemHandlerCap.IAdornmentsItemHandlerStorage;
 import com.huto.forcesofreality.capabilities.tiledevotion.Devotion;
 import com.huto.forcesofreality.capabilities.tiledevotion.DevotionStorage;
 import com.huto.forcesofreality.capabilities.tiledevotion.IDevotion;
@@ -38,9 +38,9 @@ public class CapabilityInit {
 		CapabilityManager.INSTANCE.register(IKarma.class, new KarmaStorage(), Karma::new);
 		CapabilityManager.INSTANCE.register(ICovenant.class, new CovenantStorage(), Covenant::new);
 		CapabilityManager.INSTANCE.register(IDevotion.class, new DevotionStorage(), Devotion::new);
-		CapabilityManager.INSTANCE.register(IRune.class, new IRuneStorage(), new IRuneFactory());
-		CapabilityManager.INSTANCE.register(IRunesItemHandler.class, new IRunesItemHandlerStorage(),
-				new IRunesItemHandlerFactory());
+		CapabilityManager.INSTANCE.register(IAdornment.class, new IAdornmentStorage(), new IAdornmentFactory());
+		CapabilityManager.INSTANCE.register(IAdornmentsItemHandler.class, new IAdornmentsItemHandlerStorage(),
+				new IAdornmentsItemHandlerFactory());
 		CapabilityManager.INSTANCE.register(IChunkVibrations.class, new ChunkVibrationStorage(),()->null);
 
 	}

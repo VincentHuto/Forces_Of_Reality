@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.objects.blocks;
+/*package com.huto.forcesofreality.objects.blocks;
 
 import com.huto.forcesofreality.objects.tileenties.TileEntityChiselStation;
 
@@ -121,3 +121,4 @@ public class BlockChiselStation extends Block {
 	}
 
 }
+*/

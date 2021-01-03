@@ -2,7 +2,7 @@ package com.huto.forcesofreality.network.coven;
 
 import java.util.function.Supplier;
 
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

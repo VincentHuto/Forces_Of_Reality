@@ -39,7 +39,7 @@ public class GuiTomeTitle extends Screen {
 	final int BUTTONYELLOW = 2;
 	final int BUTTONBLUE = 3;
 	final int BUTTONGREEN = 4;
-	final int BUTTONRED = 5;
+//	final int BUTTONRED = 5;
 	final int BUTTONORANGE = 6;
 	final int BUTTONCYAN = 7;
 	final int BUTTONDARKBLUE = 9;
@@ -48,7 +48,7 @@ public class GuiTomeTitle extends Screen {
 	static StringTextComponent titleComponent = new StringTextComponent(title);
 	String subtitle = " Duality of Nature";
 	ItemStack icon = new ItemStack(ItemInit.somnolent_crystal.get());
-	GuiButtonTextured buttonclose, whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton,
+	GuiButtonTextured buttonclose, whiteButton, yellowButton, blueButton, greenButton, orangeButton,
 			cyanButton, darkBlueButton, eyeButton;
 	boolean isElder;
 
@@ -151,9 +151,9 @@ public class GuiTomeTitle extends Screen {
 		if (greenButton.isHovered()) {
 			renderTooltip(matrixStack, new StringTextComponent("Wands"), mouseX, mouseY);
 		}
-		if (redButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Runes"), mouseX, mouseY);
-		}
+	/*	if (redButton.isHovered()) {
+			renderTooltip(matrixStack, new StringTextComponent("Adornments"), mouseX, mouseY);
+		}*/
 		if (orangeButton.isHovered()) {
 			renderTooltip(matrixStack, new StringTextComponent("Machines"), mouseX, mouseY);
 		}
@@ -197,10 +197,10 @@ public class GuiTomeTitle extends Screen {
 				verticalLoc - 121, 24, 16, 186, 96, null, (press) -> {
 					mc.displayGuiScreen(TomePageLib.WandsPageList.get(0));
 				}));
-		this.addButton(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc - (guiWidth - 180),
+		/*this.addButton(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc - (guiWidth - 180),
 				verticalLoc - 91, 24, 16, 186, 128, null, (press) -> {
-					mc.displayGuiScreen(TomePageLib.RunesPageList.get(0));
-				}));
+					mc.displayGuiScreen(TomePageLib.AdornmentsPageList.get(0));
+				}));*/
 		this.addButton(orangeButton = new GuiButtonTextured(texture, BUTTONORANGE, sideLoc - (guiWidth - 177),
 				verticalLoc - 49, 24, 16, 186, 160, null, (press) -> {
 					mc.displayGuiScreen(TomePageLib.BlocksPageList.get(0));

@@ -3,7 +3,7 @@ package com.huto.forcesofreality.containers.slots;
 import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.containers.MechanGloveItemHandler;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanModuleBase;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanModuleBase;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

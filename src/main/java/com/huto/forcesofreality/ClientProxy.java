@@ -3,7 +3,6 @@ package com.huto.forcesofreality;
 import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.GuiMechanGloveViewer;
-import com.huto.forcesofreality.gui.GuiRuneBinderViewer;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.models.armor.ModelOldIronChestPlate;
 import com.huto.forcesofreality.render.effects.FXLightning;
@@ -36,11 +35,11 @@ public class ClientProxy implements IProxy {
 				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
 	}
 
-	@Override
+/*	@Override
 	public void openBinderGui() {
-		Minecraft.getInstance().displayGuiScreen(new GuiRuneBinderViewer(new ItemStack(ItemInit.rune_binder.get()),
+		Minecraft.getInstance().displayGuiScreen(new GuiAdornmentBinderViewer(new ItemStack(ItemInit.rune_binder.get()),
 				ClientEventSubscriber.getClientPlayer()));
-	}
+	}*/
 	@Override
 	public void openMechanGui() {
 		Minecraft.getInstance().displayGuiScreen(new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()),

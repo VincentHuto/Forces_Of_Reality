@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.gui;
+/*package com.huto.forcesofreality.gui;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GuiRunePattern extends Screen {
+public class GuiAdornmentPattern extends Screen {
 	final ResourceLocation texture = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/rune_pattern.png");
 	private static final ResourceLocation GUI_Chisel = new ResourceLocation(
 			ForcesOfReality.MOD_ID + ":textures/gui/chisel_station.png");
@@ -41,7 +41,7 @@ public class GuiRunePattern extends Screen {
 	protected List<Button> buttonList = Lists.<Button>newArrayList();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiRunePattern(ItemStack iconIn, RecipeChiselStation recipeIn, String textIn) {
+	public GuiAdornmentPattern(ItemStack iconIn, RecipeChiselStation recipeIn, String textIn) {
 		super(titleComponent);
 		this.icon = iconIn;
 		this.recipe = recipeIn;
@@ -134,8 +134,8 @@ public class GuiRunePattern extends Screen {
 		}
 		for (int l = 0; l < runeButtonArray.length; l++) {
 			for (int m = 0; m < runeButtonArray.length; m++) {
-				for (int k = 0; k < recipe.getActivatedRunes().size(); k++) {
-					if (runeButtonArray[l][m].getId() == recipe.getActivatedRunes().get(k)) {
+				for (int k = 0; k < recipe.getActivatedAdornments().size(); k++) {
+					if (runeButtonArray[l][m].getId() == recipe.getActivatedAdornments().get(k)) {
 						runeButtonArray[l][m].setState(true);
 					}
 				}
@@ -156,3 +156,4 @@ public class GuiRunePattern extends Screen {
 	}
 
 }
+*/

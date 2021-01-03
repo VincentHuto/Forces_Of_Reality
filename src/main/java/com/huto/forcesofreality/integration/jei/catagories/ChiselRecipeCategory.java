@@ -1,4 +1,4 @@
-
+/*
 package com.huto.forcesofreality.integration.jei.catagories;
 
 import java.util.ArrayList;
@@ -100,13 +100,13 @@ public class ChiselRecipeCategory implements IRecipeCategory<RecipeChiselStation
 		}
 		GlStateManager.popMatrix();
 
-		/*
-		 * fontRenderer.func_238418_a_(new StringTextComponent("Runes to Activate"), 20,
+		
+		 * fontRenderer.func_238418_a_(new StringTextComponent("Adornments to Activate"), 20,
 		 * (int) (fontRenderer.FONT_HEIGHT) - 8, 130, 10);
 		 * fontRenderer.func_238418_a_(new
-		 * StringTextComponent(recipe.getActivatedRunes().toString()), -20, (int)
+		 * StringTextComponent(recipe.getActivatedAdornments().toString()), -20, (int)
 		 * (fontRenderer.FONT_HEIGHT), 150, 0);
-		 */
+		 
 
 	}
 
@@ -127,8 +127,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<RecipeChiselStation
 		}
 		for (int l = 0; l < runeButtonArray.length; l++) {
 			for (int m = 0; m < runeButtonArray.length; m++) {
-				for (int k = 0; k < recipe.getActivatedRunes().size(); k++) {
-					if (runeButtonArray[l][m].getId() == recipe.getActivatedRunes().get(k)) {
+				for (int k = 0; k < recipe.getActivatedAdornments().size(); k++) {
+					if (runeButtonArray[l][m].getId() == recipe.getActivatedAdornments().get(k)) {
 						runeButtonArray[l][m].setState(true);
 					}
 				}
@@ -137,21 +137,22 @@ public class ChiselRecipeCategory implements IRecipeCategory<RecipeChiselStation
 
 		int runeIn = 1;
 		int secondaryIn = 2;
-		int outputRune = 3;
+		int outputAdornment = 3;
 		if (ingredients.getInputs(VanillaTypes.ITEM).size() == 1) {
 			recipeLayout.getItemStacks().init(runeIn, true, 3, 32);
 			recipeLayout.getItemStacks().set(runeIn, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-			recipeLayout.getItemStacks().init(outputRune, false, 114, 40);
-			recipeLayout.getItemStacks().set(outputRune, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+			recipeLayout.getItemStacks().init(outputAdornment, false, 114, 40);
+			recipeLayout.getItemStacks().set(outputAdornment, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 
 		} else if (ingredients.getInputs(VanillaTypes.ITEM).size() > 1) {
 			recipeLayout.getItemStacks().init(runeIn, true, 3, 32);
 			recipeLayout.getItemStacks().set(runeIn, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 			recipeLayout.getItemStacks().init(secondaryIn, true, 3, 53);
 			recipeLayout.getItemStacks().set(secondaryIn, ingredients.getInputs(VanillaTypes.ITEM).get(1));
-			recipeLayout.getItemStacks().init(outputRune, false, 114, 40);
-			recipeLayout.getItemStacks().set(outputRune, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+			recipeLayout.getItemStacks().init(outputAdornment, false, 114, 40);
+			recipeLayout.getItemStacks().set(outputAdornment, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 		}
 	}
 
 }
+*/

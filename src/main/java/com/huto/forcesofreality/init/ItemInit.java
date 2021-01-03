@@ -38,58 +38,34 @@ import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
 import com.huto.forcesofreality.objects.items.armor.ItemVibeSeer;
 import com.huto.forcesofreality.objects.items.armor.ItemWrithingChest;
 import com.huto.forcesofreality.objects.items.armor.ItemWrithingHelm;
-import com.huto.forcesofreality.objects.items.fidelity.ItemBeastBreath;
-import com.huto.forcesofreality.objects.items.fidelity.ItemCrossedKeys;
-import com.huto.forcesofreality.objects.items.fidelity.ItemIntegralCog;
-import com.huto.forcesofreality.objects.items.fidelity.ItemWatchfulPendant;
-import com.huto.forcesofreality.objects.items.fidelity.ItemYellowSign;
-import com.huto.forcesofreality.objects.items.runes.ItemContractRune;
-import com.huto.forcesofreality.objects.items.runes.ItemGuidanceRune;
-import com.huto.forcesofreality.objects.items.runes.ItemMilkweedRune;
-import com.huto.forcesofreality.objects.items.runes.ItemRune;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternBeast;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternBeastContract;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternClawmark;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternCommunion;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternCorruptionContract;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternEye;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternGuidance;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternHeir;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternHunterContract;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternImpurityContract;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternLake;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternMetamorphosis;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternMetamorphosisCW;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternMilkWeedContract;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternMoon;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternOedon;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternRadianceContract;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePatternRapture;
+import com.huto.forcesofreality.objects.items.coven.sign.ItemBeastBreath;
+import com.huto.forcesofreality.objects.items.coven.sign.ItemCrossedKeys;
+import com.huto.forcesofreality.objects.items.coven.sign.ItemIntegralCog;
+import com.huto.forcesofreality.objects.items.coven.sign.ItemWatchfulPendant;
+import com.huto.forcesofreality.objects.items.coven.sign.ItemYellowSign;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemAllegianceIdentifier;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemDemonFlute;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemDiscordantBell;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemDivineFeather;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMachinaCage;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanModuleBase;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemStarSlug;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemTrickAxe;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemYellowTome;
 import com.huto.forcesofreality.objects.items.tools.EnumModToolTiers;
-import com.huto.forcesofreality.objects.items.tools.ItemAllegianceIdentifier;
 import com.huto.forcesofreality.objects.items.tools.ItemBowBlade;
 import com.huto.forcesofreality.objects.items.tools.ItemDebugTool;
-import com.huto.forcesofreality.objects.items.tools.ItemDemonFlute;
 import com.huto.forcesofreality.objects.items.tools.ItemDestructOrb;
 import com.huto.forcesofreality.objects.items.tools.ItemDestructOrbContained;
-import com.huto.forcesofreality.objects.items.tools.ItemDiscordantBell;
-import com.huto.forcesofreality.objects.items.tools.ItemDivineFeather;
 import com.huto.forcesofreality.objects.items.tools.ItemFrequencyMatcher;
 import com.huto.forcesofreality.objects.items.tools.ItemKnapper;
-import com.huto.forcesofreality.objects.items.tools.ItemMachinaCage;
 import com.huto.forcesofreality.objects.items.tools.ItemMakerActivator;
 import com.huto.forcesofreality.objects.items.tools.ItemManaExtractor;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanModuleBase;
 import com.huto.forcesofreality.objects.items.tools.ItemResonanceDestabalizer;
-import com.huto.forcesofreality.objects.items.tools.ItemRuneBinder;
 import com.huto.forcesofreality.objects.items.tools.ItemSelfAnalyzer;
-import com.huto.forcesofreality.objects.items.tools.ItemSelfReflectionMirror;
-import com.huto.forcesofreality.objects.items.tools.ItemStarSlug;
-import com.huto.forcesofreality.objects.items.tools.ItemTrickAxe;
 import com.huto.forcesofreality.objects.items.tools.ItemWandConsumeVibes;
 import com.huto.forcesofreality.objects.items.tools.ItemWandGainVibes;
-import com.huto.forcesofreality.objects.items.tools.ItemYellowTome;
 import com.huto.forcesofreality.objects.items.tools.ToolVeinPickaxe;
 
 import net.minecraft.client.renderer.color.IItemColor;
@@ -131,7 +107,7 @@ public class ItemInit {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
 			ForcesOfReality.MOD_ID);
 
-	// Return Rune
+	// Return Adornment
 	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
 			() -> new ItemResonanceDestabalizer(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 
@@ -617,14 +593,14 @@ public class ItemInit {
 	public static final RegistryObject<Item> upgrade_import = ITEMS.register("upgrade_import",
 			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 
-	// Runes
+	/*// Adornments
 
 	public static final RegistryObject<Item> self_reflection_mirror = ITEMS.register("self_reflection_mirror",
 			() -> new ItemSelfReflectionMirror(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
 					.maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
 	public static final RegistryObject<Item> mind_spike = ITEMS.register("mind_spike",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_blank = ITEMS.register("rune_blank",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
@@ -632,141 +608,141 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 
 	public static final RegistryObject<Item> rune_binder = ITEMS.register("rune_binder",
-			() -> new ItemRuneBinder("rune_binder", 18, Rarity.UNCOMMON));
+			() -> new ItemAdornmentBinder("rune_binder", 18, Rarity.UNCOMMON));
 	public static final RegistryObject<Item> rune_binder_upgraded = ITEMS.register("rune_binder_upgraded",
-			() -> new ItemRuneBinder("rune_binder_upgraded", 27, Rarity.RARE));
+			() -> new ItemAdornmentBinder("rune_binder_upgraded", 27, Rarity.RARE));
 
-	// Contract Runes
+	// Major Adornments
 	public static final RegistryObject<Item> rune_beast_c = ITEMS.register("rune_beast_c",
-			() -> new ItemContractRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMajorAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 5));
 	public static final RegistryObject<Item> rune_pattern_beast_c = ITEMS.register("rune_pattern_beast_c",
-			() -> new ItemRunePatternBeastContract(
+			() -> new ItemAdornmentPatternBeastMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Beast Contract Rune, Unleash your inner beast, destroy your Ego and let the Id become all you are, a primal beast of pure strength."));
+					"Beast Major Adornment, Unleash your inner beast, destroy your Ego and let the Id become all you are, a primal beast of pure strength."));
 	public static final RegistryObject<Item> rune_corruption_c = ITEMS.register("rune_corruption_c",
-			() -> new ItemContractRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMajorAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 5));
 	public static final RegistryObject<Item> rune_pattern_corruption_c = ITEMS.register("rune_pattern_corruption_c",
-			() -> new ItemRunePatternCorruptionContract(
+			() -> new ItemAdornmentPatternCorruptionMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Corruption Contract Rune, Corrupted by those who wished you the worst, your faith has become dark, your dreams have become nightmares!"));
+					"Corruption Major Adornment, Corrupted by those who wished you the worst, your faith has become dark, your dreams have become nightmares!"));
 	public static final RegistryObject<Item> rune_impurity_c = ITEMS.register("rune_impurity_c",
-			() -> new ItemContractRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMajorAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 5));
 	public static final RegistryObject<Item> rune_pattern_impurity_c = ITEMS.register("rune_pattern_impurity_c",
-			() -> new ItemRunePatternImpurityContract(
+			() -> new ItemAdornmentPatternImpurityMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Impurity Contract Rune, Your blood has become tainted and black, you hunger for all that is immoral and unclean..."));
+					"Impurity Major Adornment, Your blood has become tainted and black, you hunger for all that is immoral and unclean..."));
 	public static final RegistryObject<Item> rune_milkweed_c = ITEMS.register("rune_milkweed_c",
-			() -> new ItemMilkweedRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMilkweedAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ELDRITCH, 5));
 	public static final RegistryObject<Item> rune_pattern_milkweed_c = ITEMS.register("rune_pattern_milkweed_c",
-			() -> new ItemRunePatternMilkWeedContract(
+			() -> new ItemAdornmentPatternMilkWeedMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Milkweed Contract Rune, Gain contact with the outer beings from beyond all known realms, learn from them, if you dare..."));
+					"Milkweed Major Adornment, Gain contact with the outer beings from beyond all known realms, learn from them, if you dare..."));
 	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
-			() -> new ItemContractRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMajorAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.ASCENDENT, 5));
 	public static final RegistryObject<Item> rune_pattern_radiance_c = ITEMS.register("rune_pattern_radiance_c",
-			() -> new ItemRunePatternRadianceContract(
+			() -> new ItemAdornmentPatternRadianceMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Radiance Contract Rune, Shining symbol of rioutous grace and fury, unleash your inner saint against all the heathens you face!"));
+					"Radiance Major Adornment, Shining symbol of rioutous grace and fury, unleash your inner saint against all the heathens you face!"));
 	public static final RegistryObject<Item> rune_hunter_c = ITEMS.register("rune_hunter_c",
-			() -> new ItemContractRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemMajorAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 5));
 	public static final RegistryObject<Item> rune_pattern_hunter_c = ITEMS.register("rune_pattern_hunter_c",
-			() -> new ItemRunePatternHunterContract(
+			() -> new ItemAdornmentPatternHunterMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Hunter Contract Rune, A trained killer, set in your ways, a true hunter of hunters, weapons are your muse, the battle has become your muse."));
+					"Hunter Major Adornment, A trained killer, set in your ways, a true hunter of hunters, weapons are your muse, the battle has become your muse."));
 
-	// Base Runes
+	// Base Adornments
 	public static final RegistryObject<Item> rune_metamorphosis = ITEMS.register("rune_metamorphosis",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_metamorphosis = ITEMS.register("rune_pattern_metamorphosis",
-			() -> new ItemRunePatternMetamorphosis(
+			() -> new ItemAdornmentPatternMetamorphosis(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Anti Metamorphosis Rune, The crooked metamorphosis has begun, your vitatlity has increased, you feel like you could regrow anything!"));
+					"Anti Metamorphosis Adornment, The crooked metamorphosis has begun, your vitatlity has increased, you feel like you could regrow anything!"));
 	public static final RegistryObject<Item> rune_metamorphosis_cw = ITEMS.register("rune_metamorphosis_cw",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 
 	public static final RegistryObject<Item> rune_pattern_metamorphosis_cw = ITEMS.register(
 			"rune_pattern_metamorphosis_cw",
-			() -> new ItemRunePatternMetamorphosisCW(
+			() -> new ItemAdornmentPatternMetamorphosisCW(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Metamorphois Rune, The proper metamorphosis has begun, your vitality has increased, you feel full of life anew!"));
+					"Metamorphois Adornment, The proper metamorphosis has begun, your vitality has increased, you feel full of life anew!"));
 	public static final RegistryObject<Item> rune_lake = ITEMS.register("rune_lake",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_lake = ITEMS.register("rune_pattern_lake",
-			() -> new ItemRunePatternLake(
+			() -> new ItemAdornmentPatternLake(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Lake Rune, The rushing of sacred waters, the roar of a great ocean calls to you, you know your home, and it beckons you back.."));
+					"Lake Adornment, The rushing of sacred waters, the roar of a great ocean calls to you, you know your home, and it beckons you back.."));
 	public static final RegistryObject<Item> rune_clawmark = ITEMS.register("rune_clawmark",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> rune_pattern_clawmark = ITEMS.register("rune_pattern_clawmark",
-			() -> new ItemRunePatternClawmark(
+			() -> new ItemAdornmentPatternClawmark(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Clawmark Rune, Tooth and Nail is all you know, the endless fight has just begun, bring the armies home, they are no threat."));
+					"Clawmark Adornment, Tooth and Nail is all you know, the endless fight has just begun, bring the armies home, they are no threat."));
 	public static final RegistryObject<Item> rune_rapture = ITEMS.register("rune_rapture",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_rapture = ITEMS.register("rune_pattern_rapture",
-			() -> new ItemRunePatternRapture(
+			() -> new ItemAdornmentPatternRapture(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Rapture Rune, The blood of war is your fuel, the lifeblood of your enemy becomes your own, absorb those who would oppose you!"));
+					"Rapture Adornment, The blood of war is your fuel, the lifeblood of your enemy becomes your own, absorb those who would oppose you!"));
 	public static final RegistryObject<Item> rune_oedon = ITEMS.register("rune_oedon",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_oedon = ITEMS.register("rune_pattern_oedon",
-			() -> new ItemRunePatternOedon(
+			() -> new ItemAdornmentPatternOedon(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Oedon Rune, You feel as if you have a false heart, one granted to you on contract, nevertheless this life is yours now, use it."));
+					"Oedon Adornment, You feel as if you have a false heart, one granted to you on contract, nevertheless this life is yours now, use it."));
 	public static final RegistryObject<Item> rune_eye = ITEMS.register("rune_eye",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_eye = ITEMS.register("rune_pattern_eye",
-			() -> new ItemRunePatternEye(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Eye Rune, Your eyes, o' glorious eyes! do not faulter, do not die, for you shall see, beyond the veil, to see what the darkness entails..."));
+			() -> new ItemAdornmentPatternEye(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+					"Eye Adornment, Your eyes, o' glorious eyes! do not faulter, do not die, for you shall see, beyond the veil, to see what the darkness entails..."));
 	public static final RegistryObject<Item> rune_moon = ITEMS.register("rune_moon",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_moon = ITEMS.register("rune_pattern_moon",
-			() -> new ItemRunePatternMoon(
+			() -> new ItemAdornmentPatternMoon(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Moon Rune, The great moon above has become your muse, it is what drives you, turn away from the cursed sun, carpe noctum!"));
+					"Moon Adornment, The great moon above has become your muse, it is what drives you, turn away from the cursed sun, carpe noctum!"));
 	public static final RegistryObject<Item> rune_beast = ITEMS.register("rune_beast",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.BEAST, 1));
 	public static final RegistryObject<Item> rune_pattern_beast = ITEMS.register("rune_pattern_beast",
-			() -> new ItemRunePatternBeast(
+			() -> new ItemAdornmentPatternBeast(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Beast Rune, The howl of a gale, the howl of the beast, it is one and all in you, run like the wind, endless and with drive!"));
+					"Beast Adornment, The howl of a gale, the howl of the beast, it is one and all in you, run like the wind, endless and with drive!"));
 	public static final RegistryObject<Item> rune_heir = ITEMS.register("rune_heir",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_heir = ITEMS.register("rune_pattern_heir",
-			() -> new ItemRunePatternHeir(
+			() -> new ItemAdornmentPatternHeir(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Heir Rune, you develop this watchful sense,you, the spiritual succesor to a once great power, shall rekindle their former glory; Divine Heir."));
+					"Heir Adornment, you develop this watchful sense,you, the spiritual succesor to a once great power, shall rekindle their former glory; Divine Heir."));
 	public static final RegistryObject<Item> rune_guidance = ITEMS.register("rune_guidance",
-			() -> new ItemGuidanceRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+			() -> new ItemGuidanceAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumCovenants.SELF, 1));
 	public static final RegistryObject<Item> rune_pattern_guidance = ITEMS.register("rune_pattern_guidance",
-			() -> new ItemRunePatternGuidance(
+			() -> new ItemAdornmentPatternGuidance(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Guidance Rune, The supernatural blessing, one of fortune and direction, may it guide you to your wants, as it has so many others before."));
+					"Guidance Adornment, The supernatural blessing, one of fortune and direction, may it guide you to your wants, as it has so many others before."));
 	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
-			() -> new ItemRune(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT,
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT,
 					1));
 	public static final RegistryObject<Item> rune_pattern_communion = ITEMS.register("rune_pattern_communion",
-			() -> new ItemRunePatternCommunion(
+			() -> new ItemAdornmentPatternCommunion(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					"Communion Rune, The call from beyond rings louder for you, you wish to join them, you must join them. join.joi,jo..."));
-
+					"Communion Adornment, The call from beyond rings louder for you, you wish to join them, you must join them. join.joi,jo..."));
+*/
 	// Spawn Eggs
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_walker = ITEMS
 			.register("spawn_egg_dream_walker", () -> new ModSpawnEggItem(EntityInit.dream_walker, 0x000000, 0xFFFFFF,

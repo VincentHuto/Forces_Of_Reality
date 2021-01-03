@@ -5,15 +5,15 @@ import java.awt.Point;
 import java.util.Map;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.mindrunes.IRunesItemHandler;
-import com.huto.forcesofreality.capabilities.mindrunes.RunesApi;
+import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
+import com.huto.forcesofreality.capabilities.adornments.AdornmentsApi;
 import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.EnchantmentInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
-import com.huto.forcesofreality.objects.items.runes.ItemRune;
+import com.huto.forcesofreality.objects.items.ItemAdornment;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
@@ -96,16 +96,16 @@ public class CovenantEvents {
 
 	// SWITCHED TO CLIENTRENDEREVENT.THERMALLAYERHELPER
 	@SubscribeEvent
-	public static void onDropRune(LivingDeathEvent e) {
+	public static void onDropAdornment(LivingDeathEvent e) {
 		if (e.getEntity() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) e.getEntity();
-			IRunesItemHandler runes = RunesApi.getRunesHandler(player).orElseThrow(IllegalArgumentException::new);
+			IAdornmentsItemHandler runes = AdornmentsApi.getAdornmentsHandler(player).orElseThrow(IllegalArgumentException::new);
 			for (int i = 0; i < runes.getSlots(); ++i) {
-				if (!runes.getStackInSlot(i).isEmpty() && runes.getStackInSlot(i).getItem() instanceof ItemRune) {
+				if (!runes.getStackInSlot(i).isEmpty() && runes.getStackInSlot(i).getItem() instanceof ItemAdornment) {
 					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 							.orElseThrow(IllegalArgumentException::new);
-					ItemRune contractRune = (ItemRune) runes.getStackInSlot(i).getItem();
-					coven.setCovenDevotion(contractRune.getAssignedCovenant(), -contractRune.getDeepenAmount());
+					ItemAdornment contractAdornment = (ItemAdornment) runes.getStackInSlot(i).getItem();
+					coven.setCovenDevotion(contractAdornment.getAssignedCovenant(), -contractAdornment.getDeepenAmount());
 					player.sendStatusMessage(
 							new StringTextComponent(TextFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"),
 							false);

@@ -5,7 +5,6 @@ import com.huto.forcesofreality.objects.blocks.BlockAbyssalSilt;
 import com.huto.forcesofreality.objects.blocks.BlockAkebi;
 import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
 import com.huto.forcesofreality.objects.blocks.BlockBreakoutPoint;
-import com.huto.forcesofreality.objects.blocks.BlockChiselStation;
 import com.huto.forcesofreality.objects.blocks.BlockCrystalObj;
 import com.huto.forcesofreality.objects.blocks.BlockDisplayGlass;
 import com.huto.forcesofreality.objects.blocks.BlockGeode;
@@ -15,7 +14,7 @@ import com.huto.forcesofreality.objects.blocks.BlockMagicLight;
 import com.huto.forcesofreality.objects.blocks.BlockMagicRingLight;
 import com.huto.forcesofreality.objects.blocks.BlockMorelMushroom;
 import com.huto.forcesofreality.objects.blocks.BlockPassionFlower;
-import com.huto.forcesofreality.objects.blocks.BlockRuneModStation;
+import com.huto.forcesofreality.objects.blocks.BlockAdornmentModStation;
 import com.huto.forcesofreality.objects.blocks.BlockSingeriMushroom;
 import com.huto.forcesofreality.objects.blocks.BlockSlimeRepelent;
 import com.huto.forcesofreality.objects.blocks.BlockTeleporter;
@@ -422,11 +421,14 @@ public class BlockInit {
 			() -> new BlockCapacitor(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Misc
-	public static final RegistryObject<Block> runic_chisel_station = BLOCKS.register("runic_chisel_station",
-			() -> new BlockChiselStation(
-					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	/*
+	 * public static final RegistryObject<Block> runic_chisel_station =
+	 * BLOCKS.register("runic_chisel_station", () -> new BlockChiselStation(
+	 * Block.Properties.create(Material.ROCK).hardnessAndResistance(50f,
+	 * 1500f).sound(SoundType.STONE)));
+	 */
 	public static final RegistryObject<Block> rune_mod_station = BLOCKS.register("rune_mod_station",
-			() -> new BlockRuneModStation(
+			() -> new BlockAdornmentModStation(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 
 	public static final RegistryObject<Block> slime_repelent = BLOCKS.register("slime_repelent",

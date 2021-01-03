@@ -3,12 +3,12 @@ package com.huto.forcesofreality.containers;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import com.huto.forcesofreality.capabilities.mindrunes.IRunesItemHandler;
-import com.huto.forcesofreality.capabilities.mindrunes.RunesCapabilities;
-import com.huto.forcesofreality.containers.slots.SlotContractRune;
-import com.huto.forcesofreality.containers.slots.SlotRune;
-import com.huto.forcesofreality.containers.slots.SlotRuneArmor;
-import com.huto.forcesofreality.containers.slots.SlotRuneOffHand;
+import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
+import com.huto.forcesofreality.capabilities.adornments.AdornmentsCapabilities;
+import com.huto.forcesofreality.containers.slots.SlotMajorAdornment;
+import com.huto.forcesofreality.containers.slots.SlotAdornment;
+import com.huto.forcesofreality.containers.slots.SlotAdornmentArmor;
+import com.huto.forcesofreality.containers.slots.SlotAdornmentOffHand;
 import com.huto.forcesofreality.init.ContainerInit;
 
 import net.minecraft.entity.MobEntity;
@@ -40,14 +40,14 @@ public class PlayerExpandedContainer extends Container {
 	public final boolean isLocalWorld;
 	private final PlayerEntity player;
 
-	public IRunesItemHandler runes;
+	public IAdornmentsItemHandler runes;
 
 	public PlayerExpandedContainer(int id, PlayerInventory playerInventory, boolean localWorld) {
-		super(ContainerInit.PLAYER_RUNES, id);
+		super(ContainerInit.PLAYER_ADORNMENTS, id);
 		this.isLocalWorld = localWorld;
 		this.player = playerInventory.player;
 
-		this.runes = this.player.getCapability(RunesCapabilities.RUNES).orElseThrow(NullPointerException::new);
+		this.runes = this.player.getCapability(AdornmentsCapabilities.ADORNMENTS).orElseThrow(NullPointerException::new);
 
 		this.addSlot(
 				new CraftingResultSlot(playerInventory.player, this.craftMatrix, this.craftResult, 0, 154, 28 + 26));
@@ -60,13 +60,13 @@ public class PlayerExpandedContainer extends Container {
 
 		for (int k = 0; k < 4; ++k) {
 			final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
-			this.addSlot(new SlotRuneArmor(playerInventory, 36 + (3 - k), 8, 8 + k * 18, equipmentslottype, this.player));
+			this.addSlot(new SlotAdornmentArmor(playerInventory, 36 + (3 - k), 8, 8 + k * 18, equipmentslottype, this.player));
 		}
 
-		this.addSlot(new SlotContractRune(player, runes, 0, 78, 8));
-		this.addSlot(new SlotRune(player, runes, 1, 78 + 1 * 18, 8));
-		this.addSlot(new SlotRune(player, runes, 2, 78 + 2 * 18, 8));
-		this.addSlot(new SlotRune(player, runes, 3, 78 + 3 * 18, 8));
+		this.addSlot(new SlotMajorAdornment(player, runes, 0, 78, 8));
+		this.addSlot(new SlotAdornment(player, runes, 1, 78 + 1 * 18, 8));
+		this.addSlot(new SlotAdornment(player, runes, 2, 78 + 2 * 18, 8));
+		this.addSlot(new SlotAdornment(player, runes, 3, 78 + 3 * 18, 8));
 
 		for (int l = 0; l < 3; ++l) {
 			for (int j1 = 0; j1 < 9; ++j1) {
@@ -78,7 +78,7 @@ public class PlayerExpandedContainer extends Container {
 			this.addSlot(new Slot(playerInventory, i1, 8 + i1 * 18, 142));
 		}
 
-		this.addSlot(new SlotRuneOffHand(playerInventory, 40, 96 - 19, 62));
+		this.addSlot(new SlotAdornmentOffHand(playerInventory, 40, 96 - 19, 62));
 	}
 
 	@Override
@@ -171,13 +171,13 @@ public class PlayerExpandedContainer extends Container {
 			}
 			// inv -> rune
 			/*
-			 * else if (itemstack.getCapability(RunesCapabilities.ITEM_RUNE,
+			 * else if (itemstack.getCapability(AdornmentsCapabilities.ITEM_ADORNMENT,
 			 * null).isPresent()) {
 			 * 
-			 * IRune rune = itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
+			 * IAdornment rune = itemstack.getCapability(AdornmentsCapabilities.ITEM_ADORNMENT, null)
 			 * .orElseThrow(NullPointerException::new);
 			 * 
-			 * for (int runeSlot : rune.getRuneType().getValidSlots()) { if
+			 * for (int runeSlot : rune.getAdornmentType().getValidSlots()) { if
 			 * (rune.canEquip(this.player) && !(this.inventorySlots.get(runeSlot +
 			 * 9)).getHasStack() && !this.mergeItemStack(itemstack1, runeSlot + 9, runeSlot
 			 * + 10, false)) {
@@ -208,12 +208,12 @@ public class PlayerExpandedContainer extends Container {
 				return ItemStack.EMPTY;
 			}
 
-			if (itemstack1.isEmpty() && !runes.isEventBlocked() && slot instanceof SlotRune
-					&& itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null).isPresent()) {
+			if (itemstack1.isEmpty() && !runes.isEventBlocked() && slot instanceof SlotAdornment
+					&& itemstack.getCapability(AdornmentsCapabilities.ITEM_ADORNMENT, null).isPresent()) {
 				@SuppressWarnings("unused")
 				ItemStack finalItemstack = itemstack;
-				itemstack.getCapability(RunesCapabilities.ITEM_RUNE, null)
-						.ifPresent((iRune -> iRune.onEquipped(playerIn)));
+				itemstack.getCapability(AdornmentsCapabilities.ITEM_ADORNMENT, null)
+						.ifPresent((iAdornment -> iAdornment.onEquipped(playerIn)));
 			}
 
 			ItemStack itemstack2 = slot.onTake(playerIn, itemstack1);
@@ -232,7 +232,7 @@ public class PlayerExpandedContainer extends Container {
 	}
 
 	@SuppressWarnings("unused")
-	private void addRuneSlots() {
+	private void addAdornmentSlots() {
 
 	}
 }

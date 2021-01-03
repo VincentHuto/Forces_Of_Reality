@@ -14,14 +14,9 @@ import com.huto.forcesofreality.network.karma.KarmaActivationPacketClient;
 import com.huto.forcesofreality.network.karma.KarmaActivationPacketServer;
 import com.huto.forcesofreality.network.karma.KarmaPacketClient;
 import com.huto.forcesofreality.network.karma.KarmaPacketServer;
-import com.huto.forcesofreality.network.mindrunes.OpenNormalInvPacket;
-import com.huto.forcesofreality.network.mindrunes.OpenRunesInvPacket;
-import com.huto.forcesofreality.network.mindrunes.PacketBinderTogglePickup;
-import com.huto.forcesofreality.network.mindrunes.PacketChiselCraftingEvent;
-import com.huto.forcesofreality.network.mindrunes.PacketOpenRuneBinder;
-import com.huto.forcesofreality.network.mindrunes.PacketToggleBinderMessage;
-import com.huto.forcesofreality.network.mindrunes.PacketUpdateChiselRunes;
-import com.huto.forcesofreality.network.mindrunes.SyncPacket;
+import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
+import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
+import com.huto.forcesofreality.network.adornments.SyncPacket;
 import com.huto.forcesofreality.network.vibes.ExportVibePacket;
 import com.huto.forcesofreality.network.vibes.ImportVibePacket;
 import com.huto.forcesofreality.network.vibes.UpdateChunkEnergyValueMessage;
@@ -93,19 +88,19 @@ public class PacketHandler {
 		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
 				ExportVibePacket.Handler::handle);
 
-		HANDLER.registerMessage(networkID++, PacketUpdateChiselRunes.class, PacketUpdateChiselRunes::encode,
-				PacketUpdateChiselRunes::decode, PacketUpdateChiselRunes.Handler::handle);
-		HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class, PacketChiselCraftingEvent::encode,
-				PacketChiselCraftingEvent::decode, PacketChiselCraftingEvent.Handler::handle);
+	/*	HANDLER.registerMessage(networkID++, PacketUpdateChiselAdornments.class, PacketUpdateChiselAdornments::encode,
+				PacketUpdateChiselAdornments::decode, PacketUpdateChiselAdornments.Handler::handle);*/
+/*		HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class, PacketChiselCraftingEvent::encode,
+				PacketChiselCraftingEvent::decode, PacketChiselCraftingEvent.Handler::handle);*/
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
 
-		// MindRunes
+		// MindAdornments
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ForcesOfReality.MOD_ID, "runechannel"), () -> "1.0",
 				s -> true, s -> true);
 
-		INSTANCE.registerMessage(networkID++, OpenRunesInvPacket.class, OpenRunesInvPacket::toBytes,
-				OpenRunesInvPacket::new, OpenRunesInvPacket::handle);
+		INSTANCE.registerMessage(networkID++, OpenAdornmentsInvPacket.class, OpenAdornmentsInvPacket::toBytes,
+				OpenAdornmentsInvPacket::new, OpenAdornmentsInvPacket::handle);
 		INSTANCE.registerMessage(networkID++, OpenNormalInvPacket.class, OpenNormalInvPacket::toBytes,
 				OpenNormalInvPacket::new, OpenNormalInvPacket::handle);
 		INSTANCE.registerMessage(networkID++, SyncPacket.class, SyncPacket::toBytes, SyncPacket::new,
@@ -113,21 +108,21 @@ public class PacketHandler {
 
 	}
 
-	public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
+/*	public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "runebindernetwork"), () -> PROTOCOL_VERSION,
-			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
-	public static SimpleChannel registerRuneBinderChannels() {
+	public static SimpleChannel registerAdornmentBinderChannels() {
 		RUNEBINDER.messageBuilder(PacketBinderTogglePickup.class, networkID++).decoder(PacketBinderTogglePickup::decode)
 				.encoder(PacketBinderTogglePickup::encode).consumer(PacketBinderTogglePickup::handle).add();
-		RUNEBINDER.messageBuilder(PacketOpenRuneBinder.class, networkID++).decoder(PacketOpenRuneBinder::decode)
-				.encoder(PacketOpenRuneBinder::encode).consumer(PacketOpenRuneBinder::handle).add();
+		RUNEBINDER.messageBuilder(PacketOpenAdornmentBinder.class, networkID++).decoder(PacketOpenAdornmentBinder::decode)
+				.encoder(PacketOpenAdornmentBinder::encode).consumer(PacketOpenAdornmentBinder::handle).add();
 		RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++)
 				.decoder(PacketToggleBinderMessage::decode).encoder(PacketToggleBinderMessage::encode)
 				.consumer(PacketToggleBinderMessage::handle).add();
 		return RUNEBINDER;
 	}
-
+*/
 	public static SimpleChannel MECHANGLOVE = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "mechanglovenetwork"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;

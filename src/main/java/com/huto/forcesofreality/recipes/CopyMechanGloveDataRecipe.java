@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;

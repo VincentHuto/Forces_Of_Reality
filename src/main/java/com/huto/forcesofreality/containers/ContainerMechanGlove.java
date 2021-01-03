@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.containers;
 
 import com.huto.forcesofreality.containers.slots.SlotMechanGlove;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

@@ -1,7 +1,7 @@
-package com.huto.forcesofreality.gui;
+/*package com.huto.forcesofreality.gui;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.ContainerRuneBinder;
+import com.huto.forcesofreality.containers.ContainerAdornmentBinder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -13,8 +13,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class GuiRuneBinder extends ContainerScreen<ContainerRuneBinder> {
-	public GuiRuneBinder(ContainerRuneBinder container, PlayerInventory playerInventory, ITextComponent name) {
+public class GuiAdornmentBinder extends ContainerScreen<ContainerAdornmentBinder> {
+	public GuiAdornmentBinder(ContainerAdornmentBinder container, PlayerInventory playerInventory, ITextComponent name) {
 		super(container, playerInventory, name);
 
 		switch (container.slotcount) {
@@ -82,4 +82,4 @@ public class GuiRuneBinder extends ContainerScreen<ContainerRuneBinder> {
 
 		return super.keyPressed(keyCode, scanCode, modifiers);
 	}
-}
+}*/

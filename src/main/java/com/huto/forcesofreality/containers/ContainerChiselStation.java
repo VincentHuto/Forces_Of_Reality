@@ -1,10 +1,10 @@
-package com.huto.forcesofreality.containers;
+/*package com.huto.forcesofreality.containers;
 
 import java.util.Objects;
 
 import com.huto.forcesofreality.containers.slots.SlotChisel;
 import com.huto.forcesofreality.containers.slots.SlotOutput;
-import com.huto.forcesofreality.containers.slots.SlotRunePattern;
+import com.huto.forcesofreality.containers.slots.SlotAdornmentPattern;
 import com.huto.forcesofreality.init.ContainerInit;
 import com.huto.forcesofreality.objects.tileenties.TileEntityChiselStation;
 
@@ -19,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 public class ContainerChiselStation extends Container {
 	private final int numRows;
 	private final TileEntityChiselStation te;
-	public int[] activatedRunes;
+	public int[] activatedAdornments;
 
 	public ContainerChiselStation(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
 		this(windowId, playerInventory, getTileEntity(playerInventory, data));
@@ -35,7 +35,7 @@ public class ContainerChiselStation extends Container {
 		this.addSlot(new SlotChisel(te, 3, 8, 14));
 		this.addSlot(new Slot(te, 0, 8, 18 + 1 * 18));
 		this.addSlot(new Slot(te, 1, 8, 22 + 2 * 18));
-		this.addSlot(new SlotRunePattern(te, 4, 8, 26 + 3 * 18));
+		this.addSlot(new SlotAdornmentPattern(te, 4, 8, 26 + 3 * 18));
 
 		this.addSlot(new SlotOutput(te, 2, 145, 44));
 		// INVENTORY
@@ -100,3 +100,4 @@ public class ContainerChiselStation extends Container {
 	}
 
 }
+*/

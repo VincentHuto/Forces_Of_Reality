@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.objects.tileenties;
+/*package com.huto.forcesofreality.objects.tileenties;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,7 +54,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 	public float lidAngle, prevLidAngle;
 	public final String TAG_RUNELIST = "RUNELIST";
 	public List<Integer> runesList;
-	public List<Integer> clientRuneList;
+	public List<Integer> clientAdornmentList;
 
 	RecipeChiselStation currentRecipe;
 	@SuppressWarnings("unused")
@@ -73,18 +73,18 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 		this.runesList = new ArrayList<Integer>();
 	}
 
-	public List<Integer> getRuneList() {
+	public List<Integer> getAdornmentList() {
 		return runesList;
 	}
 
-	public void cleartRuneList() {
+	public void cleartAdornmentList() {
 		this.sendUpdates();
 		if (runesList != null) {
 			runesList.clear();
 		}
 	}
 
-	public void setRuneList(List<Integer> runesIn) {
+	public void setAdornmentList(List<Integer> runesIn) {
 		runesList = runesIn;
 		this.sendUpdates();
 
@@ -110,10 +110,10 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 		return 1;
 	}
 
-	public boolean areRunesMatching() {
+	public boolean areAdornmentsMatching() {
 		if (this.getCurrentRecipe() != null) {
-			List<Integer> currentList = clientRuneList;
-			List<Integer> recipeList = currentRecipe.getActivatedRunes();
+			List<Integer> currentList = clientAdornmentList;
+			List<Integer> recipeList = currentRecipe.getActivatedAdornments();
 			Collections.sort(currentList);
 			Collections.sort(recipeList);
 			if (currentList.equals(recipeList)) {
@@ -209,7 +209,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 			test.set(i, s);
 		}
 		this.runesList = test;
-		clientRuneList = test;
+		clientAdornmentList = test;
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 		super.handleUpdateTag(state, tag);
 		if (tag.get(TAG_RUNELIST) != null) {
 			for (int i = 0; i < runesList.size(); i++) {
-				clientRuneList.add(runesList.get(i));
+				clientAdornmentList.add(runesList.get(i));
 			}
 		}
 	}
@@ -383,8 +383,8 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 
 			List<Ingredient> recipieInObj = recipe.getInputs();
 
-			List<Integer> list1 = recipe.getActivatedRunes();
-			List<Integer> list2 = this.getRuneList();
+			List<Integer> list1 = recipe.getActivatedAdornments();
+			List<Integer> list2 = this.getAdornmentList();
 			// These two make sure that even if you click the buttons in the wrong order
 			// they still work.
 			Collections.sort(list1);
@@ -419,7 +419,7 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 						ItemStack knapperIn = chestContents.get(3);
 						if (knapperIn.getItem() instanceof ItemKnapper) {
 							ItemStack newKnapper = knapperIn.copy();
-							newKnapper.attemptDamageItem(recipe.getActivatedRunes().size(), world.rand, null);
+							newKnapper.attemptDamageItem(recipe.getActivatedAdornments().size(), world.rand, null);
 							chestContents.set(3, newKnapper);
 						}
 						runesList.clear();
@@ -434,3 +434,4 @@ public class TileEntityChiselStation extends LockableLootTileEntity
 	}
 
 }
+*/

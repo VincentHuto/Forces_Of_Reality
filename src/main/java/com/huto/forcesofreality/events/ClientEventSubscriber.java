@@ -4,12 +4,9 @@ import org.lwjgl.glfw.GLFW;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
-import com.huto.forcesofreality.containers.ContainerRuneBinder;
-import com.huto.forcesofreality.gui.GuiChiselStation;
 import com.huto.forcesofreality.gui.GuiMechanGlove;
-import com.huto.forcesofreality.gui.GuiRuneBinder;
 import com.huto.forcesofreality.gui.GuiVirtuousEnchanter;
-import com.huto.forcesofreality.gui.mindrunes.PlayerExpandedScreen;
+import com.huto.forcesofreality.gui.adornments.PlayerExpandedScreen;
 import com.huto.forcesofreality.init.ContainerInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.TileEntityInit;
@@ -52,10 +49,9 @@ import com.huto.forcesofreality.render.entity.summons.RenderJudgement;
 import com.huto.forcesofreality.render.entity.summons.RenderSummonedBeast;
 import com.huto.forcesofreality.render.entity.summons.RenderTentacle;
 import com.huto.forcesofreality.render.entity.summons.RenderThrone;
-import com.huto.forcesofreality.render.tiles.RenderChiselStation;
 import com.huto.forcesofreality.render.tiles.RenderMagicLight;
 import com.huto.forcesofreality.render.tiles.RenderMagicRingLight;
-import com.huto.forcesofreality.render.tiles.RenderRuneModStation;
+import com.huto.forcesofreality.render.tiles.RenderAdornmentModStation;
 import com.huto.forcesofreality.render.tiles.RenderVirtuousEnchanter;
 import com.huto.forcesofreality.render.tiles.coven.RenderAscendentAltar;
 import com.huto.forcesofreality.render.tiles.coven.RenderHasturPylon;
@@ -119,8 +115,8 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderRuneModStation::new);
+		//ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderAdornmentModStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendent_altar.get(), RenderAscendentAltar::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);
@@ -136,9 +132,9 @@ public class ClientEventSubscriber {
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 
-		ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
-		ScreenManager.registerFactory(ContainerInit.PLAYER_RUNES, PlayerExpandedScreen::new);
-		ScreenManager.registerFactory(ContainerRuneBinder.type, GuiRuneBinder::new);
+	//	ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
+		ScreenManager.registerFactory(ContainerInit.PLAYER_ADORNMENTS, PlayerExpandedScreen::new);
+	//	ScreenManager.registerFactory(ContainerAdornmentBinder.type, GuiAdornmentBinder::new);
 		ScreenManager.registerFactory(ContainerMechanGlove.type, GuiMechanGlove::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);
@@ -186,13 +182,13 @@ public class ClientEventSubscriber {
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mana_dust.get(), RenderManaDustItem::new);
 
-		keyBinds.add(0, new KeyBinding("key.forcesofreality.runebinderpickup.desc", GLFW.GLFW_KEY_B, "key.forcesofreality.category"));
-		keyBinds.add(1, new KeyBinding("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V, "key.forcesofreality.category"));
-		keyBinds.add(2, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
+	//	keyBinds.add(0, new KeyBinding("key.forcesofreality.runebinderpickup.desc", GLFW.GLFW_KEY_B, "key.forcesofreality.category"));
+		keyBinds.add(0, new KeyBinding("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V, "key.forcesofreality.category"));
+		keyBinds.add(1, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
 
+	//	ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(1));
-		ClientRegistry.registerKeyBinding(keyBinds.get(2));
 
 	}
 

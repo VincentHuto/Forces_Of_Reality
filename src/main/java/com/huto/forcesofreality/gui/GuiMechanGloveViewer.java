@@ -9,8 +9,8 @@ import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.PacketUpdateMechanModule;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanModuleBase;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanModuleBase;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 

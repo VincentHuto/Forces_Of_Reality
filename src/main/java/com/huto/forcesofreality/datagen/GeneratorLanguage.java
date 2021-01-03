@@ -59,12 +59,12 @@ public class GeneratorLanguage extends LanguageProvider {
 		}
 
 		/***
-		 * Rune Pattern Text
+		 * Adornment Pattern Text
 		 */
 		// Misc
-		add("name.RUNE", "Base Rune");
-		add("name.CONTRACT", "Contract Runes");
-		// Rune Binder
+		add("name.RUNE", "Base Adornment");
+		add("name.MAJOR", "Major Adornments");
+		// Adornment Binder
 		add("forcesofreality.nbtdata", "NBT Tags");
 		add("forcesofreality.whitelist", "Whitelist");
 		add("forcesofreality.autopickupenabled", "Auto-Pickup: Enabled");

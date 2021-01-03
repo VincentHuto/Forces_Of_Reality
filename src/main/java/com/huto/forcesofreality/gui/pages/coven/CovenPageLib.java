@@ -85,7 +85,7 @@ public class CovenPageLib {
 		SelfPageList.add(new GuiCovenPage(2, EnumCovenants.SELF, "Me, Myself, and I", "The Path of the Self",
 				new ItemStack(ItemInit.allegiance_identifier.get()), I18n.format(SELF_PAGE_2)));
 		SelfPageList.add(new GuiCovenPage(3, EnumCovenants.SELF, "Self Care", "Mental and Physica;",
-				new ItemStack(ItemInit.rune_blank.get()), I18n.format(SELF_PAGE_3)));
+				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_3)));
 		SelfPageList.add(new GuiCovenPage(4, EnumCovenants.SELF, "Escaping the pull", "The whole of the Law",
 				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(SELF_PAGE_4)));
 		SelfPageList.add(new GuiCovenImagePage(5, EnumCovenants.SELF, "Tulpa", "Inner Self", SELF_PAGE_5,

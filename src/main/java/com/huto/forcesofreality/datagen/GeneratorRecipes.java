@@ -46,7 +46,7 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addIngredient(Blocks.DIRT, 2).addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get()))
 				.build(consumer);
 
-		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern.get()).addIngredient(Items.PAPER)
+		/*ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern.get()).addIngredient(Items.PAPER)
 				.addIngredient(ItemInit.rune_blank.get())
 				.addCriterion("has_rune_blank", hasItem(ItemInit.rune_blank.get())).build(consumer);
 
@@ -118,7 +118,7 @@ public class GeneratorRecipes extends RecipeProvider {
 
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_rapture.get())
 				.addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.GLOWSTONE_DUST)
-				.addCriterion("has_rune_pattern", hasItem(ItemInit.rune_pattern.get())).build(consumer);
+				.addCriterion("has_rune_pattern", hasItem(ItemInit.rune_pattern.get())).build(consumer);*/
 
 		// Misc
 
@@ -235,10 +235,10 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('S', ItemInit.machina_soul.get()).patternLine("AAA").patternLine("ASA").patternLine(" A ")
 				.addCriterion("has_old_iron_scrap", hasItem(ItemInit.old_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.rune_blank.get()).key('N', BlockInit.runed_obsidian.get())
+/*		ShapedRecipeBuilder.shapedRecipe(ItemInit.rune_blank.get()).key('N', BlockInit.runed_obsidian.get())
 				.key('O', BlockInit.mind_fog.get()).key('P', ItemInit.anti_tear.get()).patternLine("NON")
 				.patternLine("OPO").patternLine("NON")
-				.addCriterion("has_runed_obsidian", hasItem(BlockInit.runed_obsidian.get())).build(consumer);
+				.addCriterion("has_runed_obsidian", hasItem(BlockInit.runed_obsidian.get())).build(consumer);*/
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.bonsai_planter.get()).key('F', Tags.Items.INGOTS_BRICK)
 				.key('N', Blocks.DIRT).patternLine("FNF").patternLine("FFF").patternLine("F F")
@@ -300,11 +300,11 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('E', ItemInit.essence_drop.get()).patternLine("GGG").patternLine("GEG").patternLine(" G ")
 				.addCriterion("has_essence_drop", hasItem(ItemInit.essence_drop.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.mind_spike.get()).key('B', ItemInit.null_ingot.get())
+/*		ShapedRecipeBuilder.shapedRecipe(ItemInit.mind_spike.get()).key('B', ItemInit.null_ingot.get())
 				.key('E', ItemInit.essence_drop.get()).key('N', ItemInit.null_rod.get()).patternLine("  N")
 				.patternLine("EBE").patternLine("BBE")
 				.addCriterion("has_null_ingot", hasItem(ItemInit.null_ingot.get())).build(consumer);
-
+*/
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.raw_clay_flask.get()).key('C', Items.CLAY_BALL).patternLine(" C ")
 				.patternLine("C C").patternLine("CCC").addCriterion("has_clay", hasItem(Items.CLAY_BALL))
 				.build(consumer);
@@ -313,9 +313,9 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('G', Tags.Items.GLASS).key('O', Tags.Items.OBSIDIAN).patternLine("ORO").patternLine("RGR")
 				.patternLine("ORO").addCriterion("has_glass", hasItem(Tags.Items.GLASS)).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.rune_binder.get()).key('R', ItemInit.rune_pattern.get())
+/*		ShapedRecipeBuilder.shapedRecipe(ItemInit.rune_binder.get()).key('R', ItemInit.rune_pattern.get())
 				.key('G', ItemInit.grey_ingot.get()).patternLine("GGG").patternLine("GRG").patternLine("GGG")
-				.addCriterion("has_rune_pattern", hasItem(ItemInit.rune_pattern.get())).build(consumer);
+				.addCriterion("has_rune_pattern", hasItem(ItemInit.rune_pattern.get())).build(consumer);*/
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.wand_maker.get()).key('N', BlockInit.nether_block.get())
 				.key('F', ItemInit.energy_focus.get()).key('R', BlockInit.runed_obsidian.get())
@@ -437,26 +437,26 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('M', BlockInit.contained_magma.get()).patternLine("NAN").patternLine("M M").patternLine("MRM")
 				.addCriterion("has_contained_magma", hasItem(BlockInit.contained_magma.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.self_reflection_mirror.get()).key('G', Items.GOLD_INGOT)
+	/*	ShapedRecipeBuilder.shapedRecipe(ItemInit.self_reflection_mirror.get()).key('G', Items.GOLD_INGOT)
 				.key('A', ItemInit.auric_ingot.get()).key('L', Ingredient.fromTag(ItemTags.LOGS))
 				.key('M', BlockInit.rune_mod_station.get()).patternLine("AGA").patternLine("GMG").patternLine("ALA")
-				.addCriterion("has_rune_mod_station", hasItem(BlockInit.rune_mod_station.get())).build(consumer);
+				.addCriterion("has_rune_mod_station", hasItem(BlockInit.rune_mod_station.get())).build(consumer);*/
 
-		ShapedRecipeBuilder.shapedRecipe(BlockInit.rune_mod_station.get()).key('G', Items.GOLD_INGOT)
+	/*	ShapedRecipeBuilder.shapedRecipe(BlockInit.rune_mod_station.get()).key('G', Items.GOLD_INGOT)
 				.key('R', BlockInit.reversion_catalyst.get()).key('L', Ingredient.fromTag(ItemTags.LOGS))
 				.key('N', BlockInit.nether_block.get()).key('F', ItemInit.energy_focus.get())
 				.key('A', BlockInit.activated_obsidian.get()).patternLine("GRG").patternLine("NAN").patternLine("LFL")
-				.addCriterion("has_reversion_catalyst", hasItem(BlockInit.reversion_catalyst.get())).build(consumer);
+				.addCriterion("has_reversion_catalyst", hasItem(BlockInit.reversion_catalyst.get())).build(consumer);*/
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.vibe_concentrator.get()).key('N', BlockInit.nether_block.get())
 				.key('A', BlockInit.activated_obsidian.get()).key('L', BlockInit.somnolent_log.get())
 				.key('F', ItemInit.energy_focus.get()).patternLine("NAN").patternLine("AFA").patternLine("LFL")
 				.addCriterion("has_energy_focus", hasItem(ItemInit.energy_focus.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(BlockInit.runic_chisel_station.get()).key('N', BlockInit.nether_block.get())
+		/*ShapedRecipeBuilder.shapedRecipe(BlockInit.runic_chisel_station.get()).key('N', BlockInit.nether_block.get())
 				.key('S', BlockInit.somnolent_stone_smooth.get()).key('O', ItemInit.obsidian_knapper.get())
 				.key('I', ItemInit.iron_knapper.get()).patternLine("I O").patternLine("SSS").patternLine(" N ")
-				.addCriterion("has_iron_knapper", hasItem(ItemInit.iron_knapper.get())).build(consumer);
+				.addCriterion("has_iron_knapper", hasItem(ItemInit.iron_knapper.get())).build(consumer);*/
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.machina_imperfecta.get()).key('A', BlockInit.auric_block.get())
 				.key('N', ItemInit.neurotic_mechanism.get()).key('D', ItemInit.discared_gear.get()).patternLine("ADA")

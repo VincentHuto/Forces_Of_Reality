@@ -4,7 +4,7 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
-import com.huto.forcesofreality.objects.items.tools.ItemMechanGlove;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

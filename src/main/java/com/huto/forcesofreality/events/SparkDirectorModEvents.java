@@ -13,7 +13,7 @@ public class SparkDirectorModEvents {
 
 	
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.keyBinds.get(2).isPressed()) {
+		if (ClientEventSubscriber.keyBinds.get(1).isPressed()) {
 			PacketHandler.MECHANGLOVE.sendToServer(new PacketDirectorToggleFlightMode());
 		}
 	}

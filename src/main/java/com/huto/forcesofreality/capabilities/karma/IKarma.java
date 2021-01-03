@@ -10,4 +10,5 @@ public interface IKarma {
 
 	public int getKarma();
 
+	public boolean isKarmaGood();
 }

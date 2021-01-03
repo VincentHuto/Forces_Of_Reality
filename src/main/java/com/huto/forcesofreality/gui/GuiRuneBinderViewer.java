@@ -1,13 +1,13 @@
-package com.huto.forcesofreality.gui;
+/*package com.huto.forcesofreality.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.RuneBinderItemHandler;
+import com.huto.forcesofreality.containers.AdornmentBinderItemHandler;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePattern;
+import com.huto.forcesofreality.objects.items.runes.patterns.ItemAdornmentPattern;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -29,7 +29,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 @OnlyIn(Dist.CLIENT)
-public class GuiRuneBinderViewer extends Screen {
+public class GuiAdornmentBinderViewer extends Screen {
 	final ResourceLocation texture = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/rune_binder_gui.png");
 	int guiWidth = 175;
 	int guiHeight = 228;
@@ -37,10 +37,10 @@ public class GuiRuneBinderViewer extends Screen {
 	ItemStack icon;
 	Minecraft mc = Minecraft.getInstance();
 	PlayerEntity player;
-	public RuneBinderItemHandler handler;
+	public AdornmentBinderItemHandler handler;
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiRuneBinderViewer(ItemStack currentBinderIn, PlayerEntity playerIn) {
+	public GuiAdornmentBinderViewer(ItemStack currentBinderIn, PlayerEntity playerIn) {
 		super(new StringTextComponent("View All Patterns"));
 		this.icon = currentBinderIn;
 		this.player = playerIn;
@@ -66,11 +66,11 @@ public class GuiRuneBinderViewer extends Screen {
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).renderButton(matrixStack, mouseX, mouseY, 511);
 			if (buttons.get(i).isHovered()) {
-				ItemStack stack = ForcesOfReality.findRuneBinder(player);
+				ItemStack stack = ForcesOfReality.findAdornmentBinder(player);
 				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 						.orElseThrow(NullPointerException::new);
-				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemRunePattern) {
-					ItemRunePattern pat = (ItemRunePattern) binderHandler.getStackInSlot(i).getItem();
+				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemAdornmentPattern) {
+					ItemAdornmentPattern pat = (ItemAdornmentPattern) binderHandler.getStackInSlot(i).getItem();
 					List<ITextComponent> text = new ArrayList<ITextComponent>();
 					text.add(new StringTextComponent(
 							I18n.format(pat.getRecipe().getOutput().getDisplayName().getString())));
@@ -82,20 +82,20 @@ public class GuiRuneBinderViewer extends Screen {
 
 		GlStateManager.pushMatrix();
 		{
-			ItemStack stack = ForcesOfReality.findRuneBinder(player);
+			ItemStack stack = ForcesOfReality.findAdornmentBinder(player);
 			IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 					.orElseThrow(NullPointerException::new);
 
-			if (binderHandler instanceof RuneBinderItemHandler) {
-				handler = (RuneBinderItemHandler) binderHandler;
+			if (binderHandler instanceof AdornmentBinderItemHandler) {
+				handler = (AdornmentBinderItemHandler) binderHandler;
 				handler.load();
 				slotcount = handler.getSlots();
 				itemKey = stack.getTranslationKey();
 				for (int i = 0; i < buttons.size(); i++) {
 					GlStateManager.translatef(0, 0, 1);
 					RenderHelper.enableStandardItemLighting();
-					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemRunePattern) {
-						ItemRunePattern pat = (ItemRunePattern) binderHandler.getStackInSlot(i).getItem();
+					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemAdornmentPattern) {
+						ItemAdornmentPattern pat = (ItemAdornmentPattern) binderHandler.getStackInSlot(i).getItem();
 						Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(
 								pat.getRecipe().getOutput(), (buttons.get(i).x + 2), buttons.get(i).y + 2);
 					}
@@ -128,12 +128,12 @@ public class GuiRuneBinderViewer extends Screen {
 		int sideLoc = left + guiWidth;
 		int verticalLoc = top + guiHeight;
 		buttons.clear();
-		ItemStack stack = ForcesOfReality.findRuneBinder(player);
+		ItemStack stack = ForcesOfReality.findAdornmentBinder(player);
 		IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 				.orElseThrow(NullPointerException::new);
 
-		if (binderHandler instanceof RuneBinderItemHandler) {
-			handler = (RuneBinderItemHandler) binderHandler;
+		if (binderHandler instanceof AdornmentBinderItemHandler) {
+			handler = (AdornmentBinderItemHandler) binderHandler;
 			handler.load();
 			slotcount = handler.getSlots();
 			itemKey = stack.getTranslationKey();
@@ -146,8 +146,8 @@ public class GuiRuneBinderViewer extends Screen {
 									if (press instanceof GuiButtonTextured) {
 										player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 										if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
-												.getItem() instanceof ItemRunePattern) {
-											ItemRunePattern pat = (ItemRunePattern) binderHandler
+												.getItem() instanceof ItemAdornmentPattern) {
+											ItemAdornmentPattern pat = (ItemAdornmentPattern) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
 											Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
 										}
@@ -162,8 +162,8 @@ public class GuiRuneBinderViewer extends Screen {
 									if (press instanceof GuiButtonTextured) {
 										player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 										if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
-												.getItem() instanceof ItemRunePattern) {
-											ItemRunePattern pat = (ItemRunePattern) binderHandler
+												.getItem() instanceof ItemAdornmentPattern) {
+											ItemAdornmentPattern pat = (ItemAdornmentPattern) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
 											Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
 										}
@@ -178,8 +178,8 @@ public class GuiRuneBinderViewer extends Screen {
 									if (press instanceof GuiButtonTextured) {
 										player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 										if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
-												.getItem() instanceof ItemRunePattern) {
-											ItemRunePattern pat = (ItemRunePattern) binderHandler
+												.getItem() instanceof ItemAdornmentPattern) {
+											ItemAdornmentPattern pat = (ItemAdornmentPattern) binderHandler
 													.getStackInSlot(((GuiButtonTextured) press).getId()).getItem();
 											Minecraft.getInstance().displayGuiScreen(pat.getPatternGui());
 										}
@@ -203,3 +203,4 @@ public class GuiRuneBinderViewer extends Screen {
 	}
 
 }
+*/

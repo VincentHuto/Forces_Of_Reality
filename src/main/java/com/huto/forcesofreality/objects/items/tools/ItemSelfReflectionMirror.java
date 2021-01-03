@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.objects.items.tools;
 
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.mindrunes.OpenRunesInvPacket;
+import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -19,7 +19,7 @@ public class ItemSelfReflectionMirror extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (worldIn.isRemote) {
-			PacketHandler.INSTANCE.sendToServer(new OpenRunesInvPacket());
+			PacketHandler.INSTANCE.sendToServer(new OpenAdornmentsInvPacket());
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}

@@ -28,7 +28,7 @@ public class TomePageLib {
 	public static List<GuiTomePage> BlocksPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> GeneratePageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> WandsPageList = new ArrayList<GuiTomePage>();
-	public static List<GuiTomePage> RunesPageList = new ArrayList<GuiTomePage>();
+//	public static List<GuiTomePage> AdornmentsPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> ElderPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePageTOC> TOCPageList = new ArrayList<GuiTomePageTOC>();
 	public static List<List<GuiTomePage>> ChapterList = new ArrayList<List<GuiTomePage>>();
@@ -76,10 +76,10 @@ public class TomePageLib {
 	public static String WANDS_PAGE_2 = "title.somnolenttome.wands.page.2.text";
 	public static String WANDS_PAGE_3 = "title.somnolenttome.wands.page.3.text";
 
-	// Runes
-	public static String RUNES_PAGE_1 = "title.somnolenttome.runes.page.1.text";
-	public static String RUNES_PAGE_2 = "title.somnolenttome.runes.page.2.text";
-
+	// Adornments
+/*	public static String ADORNMENTS_PAGE_1 = "title.somnolenttome.runes.page.1.text";
+	public static String ADORNMENTS_PAGE_2 = "title.somnolenttome.runes.page.2.text";
+*/
 	// Karma
 	public static String KARMA_PAGE_1 = "title.somnolenttome.karma.page.1.text";
 	// Elder
@@ -96,7 +96,7 @@ public class TomePageLib {
 		BlocksPageList.clear();
 		GeneratePageList.clear();
 		WandsPageList.clear();
-		RunesPageList.clear();
+	//	AdornmentsPageList.clear();
 		ElderPageList.clear();
 		ChapterList.clear();
 		TOCPageList.clear();
@@ -199,22 +199,22 @@ public class TomePageLib {
 				new ItemStack(ItemInit.frequency_matcher.get()), I18n.format(WANDS_PAGE_2)));
 		WandsPageList.add(new GuiTomePage(3, EnumTomeCatagories.WANDS, "Configuerer", "Swithcing Modes",
 				new ItemStack(ItemInit.absorber_configurer.get()), I18n.format(WANDS_PAGE_3)));
-		// Runes
-		RunesPageList.add(new GuiTomePage(1, EnumTomeCatagories.RUNES, "Runes", "More than goodluck",
-				new ItemStack(ItemInit.rune_beast.get()), I18n.format(RUNES_PAGE_1)));
-		RunesPageList.add(new GuiTomePage(2, EnumTomeCatagories.RUNES, "Runes cont.", "Etching your mind",
-				new ItemStack(ItemInit.mind_spike.get()), I18n.format(RUNES_PAGE_2)));
+		// Adornments
+/*		AdornmentsPageList.add(new GuiTomePage(1, EnumTomeCatagories.ADORNMENTS, "Adornments", "More than goodluck",
+				new ItemStack(ItemInit.rune_beast.get()), I18n.format(ADORNMENTS_PAGE_1)));
+		AdornmentsPageList.add(new GuiTomePage(2, EnumTomeCatagories.ADORNMENTS, "Adornments cont.", "Etching your mind",
+				new ItemStack(ItemInit.mind_spike.get()), I18n.format(ADORNMENTS_PAGE_2)));*/
 		// Elder
 		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, "The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
 		ElderPageList.add(new GuiTomePage(2, EnumTomeCatagories.ELDER, "Gem Enchanting", "Virtuosity at its finest",
 				new ItemStack(BlockInit.virtuous_enchanter.get()), I18n.format(ELDER_PAGE_2)));
-		ElderPageList.add(new GuiTomePage(3, EnumTomeCatagories.ELDER, "Elder Runes", "Exclusive Perks",
-				new ItemStack(ItemInit.rune_milkweed_c.get()), I18n.format(ELDER_PAGE_2)));
+/*		ElderPageList.add(new GuiTomePage(3, EnumTomeCatagories.ELDER, "Elder Adornments", "Exclusive Perks",
+				new ItemStack(ItemInit.rune_milkweed_c.get()), I18n.format(ELDER_PAGE_2)));*/
 
 		// Adding Chapters
 		Collections.addAll(ChapterList, IntroPageList, KarmaPageList, WorldGenPageList, WorldGenPageList, ArmorPageList,
-				BlocksPageList, GeneratePageList, WandsPageList, RunesPageList, ElderPageList);
+				BlocksPageList, GeneratePageList, WandsPageList, ElderPageList);
 
 		// TOC PAGES
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.INTRO, new ItemStack(ItemInit.somnolent_powder.get())));
@@ -226,7 +226,7 @@ public class TomePageLib {
 		TOCPageList
 				.add(new GuiTomePageTOC(EnumTomeCatagories.GENERATION, new ItemStack(ItemInit.emanating_ingot.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WANDS, new ItemStack(ItemInit.wand_consume_vibes.get())));
-		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.RUNES, new ItemStack(ItemInit.rune_milkweed_c.get())));
+	//	TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.ADORNMENTS, new ItemStack(ItemInit.rune_milkweed_c.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.ELDER, new ItemStack(ItemInit.elder_helmet.get())));
 
 		// Adding the table of contents to each chapter
@@ -237,8 +237,8 @@ public class TomePageLib {
 		BlocksPageList.add(0, TOCPageList.get(4));
 		GeneratePageList.add(0, TOCPageList.get(5));
 		WandsPageList.add(0, TOCPageList.get(6));
-		RunesPageList.add(0, TOCPageList.get(7));
-		ElderPageList.add(0, TOCPageList.get(8));
+	//	AdornmentsPageList.add(0, TOCPageList.get(7));
+		ElderPageList.add(0, TOCPageList.get(7));
 
 	}
 
@@ -270,9 +270,9 @@ public class TomePageLib {
 		return WandsPageList;
 	}
 
-	public static List<GuiTomePage> getRunesPageList() {
-		return RunesPageList;
-	}
+/*	public static List<GuiTomePage> getAdornmentsPageList() {
+		return AdornmentsPageList;
+	}*/
 
 	public static List<GuiTomePage> getElderPageList() {
 		return ElderPageList;

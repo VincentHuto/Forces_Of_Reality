@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.gui;
+/*package com.huto.forcesofreality.gui;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,9 +8,9 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerChiselStation;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.mindrunes.PacketChiselCraftingEvent;
-import com.huto.forcesofreality.network.mindrunes.PacketUpdateChiselRunes;
-import com.huto.forcesofreality.objects.items.runes.patterns.ItemRunePattern;
+import com.huto.forcesofreality.network.adornments.PacketChiselCraftingEvent;
+import com.huto.forcesofreality.network.adornments.PacketUpdateChiselAdornments;
+import com.huto.forcesofreality.objects.items.runes.patterns.ItemAdornmentPattern;
 import com.huto.forcesofreality.objects.items.tools.ItemKnapper;
 import com.huto.forcesofreality.objects.tileenties.TileEntityChiselStation;
 import com.huto.forcesofreality.recipes.RecipeChiselStation;
@@ -47,7 +47,7 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 	GuiButtonTextured clearButton;
 	int CHISELBUTTONID = 71;
 	GuiButtonTextured chiselButton;
-	public List<Integer> activatedRuneList = new ArrayList<Integer>();
+	public List<Integer> activatedAdornmentList = new ArrayList<Integer>();
 
 	public GuiChiselStation(ContainerChiselStation screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn);
@@ -88,17 +88,17 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 			for (int i = 0; i < 64; i++) {
 
 				if (buttons.get(i).isHovered()) {
-					renderTooltip(matrixStack, new StringTextComponent("Rune:" + i), mouseX, mouseY);
+					renderTooltip(matrixStack, new StringTextComponent("Adornment:" + i), mouseX, mouseY);
 				}
 			}
 
 			List<ITextComponent> cat1 = new ArrayList<ITextComponent>();
-			cat1.add(new StringTextComponent(I18n.format("Clear Runes")));
+			cat1.add(new StringTextComponent(I18n.format("Clear Adornments")));
 			if (clearButton.isHovered()) {
 				func_243308_b(matrixStack, cat1, left + guiWidth - (guiWidth - 120), top + guiHeight - (170));
 			}
 			List<ITextComponent> cat9 = new ArrayList<ITextComponent>();
-			cat9.add(new StringTextComponent(I18n.format("Chisel Rune")));
+			cat9.add(new StringTextComponent(I18n.format("Chisel Adornment")));
 			if (chiselButton.isHovered()) {
 				func_243308_b(matrixStack, cat9, left + guiWidth - (guiWidth - 120), top + guiHeight - (150));
 			}
@@ -108,16 +108,16 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 		if (te.getWorld().getGameTime() % 2 == 0) {
 			if (te.getStackInSlot(4) != null && this.te.getStackInSlot(4) != ItemStack.EMPTY) {
 				Minecraft.getInstance().textureManager.bindTexture(GUI_Chisel);
-				if (te.getStackInSlot(4).getItem() instanceof ItemRunePattern) {
+				if (te.getStackInSlot(4).getItem() instanceof ItemAdornmentPattern) {
 					GlStateManager.translatef(0, 0, -1);
-					ItemRunePattern runePattern = (ItemRunePattern) te.getStackInSlot(4).getItem();
+					ItemAdornmentPattern runePattern = (ItemAdornmentPattern) te.getStackInSlot(4).getItem();
 					int incPattern = 100;
 					for (int i = 0; i < runePatternButtonArray.length; i++) {
 						for (int j = 0; j < runePatternButtonArray.length; j++) {
 
 							buttons.add(runePatternButtonArray[i][j] = new GuiButtonTextured(GUI_Chisel, incPattern,
 									left + guiWidth - (guiWidth + 80 - (i * 8)), top + guiHeight - (160 - (j * 8)), 8,
-									8, 176, 0, runePattern.getRecipe().getActivatedRunes().contains(incPattern - 100),
+									8, 176, 0, runePattern.getRecipe().getActivatedAdornments().contains(incPattern - 100),
 									null, new IPressable() {
 										@Override
 										public void onPress(Button press) {
@@ -168,7 +168,7 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 		GlStateManager.pushMatrix();
 		if (te.hasValidRecipe()) {
 			Minecraft.getInstance().textureManager.bindTexture(GUI_Chisel);
-			if (te.areRunesMatching()) {
+			if (te.areAdornmentsMatching()) {
 				GuiUtils.drawTexturedModalRect(162 - 42, 45 + 32, 176, 96, 16, 16, 10f);
 			} else {
 				GuiUtils.drawTexturedModalRect(162 - 42, 45 + 32, 176, 80, 16, 16, 10f);
@@ -188,8 +188,8 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 		// Prevents the runes from disappering on resize or jei check
 		for (int l = 0; l < runeButtonArray.length; l++) {
 			for (int m = 0; m < runeButtonArray.length; m++) {
-				for (int k = 0; k < this.getActivatedRuneList().size(); k++) {
-					if (runeButtonArray[l][m].getId() == this.getActivatedRuneList().get(k)) {
+				for (int k = 0; k < this.getActivatedAdornmentList().size(); k++) {
+					if (runeButtonArray[l][m].getId() == this.getActivatedAdornmentList().get(k)) {
 						runeButtonArray[l][m].setState(true);
 					}
 				}
@@ -236,14 +236,14 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 											GuiButtonTextured test = (GuiButtonTextured) buttons.get(button.getId());
 											if (test.getState() == false) {
 												test.setState(true);
-												activatedRuneList.add(test.getId());
+												activatedAdornmentList.add(test.getId());
 												PacketHandler.HANDLER
-														.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+														.sendToServer(new PacketUpdateChiselAdornments(activatedAdornmentList));
 											} else if (test.getState() == true) {
 												test.setState(false);
-												activatedRuneList.remove(Integer.valueOf(test.getId()));
+												activatedAdornmentList.remove(Integer.valueOf(test.getId()));
 												PacketHandler.HANDLER
-														.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+														.sendToServer(new PacketUpdateChiselAdornments(activatedAdornmentList));
 											}
 
 										}
@@ -266,8 +266,8 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 							GuiButtonTextured test = (GuiButtonTextured) buttons.get(i);
 							if (test.getState() == true) {
 								test.setState(false);
-								activatedRuneList.clear();
-								PacketHandler.HANDLER.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+								activatedAdornmentList.clear();
+								PacketHandler.HANDLER.sendToServer(new PacketUpdateChiselAdornments(activatedAdornmentList));
 							}
 						}
 					}
@@ -283,8 +283,8 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 								GuiButtonTextured test = (GuiButtonTextured) buttons.get(i);
 								if (test.getState() == true) {
 									test.setState(false);
-									activatedRuneList.clear();
-									PacketHandler.HANDLER.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+									activatedAdornmentList.clear();
+									PacketHandler.HANDLER.sendToServer(new PacketUpdateChiselAdornments(activatedAdornmentList));
 								}
 
 							}
@@ -294,8 +294,8 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 
 	}
 
-	public List<Integer> getActivatedRuneList() {
-		return activatedRuneList;
+	public List<Integer> getActivatedAdornmentList() {
+		return activatedAdornmentList;
 	}
 
 	@Override
@@ -318,3 +318,4 @@ public class GuiChiselStation extends ContainerScreen<ContainerChiselStation> {
 	}
 
 }
+*/
