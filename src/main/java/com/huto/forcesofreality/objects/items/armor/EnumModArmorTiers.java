@@ -18,9 +18,9 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
-	OLDIRON(ForcesOfReality.MOD_ID + ":old_iron", 37, new int[] { 3, 6, 8, 3 }, 15,
+	ANOINTED(ForcesOfReality.MOD_ID + ":anointed_iron", 37, new int[] { 3, 6, 8, 3 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
-				return Ingredient.fromItems(ItemInit.old_iron_scrap.get());
+				return Ingredient.fromItems(ItemInit.anointed_iron_scrap.get());
 			}),
 	ELDER(ForcesOfReality.MOD_ID + ":elder", 37, new int[] { 1, 2, 3, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
 			3.0F, 0.1F, () -> {
@@ -36,7 +36,7 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			}),
 	SUPPRESSOR(ForcesOfReality.MOD_ID + ":influence_supressor", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
-				return Ingredient.fromItems(ItemInit.old_iron_scrap.get());
+				return Ingredient.fromItems(ItemInit.anointed_iron_scrap.get());
 			}),
 	SKULL(ForcesOfReality.MOD_ID + ":skull", 37, new int[] { 3, 1, 1, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
 			3.0F, 0.1F, () -> {

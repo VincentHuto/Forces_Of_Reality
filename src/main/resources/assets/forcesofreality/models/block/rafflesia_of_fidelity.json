@@ -11,7 +11,7 @@
 		"6": "forcesofreality:blocks/netherblock_side",
 		"7": "forcesofreality:blocks/netherblock_top",
 		"8": "forcesofreality:blocks/activated_obsidian",
-		"9": "forcesofreality:blocks/old_iron_block",
+		"9": "forcesofreality:blocks/anointed_iron_block",
 		"particle": "forcesofreality:blocks/rafflesia_core"
 	},
 	"elements": [

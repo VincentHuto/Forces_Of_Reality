@@ -19,7 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedContainer> {
 
 	public static final ResourceLocation background = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/gui/gui_mind_runes.png");
+			"textures/gui/gui_adornments.png");
 
 	private float oldMouseX;
 	private float oldMouseY;

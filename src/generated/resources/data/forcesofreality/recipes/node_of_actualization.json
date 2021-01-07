@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OKQ",
+    "QQQ"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "K": {
+      "item": "forcesofreality:karmic_drop"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:node_of_actualization"
+  }
+}

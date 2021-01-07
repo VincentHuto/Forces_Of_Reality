@@ -270,10 +270,6 @@ public class TomePageLib {
 		return WandsPageList;
 	}
 
-/*	public static List<GuiTomePage> getAdornmentsPageList() {
-		return AdornmentsPageList;
-	}*/
-
 	public static List<GuiTomePage> getElderPageList() {
 		return ElderPageList;
 	}

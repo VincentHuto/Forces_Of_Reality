@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:rafflesia_of_fidelity"
+    ]
+  },
+  "criteria": {
+    "has_rafflesia_flower": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:rafflesia_flower"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:rafflesia_of_fidelity"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rafflesia_flower",
+      "has_the_recipe"
+    ]
+  ]
+}

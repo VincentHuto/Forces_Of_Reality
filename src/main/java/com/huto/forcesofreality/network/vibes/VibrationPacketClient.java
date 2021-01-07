@@ -21,7 +21,6 @@ public class VibrationPacketClient {
 		ctx.get().enqueueWork(() -> {
 			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
 			if (sender != null) {
-				// Get the currency
 				IVibrations vibes = sender.getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
 				// Send message back to the client to set the information
 				PacketHandler.CHANNELVIBES.send(PacketDistributor.PLAYER.with(() -> sender),

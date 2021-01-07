@@ -41,7 +41,7 @@ public class ModResonatorRecipies {
 				Ingredient.fromItems(Blocks.COBBLESTONE));
 
 		recipeAuricBar = registerRecipe(new ResourceLocation("recipeauricbar"),
-				new ItemStack(ItemInit.old_iron_scrap.get(), 1), 30, EnumEssecenceType.NULL,
+				new ItemStack(ItemInit.anointed_iron_scrap.get(), 1), 30, EnumEssecenceType.NULL,
 				Ingredient.fromItems(Items.IRON_INGOT));
 		recipeAntiTear = registerRecipe(new ResourceLocation("recipeantitear"),
 				new ItemStack(ItemInit.anti_tear.get(), 1), 30, EnumEssecenceType.KARMIC,

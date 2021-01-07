@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "PIP",
+    "I I"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "P": {
+      "item": "forcesofreality:phantasmal_pane"
+    },
+    "I": {
+      "item": "forcesofreality:null_ingot"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:influence_supressor"
+  }
+}

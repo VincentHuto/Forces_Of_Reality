@@ -4,7 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Covenant implements ICovenant {
-	private Map<EnumCovenants, Integer> devotion = new HashMap<>();
+	@SuppressWarnings("serial")
+	private Map<EnumCovenants, Integer> devotion = new HashMap<EnumCovenants, Integer>(){{
+		put(EnumCovenants.SELF,0);
+		put(EnumCovenants.HASTUR,0);
+		put(EnumCovenants.ASCENDENT,0);
+		put(EnumCovenants.ELDRITCH,0);
+		put(EnumCovenants.MACHINE,0);
+		put(EnumCovenants.BEAST,0);
+
+	}};
 
 	public Map<EnumCovenants, Integer> getDevotion() {
 		return devotion;

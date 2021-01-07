@@ -54,10 +54,14 @@ public class EntityManaDustItem extends ItemEntity {
 			}
 		}
 		List<Item> recipeList = Arrays.asList(Items.REDSTONE, Items.GLOWSTONE_DUST);
+		List<Item> antiRecipeList = Arrays.asList(Items.REDSTONE, Items.GUNPOWDER);
+		
 		List<Entity> entList = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().grow(0.75));
 		List<Item> itemList = new ArrayList<Item>();
 		List<ItemEntity> itemEntList = new ArrayList<ItemEntity>();
 
+		
+		//Machina Spark
 		for (int i = 0; i < entList.size(); i++) {
 			if (entList.get(i) instanceof ItemEntity) {
 				ItemEntity itemEnt = (ItemEntity) entList.get(i);
@@ -65,7 +69,6 @@ public class EntityManaDustItem extends ItemEntity {
 					if (!itemList.contains(itemEnt.getItem().getItem())) {
 						itemList.add(itemEnt.getItem().getItem());
 					}
-
 					if (!itemEntList.contains(itemEnt)) {
 						itemEntList.add(itemEnt);
 					}
@@ -86,6 +89,33 @@ public class EntityManaDustItem extends ItemEntity {
 						}
 					}
 				}
+				
+				//Anti
+				if (antiRecipeList.contains(itemEnt.getItem().getItem())) {
+					if (!itemList.contains(itemEnt.getItem().getItem())) {
+						itemList.add(itemEnt.getItem().getItem());
+					}
+					if (!itemEntList.contains(itemEnt)) {
+						itemEntList.add(itemEnt);
+					}
+
+					if (itemList.containsAll(antiRecipeList)) {
+						if (!world.isRemote) {
+							for (ItemEntity it : itemEntList) {
+								it.getItem().shrink(1);
+							}
+							world.addEntity(new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(),
+									new ItemStack(ItemInit.anti_tear.get(),2)));
+							this.getItem().shrink(1);
+						} else {
+							world.addParticle(ParticleTypes.POOF, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D,
+									0.0D, 0.0D);
+							world.addParticle(ParticleTypes.SMOKE, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D,
+									0.0D, 0.0D);
+						}
+					}
+				}
+				
 			}
 		}
 		super.tick();

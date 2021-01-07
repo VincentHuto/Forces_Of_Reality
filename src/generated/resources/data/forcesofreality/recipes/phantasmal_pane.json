@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NNN"
+  ],
+  "key": {
+    "N": {
+      "item": "forcesofreality:phantasmal_glass"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:phantasmal_pane"
+  }
+}

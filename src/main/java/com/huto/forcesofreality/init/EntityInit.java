@@ -226,7 +226,6 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityHolySpirit>create(EntityHolySpirit::new, EntityClassification.MISC)
 					.setTrackingRange(150).setUpdateInterval(12).setShouldReceiveVelocityUpdates(true)
 					.size(0.25F, 0.25F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "holy_spirit").toString()));
-
 	public static final RegistryObject<EntityType<EntityCorruptNote>> corrupt_note = ENTITY_TYPES.register(
 			"corrupt_note",
 			() -> EntityType.Builder.<EntityCorruptNote>create(EntityCorruptNote::new, EntityClassification.MISC)
@@ -262,7 +261,6 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.denizen_sage.get(), EntityDenizenSage.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.ibis.get(), EntityIbis.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.angelic_fowl.get(), EntityAngelicFowl.setAttributes().create());
-
 		GlobalEntityTypeAttributes.put(EntityInit.tentacle.get(), EntityTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.player_tentacle.get(), EntityPlayerTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur_spawn.get(), EntityHasturSpawn.setAttributes().create());

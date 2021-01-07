@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NMN",
+    "FNF",
+    "NGN"
+  ],
+  "key": {
+    "M": {
+      "item": "forcesofreality:morel_cap"
+    },
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "G": {
+      "item": "forcesofreality:phantasmal_glass"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:wave_gatherer"
+  }
+}

@@ -209,7 +209,7 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> old_iron_scrap = ITEMS.register("old_iron_scrap",
+	public static final RegistryObject<Item> anointed_iron_scrap = ITEMS.register("anointed_iron_scrap",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
@@ -438,20 +438,20 @@ public class ItemInit {
 			() -> new ItemInfluenceSuppressor(EnumModArmorTiers.SUPPRESSOR, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
 
-	public static final RegistryObject<Item> old_iron_helm = ITEMS.register("old_iron_helm",
-			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.HEAD,
+	public static final RegistryObject<Item> anointed_iron_helm = ITEMS.register("anointed_iron_helm",
+			() -> new ArmorItem(EnumModArmorTiers.ANOINTED, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
 
-	public static final RegistryObject<Item> old_iron_chestplate = ITEMS.register("old_iron_chestplate",
-			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.CHEST,
+	public static final RegistryObject<Item> anointed_iron_chestplate = ITEMS.register("anointed_iron_chestplate",
+			() -> new ArmorItem(EnumModArmorTiers.ANOINTED, EquipmentSlotType.CHEST,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
 
-	public static final RegistryObject<Item> old_iron_leggings = ITEMS.register("old_iron_leggings",
-			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.LEGS,
+	public static final RegistryObject<Item> anointed_iron_leggings = ITEMS.register("anointed_iron_leggings",
+			() -> new ArmorItem(EnumModArmorTiers.ANOINTED, EquipmentSlotType.LEGS,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
 
-	public static final RegistryObject<Item> old_iron_boots = ITEMS.register("old_iron_boots",
-			() -> new ArmorItem(EnumModArmorTiers.OLDIRON, EquipmentSlotType.FEET,
+	public static final RegistryObject<Item> anointed_iron_boots = ITEMS.register("anointed_iron_boots",
+			() -> new ArmorItem(EnumModArmorTiers.ANOINTED, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
 
 	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
@@ -517,7 +517,7 @@ public class ItemInit {
 			() -> new ItemTrickAxe(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumModToolTiers.AURIC));
 	// Old Iron
-	public static final RegistryObject<Item> old_iron_sword = ITEMS.register("old_iron_sword",
+	public static final RegistryObject<Item> anointed_iron_sword = ITEMS.register("anointed_iron_sword",
 			() -> new SwordItem(EnumModToolTiers.OLD_IRON, 3, -2.4F,
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 

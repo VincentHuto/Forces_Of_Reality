@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "ASA",
+    "OOO"
+  ],
+  "key": {
+    "A": {
+      "item": "forcesofreality:activated_obsidian"
+    },
+    "O": {
+      "item": "forcesofreality:nether_block"
+    },
+    "S": {
+      "tag": "minecraft:logs"
+    },
+    "L": {
+      "item": "forcesofreality:somnolent_leaves"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:vibe_gatherer"
+  }
+}

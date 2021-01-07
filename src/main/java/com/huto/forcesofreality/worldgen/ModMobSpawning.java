@@ -27,20 +27,23 @@ public class ModMobSpawning {
 		}
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.PLAINS)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.FOREST)
-				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)) {
+				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)
+						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.CREATURE,
 					new Spawners(EntityInit.ibis.get(), 12, 6, 10));
 		}
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.COLD)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MOUNTAIN)
-				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SNOWY)) {
+				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SNOWY)
+						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.CREATURE,
 					new Spawners(EntityInit.angelic_fowl.get(), 2, 1, 2));
 		}
 
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MESA)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SANDY)
-				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)) {
+				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)
+						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
 					new Spawners(EntityInit.dread_bot.get(), 50, 1, 2));
 		}

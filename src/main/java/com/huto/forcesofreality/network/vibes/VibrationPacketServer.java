@@ -21,7 +21,6 @@ public class VibrationPacketServer {
 	public static void handle(final VibrationPacketServer msg, Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			ServerPlayerEntity sender = ctx.get().getSender(); // the client that sent this packet
-			// Set the amount in the screen
 			Minecraft.getInstance().player.getCapability(VibrationProvider.VIBE_CAPA)
 					.orElseThrow(IllegalStateException::new).setVibes(msg.vibes);
 		});

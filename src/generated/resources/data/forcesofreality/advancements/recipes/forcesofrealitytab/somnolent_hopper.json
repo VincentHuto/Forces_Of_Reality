@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:somnolent_hopper"
+    ]
+  },
+  "criteria": {
+    "has_channeling_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:channeling_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:somnolent_hopper"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_channeling_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:phantasmal_pane"
+    ]
+  },
+  "criteria": {
+    "has_phantasmal_glass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:phantasmal_glass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:phantasmal_pane"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_phantasmal_glass",
+      "has_the_recipe"
+    ]
+  ]
+}

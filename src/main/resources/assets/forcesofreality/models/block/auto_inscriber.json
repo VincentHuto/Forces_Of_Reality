@@ -5,7 +5,7 @@
 		"0": "forcesofreality:blocks/activated_obsidian",
 		"1": "forcesofreality:blocks/contained_magma_bottom",
 		"2": "forcesofreality:blocks/contained_magma_side",
-		"3": "forcesofreality:blocks/old_iron_block",
+		"3": "forcesofreality:blocks/anointed_iron_block",
 		"4": "forcesofreality:blocks/runed_obsidian",
 		"particle": "forcesofreality:blocks/activated_obsidian"
 	},

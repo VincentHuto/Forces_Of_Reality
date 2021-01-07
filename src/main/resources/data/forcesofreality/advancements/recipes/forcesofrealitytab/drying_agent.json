@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:drying_agent"
+    ]
+  },
+  "criteria": {
+    "has_machina_soul": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:machina_soul"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:drying_agent"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_machina_soul",
+      "has_the_recipe"
+    ]
+  ]
+}

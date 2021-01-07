@@ -110,7 +110,6 @@ public class GuiTomePageTOC extends GuiTomePage {
 			GlStateManager.scalef(1.9f, 1.7f, 1.9f);
 			RenderHelper.enableStandardItemLighting();
 			Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(icon, 0, 2);
-
 		}
 		GlStateManager.popMatrix();
 

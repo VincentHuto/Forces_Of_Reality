@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "forcesofreality:old_iron_chestplate"
+      "forcesofreality:anointed_iron_chestplate"
     ]
   },
   "criteria": {
-    "has_old_iron_scrap": {
+    "has_anointed_iron_scrap": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "forcesofreality:old_iron_scrap"
+            "item": "forcesofreality:anointed_iron_scrap"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "forcesofreality:old_iron_chestplate"
+        "recipe": "forcesofreality:anointed_iron_chestplate"
       }
     }
   },
   "requirements": [
     [
-      "has_old_iron_scrap",
+      "has_anointed_iron_scrap",
       "has_the_recipe"
     ]
   ]

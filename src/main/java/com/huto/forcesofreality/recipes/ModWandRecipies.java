@@ -13,22 +13,20 @@ import net.minecraft.util.ResourceLocation;
 public class ModWandRecipies {
 	public static final List<RecipeWandMaker> wandMakerRecipies = new ArrayList<>();
 
-	public static RecipeWandMaker recipeManaConsumption,recipeManaAbsorbtion,test;
+	public static RecipeWandMaker recipeManaConsumption, recipeManaAbsorbtion;
 
 	public static void init() {
 
-		recipeManaConsumption = registerRecipe(new ResourceLocation("wand_consume_vibes"),
+		recipeManaConsumption = registerRecipe(new ResourceLocation("wand_consume_evibes"),
 				new ItemStack(ItemInit.wand_consume_vibes.get(), 1), 50,
 				Ingredient.fromItems(ItemInit.channeling_ingot.get()),
 				Ingredient.fromItems(ItemInit.channeling_rod.get()), Ingredient.fromItems(ItemInit.null_crystal.get()));
 		recipeManaAbsorbtion = registerRecipe(new ResourceLocation("wand_gain_vibes"),
 				new ItemStack(ItemInit.wand_gain_vibes.get(), 1), 0,
 				Ingredient.fromItems(ItemInit.channeling_ingot.get()),
-				Ingredient.fromItems(ItemInit.channeling_rod.get()), Ingredient.fromItems(ItemInit.somnolent_crystal.get()));
-		test = registerRecipe(new ResourceLocation("anti_tear"),
-				new ItemStack(ItemInit.anti_tear.get(), 1), 0, Ingredient.fromItems(ItemInit.drying_agent.get()),
-				Ingredient.fromItems(ItemInit.storming_agent.get()),
-				Ingredient.fromItems(ItemInit.soaking_agent.get()));
+				Ingredient.fromItems(ItemInit.channeling_rod.get()),
+				Ingredient.fromItems(ItemInit.somnolent_crystal.get()));
+
 	}
 
 	public static RecipeWandMaker registerRecipe(ResourceLocation rl, ItemStack output, float vibes,

@@ -18,8 +18,8 @@ public class ModFuserRecipies {
 
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
-			recipeUpgradeExport, recipeElderTome, recipeCovenTome, recipeOpal, recipeNullBowBlade, recipeMysticBowBlade,
-			recipeAuricBowBlade, recipeNullTrickAxe, recipeMysticTrickAxe, recipeAuricTrickAxe, recipeIdentifier,
+			recipeUpgradeExport, recipeElderTome, recipeCovenTome, recipeOpal, recipeNullBowBlade, recipeSomnolentBowBlade,
+			recipeAuricBowBlade, recipeNullTrickAxe, recipeSomnolentTrickAxe, recipeAuricTrickAxe, recipeIdentifier,
 			recipeArmoredDirector, recipeAuricIngot, recipeCryingObsidian, recipePhantasmalGlass, recipeSeraphChest,
 			recipeAuricHelm, recipeAuricChest, recipeAuricLegs, recipeAuricBoots, recipeAuricDirector;
 
@@ -27,7 +27,7 @@ public class ModFuserRecipies {
 
 		recipeSeraphChest = registerRecipe(new ResourceLocation("seraph_wings"),
 				new ItemStack(ItemInit.seraph_wings.get(), 1), 30,
-				Ingredient.fromItems(ItemInit.old_iron_chestplate.get()),
+				Ingredient.fromItems(ItemInit.anointed_iron_chestplate.get()),
 				Ingredient.fromItems(ItemInit.wing_fragment.get()), Ingredient.fromItems(ItemInit.wing_fragment.get()),
 				Ingredient.fromItems(ItemInit.wing_fragment.get()), Ingredient.fromItems(ItemInit.wing_fragment.get()),
 				Ingredient.fromItems(ItemInit.crossed_keys.get()));
@@ -91,7 +91,7 @@ public class ModFuserRecipies {
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
-		recipeMysticBowBlade = registerRecipe(new ResourceLocation("somnolent_bow_blade"),
+		recipeSomnolentBowBlade = registerRecipe(new ResourceLocation("somnolent_bow_blade"),
 				new ItemStack(ItemInit.somnolent_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
@@ -108,7 +108,7 @@ public class ModFuserRecipies {
 				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
 
-		recipeMysticTrickAxe = registerRecipe(new ResourceLocation("somnolent_trick_axe"),
+		recipeSomnolentTrickAxe = registerRecipe(new ResourceLocation("somnolent_trick_axe"),
 				new ItemStack(ItemInit.somnolent_trick_axe.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_AXE),
 				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
 				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));

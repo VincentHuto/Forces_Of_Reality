@@ -24,7 +24,7 @@ public class ModOreGen {
 	public static final RuleTest SOMNOLENT_STONE_DREAMLANDS = new BlockMatchRuleTest(BlockInit.somnolent_stone.get());
 
 	public static ConfiguredFeature<?, ?> EnchantedOreGen;
-	public static ConfiguredFeature<?, ?> MysticEnchantedOreGen;
+	public static ConfiguredFeature<?, ?> SomnolentEnchantedOreGen;
 	public static ConfiguredFeature<?, ?> GeodeOreGen;
 
 	public static void registerConfiguredFeatures() {
@@ -36,12 +36,12 @@ public class ModOreGen {
 
 		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "enchanted_ore_gen"), EnchantedOreGen);
 
-		MysticEnchantedOreGen = Feature.ORE
+	/*	SomnolentEnchantedOreGen = Feature.ORE
 				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
 						BlockInit.somnolent_ore.get().getDefaultState(), 10))
 				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(3, 3, 40))).chance(1);
 		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "enchanted_ore_mystic_gen"),
-				MysticEnchantedOreGen);
+				SomnolentEnchantedOreGen);*/
 
 		GeodeOreGen = Feature.ORE
 				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
@@ -55,7 +55,7 @@ public class ModOreGen {
 		RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
 		if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.VOID) && isValidBiome(event.getCategory())) {
 			event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EnchantedOreGen);
-			event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MysticEnchantedOreGen);
+			event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SomnolentEnchantedOreGen);
 			event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GeodeOreGen);
 
 		}

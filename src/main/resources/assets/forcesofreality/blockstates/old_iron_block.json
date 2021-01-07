@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "forcesofreality:block/old_iron_block" }
+        "": { "model": "forcesofreality:block/anointed_iron_block" }
     }
 }

@@ -116,7 +116,7 @@ public class BlockInit {
 
 	public static final RegistryObject<Block> mind_fog = BLOCKS.register("mind_fog", () -> new Block(
 			Block.Properties.create(Material.SNOW).hardnessAndResistance(5f, 15f).sound(SoundType.CLOTH)));
-	public static final RegistryObject<Block> old_iron_block = BLOCKS.register("old_iron_block",
+	public static final RegistryObject<Block> anointed_iron_block = BLOCKS.register("anointed_iron_block",
 			() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.ANVIL)));
 	public static final RegistryObject<Block> opal_block = BLOCKS.register("opal_block",

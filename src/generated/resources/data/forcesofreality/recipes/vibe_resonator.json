@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FRF",
+    "NFN"
+  ],
+  "key": {
+    "N": {
+      "item": "forcesofreality:nether_block"
+    },
+    "F": {
+      "item": "forcesofreality:energy_focus"
+    },
+    "R": {
+      "item": "forcesofreality:activated_obsidian"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:vibe_resonator"
+  }
+}

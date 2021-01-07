@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "forcesofreality:old_iron_block"
+          "name": "forcesofreality:anointed_iron_block"
         }
       ],
       "conditions": [
