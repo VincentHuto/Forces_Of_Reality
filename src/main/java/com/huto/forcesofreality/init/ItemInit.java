@@ -236,13 +236,13 @@ public class ItemInit {
 	// Seraph
 	public static final RegistryObject<Item> crossed_keys = ITEMS.register("crossed_keys",
 			() -> new ItemCrossedKeys(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					EnumCovenants.ASCENDENT, 10));
+					EnumCovenants.ASCENDANT, 10));
 	public static final RegistryObject<Item> seraph_feather = ITEMS.register("seraph_feather",
 			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
-					EnumCovenants.ASCENDENT, 1));
+					EnumCovenants.ASCENDANT, 1));
 	public static final RegistryObject<Item> wing_fragment = ITEMS.register("wing_fragment",
 			() -> new ItemSacrificial(new Item.Properties().group(ForcesOfRealityItemGroup.instance),
-					EnumCovenants.ASCENDENT, 3));
+					EnumCovenants.ASCENDANT, 3));
 	public static final RegistryObject<Item> star_slug = ITEMS.register("star_slug", () -> new ItemStarSlug(
 			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> discordant_bell = ITEMS.register("discordant_bell",
@@ -643,7 +643,7 @@ public class ItemInit {
 					"Milkweed Major Adornment, Gain contact with the outer beings from beyond all known realms, learn from them, if you dare..."));
 	public static final RegistryObject<Item> rune_radiance_c = ITEMS.register("rune_radiance_c",
 			() -> new ItemMajorAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					EnumCovenants.ASCENDENT, 5));
+					EnumCovenants.ASCENDANT, 5));
 	public static final RegistryObject<Item> rune_pattern_radiance_c = ITEMS.register("rune_pattern_radiance_c",
 			() -> new ItemAdornmentPatternRadianceMajor(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
@@ -736,7 +736,7 @@ public class ItemInit {
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Guidance Adornment, The supernatural blessing, one of fortune and direction, may it guide you to your wants, as it has so many others before."));
 	public static final RegistryObject<Item> rune_communion = ITEMS.register("rune_communion",
-			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDENT,
+			() -> new ItemAdornment(new Item.Properties().group(ForcesOfRealityItemGroup.instance), EnumCovenants.ASCENDANT,
 					1));
 	public static final RegistryObject<Item> rune_pattern_communion = ITEMS.register("rune_pattern_communion",
 			() -> new ItemAdornmentPatternCommunion(

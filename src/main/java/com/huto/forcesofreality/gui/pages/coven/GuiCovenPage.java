@@ -230,8 +230,8 @@ public class GuiCovenPage extends Screen {
 			return CovenPageLib.getHasturPageList();
 		case ELDRITCH:
 			return CovenPageLib.getEldritchPageList();
-		case ASCENDENT:
-			return CovenPageLib.getAscendentPageList();
+		case ASCENDANT:
+			return CovenPageLib.getAscendantPageList();
 		case BEAST:
 			return CovenPageLib.getBeastPageList();
 		case MACHINE:

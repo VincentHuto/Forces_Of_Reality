@@ -397,7 +397,7 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('N', ItemInit.null_rod.get()).patternLine("R").patternLine("R").patternLine("N")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(BlockInit.ascendent_altar.get()).key('B', Items.QUARTZ_BLOCK)
+		ShapedRecipeBuilder.shapedRecipe(BlockInit.ascendant_altar.get()).key('B', Items.QUARTZ_BLOCK)
 				.key('P', Items.QUARTZ_PILLAR).key('O', Items.GOLD_BLOCK).key('G', BlockInit.gilded_wool.get())
 				.patternLine("BGB").patternLine("POP").patternLine("BOB")
 				.addCriterion("has_gilded_wool", hasItem(BlockInit.gilded_wool.get())).build(consumer);

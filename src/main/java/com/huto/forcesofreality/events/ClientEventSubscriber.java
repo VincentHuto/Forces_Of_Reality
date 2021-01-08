@@ -53,7 +53,7 @@ import com.huto.forcesofreality.render.tiles.RenderMagicLight;
 import com.huto.forcesofreality.render.tiles.RenderMagicRingLight;
 import com.huto.forcesofreality.render.tiles.RenderAdornmentModStation;
 import com.huto.forcesofreality.render.tiles.RenderVirtuousEnchanter;
-import com.huto.forcesofreality.render.tiles.coven.RenderAscendentAltar;
+import com.huto.forcesofreality.render.tiles.coven.RenderAscendantAltar;
 import com.huto.forcesofreality.render.tiles.coven.RenderHasturPylon;
 import com.huto.forcesofreality.render.tiles.coven.RenderIcoSphere;
 import com.huto.forcesofreality.render.tiles.coven.RenderMachinaImperfecta;
@@ -118,7 +118,7 @@ public class ClientEventSubscriber {
 		//ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderAdornmentModStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendent_altar.get(), RenderAscendentAltar::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendant_altar.get(), RenderAscendantAltar::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.occular_heap.get(), RenderOccularHeap::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.untold_easel.get(), RenderUntoldEasel::new);

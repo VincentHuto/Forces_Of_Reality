@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/ascendant_altar"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/ascendant_altar",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/ascendant_altar",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/ascendant_altar",
+			"y": 90
+		}
+	}
+}

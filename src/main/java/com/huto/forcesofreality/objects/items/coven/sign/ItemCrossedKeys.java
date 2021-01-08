@@ -129,7 +129,7 @@ public class ItemCrossedKeys extends ItemMajorAdornment implements IAdornment, I
 	
 	@Override
 	public EnumCovenants getAssignedCovenant() {
-		return EnumCovenants.ASCENDENT;
+		return EnumCovenants.ASCENDANT;
 	}
 
 }

@@ -18,7 +18,7 @@ import com.huto.forcesofreality.objects.blocks.BlockAdornmentModStation;
 import com.huto.forcesofreality.objects.blocks.BlockSingeriMushroom;
 import com.huto.forcesofreality.objects.blocks.BlockSlimeRepelent;
 import com.huto.forcesofreality.objects.blocks.BlockTeleporter;
-import com.huto.forcesofreality.objects.blocks.altars.BlockAscendentAltar;
+import com.huto.forcesofreality.objects.blocks.altars.BlockAscendantAltar;
 import com.huto.forcesofreality.objects.blocks.altars.BlockAuspiciousBundle;
 import com.huto.forcesofreality.objects.blocks.altars.BlockMachinaImperfecta;
 import com.huto.forcesofreality.objects.blocks.altars.BlockOccularHeap;
@@ -212,8 +212,8 @@ public class BlockInit {
 	public static final RegistryObject<Block> gilded_wool = BLOCKS.register("gilded_wool",
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
 					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> ascendent_altar = BLOCKS.register("ascendent_altar",
-			() -> new BlockAscendentAltar(
+	public static final RegistryObject<Block> ascendant_altar = BLOCKS.register("ascendant_altar",
+			() -> new BlockAscendantAltar(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Eldritch
 	public static final RegistryObject<Block> occular_heap = BLOCKS.register("occular_heap", () -> new BlockOccularHeap(
@@ -439,7 +439,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron",
 			() -> new BlockIcoSphere(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
-	public static final RegistryObject<Block> end_crystal_somnolent = BLOCKS.register("end_crystal_somnolent",
+/*	public static final RegistryObject<Block> end_crystal_somnolent = BLOCKS.register("end_crystal_somnolent",
 			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
 	public static final RegistryObject<Block> end_crystal_nightmare = BLOCKS.register("end_crystal_nightmare",
@@ -447,7 +447,7 @@ public class BlockInit {
 					.sound(SoundType.STONE).notSolid()));
 	public static final RegistryObject<Block> raw_hematite = BLOCKS.register("raw_hematite",
 			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
-					.sound(SoundType.STONE).notSolid()));
+					.sound(SoundType.STONE).notSolid()));*/
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
@@ -467,9 +467,9 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.vibe_gatherer.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.obj_icosahedron.get(), RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_somnolent.get(), RenderType.getCutout());
+/*			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_somnolent.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(), RenderType.getCutout());
+			RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(), RenderType.getCutout());*/
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_grass.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.essence_breakout_point.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.null_breakout_point.get(), RenderType.getCutout());

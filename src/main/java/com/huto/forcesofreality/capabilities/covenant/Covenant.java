@@ -8,7 +8,7 @@ public class Covenant implements ICovenant {
 	private Map<EnumCovenants, Integer> devotion = new HashMap<EnumCovenants, Integer>(){{
 		put(EnumCovenants.SELF,0);
 		put(EnumCovenants.HASTUR,0);
-		put(EnumCovenants.ASCENDENT,0);
+		put(EnumCovenants.ASCENDANT,0);
 		put(EnumCovenants.ELDRITCH,0);
 		put(EnumCovenants.MACHINE,0);
 		put(EnumCovenants.BEAST,0);
@@ -66,12 +66,12 @@ public class Covenant implements ICovenant {
 	@Override
 	public EnumCovenants getOpposingCoven(EnumCovenants covenIn) {
 		switch (covenIn) {
-		case ASCENDENT:
+		case ASCENDANT:
 			return EnumCovenants.ELDRITCH;
 		case BEAST:
 			return EnumCovenants.MACHINE;
 		case ELDRITCH:
-			return EnumCovenants.ASCENDENT;
+			return EnumCovenants.ASCENDANT;
 		case HASTUR:
 			return EnumCovenants.SELF;
 		case MACHINE:
@@ -86,7 +86,7 @@ public class Covenant implements ICovenant {
 	@Override
 	public boolean getCovenAlignment(EnumCovenants covenIn) {
 		switch (covenIn) {
-		case ASCENDENT:
+		case ASCENDANT:
 			return true;
 		case BEAST:
 			return false;

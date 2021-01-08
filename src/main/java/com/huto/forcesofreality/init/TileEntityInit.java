@@ -9,7 +9,7 @@ import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation
 import com.huto.forcesofreality.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.forcesofreality.objects.tileenties.TileEntityTeleporter;
 import com.huto.forcesofreality.objects.tileenties.TileEntityVirtuousEnchant;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendentAltar;
+import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAuspiciousBundle;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHasturPylon;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityOccularHeap;
@@ -109,9 +109,9 @@ public class TileEntityInit {
 			.register("slime_repelent", () -> TileEntityType.Builder
 					.create(TileEntitySlimeRepelent::new, BlockInit.slime_repelent.get()).build(null));
 
-	public static final RegistryObject<TileEntityType<TileEntityAscendentAltar>> ascendent_altar = TILES
-			.register("ascendent_altar", () -> TileEntityType.Builder
-					.create(TileEntityAscendentAltar::new, BlockInit.ascendent_altar.get()).build(null));
+	public static final RegistryObject<TileEntityType<TileEntityAscendantAltar>> ascendant_altar = TILES
+			.register("ascendant_altar", () -> TileEntityType.Builder
+					.create(TileEntityAscendantAltar::new, BlockInit.ascendant_altar.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntityOccularHeap>> occular_heap = TILES.register(
 			"occular_heap",

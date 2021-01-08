@@ -36,12 +36,12 @@ public class ModOreGen {
 
 		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "enchanted_ore_gen"), EnchantedOreGen);
 
-	/*	SomnolentEnchantedOreGen = Feature.ORE
-				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+		SomnolentEnchantedOreGen = Feature.ORE
+				.withConfiguration(new OreFeatureConfig(SOMNOLENT_STONE_DREAMLANDS,
 						BlockInit.somnolent_ore.get().getDefaultState(), 10))
-				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(3, 3, 40))).chance(1);
+				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(3, 3, 140))).chance(1);
 		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "enchanted_ore_mystic_gen"),
-				SomnolentEnchantedOreGen);*/
+				SomnolentEnchantedOreGen);
 
 		GeodeOreGen = Feature.ORE
 				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,

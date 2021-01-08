@@ -97,7 +97,7 @@ public class GuiCovenTitle extends Screen {
 			// Enables lighting so it doesnt look dark
 			RenderHelper.enableStandardItemLighting();
 			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.hastur_pylon.get()), 0, -4);
-			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.ascendent_altar.get()), 0, 8);
+			mc.getItemRenderer().renderItemIntoGUI(new ItemStack(BlockInit.ascendant_altar.get()), 0, 8);
 
 			GlStateManager.pushMatrix();
 			GlStateManager.translatef(3, -5, 0);
@@ -137,7 +137,7 @@ public class GuiCovenTitle extends Screen {
 			renderTooltip(matrixStack, new StringTextComponent("Eldrtich"), mouseX, mouseY);
 		}
 		if (ascendButton.isHovered()) {
-			renderTooltip(matrixStack, new StringTextComponent("Ascendents"), mouseX, mouseY);
+			renderTooltip(matrixStack, new StringTextComponent("Ascendants"), mouseX, mouseY);
 		}
 		if (beastButton.isHovered()) {
 			renderTooltip(matrixStack, new StringTextComponent("Beast"), mouseX, mouseY);
@@ -174,7 +174,7 @@ public class GuiCovenTitle extends Screen {
 				}));
 		this.addButton(ascendButton = new GuiButtonTextured(texture, BUTTONASCEND, sideLoc - (guiWidth - 175),
 				verticalLoc - 153, 23, 16, 186, 64, null, (press) -> {
-					mc.displayGuiScreen(CovenPageLib.AscendentPageList.get(0));
+					mc.displayGuiScreen(CovenPageLib.AscendantPageList.get(0));
 				}));
 		
 		this.addButton(eldritchButton = new GuiButtonTextured(texture, BUTTONELDRITCH,  sideLoc - (guiWidth - 177),

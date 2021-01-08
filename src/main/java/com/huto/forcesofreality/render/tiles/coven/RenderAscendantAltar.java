@@ -2,7 +2,7 @@ package com.huto.forcesofreality.render.tiles.coven;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.models.block.ModelFloatingCandle;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendentAltar;
+import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
 import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -15,15 +15,15 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderAscendentAltar extends TileEntityRenderer<TileEntityAscendentAltar> {
+public class RenderAscendantAltar extends TileEntityRenderer<TileEntityAscendantAltar> {
 	private final ModelFloatingCandle black_candle = new ModelFloatingCandle();
 
-	public RenderAscendentAltar(TileEntityRendererDispatcher rendererDispatcherIn) {
+	public RenderAscendantAltar(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
 	}
 
 	@Override
-	public void render(TileEntityAscendentAltar te, float partialTicks, MatrixStack matrixStackIn,
+	public void render(TileEntityAscendantAltar te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
 		matrixStackIn.push();

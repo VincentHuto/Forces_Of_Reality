@@ -46,12 +46,12 @@ public class ItemDivineFeather extends Item {
 			if (!worldIn.isRemote) {
 				ICovenant coven = entityLiving.getCapability(CovenantProvider.COVEN_CAPA)
 						.orElseThrow(IllegalArgumentException::new);
-				if (coven.getDevotionByCoven(EnumCovenants.ASCENDENT) > 3) {
+				if (coven.getDevotionByCoven(EnumCovenants.ASCENDANT) > 3) {
 					if (!worldIn.isRemote) {
 
 						if (worldIn.rand.nextInt(10) == 6) {
 
-							coven.setCovenDevotion(EnumCovenants.ASCENDENT, -1);
+							coven.setCovenDevotion(EnumCovenants.ASCENDANT, -1);
 							PacketHandler.CHANNELCOVENANT.send(
 									PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerentity),
 									new CovenantPacketServer(coven.getDevotion()));

@@ -278,7 +278,8 @@ public class ContainerVirtuousEnchanter extends Container {
 								// this.enchantclue[j1] is maybe the enchanment ids/objs?
 								this.enchantClue[j1] = Registry.ENCHANTMENT.getId(enchantmentdata.enchantment);
 								this.worldClue[j1] = enchantmentdata.enchantmentLevel;
-							//	System.out.println(enchantmentdata.enchantment.getName() + " " + this.worldClue[j1]);
+								// System.out.println(enchantmentdata.enchantment.getName() + " " +
+								// this.worldClue[j1]);
 							}
 						}
 					}
@@ -387,8 +388,8 @@ public class ContainerVirtuousEnchanter extends Container {
 		List<Enchantment> sapphireList = new ArrayList<Enchantment>();
 		List<Enchantment> amethystList = new ArrayList<Enchantment>();
 		List<Enchantment> opalList = new ArrayList<Enchantment>();
-
-		Collections.addAll(onyxList, Enchantments.FEATHER_FALLING, Enchantments.FIRE_PROTECTION,Enchantments.EFFICIENCY);
+		Collections.addAll(onyxList, Enchantments.FEATHER_FALLING, Enchantments.FIRE_PROTECTION,
+				Enchantments.EFFICIENCY);
 		Collections.addAll(topazList, Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.THORNS,
 				Enchantments.QUICK_CHARGE, Enchantments.MULTISHOT, Enchantments.PIERCING);
 		Collections.addAll(hematiteList, Enchantments.PROTECTION, Enchantments.UNBREAKING, Enchantments.KNOCKBACK,
@@ -406,7 +407,6 @@ public class ContainerVirtuousEnchanter extends Container {
 		opalList.addAll(rubyList);
 		opalList.addAll(sapphireList);
 		opalList.addAll(amethystList);
-
 		Enchantment enchant = enchantmentdata.enchantment;
 		if (type == EnumVirtuousTypes.TOPAZ && topazList.contains(enchant)) {
 			return true;
@@ -430,8 +430,7 @@ public class ContainerVirtuousEnchanter extends Container {
 
 	private float getPower(net.minecraft.world.World world, net.minecraft.util.math.BlockPos pos) {
 
-		if (world.getBlockState(pos).getBlock() == BlockInit.end_crystal_somnolent.get()
-				|| world.getBlockState(pos).getBlock() == BlockInit.end_crystal_nightmare.get()) {
+		if (world.getBlockState(pos).getBlock() == BlockInit.opal_block.get()) {
 			return 3f;
 		} else {
 			return world.getBlockState(pos).getEnchantPowerBonus(world, pos);

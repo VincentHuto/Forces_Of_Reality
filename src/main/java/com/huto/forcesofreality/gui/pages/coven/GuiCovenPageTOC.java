@@ -233,8 +233,8 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		case ELDRITCH:
 			chapterPages = CovenPageLib.getEldritchPageList();
 			break;
-		case ASCENDENT:
-			chapterPages = CovenPageLib.getAscendentPageList();
+		case ASCENDANT:
+			chapterPages = CovenPageLib.getAscendantPageList();
 			break;
 		case BEAST:
 			chapterPages = CovenPageLib.getBeastPageList();
@@ -257,8 +257,8 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 			return CovenPageLib.getHasturPageList();
 		case ELDRITCH:
 			return CovenPageLib.getEldritchPageList();
-		case ASCENDENT:
-			return CovenPageLib.getAscendentPageList();
+		case ASCENDANT:
+			return CovenPageLib.getAscendantPageList();
 		case BEAST:
 			return CovenPageLib.getBeastPageList();
 		case MACHINE:

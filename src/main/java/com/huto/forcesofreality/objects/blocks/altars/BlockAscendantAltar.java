@@ -9,7 +9,7 @@ import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.objects.blocks.util.IBlockDevotionStation;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendentAltar;
+import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
 import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
@@ -42,7 +42,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class BlockAscendentAltar extends Block implements IBlockDevotionStation {
+public class BlockAscendantAltar extends Block implements IBlockDevotionStation {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	private static final VoxelShape SHAPE_N = Stream
 			.of(Block.makeCuboidShape(0, 0, 1, 16, 1, 15), Block.makeCuboidShape(3, 1, 4, 13, 3, 12),
@@ -67,7 +67,7 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
 
-	public BlockAscendentAltar(Properties properties) {
+	public BlockAscendantAltar(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.SOUTH));
 
@@ -76,7 +76,7 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		TileEntityAscendentAltar te = (TileEntityAscendentAltar) worldIn.getTileEntity(pos);
+		TileEntityAscendantAltar te = (TileEntityAscendantAltar) worldIn.getTileEntity(pos);
 		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getHeldItemMainhand();
 		// Upgrade clause
@@ -184,7 +184,7 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileEntityAscendentAltar();
+		return new TileEntityAscendantAltar();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -195,7 +195,7 @@ public class BlockAscendentAltar extends Block implements IBlockDevotionStation 
 
 	@Override
 	public EnumCovenants getCovenType() {
-		return EnumCovenants.ASCENDENT;
+		return EnumCovenants.ASCENDANT;
 	}
 
 }

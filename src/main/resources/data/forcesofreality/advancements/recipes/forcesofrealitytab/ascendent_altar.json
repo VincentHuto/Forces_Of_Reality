@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "forcesofreality:ascendent_altar"
+      "forcesofreality:ascendant_altar"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "forcesofreality:ascendent_altar"
+        "recipe": "forcesofreality:ascendant_altar"
       }
     }
   },

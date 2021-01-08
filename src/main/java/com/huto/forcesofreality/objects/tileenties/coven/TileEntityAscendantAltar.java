@@ -5,10 +5,10 @@ import com.huto.forcesofreality.init.TileEntityInit;
 
 import net.minecraft.tileentity.ITickableTileEntity;
 
-public class TileEntityAscendentAltar extends TileModDevotion implements ITickableTileEntity {
+public class TileEntityAscendantAltar extends TileModDevotion implements ITickableTileEntity {
 
-	public TileEntityAscendentAltar() {
-		super(TileEntityInit.ascendent_altar.get());
+	public TileEntityAscendantAltar() {
+		super(TileEntityInit.ascendant_altar.get());
 	}
 
 	@Override
@@ -17,6 +17,6 @@ public class TileEntityAscendentAltar extends TileModDevotion implements ITickab
 
 	@Override
 	public EnumCovenants getCovenType() {
-		return EnumCovenants.ASCENDENT;
+		return EnumCovenants.ASCENDANT;
 	}
 }

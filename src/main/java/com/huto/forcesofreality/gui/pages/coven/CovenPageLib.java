@@ -7,6 +7,7 @@ import java.util.List;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.gui.pages.GuiTomeImage;
+import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
 
 import net.minecraft.client.resources.I18n;
@@ -17,171 +18,243 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CovenPageLib {
-
+	
+	public static List<GuiCovenPage> SelfPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> HasturPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> EldritchPageList = new ArrayList<GuiCovenPage>();
-	public static List<GuiCovenPage> AscendentPageList = new ArrayList<GuiCovenPage>();
+	public static List<GuiCovenPage> AscendantPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> BeastPageList = new ArrayList<GuiCovenPage>();
 	public static List<GuiCovenPage> MachinePageList = new ArrayList<GuiCovenPage>();
-	public static List<GuiCovenPage> SelfPageList = new ArrayList<GuiCovenPage>();
 
 	public static List<List<GuiCovenPage>> ChapterList = new ArrayList<List<GuiCovenPage>>();
 	public static List<GuiCovenPageTOC> TOCPageList = new ArrayList<GuiCovenPageTOC>();
 
-	// HASTUR
-	public static String SELF_PAGE_1 = "title.coventome.self.page.1.text";
-	public static String SELF_PAGE_2 = "title.coventome.self.page.2.text";
-	public static String SELF_PAGE_3 = "title.coventome.self.page.3.text";
-	public static String SELF_PAGE_4 = "title.coventome.self.page.4.text";
-	public static String SELF_PAGE_5 = "title.coventome.self.page.5.text";
+	//Self
+	public static String SELF_PAGE_1 = "Self: focused on peace, self reliance, non destruction and healing.Bonsais, Akebi fruit, chakra";
+	public static String SELF_PAGE_2 = "Guardian: Tulpa";
+	public static String SELF_PAGE_3 = "Lord: Veritas";
+	public static String SELF_PAGE_4 = "Animal: Self";
+	public static String SELF_PAGE_5 = "Altar: Bonsais and the devotion is based on grooming them";
+	public static String SELF_PAGE_6 = "Alignment: Positive\nCounter coven- Hastur";
+	public static String SELF_PAGE_7 = "Tools: ";
 
-	// HASTUR
-	public static String HASTUR_PAGE_1 = "title.coventome.hastur.page.1.text";
-	public static String HASTUR_PAGE_2 = "title.coventome.hastur.page.2.text";
-	public static String HASTUR_PAGE_3 = "title.coventome.hastur.page.3.text";
-	public static String HASTUR_PAGE_4 = "title.coventome.hastur.page.4.text";
+	//Hastur
+	public static String HASTUR_PAGE_1 = "Hastur: Focused on control, deception, cunning, yellow, and tentacles";
+	public static String HASTUR_PAGE_2 = "Guardian: Hastur;The Lord in yellow.";
+	public static String HASTUR_PAGE_3 = "Lord: Hastur; The Great Xanthous Deciever";
+	public static String HASTUR_PAGE_4 = "Animal: Hastur Vassal";
+	public static String HASTUR_PAGE_5 = "Altar: Untold Easel\nDevotional: Yellow Sign\nSacrifices:(Unsettling Fabric, Unsettling Tapestry)";
+	public static String HASTUR_PAGE_6 = "Alignment: Positive\nCounter coven- Hastur";
+	public static String HASTUR_PAGE_7 = "Tools: Yellow Tome";
 
-	// ASCENDENT
-	public static String ASCENDENT_PAGE_1 = "title.coventome.ascendent.page.1.text";
-	public static String ASCENDENT_PAGE_2 = "title.coventome.ascendent.page.2.text";
-	public static String ASCENDENT_PAGE_3 = "title.coventome.ascendent.page.3.text";
-	public static String ASCENDENT_PAGE_4 = "title.coventome.ascendent.page.4.text";
+	//Ascendant
+	public static String ASCENDANT_PAGE_1 = "Ascendant: Light,justice, Wings, order, Anti undead etc";
+	public static String ASCENDANT_PAGE_2 = "Guardian: Seraph";
+	public static String ASCENDANT_PAGE_3 = "Lord: Tetra;The 4-Fold Light";
+	public static String ASCENDANT_PAGE_4 = "Animal: Angelic Fowl";
+	public static String ASCENDANT_PAGE_5 = "Altar: Ascendant Altar\nDevotional: Crossed Keys\nSacrifices(Seraph Feather,Wing Fragment)";
+	public static String ASCENDANT_PAGE_6 = "Alignment: Positive\nCounter coven- Eldritch";
+	public static String ASCENDANT_PAGE_7 = "Tools: Divine Feather\nDiscordent Bell\nSeraph Wings";
 
-	// ELDRITCH
-	public static String ELDRITCH_PAGE_1 = "title.coventome.eldritch.page.1.text";
-	public static String ELDRITCH_PAGE_2 = "title.coventome.eldritch.page.2.text";
-	public static String ELDRITCH_PAGE_3 = "title.coventome.eldritch.page.3.text";
-	public static String ELDRITCH_PAGE_4 = "title.coventome.eldritch.page.4.text";
-
-	// BEAST
-	public static String BEAST_PAGE_1 = "title.coventome.beast.page.1.text";
-	public static String BEAST_PAGE_2 = "title.coventome.beast.page.2.text";
-	public static String BEAST_PAGE_3 = "title.coventome.beast.page.3.text";
-	public static String BEAST_PAGE_4 = "title.coventome.beast.page.4.text";
-
+	//Eldritch
+	public static String ELDRITCH_PAGE_1 = "Eldritch: Chaos, confusion eyes purple black, obscuration, mist, teleportation,body mutation";
+	public static String ELDRITCH_PAGE_2 = "Guardian: Dark Young";
+	public static String ELDRITCH_PAGE_3 = "Lord: *($8($?$!jrjsn+UFHHHHH";
+	public static String ELDRITCH_PAGE_4 = "Animal: Scuttling Occulus";
+	public static String ELDRITCH_PAGE_5 = "Altar: Occular Heap\nDevotional: Everwatchful Pendant\nSacrifices(Suspicious Eye,Ball of Eyes)";
+	public static String ELDRITCH_PAGE_6 = "Alignment: Negative\nCounter coven- Ascendant";
+	public static String ELDRITCH_PAGE_7 = "Tools: Demon Flute\nDestabilization Charm\nSoaking & Strorming Agents";
+	// Beast
+	public static String BEAST_PAGE_1 = "Beast: Wild, bloodlust, nature, primal, pack mentality, swarming fur bones teeth etc";
+	public static String BEAST_PAGE_2 = "Guardian: Beast from Beyond";
+	public static String BEAST_PAGE_3 = "Lord: The Lord of the Wild";
+	public static String BEAST_PAGE_4 = "Animal: Deranged Beast";
+	public static String BEAST_PAGE_5 = "Altar: Sacrificial Pyre\nDevotional: Breath of the Beast\nSacrifices(Blooddrawn Fang,Beastly Bone)";
+	public static String BEAST_PAGE_6 = "Alignment: Negative\nCounter coven- Machine";
+	public static String BEAST_PAGE_7 = "Tools: Predator View\nBoost in Forest and like biomes";
 	// Machine
-	public static String MACHINE_PAGE_1 = "title.coventome.machine.page.1.text";
-	public static String MACHINE_PAGE_2 = "title.coventome.machine.page.2.text";
-	public static String MACHINE_PAGE_3 = "title.coventome.machine.page.3.text";
-	public static String MACHINE_PAGE_4 = "title.coventome.machine.page.4.text";
-	public static String MACHINE_PAGE_5 = "To know the machine, to know the spark of life itself, just as you run on  spirit, as do machines, Create an artifical soul";
-	public static String MACHINE_PAGE_6 = "No matter how meticulous the great tinkerer is, when starting any new task, mistakes and hiccups are bound to occur. The Malformed Automaton is exactly that hiccup. Broken and Deranged, It was cast into the scrap heap of creation to slowly rust and decay. However its primeval spark still remains, waiting eagerly to inhabit its old vessel";
-	public static void registerPages() {
+	public static String MACHINE_PAGE_1 = "Machina: Hand made creations and true order, binary truths, cogs and wheels, electricy and rockets, The Machina Spark and it's power, Mechanical Augmentation";
+	public static String MACHINE_PAGE_2 = "Guardian: Malformed Automaton \nNo matter how meticulous the great tinkerer is, when starting any new task, mistakes and hiccups are bound to occur. The Malformed Automaton is exactly that hiccup. Broken and Deranged, It was cast into the scrap heap of creation to slowly rust and decay. However its primeval spark still remains, waiting eagerly to inhabit its old vessel";
+	public static String MACHINE_PAGE_3 = "Lord: Mechan; The Great Tinkerer/The Origin of Spark";
+	public static String MACHINE_PAGE_4 = "Animal: DreadBot";
+	public static String MACHINE_PAGE_5 = "Altar: Machina Spark\nDevotional: Integral Cog\nSacrifices(Discarded Cog,Neurotic Mechanism)";
+	public static String MACHINE_PAGE_6 = "Alignment: Positive\nCounter coven- Beast";
+	public static String MACHINE_PAGE_7 = "Tools: Mechan Glove";
+	public static String MACHINE_PAGE_8 = "Machina Spark: To know the machine, to know the spark of life itself, just as you run on  spirit, as do machines, Create an artifical soul and you can achieve anything";
 
+	public static void registerPages() {
+		SelfPageList.clear();
 		HasturPageList.clear();
 		EldritchPageList.clear();
-		AscendentPageList.clear();
+		AscendantPageList.clear();
 		BeastPageList.clear();
 		MachinePageList.clear();
-		SelfPageList.clear();
-
 		ChapterList.clear();
 		TOCPageList.clear();
 
 		// SELF
-		SelfPageList.add(new GuiCovenImagePage(1, EnumCovenants.SELF, "Self", "Altar", SELF_PAGE_1,
-				new GuiTomeImage(new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/altar.png"),
-						0, 0, 104, 104, 0.00970625F)));
-		SelfPageList.add(new GuiCovenPage(2, EnumCovenants.SELF, "Me, Myself, and I", "The Path of the Self",
-				new ItemStack(ItemInit.allegiance_identifier.get()), I18n.format(SELF_PAGE_2)));
-		SelfPageList.add(new GuiCovenPage(3, EnumCovenants.SELF, "Self Care", "Mental and Physica;",
-				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_3)));
-		SelfPageList.add(new GuiCovenPage(4, EnumCovenants.SELF, "Escaping the pull", "The whole of the Law",
-				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(SELF_PAGE_4)));
-		SelfPageList.add(new GuiCovenImagePage(5, EnumCovenants.SELF, "Tulpa", "Inner Self", SELF_PAGE_5,
-				new GuiTomeImage(new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/tulpa.png"),
-						0, 0, 104, 104, 0.00970625F)));
-		// HASTUR
-		HasturPageList.add(new GuiCovenImagePage(1, EnumCovenants.HASTUR, "Hasturs", "Altar", HASTUR_PAGE_1,
+		SelfPageList.add(new GuiCovenPage(1, EnumCovenants.SELF, "Self", "The Path of One",
+				new ItemStack(BlockInit.akebi.get()), I18n.format(SELF_PAGE_1)));
+		SelfPageList.add(new GuiCovenImagePage(2, EnumCovenants.SELF, "Guardian", "Tulpa", SELF_PAGE_2,
 				new GuiTomeImage(
-						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/hastur/altar.png"), 0, 0,
-						104, 104, 0.00970625F)));
-		HasturPageList.add(new GuiCovenPage(2, EnumCovenants.HASTUR, "The Lord in Yellow", "It Started Somewhere",
-				new ItemStack(ItemInit.unsettling_tapestry.get()), I18n.format(HASTUR_PAGE_2)));
-		HasturPageList.add(new GuiCovenPage(3, EnumCovenants.HASTUR, "Scraps of Himself", "Its not polyester",
-				new ItemStack(ItemInit.unsettling_fabric.get()), I18n.format(HASTUR_PAGE_3)));
-		HasturPageList.add(new GuiCovenPage(4, EnumCovenants.HASTUR, "Channeling Power", "Only as he wills it",
-				new ItemStack(ItemInit.yellow_tome.get()), I18n.format(HASTUR_PAGE_4)));
-
-		// ELDRITCH
-		EldritchPageList.add(new GuiCovenImagePage(1, EnumCovenants.ELDRITCH, "Eldritch", "Altar", ELDRITCH_PAGE_1,
-				new GuiTomeImage(
-						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/eldritch/altar.png"), 0, 0,
-						104, 104, 0.00970625F)));
-
-		EldritchPageList.add(new GuiCovenPage(2, EnumCovenants.ELDRITCH, "The Eldritch Truth", "Whispers from beyond",
-				new ItemStack(ItemInit.ball_of_eyes.get()), I18n.format(ELDRITCH_PAGE_2)));
-		EldritchPageList.add(new GuiCovenPage(3, EnumCovenants.ELDRITCH, "The Eye on the Inside", "Keep an eye out",
-				new ItemStack(ItemInit.suspicious_eye.get()), I18n.format(ELDRITCH_PAGE_3)));
-		EldritchPageList.add(new GuiCovenPage(4, EnumCovenants.ELDRITCH, "Cognito Hazard", "What you dont know...",
-				new ItemStack(ItemInit.karmic_drop.get()), I18n.format(ELDRITCH_PAGE_4)));
-
-		// Ascendent
-		AscendentPageList.add(new GuiCovenImagePage(1, EnumCovenants.ASCENDENT, "Ascendent", "Altar", ASCENDENT_PAGE_1,
-				new GuiTomeImage(
-						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/ascendent/altar.png"), 0,
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/tulpa.png"), 0,
 						0, 104, 104, 0.00970625F)));
-		AscendentPageList.add(new GuiCovenPage(2, EnumCovenants.ASCENDENT, "The Higher Beings", "Seraphim and Beyond",
-				new ItemStack(ItemInit.wing_fragment.get()), I18n.format(ASCENDENT_PAGE_2)));
-		AscendentPageList.add(new GuiCovenPage(3, EnumCovenants.ASCENDENT, "Magic Down", "Feather Collecting",
-				new ItemStack(ItemInit.seraph_feather.get()), I18n.format(ASCENDENT_PAGE_3)));
-		AscendentPageList.add(new GuiCovenPage(4, EnumCovenants.ASCENDENT, "Holy Flares", "Star Spawn",
-				new ItemStack(ItemInit.star_slug.get()), I18n.format(ASCENDENT_PAGE_4)));
-
-		// Beast
-
-		BeastPageList.add(new GuiCovenImagePage(1, EnumCovenants.BEAST, "Beast", "Altar", BEAST_PAGE_1,
-				new GuiTomeImage(new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/beast/altar.png"),
+		SelfPageList.add(new GuiCovenImagePage(3, EnumCovenants.SELF, "Lord", "Veritas", SELF_PAGE_3,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		SelfPageList.add(new GuiCovenPage(4, EnumCovenants.SELF, "Animal", "Ibis",
+				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_4)));
+		SelfPageList.add(new GuiCovenImagePage(5, EnumCovenants.SELF, "Altar", "Bonsai", SELF_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/altar.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		SelfPageList.add(new GuiCovenPage(6, EnumCovenants.SELF, "Alignment", "Positive",
+				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_6)));
+		SelfPageList.add(new GuiCovenPage(7, EnumCovenants.SELF, "Tools", "Tricks of the Trade",
+				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_7)));
+		
+		
+		
+		// HASTUR
+		HasturPageList.add(new GuiCovenPage(1, EnumCovenants.HASTUR, "Hastur", "The Great Deciever",
+				new ItemStack(ItemInit.yellow_sign.get()), I18n.format(HASTUR_PAGE_1)));
+		HasturPageList.add(new GuiCovenImagePage(2, EnumCovenants.HASTUR, "Guardian", "Hastur; The Lord in Yellow", HASTUR_PAGE_2,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/hastur/hastur.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		HasturPageList.add(new GuiCovenImagePage(3, EnumCovenants.HASTUR, "Lord", "Hastur; The Great Xanthous Deciever", HASTUR_PAGE_3,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"),
 						0, 0, 104, 104, 0.00970625F)));
-		BeastPageList.add(new GuiCovenPage(2, EnumCovenants.BEAST, "Fight Tooth and Nail", "Beastly Blood",
-				new ItemStack(ItemInit.beastly_bone.get()), I18n.format(BEAST_PAGE_2)));
-		BeastPageList.add(new GuiCovenPage(3, EnumCovenants.BEAST, "Just a Nail", "Nail Clippings",
-				new ItemStack(ItemInit.blooddrawn_fang.get()), I18n.format(BEAST_PAGE_3)));
-		BeastPageList.add(new GuiCovenPage(4, EnumCovenants.BEAST, "Thermal Vision", "Hunt as a Beast",
-				new ItemStack(ItemInit.influence_supressor.get()), I18n.format(BEAST_PAGE_4)));
+		HasturPageList.add(new GuiCovenPage(4, EnumCovenants.HASTUR, "Animal", "Hastur Vassal",
+				new ItemStack(ItemInit.unsettling_tapestry.get()), I18n.format(HASTUR_PAGE_4)));
+		HasturPageList.add(new GuiCovenImagePage(5, EnumCovenants.HASTUR, "Altar", "Untold Easel", HASTUR_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/hastur/altar.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		HasturPageList.add(new GuiCovenPage(6, EnumCovenants.HASTUR, "Alignment", "Negative",
+				new ItemStack(ItemInit.unsettling_fabric.get()), I18n.format(HASTUR_PAGE_6)));
+		HasturPageList.add(new GuiCovenPage(7, EnumCovenants.HASTUR, "Tools", "Tricks of the Trade",
+				new ItemStack(ItemInit.yellow_tome.get()), I18n.format(HASTUR_PAGE_7)));
+		
+		
+		// ELDRITCH
+		EldritchPageList.add(new GuiCovenPage(1, EnumCovenants.ELDRITCH, "Eldritch", "The Bizzare and Obscure",
+				new ItemStack(ItemInit.everwatchful_pendant.get()), I18n.format(ELDRITCH_PAGE_1)));
+		EldritchPageList.add(new GuiCovenImagePage(2, EnumCovenants.ELDRITCH, "Guardian", "The Dark Young", ELDRITCH_PAGE_2,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/eldritch/darkyoung.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		EldritchPageList.add(new GuiCovenImagePage(3, EnumCovenants.ELDRITCH, "Lord", "*($8($?$!jrjsn+UFHHHHH", ELDRITCH_PAGE_3,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"),
+						0, 0, 104, 104, 0.00970625F)));
+		EldritchPageList.add(new GuiCovenPage(4, EnumCovenants.ELDRITCH, "Animal", "Scuttling Occulus",
+				new ItemStack(ItemInit.suspicious_eye.get()), I18n.format(ELDRITCH_PAGE_4)));
+		EldritchPageList.add(new GuiCovenImagePage(5, EnumCovenants.ELDRITCH, "Altar", "Occular Heap", ELDRITCH_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/eldritch/altar.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		EldritchPageList.add(new GuiCovenPage(6, EnumCovenants.ELDRITCH, "Alignment", "Negative",
+				new ItemStack(ItemInit.ball_of_eyes.get()), I18n.format(ELDRITCH_PAGE_6)));
+		EldritchPageList.add(new GuiCovenPage(7, EnumCovenants.ELDRITCH, "Tools", "Tricks of the Trade",
+				new ItemStack(ItemInit.demon_flute.get()), I18n.format(ELDRITCH_PAGE_7)));
 
-		// Machine
-		MachinePageList.add(new GuiCovenImagePage(1, EnumCovenants.MACHINE, "Machine", "Altar", MACHINE_PAGE_1,
+		
+		
+		// Ascendant
+		AscendantPageList.add(new GuiCovenPage(1, EnumCovenants.ASCENDANT, "Ascendant", "The Heavens Above",
+				new ItemStack(ItemInit.crossed_keys.get()), I18n.format(ASCENDANT_PAGE_1)));
+		AscendantPageList.add(new GuiCovenImagePage(2, EnumCovenants.ASCENDANT, "Guardian", "Seraph; The Holy Knight", ASCENDANT_PAGE_2,
 				new GuiTomeImage(
-						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/altar.png"), 0, 0,
-						104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenPage(2, EnumCovenants.MACHINE, "The World of Machines", "Facts and Logic",
-				new ItemStack(ItemInit.auric_ingot.get()), I18n.format(MACHINE_PAGE_2)));
-		MachinePageList.add(new GuiCovenPage(3, EnumCovenants.MACHINE, "Sentient Machines", "T-1000",
-				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_3)));
-		MachinePageList.add(new GuiCovenPage(4, EnumCovenants.MACHINE, "Trick Tools", "Mechanical Advantage",
-				new ItemStack(ItemInit.somnolent_trick_axe.get()), I18n.format(MACHINE_PAGE_4)));
-		MachinePageList.add(new GuiCovenImagePage(5, EnumCovenants.MACHINE, "Machina Soul", "Life Spark",
-				MACHINE_PAGE_5,
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/ascendant/seraph.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		AscendantPageList.add(new GuiCovenImagePage(3, EnumCovenants.ASCENDANT, "Lord", "Tetra: The Four-Fold Light", ASCENDANT_PAGE_3,
 				new GuiTomeImage(
-						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/spark.png"), 0, 0,
-						104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenImagePage(6, EnumCovenants.MACHINE, "Malformed Automaton",
-				"The Failed Creation", MACHINE_PAGE_6,
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"),
+						0, 0, 104, 104, 0.00970625F)));
+		AscendantPageList.add(new GuiCovenPage(4, EnumCovenants.ASCENDANT, "Animal", "Angelic Fowl",
+				new ItemStack(ItemInit.seraph_feather.get()), I18n.format(ASCENDANT_PAGE_4)));
+		AscendantPageList.add(new GuiCovenImagePage(5, EnumCovenants.ASCENDANT, "Altar", "Ascendant Altar", ASCENDANT_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/ascendant/altar.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		AscendantPageList.add(new GuiCovenPage(6, EnumCovenants.ASCENDANT, "Alignment", "Positive",
+				new ItemStack(ItemInit.wing_fragment.get()), I18n.format(ASCENDANT_PAGE_6)));
+		AscendantPageList.add(new GuiCovenPage(7, EnumCovenants.ASCENDANT, "Tools", "Tricks of the Trade",
+				new ItemStack(ItemInit.divine_feather.get()), I18n.format(ASCENDANT_PAGE_7)));
+		
+		// Beast
+		BeastPageList.add(new GuiCovenPage(1, EnumCovenants.BEAST, "Beast", "Unleash your Wild Side",
+				new ItemStack(ItemInit.breath_of_the_beast.get()), I18n.format(BEAST_PAGE_1)));
+		BeastPageList.add(new GuiCovenImagePage(2, EnumCovenants.BEAST, "Guardian", "Beast from Beyond", BEAST_PAGE_2,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/beast/beastbeyond.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		BeastPageList.add(new GuiCovenImagePage(3, EnumCovenants.BEAST, "Lord", "The Lord of the Wild", BEAST_PAGE_3,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"),
+						0, 0, 104, 104, 0.00970625F)));
+		BeastPageList.add(new GuiCovenPage(4, EnumCovenants.BEAST, "Animal", "Deranged Beast",
+				new ItemStack(ItemInit.unkept_hide.get()), I18n.format(BEAST_PAGE_4)));
+		BeastPageList.add(new GuiCovenImagePage(5, EnumCovenants.BEAST, "Altar", "Sacrificial Pyre", BEAST_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/beast/altar.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		BeastPageList.add(new GuiCovenPage(6, EnumCovenants.BEAST, "Alignment", "Negative",
+				new ItemStack(ItemInit.blooddrawn_fang.get()), I18n.format(BEAST_PAGE_6)));
+		BeastPageList.add(new GuiCovenPage(7, EnumCovenants.BEAST, "Tools", "Tricks of the Trade",
+				new ItemStack(ItemInit.beastly_bone.get()), I18n.format(BEAST_PAGE_7)));
+		
+		//Machine
+		MachinePageList.add(new GuiCovenPage(1, EnumCovenants.MACHINE, "Beast", "Unleash your Wild Side",
+				new ItemStack(ItemInit.integral_cog.get()), I18n.format(MACHINE_PAGE_1)));
+		MachinePageList.add(new GuiCovenImagePage(2, EnumCovenants.MACHINE, "Guardian", "Malformed Automaton", MACHINE_PAGE_2,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/automaton.png"), 0,
-						0, 104, 102, 0.0096625F)));
+						0, 104, 104, 0.00970625F)));
+		MachinePageList.add(new GuiCovenImagePage(3, EnumCovenants.MACHINE, "Lord", "Mechan; The Great Tinkerer", MACHINE_PAGE_3,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"),
+						0, 0, 104, 104, 0.00970625F)));
+		MachinePageList.add(new GuiCovenPage(4, EnumCovenants.MACHINE, "Animal", "Dreadbot",
+				new ItemStack(ItemInit.mechan_module.get()), I18n.format(MACHINE_PAGE_4)));
+		MachinePageList.add(new GuiCovenImagePage(5, EnumCovenants.MACHINE, "Altar", "Machina Imperfecta", MACHINE_PAGE_5,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/altar.png"), 0,
+						0, 104, 104, 0.00970625F)));
+		MachinePageList.add(new GuiCovenPage(6, EnumCovenants.MACHINE, "Alignment", "Negative",
+				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_6)));
+		MachinePageList.add(new GuiCovenPage(7, EnumCovenants.MACHINE, "Tools", "Tricks of the Trade",
+				new ItemStack(ItemInit.discared_gear.get()), I18n.format(MACHINE_PAGE_7)));
+		MachinePageList.add(new GuiCovenImagePage(8, EnumCovenants.MACHINE, "Machina Soul", "Life Spark",
+				MACHINE_PAGE_8,
+				new GuiTomeImage(
+						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/spark.png"),
+						0, 0, 104, 104, 0.00970625F)));
 
+		
 		// Adding Chapters
-		Collections.addAll(ChapterList, HasturPageList, EldritchPageList, AscendentPageList, BeastPageList,
-				MachinePageList, SelfPageList);
+		Collections.addAll(ChapterList,SelfPageList, HasturPageList, EldritchPageList, AscendantPageList, BeastPageList,
+				MachinePageList);
 
 		// TOC PAGES
+		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.SELF, new ItemStack(ItemInit.purging_stone.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.HASTUR, new ItemStack(ItemInit.yellow_sign.get())));
 		TOCPageList
 				.add(new GuiCovenPageTOC(EnumCovenants.ELDRITCH, new ItemStack(ItemInit.everwatchful_pendant.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.ASCENDENT, new ItemStack(ItemInit.crossed_keys.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.ASCENDANT, new ItemStack(ItemInit.crossed_keys.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.BEAST, new ItemStack(ItemInit.breath_of_the_beast.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.MACHINE, new ItemStack(ItemInit.neurotic_mechanism.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.SELF, new ItemStack(ItemInit.purging_stone.get())));
 
 		// Adding the table of contents to each chapter
-		HasturPageList.add(0, TOCPageList.get(0));
-		EldritchPageList.add(0, TOCPageList.get(1));
-		AscendentPageList.add(0, TOCPageList.get(2));
-		BeastPageList.add(0, TOCPageList.get(3));
-		MachinePageList.add(0, TOCPageList.get(4));
-		SelfPageList.add(0, TOCPageList.get(5));
+		SelfPageList.add(0, TOCPageList.get(0));
+		HasturPageList.add(0, TOCPageList.get(1));
+		EldritchPageList.add(0, TOCPageList.get(2));
+		AscendantPageList.add(0, TOCPageList.get(3));
+		BeastPageList.add(0, TOCPageList.get(4));
+		MachinePageList.add(0, TOCPageList.get(5));
 
 	}
 
@@ -193,8 +266,8 @@ public class CovenPageLib {
 		return EldritchPageList;
 	}
 
-	public static List<GuiCovenPage> getAscendentPageList() {
-		return AscendentPageList;
+	public static List<GuiCovenPage> getAscendantPageList() {
+		return AscendantPageList;
 	}
 
 	public static List<GuiCovenPage> getBeastPageList() {

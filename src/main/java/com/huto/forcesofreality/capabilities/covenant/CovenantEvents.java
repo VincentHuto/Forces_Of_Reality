@@ -99,13 +99,15 @@ public class CovenantEvents {
 	public static void onDropAdornment(LivingDeathEvent e) {
 		if (e.getEntity() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) e.getEntity();
-			IAdornmentsItemHandler runes = AdornmentsApi.getAdornmentsHandler(player).orElseThrow(IllegalArgumentException::new);
+			IAdornmentsItemHandler runes = AdornmentsApi.getAdornmentsHandler(player)
+					.orElseThrow(IllegalArgumentException::new);
 			for (int i = 0; i < runes.getSlots(); ++i) {
 				if (!runes.getStackInSlot(i).isEmpty() && runes.getStackInSlot(i).getItem() instanceof ItemAdornment) {
 					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 							.orElseThrow(IllegalArgumentException::new);
 					ItemAdornment contractAdornment = (ItemAdornment) runes.getStackInSlot(i).getItem();
-					coven.setCovenDevotion(contractAdornment.getAssignedCovenant(), -contractAdornment.getDeepenAmount());
+					coven.setCovenDevotion(contractAdornment.getAssignedCovenant(),
+							-contractAdornment.getDeepenAmount());
 					player.sendStatusMessage(
 							new StringTextComponent(TextFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"),
 							false);
@@ -122,9 +124,7 @@ public class CovenantEvents {
 
 	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying, boolean isFlying) {
 		if (player != null) {
-			if (player.world.isRemote) {
-				PacketHandler.HANDLER.sendToServer(new SetFlyPKT(allowFlying, isFlying));
-			}
+			PacketHandler.HANDLER.sendToServer(new SetFlyPKT(allowFlying, isFlying));
 			player.abilities.allowFlying = allowFlying;
 			player.abilities.isFlying = isFlying;
 		}
@@ -139,14 +139,11 @@ public class CovenantEvents {
 					EquipmentSlotType slotChanged = e.getSlot();
 					if (slotChanged == EquipmentSlotType.CHEST) {
 						if (e.getTo().getItem() == ItemInit.seraph_wings.get()) {
-							// System.out.println("EQUIPED WINGS");
-							if (!player.getEntityWorld().isRemote) {
-								if (!((PlayerEntity) player).isCreative()) {
-									updateClientServerFlight((ServerPlayerEntity) player, true);
-								} else {
-									updateClientServerFlight((ServerPlayerEntity) player, false);
-								}
+							if (!((PlayerEntity) player).isCreative()) {
+								updateClientServerFlight((ServerPlayerEntity) player, true);
 							}
+						} else {
+							updateClientServerFlight((ServerPlayerEntity) player, false);
 						}
 					}
 				}
@@ -217,7 +214,7 @@ public class CovenantEvents {
 							renderItem = ItemInit.yellow_sign.get();
 						} else if (selectedCoven.equals(EnumCovenants.ELDRITCH)) {
 							renderItem = ItemInit.everwatchful_pendant.get();
-						} else if (selectedCoven.equals(EnumCovenants.ASCENDENT)) {
+						} else if (selectedCoven.equals(EnumCovenants.ASCENDANT)) {
 							renderItem = ItemInit.crossed_keys.get();
 						} else if (selectedCoven.equals(EnumCovenants.MACHINE)) {
 							renderItem = ItemInit.integral_cog.get();
@@ -270,7 +267,7 @@ public class CovenantEvents {
 								Minecraft.getInstance().textureManager
 										.bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 								break;
-							case ASCENDENT:
+							case ASCENDANT:
 								AbstractGui.fill(event.getMatrixStack(), 0, 0, event.getWindow().getWidth(),
 										event.getWindow().getHeight(), new Color(255, 255, 255, devoMult).getRGB());
 								fontRenderer.drawString(event.getMatrixStack(), "Seraph View", 5, 5,
