@@ -46,7 +46,7 @@ public class GuiTomeTitle extends Screen {
 	final int BUTTONEYE = 8;
 	static String title = " Table of Contents";
 	static StringTextComponent titleComponent = new StringTextComponent(title);
-	String subtitle = " Duality of Nature";
+	String subtitle = " Forces of Reality";
 	ItemStack icon = new ItemStack(ItemInit.somnolent_crystal.get());
 	GuiButtonTextured buttonclose, whiteButton, yellowButton, blueButton, greenButton, orangeButton,
 			cyanButton, darkBlueButton, eyeButton;

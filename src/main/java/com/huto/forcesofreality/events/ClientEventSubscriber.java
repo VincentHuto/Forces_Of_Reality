@@ -20,7 +20,9 @@ import com.huto.forcesofreality.render.entity.guardians.RenderTulpa;
 import com.huto.forcesofreality.render.entity.item.RenderManaDustItem;
 import com.huto.forcesofreality.render.entity.layer.ThermalLayerRender;
 import com.huto.forcesofreality.render.entity.lords.RenderMechan;
+import com.huto.forcesofreality.render.entity.lords.RenderTetra;
 import com.huto.forcesofreality.render.entity.lords.RenderVeritas;
+import com.huto.forcesofreality.render.entity.mobs.RenderDerangedBeast;
 import com.huto.forcesofreality.render.entity.mobs.RenderDreadBot;
 import com.huto.forcesofreality.render.entity.mobs.RenderHasturVassal;
 import com.huto.forcesofreality.render.entity.mobs.RenderScuttlingOcculus;
@@ -115,7 +117,6 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
-		//ClientRegistry.bindTileEntityRenderer(TileEntityInit.runic_chisel_station.get(), RenderChiselStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderAdornmentModStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendant_altar.get(), RenderAscendantAltar::new);
@@ -171,6 +172,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.veritas.get(), RenderVeritas::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.black_goat.get(), RenderBlackGoat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_vassal.get(), RenderHasturVassal::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.deranged_beast.get(), RenderDerangedBeast::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tetra.get(), RenderTetra::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
@@ -182,11 +185,9 @@ public class ClientEventSubscriber {
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mana_dust.get(), RenderManaDustItem::new);
 
-	//	keyBinds.add(0, new KeyBinding("key.forcesofreality.runebinderpickup.desc", GLFW.GLFW_KEY_B, "key.forcesofreality.category"));
 		keyBinds.add(0, new KeyBinding("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V, "key.forcesofreality.category"));
 		keyBinds.add(1, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
 
-	//	ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(1));
 

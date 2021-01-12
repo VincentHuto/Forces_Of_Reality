@@ -34,7 +34,7 @@ import net.minecraftforge.items.IItemHandler;
 @OnlyIn(Dist.CLIENT)
 public class GuiMechanGloveViewer extends Screen {
 	final ResourceLocation texture = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/mechan_viewer_gui.png");
-	int guiWidth = 175;
+	int guiWidth = 145;
 	int guiHeight = 149;
 	int left, top;
 	ItemStack icon;
@@ -141,7 +141,7 @@ public class GuiMechanGloveViewer extends Screen {
 				for (int i = 0; i < binderHandler.getSlots(); i++) {
 					if (i < 3) {
 						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 30),
-								(verticalLoc - 140) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+								(verticalLoc - 130) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
 									@SuppressWarnings("unused")
 									@Override
 									public void onPress(Button press) {
@@ -161,7 +161,7 @@ public class GuiMechanGloveViewer extends Screen {
 								}));
 					} else if (i < 6) {
 						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 63),
-								(verticalLoc - 275) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+								(verticalLoc - 265) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
 									@SuppressWarnings("unused")
 									@Override
 									public void onPress(Button press) {
@@ -182,7 +182,7 @@ public class GuiMechanGloveViewer extends Screen {
 								}));
 					} else if (i < 9) {
 						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 95),
-								(verticalLoc - 410) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+								(verticalLoc - 400) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
 									@SuppressWarnings("unused")
 									@Override
 									public void onPress(Button press) {

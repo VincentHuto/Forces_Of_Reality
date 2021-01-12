@@ -47,7 +47,7 @@ public class ItemRepulsionCharm extends Item {
 			CompoundNBT compound = stack.getTag();
 			compound.putBoolean(TAG_STATE, false);
 		}
-		if (stack.getTag().getBoolean(TAG_STATE)) {
+		if (stack.getOrCreateTag().getBoolean(TAG_STATE)) {
 
 			repel(entityIn, worldIn,
 					new AxisAlignedBB(entityIn.getPositionVec().add(-4, -4, -4),

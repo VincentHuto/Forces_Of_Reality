@@ -31,7 +31,8 @@ public class MechanGloveEvents {
 	}
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.keyBinds.get(1).isPressed()) {
+		if (ClientEventSubscriber.keyBinds.get(0).isPressed()) {
+			
 			PacketHandler.MECHANGLOVE.sendToServer(new MechanGloveActionMessage());
 
 		}

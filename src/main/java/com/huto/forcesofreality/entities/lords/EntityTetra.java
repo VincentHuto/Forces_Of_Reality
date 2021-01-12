@@ -59,7 +59,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpawnData {
+public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawnData {
 
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
@@ -75,9 +75,9 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 	public float oFlap;
 	public float wingRotDelta = 1.0F;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
-			BossInfo.Color.WHITE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+			BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntityVeritas(EntityType<? extends EntityVeritas> type, World worldIn) {
+	public EntityTetra(EntityType<? extends EntityTetra> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -91,21 +91,18 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 	public void livingTick() {
 
 		if (!this.onGround && this.getMotion().y < 0.0D) {
-		//	this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
-		} else if (this.onGround && this.getMotion().y < 0.0D) {
-		//	this.setMotion(0, Math.sin(this.world.getGameTime()) * 0.15f, 0);
-
+			this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
 		}
 
 		super.livingTick();
 		this.oFlap = this.wingRotation;
 		this.oFlapSpeed = this.destPos;
 		this.destPos = (float) ((double) this.destPos + (double) (4) * 0.3D);
-		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
+		this.destPos = MathHelper.clamp(this.destPos, 1.2F, 1.5F);
 		if (!this.onGround) {
-			this.wingRotDelta = 4.0F;
+			this.wingRotDelta = 2.0F;
 		} else {
-			this.wingRotDelta = 1.0F;
+			this.wingRotDelta = 2.0F;
 		}
 		this.wingRotDelta = (float) ((double) this.wingRotDelta * 0.9D);
 		Vector3d vector3d = this.getMotion();
@@ -123,10 +120,15 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 
 	int timer = 200;
 
-	@SuppressWarnings("unused")
 	@Override
 	public void tick() {
 		super.tick();
+
+		
+		
+		
+		
+		
 
 		World world = this.getEntityWorld();
 		BlockPos pos = this.getPosition();
@@ -135,6 +137,7 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		Collections.addAll(chakraColors, new ParticleColor(162, 86, 160), new ParticleColor(96, 96, 186),
 				new ParticleColor(66, 184, 212), new ParticleColor(110, 200, 80), new ParticleColor(255, 165, 44),
 				new ParticleColor(243, 124, 59), new ParticleColor(229, 60, 81));
+		Collections.reverse(chakraColors);
 	/*	for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
 			world.addParticle(ParticleInit.chakraData.get(j),
 					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
@@ -146,23 +149,34 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
 
 		}*/
+		
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
-					center.x + Math.sin(time + j) + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
-					center.z  + Math.cos(time + j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-			
-			Collections.reverse(chakraColors);
-
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
-					center.x - Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
-					center.z  + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-			
+			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 0)),
+					center.x  + Math.sin(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1),
+					center.y + (j * 0.15)  + ParticleUtil.inRange(-0.1, 0.1),
+					center.z  + Math.cos(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 229)),
+					center.x + Math.sin(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1),
+					center.y + (j * 0.15)  + ParticleUtil.inRange(-0.1, 0.1),
+					center.z  + Math.cos(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 		}
-
-		@SuppressWarnings("unused")
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		float diffMult = 1f;
 
 		// Protection
@@ -180,24 +194,39 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		// Attacks
 		int attackRoll = ticksExisted + rand.nextInt(5);
 		if (this.deathTicks <= 0) {
-			/*
-			 * if (this.ticksExisted % 10 - rand.nextInt(10) > 20) { pullPlayer( new
-			 * AxisAlignedBB(this.getPositionVec().add(-15, -15, -15),
-			 * this.getPositionVec().add(15, 15, 15)), this.getPositionVec().getX() + 0.5,
-			 * this.getPositionVec().getY() + 0.5, this.getPositionVec().getZ() + 0.5); }
-			 * 
-			 * if (attackRoll % 100 * diffMult == 0) { this.spawnMissile(); } else if
-			 * (attackRoll % 110 * diffMult == 0) {
-			 * this.spawnMissileVortex(rand.nextInt(15)); } else if (attackRoll % 130 *
-			 * diffMult == 0) { this.summonThroneAid(rand.nextInt(2) + 2); } else if
-			 * (attackRoll % 160 * diffMult == 0) { this.summonJudgement(rand.nextInt(3) +
-			 * 3);
-			 * 
-			 * } if (!this.isOnGround()) { if (attackRoll % 100 * diffMult == 0) {
-			 * this.summonHolyFlare(rand.nextInt(1) + 3);
-			 * playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F + (float)
-			 * Math.random() * 0.2F); } }
-			 */
+
+			if (this.ticksExisted % 10 - rand.nextInt(10) > 20) {
+				pullPlayer(
+						new AxisAlignedBB(this.getPositionVec().add(-15, -15, -15),
+								this.getPositionVec().add(15, 15, 15)),
+						this.getPositionVec().getX() + 0.5, this.getPositionVec().getY() + 0.5,
+						this.getPositionVec().getZ() + 0.5);
+			}
+
+			if (attackRoll % 100 * diffMult == 0) {
+				this.spawnMissile();
+			} else if (attackRoll % 110 * diffMult == 0) {
+				this.spawnMissileVortex(rand.nextInt(15));
+			} else if (attackRoll % 130 * diffMult == 0) {
+				this.summonThroneAid(rand.nextInt(2) + 2);
+			} else if (attackRoll % 160 * diffMult == 0) {
+				this.summonJudgement(rand.nextInt(3) + 3);
+
+			}
+			if (!this.isOnGround()) {
+				if (attackRoll % 100 * diffMult == 0) {
+					this.summonHolyFlare(rand.nextInt(1) + 3);
+					playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+				}
+			}
+
+			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.world.addParticle(ParticleTypes.ENCHANT, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+			this.world.addParticle(ParticleTypes.REVERSE_PORTAL, this.getPosX() + (double) f,
+					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -313,6 +342,8 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
+					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 			if (this.deathTicks >= 100) {
 				this.world.addParticle(ParticleTypes.WHITE_ASH, this.getPosX() + (double) f,
@@ -409,7 +440,6 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void spawnMissile() {
 		EntityStarStrike missile = new EntityStarStrike(this, true);
 		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
@@ -439,7 +469,6 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void spawnMissileVortex(int numMiss) {
 
 		EntityStarStrike[] missArray = new EntityStarStrike[numMiss];
@@ -529,21 +558,26 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntityVeritas seraph;
+		private final EntityTetra tetra;
 
-		public HasturMusic(EntityVeritas seraph) {
+		public HasturMusic(EntityTetra tetra) {
 			super(SoundHandler.ENTITY_SERAPHIM_MUSIC, SoundCategory.RECORDS);
 
-			this.seraph = seraph;
-			this.x = seraph.getSource().getX();
-			this.y = seraph.getSource().getY();
-			this.z = seraph.getSource().getZ();
+			this.tetra = tetra;
+			this.x = tetra.getSource().getX();
+			this.y = tetra.getSource().getY();
+			this.z = tetra.getSource().getZ();
 			this.repeat = true; //
 		}
 
 		@Override
+		public float getVolume() {
+			return super.getVolume() / 2;
+		}
+
+		@Override
 		public void tick() {
-			if (!seraph.isAlive()) {
+			if (!tetra.isAlive()) {
 				this.finishPlaying();
 			}
 		}

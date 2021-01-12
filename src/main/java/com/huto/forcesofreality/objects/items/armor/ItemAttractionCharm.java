@@ -43,7 +43,7 @@ public class ItemAttractionCharm extends Item {
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 
 	
-		if (stack.getTag().getBoolean(TAG_STATE)) {
+		if (stack.getOrCreateTag().getBoolean(TAG_STATE)) {
 			attractItems(worldIn,
 					new AxisAlignedBB(entityIn.getPositionVec().add(-4, -4, -4),
 							entityIn.getPositionVec().add(4, 4, 4)),

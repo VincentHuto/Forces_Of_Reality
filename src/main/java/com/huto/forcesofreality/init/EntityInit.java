@@ -10,7 +10,9 @@ import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
 import com.huto.forcesofreality.entities.guardians.EntityTulpa;
 import com.huto.forcesofreality.entities.item.EntityManaDustItem;
 import com.huto.forcesofreality.entities.lords.EntityMechan;
+import com.huto.forcesofreality.entities.lords.EntityTetra;
 import com.huto.forcesofreality.entities.lords.EntityVeritas;
+import com.huto.forcesofreality.entities.mobs.EntityDerangedBeast;
 import com.huto.forcesofreality.entities.mobs.EntityDreadBot;
 import com.huto.forcesofreality.entities.mobs.EntityHasturVassal;
 import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
@@ -128,6 +130,12 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntitySeraphim>> seraphim = ENTITY_TYPES.register("seraphim",
 			() -> EntityType.Builder.<EntitySeraphim>create(EntitySeraphim::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.6f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "seraphim").toString()));
+	
+	
+	public static final RegistryObject<EntityType<EntityTetra>> tetra = ENTITY_TYPES.register("tetra",
+			() -> EntityType.Builder.<EntityTetra>create(EntityTetra::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.6f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "tetra").toString()));
+	
 	public static final RegistryObject<EntityType<EntityThrone>> throne = ENTITY_TYPES.register("throne",
 			() -> EntityType.Builder.<EntityThrone>create(EntityThrone::new, EntityClassification.MONSTER).size(1F, 1F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "throne").toString()));
@@ -158,6 +166,12 @@ public class EntityInit {
 			"summoned_beast",
 			() -> EntityType.Builder.<EntitySummonedBeast>create(EntitySummonedBeast::new, EntityClassification.MONSTER)
 					.size(0.5F, 0.5F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "summoned_beast").toString()));
+	public static final RegistryObject<EntityType<EntityDerangedBeast>> deranged_beast = ENTITY_TYPES.register(
+			"deranged_beast",
+			() -> EntityType.Builder.<EntityDerangedBeast>create(EntityDerangedBeast::new, EntityClassification.MONSTER)
+					.size(1F, 1F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "deranged_beast").toString()));
+	
+	
 
 	// Machine
 	public static final RegistryObject<EntityType<EntityMechan>> mechan = ENTITY_TYPES.register("mechan",
@@ -284,6 +298,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.mechan.get(), EntityMechan.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.veritas.get(), EntityVeritas.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.black_goat.get(), EntityBlackGoat.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.deranged_beast.get(), EntityDerangedBeast.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.tetra.get(), EntityTetra.setAttributes().create());
 
 	}
 }

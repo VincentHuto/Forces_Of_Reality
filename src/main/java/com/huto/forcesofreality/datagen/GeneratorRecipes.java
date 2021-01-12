@@ -29,6 +29,10 @@ public class GeneratorRecipes extends RecipeProvider {
 				ItemInit.cured_clay_flask.get(), 1f, 200);
 		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(Items.COAL), ItemInit.grey_crystal.get(), 1f, 200);
 
+		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.writhing_thread.get(), 2).addIngredient(Items.STRING, 1)
+				.addIngredient(ItemInit.vitreous_humor.get(), 1).addIngredient(Items.ENDER_PEARL, 2)
+				.addCriterion("has_vitreous_humor", hasItem(ItemInit.vitreous_humor.get())).build(consumer);
+
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.storming_agent.get(), 2)
 				.addIngredient(ItemInit.somnolent_powder.get(), 1).addIngredient(ItemInit.vitreous_humor.get(), 1)
 				.addIngredient(Items.GUNPOWDER, 2).addIngredient(Items.LAPIS_LAZULI, 2)
@@ -261,8 +265,8 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("AAA").patternLine("AAA").patternLine("AAA")
 				.addCriterion("has_auric_ingot", hasItem(ItemInit.auric_ingot.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(BlockInit.anointed_iron_block.get()).key('A', ItemInit.anointed_iron_scrap.get())
-				.patternLine("AAA").patternLine("AAA").patternLine("AAA")
+		ShapedRecipeBuilder.shapedRecipe(BlockInit.anointed_iron_block.get())
+				.key('A', ItemInit.anointed_iron_scrap.get()).patternLine("AAA").patternLine("AAA").patternLine("AAA")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.machina_cage.get()).key('A', ItemInit.anointed_iron_scrap.get())
@@ -381,20 +385,21 @@ public class GeneratorRecipes extends RecipeProvider {
 				.patternLine("RRR").patternLine("R R")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_chestplate.get()).key('R', ItemInit.anointed_iron_scrap.get())
-				.patternLine("R R").patternLine("RRR").patternLine("RRR")
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_chestplate.get())
+				.key('R', ItemInit.anointed_iron_scrap.get()).patternLine("R R").patternLine("RRR").patternLine("RRR")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_leggings.get()).key('R', ItemInit.anointed_iron_scrap.get())
-				.patternLine("RRR").patternLine("R R").patternLine("R R")
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_leggings.get())
+				.key('R', ItemInit.anointed_iron_scrap.get()).patternLine("RRR").patternLine("R R").patternLine("R R")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_boots.get()).key('R', ItemInit.anointed_iron_scrap.get())
-				.patternLine("R R").patternLine("R R")
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_boots.get())
+				.key('R', ItemInit.anointed_iron_scrap.get()).patternLine("R R").patternLine("R R")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_sword.get()).key('R', ItemInit.anointed_iron_scrap.get())
-				.key('N', ItemInit.null_rod.get()).patternLine("R").patternLine("R").patternLine("N")
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.anointed_iron_sword.get())
+				.key('R', ItemInit.anointed_iron_scrap.get()).key('N', ItemInit.null_rod.get()).patternLine("R")
+				.patternLine("R").patternLine("N")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.ascendant_altar.get()).key('B', Items.QUARTZ_BLOCK)

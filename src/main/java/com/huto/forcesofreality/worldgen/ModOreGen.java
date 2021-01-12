@@ -31,23 +31,23 @@ public class ModOreGen {
 		Registry<ConfiguredFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_FEATURE;
 		EnchantedOreGen = Feature.ORE
 				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-						BlockInit.somnolent_ore_somnolent.get().getDefaultState(), 10))
+						BlockInit.somnolent_ore.get().getDefaultState(), 10))
 				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(5, 5, 60))).chance(1);
 
 		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "enchanted_ore_gen"), EnchantedOreGen);
 
 		SomnolentEnchantedOreGen = Feature.ORE
 				.withConfiguration(new OreFeatureConfig(SOMNOLENT_STONE_DREAMLANDS,
-						BlockInit.somnolent_ore.get().getDefaultState(), 10))
+						BlockInit.somnolent_ore_somnolent.get().getDefaultState(), 10))
 				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(3, 3, 140))).chance(1);
 		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "enchanted_ore_mystic_gen"),
 				SomnolentEnchantedOreGen);
 
 		GeodeOreGen = Feature.ORE
 				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-						BlockInit.stone_geode.get().getDefaultState(), 3))
-				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(2, 2, 20))).chance(1);
-		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "geode_ore_gen"), EnchantedOreGen);
+						BlockInit.stone_geode.get().getDefaultState(), 7))
+				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(2, 12, 40))).chance(1);
+		Registry.register(registry, new ResourceLocation(ForcesOfReality.MOD_ID, "geode_ore_gen"), GeodeOreGen);
 
 	}
 

@@ -1,0 +1,20 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "forcesofreality:items/destabilization_charm"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"forcesofreality:on": 0
+			},
+			"model": "forcesofreality:item/destabilization_charm"
+		},
+		{
+			"predicate": {
+				"forcesofreality:on": 1
+			},
+			"model": "forcesofreality:item/destabilization_charm_on"
+		}
+	]
+}

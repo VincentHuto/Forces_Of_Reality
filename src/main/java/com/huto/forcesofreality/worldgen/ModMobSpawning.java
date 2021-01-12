@@ -23,21 +23,23 @@ public class ModMobSpawning {
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.RIVER)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
-					new Spawners(EntityInit.hastur_vassal.get(), 50, 1, 3));
+					new Spawners(EntityInit.hastur_vassal.get(), 2, 1, 3));
 		}
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.PLAINS)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.FOREST)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)
 						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
-			event.getSpawns().withSpawner(EntityClassification.CREATURE,
-					new Spawners(EntityInit.ibis.get(), 12, 6, 10));
+			event.getSpawns().withSpawner(EntityClassification.CREATURE, new Spawners(EntityInit.ibis.get(), 6, 1, 6));
+			event.getSpawns().withSpawner(EntityClassification.MONSTER,
+					new Spawners(EntityInit.deranged_beast.get(), 10, 1, 3));
+
 		}
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.COLD)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MOUNTAIN)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SNOWY)
 						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.CREATURE,
-					new Spawners(EntityInit.angelic_fowl.get(), 2, 1, 2));
+					new Spawners(EntityInit.angelic_fowl.get(), 10, 1, 2));
 		}
 
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MESA)
@@ -45,7 +47,7 @@ public class ModMobSpawning {
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.SAVANNA)
 						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
-					new Spawners(EntityInit.dread_bot.get(), 50, 1, 2));
+					new Spawners(EntityInit.dread_bot.get(), 20, 1, 2));
 		}
 
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.END)
@@ -55,15 +57,6 @@ public class ModMobSpawning {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
 					new Spawners(EntityInit.scuttling_occulus.get(), 50, 3, 5));
 		}
-
-		// func_242575_a(Entity Classification, new Spawners(Entity Type, Spawn Chance
-		// Weight, Minimum Spawned, Maximum Spawned))
-		// event.getSpawns().func_242575_a(EntityClassification.AMBIENT, new
-		// Spawners(EntityInit.ibis.get(), 1, 1, 1));
-		/*
-		 * event.getSpawns().withSpawnCost(EntityInit.ibis.get(), 31, 31);
-		 * event.getSpawns().getEntityTypes().add(EntityInit.ibis.get());
-		 */
 
 	}
 

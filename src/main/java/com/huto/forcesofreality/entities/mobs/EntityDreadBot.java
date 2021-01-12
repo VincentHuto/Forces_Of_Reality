@@ -2,7 +2,6 @@ package com.huto.forcesofreality.entities.mobs;
 
 import javax.annotation.Nullable;
 
-import com.huto.forcesofreality.entities.guardians.EntityHastur;
 import com.huto.forcesofreality.entities.utils.GoalFireDreadRocket;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
@@ -62,22 +61,23 @@ public class EntityDreadBot extends MonsterEntity {
 
 	@Override
 	protected void onDeathUpdate() {
-		this.remove();
+		super.onDeathUpdate();
+		//this.remove();
 
 	}
 
 	@Override
 	public void onCollideWithPlayer(PlayerEntity entityIn) {
-		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1f);
+		//entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1f);
 
 	}
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityDreadBot || entityIn instanceof EntityHastur)) {
+		/*if (!(entityIn instanceof EntityDreadBot || entityIn instanceof EntityHastur)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
-		}
+		}*/
 
 	}
 

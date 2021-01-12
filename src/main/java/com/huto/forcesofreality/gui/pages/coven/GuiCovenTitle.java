@@ -44,7 +44,7 @@ public class GuiCovenTitle extends Screen {
 	int BUTTONEYE = 8;
 	static String title = " Table of Contents";
 	static StringTextComponent titleComponent = new StringTextComponent(title);
-	String subtitle = " Covenenants";
+	String subtitle = " Covenants";
 	ItemStack icon = new ItemStack(Items.PAPER);
 	GuiButtonTextured buttonclose, hasturButton, eldritchButton, ascendButton, beastButton, machineButton, selfButton,
 			eyeButton;
