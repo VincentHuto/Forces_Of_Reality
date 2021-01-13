@@ -634,18 +634,20 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_seraphim = ITEMS.register("spawn_egg_seraphim",
 			() -> new ModSpawnEggItem(EntityInit.seraphim, 16515071, 16514816,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	
-	
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tetra = ITEMS
-			.register("spawn_egg_tetra", () -> new ModSpawnEggItem(EntityInit.tetra, 16515071, 16514816,
+
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tetra = ITEMS.register("spawn_egg_tetra",
+			() -> new ModSpawnEggItem(EntityInit.tetra, 14565021, 16464878,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	
+
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_throne = ITEMS.register("spawn_egg_throne",
 			() -> new ModSpawnEggItem(EntityInit.throne, 16777215, 12745984,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_beast_from_beyond = ITEMS
 			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 9450752, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_lord_of_the_wild = ITEMS
+			.register("spawn_egg_lord_of_the_wild", () -> new ModSpawnEggItem(EntityInit.lord_of_the_wild, 9450752,
+					7450752, new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_summoned_beast = ITEMS
 			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 8155760, 9450752,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
@@ -677,8 +679,8 @@ public class ItemInit {
 			.register("spawn_egg_angelic_fowl", () -> new ModSpawnEggItem(EntityInit.angelic_fowl, 0xBDFFE2, 0xFFD25B,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_deranged_beast = ITEMS
-			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 0xC1FF2,
-					0xFDF25B, new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 4603962,
+					5252864, new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -690,8 +692,7 @@ public class ItemInit {
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
 				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
 				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl,
-				ItemInit.spawn_egg_deranged_beast,
-				ItemInit.spawn_egg_tetra);
+				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild);
 	}
 
 	@SuppressWarnings("unchecked")

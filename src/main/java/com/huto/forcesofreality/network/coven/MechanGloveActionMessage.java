@@ -24,7 +24,6 @@ public class MechanGloveActionMessage {
 			if (player == null)
 				return;
 			if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove) {
-				System.out.println("t");
 				((ItemMechanGlove) player.getHeldItemMainhand().getItem()).moduleUse(player,
 						player.getHeldItemMainhand(), player.getEntityWorld());
 			}

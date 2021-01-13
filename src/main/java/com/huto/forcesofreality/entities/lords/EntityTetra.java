@@ -120,15 +120,10 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 
 	int timer = 200;
 
+	@SuppressWarnings("unused")
 	@Override
 	public void tick() {
 		super.tick();
-
-		
-		
-		
-		
-		
 
 		World world = this.getEntityWorld();
 		BlockPos pos = this.getPosition();
@@ -138,45 +133,41 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 				new ParticleColor(66, 184, 212), new ParticleColor(110, 200, 80), new ParticleColor(255, 165, 44),
 				new ParticleColor(243, 124, 59), new ParticleColor(229, 60, 81));
 		Collections.reverse(chakraColors);
-	/*	for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
-			world.addParticle(ParticleInit.chakraData.get(j),
-					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosY() + (j * 0.5) + 0.1 + ParticleUtil.inRange(-0.1, 0.1),
-					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-			world.addParticle(ParticleTypes.WHITE_ASH,
-					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosY() + (j * 0.5) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+		/*
+		 * for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
+		 * world.addParticle(ParticleInit.chakraData.get(j), getPosX() + 0.5 +
+		 * Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
+		 * 0.1 + ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j)
+		 * + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+		 * world.addParticle(ParticleTypes.WHITE_ASH, getPosX() + 0.5 + Math.cos(time -
+		 * j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
+		 * ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j) +
+		 * ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
+		 * 
+		 * }
+		 */
 
-		}*/
-		
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 0)),
-					center.x  + Math.sin(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.15)  + ParticleUtil.inRange(-0.1, 0.1),
-					center.z  + Math.cos(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+			world.addParticle(GlowParticleData.createData(new ParticleColor(100, 229, 0)),
+					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
+					center.y + (j * 0.15)-0.1 + ParticleUtil.inRange(-0.1, 0.1),
+					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 229)),
-					center.x + Math.sin(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.15)  + ParticleUtil.inRange(-0.1, 0.1),
-					center.z  + Math.cos(time + j)*0.25f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
+					center.y + (j * 0.15)-0.1  + ParticleUtil.inRange(-0.1, 0.1),
+					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		world.addParticle(GlowParticleData.createData(new ParticleColor(250, 0, 250)),
+				center.x  + ParticleUtil.inRange(-0.1, 0.1),
+				center.y + (1 * 0.15)+1.3 + ParticleUtil.inRange(-0.2, 0.2),
+				center.z   + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+		world.addParticle(GlowParticleData.createData(new ParticleColor(20, 0, 20)),
+				center.x  + ParticleUtil.inRange(-0.1, 0.1),
+				center.y + (1* 0.15)+1.3  + ParticleUtil.inRange(-0.2, 0.2),
+				center.z   + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+
 		float diffMult = 1f;
 
 		// Protection

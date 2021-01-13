@@ -16,9 +16,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class RenderTetra extends MobRenderer<EntityTetra, ModelTetra> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/seraphim/modelseraphim.png");
+			"textures/entity/tetra/model_tetra.png");
 	private static final ResourceLocation DRAGON_DEAD_TEXTURES = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/seraphim/modelseraphim.png");
+			"textures/entity/tetra/model_tetra.png");
 
 	public RenderTetra(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelTetra(), 0.5f);

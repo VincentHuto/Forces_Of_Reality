@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.entities.guardians;
+package com.huto.forcesofreality.entities.lords;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.trees.DarkOakTree;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
 import net.minecraft.entity.Entity;
@@ -29,6 +30,7 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -53,12 +55,13 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAdditionalSpawnData {
+public class EntityLordOfTheWild extends MonsterEntity implements IEntityAdditionalSpawnData {
 
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
@@ -67,9 +70,9 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 
 	public int deathTicks;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
-			BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+			BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntityBeastFromBeyond(EntityType<? extends EntityBeastFromBeyond> type, World worldIn) {
+	public EntityLordOfTheWild(EntityType<? extends EntityLordOfTheWild> type, World worldIn) {
 		super(type, worldIn);
 
 	}
@@ -233,7 +236,7 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
 			if (this.deathTicks >= 100) {
-				this.world.addParticle(ParticleTypes.FALLING_LAVA, this.getPosX() + (double) f,
+				this.world.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
 
@@ -263,25 +266,37 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 			if (flag) {
 				this.dropExperience(MathHelper.floor((float) 500 * 0.2F));
 			}
+			DarkOakTree tree = new DarkOakTree();
+			ServerWorld sWorld = (ServerWorld) world;
+			tree.attemptGrowTree(sWorld, sWorld.getChunkProvider().getChunkGenerator(), this.getPositionUnderneath(),
+					sWorld.getBlockState(this.getPositionUnderneath()), rand);
 			this.remove();
 		}
-
 	}
 
 	// Attack types
-
 	public void summonHounds(int numTent) {
 		EntitySummonedBeast[] tentArray = new EntitySummonedBeast[numTent];
+		WolfEntity[] wolfArray = new WolfEntity[numTent];
+
 		for (int i = 0; i < numTent; i++) {
 			tentArray[i] = new EntitySummonedBeast(EntityInit.summoned_beast.get(), world);
+			wolfArray[i] = new WolfEntity(EntityType.WOLF, world);
+			if (this.getAttackingEntity() != null) {
+				wolfArray[i].setAngerTarget(getAttackingEntity().getUniqueID());
+			}
 			tentArray[i].setBeastType(rand.nextInt(4));
 			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
 					this.getPosZ() + 0.5 + zMod);
+			wolfArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+					this.getPosZ() + 0.5 + zMod);
 			if (!world.isRemote) {
 				world.addEntity(tentArray[i]);
+				world.addEntity(wolfArray[i]);
+
 			}
 		}
 	}
@@ -400,9 +415,9 @@ public class EntityBeastFromBeyond extends MonsterEntity implements IEntityAddit
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntityBeastFromBeyond hastur;
+		private final EntityLordOfTheWild hastur;
 
-		public HasturMusic(EntityBeastFromBeyond hastur) {
+		public HasturMusic(EntityLordOfTheWild hastur) {
 			super(SoundHandler.ENTITY_BEAST_FROM_BEYOND_MUSIC, SoundCategory.RECORDS);
 
 			this.hastur = hastur;

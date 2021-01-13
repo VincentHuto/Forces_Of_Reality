@@ -2,10 +2,10 @@ package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.objects.blocks.BlockAbyssalSilt;
+import com.huto.forcesofreality.objects.blocks.BlockAdornmentModStation;
 import com.huto.forcesofreality.objects.blocks.BlockAkebi;
 import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
 import com.huto.forcesofreality.objects.blocks.BlockBreakoutPoint;
-import com.huto.forcesofreality.objects.blocks.BlockCrystalObj;
 import com.huto.forcesofreality.objects.blocks.BlockDisplayGlass;
 import com.huto.forcesofreality.objects.blocks.BlockGeode;
 import com.huto.forcesofreality.objects.blocks.BlockHasturPylon;
@@ -14,7 +14,6 @@ import com.huto.forcesofreality.objects.blocks.BlockMagicLight;
 import com.huto.forcesofreality.objects.blocks.BlockMagicRingLight;
 import com.huto.forcesofreality.objects.blocks.BlockMorelMushroom;
 import com.huto.forcesofreality.objects.blocks.BlockPassionFlower;
-import com.huto.forcesofreality.objects.blocks.BlockAdornmentModStation;
 import com.huto.forcesofreality.objects.blocks.BlockSingeriMushroom;
 import com.huto.forcesofreality.objects.blocks.BlockSlimeRepelent;
 import com.huto.forcesofreality.objects.blocks.BlockTeleporter;
@@ -439,15 +438,20 @@ public class BlockInit {
 	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron",
 			() -> new BlockIcoSphere(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.STONE).notSolid()));
-/*	public static final RegistryObject<Block> end_crystal_somnolent = BLOCKS.register("end_crystal_somnolent",
-			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
-					.sound(SoundType.STONE).notSolid()));
-	public static final RegistryObject<Block> end_crystal_nightmare = BLOCKS.register("end_crystal_nightmare",
-			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
-					.sound(SoundType.STONE).notSolid()));
-	public static final RegistryObject<Block> raw_hematite = BLOCKS.register("raw_hematite",
-			() -> new BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
-					.sound(SoundType.STONE).notSolid()));*/
+	/*
+	 * public static final RegistryObject<Block> end_crystal_somnolent =
+	 * BLOCKS.register("end_crystal_somnolent", () -> new
+	 * BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(
+	 * 50f, 1500f) .sound(SoundType.STONE).notSolid())); public static final
+	 * RegistryObject<Block> end_crystal_nightmare =
+	 * BLOCKS.register("end_crystal_nightmare", () -> new
+	 * BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(
+	 * 50f, 1500f) .sound(SoundType.STONE).notSolid())); public static final
+	 * RegistryObject<Block> raw_hematite = BLOCKS.register("raw_hematite", () ->
+	 * new
+	 * BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(
+	 * 50f, 1500f) .sound(SoundType.STONE).notSolid()));
+	 */
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
@@ -467,9 +471,14 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.vibe_gatherer.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.anti_leaves.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.obj_icosahedron.get(), RenderType.getCutoutMipped());
-/*			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_somnolent.get(), RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(), RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(), RenderType.getCutout());*/
+			/*
+			 * RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_somnolent.get(),
+			 * RenderType.getCutout());
+			 * RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(),
+			 * RenderType.getCutout());
+			 * RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(),
+			 * RenderType.getCutout());
+			 */
 			RenderTypeLookup.setRenderLayer(BlockInit.somnolent_grass.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.essence_breakout_point.get(), RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(BlockInit.null_breakout_point.get(), RenderType.getCutout());

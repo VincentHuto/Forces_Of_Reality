@@ -19,6 +19,7 @@ import com.huto.forcesofreality.render.entity.guardians.RenderSeraphim;
 import com.huto.forcesofreality.render.entity.guardians.RenderTulpa;
 import com.huto.forcesofreality.render.entity.item.RenderManaDustItem;
 import com.huto.forcesofreality.render.entity.layer.ThermalLayerRender;
+import com.huto.forcesofreality.render.entity.lords.RenderLordOfTheWild;
 import com.huto.forcesofreality.render.entity.lords.RenderMechan;
 import com.huto.forcesofreality.render.entity.lords.RenderTetra;
 import com.huto.forcesofreality.render.entity.lords.RenderVeritas;
@@ -51,9 +52,9 @@ import com.huto.forcesofreality.render.entity.summons.RenderJudgement;
 import com.huto.forcesofreality.render.entity.summons.RenderSummonedBeast;
 import com.huto.forcesofreality.render.entity.summons.RenderTentacle;
 import com.huto.forcesofreality.render.entity.summons.RenderThrone;
+import com.huto.forcesofreality.render.tiles.RenderAdornmentModStation;
 import com.huto.forcesofreality.render.tiles.RenderMagicLight;
 import com.huto.forcesofreality.render.tiles.RenderMagicRingLight;
-import com.huto.forcesofreality.render.tiles.RenderAdornmentModStation;
 import com.huto.forcesofreality.render.tiles.RenderVirtuousEnchanter;
 import com.huto.forcesofreality.render.tiles.coven.RenderAscendantAltar;
 import com.huto.forcesofreality.render.tiles.coven.RenderHasturPylon;
@@ -174,7 +175,6 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_vassal.get(), RenderHasturVassal::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.deranged_beast.get(), RenderDerangedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tetra.get(), RenderTetra::new);
-
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.malformed_automaton.get(),
@@ -184,6 +184,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.thrown_axe.get(),
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mana_dust.get(), RenderManaDustItem::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.lord_of_the_wild.get(), RenderLordOfTheWild::new);
 
 		keyBinds.add(0, new KeyBinding("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V, "key.forcesofreality.category"));
 		keyBinds.add(1, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
