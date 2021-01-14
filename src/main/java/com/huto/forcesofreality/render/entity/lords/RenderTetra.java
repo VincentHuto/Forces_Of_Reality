@@ -22,7 +22,6 @@ public class RenderTetra extends MobRenderer<EntityTetra, ModelTetra> {
 
 	public RenderTetra(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelTetra(), 0.5f);
-
 	}
 
 	@Override

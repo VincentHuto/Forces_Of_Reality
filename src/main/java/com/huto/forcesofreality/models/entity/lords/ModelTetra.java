@@ -17,7 +17,7 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 	private final ModelRenderer lHand;
 	private final ModelRenderer rightArm;
 	private final ModelRenderer rforeArm;
-	private final ModelRenderer lHand2;
+	private final ModelRenderer rHand;
 	private final ModelRenderer steve;
 	private final ModelRenderer stRLeg;
 	private final ModelRenderer stLLeg;
@@ -34,6 +34,9 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 	private final ModelRenderer bone7;
 	private final ModelRenderer bone8;
 	private final ModelRenderer bone6;
+	private final ModelRenderer lowerHalf;
+	private final ModelRenderer bottomHalf;
+	private final ModelRenderer wheel;
 	private final ModelRenderer LeftWing;
 	private final ModelRenderer Limb3;
 	private final ModelRenderer Limb1;
@@ -103,87 +106,66 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		Body.setTextureOffset(0, 173).addBox(-0.5F, -3.0F, -1.1F, 1.0F, 1.0F, 2.0F, 0.0F, false);
 		Body.setTextureOffset(48, 179).addBox(1.0F, 1.6F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 		Body.setTextureOffset(0, 44).addBox(-4.0F, 1.0F, 0.0F, 8.0F, 3.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(16, 109).addBox(1.0F, 7.0F, 0.0F, 3.0F, 5.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(0, 120).addBox(2.0F, 12.0F, 0.0F, 1.0F, 4.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(28, 164).addBox(2.0F, 16.0F, -0.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(0, 164).addBox(2.0F, 7.0F, -0.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(16, 164).addBox(2.0F, 16.0F, 2.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(8, 164).addBox(2.0F, 7.0F, 2.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(24, 164).addBox(-3.0F, 16.0F, -0.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(4, 164).addBox(-3.0F, 7.0F, -0.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(20, 164).addBox(-3.0F, 16.0F, 2.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(12, 164).addBox(-3.0F, 7.0F, 2.3F, 1.0F, 5.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(4, 109).addBox(1.0F, 16.0F, 0.0F, 3.0F, 5.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(0, 158).addBox(-1.0F, 21.0F, 0.5F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		Body.setTextureOffset(16, 176).addBox(-1.0F, 19.0F, 1.5F, 2.0F, 2.0F, 0.0F, 0.0F, false);
-		Body.setTextureOffset(12, 176).addBox(-1.0F, 23.0F, 1.5F, 2.0F, 2.0F, 0.0F, 0.0F, false);
-		Body.setTextureOffset(8, 176).addBox(-3.0F, 21.0F, 1.5F, 2.0F, 2.0F, 0.0F, 0.0F, false);
-		Body.setTextureOffset(4, 176).addBox(1.0F, 21.0F, 1.5F, 2.0F, 2.0F, 0.0F, 0.0F, false);
-		Body.setTextureOffset(16, 101).addBox(-4.0F, 7.0F, 0.0F, 3.0F, 5.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(8, 120).addBox(-3.0F, 12.0F, 0.0F, 1.0F, 4.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(4, 101).addBox(-4.0F, 16.0F, 0.0F, 3.0F, 5.0F, 3.0F, 0.0F, false);
-		Body.setTextureOffset(8, 183).addBox(4.5F, 5.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(28, 176).addBox(1.5F, 5.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(24, 176).addBox(-2.5F, 5.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(20, 176).addBox(-5.5F, 5.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		Body.setTextureOffset(18, 76).addBox(2.0F, 4.0F, -1.0F, 3.0F, 3.0F, 5.0F, 0.0F, false);
-		Body.setTextureOffset(34, 76).addBox(-5.0F, 4.0F, -1.0F, 3.0F, 3.0F, 5.0F, 0.0F, false);
 
 		leftArm = new ModelRenderer(this);
-		leftArm.setRotationPoint(7.5364F, -3.1727F, -0.1455F);
+		leftArm.setRotationPoint(7.5F, -9.0F, 0.0F);
 		Body.addChild(leftArm);
-		leftArm.setTextureOffset(66, 76).addBox(0.4636F, -6.8273F, -1.8545F, 4.0F, 3.0F, 4.0F, 0.0F, false);
-		leftArm.setTextureOffset(6, 173).addBox(1.4636F, -6.4273F, -2.3545F, 2.0F, 2.0F, 1.0F, 0.0F, false);
-		leftArm.setTextureOffset(6, 170).addBox(1.4636F, -6.4273F, 1.6455F, 2.0F, 2.0F, 1.0F, 0.0F, false);
-		leftArm.setTextureOffset(50, 164).addBox(3.9636F, -6.4273F, -0.8545F, 1.0F, 2.0F, 2.0F, 0.0F, false);
-		leftArm.setTextureOffset(44, 164).addBox(-0.0364F, -6.4273F, -0.8545F, 1.0F, 2.0F, 2.0F, 0.0F, false);
-		leftArm.setTextureOffset(64, 161).addBox(1.4636F, -7.8273F, -0.8545F, 2.0F, 1.0F, 2.0F, 0.0F, false);
-		leftArm.setTextureOffset(64, 158).addBox(1.4636F, -4.4273F, -0.8545F, 2.0F, 1.0F, 2.0F, 0.0F, false);
+		leftArm.setTextureOffset(66, 76).addBox(0.5F, -1.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.0F, false);
+		leftArm.setTextureOffset(6, 173).addBox(1.5F, -0.6F, -2.5F, 2.0F, 2.0F, 1.0F, 0.0F, false);
+		leftArm.setTextureOffset(6, 170).addBox(1.5F, -0.6F, 1.5F, 2.0F, 2.0F, 1.0F, 0.0F, false);
+		leftArm.setTextureOffset(50, 164).addBox(4.0F, -0.6F, -1.0F, 1.0F, 2.0F, 2.0F, 0.0F, false);
+		leftArm.setTextureOffset(44, 164).addBox(0.0F, -0.6F, -1.0F, 1.0F, 2.0F, 2.0F, 0.0F, false);
+		leftArm.setTextureOffset(64, 161).addBox(1.5F, -2.0F, -1.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
+		leftArm.setTextureOffset(64, 158).addBox(1.5F, 1.4F, -1.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
 
 		lforeArm = new ModelRenderer(this);
-		lforeArm.setRotationPoint(-8.0364F, 20.5727F, 0.1455F);
+		lforeArm.setRotationPoint(3.0F, 2.5F, 0.0F);
 		leftArm.addChild(lforeArm);
-		lforeArm.setTextureOffset(8, 127).addBox(9.5F, -19.0F, -1.0F, 2.0F, 5.0F, 2.0F, 0.0F, false);
-		lforeArm.setTextureOffset(4, 138).addBox(10.8F, -23.1F, -0.5F, 1.0F, 9.0F, 1.0F, 0.0F, false);
-		lforeArm.setTextureOffset(36, 148).addBox(9.3F, -22.1F, -0.5F, 1.0F, 8.0F, 1.0F, 0.0F, false);
-		lforeArm.setTextureOffset(46, 148).addBox(11.1F, -24.0F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
-		lforeArm.setTextureOffset(40, 148).addBox(9.0F, -24.0F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
+		lforeArm.setTextureOffset(4, 138).addBox(-0.2F, 0.8F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+		lforeArm.setTextureOffset(36, 148).addBox(-1.7F, 1.8F, -0.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
+		lforeArm.setTextureOffset(46, 148).addBox(0.1F, -0.1F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
+		lforeArm.setTextureOffset(40, 148).addBox(-2.0F, -0.1F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
 
 		lHand = new ModelRenderer(this);
-		lHand.setRotationPoint(2.1F, 10.0F, 1.4F);
+		lHand.setRotationPoint(-0.5F, 5.5F, 0.5F);
 		lforeArm.addChild(lHand);
-		lHand.setTextureOffset(42, 173).addBox(7.8F, -24.0F, -3.3F, 1.0F, 2.0F, 1.0F, 0.0F, false);
-		lHand.setTextureOffset(26, 170).addBox(9.1F, -24.0F, -2.9F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-		lHand.setTextureOffset(46, 170).addBox(9.3F, -24.0F, -2.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
-		lHand.setTextureOffset(0, 176).addBox(9.0F, -24.0F, -1.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+		lHand.setTextureOffset(42, 173).addBox(-0.6F, 4.4F, -2.4F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+		lHand.setTextureOffset(26, 170).addBox(0.7F, 4.4F, -2.0F, 1.0F, 3.0F, 1.0F, 0.0F, false);
+		lHand.setTextureOffset(46, 170).addBox(0.9F, 4.4F, -1.1F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+		lHand.setTextureOffset(36, 148).addBox(-1.2F, -0.7F, -1.0F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		lHand.setTextureOffset(4, 138).addBox(0.3F, -0.7F, -1.0F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		lHand.setTextureOffset(8, 127).addBox(-1.0F, -0.6F, -1.5F, 2.0F, 5.0F, 2.0F, 0.0F, false);
+		lHand.setTextureOffset(0, 176).addBox(0.6F, 4.4F, -0.1F, 1.0F, 2.0F, 1.0F, 0.0F, false);
 
 		rightArm = new ModelRenderer(this);
-		rightArm.setRotationPoint(-11.4636F, -3.1727F, -0.1455F);
+		rightArm.setRotationPoint(-6.5F, -9.0F, 0.0F);
 		Body.addChild(rightArm);
-		rightArm.setTextureOffset(50, 76).addBox(0.4636F, -6.8273F, -1.8545F, 4.0F, 3.0F, 4.0F, 0.0F, false);
-		rightArm.setTextureOffset(56, 167).addBox(1.4636F, -6.4273F, -2.3545F, 2.0F, 2.0F, 1.0F, 0.0F, false);
-		rightArm.setTextureOffset(56, 164).addBox(1.4636F, -6.4273F, 1.6455F, 2.0F, 2.0F, 1.0F, 0.0F, false);
-		rightArm.setTextureOffset(38, 164).addBox(3.9636F, -6.4273F, -0.8545F, 1.0F, 2.0F, 2.0F, 0.0F, false);
-		rightArm.setTextureOffset(32, 164).addBox(-0.0364F, -6.4273F, -0.8545F, 1.0F, 2.0F, 2.0F, 0.0F, false);
-		rightArm.setTextureOffset(56, 161).addBox(1.4636F, -7.8273F, -0.8545F, 2.0F, 1.0F, 2.0F, 0.0F, false);
-		rightArm.setTextureOffset(56, 158).addBox(1.4636F, -4.4273F, -0.8545F, 2.0F, 1.0F, 2.0F, 0.0F, false);
+		rightArm.setTextureOffset(50, 76).addBox(-4.5F, -1.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.0F, false);
+		rightArm.setTextureOffset(56, 167).addBox(-3.5F, -0.6F, -2.5F, 2.0F, 2.0F, 1.0F, 0.0F, false);
+		rightArm.setTextureOffset(56, 164).addBox(-3.5F, -0.6F, 1.5F, 2.0F, 2.0F, 1.0F, 0.0F, false);
+		rightArm.setTextureOffset(38, 164).addBox(-1.0F, -0.6F, -1.0F, 1.0F, 2.0F, 2.0F, 0.0F, false);
+		rightArm.setTextureOffset(32, 164).addBox(-5.0F, -0.6F, -1.0F, 1.0F, 2.0F, 2.0F, 0.0F, false);
+		rightArm.setTextureOffset(56, 161).addBox(-3.5F, -2.0F, -1.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
+		rightArm.setTextureOffset(56, 158).addBox(-3.5F, 1.4F, -1.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
 
 		rforeArm = new ModelRenderer(this);
-		rforeArm.setRotationPoint(-8.0364F, 20.5727F, 0.1455F);
+		rforeArm.setRotationPoint(-3.0F, 2.5F, 0.0F);
 		rightArm.addChild(rforeArm);
-		rforeArm.setTextureOffset(0, 127).addBox(9.5F, -19.0F, -1.0F, 2.0F, 5.0F, 2.0F, 0.0F, false);
-		rforeArm.setTextureOffset(32, 148).addBox(10.8F, -22.1F, -0.5F, 1.0F, 8.0F, 1.0F, 0.0F, false);
-		rforeArm.setTextureOffset(0, 138).addBox(9.3F, -23.1F, -0.5F, 1.0F, 9.0F, 1.0F, 0.0F, false);
-		rforeArm.setTextureOffset(26, 148).addBox(11.1F, -24.0F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
-		rforeArm.setTextureOffset(20, 148).addBox(9.0F, -24.0F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
+		rforeArm.setTextureOffset(32, 148).addBox(0.8F, 1.8F, -0.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
+		rforeArm.setTextureOffset(0, 138).addBox(-0.7F, 0.8F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+		rforeArm.setTextureOffset(26, 148).addBox(1.1F, -0.1F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
+		rforeArm.setTextureOffset(20, 148).addBox(-1.0F, -0.1F, -1.0F, 1.0F, 5.0F, 2.0F, 0.0F, false);
 
-		lHand2 = new ModelRenderer(this);
-		lHand2.setRotationPoint(2.1F, 10.0F, 1.4F);
-		rforeArm.addChild(lHand2);
-		lHand2.setTextureOffset(34, 170).addBox(8.1F, -24.0F, -3.3F, 1.0F, 2.0F, 1.0F, 0.0F, false);
-		lHand2.setTextureOffset(18, 170).addBox(6.8F, -24.0F, -3.0F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-		lHand2.setTextureOffset(30, 173).addBox(6.5F, -24.0F, -2.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
-		lHand2.setTextureOffset(30, 170).addBox(6.6F, -24.0F, -1.0F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+		rHand = new ModelRenderer(this);
+		rHand.setRotationPoint(0.5F, 5.0F, 0.0F);
+		rforeArm.addChild(rHand);
+		rHand.setTextureOffset(0, 138).addBox(-1.2F, -0.2F, -0.5F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		rHand.setTextureOffset(32, 148).addBox(0.3F, -0.2F, -0.5F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		rHand.setTextureOffset(34, 170).addBox(-0.3F, 4.9F, -1.9F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+		rHand.setTextureOffset(18, 170).addBox(-1.6F, 4.9F, -1.6F, 1.0F, 3.0F, 1.0F, 0.0F, false);
+		rHand.setTextureOffset(30, 173).addBox(-1.9F, 4.9F, -0.6F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+		rHand.setTextureOffset(0, 127).addBox(-1.0F, -0.1F, -1.0F, 2.0F, 5.0F, 2.0F, 0.0F, false);
+		rHand.setTextureOffset(30, 170).addBox(-1.8F, 4.9F, 0.4F, 1.0F, 2.0F, 1.0F, 0.0F, false);
 
 		steve = new ModelRenderer(this);
 		steve.setRotationPoint(0.4875F, -2.25F, 0.475F);
@@ -315,6 +297,47 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		Body.addChild(bone6);
 		setRotationAngle(bone6, 0.0F, 0.0F, -1.0908F);
 		bone6.setTextureOffset(32, 179).addBox(4.453F, -3.4848F, -0.5F, 0.0F, 3.0F, 1.0F, 0.0F, false);
+
+		lowerHalf = new ModelRenderer(this);
+		lowerHalf.setRotationPoint(-0.0333F, 3.9667F, 1.0533F);
+		Body.addChild(lowerHalf);
+		lowerHalf.setTextureOffset(12, 164).addBox(-2.9667F, 3.0333F, 1.2467F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(8, 164).addBox(2.0333F, 3.0333F, 1.2467F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(34, 76).addBox(-4.9667F, 0.0333F, -2.0533F, 3.0F, 3.0F, 5.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(20, 176).addBox(-5.4667F, 1.0333F, -0.0533F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(24, 176).addBox(-2.4667F, 1.0333F, -0.0533F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(18, 76).addBox(2.0333F, 0.0333F, -2.0533F, 3.0F, 3.0F, 5.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(28, 176).addBox(1.5333F, 1.0333F, -0.0533F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(8, 183).addBox(4.5333F, 1.0333F, -0.0533F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(16, 109).addBox(1.0333F, 3.0333F, -1.0533F, 3.0F, 5.0F, 3.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(0, 164).addBox(2.0333F, 3.0333F, -1.3533F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(16, 101).addBox(-3.9667F, 3.0333F, -1.0533F, 3.0F, 5.0F, 3.0F, 0.0F, false);
+		lowerHalf.setTextureOffset(4, 164).addBox(-2.9667F, 3.0333F, -1.3533F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+
+		bottomHalf = new ModelRenderer(this);
+		bottomHalf.setRotationPoint(0.0333F, 8.1444F, 0.28F);
+		lowerHalf.addChild(bottomHalf);
+		bottomHalf.setTextureOffset(8, 120).addBox(-3.0F, -0.1111F, -1.3333F, 1.0F, 4.0F, 3.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(0, 120).addBox(2.0F, -0.1111F, -1.3333F, 1.0F, 4.0F, 3.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(4, 109).addBox(1.0F, 3.8889F, -1.3333F, 3.0F, 5.0F, 3.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(28, 164).addBox(2.0F, 3.8889F, -1.6333F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(4, 101).addBox(-4.0F, 3.8889F, -1.3333F, 3.0F, 5.0F, 3.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(24, 164).addBox(-3.0F, 3.8889F, -1.6333F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(16, 164).addBox(2.0F, 3.8889F, 0.9667F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+		bottomHalf.setTextureOffset(20, 164).addBox(-3.0F, 3.8889F, 0.9667F, 1.0F, 5.0F, 1.0F, 0.0F, false);
+
+		wheel = new ModelRenderer(this);
+		wheel.setRotationPoint(0.0F, 9.8889F, 0.1667F);
+		bottomHalf.addChild(wheel);
+		wheel.setTextureOffset(4, 176).addBox(1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(4, 176).addBox(1.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(4, 176).addBox(-2.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(4, 176).addBox(-2.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(4, 176).addBox(1.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(12, 176).addBox(-1.0F, 1.0F, 0.0F, 2.0F, 2.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(8, 176).addBox(-3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, 0.0F, false);
+		wheel.setTextureOffset(0, 158).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		wheel.setTextureOffset(16, 176).addBox(-1.0F, -3.0F, 0.0F, 2.0F, 2.0F, 0.0F, 0.0F, false);
 
 		LeftWing = new ModelRenderer(this);
 		LeftWing.setRotationPoint(4.0F, -6.0F, 4.5F);
@@ -511,7 +534,6 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		Limb8.setTextureOffset(32, 16).addBox(2.1451F, -4.1325F, -2.7249F, 8.0F, 16.0F, 0.0F, 0.0F, false);
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void setRotationAngles(EntityTetra entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
@@ -522,22 +544,12 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		// Mini Steve
 		this.stHead.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.stHead.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
-		this.stRArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F
-				/ f;
-		this.stLArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
-		this.stRArm.rotateAngleZ = 0.0F;
-		this.stLArm.rotateAngleZ = 0.0F;
-		this.stRLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
-		this.stLLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount / f;
+		this.stRArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount
+				* 0.5F;
+		this.stLArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F;
+		this.stRLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		this.stLLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
-		
-		
-		
-		
-		
-		
-		
-		
 		this.eye.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.eye.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
 
@@ -557,20 +569,32 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		this.halo3.rotateAngleZ += ageInTicks * 0.002f;
 		this.halo4.rotateAngleZ += -ageInTicks * 0.002f;
 
+		this.leftArm.rotateAngleX = MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount;
+		this.rightArm.rotateAngleX = -MathHelper.cos(limbSwing * 0.1662F) * 1.2F * limbSwingAmount;
+
+		this.rforeArm.rotateAngleX = MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount;
+		this.lforeArm.rotateAngleX = MathHelper.cos(limbSwing * 0.1662F) * 1.2F * limbSwingAmount;
+
+		this.lHand.rotateAngleX = -Math
+				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount);
+		this.rHand.rotateAngleX = -Math.abs(MathHelper.cos(limbSwing * 0.1662F) * 1.2F * limbSwingAmount);
+
+		this.lowerHalf.rotateAngleX = MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 0.5F * limbSwingAmount;
+		this.bottomHalf.rotateAngleX = Math
+				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount);
+
 		this.RightWing.rotateAngleZ = f3 * 1.0f;
 		this.LeftWing.rotateAngleZ = -f3 * 1.0f;
-
 		this.RightWing2.rotateAngleZ = f3 * 0.8f;
 		this.LeftWing2.rotateAngleZ = -f3 * 0.8f;
-
 		this.RightWing3.rotateAngleZ = f3 * 0.65f;
 		this.LeftWing3.rotateAngleZ = -f3 * 0.65f;
-
 		this.RightWing4.rotateAngleZ = f3 * 0.4f;
 		this.LeftWing4.rotateAngleZ = -f3 * 0.4f;
-
 		this.RightWing5.rotateAngleZ = f3 * 0.15f;
 		this.LeftWing5.rotateAngleZ = -f3 * 0.15f;
+
+		this.wheel.rotateAngleZ += ageInTicks * 0.012f;
 
 	}
 

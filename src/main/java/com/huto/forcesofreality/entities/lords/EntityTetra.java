@@ -133,40 +133,27 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 				new ParticleColor(66, 184, 212), new ParticleColor(110, 200, 80), new ParticleColor(255, 165, 44),
 				new ParticleColor(243, 124, 59), new ParticleColor(229, 60, 81));
 		Collections.reverse(chakraColors);
-		/*
-		 * for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
-		 * world.addParticle(ParticleInit.chakraData.get(j), getPosX() + 0.5 +
-		 * Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
-		 * 0.1 + ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j)
-		 * + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-		 * world.addParticle(ParticleTypes.WHITE_ASH, getPosX() + 0.5 + Math.cos(time -
-		 * j) + ParticleUtil.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
-		 * ParticleUtil.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j) +
-		 * ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-		 * 
-		 * }
-		 */
 
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(new ParticleColor(100, 229, 0)),
+			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 0)),
 					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.15)-0.1 + ParticleUtil.inRange(-0.1, 0.1),
+					center.y + (j * 0.15) - 0.1 + ParticleUtil.inRange(-0.1, 0.1),
 					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 229)),
 					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.15)-0.1  + ParticleUtil.inRange(-0.1, 0.1),
+					center.y + (j * 0.15) - 0.1 + ParticleUtil.inRange(-0.1, 0.1),
 					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 		}
-		
-		world.addParticle(GlowParticleData.createData(new ParticleColor(250, 0, 250)),
-				center.x  + ParticleUtil.inRange(-0.1, 0.1),
-				center.y + (1 * 0.15)+1.3 + ParticleUtil.inRange(-0.2, 0.2),
-				center.z   + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-		world.addParticle(GlowParticleData.createData(new ParticleColor(20, 0, 20)),
-				center.x  + ParticleUtil.inRange(-0.1, 0.1),
-				center.y + (1* 0.15)+1.3  + ParticleUtil.inRange(-0.2, 0.2),
-				center.z   + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+
+		world.addParticle(GlowParticleData.createData(new ParticleColor(250, 200, 0)),
+				center.x + ParticleUtil.inRange(-0.1, 0.1),
+				center.y + (1 * 0.15) - 1.3 + ParticleUtil.inRange(-0.2, 0.2),
+				center.z + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+		world.addParticle(GlowParticleData.createData(new ParticleColor(20, 0, 0)),
+				center.x + ParticleUtil.inRange(-0.1, 0.1),
+				center.y + (1 * 0.15) - 1.3 + ParticleUtil.inRange(-0.2, 0.2),
+				center.z + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 
 		float diffMult = 1f;
 
@@ -196,13 +183,14 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 
 			if (attackRoll % 100 * diffMult == 0) {
 				this.spawnMissile();
+
 			} else if (attackRoll % 110 * diffMult == 0) {
-				this.spawnMissileVortex(rand.nextInt(15));
+				this.magnificentFlash();
+
 			} else if (attackRoll % 130 * diffMult == 0) {
 				this.summonThroneAid(rand.nextInt(2) + 2);
 			} else if (attackRoll % 160 * diffMult == 0) {
 				this.summonJudgement(rand.nextInt(3) + 3);
-
 			}
 			if (!this.isOnGround()) {
 				if (attackRoll % 100 * diffMult == 0) {
@@ -431,6 +419,46 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 		}
 	}
 
+	private void magnificentFlash() {
+		playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .25F, 1f);
+		this.setMotion(0, 0, 0);
+		this.setMotion(0, 0, 0);
+		this.setMotion(0, 0, 0);
+		this.setMotion(0, 0, 0);
+		repel(world, new AxisAlignedBB(this.getPositionVec().add(-8, -8, -8), this.getPositionVec().add(8, 8, 8)),
+				this.getPositionVec().getX() + 0.5, this.getPositionVec().getY(), this.getPositionVec().getZ() + 0.5);
+	}
+
+	public void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {
+		List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, effectBounds);
+		for (Entity ent : list) {
+			if (!(ent instanceof EntityThrone)) {
+				Vector3d p = new Vector3d(x, y, z);
+				Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
+				double distance = p.distanceTo(t) + 0.1D;
+				Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
+				ent.setMotion(r.x * 3 / distance, r.y * 3 / distance, r.z * 3 / distance);
+				for (int countparticles = 0; countparticles <= 30; ++countparticles) {
+					world.addParticle(ParticleTypes.FLASH,
+							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
+							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
+									- (double) ent.getYOffset() - 0.5,
+							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
+							0.0D);
+					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 255, 0)),
+							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
+							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
+									- (double) ent.getYOffset() - 0.5,
+							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
+							0.0D);
+
+					ent.playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .15F, 1f + (float) Math.random() * 0.2F);
+
+				}
+			}
+		}
+	}
+
 	private void spawnMissile() {
 		EntityStarStrike missile = new EntityStarStrike(this, true);
 		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
@@ -460,6 +488,7 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void spawnMissileVortex(int numMiss) {
 
 		EntityStarStrike[] missArray = new EntityStarStrike[numMiss];

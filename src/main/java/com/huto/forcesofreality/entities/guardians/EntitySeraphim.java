@@ -3,7 +3,6 @@ package com.huto.forcesofreality.entities.guardians;
 import java.util.List;
 
 import com.huto.forcesofreality.entities.projectiles.EntityHolyFlare;
-import com.huto.forcesofreality.entities.projectiles.EntityJudgement;
 import com.huto.forcesofreality.entities.projectiles.EntityStarStrike;
 import com.huto.forcesofreality.entities.summons.EntityThrone;
 import com.huto.forcesofreality.init.EntityInit;
@@ -150,10 +149,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 				this.spawnMissileVortex(rand.nextInt(15));
 			} else if (attackRoll % 130 * diffMult == 0) {
 				this.summonThroneAid(rand.nextInt(2) + 2);
-			} else if (attackRoll % 160 * diffMult == 0) {
-				this.summonJudgement(rand.nextInt(3) + 3);
-
-			}
+			} 
 			if (!this.isOnGround()) {
 				if (attackRoll % 100 * diffMult == 0) {
 					this.summonHolyFlare(rand.nextInt(1) + 3);
@@ -384,7 +380,7 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 	private void spawnMissile() {
 		EntityStarStrike missile = new EntityStarStrike(this, true);
 		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1),
-				this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1), this.getPosZ() + (Math.random() - 0.5 * 0.1));
+				this.getPosY() + 2.4 + (Math.random() - 0.5 * 0.1), this	.getPosZ() + (Math.random() - 0.5 * 0.1));
 		if (missile.findTarget()) {
 			playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
 
@@ -392,23 +388,6 @@ public class EntitySeraphim extends MonsterEntity implements IEntityAdditionalSp
 		}
 	}
 
-	public void summonJudgement(int numMiss) {
-		EntityJudgement[] missArray = new EntityJudgement[numMiss];
-		for (int i = 0; i < numMiss; i++) {
-			missArray[i] = new EntityJudgement(this, true);
-			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			missArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
-					this.getPosZ() + 0.5 + zMod);
-			if (!world.isRemote) {
-				playSound(SoundHandler.ENTITY_HASTUR_HIT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
-
-				world.addEntity(missArray[i]);
-
-			}
-		}
-	}
 
 	private void spawnMissileVortex(int numMiss) {
 
