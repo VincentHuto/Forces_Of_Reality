@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityTetra;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -537,6 +538,11 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 	@Override
 	public void setRotationAngles(EntityTetra entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
+		
+		
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
 		float f = MathHelper.lerp(0, entity.oFlap, entity.wingRotation);
 		float f1 = MathHelper.lerp(0, entity.oFlapSpeed, entity.destPos);
 		float f3 = (MathHelper.sin(f) + 1.6F) * f1;
@@ -553,21 +559,21 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		this.eye.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.eye.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
 
-		this.halos.rotateAngleX += ageInTicks * 0.002f;
-		this.halo.rotateAngleX += -ageInTicks * 0.002f;
-		this.halo2.rotateAngleX += ageInTicks * 0.002f;
-		this.halo3.rotateAngleX = -ageInTicks * 0.002f;
-		this.halo4.rotateAngleX = -ageInTicks * 0.002f;
-		this.halos.rotateAngleY += ageInTicks * 0.002f;
-		this.halo.rotateAngleY += ageInTicks * 0.002f;
-		this.halo2.rotateAngleY += -ageInTicks * 0.002f;
-		this.halo3.rotateAngleY = ageInTicks * 0.002f;
-		this.halo4.rotateAngleY = ageInTicks * 0.002f;
-		this.halos.rotateAngleZ += -ageInTicks * 0.002f;
-		this.halo.rotateAngleZ += ageInTicks * 0.002f;
-		this.halo2.rotateAngleZ += -ageInTicks * 0.002f;
-		this.halo3.rotateAngleZ += ageInTicks * 0.002f;
-		this.halo4.rotateAngleZ += -ageInTicks * 0.002f;
+		this.halos.rotateAngleX = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo.rotateAngleX = -(entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo2.rotateAngleX = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo3.rotateAngleX = -(entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo4.rotateAngleX = -(entity.ticksExisted+ parTicks) * 0.005f;
+		this.halos.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo2.rotateAngleY = -(entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo3.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo4.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halos.rotateAngleZ = -(entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo.rotateAngleZ = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo2.rotateAngleZ = -(entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo3.rotateAngleZ = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.halo4.rotateAngleZ = -(entity.ticksExisted+ parTicks) * 0.005f;
 
 		this.leftArm.rotateAngleX = MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount;
 		this.rightArm.rotateAngleX = -MathHelper.cos(limbSwing * 0.1662F) * 1.2F * limbSwingAmount;
@@ -594,7 +600,7 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 		this.RightWing5.rotateAngleZ = f3 * 0.15f;
 		this.LeftWing5.rotateAngleZ = -f3 * 0.15f;
 
-		this.wheel.rotateAngleZ += ageInTicks * 0.012f;
+		this.wheel.rotateAngleZ += (entity.ticksExisted+ parTicks) * 0.012f;
 
 	}
 

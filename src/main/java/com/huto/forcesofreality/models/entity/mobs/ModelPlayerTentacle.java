@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.mobs;
 
 import com.huto.forcesofreality.entities.summons.EntityPlayerTentacle;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -41,15 +42,16 @@ public class ModelPlayerTentacle extends EntityModel<EntityPlayerTentacle> {
 	@Override
 	public void setRotationAngles(EntityPlayerTentacle entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
+		float parTicks = ClientEventSubscriber.getPartialTicks();
 
-		this.Base.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0625);
-		this.Base.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625);
-		this.Second.rotateAngleX = (float) (Math.cos(ageInTicks) * 0.0625);
-		this.Second.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625);
-		this.Third.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0625);
-		this.Third.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625);
-		this.Tip.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0925);
-		this.Tip.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925);
+		this.Base.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Base.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Second.rotateAngleX = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Second.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Third.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Third.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Tip.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925);
+		this.Tip.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925);
 	}
 
 	@Override

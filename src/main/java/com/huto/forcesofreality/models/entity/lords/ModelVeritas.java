@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityVeritas;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -158,9 +159,12 @@ public class ModelVeritas extends EntityModel<EntityVeritas> {
 
 	@Override
 	public void setRotationAngles(EntityVeritas entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
 		this.ring.rotateAngleX= 0;
-		this.ring.rotateAngleZ= ageInTicks*0.1f;
-		this.Halo.rotateAngleZ= -ageInTicks*0.2f;	}
+		this.ring.rotateAngleZ= (ageInTicks + parTicks)*0.1f;
+		this.Halo.rotateAngleZ= -(ageInTicks + parTicks)*0.2f;	}
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){

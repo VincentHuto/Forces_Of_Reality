@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.summons;
 
 import com.huto.forcesofreality.entities.summons.EntityHasturSpawn;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -111,27 +112,28 @@ public class ModelHasturSpawn extends EntityModel<EntityHasturSpawn> {
 	@Override
 	public void setRotationAngles(EntityHasturSpawn entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
+		float parTicks = ClientEventSubscriber.getPartialTicks();
 
-		this.Body.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.0225);
-		this.Body.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0225);
+		this.Body.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0225);
+		this.Body.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0225);
 
 		if (entity.isAggressive()) {
-			this.Head.rotateAngleY = ageInTicks * 0.5f;
+			this.Head.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.5f;
 
 		} else {
-			this.Head.rotateAngleY = ageInTicks * 0.33f;
+			this.Head.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.33f;
 
 		}
 
-		this.BackShould.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.1625);
-		this.FrontShould.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.1625);
-		this.LeftShould.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.1625);
-		this.RightShould.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.1625);
+		this.BackShould.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.1625);
+		this.FrontShould.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.1625);
+		this.LeftShould.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.1625);
+		this.RightShould.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.1625);
 
-		this.FrontTent.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.1625);
-		this.BackTent.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.1625);
-		this.RightTent.rotateAngleX = (float) (Math.sin(ageInTicks) * 0.1625);
-		this.LeftTent.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.1625);
+		this.FrontTent.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.1625);
+		this.BackTent.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.1625);
+		this.RightTent.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.1625);
+		this.LeftTent.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.1625);
 
 		this.RightLeg.rotateAngleX = MathHelper.cos(limbSwing * 1.6662F) * .5F * limbSwingAmount;
 		this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 1.6662F + (float) Math.PI) * .5F * limbSwingAmount;

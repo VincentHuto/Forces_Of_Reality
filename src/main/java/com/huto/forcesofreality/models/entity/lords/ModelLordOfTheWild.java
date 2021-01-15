@@ -2,6 +2,7 @@ package com.huto.forcesofreality.models.entity.lords;
 
 
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -672,6 +673,10 @@ public class ModelLordOfTheWild extends EntityModel<EntityLordOfTheWild> {
 
 	@Override
 	public void setRotationAngles(EntityLordOfTheWild entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F)/1.5f;
 		this.neck.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F)/1.5f;
@@ -680,24 +685,24 @@ public class ModelLordOfTheWild extends EntityModel<EntityLordOfTheWild> {
 		this.tail.rotateAngleY = headPitch * ((float) Math.PI / 180F) / 2;
 		this.bottomJaw.rotateAngleX = limbSwingAmount * 0.73f;
 		
-		this.centerMane.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.3f) *0.05f;
-		this.mane.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.5f) *0.1f -44.5f;
-		this.mane2.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.6f) *0.15f;
-		this.mane3.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.7f) *0.25f;
-		this.mane4.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.8f) *0.35f;
+		this.centerMane.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.3f) *0.05f;
+		this.mane.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.5f) *0.1f -44.5f;
+		this.mane2.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.6f) *0.15f;
+		this.mane3.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.7f) *0.25f;
+		this.mane4.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.8f) *0.35f;
 
 		
-		this.leftMane.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.3f) *0.05f;
-		this.mane5.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.5f) *0.1f -44.0f;
-		this.mane6.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.6f) *0.15f;
-		this.mane7.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.7f) *0.25f;
-		this.mane8.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.8f) *0.25f;
+		this.leftMane.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.3f) *0.05f;
+		this.mane5.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.5f) *0.1f -44.0f;
+		this.mane6.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.6f) *0.15f;
+		this.mane7.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.7f) *0.25f;
+		this.mane8.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.8f) *0.25f;
 		
-		this.rightMane.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.3f) *0.05f;
-		this.mane9.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.5f) *0.1f -44.0f;
-		this.mane10.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.6f) *0.15f;
-		this.mane11.rotateAngleX = (float) Math.cos(entity.ticksExisted*0.7f) *0.25f;
-		this.mane12.rotateAngleX = (float) Math.sin(entity.ticksExisted*0.8f) *0.35f;
+		this.rightMane.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.3f) *0.05f;
+		this.mane9.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.5f) *0.1f -44.0f;
+		this.mane10.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.6f) *0.15f;
+		this.mane11.rotateAngleX = (float) Math.cos((entity.ticksExisted+ parTicks)*0.7f) *0.25f;
+		this.mane12.rotateAngleX = (float) Math.sin((entity.ticksExisted+ parTicks)*0.8f) *0.35f;
 		
 		
 		this.fLLeg.rotateAngleX = MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount;

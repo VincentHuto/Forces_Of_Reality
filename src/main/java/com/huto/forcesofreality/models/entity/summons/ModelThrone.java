@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.summons;
 
 import com.huto.forcesofreality.entities.summons.EntityThrone;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -39,10 +40,13 @@ public class ModelThrone extends EntityModel<EntityThrone> {
 	@Override
 	public void setRotationAngles(EntityThrone entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		this.NSWheel.rotateAngleX = ageInTicks * 0.2f;
-		this.EWWheel.rotateAngleX = -ageInTicks * 0.2f;
-		this.NSWheel.rotateAngleY = ageInTicks * 0.2f;
-		this.EWWheel.rotateAngleZ = -ageInTicks * 0.2f;
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
+		this.NSWheel.rotateAngleX = (entity.ticksExisted+ parTicks) * 0.4f;
+		this.EWWheel.rotateAngleX = -(entity.ticksExisted+ parTicks) * 0.4f;
+		this.NSWheel.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.4f;
+		this.EWWheel.rotateAngleZ = -(entity.ticksExisted+ parTicks) * 0.4f;
 	}
 
 	@Override

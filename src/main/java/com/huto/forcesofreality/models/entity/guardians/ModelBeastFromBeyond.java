@@ -136,12 +136,15 @@ public class ModelBeastFromBeyond extends EntityModel<EntityBeastFromBeyond> {
 	@Override
 	public void setRotationAngles(EntityBeastFromBeyond entity, float limbSwing, float limbSwingAmount,
 			float ageInTicks, float netHeadYaw, float headPitch) {
+		
+
+		
 		this.Head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
 		this.Head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
 		this.Tail.rotateAngleX = headPitch * ((float) Math.PI / 180F) / 2;
 		this.Tail.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) / 2;
 		this.Tail.rotateAngleZ = headPitch * ((float) Math.PI / 180F) / 2;
-		this.JawTop.rotateAngleX = -limbSwingAmount * 0.43f;
+		this.JawTop.rotateAngleX = -limbSwingAmount * 0.43f;	
 		this.JawBottom.rotateAngleX = limbSwingAmount * 0.43f;
 		if (!entity.isAggressive()) {
 			this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;

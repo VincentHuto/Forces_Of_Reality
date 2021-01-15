@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.summons;
 
 import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -116,15 +117,19 @@ public class ModelSummonedBeast extends EntityModel<EntitySummonedBeast> {
 	@Override
 	public void setRotationAngles(EntitySummonedBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
+		
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
 		this.Head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
 		this.Head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
 		this.JawTop.rotateAngleX = -limbSwingAmount * 0.43f;
 		this.JawBottom.rotateAngleX = limbSwingAmount * 0.43f;
 
-		this.Tail1.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0425);
-		this.Tail2.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
-		this.Tail3.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0225);
-		this.Tail4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925);
+		this.Tail1.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825);
+		this.Tail2.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625);
+		this.Tail3.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0425);
+		this.Tail4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.1225);
 
 		if (!entity.isAggressive()) {
 			this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;

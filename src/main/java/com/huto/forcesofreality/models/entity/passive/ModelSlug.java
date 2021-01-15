@@ -55,6 +55,8 @@ public class ModelSlug extends EntityModel<EntitySlug> {
 	@Override
 	public void setRotationAngles(EntitySlug entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
+		
+		
 		this.Head.rotateAngleX = headPitch * ((float) Math.PI / 180F)* .5F;
 		this.Head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F)* .5F;
 		this.Tail.rotateAngleY = MathHelper.sin(limbSwing * 7.6662F) * .5F * limbSwingAmount;

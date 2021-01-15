@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.mobs;
 
 import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -698,6 +699,9 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 
 	@Override
 	public void setRotationAngles(EntityScuttlingOcculus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
 		// Head
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
@@ -732,47 +736,47 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 				* limbSwingAmount * 2;
 
 		// Back stuff
-		this.rock6.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.rock6.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.rock14.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.rock14.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.rock16.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.rock16.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.rock17.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.rock17.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.rock7.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.rock7.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.bone2.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.bone2.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.bone4.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.bone4.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.bone5.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.bone5.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.bone6.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.bone6.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.bone3.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.bone3.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.bone7.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.bone7.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.rock6.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock6.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock14.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock14.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock16.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock16.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock17.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock17.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock7.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rock7.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone2.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone2.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone4.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone4.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone5.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone5.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone6.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone6.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone3.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone3.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone7.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.bone7.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 		// Eyes
-		this.eye2.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye2.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye3.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye3.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye4.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye4.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye5.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye5.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye7.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye7.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye8.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye8.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye9.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye9.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye10.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye10.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.eye11.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.eye11.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);	}
+		this.eye2.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye2.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye3.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye3.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye4.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye4.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye5.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye5.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye7.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye7.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye8.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye8.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye9.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye9.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye10.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye10.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye11.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.eye11.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);	}
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){

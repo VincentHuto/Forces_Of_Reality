@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityMechan;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -264,11 +265,15 @@ public class ModelMechan extends EntityModel<EntityMechan> {
 	@Override
 	public void setRotationAngles(EntityMechan entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		this.backGear.rotateAngleZ = ageInTicks * 0.1f;
-		this.rightArmGear.rotateAngleX = ageInTicks * 0.3f;
-		this.cage.rotateAngleY = -ageInTicks * 0.015f;
-		this.turretArm.rotateAngleZ = (float) (Math.sin(ageInTicks / 7) * 0.35f);
-		this.turretHead.rotateAngleZ = ageInTicks * 0.1f;
+		
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
+		
+		this.backGear.rotateAngleZ = (ageInTicks+ parTicks) * 0.1f;
+		this.rightArmGear.rotateAngleX = (ageInTicks+ parTicks) * 0.3f;
+		this.cage.rotateAngleY = -(ageInTicks+ parTicks) * 0.015f;
+		this.turretArm.rotateAngleZ = (float) (Math.sin((ageInTicks+ parTicks) / 7) * 0.35f);
+		this.turretHead.rotateAngleZ = (ageInTicks+ parTicks) * 0.1f;
 		this.RightArm.rotationPointZ = 0.0F;
 		this.RightArm.rotationPointX = -5.0F;
 		this.LeftArm.rotationPointZ = 0.0F;

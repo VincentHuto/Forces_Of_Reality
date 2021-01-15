@@ -679,8 +679,11 @@ public class ItemInit {
 			.register("spawn_egg_angelic_fowl", () -> new ModSpawnEggItem(EntityInit.angelic_fowl, 0xBDFFE2, 0xFFD25B,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_deranged_beast = ITEMS
-			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 4603962,
-					5252864, new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 4603962, 5252864,
+					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_uzouthrhix = ITEMS.register("spawn_egg_uzouthrhix",
+			() -> new ModSpawnEggItem(EntityInit.uzouthrhix, 23862, 8133430,
+					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -692,7 +695,8 @@ public class ItemInit {
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
 				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
 				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl,
-				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild);
+				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild,
+				ItemInit.spawn_egg_uzouthrhix);
 	}
 
 	@SuppressWarnings("unchecked")

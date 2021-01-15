@@ -3,6 +3,7 @@ package com.huto.forcesofreality.models.entity.guardians;
 import java.util.Random;
 
 import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -629,7 +630,8 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 	public void setRotationAngles(EntityDarkYoung entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		
-		
+		float parTicks = ClientEventSubscriber.getPartialTicks();
+
 		//Head
 		this.upperJaw2.rotateAngleX = -limbSwingAmount * 0.13f;
 		this.lowerJaw2.rotateAngleX = limbSwingAmount * 0.13f;
@@ -657,137 +659,137 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 
 		
 		//Head Eyes
-		this.backLeftEye2.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.backLeftEye2.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.backLeftEye2.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.backLeftEye2.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 		
-		this.backRightEye2.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0325);
-		this.backRightEye2.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.backRightEye2.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.backRightEye2.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 		
-		this.backLeftEye3.rotateAngleZ = -(float) (Math.sin(ageInTicks) * 0.0325);
-		this.backLeftEye3.rotateAngleY = -(float) (Math.cos(ageInTicks) * 0.0325);
+		this.backLeftEye3.rotateAngleZ = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.backLeftEye3.rotateAngleY = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 		
-		this.backRightEye3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0325);
-		this.backRightEye3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.backRightEye3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.backRightEye3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 		
 		
-		this.centerEye2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0325);
-		this.centerEye2.rotateAngleY = -(float) (Math.sin(ageInTicks) * 0.0325);
+		this.centerEye2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.centerEye2.rotateAngleY = -(float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
 		
-		this.centerEye3.rotateAngleZ = -(float) (Math.cos(ageInTicks) * 0.0325);
-		this.centerEye3.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0325);
+		this.centerEye3.rotateAngleZ = -(float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.centerEye3.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
 		
 		
 		
 		// Shoulder Eyes
-		this.leftFrontLegEye.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0325);
-		this.leftFrontLegEye.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.leftFrontLegEye.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.leftFrontLegEye.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 
-		this.rightFrontLegEye.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0325);
-		this.rightFrontLegEye.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.rightFrontLegEye.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rightFrontLegEye.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 
-		this.leftBackLegEye.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0325);
-		this.leftBackLegEye.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.leftBackLegEye.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.leftBackLegEye.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 
-		this.rightBackLegEye.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0325);
-		this.rightBackLegEye.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0325);
+		this.rightBackLegEye.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0325);
+		this.rightBackLegEye.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0325);
 
 		// Front left
-		this.frSeg1.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.frSeg1.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.frSeg2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.frSeg2.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.frSeg3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.frSeg3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.frSeg4.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.frSeg4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.frSeg5.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.frSeg5.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.frSeg6.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.frSeg6.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.frSeg1.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.frSeg1.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.frSeg2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.frSeg2.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.frSeg3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.frSeg3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.frSeg4.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.frSeg4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.frSeg5.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.frSeg5.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.frSeg6.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.frSeg6.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
 		// Middle left
-		this.mlSeg1.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mlSeg1.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mlSeg2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mlSeg2.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mlSeg3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mlSeg3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mlSeg4.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.mlSeg4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.mlSeg5.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.mlSeg5.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.mlSeg6.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.mlSeg6.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.mlSeg1.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mlSeg1.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mlSeg2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mlSeg2.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mlSeg3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mlSeg3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mlSeg4.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mlSeg4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mlSeg5.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mlSeg5.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mlSeg6.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.mlSeg6.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
 		// Middle right
-		this.mrSeg1.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mrSeg1.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mrSeg2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mrSeg2.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mrSeg3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mrSeg3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mrSeg4.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.mrSeg4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.mrSeg5.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.mrSeg5.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.mrSeg6.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.mrSeg6.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.mrSeg1.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mrSeg1.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mrSeg2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mrSeg2.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mrSeg3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mrSeg3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mrSeg4.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mrSeg4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mrSeg5.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mrSeg5.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mrSeg6.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.mrSeg6.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
 		// Front right
-		this.flSeg1.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.flSeg1.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.flSeg2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.flSeg2.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.flSeg3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.flSeg3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.flSeg4.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.flSeg4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.flSeg5.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.flSeg5.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.flSeg6.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.flSeg6.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.flSeg1.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.flSeg1.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.flSeg2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.flSeg2.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.flSeg3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.flSeg3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.flSeg4.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.flSeg4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.flSeg5.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.flSeg5.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.flSeg6.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.flSeg6.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
 		// Middle Tentacles
-		this.mTSeg1.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg1.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg2.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg4.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.mTSeg4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.mTSeg5.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.mTSeg5.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.mTSeg6.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.mTSeg6.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.mTSeg1.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg1.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg2.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg4.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mTSeg4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mTSeg5.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mTSeg5.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mTSeg6.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.mTSeg6.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
-		this.mTSeg7.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg7.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg8.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg8.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg9.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg9.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.mTSeg10.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.mTSeg10.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.mTSeg11.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.mTSeg11.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.mTSeg12.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.mTSeg12.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.mTSeg7.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg7.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg8.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg8.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg9.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg9.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.mTSeg10.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mTSeg10.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.mTSeg11.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mTSeg11.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.mTSeg12.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.mTSeg12.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
 		// Rear Tentacle
-		this.rearSeg1.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.rearSeg1.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.rearSeg2.rotateAngleZ = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.rearSeg2.rotateAngleY = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.rearSeg3.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0625) * tentMod;
-		this.rearSeg3.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0625) * tentMod;
-		this.rearSeg4.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0725) * tentMod;
-		this.rearSeg4.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0725) * tentMod;
-		this.rearSeg5.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0825) * tentMod;
-		this.rearSeg5.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0825) * tentMod;
-		this.rearSeg6.rotateAngleX = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
-		this.rearSeg6.rotateAngleZ = (float) (Math.sin(ageInTicks) * 0.0925) * tentMod;
-		this.rearSeg6.rotateAngleY = (float) (Math.cos(ageInTicks) * 0.0925) * tentMod;
+		this.rearSeg1.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.rearSeg1.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.rearSeg2.rotateAngleZ = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.rearSeg2.rotateAngleY = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.rearSeg3.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.rearSeg3.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625) * tentMod;
+		this.rearSeg4.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.rearSeg4.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0725) * tentMod;
+		this.rearSeg5.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.rearSeg5.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0825) * tentMod;
+		this.rearSeg6.rotateAngleX = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.rearSeg6.rotateAngleZ = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
+		this.rearSeg6.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0925) * tentMod;
 
 	}
 

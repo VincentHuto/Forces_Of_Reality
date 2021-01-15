@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.models.entity.guardians;
 
 import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -338,9 +339,10 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 		// limbSwingAmount;
 		// this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)
 		// Math.PI) * 1.4F * limbSwingAmount;
+		float parTicks = ClientEventSubscriber.getPartialTicks();
 
-		this.Halo.rotateAngleZ += ageInTicks * 0.002;
-		this.Skull.rotateAngleY += ageInTicks * 0.03f;
+		this.Halo.rotateAngleZ = (entity.ticksExisted+ parTicks) * 0.005f;
+		this.Skull.rotateAngleY = (entity.ticksExisted+ parTicks) * 0.07f;
 
 		if (Halo.rotateAngleZ > 10000) {
 			Halo.rotateAngleZ = 0;

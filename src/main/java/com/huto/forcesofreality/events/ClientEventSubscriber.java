@@ -22,6 +22,7 @@ import com.huto.forcesofreality.render.entity.layer.ThermalLayerRender;
 import com.huto.forcesofreality.render.entity.lords.RenderLordOfTheWild;
 import com.huto.forcesofreality.render.entity.lords.RenderMechan;
 import com.huto.forcesofreality.render.entity.lords.RenderTetra;
+import com.huto.forcesofreality.render.entity.lords.RenderUzouthrhix;
 import com.huto.forcesofreality.render.entity.lords.RenderVeritas;
 import com.huto.forcesofreality.render.entity.mobs.RenderDerangedBeast;
 import com.huto.forcesofreality.render.entity.mobs.RenderDreadBot;
@@ -130,13 +131,16 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.teleporter.get(), RenderTeleporter::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.lector_table.get(), RenderLectorTable::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.crystal_harmonizer.get(), RenderCrystalHarmonizer::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rafflesia_of_fidelity.get(), RenderRafflesiaOfFidelity::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rafflesia_of_fidelity.get(),
+				RenderRafflesiaOfFidelity::new);
 
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 
-	//	ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(), GuiChiselStation::new);
+		// ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(),
+		// GuiChiselStation::new);
 		ScreenManager.registerFactory(ContainerInit.PLAYER_ADORNMENTS, PlayerExpandedScreen::new);
-	//	ScreenManager.registerFactory(ContainerAdornmentBinder.type, GuiAdornmentBinder::new);
+		// ScreenManager.registerFactory(ContainerAdornmentBinder.type,
+		// GuiAdornmentBinder::new);
 		ScreenManager.registerFactory(ContainerMechanGlove.type, GuiMechanGlove::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);
@@ -185,18 +189,28 @@ public class ClientEventSubscriber {
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mana_dust.get(), RenderManaDustItem::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.lord_of_the_wild.get(), RenderLordOfTheWild::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.uzouthrhix.get(), RenderUzouthrhix::new);
 
-		keyBinds.add(0, new KeyBinding("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V, "key.forcesofreality.category"));
-		keyBinds.add(1, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
+		keyBinds.add(0, new KeyBinding("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V,
+				"key.forcesofreality.category"));
+		keyBinds.add(1, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M,
+				"key.forcesofreality.category"));
 
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(1));
 
 	}
 
+	// for class loading issues
+	public static Minecraft getClient() {
+		return Minecraft.getInstance();
+	}
+
 	public static PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
 
-
+	public static float getPartialTicks() {
+		return getClient().getRenderPartialTicks();
+	}
 }

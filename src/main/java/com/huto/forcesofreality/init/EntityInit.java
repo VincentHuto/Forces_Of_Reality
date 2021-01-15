@@ -13,6 +13,7 @@ import com.huto.forcesofreality.entities.item.EntityManaDustItem;
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
 import com.huto.forcesofreality.entities.lords.EntityMechan;
 import com.huto.forcesofreality.entities.lords.EntityTetra;
+import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
 import com.huto.forcesofreality.entities.lords.EntityVeritas;
 import com.huto.forcesofreality.entities.mobs.EntityDerangedBeast;
 import com.huto.forcesofreality.entities.mobs.EntityDreadBot;
@@ -147,6 +148,12 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityDarkYoung>create(EntityDarkYoung::new, EntityClassification.MONSTER)
 					.size(1.7f, 2.5f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dark_young").toString()));
 
+	
+	public static final RegistryObject<EntityType<EntityUzouthrhix>> uzouthrhix = ENTITY_TYPES.register("uzouthrhix",
+			() -> EntityType.Builder.<EntityUzouthrhix>create(EntityUzouthrhix::new, EntityClassification.MONSTER)
+					.size(4f, 6f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "uzouthrhix").toString()));
+	
+	
 	public static final RegistryObject<EntityType<EntityScuttlingOcculus>> scuttling_occulus = ENTITY_TYPES.register(
 			"scuttling_occulus",
 			() -> EntityType.Builder
@@ -310,6 +317,7 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.deranged_beast.get(), EntityDerangedBeast.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.tetra.get(), EntityTetra.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.lord_of_the_wild.get(), EntityLordOfTheWild.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.uzouthrhix.get(), EntityUzouthrhix.setAttributes().create());
 
 	}
 }
