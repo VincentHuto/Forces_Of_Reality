@@ -2,7 +2,8 @@ package com.huto.forcesofreality.entities.summons;
 
 import javax.annotation.Nullable;
 
-import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
+import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
+import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;
@@ -122,7 +123,7 @@ public class EntityBlackGoat extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityBlackGoat || entityIn instanceof EntityBeastFromBeyond)) {
+		if (!(entityIn instanceof EntityBlackGoat || entityIn instanceof EntityDarkYoung|| entityIn instanceof EntityUzouthrhix)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 

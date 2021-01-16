@@ -1,6 +1,10 @@
 package com.huto.forcesofreality.network;
 
 import com.huto.forcesofreality.ForcesOfReality;
+import com.huto.forcesofreality.models.animation.AnimationPacket;
+import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
+import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
+import com.huto.forcesofreality.network.adornments.SyncPacket;
 import com.huto.forcesofreality.network.coven.CovenantPacketClient;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
@@ -14,9 +18,6 @@ import com.huto.forcesofreality.network.karma.KarmaActivationPacketClient;
 import com.huto.forcesofreality.network.karma.KarmaActivationPacketServer;
 import com.huto.forcesofreality.network.karma.KarmaPacketClient;
 import com.huto.forcesofreality.network.karma.KarmaPacketServer;
-import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
-import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
-import com.huto.forcesofreality.network.adornments.SyncPacket;
 import com.huto.forcesofreality.network.vibes.ExportVibePacket;
 import com.huto.forcesofreality.network.vibes.ImportVibePacket;
 import com.huto.forcesofreality.network.vibes.UpdateChunkEnergyValueMessage;
@@ -24,6 +25,7 @@ import com.huto.forcesofreality.network.vibes.VibrationPacketClient;
 import com.huto.forcesofreality.network.vibes.VibrationPacketServer;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
@@ -38,20 +40,27 @@ public class PacketHandler {
 			.clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals)
 			.networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
 	public static final SimpleChannel CHANNELVIBES = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "vibrationchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
-			PROTOCOL_VERSION::equals);
+			new ResourceLocation(ForcesOfReality.MOD_ID, "vibrationchannel"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	public static final SimpleChannel CHANNELKARMA = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "karmachannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
-			PROTOCOL_VERSION::equals);
+			new ResourceLocation(ForcesOfReality.MOD_ID, "karmachannel"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	public static final SimpleChannel CHANNELCOVENANT = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
-			PROTOCOL_VERSION::equals);
+			new ResourceLocation(ForcesOfReality.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	public static final SimpleChannel CHANNELMODULETIER = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "modulechannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals,
-			PROTOCOL_VERSION::equals);
+			new ResourceLocation(ForcesOfReality.MOD_ID, "modulechannel"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+	public static final SimpleChannel ANIMATIONS = NetworkRegistry.ChannelBuilder
+			.named(new ResourceLocation(ForcesOfReality.MOD_ID, "animchannel"))
+			.clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals)
+			.networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
 
 	public static void registerChannels() {
 		// Register Networking packets
+		ANIMATIONS.messageBuilder(AnimationPacket.class, networkID++, NetworkDirection.PLAY_TO_CLIENT).encoder(AnimationPacket::encode).decoder(AnimationPacket::new).consumer(AnimationPacket::handle).add();
+
+		
 		// Vibes
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketClient.class, VibrationPacketClient::encode,
 				VibrationPacketClient::decode, VibrationPacketClient::handle);
@@ -88,16 +97,22 @@ public class PacketHandler {
 		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
 				ExportVibePacket.Handler::handle);
 
-	/*	HANDLER.registerMessage(networkID++, PacketUpdateChiselAdornments.class, PacketUpdateChiselAdornments::encode,
-				PacketUpdateChiselAdornments::decode, PacketUpdateChiselAdornments.Handler::handle);*/
-/*		HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class, PacketChiselCraftingEvent::encode,
-				PacketChiselCraftingEvent::decode, PacketChiselCraftingEvent.Handler::handle);*/
+		/*
+		 * HANDLER.registerMessage(networkID++, PacketUpdateChiselAdornments.class,
+		 * PacketUpdateChiselAdornments::encode, PacketUpdateChiselAdornments::decode,
+		 * PacketUpdateChiselAdornments.Handler::handle);
+		 */
+		/*
+		 * HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class,
+		 * PacketChiselCraftingEvent::encode, PacketChiselCraftingEvent::decode,
+		 * PacketChiselCraftingEvent.Handler::handle);
+		 */
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
 
 		// MindAdornments
-		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ForcesOfReality.MOD_ID, "runechannel"), () -> "1.0",
-				s -> true, s -> true);
+		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ForcesOfReality.MOD_ID, "runechannel"),
+				() -> "1.0", s -> true, s -> true);
 
 		INSTANCE.registerMessage(networkID++, OpenAdornmentsInvPacket.class, OpenAdornmentsInvPacket::toBytes,
 				OpenAdornmentsInvPacket::new, OpenAdornmentsInvPacket::handle);
@@ -108,21 +123,24 @@ public class PacketHandler {
 
 	}
 
-/*	public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "runebindernetwork"), () -> PROTOCOL_VERSION,
-			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-
-	public static SimpleChannel registerAdornmentBinderChannels() {
-		RUNEBINDER.messageBuilder(PacketBinderTogglePickup.class, networkID++).decoder(PacketBinderTogglePickup::decode)
-				.encoder(PacketBinderTogglePickup::encode).consumer(PacketBinderTogglePickup::handle).add();
-		RUNEBINDER.messageBuilder(PacketOpenAdornmentBinder.class, networkID++).decoder(PacketOpenAdornmentBinder::decode)
-				.encoder(PacketOpenAdornmentBinder::encode).consumer(PacketOpenAdornmentBinder::handle).add();
-		RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++)
-				.decoder(PacketToggleBinderMessage::decode).encoder(PacketToggleBinderMessage::encode)
-				.consumer(PacketToggleBinderMessage::handle).add();
-		return RUNEBINDER;
-	}
-*/
+	/*
+	 * public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
+	 * new ResourceLocation(ForcesOfReality.MOD_ID, "runebindernetwork"), () ->
+	 * PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+	 * 
+	 * public static SimpleChannel registerAdornmentBinderChannels() {
+	 * RUNEBINDER.messageBuilder(PacketBinderTogglePickup.class,
+	 * networkID++).decoder(PacketBinderTogglePickup::decode)
+	 * .encoder(PacketBinderTogglePickup::encode).consumer(PacketBinderTogglePickup:
+	 * :handle).add(); RUNEBINDER.messageBuilder(PacketOpenAdornmentBinder.class,
+	 * networkID++).decoder(PacketOpenAdornmentBinder::decode)
+	 * .encoder(PacketOpenAdornmentBinder::encode).consumer(
+	 * PacketOpenAdornmentBinder::handle).add();
+	 * RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++)
+	 * .decoder(PacketToggleBinderMessage::decode).encoder(PacketToggleBinderMessage
+	 * ::encode) .consumer(PacketToggleBinderMessage::handle).add(); return
+	 * RUNEBINDER; }
+	 */
 	public static SimpleChannel MECHANGLOVE = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "mechanglovenetwork"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;

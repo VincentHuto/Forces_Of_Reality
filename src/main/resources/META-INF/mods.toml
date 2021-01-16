@@ -28,7 +28,7 @@ logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 credits='''
 Thanks to these Folks! Whos sources I looked at for help!
-Vazkii,WolfShotz,Direwolf20,baileyholl, and many others!
+Vazkii(Lightning, TE Stuff),WolfShotz(Mob Animation),Direwolf20(Laser Rendering),baileyholl(Particle Effects),
 And to the entire Forge Discord!
 '''
 

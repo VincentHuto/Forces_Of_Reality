@@ -10,6 +10,7 @@ import com.huto.forcesofreality.gui.adornments.PlayerExpandedScreen;
 import com.huto.forcesofreality.init.ContainerInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.TileEntityInit;
+import com.huto.forcesofreality.models.animation.IAnimatable;
 import com.huto.forcesofreality.render.entity.guardians.RenderBeastFromBeyond;
 import com.huto.forcesofreality.render.entity.guardians.RenderColin;
 import com.huto.forcesofreality.render.entity.guardians.RenderDarkYoung;
@@ -83,8 +84,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -210,7 +213,22 @@ public class ClientEventSubscriber {
 		return Minecraft.getInstance().player;
 	}
 
+	public static ClientWorld getWorld() {
+		return getClient().world;
+	}
+
 	public static float getPartialTicks() {
 		return getClient().getRenderPartialTicks();
+	}
+
+	public static boolean handleAnimationPacket(int entityID, int animationIndex) {
+		World world = ClientEventSubscriber.getWorld();
+		IAnimatable entity = (IAnimatable) world.getEntityByID(entityID);
+
+		if (animationIndex < 0)
+			entity.setAnimation(IAnimatable.NO_ANIMATION);
+		else
+			entity.setAnimation(entity.getAnimations()[animationIndex]);
+		return true;
 	}
 }

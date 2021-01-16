@@ -1,5 +1,6 @@
 package com.huto.forcesofreality.entities.lords;
 
+import java.util.EnumSet;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
@@ -10,18 +11,29 @@ import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
+import com.huto.forcesofreality.models.animation.Animation;
+import com.huto.forcesofreality.models.animation.AnimationPacket;
+import com.huto.forcesofreality.models.animation.IAnimatable;
+import com.huto.forcesofreality.models.animation.Mafs;
+import com.huto.forcesofreality.models.animation.TickFloat;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
@@ -32,12 +44,11 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
@@ -60,7 +71,7 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditionalSpawnData {
+public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditionalSpawnData, IAnimatable {
 
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
@@ -69,10 +80,18 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 	private int attackTimer;
 	private int teleportTime;
 	public int deathTicks;
+	private Animation animation = NO_ANIMATION;
+	public static final Animation LIGHTNING_ANIMATION = new Animation(64);
+	public static final Animation CHARGE_ANIMATION = new Animation(104);
+	public static final Animation BITE_ANIMATION = new Animation(17);
+	public int lightningCooldown = 0;
+	public boolean beached = true;
+	public final TickFloat beachedTimer = new TickFloat().setLimit(0, 1);
+	private int animationTick;
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
 			BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 	public boolean clawStrikeFlag;
-	
+
 	public EntityUzouthrhix(EntityType<? extends EntityUzouthrhix> type, World worldIn) {
 		super(type, worldIn);
 
@@ -82,6 +101,24 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason,
 			ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+	}
+
+	@Override
+	protected void registerGoals() {
+		goalSelector.addGoal(2, new AttackGoal());
+		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+		this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 2.3d, 50));
+		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+
+	}
+
+	public static AttributeModifierMap.MutableAttribute setAttributes() {
+		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.15D)
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -107,19 +144,76 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 		return super.attackEntityAsMob(entityIn);
 	}
 
+	public boolean canZap() {
+		return isWet() && lightningCooldown <= 0;
+	}
+
 	@Override
 	public void livingTick() {
 		super.livingTick();
+		if (lightningCooldown > 0) {
+			--lightningCooldown;
+		}
 		if (this.attackTimer > 0) {
 			--this.attackTimer;
 		}
 
+		boolean prevBeached = beached;
+		if (!beached && onGround && !inWater)
+			beached = true;
+		else if (beached && inWater)
+			beached = false;
+		if (prevBeached != beached)
+			recalculateSize();
+		beachedTimer.add((beached) ? 0.1f : -0.05f);
+
+		Animation animation = getAnimation();
+		int animTick = getAnimationTick();
+		if (animation == LIGHTNING_ANIMATION) {
+			lightningCooldown += 6;
+			if (animTick == 10)
+				playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
+			if (!world.isRemote && animTick >= 10) {
+				LivingEntity target = getAttackTarget();
+				if (target != null) {
+					if (animTick % 30 == 0) {
+						this.shock(getAttackTarget());
+					}
+				}
+			}
+
+		} else if (animation == BITE_ANIMATION) {
+			if (animTick == 0)
+				playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
+			else if (animTick == 6)
+				attackInBox(getBoundingBox()
+						.offset(Vector3d.fromPitchYaw(isInWater() ? rotationPitch : 0, rotationYawHead).scale(5.5f))
+						.grow(0.85), 40);
+		}
+
 	}
 
-	@SuppressWarnings("unused")
+	public void attackInBox(AxisAlignedBB box, int disabledShieldTime) {
+		List<LivingEntity> attackables = world.getEntitiesWithinAABB(LivingEntity.class, box,
+				entity -> entity != this && !isPassenger(entity));
+		for (LivingEntity attacking : attackables) {
+			attackEntityAsMob(attacking);
+			if (disabledShieldTime > 0 && attacking instanceof PlayerEntity) {
+				PlayerEntity player = ((PlayerEntity) attacking);
+				if (player.isHandActive() && player.getActiveItemStack().isShield(player)) {
+					player.getCooldownTracker().setCooldown(Items.SHIELD, disabledShieldTime);
+					player.resetActiveHand();
+					world.setEntityState(player, (byte) 9);
+				}
+			}
+		}
+	}
+
 	@Override
 	public void tick() {
 		super.tick();
+		updateAnimations();
+
 		float diffMult = 1f;
 
 		// Protection
@@ -136,18 +230,14 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 
 		// Attacks
 
-		if(ticksExisted % 50 > 10) {
+		if (ticksExisted % 50 > 10) {
 			this.clawStrikeFlag = true;
-		}else {
+		} else {
 			this.clawStrikeFlag = false;
 		}
-		
-		
+
 		int attackRoll = ticksExisted + rand.nextInt(5);
 		if (this.deathTicks <= 0) {
-			if (attackRoll % 50 * diffMult == 0) {
-				this.shock(getAttackTarget());
-			}
 			if (attackRoll % 100 * diffMult == 0) {
 				this.beyondFlames(getAttackTarget());
 			}
@@ -157,15 +247,42 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 			if (attackRoll % 170 == 0) {
 				this.summonGoats(3);
 			}
-			// Random Teleportation
 			if (this.getAttackTarget() != null) {
 				if (this.teleportTime++ >= rand.nextInt(1000) && this.teleportToEntity(this)) {
 					this.teleportTime = 0;
 				}
 			}
 
-			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
-			// though
+			LivingEntity target = getAttackTarget();
+			if (target == null)
+				return;
+			double distFromTarget = getDistanceSq(target);
+
+			getLookController().setLookPositionWithEntity(target, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
+
+			boolean isClose = distFromTarget < 40;
+
+			if (getNavigator().noPath())
+				getNavigator().tryMoveToEntityLiving(target, 1.2);
+
+			if (isClose) {
+				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
+			}
+
+			if (noActiveAnimation()) {
+				if (distFromTarget > 50 && distFromTarget < 89) {
+					AnimationPacket.send(EntityUzouthrhix.this, LIGHTNING_ANIMATION);
+
+				}
+				else if (distFromTarget > 90) {
+				//	AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
+				} else if (isClose
+						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90,
+								rotationYaw) < 30) {
+					AnimationPacket.send(EntityUzouthrhix.this, BITE_ANIMATION);
+				}
+			}
+
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
@@ -174,22 +291,6 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 		}
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-
-	}
-
-	public static AttributeModifierMap.MutableAttribute setAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.15D)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
 	@Override
@@ -411,7 +512,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
 			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
 			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(7)) {
+			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(27)) {
 				target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
 			}
 		}
@@ -443,7 +544,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 		if (target != null) {
 			if (target instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) target;
-				player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
+				// player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
 			}
 		}
 	}
@@ -502,6 +603,15 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 
 	public boolean isVulnerable() {
 		return this.getHealth() < this.getMaxHealth() / 4.0F;
+	}
+
+	public boolean isJumpingOutOfWater() {
+		return !isInWater() && !beached;
+	}
+
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntitySize size) {
+		return size.height * (beached ? 1f : 0.6f);
 	}
 
 	@Override
@@ -568,6 +678,163 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 			if (!hastur.isAlive()) {
 				this.finishPlaying();
 			}
+		}
+	}
+
+//Animation
+	@Override
+	public int getAnimationTick() {
+		return animationTick;
+	}
+
+	@Override
+	public void setAnimationTick(int tick) {
+		animationTick = tick;
+	}
+
+	@Override
+	public Animation getAnimation() {
+		return animation;
+	}
+
+	@Override
+	public void setAnimation(Animation animation) {
+		if (animation == null)
+			animation = NO_ANIMATION;
+		setAnimationTick(0);
+		this.animation = animation;
+	}
+
+	@Override
+	public Animation[] getAnimations() {
+		return new Animation[] { BITE_ANIMATION, LIGHTNING_ANIMATION, CHARGE_ANIMATION };
+	}
+
+	// Bite Goal
+	private class AttackGoal extends Goal {
+		public AttackGoal() {
+			setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			return !canPassengerSteer() && getAttackTarget() != null;
+		}
+
+		@Override
+		public void tick() {
+			LivingEntity target = getAttackTarget();
+			if (target == null)
+				return;
+			double distFromTarget = getDistanceSq(target);
+
+			getLookController().setLookPositionWithEntity(target, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
+
+			boolean isClose = distFromTarget < 40;
+
+			if (getNavigator().noPath())
+				getNavigator().tryMoveToEntityLiving(target, 1.2);
+
+			if (isClose)
+				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
+
+			if (noActiveAnimation()) {
+				if (isClose
+						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90,
+								rotationYaw) < 30)
+					AnimationPacket.send(EntityUzouthrhix.this, BITE_ANIMATION);
+			}
+		}
+	}
+
+	// Move Goal
+	private class MoveTowardsTargetGoal extends Goal {
+		private final CreatureEntity creature;
+		private LivingEntity targetEntity;
+		private double movePosX;
+		private double movePosY;
+		private double movePosZ;
+		private final double speed;
+		private final float maxTargetDistance;
+
+		public MoveTowardsTargetGoal(CreatureEntity creature, double speedIn, float targetMaxDistance) {
+			this.creature = creature;
+			this.speed = speedIn;
+			this.maxTargetDistance = targetMaxDistance;
+			this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
+		}
+
+		@Override
+		public void tick() {
+			LivingEntity target = getAttackTarget();
+			if (target == null)
+				return;
+			double distFromTarget = getDistanceSq(target);
+
+			getLookController().setLookPositionWithEntity(target, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
+
+			boolean isClose = distFromTarget < 40;
+
+			if (getNavigator().noPath())
+				getNavigator().tryMoveToEntityLiving(target, 1.2);
+
+			if (isClose)
+				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
+
+			if (noActiveAnimation()) {
+				if (distFromTarget > 90) {
+					AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
+				}
+			}
+		}
+
+		/**
+		 * Returns whether execution should begin. You can also read and cache any state
+		 * necessary for execution in this method as well.
+		 */
+		public boolean shouldExecute() {
+			this.targetEntity = this.creature.getAttackTarget();
+			if (this.targetEntity == null) {
+				return false;
+			} else if (this.targetEntity
+					.getDistanceSq(this.creature) > (double) (this.maxTargetDistance * this.maxTargetDistance)) {
+				return false;
+			} else {
+				Vector3d vector3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.creature, 16, 7,
+						this.targetEntity.getPositionVec());
+				if (vector3d == null) {
+					return false;
+
+				} else {
+					this.movePosX = vector3d.x;
+					this.movePosY = vector3d.y;
+					this.movePosZ = vector3d.z;
+					return true;
+				}
+			}
+		}
+
+		/**
+		 * Returns whether an in-progress EntityAIBase should continue executing
+		 */
+		public boolean shouldContinueExecuting() {
+			return !this.creature.getNavigator().noPath() && this.targetEntity.isAlive() && this.targetEntity
+					.getDistanceSq(this.creature) < (double) (this.maxTargetDistance * this.maxTargetDistance);
+		}
+
+		/**
+		 * Reset the task's internal state. Called when this task is interrupted by
+		 * another one
+		 */
+		public void resetTask() {
+			this.targetEntity = null;
+		}
+
+		/**
+		 * Execute a one shot task or start executing a continuous task
+		 */
+		public void startExecuting() {
+			this.creature.getNavigator().tryMoveToXYZ(this.movePosX, this.movePosY, this.movePosZ, this.speed);
 		}
 	}
 

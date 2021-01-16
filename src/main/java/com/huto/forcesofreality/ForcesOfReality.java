@@ -27,6 +27,7 @@ import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.ParticleInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.init.TreeDecoratorInit;
+import com.huto.forcesofreality.models.animation.IAnimatable;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 import com.huto.forcesofreality.recipes.CopyMechanGloveDataRecipe;
@@ -139,6 +140,7 @@ public class ForcesOfReality {
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
 		CapabilityInit.init();
+        IAnimatable.registerCapability();
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();

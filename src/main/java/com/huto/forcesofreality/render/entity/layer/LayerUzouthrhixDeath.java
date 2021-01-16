@@ -2,7 +2,7 @@ package com.huto.forcesofreality.render.entity.layer;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
-import com.huto.forcesofreality.models.entity.lords.ModelUzouthrhix;
+import com.huto.forcesofreality.models.animation.ModelUzouthrhixAnim;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -14,12 +14,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class LayerUzouthrhixDeath extends LayerRenderer<EntityUzouthrhix, ModelUzouthrhix> {
+public class LayerUzouthrhixDeath extends LayerRenderer<EntityUzouthrhix, ModelUzouthrhixAnim> {
 
 	public static final ResourceLocation GLASSTEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
 			"textures/blocks/end_portal_circle.png");
 
-	public LayerUzouthrhixDeath(IEntityRenderer<EntityUzouthrhix, ModelUzouthrhix> entityRendererIn) {
+	public LayerUzouthrhixDeath(IEntityRenderer<EntityUzouthrhix, ModelUzouthrhixAnim> entityRendererIn) {
 		super(entityRendererIn);
 	}
 

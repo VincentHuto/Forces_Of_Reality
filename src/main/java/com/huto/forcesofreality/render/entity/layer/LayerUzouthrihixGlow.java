@@ -2,6 +2,7 @@ package com.huto.forcesofreality.render.entity.layer;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
+import com.huto.forcesofreality.models.animation.ModelUzouthrhixAnim;
 import com.huto.forcesofreality.models.entity.lords.ModelUzouthrhix;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -16,11 +17,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LayerUzouthrihixGlow extends LayerRenderer<EntityUzouthrhix, ModelUzouthrhix> {
+public class LayerUzouthrihixGlow extends LayerRenderer<EntityUzouthrhix, ModelUzouthrhixAnim> {
 	private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(ForcesOfReality.MOD_ID,
 			"textures/entity/uzouthrhix/model_uzouthrhix_awoken_mask.png"));
 
-	public LayerUzouthrihixGlow(IEntityRenderer<EntityUzouthrhix, ModelUzouthrhix> rendererIn) {
+	
+	
+	public LayerUzouthrihixGlow(IEntityRenderer<EntityUzouthrhix, ModelUzouthrhixAnim> rendererIn) {
 		super(rendererIn);
 
 	}
