@@ -35,11 +35,6 @@ public class ClientProxy implements IProxy {
 				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
 	}
 
-/*	@Override
-	public void openBinderGui() {
-		Minecraft.getInstance().displayGuiScreen(new GuiAdornmentBinderViewer(new ItemStack(ItemInit.rune_binder.get()),
-				ClientEventSubscriber.getClientPlayer()));
-	}*/
 	@Override
 	public void openMechanGui() {
 		Minecraft.getInstance().displayGuiScreen(new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()),
@@ -47,7 +42,7 @@ public class ClientProxy implements IProxy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <A extends BipedModel<?>> A getRubyArmorModel(EquipmentSlotType armorSlot) {
+	public <A extends BipedModel<?>> A getArmorModel(EquipmentSlotType armorSlot) {
 		return (A) (armorSlot == EquipmentSlotType.LEGS ? oldIronChest : oldIronChest);
 	}
 

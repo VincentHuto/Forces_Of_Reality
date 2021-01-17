@@ -19,7 +19,7 @@ public class ItemOldIronChest extends ArmorItem {
 	@Override
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
 			EquipmentSlotType armorSlot, A _default) {
-		return ForcesOfReality.proxy instanceof ClientProxy ? ((ClientProxy) ForcesOfReality.proxy).getRubyArmorModel(armorSlot)
+		return ForcesOfReality.proxy instanceof ClientProxy ? ((ClientProxy) ForcesOfReality.proxy).getArmorModel(armorSlot)
 				: null;
 	}
 }

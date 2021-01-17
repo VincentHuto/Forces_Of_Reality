@@ -4,7 +4,6 @@ import java.util.EnumSet;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.projectiles.EntityWolfShot;
 import com.huto.forcesofreality.entities.summons.EntityBlackGoat;
 import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
 import com.huto.forcesofreality.entities.utils.Vector3;
@@ -248,7 +247,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				this.summonGoats(3);
 			}
 			if (this.getAttackTarget() != null) {
-				if (this.teleportTime++ >= rand.nextInt(1000) && this.teleportToEntity(this)) {
+				if (this.teleportTime++ >= rand.nextInt(20000) && this.teleportToEntity(this)) {
 					this.teleportTime = 0;
 				}
 			}
@@ -273,9 +272,8 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				if (distFromTarget > 50 && distFromTarget < 89) {
 					AnimationPacket.send(EntityUzouthrhix.this, LIGHTNING_ANIMATION);
 
-				}
-				else if (distFromTarget > 90) {
-				//	AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
+				} else if (distFromTarget > 90) {
+					// AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
 				} else if (isClose
 						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90,
 								rotationYaw) < 30) {
@@ -301,61 +299,6 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 		 */
 		super.updateAITasks();
 		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-	}
-
-	/**
-	 * Teleport to a random nearby position
-	 */
-	protected boolean teleportRandomly() {
-		if (!this.world.isRemote() && this.isAlive()) {
-			double d0 = this.getPosX() + (this.rand.nextDouble() - 0.5D) * 16.0D;
-			double d1 = this.getPosY() + (double) (this.rand.nextInt(64) - 32);
-			double d2 = this.getPosZ() + (this.rand.nextDouble() - 0.5D) * 16.0D;
-			return this.teleportTo(d0, d1, d2);
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * Teleport to another entity
-	 */
-	private boolean teleportToEntity(Entity target) {
-		Vector3d vector3d = new Vector3d(this.getPosX() - target.getPosX(),
-				this.getPosYHeight(0.5D) - target.getPosYEye(), this.getPosZ() - target.getPosZ());
-		vector3d = vector3d.normalize();
-		double d1 = this.getPosX() + (this.rand.nextDouble() - 0.5D) * 8.0D - vector3d.x * 8.0D;
-		double d2 = this.getPosY() + (double) (this.rand.nextInt(16) - 8) - vector3d.y * 8.0D;
-		double d3 = this.getPosZ() + (this.rand.nextDouble() - 0.5D) * 8.0D - vector3d.z * 8.0D;
-		return this.teleportTo(d1, d2, d3);
-	}
-
-	/**
-	 * Teleport the boss
-	 */
-	private boolean teleportTo(double x, double y, double z) {
-		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(x, y, z);
-		while (blockpos$mutable.getY() > 0
-				&& !this.world.getBlockState(blockpos$mutable).getMaterial().blocksMovement()) {
-			blockpos$mutable.move(Direction.DOWN);
-		}
-		BlockState blockstate = this.world.getBlockState(blockpos$mutable);
-		boolean flag = blockstate.getMaterial().blocksMovement();
-		boolean flag1 = blockstate.getFluidState().isTagged(FluidTags.WATER);
-		if (flag && !flag1) {
-			EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
-			if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
-				return false;
-			boolean flag2 = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
-			if (flag2 && !this.isSilent()) {
-				this.world.playSound((PlayerEntity) null, this.prevPosX, this.prevPosY, this.prevPosZ,
-						SoundHandler.ENTITY_DARK_YOUNG_TELEPORT, this.getSoundCategory(), 0.5f, 0.5f);
-				this.playSound(SoundHandler.ENTITY_DARK_YOUNG_TELEPORT, 0.5f, 0.5f);
-			}
-			return flag2;
-		} else {
-			return false;
-		}
 	}
 
 	@Override
@@ -424,7 +367,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 						SoundCategory.HOSTILE, 0.5f, 0.9f, false);
 			}
 		}
-		if (this.deathTicks >= 100 && this.deathTicks <= 200) {
+		if (this.deathTicks >= 100 && this.deathTicks <= 150) {
 
 			this.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getPosX() + (double) f,
 					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
@@ -441,11 +384,11 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				this.world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
-			if (this.deathTicks > 180) {
+			if (this.deathTicks > 130) {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
-			if (this.deathTicks >= 200) {
+			if (this.deathTicks >= 150) {
 				this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
@@ -459,117 +402,20 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 			world.addEntity(outputItem);
 		}
 
-		if (this.deathTicks == 200) {
+		if (this.deathTicks == 150) {
 			if (world.isRemote) {
 				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
 						SoundCategory.HOSTILE, 3f, 0.2f, false);
 			}
 		}
 
-		if (this.deathTicks == 200 && !this.world.isRemote) {
+		if (this.deathTicks == 150 && !this.world.isRemote) {
 			if (flag) {
 				this.dropExperience(MathHelper.floor((float) 500 * 0.2F));
 			}
 			this.remove();
 		}
 
-	}
-
-	// Attack types
-
-	public void summonGoats(int numTent) {
-		EntityBlackGoat[] tentArray = new EntityBlackGoat[numTent];
-		for (int i = 0; i < numTent; i++) {
-			tentArray[i] = new EntityBlackGoat(EntityInit.black_goat.get(), world);
-			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
-					this.getPosZ() + 0.5 + zMod);
-			if (!world.isRemote) {
-				world.addEntity(tentArray[i]);
-			}
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private void spawnWolfShot() {
-		EntityWolfShot missile = new EntityWolfShot(this, true);
-		missile.setPosition(this.getPosX() + (Math.random() - 0.5 * 0.1), this.getPosY() + (Math.random() - 0.5 * 0.1),
-				this.getPosZ() + (Math.random() - 0.5 * 0.1));
-		if (missile.findTarget()) {
-			playSound(SoundEvents.ENTITY_WOLF_GROWL, 0.6F, 0.8F + (float) Math.random() * 0.2F);
-			world.addEntity(missile);
-		}
-	}
-
-	private void shock(Entity target) {
-		if (target != null) {
-			playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
-			this.setMotion(0, 0, 0);
-			Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
-			Vector3 endVec = Vector3.fromEntityCenter(target);
-			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
-			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(27)) {
-				target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
-			}
-		}
-	}
-
-	private void beyondFlames(Entity target) {
-		if (target != null) {
-			playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .25F, 1f);
-			setFlame(target.getPosition().add(2, 0, 0));
-			setFlame(target.getPosition().add(-2, 0, 0));
-			setFlame(target.getPosition().add(0, 0, 2));
-			setFlame(target.getPosition().add(0, 0, -2));
-			setFlame(target.getPosition().add(-1, 0, 1));
-			setFlame(target.getPosition().add(1, 0, -1));
-			setFlame(target.getPosition().add(-1, 0, -1));
-			setFlame(target.getPosition().add(1, 0, 1));
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void setFlame(BlockPos pos) {
-		if (world.getBlockState(pos).isAir(world, pos)) {
-			world.setBlockState(pos, BlockInit.beyond_flames.get().getDefaultState());
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private void massBlind(Entity target) {
-		if (target != null) {
-			if (target instanceof PlayerEntity) {
-				PlayerEntity player = (PlayerEntity) target;
-				// player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
-			}
-		}
-	}
-
-	public void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {
-		List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, effectBounds);
-		for (Entity ent : list) {
-			if (!(ent instanceof EntitySummonedBeast)) {
-				Vector3d p = new Vector3d(x, y, z);
-				Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
-				double distance = p.distanceTo(t) + 0.1D;
-				Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
-				ent.setMotion(r.x * 2 / distance, r.y * 2 / distance, r.z * 2 / distance);
-				for (int countparticles = 0; countparticles <= 10; ++countparticles) {
-					world.addParticle(ParticleTypes.SMOKE,
-							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
-							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
-									- (double) ent.getYOffset() - 0.5,
-							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
-							0.0D);
-					playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
-
-				}
-			}
-		}
 	}
 
 	@Override
@@ -710,6 +556,146 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 		return new Animation[] { BITE_ANIMATION, LIGHTNING_ANIMATION, CHARGE_ANIMATION };
 	}
 
+	// Attack types
+	public void summonGoats(int numTent) {
+		EntityBlackGoat[] tentArray = new EntityBlackGoat[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityBlackGoat(EntityInit.black_goat.get(), world);
+			float xMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.rand.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.rand.nextFloat() - 0.5F) * 8.0F;
+			tentArray[i].setPosition(this.getPosX() + 0.5 + xMod, this.getPosY() + 1.5 + yMod,
+					this.getPosZ() + 0.5 + zMod);
+			if (!world.isRemote) {
+				world.addEntity(tentArray[i]);
+			}
+		}
+	}
+
+	private void shock(Entity target) {
+		if (target != null) {
+			playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
+			this.setMotion(0, 0, 0);
+			Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
+			Vector3 endVec = Vector3.fromEntityCenter(target);
+			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
+			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(27)) {
+				target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
+			}
+		}
+	}
+
+	private void beyondFlames(Entity target) {
+		if (target != null) {
+			playSound(SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, .25F, 1f);
+			setFlame(target.getPosition().add(2, 0, 0));
+			setFlame(target.getPosition().add(-2, 0, 0));
+			setFlame(target.getPosition().add(0, 0, 2));
+			setFlame(target.getPosition().add(0, 0, -2));
+			setFlame(target.getPosition().add(-1, 0, 1));
+			setFlame(target.getPosition().add(1, 0, -1));
+			setFlame(target.getPosition().add(-1, 0, -1));
+			setFlame(target.getPosition().add(1, 0, 1));
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void setFlame(BlockPos pos) {
+		if (world.getBlockState(pos).isAir(world, pos)) {
+			world.setBlockState(pos, BlockInit.beyond_flames.get().getDefaultState());
+		}
+	}
+
+	@SuppressWarnings("unused")
+	private void massBlind(Entity target) {
+		if (target != null) {
+			if (target instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) target;
+				// player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 80, 255));
+			}
+		}
+	}
+
+	public void repel(World world, AxisAlignedBB effectBounds, double x, double y, double z) {
+		List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, effectBounds);
+		for (Entity ent : list) {
+			if (!(ent instanceof EntitySummonedBeast)) {
+				Vector3d p = new Vector3d(x, y, z);
+				Vector3d t = new Vector3d(ent.getPosX(), ent.getPosY(), ent.getPosZ());
+				double distance = p.distanceTo(t) + 0.1D;
+				Vector3d r = new Vector3d(t.x - p.x, t.y - p.y, t.z - p.z);
+				ent.setMotion(r.x * 2 / distance, r.y * 2 / distance, r.z * 2 / distance);
+				for (int countparticles = 0; countparticles <= 10; ++countparticles) {
+					world.addParticle(ParticleTypes.SMOKE,
+							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
+							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
+									- (double) ent.getYOffset() - 0.5,
+							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
+							0.0D);
+					playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
+
+				}
+			}
+		}
+	}
+
+	/**
+	 * Teleport to a random nearby position
+	 */
+	protected boolean teleportRandomly() {
+		if (!this.world.isRemote() && this.isAlive()) {
+			double d0 = this.getPosX() + (this.rand.nextDouble() - 0.5D) * 16.0D;
+			double d1 = this.getPosY() + (double) (this.rand.nextInt(64) - 32);
+			double d2 = this.getPosZ() + (this.rand.nextDouble() - 0.5D) * 16.0D;
+			return this.teleportTo(d0, d1, d2);
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Teleport to another entity
+	 */
+	private boolean teleportToEntity(Entity target) {
+		Vector3d vector3d = new Vector3d(this.getPosX() - target.getPosX(),
+				this.getPosYHeight(0.5D) - target.getPosYEye(), this.getPosZ() - target.getPosZ());
+		vector3d = vector3d.normalize();
+		double d1 = this.getPosX() + (this.rand.nextDouble() - 0.5D) * 8.0D - vector3d.x * 8.0D;
+		double d2 = this.getPosY() + (double) (this.rand.nextInt(16) - 8) - vector3d.y * 8.0D;
+		double d3 = this.getPosZ() + (this.rand.nextDouble() - 0.5D) * 8.0D - vector3d.z * 8.0D;
+		return this.teleportTo(d1, d2, d3);
+	}
+
+	/**
+	 * Teleport the boss
+	 */
+	private boolean teleportTo(double x, double y, double z) {
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(x, y, z);
+		while (blockpos$mutable.getY() > 0
+				&& !this.world.getBlockState(blockpos$mutable).getMaterial().blocksMovement()) {
+			blockpos$mutable.move(Direction.DOWN);
+		}
+		BlockState blockstate = this.world.getBlockState(blockpos$mutable);
+		boolean flag = blockstate.getMaterial().blocksMovement();
+		boolean flag1 = blockstate.getFluidState().isTagged(FluidTags.WATER);
+		if (flag && !flag1) {
+			EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
+			if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
+				return false;
+			boolean flag2 = this.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
+			if (flag2 && !this.isSilent()) {
+				this.world.playSound((PlayerEntity) null, this.prevPosX, this.prevPosY, this.prevPosZ,
+						SoundHandler.ENTITY_DARK_YOUNG_TELEPORT, this.getSoundCategory(), 0.5f, 0.5f);
+				this.playSound(SoundHandler.ENTITY_DARK_YOUNG_TELEPORT, 0.5f, 0.5f);
+			}
+			return flag2;
+		} else {
+			return false;
+		}
+	}
+
 	// Bite Goal
 	private class AttackGoal extends Goal {
 		public AttackGoal() {
@@ -782,7 +768,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
 
 			if (noActiveAnimation()) {
-				if (distFromTarget > 90) {
+				if (distFromTarget > 120) {
 					AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
 				}
 			}
