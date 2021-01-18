@@ -8,92 +8,86 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 import javax.annotation.Nullable;
 
-public interface IAnimatable
-{
+public interface IAnimatable {
 
-    Animation NO_ANIMATION = new Animation(0)
-	{
+	Animation NO_ANIMATION = new Animation(0) {
 		@Override
-        public String toString() { return "NO_ANIMATION"; }
-    };
+		public String toString() {
+			return "NO_ANIMATION";
+		}
+	};
 
-    int getAnimationTick();
+	int getAnimationTick();
 
-    void setAnimationTick(int tick);
+	void setAnimationTick(int tick);
 
-    Animation getAnimation();
+	Animation getAnimation();
 
-    void setAnimation(Animation animation);
+	void setAnimation(Animation animation);
 
-    Animation[] getAnimations();
+	Animation[] getAnimations();
 
-    default boolean noActiveAnimation() { return getAnimation() == NO_ANIMATION; }
+	default boolean noActiveAnimation() {
+		return getAnimation() == NO_ANIMATION;
+	}
 
-    default void updateAnimations()
-    {
-        Animation current = getAnimation();
-        if (current != NO_ANIMATION)
-        {
-            int tick = getAnimationTick() + 1;
-            if (tick >= current.getDuration())
-            {
-                setAnimation(NO_ANIMATION);
-                tick = 0;
-            }
-            setAnimationTick(tick);
-        }
-    }
+	default void updateAnimations() {
+		Animation current = getAnimation();
+		if (current != NO_ANIMATION) {
+			int tick = getAnimationTick() + 1;
+			if (tick >= current.getDuration()) {
+				setAnimation(NO_ANIMATION);
+				tick = 0;
+			}
+			setAnimationTick(tick);
+		}
+	}
 
-    static void registerCapability()
-    {
-        CapabilityManager.INSTANCE.register(IAnimatable.class, new Capability.IStorage<IAnimatable>()
-        {
-            // There is no data needed to be stored.
-            @Nullable
-            @Override
-            public INBT writeNBT(Capability<IAnimatable> capability, IAnimatable instance, Direction side) { return null; }
+	static void registerCapability() {
+		CapabilityManager.INSTANCE.register(IAnimatable.class, new Capability.IStorage<IAnimatable>() {
+			// There is no data needed to be stored.
+			@Nullable
+			@Override
+			public INBT writeNBT(Capability<IAnimatable> capability, IAnimatable instance, Direction side) {
+				return null;
+			}
 
-            @Override
-            public void readNBT(Capability<IAnimatable> capability, IAnimatable instance, Direction side, INBT nbt) {}
-        }, CapImpl::new);
-    }
+			@Override
+			public void readNBT(Capability<IAnimatable> capability, IAnimatable instance, Direction side, INBT nbt) {
+			}
+		}, CapImpl::new);
+	}
 
-    class CapImpl implements IAnimatable
-    {
-        @CapabilityInject(IAnimatable.class)
-        public static final Capability<IAnimatable> CAPABILITY = null;
+	class CapImpl implements IAnimatable {
+		@CapabilityInject(IAnimatable.class)
+		public static final Capability<IAnimatable> CAPABILITY = null;
 
-        private int animationTick = 0;
-        private Animation animation;
+		private int animationTick = 0;
+		private Animation animation;
 
-        @Override
-        public int getAnimationTick()
-        {
-            return animationTick;
-        }
+		@Override
+		public int getAnimationTick() {
+			return animationTick;
+		}
 
-        @Override
-        public void setAnimationTick(int tick)
-        {
-            this.animationTick = tick;
-        }
+		@Override
+		public void setAnimationTick(int tick) {
+			this.animationTick = tick;
+		}
 
-        @Override
-        public Animation getAnimation()
-        {
-            return animation;
-        }
+		@Override
+		public Animation getAnimation() {
+			return animation;
+		}
 
-        @Override
-        public void setAnimation(Animation animation)
-        {
-            this.animation = animation;
-        }
+		@Override
+		public void setAnimation(Animation animation) {
+			this.animation = animation;
+		}
 
-        @Override
-        public Animation[] getAnimations()
-        {
-            return new Animation[0];
-        }
-    }
+		@Override
+		public Animation[] getAnimations() {
+			return new Animation[0];
+		}
+	}
 }

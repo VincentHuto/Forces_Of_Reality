@@ -25,6 +25,7 @@ import com.huto.forcesofreality.render.entity.lords.RenderMechan;
 import com.huto.forcesofreality.render.entity.lords.RenderTetra;
 import com.huto.forcesofreality.render.entity.lords.RenderUzouthrhix;
 import com.huto.forcesofreality.render.entity.lords.RenderVeritas;
+import com.huto.forcesofreality.render.entity.lords.RenderXanthousKing;
 import com.huto.forcesofreality.render.entity.mobs.RenderDerangedBeast;
 import com.huto.forcesofreality.render.entity.mobs.RenderDreadBot;
 import com.huto.forcesofreality.render.entity.mobs.RenderHasturVassal;
@@ -182,6 +183,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_vassal.get(), RenderHasturVassal::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.deranged_beast.get(), RenderDerangedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tetra.get(), RenderTetra::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.xanthous_king.get(), RenderXanthousKing::new);
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.malformed_automaton.get(),

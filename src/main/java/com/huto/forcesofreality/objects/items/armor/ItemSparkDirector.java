@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.models.armor.ModelSparkDirector;
 import com.huto.forcesofreality.models.armor.ModelSparkDirectorArmored;
 import com.huto.forcesofreality.network.PacketHandler;
@@ -24,6 +25,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Mirror;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -63,17 +65,35 @@ public class ItemSparkDirector extends ArmorItem {
 		super.onArmorTick(stack, world, player);
 
 		Vector3d newVec = player.getLookVec();
+
 		double dx = player.getPosX() - (newVec.getX() * 0.8);
 		double dy = player.getPosY() + player.getEyeHeight() - .5f;
 		double dz = player.getPosZ() - (newVec.getZ() * 0.8);
 		boolean flightActive = stack.getOrCreateTag().getBoolean("flightmode");
 		if (flightActive) {
 			if (stack.getOrCreateTag().getFloat(TAG_MODIFIER) == 0.2f) {
-				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f, 0);
-				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f, 0);
-				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 60, 0)), dx, dy, dz, 0, 0.06f, 0);
+				if (world.isRemote) {
+					float rot = player.renderYawOffset;
+/*					System.out.println(rot);
+					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f,
+							0);
+					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f,
+							0);
+					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 60, 0)), dx, dy, dz, 0, 0.06f,
+							0);*/
+				}
 			} else {
-				world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f, 0);
+				if (world.isRemote) {
+					float rot = player.renderYawOffset;
+					float rotSin = (float) (Math.sin(rot)*100);
+					float strRot = Float.valueOf(Float.toString(rot).substring(Float.toString(rot).length()-2));
+				//	System.out.println(Math.cos(strRot)*0.25f);
+					double x = player.getPosX()+Math.sin(strRot)*0.35f;
+					double y = player.getPosY()  +1 ;
+					double z = player.getPosZ()-Math.abs(Math.cos(strRot))*0.35f;
+					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), x, y, z, 0, 0.06f,
+							0);
+				}
 
 			}
 
@@ -124,8 +144,8 @@ public class ItemSparkDirector extends ArmorItem {
 					new PacketToggleDirectorFlightModeMessage(flightMode));
 		} else {
 			playerEntity.sendStatusMessage(
-					new StringTextComponent(
-							I18n.format(flightMode ? "forcesofreality.autopickupenabled" : "forcesofreality.autopickupdisabled")),
+					new StringTextComponent(I18n.format(
+							flightMode ? "forcesofreality.autopickupenabled" : "forcesofreality.autopickupdisabled")),
 					true);
 		}
 	}
@@ -168,7 +188,8 @@ public class ItemSparkDirector extends ArmorItem {
 			if (hasTranslation(translationKey + ".info3"))
 				tooltip.add(new StringTextComponent(I18n.format(translationKey + ".info3")));
 		} else {
-			tooltip.add(new StringTextComponent(fallbackString("forcesofreality.shift", "Press <§6§oShift§r> for info.")));
+			tooltip.add(
+					new StringTextComponent(fallbackString("forcesofreality.shift", "Press <§6§oShift§r> for info.")));
 		}
 	}
 

@@ -27,7 +27,6 @@ import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.ParticleInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.init.TreeDecoratorInit;
-import com.huto.forcesofreality.models.animation.IAnimatable;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 import com.huto.forcesofreality.recipes.CopyMechanGloveDataRecipe;
@@ -87,7 +86,7 @@ public class ForcesOfReality {
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::commonSetup);
-		modEventBus.addListener(this::doClientStuff);
+		modEventBus.addListener(this::clientSetup);
 		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
@@ -99,8 +98,6 @@ public class ForcesOfReality {
 		TreeDecoratorInit.TREEDECORATORS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
-		// MinecraftForge.EVENT_BUS.addListener(AdornmentBinderEvents::pickupEvent);
-		// MinecraftForge.EVENT_BUS.addListener(AdornmentBinderEvents::onClientTick);
 		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::pickupEvent);
 		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::onClientTick);
 		MinecraftForge.EVENT_BUS.addListener(SparkDirectorModEvents::onClientTick);
@@ -117,7 +114,21 @@ public class ForcesOfReality {
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}
+	// Creative Tab
+	public static class ForcesOfRealityItemGroup extends ItemGroup {
+		public static final ForcesOfRealityItemGroup instance = new ForcesOfRealityItemGroup(ItemGroup.GROUPS.length,
+				"forcesofrealitytab");
 
+		public ForcesOfRealityItemGroup(int index, String label) {
+			super(index, label);
+		}
+
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(BlockInit.activated_obsidian.get());
+		}
+	}
+	
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
 		// Automatically Registers BlockItems
@@ -140,16 +151,13 @@ public class ForcesOfReality {
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
 		CapabilityInit.init();
-        IAnimatable.registerCapability();
 		ModWandRecipies.init();
 		ModResonatorRecipies.init();
 		ModFuserRecipies.init();
 		ModRafflesiaRecipies.init();
-		// ModChiselRecipes.init();
 		ModInscriberRecipes.init();
 		ModHarmonizerRecipes.init();
 		PacketHandler.registerChannels();
-		// PacketHandler.registerAdornmentBinderChannels();
 		PacketHandler.registerMechanGloveChannels();
 		ModFeatures.setup();
 		MinecraftForge.EVENT_BUS.register(new ModFeatures());
@@ -160,7 +168,7 @@ public class ForcesOfReality {
 
 	}
 
-	private void doClientStuff(final FMLClientSetupEvent event) {
+	private void clientSetup(final FMLClientSetupEvent event) {
 		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		this.addLayers();
@@ -175,25 +183,8 @@ public class ForcesOfReality {
 
 	}
 
-	// Creative Tab
-	public static class ForcesOfRealityItemGroup extends ItemGroup {
-		public static final ForcesOfRealityItemGroup instance = new ForcesOfRealityItemGroup(ItemGroup.GROUPS.length,
-				"forcesofrealitytab");
-
-		public ForcesOfRealityItemGroup(int index, String label) {
-			super(index, label);
-		}
-
-		@Override
-		public ItemStack createIcon() {
-			return new ItemStack(BlockInit.activated_obsidian.get());
-		}
-	}
-
 	// Adornment Layers
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-
 	@OnlyIn(Dist.CLIENT)
 	private void addLayers() {
 		Map<String, PlayerRenderer> skinMap = Minecraft.getInstance().getRenderManager().getSkinMap();
@@ -204,15 +195,6 @@ public class ForcesOfReality {
 		render.addLayer(new AdornmentsRenderLayer(render));
 	}
 
-	/*
-	 * public static ItemStack findAdornmentBinder(PlayerEntity player) { if
-	 * (player.getHeldItemMainhand().getItem() instanceof ItemAdornmentBinder) return
-	 * player.getHeldItemMainhand(); if (player.getHeldItemOffhand().getItem()
-	 * instanceof ItemAdornmentBinder) return player.getHeldItemOffhand();
-	 * PlayerInventory inventory = player.inventory; for (int i = 0; i <= 35; i++) {
-	 * ItemStack stack = inventory.getStackInSlot(i); if (stack.getItem() instanceof
-	 * ItemAdornmentBinder) return stack; } return ItemStack.EMPTY; }
-	 */
 	public static ItemStack findMechanGlove(PlayerEntity player) {
 		if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove)
 			return player.getHeldItemMainhand();
@@ -229,10 +211,6 @@ public class ForcesOfReality {
 
 	@SubscribeEvent
 	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
-		/*
-		 * event.getRegistry().register(new CopyAdornmentBinderDataRecipe.Serializer()
-		 * .setRegistryName(new ResourceLocation(MOD_ID, "rune_binder_upgrade")));
-		 */
 		event.getRegistry().register(new CopyMechanGloveDataRecipe.Serializer()
 				.setRegistryName(new ResourceLocation(MOD_ID, "mechan_glove_upgrade")));
 		event.getRegistry().register(new UpgradeMachinaLampDataRecipe.Serializer()

@@ -24,6 +24,7 @@ import com.huto.forcesofreality.capabilities.vibes.VibrationStorage;
 import com.huto.forcesofreality.capabilities.vibes.Vibrations;
 import com.huto.forcesofreality.capabilities.vibes.chunk.ChunkVibrationStorage;
 import com.huto.forcesofreality.capabilities.vibes.chunk.IChunkVibrations;
+import com.huto.forcesofreality.models.animation.IAnimatable;
 
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -41,7 +42,8 @@ public class CapabilityInit {
 		CapabilityManager.INSTANCE.register(IAdornment.class, new IAdornmentStorage(), new IAdornmentFactory());
 		CapabilityManager.INSTANCE.register(IAdornmentsItemHandler.class, new IAdornmentsItemHandlerStorage(),
 				new IAdornmentsItemHandlerFactory());
-		CapabilityManager.INSTANCE.register(IChunkVibrations.class, new ChunkVibrationStorage(),()->null);
+		CapabilityManager.INSTANCE.register(IChunkVibrations.class, new ChunkVibrationStorage(), () -> null);
+		IAnimatable.registerCapability();
 
 	}
 

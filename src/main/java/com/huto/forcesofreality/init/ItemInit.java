@@ -681,8 +681,13 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_deranged_beast = ITEMS
 			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 4603962, 5252864,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_uzouthrhix = ITEMS.register("spawn_egg_uzouthrhix",
 			() -> new ModSpawnEggItem(EntityInit.uzouthrhix, 23862, 8133430,
+					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_xanthous_king = ITEMS
+			.register("spawn_egg_xanthous_king", () -> new ModSpawnEggItem(EntityInit.xanthous_king, 10862336, 852039,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 
 	@SubscribeEvent
@@ -696,7 +701,7 @@ public class ItemInit {
 				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
 				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl,
 				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild,
-				ItemInit.spawn_egg_uzouthrhix);
+				ItemInit.spawn_egg_uzouthrhix, ItemInit.spawn_egg_xanthous_king);
 	}
 
 	@SuppressWarnings("unchecked")
