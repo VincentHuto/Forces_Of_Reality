@@ -1,8 +1,5 @@
 package com.huto.forcesofreality.entities.lords;
 
-import java.util.EnumSet;
-import java.util.List;
-
 import com.huto.forcesofreality.entities.passive.EntityDenizen;
 import com.huto.forcesofreality.entities.projectiles.EntityTrackingOrb;
 import com.huto.forcesofreality.entities.summons.EntityEldritchGrip;
@@ -10,10 +7,9 @@ import com.huto.forcesofreality.entities.summons.EntityHasturClone;
 import com.huto.forcesofreality.entities.summons.EntityHasturSpawn;
 import com.huto.forcesofreality.entities.summons.EntityTentacle;
 import com.huto.forcesofreality.init.EntityInit;
+import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.models.animation.Animation;
-import com.huto.forcesofreality.models.animation.AnimationPacket;
 import com.huto.forcesofreality.models.animation.IAnimatable;
-import com.huto.forcesofreality.models.animation.Mafs;
 import com.huto.forcesofreality.models.animation.TickFloat;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
@@ -21,21 +17,20 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.TickableSound;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.MoveTowardsTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
@@ -44,10 +39,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -57,7 +50,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityXanthousKing extends MonsterEntity implements IEntityAdditionalSpawnData, IAnimatable {
+public class EntityTrueXanthousKing extends MonsterEntity implements IEntityAdditionalSpawnData,IAnimatable {
 
 	private BlockPos source = BlockPos.ZERO;
 	private static final String TAG_SOURCE_X = "sourceX";
@@ -76,60 +69,14 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 	private final ServerBossInfo bossInfo = (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(),
 			BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
-	public EntityXanthousKing(EntityType<? extends EntityXanthousKing> type, World worldIn) {
+	public EntityTrueXanthousKing(EntityType<? extends EntityTrueXanthousKing> type, World worldIn) {
 		super(type, worldIn);
 
 	}
 
 	@Override
-	public void livingTick() {
-		super.livingTick();
-		if (lightningCooldown > 0) {
-			--lightningCooldown;
-		}
-
-		boolean prevBeached = beached;
-		if (!beached && onGround && !inWater)
-			beached = true;
-		else if (beached && inWater)
-			beached = false;
-		if (prevBeached != beached)
-			recalculateSize();
-		beachedTimer.add((beached) ? 0.1f : -0.05f);
-
-		Animation animation = getAnimation();
-		int animTick = getAnimationTick();
-		if (animation == BITE_ANIMATION) {
-			if (animTick == 0)
-				playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
-			else if (animTick == 6)
-				attackInBox(getBoundingBox()
-						.offset(Vector3d.fromPitchYaw(isInWater() ? rotationPitch : 0, rotationYawHead).scale(5.5f))
-						.grow(0.85), 40);
-		}
-	}
-
-
-	public void attackInBox(AxisAlignedBB box, int disabledShieldTime) {
-		List<LivingEntity> attackables = world.getEntitiesWithinAABB(LivingEntity.class, box,
-				entity -> entity != this && !isPassenger(entity));
-		for (LivingEntity attacking : attackables) {
-			attackEntityAsMob(attacking);
-			if (disabledShieldTime > 0 && attacking instanceof PlayerEntity) {
-				PlayerEntity player = ((PlayerEntity) attacking);
-				if (player.isHandActive() && player.getActiveItemStack().isShield(player)) {
-					player.getCooldownTracker().setCooldown(Items.SHIELD, disabledShieldTime);
-					player.resetActiveHand();
-					world.setEntityState(player, (byte) 9);
-				}
-			}
-		}
-	}
-
-	@Override
 	public void tick() {
 		super.tick();
-		updateAnimations();
 		float diffMult = 1f;
 
 		// Protection
@@ -147,51 +94,23 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 		// Attacks
 		if (this.deathTicks <= 0) {
 			int attackRoll = ticksExisted + rand.nextInt(5);
-			/*
-			 * if (attackRoll % 50 * diffMult == 0) { this.spawnMissile(); } else if
-			 * (attackRoll % 120 * diffMult == 0) { if (world.rand.nextBoolean()) {
-			 * this.summonTentacleAid(rand.nextInt(10)); } else {
-			 * this.summonSpawnAid(rand.nextInt(5)); } } else if (attackRoll % 130 *
-			 * diffMult == 0) { this.summonClones(rand.nextInt(2)); } if (this.isOnGround())
-			 * { if (attackRoll % 100 * diffMult == 0) {
-			 * this.summonEldritchGrip(rand.nextInt(1) + 3); } }
-			 */
-
-			
-			
-
-			LivingEntity target = getAttackTarget();
-			if (target == null)
-				return;
-			double distFromTarget = getDistanceSq(target);
-
-			getLookController().setLookPositionWithEntity(target, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
-
-			boolean isClose = distFromTarget < 40;
-
-			if (getNavigator().noPath())
-				getNavigator().tryMoveToEntityLiving(target, 1.2);
-
-			if (isClose) {
-				rotationYaw = (float) Mafs.getAngle(EntityXanthousKing.this, target) + 90f;
-			}
-
-			if (noActiveAnimation()) {
-/*				if (distFromTarget > 50 && distFromTarget < 89) {
-					AnimationPacket.send(EntityXanthousKing.this, LIGHTNING_ANIMATION);
-
-				} else if (distFromTarget > 90) {
-					// AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
-				} else */if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityXanthousKing.this, target) + 90,
-								rotationYaw) < 30) {
-					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
+		/*	if (attackRoll % 50 * diffMult == 0) {
+				this.spawnMissile();
+			} else if (attackRoll % 120 * diffMult == 0) {
+				if (world.rand.nextBoolean()) {
+					this.summonTentacleAid(rand.nextInt(10));
+				} else {
+					this.summonSpawnAid(rand.nextInt(5));
 				}
+			} else if (attackRoll % 130 * diffMult == 0) {
+				this.summonClones(rand.nextInt(2));
 			}
-			
-			
-			
-			
+			if (this.isOnGround()) {
+				if (attackRoll % 100 * diffMult == 0) {
+					this.summonEldritchGrip(rand.nextInt(1) + 3);
+				}
+			}*/
+
 			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
 			// though
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
@@ -211,9 +130,10 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 		 * this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 		 */
 		this.applyEntityAI();
-		goalSelector.addGoal(2, new AttackGoal());
 		this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 0.12));
-		this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 3d, 5));
+		//this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 3d, 5));
+		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1d, true));
+		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.2f));
 		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 
 	}
@@ -232,7 +152,7 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 
 	public static AttributeModifierMap.MutableAttribute setAttributes() {
 		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
 				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
@@ -301,45 +221,39 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 	@Override
 	protected void onDeathUpdate() {
 		++this.deathTicks;
-		if (this.deathTicks >= 75 && this.deathTicks <= 120) {
+		if (this.deathTicks >= 100 && this.deathTicks <= 200) {
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			this.world.addParticle(ParticleTypes.ASH, this.getPosX() + (double) f, this.getPosY() + 2.0D + (double) f1,
 					this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 
-			if (this.deathTicks >= 75) {
+			if (this.deathTicks >= 100) {
 				this.world.addParticle(ParticleTypes.FLASH, this.getPosX() + (double) f,
-						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-				this.world.addParticle(ParticleTypes.DRIPPING_HONEY, this.getPosX() + (double) f,
 						this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 		boolean flag = this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT);
 
-		/*
-		 * if (!this.world.isRemote && deathTicks % (15 + rand.nextInt(4)) == 0) {
-		 * ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(),
-		 * this.getPosZ(), new ItemStack(ItemInit.unsettling_fabric.get()));
-		 * world.addEntity(outputItem); }
-		 */
+		if (!this.world.isRemote && deathTicks % (15 + rand.nextInt(4)) == 0) {
+			ItemEntity outputItem = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(),
+					new ItemStack(ItemInit.unsettling_fabric.get()));
+			world.addEntity(outputItem);
+		}
 
-		if (this.deathTicks == 120) {
+		if (this.deathTicks == 200) {
 			if (world.isRemote) {
 				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
 						SoundCategory.HOSTILE, 3f, 0.2f, false);
 			}
 		}
 
-		if (this.deathTicks == 120 && !this.world.isRemote) {
+		if (this.deathTicks == 200 && !this.world.isRemote) {
 			if (flag) {
 				this.dropExperience(MathHelper.floor((float) 500 * 0.2F));
 			}
 			this.remove();
-			EntityTrueXanthousKing king = new EntityTrueXanthousKing(EntityInit.true_xanthous_king.get(), world);
-			king.setPosition(this.getPosX(), this.getPosY() + 1, this.getPosZ());
-			world.addEntity(king);
 		}
 
 	}
@@ -440,10 +354,10 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 	@Override
 	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
 		super.dropSpecialItems(source, looting, recentlyHitIn);
-		/*
-		 * ItemEntity itementity = this.entityDropItem(ItemInit.yellow_sign.get()); if
-		 * (itementity != null) { itementity.setNoDespawn(); }
-		 */
+		ItemEntity itementity = this.entityDropItem(ItemInit.yellow_sign.get());
+		if (itementity != null) {
+			itementity.setNoDespawn();
+		}
 
 	}
 
@@ -507,9 +421,9 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 
 	@OnlyIn(Dist.CLIENT)
 	private static class HasturMusic extends TickableSound {
-		private final EntityXanthousKing hastur;
+		private final EntityTrueXanthousKing hastur;
 
-		public HasturMusic(EntityXanthousKing hastur) {
+		public HasturMusic(EntityTrueXanthousKing hastur) {
 			super(SoundHandler.ENTITY_HASTUR_MUSIC, SoundCategory.RECORDS);
 
 			this.hastur = hastur;
@@ -544,69 +458,33 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 		return bossInfo;
 	}
 
-	// Animation
-	@Override
-	public int getAnimationTick() {
-		return animationTick;
-	}
-
-	@Override
-	public void setAnimationTick(int tick) {
-		animationTick = tick;
-	}
-
-	@Override
-	public Animation getAnimation() {
-		return animation;
-	}
-
-	@Override
-	public void setAnimation(Animation animation) {
-		if (animation == null)
-			animation = NO_ANIMATION;
-		setAnimationTick(0);
-		this.animation = animation;
-	}
-
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[] { BITE_ANIMATION, LIGHTNING_ANIMATION, CHARGE_ANIMATION };
-	}
-
-	// Bite Goal
-	private class AttackGoal extends Goal {
-		public AttackGoal() {
-			setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+	//Animation
+		@Override
+		public int getAnimationTick() {
+			return animationTick;
 		}
 
 		@Override
-		public boolean shouldExecute() {
-			return !canPassengerSteer() && getAttackTarget() != null;
+		public void setAnimationTick(int tick) {
+			animationTick = tick;
 		}
 
 		@Override
-		public void tick() {
-			LivingEntity target = getAttackTarget();
-			if (target == null)
-				return;
-			double distFromTarget = getDistanceSq(target);
-
-			getLookController().setLookPositionWithEntity(target, getHorizontalFaceSpeed(), getVerticalFaceSpeed());
-
-			boolean isClose = distFromTarget < 40;
-
-			if (getNavigator().noPath())
-				getNavigator().tryMoveToEntityLiving(target, 1.2);
-
-			if (isClose)
-				rotationYaw = (float) Mafs.getAngle(EntityXanthousKing.this, target) + 90f;
-
-			if (noActiveAnimation()) {
-				if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityXanthousKing.this, target) + 90,
-								rotationYaw) < 30)
-					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
-			}
+		public Animation getAnimation() {
+			return animation;
 		}
-	}
+
+		@Override
+		public void setAnimation(Animation animation) {
+			if (animation == null)
+				animation = NO_ANIMATION;
+			setAnimationTick(0);
+			this.animation = animation;
+		}
+
+		@Override
+		public Animation[] getAnimations() {
+			return new Animation[] { BITE_ANIMATION, LIGHTNING_ANIMATION, CHARGE_ANIMATION };
+		}
+
 }

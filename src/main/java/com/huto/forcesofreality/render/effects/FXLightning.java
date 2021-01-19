@@ -31,6 +31,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Vector3d;
 
 // Originally taken with permission from WRCBE - heavily modified
 public class FXLightning extends Particle {
@@ -43,7 +44,8 @@ public class FXLightning extends Particle {
 	private final List<FXLightningSegment> segments;
 	private final int segmentCount;
 
-	public FXLightning(ClientWorld world, Vector3 sourcevec, Vector3 targetvec, float speed, long seed, int colorOuter, int colorInner) {
+	public FXLightning(ClientWorld world, Vector3 sourcevec, Vector3 targetvec, float speed, long seed, int colorOuter,
+			int colorInner) {
 		super(world, sourcevec.x, sourcevec.y, sourcevec.z);
 		this.colorOuter = colorOuter;
 		this.colorInner = colorInner;
@@ -63,16 +65,16 @@ public class FXLightning extends Particle {
 		// todo fix this >.>
 
 		// old way (bad position and too thick)
-		// LightningHandler.queuedLightningBolts.offer(this);
+	//	LightningHandler.queuedLightningBolts.offer(this);
 
 		// new way (right position but heavy artifacting)
-		/*
+
 		Vector3d cameraPos = info.getProjectedView();
 		MatrixStack ms = new MatrixStack();
 		ms.translate(-cameraPos.getX(), -cameraPos.getY(), -cameraPos.getZ());
 		renderBolt(ms, buffer, 0, false);
 		renderBolt(ms, buffer, 1, true);
-		*/
+
 	}
 
 	@Nonnull
@@ -102,10 +104,12 @@ public class FXLightning extends Particle {
 
 			Vector3 playerVec = getRelativeViewVector(rendersegment.startPoint.point).multiply(-1);
 
-			double width = 0.025F * (playerVec.mag() / 5 + 1) * (1 + rendersegment.light) * 0.5F;
+			double width = 0.025F * (playerVec.mag() / 5 + 1) * (1 + rendersegment.light) * 0.2F;
 
-			Vector3 diff1 = playerVec.crossProduct(rendersegment.prevDiff).normalize().multiply(width / rendersegment.sinPrev);
-			Vector3 diff2 = playerVec.crossProduct(rendersegment.nextDiff).normalize().multiply(width / rendersegment.sinNext);
+			Vector3 diff1 = playerVec.crossProduct(rendersegment.prevDiff).normalize()
+					.multiply(width / rendersegment.sinPrev);
+			Vector3 diff2 = playerVec.crossProduct(rendersegment.nextDiff).normalize()
+					.multiply(width / rendersegment.sinNext);
 
 			Vector3 startvec = rendersegment.startPoint.point;
 			Vector3 endvec = rendersegment.endPoint.point;
@@ -116,7 +120,10 @@ public class FXLightning extends Particle {
 			int b = color & 0xFF;
 			int a = (int) (mainAlpha * rendersegment.light * 0xFF);
 			int fullbright = 0xF000F0;
-
+			
+			
+			
+			
 			endvec.subtract(diff2).vertex(mat, wr);
 			wr.color(r, g, b, a).tex(0.5F, 0).lightmap(fullbright).endVertex();
 			startvec.subtract(diff1).vertex(mat, wr);
@@ -140,7 +147,8 @@ public class FXLightning extends Particle {
 			}
 
 			if (rendersegment.prev == null) {
-				Vector3 roundend = rendersegment.startPoint.point.subtract(rendersegment.diff.normalize().multiply(width));
+				Vector3 roundend = rendersegment.startPoint.point
+						.subtract(rendersegment.diff.normalize().multiply(width));
 
 				startvec.subtract(diff1).vertex(mat, wr);
 				wr.color(r, g, b, a).tex(0.5F, 0).lightmap(fullbright).endVertex();
@@ -156,7 +164,8 @@ public class FXLightning extends Particle {
 
 	private static Vector3 getRelativeViewVector(Vector3 pos) {
 		Entity renderEntity = Minecraft.getInstance().getRenderViewEntity();
-		return new Vector3((float) renderEntity.getPosX() - pos.x, (float) renderEntity.getPosY() - pos.y, (float) renderEntity.getPosZ() - pos.z);
+		return new Vector3((float) renderEntity.getPosX() - pos.x, (float) renderEntity.getPosY() - pos.y,
+				(float) renderEntity.getPosZ() - pos.z);
 	}
 
 	private static final IParticleRenderType LAYER = new IParticleRenderType() {

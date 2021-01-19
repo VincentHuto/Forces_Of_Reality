@@ -1,6 +1,5 @@
 package com.huto.forcesofreality.render.tiles.vibes;
 
-import java.awt.Color;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +12,6 @@ import com.huto.forcesofreality.models.block.ModelFloatingCube;
 import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
 import com.huto.forcesofreality.objects.tileenties.util.EnumAbsorberStates;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
-import com.huto.forcesofreality.render.effects.BlockOverlayRender;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -36,7 +34,6 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 	private final ModelDrumMagatama magatamas = new ModelDrumMagatama();
@@ -213,32 +210,6 @@ public class RenderAbsorber extends TileEntityRenderer<TileEntityAbsorber> {
 		irendertypebuffer$impl.finish();
 		matrixStackIn.pop();
 
-	}
-
-	public static void renderSelectedBlock(RenderWorldLastEvent evt, BlockPos pos) {
-		final Minecraft mc = Minecraft.getInstance();
-
-		IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-
-		Vector3d view = mc.gameRenderer.getActiveRenderInfo().getProjectedView();
-
-		MatrixStack matrix = evt.getMatrixStack();
-		matrix.push();
-		matrix.translate(-view.getX(), -view.getY(), -view.getZ());
-
-		IVertexBuilder builder;
-		builder = buffer.getBuffer(RenderTypeInit.SolidBlockOverlay);
-
-		matrix.push();
-		matrix.translate(pos.getX(), pos.getY(), pos.getZ());
-		matrix.translate(-0.005f, -0.005f, -0.005f);
-		matrix.scale(1.01f, 1.01f, 1.01f);
-		matrix.rotate(Vector3f.YP.rotationDegrees(-90.0F));
-		Matrix4f positionMatrix = matrix.getLast().getMatrix();
-		BlockOverlayRender.render(positionMatrix, builder, pos, Color.GREEN);
-		matrix.pop();
-
-		buffer.finish(RenderTypeInit.SolidBlockOverlay);
 	}
 
 	public static void drawLasers(MatrixStack matrixStackIn, SetMultimap<BlockPos, BlockPos> lasers, float r, float g,

@@ -23,6 +23,7 @@ import com.huto.forcesofreality.render.entity.layer.ThermalLayerRender;
 import com.huto.forcesofreality.render.entity.lords.RenderLordOfTheWild;
 import com.huto.forcesofreality.render.entity.lords.RenderMechan;
 import com.huto.forcesofreality.render.entity.lords.RenderTetra;
+import com.huto.forcesofreality.render.entity.lords.RenderTrueXanthousKing;
 import com.huto.forcesofreality.render.entity.lords.RenderUzouthrhix;
 import com.huto.forcesofreality.render.entity.lords.RenderVeritas;
 import com.huto.forcesofreality.render.entity.lords.RenderXanthousKing;
@@ -184,6 +185,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.deranged_beast.get(), RenderDerangedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tetra.get(), RenderTetra::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.xanthous_king.get(), RenderXanthousKing::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.true_xanthous_king.get(),
+				RenderTrueXanthousKing::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.beast_from_beyond.get(),
 				RenderBeastFromBeyond::new);
@@ -223,6 +226,8 @@ public class ClientEventSubscriber {
 	public static float getPartialTicks() {
 		return getClient().getRenderPartialTicks();
 	}
+
+
 
 	public static boolean handleAnimationPacket(int entityID, int animationIndex) {
 		World world = ClientEventSubscriber.getWorld();

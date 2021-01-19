@@ -14,6 +14,7 @@ import com.huto.forcesofreality.capabilities.vibes.SeerEventHandler;
 import com.huto.forcesofreality.capabilities.vibes.VibrationEvents;
 import com.huto.forcesofreality.capabilities.vibes.chunk.ChunkVibrationEvents;
 import com.huto.forcesofreality.events.MechanGloveEvents;
+import com.huto.forcesofreality.events.RenderLaserEvent;
 import com.huto.forcesofreality.events.SparkDirectorModEvents;
 import com.huto.forcesofreality.gui.pages.coven.CovenPageLib;
 import com.huto.forcesofreality.gui.pages.guide.TomePageLib;
@@ -169,6 +170,7 @@ public class ForcesOfReality {
 	}
 
 	private void clientSetup(final FMLClientSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
 		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		this.addLayers();
@@ -208,7 +210,21 @@ public class ForcesOfReality {
 		}
 		return ItemStack.EMPTY;
 	}
-
+	public static ItemStack findMechanGloveInHand(PlayerEntity player) {
+		   ItemStack heldItem = player.getHeldItemMainhand();
+	        if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
+	            heldItem = player.getHeldItemOffhand();
+	            if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
+	                return ItemStack.EMPTY;
+	            }
+	        }
+	        return heldItem;
+	    }
+    public static boolean isArmed(PlayerEntity entity) {
+        return findMechanGloveInHand(entity).getItem() instanceof ItemMechanGlove;
+    }
+	
+	
 	@SubscribeEvent
 	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
 		event.getRegistry().register(new CopyMechanGloveDataRecipe.Serializer()

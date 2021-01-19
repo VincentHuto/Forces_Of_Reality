@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.models.armor.ModelSparkDirector;
 import com.huto.forcesofreality.models.armor.ModelSparkDirectorArmored;
 import com.huto.forcesofreality.network.PacketHandler;
@@ -25,7 +24,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Mirror;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -73,24 +71,23 @@ public class ItemSparkDirector extends ArmorItem {
 		if (flightActive) {
 			if (stack.getOrCreateTag().getFloat(TAG_MODIFIER) == 0.2f) {
 				if (world.isRemote) {
-					float rot = player.renderYawOffset;
-/*					System.out.println(rot);
+					//float rot = player.renderYawOffset;
 					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f,
 							0);
 					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f,
 							0);
 					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 60, 0)), dx, dy, dz, 0, 0.06f,
-							0);*/
+							0);
 				}
 			} else {
 				if (world.isRemote) {
 					float rot = player.renderYawOffset;
-					float rotSin = (float) (Math.sin(rot)*100);
-					float strRot = Float.valueOf(Float.toString(rot).substring(Float.toString(rot).length()-2));
-				//	System.out.println(Math.cos(strRot)*0.25f);
-					double x = player.getPosX()+Math.sin(strRot)*0.35f;
-					double y = player.getPosY()  +1 ;
-					double z = player.getPosZ()-Math.abs(Math.cos(strRot))*0.35f;
+					//float rotSin = (float) (Math.sin(rot) * 100);
+					float strRot = Float.valueOf(Float.toString(rot).substring(Float.toString(rot).length() - 2));
+					// System.out.println(Math.cos(strRot)*0.25f);
+					double x = player.getPosX() + Math.sin(strRot) * 0.35f;
+					double y = player.getPosY() + 1;
+					double z = player.getPosZ() - Math.abs(Math.cos(strRot)) * 0.35f;
 					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), x, y, z, 0, 0.06f,
 							0);
 				}

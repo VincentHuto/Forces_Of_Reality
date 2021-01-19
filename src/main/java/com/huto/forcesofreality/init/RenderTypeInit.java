@@ -63,13 +63,13 @@ public class RenderTypeInit extends RenderType {
 					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS).writeMask(COLOR_DEPTH_WRITE)
 					.build(false));
 
-	public static final RenderType LASER_MAIN_ADDITIVE = makeType("MiningLaserAdditiveBeam",
+	public static final RenderType LASER_MAIN_ADDITIVE = makeType("LaserAdditiveBeam",
 			DefaultVertexFormats.POSITION_COLOR_TEX, GL11.GL_QUADS, 256,
 			RenderType.State.getBuilder().texture(new TextureState(laserBeamGlow, false, false))
 					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS).writeMask(COLOR_DEPTH_WRITE)
 					.build(false));
 
-	public static final RenderType LASER_MAIN_CORE = makeType("MiningLaserCoreBeam",
+	public static final RenderType LASER_MAIN_CORE = makeType("LaserCoreBeam",
 			DefaultVertexFormats.POSITION_COLOR_TEX, GL11.GL_QUADS, 256,
 			RenderType.State.getBuilder().texture(new TextureState(laserBeam, false, false))
 					.transparency(TRANSLUCENT_TRANSPARENCY).depthTest(DEPTH_ALWAYS).writeMask(COLOR_DEPTH_WRITE)
@@ -81,11 +81,7 @@ public class RenderTypeInit extends RenderType {
 					.texture(NO_TEXTURE).depthTest(DEPTH_LEQUAL).cull(CULL_DISABLED).lightmap(LIGHTMAP_DISABLED)
 					.writeMask(COLOR_WRITE).build(false));
 
-	public static RenderType BorderBlockOverlay = makeType("BorderBlockOverlay", DefaultVertexFormats.POSITION_COLOR,
-			GL11.GL_LINE_STRIP, 256,
-			RenderType.State.getBuilder().line(new LineState(OptionalDouble.of(2.0D))).layer(field_239235_M_)
-					.transparency(TRANSLUCENT_TRANSPARENCY).texture(NO_TEXTURE).depthTest(DEPTH_LEQUAL)
-					.cull(CULL_DISABLED).lightmap(LIGHTMAP_DISABLED).writeMask(COLOR_WRITE).build(false));
+	
 	public static final IParticleRenderType EMBER_RENDER = new IParticleRenderType() {
 		@SuppressWarnings("deprecation")
 		@Override

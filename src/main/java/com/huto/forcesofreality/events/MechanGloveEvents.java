@@ -2,8 +2,6 @@ package com.huto.forcesofreality.events;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
-import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 
 import net.minecraft.entity.player.PlayerInventory;
@@ -32,9 +30,7 @@ public class MechanGloveEvents {
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (ClientEventSubscriber.keyBinds.get(0).isPressed()) {
-			
-			PacketHandler.MECHANGLOVE.sendToServer(new MechanGloveActionMessage());
-
+			ForcesOfReality.proxy.openMechanGui();
 		}
 	}
 

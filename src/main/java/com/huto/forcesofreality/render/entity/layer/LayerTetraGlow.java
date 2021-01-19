@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.layer;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
-import com.huto.forcesofreality.models.entity.lords.ModelUzouthrhix;
+import com.huto.forcesofreality.entities.lords.EntityTetra;
+import com.huto.forcesofreality.models.entity.lords.ModelTetra;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -16,13 +16,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LayerUzouthrihixGlow extends LayerRenderer<EntityUzouthrhix, ModelUzouthrhix> {
+public class LayerTetraGlow extends LayerRenderer<EntityTetra, ModelTetra> {
 	private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/uzouthrhix/model_uzouthrhix_awoken_mask.png"));
+			"textures/entity/tetra/model_tetra_lines.png"));
 
 	
 	
-	public LayerUzouthrihixGlow(IEntityRenderer<EntityUzouthrhix, ModelUzouthrhix> rendererIn) {
+	public LayerTetraGlow(IEntityRenderer<EntityTetra, ModelTetra> rendererIn) {
 		super(rendererIn);
 
 	}
@@ -33,7 +33,7 @@ public class LayerUzouthrihixGlow extends LayerRenderer<EntityUzouthrhix, ModelU
 
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn,
-			EntityUzouthrhix entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
+			EntityTetra entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
 			float ageInTicks, float netHeadYaw, float headPitch) {
 		if (entitylivingbaseIn.isVulnerable()) {
 			IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RENDER_TYPE);

@@ -1,9 +1,9 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityTetra;
-import com.huto.forcesofreality.models.entity.lords.ModelTetra;
-import com.huto.forcesofreality.render.entity.layer.LayerTetraGlow;
+import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
+import com.huto.forcesofreality.models.entity.lords.ModelTrueXanthousKing;
+import com.huto.forcesofreality.render.entity.layer.LayerTrueXanthousGlow;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -14,20 +14,20 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderTetra extends MobRenderer<EntityTetra, ModelTetra> {
+public class RenderTrueXanthousKing extends MobRenderer<EntityTrueXanthousKing, ModelTrueXanthousKing> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/tetra/model_tetra.png");
+			"textures/entity/true_xanthous_king/model_true_xanthous_king.png");
 	private static final ResourceLocation DRAGON_DEAD_TEXTURES = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/tetra/model_tetra.png");
+			"textures/entity/true_xanthous_king/model_true_xanthous_king.png");
 
-	public RenderTetra(EntityRendererManager renderManagerIn) {
-		super(renderManagerIn, new ModelTetra(), 0.5f);
-		addLayer(new LayerTetraGlow(this));
+	public RenderTrueXanthousKing(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn, new ModelTrueXanthousKing(), 1.5f);
+		addLayer(new LayerTrueXanthousGlow(this));
 	}
 
 	@Override
-	public void render(EntityTetra entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
+	public void render(EntityTrueXanthousKing entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
@@ -37,12 +37,7 @@ public class RenderTetra extends MobRenderer<EntityTetra, ModelTetra> {
 	}
 
 	@Override
-	protected float handleRotationFloat(EntityTetra livingBase, float partialTicks) {
-		return 1f;
-	}
-
-	@Override
-	public ResourceLocation getEntityTexture(EntityTetra entity) {
+	public ResourceLocation getEntityTexture(EntityTrueXanthousKing entity) {
 		if (entity.deathTicks > 0) {
 			return DRAGON_DEAD_TEXTURES;
 		} else {

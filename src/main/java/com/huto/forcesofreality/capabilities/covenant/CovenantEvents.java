@@ -143,7 +143,9 @@ public class CovenantEvents {
 								updateClientServerFlight((ServerPlayerEntity) player, true);
 							}
 						} else {
-							updateClientServerFlight((ServerPlayerEntity) player, false);
+							if (!((PlayerEntity) player).isCreative()) {
+								updateClientServerFlight((ServerPlayerEntity) player, false);
+							}
 						}
 					}
 				}

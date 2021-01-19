@@ -1,7 +1,8 @@
 package com.huto.forcesofreality.models.entity.lords;
 
-import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
 import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.huto.forcesofreality.models.animation.ModelAnimator;
 import com.huto.forcesofreality.models.animation.WREntityModel;
 import com.huto.forcesofreality.models.animation.WRModelRenderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -9,9 +10,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.util.math.MathHelper;
 
-
-
-public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
+public class ModelXanthousKing extends WREntityModel<EntityXanthousKing> {
 	private final WRModelRenderer whole;
 	private final WRModelRenderer upperBody;
 	private final WRModelRenderer hasturForm;
@@ -103,6 +102,7 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 	private final WRModelRenderer tail3;
 	private final WRModelRenderer tail4;
 	private final WRModelRenderer tail5;
+	public ModelAnimator animator;
 
 	public ModelXanthousKing() {
 		textureWidth = 512;
@@ -110,7 +110,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 
 		whole = new WRModelRenderer(this);
 		whole.setRotationPoint(0.0F, -15.0F, -15.0F);
-		
 
 		upperBody = new WRModelRenderer(this);
 		upperBody.setRotationPoint(0.1F, -19.0F, -19.0F);
@@ -137,7 +136,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		hasturForm = new WRModelRenderer(this);
 		hasturForm.setRotationPoint(0.0F, 0.0F, 0.0F);
 		upperBody.addChild(hasturForm);
-		
 
 		head = new WRModelRenderer(this);
 		head.setRotationPoint(0.0F, -28.0F, 0.0F);
@@ -226,7 +224,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		bone.setRotationPoint(-0.5F, 17.5F, -3.6F);
 		upperBody.addChild(bone);
 		setRotateAngle(bone, 0.6109F, 0.0F, 0.0F);
-		
 
 		cube_r1 = new WRModelRenderer(this);
 		cube_r1.setRotationPoint(0.0F, 2.1015F, 0.3548F);
@@ -404,7 +401,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		jaw = new WRModelRenderer(this);
 		jaw.setRotationPoint(1.0F, -27.0F, -43.0F);
 		lowerBody.addChild(jaw);
-		
 
 		jaw2 = new WRModelRenderer(this);
 		jaw2.setRotationPoint(1.0F, -19.0F, -43.0F);
@@ -461,7 +457,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		fRArm = new WRModelRenderer(this);
 		fRArm.setRotationPoint(-7.75F, 1.25F, -24.1F);
 		lowerBody.addChild(fRArm);
-		
 
 		fRShoulder = new WRModelRenderer(this);
 		fRShoulder.setRotationPoint(-1.6059F, 0.1815F, -0.225F);
@@ -499,7 +494,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		rFingers = new WRModelRenderer(this);
 		rFingers.setRotationPoint(-1.4F, 0.4F, 3.0F);
 		fRFist.addChild(rFingers);
-		
 
 		rFinger1 = new WRModelRenderer(this);
 		rFinger1.setRotationPoint(-1.5527F, -4.4882F, 1.0429F);
@@ -584,7 +578,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		fLArm = new WRModelRenderer(this);
 		fLArm.setRotationPoint(7.75F, 1.25F, -24.1F);
 		lowerBody.addChild(fLArm);
-		
 
 		fLShoulder = new WRModelRenderer(this);
 		fLShoulder.setRotationPoint(1.6059F, 0.1815F, -0.225F);
@@ -622,7 +615,6 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		lFingers = new WRModelRenderer(this);
 		lFingers.setRotationPoint(1.4F, 0.4F, 3.0F);
 		fLFist.addChild(lFingers);
-		
 
 		lFinger1 = new WRModelRenderer(this);
 		lFinger1.setRotationPoint(1.5527F, -4.4882F, 1.0429F);
@@ -981,23 +973,134 @@ public class ModelXanthousKing extends  WREntityModel<EntityXanthousKing> {
 		tail5.setTextureOffset(80, 127).addBox(-18.5893F, -1.0357F, 28.9381F, 8.0F, 4.0F, 3.0F, 0.0F, false);
 		tail5.setTextureOffset(74, 52).addBox(13.4107F, -1.0357F, 28.9381F, 8.0F, 4.0F, 3.0F, 0.0F, false);
 		tail5.setTextureOffset(266, 119).addBox(-10.5893F, -1.0357F, 25.9381F, 8.0F, 4.0F, 6.0F, 0.0F, false);
+		animator = ModelAnimator.create();
+		setDefaultPose();
+
 	}
 
 	@Override
-	public void setRotationAngles(EntityXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+	public void setLivingAnimations(EntityXanthousKing entityIn, float limbSwing, float limbSwingAmount,
+			float partialTick) {
+		super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
+		this.entity = entityIn;
+		resetToDefaultPose();
+		animator.update(entity, partialTick);
+		if (animator.setAnimation(EntityXanthousKing.LIGHTNING_ANIMATION)) {
+			roarAnim(partialTick);
+		} else if (animator.setAnimation(EntityXanthousKing.CHARGE_ANIMATION)) {
+			diveAnim(partialTick);
+		} else if (animator.setAnimation(EntityXanthousKing.BITE_ANIMATION)) {
+			biteAnim();
+		}
+
+		idle(entity.ticksExisted + partialTick);
+
+	}
+
+	private void diveAnim(float partialTick) {
+		animator.startKeyframe(56);
+		animator.endKeyframe();
+		animator.startKeyframe(46);
+		animator.resetKeyframe(66);
+
+	}
+
+	private void roarAnim(float partialTick) {
+		animator.startKeyframe(16);
+		animator.endKeyframe();
+		animator.resetKeyframe(18);
+	}
+
+	private void biteAnim() {
+		animator.startKeyframe(7);
+		animator.rotate(leftArm, (float) Math.toRadians(-57.5), 0, 0);
+		animator.rotate(leftElbow, (float) Math.toRadians(35.5), 0, 0);
+
+		animator.rotate(fLArm, -(float) Math.toRadians(7.5), (float) Math.toRadians(27.5), (float) Math.toRadians(15.5));
+		animator.rotate(fRArm, -(float) Math.toRadians(-7.5), (float) Math.toRadians(-27.5),
+				(float) Math.toRadians(-15.5));
+		animator.endKeyframe();
+		animator.resetKeyframe(8);
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void idle(float frame) {
+		animator.rotate(leftArm, MathHelper.cos(0 * 0.6662F) * 2.0F * 0 * 0.5F, 0,
+				(float) -Math.abs(((Math.sin((frame) * 0.04f) * 0.0525) + Math.toRadians(-22.5))));
+		animator.rotate(rightArm,
+				(float) (Math.sin((frame) * 0.04f) * 0.0325)
+						+ MathHelper.cos(0 * 0.6662F + (float) Math.PI) * 2.0F * 0 * 0.5F,
+				0, (float) Math.abs(((Math.cos((frame) * 0.04f) * 0.0525) + Math.toRadians(22.5))));
+
+		/*
+		 * this.fLArm.rotateAngleX = -(float) (Math.cos((frame) * 0.13f) * 0.0325);
+		 * this.fRArm.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		 * 
+		 * this.bLFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		 * this.bRFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		 * this.fLFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		 * this.fRFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		 * 
+		 * 
+		 * this.topJaw.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0725);
+		 * this.bottomJaw.rotateAngleX = (float) (Math.sin((frame) * 0.13f) * 0.0725);
+		 * 
+		 * this.tail.rotateAngleY = (float) (Math.sin((frame) * 0.13f) * 0.0325);
+		 * this.tail2.rotateAngleY = -(float) (Math.sin((frame) * 0.13f) * 0.12325);
+		 * this.tail3.rotateAngleY = (float) (Math.sin((frame) * 0.13f) * 0.1225);
+		 * this.tail4.rotateAngleY = -(float) (Math.sin((frame) * 0.13f) * 0.1325) + 45;
+		 * this.tail5.rotateAngleY = -(float) (Math.sin((frame) * 0.13f) * 0.12325) +
+		 * 45;
+		 */
+
+	}
+
+	@Override
+	public void setRotationAngles(EntityXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
+		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
+		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
+		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
+
+		this.fLLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.fLTibia.rotateAngleX = Math
+				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.bLLeg.rotateAngleX = MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.bLTibia.rotateAngleX = Math
+				.abs(MathHelper.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.fRLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.fRTibia.rotateAngleX = Math
+				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.bRLeg.rotateAngleX = MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.bRTibia.rotateAngleX = Math
+				.abs(MathHelper.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+/*
+		this.fLArm.rotateAngleX = -(float) (Math.cos((frame) * 0.13f) * 0.0325);
+		this.fRArm.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);*/
+
+		this.bLFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.bRFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.fLFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.fRFemur.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+
+		this.topJaw.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0725);
+		this.bottomJaw.rotateAngleX = (float) (Math.sin((frame) * 0.13f) * 0.0725);
+
+		this.tail.rotateAngleY = (float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.tail2.rotateAngleY = -(float) (Math.sin((frame) * 0.13f) * 0.12325);
+		this.tail3.rotateAngleY = (float) (Math.sin((frame) * 0.13f) * 0.1225);
+		this.tail4.rotateAngleY = -(float) (Math.sin((frame) * 0.13f) * 0.1325) + 45;
+		this.tail5.rotateAngleY = -(float) (Math.sin((frame) * 0.13f) * 0.12325) + 45;
+
+	}
+
+	@Override
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red,
+			float green, float blue, float alpha) {
 		whole.render(matrixStack, buffer, packedLight, packedOverlay);
 		upperBody.render(matrixStack, buffer, packedLight, packedOverlay);
 		lowerBody.render(matrixStack, buffer, packedLight, packedOverlay);
-	}
-
-	public void setRotationAngles(EntityUzouthrhix entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
-		//faceTarget(netHeadYaw, headPitch, 1, headArray);
 	}
 
 }

@@ -12,6 +12,7 @@ import com.huto.forcesofreality.entities.item.EntityManaDustItem;
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
 import com.huto.forcesofreality.entities.lords.EntityMechan;
 import com.huto.forcesofreality.entities.lords.EntityTetra;
+import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
 import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
 import com.huto.forcesofreality.entities.lords.EntityVeritas;
 import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
@@ -113,6 +114,11 @@ public class EntityInit {
 			"xanthous_king",
 			() -> EntityType.Builder.<EntityXanthousKing>create(EntityXanthousKing::new, EntityClassification.MONSTER)
 					.size(4f, 6f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "xanthous_king").toString()));
+	
+	public static final RegistryObject<EntityType<EntityTrueXanthousKing>> true_xanthous_king = ENTITY_TYPES.register("true_xanthous_king",
+			() -> EntityType.Builder.<EntityTrueXanthousKing>create(EntityTrueXanthousKing::new, EntityClassification.MONSTER)
+					.size(1.2f, 2.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "true_xanthous_king").toString()));
+	
 	
 	public static final RegistryObject<EntityType<EntityTentacle>> tentacle = ENTITY_TYPES.register("tentacle",
 			() -> EntityType.Builder.<EntityTentacle>create(EntityTentacle::new, EntityClassification.MONSTER)
@@ -318,7 +324,8 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.tetra.get(), EntityTetra.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.lord_of_the_wild.get(), EntityLordOfTheWild.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.uzouthrhix.get(), EntityUzouthrhix.setAttributes().create());
-		GlobalEntityTypeAttributes.put(EntityInit.xanthous_king.get(), EntityXanthousKing.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.xanthous_king.get(), EntityTrueXanthousKing.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.true_xanthous_king.get(), EntityTrueXanthousKing.setAttributes().create());
 
 	}
 }

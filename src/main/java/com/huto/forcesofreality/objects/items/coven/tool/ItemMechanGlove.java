@@ -5,16 +5,19 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.containers.MechanGloveItemHandler;
 import com.huto.forcesofreality.entities.projectiles.EntityDreadRocket;
 import com.huto.forcesofreality.entities.projectiles.EntityDreadRocketDirected;
 import com.huto.forcesofreality.entities.projectiles.EntityShortCircuit;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.ItemInit;
+import com.huto.forcesofreality.network.PacketHandler;
+import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -26,13 +29,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
+import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -70,6 +75,36 @@ public class ItemMechanGlove extends Item {
 	}
 
 	@Override
+	public UseAction getUseAction(ItemStack stack) {
+		return UseAction.BOW;
+	}
+
+	@Override
+	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
+		super.onUse(worldIn, livingEntityIn, stack, count);
+		int range = 25;
+		RayTraceResult trace = livingEntityIn.pick(range, ClientEventSubscriber.getPartialTicks(), true);
+		switch (trace.getType()) {
+		case ENTITY: {
+		//	Entity hitEntity = ((EntityRayTraceResult) trace).getEntity();
+		}
+		case BLOCK: {
+		//	Block hitBlock = worldIn.getBlockState(((BlockRayTraceResult) trace).getPos()).getBlock();
+			worldIn.setBlockState(((BlockRayTraceResult) trace).getPos().add(0, 1, 0), Blocks.FIRE.getDefaultState());
+		}
+
+		default:
+			break;
+		}
+
+	}
+
+	@Override
+	public int getUseDuration(ItemStack stack) {
+		return 72000 / 4;
+	}
+
+	@Override
 	public boolean shouldSyncTag() {
 		return true;
 	}
@@ -82,13 +117,19 @@ public class ItemMechanGlove extends Item {
 		swordstate = swordstateIn;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+
+		ItemStack stack = playerIn.getHeldItem(handIn)
+				.read((CompoundNBT) playerIn.getHeldItem(handIn).getTag().get("selectedstack"));
+		if (stack.getItem() == ItemInit.mechan_module_laser.get()) {
+			playerIn.setActiveHand(handIn);
+		}
 		if (handIn == Hand.MAIN_HAND) {
 			if (worldIn.isRemote) {
 				if (!playerIn.isSneaking()) {
-					ForcesOfReality.proxy.openMechanGui();
-					playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+					PacketHandler.MECHANGLOVE.sendToServer(new MechanGloveActionMessage());
 				}
 
 			}
@@ -179,7 +220,7 @@ public class ItemMechanGlove extends Item {
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
 					// TODO "This is where id put my laser, IF I HAD ONE"
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_thruster.get()) {
-					if (playerIn.inventory.armorInventory.get(2).getItem() instanceof ItemSparkDirector	) {
+					if (playerIn.inventory.armorInventory.get(2).getItem() instanceof ItemSparkDirector) {
 						ItemStack armor = playerIn.inventory.armorInventory.get(2);
 						if (armor.getOrCreateTag().getFloat("heightmodifier") == 0.1f) {
 							armor.getOrCreateTag().putFloat("heightmodifier", 0.2f);

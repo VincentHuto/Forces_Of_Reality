@@ -80,6 +80,8 @@ public class ItemDemonFlute extends Item {
 	public int getUseDuration(ItemStack stack) {
 		return 72000 / 4;
 	}
+	
+	
 
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
