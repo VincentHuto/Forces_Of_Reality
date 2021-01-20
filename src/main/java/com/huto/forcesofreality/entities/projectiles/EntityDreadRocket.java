@@ -22,6 +22,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -41,7 +42,7 @@ public class EntityDreadRocket extends ThrowableEntity {
 			DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TARGET = EntityDataManager.createKey(EntityDreadRocket.class,
 			DataSerializers.VARINT);
-
+	LivingEntity thrower;
 	double lockX, lockY = -1, lockZ;
 	int time = 0;
 
@@ -53,11 +54,16 @@ public class EntityDreadRocket extends ThrowableEntity {
 		this(TYPE, world);
 	}
 
-	public EntityDreadRocket(LivingEntity thrower, boolean evil) {
-		super(TYPE, thrower, thrower.world);
+	public EntityDreadRocket(LivingEntity throwerIn, boolean evil) {
+		super(TYPE, throwerIn,throwerIn.world);
+		thrower = throwerIn;
 		setEvil(evil);
 	}
 
+	public LivingEntity getThrower() {
+		return thrower;
+	}
+	
 	@Override
 	protected void registerData() {
 		dataManager.register(EVIL, false);
@@ -113,7 +119,7 @@ public class EntityDreadRocket extends ThrowableEntity {
 		Vector3 particlePos = oldPos;
 
 		for (int i = 0; i < steps; i++) {
-			world.addParticle(ParticleTypes.ANGRY_VILLAGER, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
+			world.addParticle(RedstoneParticleData.REDSTONE_DUST, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
 			if (world.rand.nextInt(steps) <= 1)
 				world.addParticle(ParticleTypes.CRIT, particlePos.x + (Math.random() - 0.5) * 0.4,
 						particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0,

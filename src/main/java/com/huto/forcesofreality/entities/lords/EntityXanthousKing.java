@@ -27,7 +27,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.MoveTowardsTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -109,7 +108,6 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 		}
 	}
 
-
 	public void attackInBox(AxisAlignedBB box, int disabledShieldTime) {
 		List<LivingEntity> attackables = world.getEntitiesWithinAABB(LivingEntity.class, box,
 				entity -> entity != this && !isPassenger(entity));
@@ -147,18 +145,23 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 		// Attacks
 		if (this.deathTicks <= 0) {
 			int attackRoll = ticksExisted + rand.nextInt(5);
-			/*
-			 * if (attackRoll % 50 * diffMult == 0) { this.spawnMissile(); } else if
-			 * (attackRoll % 120 * diffMult == 0) { if (world.rand.nextBoolean()) {
-			 * this.summonTentacleAid(rand.nextInt(10)); } else {
-			 * this.summonSpawnAid(rand.nextInt(5)); } } else if (attackRoll % 130 *
-			 * diffMult == 0) { this.summonClones(rand.nextInt(2)); } if (this.isOnGround())
-			 * { if (attackRoll % 100 * diffMult == 0) {
-			 * this.summonEldritchGrip(rand.nextInt(1) + 3); } }
-			 */
 
-			
-			
+			if (attackRoll % 50 * diffMult == 0) {
+				this.spawnMissile();
+			} else if (attackRoll % 120 * diffMult == 0) {
+				if (world.rand.nextBoolean()) {
+					this.summonTentacleAid(rand.nextInt(10));
+				} else {
+					this.summonSpawnAid(rand.nextInt(5));
+				}
+			} else if (attackRoll % 130 * diffMult == 0) {
+				this.summonClones(rand.nextInt(2));
+			}
+			if (this.isOnGround()) {
+				if (attackRoll % 100 * diffMult == 0) {
+					this.summonEldritchGrip(rand.nextInt(1) + 3);
+				}
+			}
 
 			LivingEntity target = getAttackTarget();
 			if (target == null)
@@ -177,21 +180,19 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 			}
 
 			if (noActiveAnimation()) {
-/*				if (distFromTarget > 50 && distFromTarget < 89) {
-					AnimationPacket.send(EntityXanthousKing.this, LIGHTNING_ANIMATION);
-
-				} else if (distFromTarget > 90) {
-					// AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
-				} else */if (isClose
+				/*
+				 * if (distFromTarget > 50 && distFromTarget < 89) {
+				 * AnimationPacket.send(EntityXanthousKing.this, LIGHTNING_ANIMATION);
+				 * 
+				 * } else if (distFromTarget > 90) { //
+				 * AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION); } else
+				 */if (isClose
 						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityXanthousKing.this, target) + 90,
 								rotationYaw) < 30) {
 					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
 				}
 			}
-			
-			
-			
-			
+
 			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
 			// though
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;

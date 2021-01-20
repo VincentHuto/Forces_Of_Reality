@@ -93,8 +93,8 @@ public class EntityTrueXanthousKing extends MonsterEntity implements IEntityAddi
 
 		// Attacks
 		if (this.deathTicks <= 0) {
-			int attackRoll = ticksExisted + rand.nextInt(5);
-		/*	if (attackRoll % 50 * diffMult == 0) {
+		int attackRoll = ticksExisted + rand.nextInt(5);
+			if (attackRoll % 50 * diffMult == 0) {
 				this.spawnMissile();
 			} else if (attackRoll % 120 * diffMult == 0) {
 				if (world.rand.nextBoolean()) {
@@ -109,7 +109,7 @@ public class EntityTrueXanthousKing extends MonsterEntity implements IEntityAddi
 				if (attackRoll % 100 * diffMult == 0) {
 					this.summonEldritchGrip(rand.nextInt(1) + 3);
 				}
-			}*/
+			}
 
 			// Removed Starstrikes to use on the seraphim, still has the one missle spawn
 			// though

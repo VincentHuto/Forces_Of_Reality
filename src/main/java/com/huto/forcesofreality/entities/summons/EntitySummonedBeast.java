@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Maps;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
+import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;
@@ -41,12 +42,12 @@ public class EntitySummonedBeast extends MonsterEntity {
 	private static final DataParameter<Integer> BEAST_TYPE = EntityDataManager.createKey(EntitySummonedBeast.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/summoned_beast/model_summoned_beast_grey.png"));
-		p_213410_0_.put(1,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/summoned_beast/model_summoned_beast_brown.png"));
-		p_213410_0_.put(2,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/summoned_beast/model_summoned_beast_white.png"));
+		p_213410_0_.put(0, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/summoned_beast/model_summoned_beast_grey.png"));
+		p_213410_0_.put(1, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/summoned_beast/model_summoned_beast_brown.png"));
+		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/summoned_beast/model_summoned_beast_white.png"));
 	});
 	public float deathTicks = 1;
 
@@ -170,7 +171,8 @@ public class EntitySummonedBeast extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond)) {
+		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond
+				|| entityIn instanceof EntityLordOfTheWild)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 
@@ -178,7 +180,7 @@ public class EntitySummonedBeast extends MonsterEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 2.3d, 30));
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 1.3d, 30));
 		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 
 	}

@@ -7,6 +7,8 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Maps;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntityHastur;
+import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
+import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;
@@ -182,7 +184,7 @@ public class EntityTentacle extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur)) {
+		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur|| entityIn instanceof EntityXanthousKing|| entityIn instanceof EntityTrueXanthousKing)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 

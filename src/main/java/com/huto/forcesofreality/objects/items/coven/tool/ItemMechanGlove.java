@@ -17,25 +17,34 @@ import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
 
+import net.minecraft.block.AbstractFireBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
+import net.minecraft.item.crafting.FurnaceRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
@@ -49,6 +58,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class ItemMechanGlove extends Item {
 	String name;
@@ -79,6 +89,7 @@ public class ItemMechanGlove extends Item {
 		return UseAction.BOW;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
 		super.onUse(worldIn, livingEntityIn, stack, count);
@@ -86,11 +97,40 @@ public class ItemMechanGlove extends Item {
 		RayTraceResult trace = livingEntityIn.pick(range, ClientEventSubscriber.getPartialTicks(), true);
 		switch (trace.getType()) {
 		case ENTITY: {
-		//	Entity hitEntity = ((EntityRayTraceResult) trace).getEntity();
+			// Entity hitEntity = ((EntityRayTraceResult) trace).getEntity();
 		}
 		case BLOCK: {
-		//	Block hitBlock = worldIn.getBlockState(((BlockRayTraceResult) trace).getPos()).getBlock();
-			worldIn.setBlockState(((BlockRayTraceResult) trace).getPos().add(0, 1, 0), Blocks.FIRE.getDefaultState());
+			BlockPos hitPos = ((BlockRayTraceResult) trace).getPos();
+			Block hitBlock = worldIn.getBlockState(hitPos).getBlock();
+			ItemStack smeltStack = worldIn.getRecipeManager()
+					.getRecipe(IRecipeType.SMELTING, new Inventory(new ItemStack(hitBlock)), worldIn)
+					.map(FurnaceRecipe::getRecipeOutput).filter(itemStack -> !new ItemStack(hitBlock).isEmpty())
+					.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack,
+							new ItemStack(hitBlock).getCount() * new ItemStack(hitBlock).getCount()))
+					.orElse(new ItemStack(hitBlock));
+			if (smeltStack.getItem() != new ItemStack(hitBlock).getItem()) {
+				if (smeltStack.getItem() instanceof BlockItem) {
+					BlockItem smeltBlock = (BlockItem) smeltStack.getItem();
+					worldIn.destroyBlock(hitPos, false);
+					worldIn.setBlockState(hitPos, smeltBlock.getBlock().getDefaultState());
+				} else {
+					if(worldIn.rand.nextInt(20) %3 ==0) {
+					worldIn.addEntity(new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(), hitPos.getZ(), smeltStack));
+					}
+					worldIn.destroyBlock(hitPos, false);
+				}
+			} else {
+				if (!hitBlock.getDefaultState().isAir() && hitBlock != Blocks.FIRE) {
+					if (hitBlock.isFlammable(hitBlock.getDefaultState(), worldIn,
+							((BlockRayTraceResult) trace).getPos(), ((BlockRayTraceResult) trace).getFace())) {
+				         BlockPos blockpos1 = hitPos.offset( ((BlockRayTraceResult) trace).getFace());
+					       BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(worldIn, blockpos1);
+				            worldIn.setBlockState(blockpos1, blockstate1, 11);
+
+					}
+				}
+			}
+
 		}
 
 		default:
@@ -155,7 +195,7 @@ public class ItemMechanGlove extends Item {
 			}
 		}
 
-		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+		return ActionResult.resultPass(playerIn.getHeldItem(handIn));
 
 	}
 
@@ -211,6 +251,7 @@ public class ItemMechanGlove extends Item {
 					EntityDreadRocketDirected miss = new EntityDreadRocketDirected((PlayerEntity) playerIn, false);
 					miss.setPosition(playerIn.getPosX() - 0.5, playerIn.getPosY() + 0.6, playerIn.getPosZ() - 0.5);
 					miss.setDirectionMotion(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.0F, 1.0F);
+					System.out.println(miss.getThrower());
 					worldIn.addEntity(miss);
 				} else if (moduleStack.getItem() == ItemInit.mechan_module_shortcircuit.get()) {
 					EntityShortCircuit miss = new EntityShortCircuit((PlayerEntity) playerIn, true);

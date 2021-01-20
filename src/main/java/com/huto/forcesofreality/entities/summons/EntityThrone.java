@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Maps;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
+import com.huto.forcesofreality.entities.lords.EntityTetra;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;
@@ -41,9 +42,12 @@ public class EntityThrone extends MonsterEntity {
 	private static final DataParameter<Integer> TENTACLE_TYPE = EntityDataManager.createKey(EntityThrone.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_blue.png"));
-		p_213410_0_.put(1, new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_brown.png"));
-		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_green.png"));
+		p_213410_0_.put(0,
+				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_blue.png"));
+		p_213410_0_.put(1,
+				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_brown.png"));
+		p_213410_0_.put(2,
+				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_green.png"));
 	});
 	public float deathTicks = 1;
 
@@ -167,7 +171,8 @@ public class EntityThrone extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityThrone || entityIn instanceof EntitySeraphim)) {
+		if (!(entityIn instanceof EntityThrone || entityIn instanceof EntitySeraphim
+				|| entityIn instanceof EntityTetra)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}
 

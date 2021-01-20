@@ -20,6 +20,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityDreadRocketDirected extends ThrowableEntity {
 	public static EntityType<EntityDreadRocketDirected> TYPE = EntityInit.dread_rocket_directed.get();
+	LivingEntity thrower;
 
 	public EntityDreadRocketDirected(EntityType<EntityDreadRocketDirected> type, World world) {
 		super(type, world);
@@ -29,8 +30,13 @@ public class EntityDreadRocketDirected extends ThrowableEntity {
 		this(TYPE, world);
 	}
 
-	public EntityDreadRocketDirected(LivingEntity thrower, boolean evil) {
-		super(TYPE, thrower, thrower.world);
+	public EntityDreadRocketDirected(LivingEntity throwerIn, boolean evil) {
+		super(TYPE, throwerIn, throwerIn.world);
+		thrower = throwerIn;
+	}
+
+	public LivingEntity getThrower() {
+		return thrower;
 	}
 
 	@Nonnull
@@ -42,7 +48,7 @@ public class EntityDreadRocketDirected extends ThrowableEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		world.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
+		world.addParticle(ParticleTypes.FLAME, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
 		world.addParticle(ParticleTypes.CRIT, this.getPosX() + (Math.random() - 0.5) * 0.4,
 				this.getPosY() + (Math.random() - 0.5) * 0.4, this.getPosZ() + (Math.random() - 0.5) * 0.4, 0, 0, 0);
 

@@ -3,6 +3,8 @@ package com.huto.forcesofreality.entities.summons;
 import javax.annotation.Nullable;
 
 import com.huto.forcesofreality.entities.guardians.EntityHastur;
+import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
+import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;
@@ -174,7 +176,7 @@ public class EntityEldritchGrip extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntityEldritchGrip || entityIn instanceof EntityHastur)) {
+		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur|| entityIn instanceof EntityXanthousKing|| entityIn instanceof EntityTrueXanthousKing)) {
 			((LivingEntity) entityIn).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 2));
 
 		}
