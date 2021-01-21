@@ -4,6 +4,7 @@ import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
 import com.huto.forcesofreality.capabilities.covenant.ICovenant;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
+import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -27,12 +28,12 @@ public class ItemAllegianceIdentifier extends Item {
 		if (!worldIn.isRemote) {
 			ICovenant coven = playerIn.getCapability(CovenantProvider.COVEN_CAPA)
 					.orElseThrow(IllegalStateException::new);
-			
-			
-			PacketHandler.CHANNELCOVENANT.send(
-					PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-					new CovenantPacketServer(coven.getDevotion()));
-			
+
+			playerIn.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
+				PacketHandler.sendCovenToClients(new SyncCovenPacket(covens.getDevotion(), playerIn.getEntityId()),
+						playerIn);
+			});
+
 			playerIn.sendStatusMessage(new StringTextComponent(coven.getDevotion().toString()), true);
 		}
 

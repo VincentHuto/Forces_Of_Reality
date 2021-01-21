@@ -13,6 +13,7 @@ import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
+import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.huto.forcesofreality.objects.items.ItemAdornment;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -47,19 +48,23 @@ public class CovenantEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof PlayerEntity) {
-			System.out.println("Attatches Capability");
-			event.addCapability(new ResourceLocation(ForcesOfReality.MOD_ID, "covenant"), new CovenantProvider());
+			CovenantProvider provider = new CovenantProvider();
+
+			event.addCapability(new ResourceLocation(ForcesOfReality.MOD_ID, "covenant"), provider);
+			event.addListener(provider::invalidate);
+
 		}
 	}
 
 	@SubscribeEvent
 	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
-		Map<EnumCovenants, Integer> covenant = CovenantProvider.getPlayerDevotion(player);
-		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
-				new CovenantPacketServer(covenant));
-		player.sendStatusMessage(
-				new StringTextComponent("Welcome! Current Covenant: " + TextFormatting.GOLD + covenant), false);
+		if (event.getEntity() instanceof ServerPlayerEntity) {
+			ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+			player.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
+				PacketHandler.sendCovenToClients(new SyncCovenPacket(covens.getDevotion(), player.getEntityId()),
+						player);
+			});
+		}
 	}
 
 	@SubscribeEvent

@@ -14,6 +14,8 @@ import com.huto.forcesofreality.network.coven.PacketToggleDirectorFlightModeMess
 import com.huto.forcesofreality.network.coven.PacketUpdateMechanModule;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
 import com.huto.forcesofreality.network.coven.SetGlidePkt;
+import com.huto.forcesofreality.network.coven.SyncCovenPacket;
+import com.huto.forcesofreality.network.coven.SyncKarmaPacket;
 import com.huto.forcesofreality.network.karma.KarmaActivationPacketClient;
 import com.huto.forcesofreality.network.karma.KarmaActivationPacketServer;
 import com.huto.forcesofreality.network.karma.KarmaPacketClient;
@@ -24,9 +26,11 @@ import com.huto.forcesofreality.network.vibes.UpdateChunkEnergyValueMessage;
 import com.huto.forcesofreality.network.vibes.VibrationPacketClient;
 import com.huto.forcesofreality.network.vibes.VibrationPacketServer;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 public class PacketHandler {
@@ -45,6 +49,7 @@ public class PacketHandler {
 	public static final SimpleChannel CHANNELKARMA = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "karmachannel"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+
 	public static final SimpleChannel CHANNELCOVENANT = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
@@ -58,9 +63,9 @@ public class PacketHandler {
 
 	public static void registerChannels() {
 		// Register Networking packets
-		ANIMATIONS.messageBuilder(AnimationPacket.class, networkID++, NetworkDirection.PLAY_TO_CLIENT).encoder(AnimationPacket::encode).decoder(AnimationPacket::new).consumer(AnimationPacket::handle).add();
+		ANIMATIONS.messageBuilder(AnimationPacket.class, networkID++, NetworkDirection.PLAY_TO_CLIENT)
+				.encoder(AnimationPacket::encode).decoder(AnimationPacket::new).consumer(AnimationPacket::handle).add();
 
-		
 		// Vibes
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketClient.class, VibrationPacketClient::encode,
 				VibrationPacketClient::decode, VibrationPacketClient::handle);
@@ -81,11 +86,16 @@ public class PacketHandler {
 		CHANNELKARMA.registerMessage(networkID++, KarmaActivationPacketServer.class,
 				KarmaActivationPacketServer::encode, KarmaActivationPacketServer::decode,
 				KarmaActivationPacketServer::handle);
+		CHANNELKARMA.messageBuilder(SyncKarmaPacket.class, networkID++).encoder(SyncKarmaPacket::encode)
+				.decoder(SyncKarmaPacket::new).consumer(SyncKarmaPacket::handle).add();
+
 		// Covenant
 		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketClient.class, CovenantPacketClient::encode,
 				CovenantPacketClient::decode, CovenantPacketClient::handle);
 		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketServer.class, CovenantPacketServer::encode,
 				CovenantPacketServer::decode, CovenantPacketServer::handle);
+		CHANNELCOVENANT.messageBuilder(SyncCovenPacket.class, networkID++).encoder(SyncCovenPacket::encode)
+				.decoder(SyncCovenPacket::new).consumer(SyncCovenPacket::handle).add();
 
 		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
@@ -97,16 +107,6 @@ public class PacketHandler {
 		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
 				ExportVibePacket.Handler::handle);
 
-		/*
-		 * HANDLER.registerMessage(networkID++, PacketUpdateChiselAdornments.class,
-		 * PacketUpdateChiselAdornments::encode, PacketUpdateChiselAdornments::decode,
-		 * PacketUpdateChiselAdornments.Handler::handle);
-		 */
-		/*
-		 * HANDLER.registerMessage(networkID++, PacketChiselCraftingEvent.class,
-		 * PacketChiselCraftingEvent::encode, PacketChiselCraftingEvent::decode,
-		 * PacketChiselCraftingEvent.Handler::handle);
-		 */
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
 
@@ -123,24 +123,6 @@ public class PacketHandler {
 
 	}
 
-	/*
-	 * public static SimpleChannel RUNEBINDER = NetworkRegistry.newSimpleChannel(
-	 * new ResourceLocation(ForcesOfReality.MOD_ID, "runebindernetwork"), () ->
-	 * PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-	 * 
-	 * public static SimpleChannel registerAdornmentBinderChannels() {
-	 * RUNEBINDER.messageBuilder(PacketBinderTogglePickup.class,
-	 * networkID++).decoder(PacketBinderTogglePickup::decode)
-	 * .encoder(PacketBinderTogglePickup::encode).consumer(PacketBinderTogglePickup:
-	 * :handle).add(); RUNEBINDER.messageBuilder(PacketOpenAdornmentBinder.class,
-	 * networkID++).decoder(PacketOpenAdornmentBinder::decode)
-	 * .encoder(PacketOpenAdornmentBinder::encode).consumer(
-	 * PacketOpenAdornmentBinder::handle).add();
-	 * RUNEBINDER.messageBuilder(PacketToggleBinderMessage.class, networkID++)
-	 * .decoder(PacketToggleBinderMessage::decode).encoder(PacketToggleBinderMessage
-	 * ::encode) .consumer(PacketToggleBinderMessage::handle).add(); return
-	 * RUNEBINDER; }
-	 */
 	public static SimpleChannel MECHANGLOVE = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "mechanglovenetwork"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);;
@@ -161,6 +143,14 @@ public class PacketHandler {
 				.consumer(PacketToggleDirectorFlightModeMessage::handle).add();
 
 		return MECHANGLOVE;
+	}
+
+	public static void sendToClients(SyncKarmaPacket myPacket, PlayerEntity affectedEntity) {
+		CHANNELKARMA.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> affectedEntity), myPacket);
+	}
+
+	public static void sendCovenToClients(SyncCovenPacket myPacket, PlayerEntity affectedEntity) {
+		CHANNELCOVENANT.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> affectedEntity), myPacket);
 	}
 
 }

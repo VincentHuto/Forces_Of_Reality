@@ -16,6 +16,10 @@ public class KarmaActivationProvider implements ICapabilitySerializable<IntNBT> 
 	public static final Capability<IKarmaActivation> KARMA_CAPA = null;
 	private LazyOptional<IKarmaActivation> instance = LazyOptional.of(KARMA_CAPA::getDefaultInstance);
 
+	public void invalidate() {
+		instance.invalidate();
+	}
+
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {

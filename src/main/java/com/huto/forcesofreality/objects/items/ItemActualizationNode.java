@@ -5,6 +5,7 @@ import com.huto.forcesofreality.capabilities.karma.KarmaProvider;
 import com.huto.forcesofreality.capabilities.karma.activation.IKarmaActivation;
 import com.huto.forcesofreality.capabilities.karma.activation.KarmaActivationProvider;
 import com.huto.forcesofreality.network.PacketHandler;
+import com.huto.forcesofreality.network.coven.SyncKarmaPacket;
 import com.huto.forcesofreality.network.karma.KarmaActivationPacketServer;
 import com.huto.forcesofreality.network.karma.KarmaPacketServer;
 
@@ -26,34 +27,41 @@ public class ItemActualizationNode extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		if (!worldIn.isRemote) {
-			IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
-			IKarmaActivation karmaAct = playerIn.getCapability(KarmaActivationProvider.KARMA_CAPA)
-					.orElseThrow(IllegalStateException::new);
-			if (!karmaAct.getEnabled()) {
-				playerIn.sendStatusMessage(new StringTextComponent("Activating Karma!"), false);
-				karmaAct.setKarmaActivation(1);
-				// Sync Packet with server
-				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-						new KarmaActivationPacketServer(karmaAct.getActivation()));
-				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-						new KarmaPacketServer(karma.getKarma()));
-				playerIn.getHeldItemMainhand().shrink(1);
-				return super.onItemRightClick(worldIn, playerIn, handIn);
 
-			} else {
-				playerIn.sendStatusMessage(new StringTextComponent("Deactivating Karma!"), false);
-				karmaAct.setKarmaActivation(0);
+		IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPA).orElseThrow(IllegalStateException::new);
+		IKarmaActivation karmaAct = playerIn.getCapability(KarmaActivationProvider.KARMA_CAPA)
+				.orElseThrow(IllegalStateException::new);
+		if (!karmaAct.getEnabled()) {
+			playerIn.sendStatusMessage(new StringTextComponent("Activating Karma!"), false);
+			karmaAct.setKarmaActivation(1);
+			if (!worldIn.isRemote) {
 				// Sync Packet with server
-				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-						new KarmaActivationPacketServer(karmaAct.getActivation()));
-				PacketHandler.CHANNELKARMA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+				PacketHandler.CHANNELKARMA.send(
+						PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) playerIn),
+						new SyncKarmaPacket(karmaAct.getEnabled(), playerIn.getEntityId()));
+				PacketHandler.CHANNELKARMA.send(
+						PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) playerIn),
+						new KarmaPacketServer(karma.getKarma()));
+			}
+			playerIn.getHeldItemMainhand().shrink(1);
+			return super.onItemRightClick(worldIn, playerIn, handIn);
+
+		} else {
+			playerIn.sendStatusMessage(new StringTextComponent("Deactivating Karma!"), false);
+			karmaAct.setKarmaActivation(0);
+			// Sync Packet with server
+			if (!worldIn.isRemote) {
+				PacketHandler.CHANNELKARMA.send(
+						PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) playerIn),
+						new SyncKarmaPacket(karmaAct.getEnabled(), playerIn.getEntityId()));
+				PacketHandler.CHANNELKARMA.send(
+						PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (ServerPlayerEntity) playerIn),
 						new KarmaPacketServer(karma.getKarma()));
 				playerIn.getHeldItemMainhand().shrink(1);
-				return super.onItemRightClick(worldIn, playerIn, handIn);
 			}
+			return super.onItemRightClick(worldIn, playerIn, handIn);
+
 		}
-		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 }

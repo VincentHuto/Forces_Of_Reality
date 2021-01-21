@@ -18,6 +18,10 @@ public class CovenantProvider implements ICapabilitySerializable<INBT> {
 	public static final Capability<ICovenant> COVEN_CAPA = null;
 	private LazyOptional<ICovenant> instance = LazyOptional.of(COVEN_CAPA::getDefaultInstance);
 
+	public void invalidate() {
+		instance.invalidate();
+	}
+
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
