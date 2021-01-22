@@ -79,6 +79,8 @@ public class RenderLaserEvent {
 			if (player.getDistanceSq(myplayer) > 500)
 				continue;
 			RenderMechanLaser.renderLaser(evt, player, Minecraft.getInstance().getRenderPartialTicks());
+			RenderWickedLaser.renderLaser(evt, player, Minecraft.getInstance().getRenderPartialTicks());
+
 		}
 	}
 

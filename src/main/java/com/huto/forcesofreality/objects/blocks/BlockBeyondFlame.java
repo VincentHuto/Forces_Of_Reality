@@ -117,6 +117,8 @@ public class BlockBeyondFlame extends Block {
 					double d8 = (double) pos.getY() + rand.nextDouble();
 					double d13 = (double) pos.getZ() + rand.nextDouble();
 					worldIn.addParticle(ParticleTypes.ASH, d3, d8, d13, 0.0D, 0.0D, 0.0D);
+					worldIn.addParticle(ParticleTypes.PORTAL, d3, d8, d13, 0.0D, 0.0D, 0.0D);
+
 				}
 			}
 
@@ -126,6 +128,8 @@ public class BlockBeyondFlame extends Block {
 					double d9 = (double) pos.getY() + rand.nextDouble();
 					double d14 = (double) pos.getZ() + rand.nextDouble();
 					worldIn.addParticle(ParticleTypes.ASH, d4, d9, d14, 0.0D, 0.0D, 0.0D);
+					worldIn.addParticle(ParticleTypes.PORTAL, d4, d9, d14, 0.0D, 0.0D, 0.0D);
+
 				}
 			}
 
@@ -135,6 +139,8 @@ public class BlockBeyondFlame extends Block {
 					double d10 = (double) pos.getY() + rand.nextDouble();
 					double d15 = (double) pos.getZ() + rand.nextDouble() * (double) 0.1F;
 					worldIn.addParticle(ParticleTypes.ASH, d5, d10, d15, 0.0D, 0.0D, 0.0D);
+					worldIn.addParticle(ParticleTypes.PORTAL, d5, d10, d15, 0.0D, 0.0D, 0.0D);
+
 				}
 			}
 
@@ -144,6 +150,8 @@ public class BlockBeyondFlame extends Block {
 					double d11 = (double) pos.getY() + rand.nextDouble();
 					double d16 = (double) (pos.getZ() + 1) - rand.nextDouble() * (double) 0.1F;
 					worldIn.addParticle(ParticleTypes.ASH, d6, d11, d16, 0.0D, 0.0D, 0.0D);
+					worldIn.addParticle(ParticleTypes.PORTAL, d6, d11, d16, 0.0D, 0.0D, 0.0D);
+
 				}
 			}
 
@@ -153,6 +161,8 @@ public class BlockBeyondFlame extends Block {
 					double d12 = (double) (pos.getY() + 1) - rand.nextDouble() * (double) 0.1F;
 					double d17 = (double) pos.getZ() + rand.nextDouble();
 					worldIn.addParticle(ParticleTypes.ASH, d7, d12, d17, 0.0D, 0.0D, 0.0D);
+					worldIn.addParticle(ParticleTypes.PORTAL, d7, d12, d17, 0.0D, 0.0D, 0.0D);
+
 				}
 			}
 		} else {
@@ -161,6 +171,8 @@ public class BlockBeyondFlame extends Block {
 				double d1 = (double) pos.getY() + rand.nextDouble() * 0.5D + 0.5D;
 				double d2 = (double) pos.getZ() + rand.nextDouble();
 				worldIn.addParticle(ParticleTypes.ASH, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+				worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+
 			}
 		}
 

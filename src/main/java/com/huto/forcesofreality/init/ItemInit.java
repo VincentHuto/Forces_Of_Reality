@@ -60,6 +60,7 @@ import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModul
 import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleSalvo;
 import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleShortCircuit;
 import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleThruster;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemWickedModuleLaser;
 import com.huto.forcesofreality.objects.items.tools.EnumModToolTiers;
 import com.huto.forcesofreality.objects.items.tools.ItemBowBlade;
 import com.huto.forcesofreality.objects.items.tools.ItemDebugTool;
@@ -393,6 +394,10 @@ public class ItemInit {
 			() -> new ItemMechanModuleLaser(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a concetrated burst of energy from the glove"));
+	public static final RegistryObject<Item> wicked_module_laser = ITEMS.register("wicked_module_laser",
+			() -> new ItemWickedModuleLaser(
+					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.EPIC),
+					"A Funtional Anomaly, Fires a blast of Eldritch beam"));
 	public static final RegistryObject<Item> mechan_module_blade = ITEMS.register("mechan_module_blade",
 			() -> new ItemMechanModuleBlade(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),

@@ -9,9 +9,11 @@ import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.containers.MechanGloveItemHandler;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.font.ModTextFormatting;
+import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
+import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
 import com.huto.forcesofreality.objects.items.coven.tool.modules.IModuleUse;
 
@@ -101,37 +103,55 @@ public class ItemMechanGlove extends Item {
 		RayTraceResult trace = livingEntityIn.pick(range, ClientEventSubscriber.getPartialTicks(), true);
 		switch (trace.getType()) {
 		case ENTITY: {
-			// Entity hitEntity = ((EntityRayTraceResult) trace).getEntity();
 		}
 		case BLOCK: {
-			BlockPos hitPos = ((BlockRayTraceResult) trace).getPos();
-			Block hitBlock = worldIn.getBlockState(hitPos).getBlock();
-			ItemStack smeltStack = worldIn.getRecipeManager()
-					.getRecipe(IRecipeType.SMELTING, new Inventory(new ItemStack(hitBlock)), worldIn)
-					.map(FurnaceRecipe::getRecipeOutput).filter(itemStack -> !new ItemStack(hitBlock).isEmpty())
-					.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack,
-							new ItemStack(hitBlock).getCount() * new ItemStack(hitBlock).getCount()))
-					.orElse(new ItemStack(hitBlock));
-			if (smeltStack.getItem() != new ItemStack(hitBlock).getItem()) {
-				if (smeltStack.getItem() instanceof BlockItem) {
-					BlockItem smeltBlock = (BlockItem) smeltStack.getItem();
-					worldIn.destroyBlock(hitPos, false);
-					worldIn.setBlockState(hitPos, smeltBlock.getBlock().getDefaultState());
-				} else {
-					if (worldIn.rand.nextInt(20) % 3 == 0) {
-						worldIn.addEntity(
-								new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(), hitPos.getZ(), smeltStack));
-					}
-					worldIn.destroyBlock(hitPos, false);
-				}
-			} else {
-				if (!hitBlock.getDefaultState().isAir() && hitBlock != Blocks.FIRE) {
-					if (hitBlock.isFlammable(hitBlock.getDefaultState(), worldIn,
-							((BlockRayTraceResult) trace).getPos(), ((BlockRayTraceResult) trace).getFace())) {
-						BlockPos blockpos1 = hitPos.offset(((BlockRayTraceResult) trace).getFace());
-						BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(worldIn, blockpos1);
-						worldIn.setBlockState(blockpos1, blockstate1, 11);
+			if (stack.getTag() != null) {
+				if (stack.getTag().get(TAG_SELECTEDSTACK) != null) {
+					@SuppressWarnings("static-access")
+					ItemStack moduleStack = stack.read((CompoundNBT) stack.getTag().get(TAG_SELECTEDSTACK));
+					BlockPos hitPos = ((BlockRayTraceResult) trace).getPos();
+					Block hitBlock = worldIn.getBlockState(hitPos).getBlock();
+					if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
+				
+						ItemStack smeltStack = worldIn.getRecipeManager()
+								.getRecipe(IRecipeType.SMELTING, new Inventory(new ItemStack(hitBlock)), worldIn)
+								.map(FurnaceRecipe::getRecipeOutput)
+								.filter(itemStack -> !new ItemStack(hitBlock).isEmpty())
+								.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack,
+										new ItemStack(hitBlock).getCount() * new ItemStack(hitBlock).getCount()))
+								.orElse(new ItemStack(hitBlock));
+						if (smeltStack.getItem() != new ItemStack(hitBlock).getItem()) {
+							if (smeltStack.getItem() instanceof BlockItem) {
+								BlockItem smeltBlock = (BlockItem) smeltStack.getItem();
+								worldIn.destroyBlock(hitPos, false);
+								worldIn.setBlockState(hitPos, smeltBlock.getBlock().getDefaultState());
+							} else {
+								if (worldIn.rand.nextInt(20) % 3 == 0) {
+									worldIn.addEntity(new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(),
+											hitPos.getZ(), smeltStack));
+								}
+								worldIn.destroyBlock(hitPos, false);
+							}
+						} else {
+							if (!hitBlock.getDefaultState().isAir() && hitBlock != BlockInit.beyond_flames.get() && hitBlock != Blocks.FIRE) {
+								if (hitBlock.isFlammable(hitBlock.getDefaultState(), worldIn,
+										((BlockRayTraceResult) trace).getPos(),
+										((BlockRayTraceResult) trace).getFace())) {
+									BlockPos blockpos1 = hitPos.offset(((BlockRayTraceResult) trace).getFace());
+									BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(worldIn, blockpos1);
+									worldIn.setBlockState(blockpos1, blockstate1, 11);
 
+								}
+							}
+						}
+					} else if (moduleStack.getItem() == ItemInit.wicked_module_laser.get()) {
+						if (!hitBlock.getDefaultState().isAir() && hitBlock != Blocks.FIRE && hitBlock !=BlockInit.beyond_flames.get()) {
+								BlockPos blockpos1 = hitPos.offset(((BlockRayTraceResult) trace).getFace());
+								BlockBeyondFlame blockstate1 = (BlockBeyondFlame)BlockInit.beyond_flames.get();
+								BlockState state = blockstate1.getFireForPlacement(worldIn, blockpos1);
+								worldIn.setBlockState(blockpos1, state, 11);
+
+							}
 					}
 				}
 			}
