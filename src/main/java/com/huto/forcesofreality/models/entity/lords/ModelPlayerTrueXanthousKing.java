@@ -49,16 +49,13 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 
 		whole = new WRModelRenderer(this);
 		whole.setRotationPoint(0.0F, -15.0F, -15.0F);
-		
 
 		upperBody = new WRModelRenderer(this);
 		upperBody.setRotationPoint(0.1F, -19.0F, -19.0F);
-		
 
 		hasturForm = new WRModelRenderer(this);
 		hasturForm.setRotationPoint(0.0F, 0.0F, 0.0F);
 		upperBody.addChild(hasturForm);
-		
 
 		head = new WRModelRenderer(this);
 		head.setRotationPoint(0.0F, 12.0F, 21.0F);
@@ -127,7 +124,6 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 		cape.setRotationPoint(0.0F, -6.1615F, 3.8154F);
 		body.addChild(cape);
 		setRotateAngle(cape, -0.5672F, 0.0F, 0.0F);
-		
 
 		Body_r1 = new WRModelRenderer(this);
 		Body_r1.setRotationPoint(3.0F, 1.6868F, 0.0746F);
@@ -140,7 +136,6 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 		bone3 = new WRModelRenderer(this);
 		bone3.setRotationPoint(0.0F, 8.0F, 8.0F);
 		cape.addChild(bone3);
-		
 
 		Body_r2 = new WRModelRenderer(this);
 		Body_r2.setRotationPoint(0.0F, 1.6868F, 1.0746F);
@@ -151,7 +146,6 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 		cape2 = new WRModelRenderer(this);
 		cape2.setRotationPoint(0.0F, 3.0F, 4.0F);
 		bone3.addChild(cape2);
-		
 
 		Body_r3 = new WRModelRenderer(this);
 		Body_r3.setRotationPoint(-8.0F, 1.3891F, 0.0237F);
@@ -170,7 +164,6 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 		bone2.setRotationPoint(0.0F, 8.485F, 8.5337F);
 		cape2.addChild(bone2);
 		setRotateAngle(bone2, 0.7418F, 0.0F, 0.0F);
-		
 
 		Body_r5 = new WRModelRenderer(this);
 		Body_r5.setRotationPoint(0.0F, 1.9696F, -0.3473F);
@@ -223,7 +216,6 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 		bone.setRotationPoint(-0.5F, 17.5F, -3.6F);
 		upperBody.addChild(bone);
 		setRotateAngle(bone, 0.6109F, 0.0F, 0.0F);
-		
 
 		crest = new WRModelRenderer(this);
 		crest.setRotationPoint(-21.6F, -3.5F, 28.3889F);
@@ -294,8 +286,7 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 	}
 
 	@Override
-	public void setLivingAnimations(Entity entityIn, float limbSwing, float limbSwingAmount,
-			float partialTick) {
+	public void setLivingAnimations(Entity entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
 		super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
 		this.entity = entityIn;
 		resetToDefaultPose();
@@ -349,7 +340,7 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 
 	private void biteAnim() {
 		animator.startKeyframe(9);
-		
+
 		animator.endKeyframe();
 		animator.resetKeyframe(8);
 	}
@@ -360,8 +351,8 @@ public class ModelPlayerTrueXanthousKing extends WREntityModel<Entity> {
 	}
 
 	@Override
-	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount,
-			float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
 		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
 		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
 

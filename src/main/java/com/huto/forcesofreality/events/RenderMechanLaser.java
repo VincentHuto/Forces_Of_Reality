@@ -1,5 +1,6 @@
 package com.huto.forcesofreality.events;
 
+import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.RenderTypeInit;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
@@ -27,10 +28,17 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 public class RenderMechanLaser {
 
 	public static void renderLaser(RenderWorldLastEvent event, PlayerEntity player, float ticks) {
-		int range = 25;
-		Vector3d playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
-		RayTraceResult trace = player.pick(range, ticks, false);
-		drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
+		if (ForcesOfReality.findMechanGloveInHand(player).getItem() instanceof ItemMechanGlove) {
+			int range = ((ItemMechanGlove) ForcesOfReality.findMechanGloveInHand(player).getItem()).getRange();
+			Vector3d playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
+			RayTraceResult trace = player.pick(range, ticks, false);
+			drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
+		} else {
+			int range = 5;
+			Vector3d playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
+			RayTraceResult trace = player.pick(range, ticks, false);
+			drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
+		}
 	}
 
 	private static void drawLasers(RenderWorldLastEvent event, Vector3d from, RayTraceResult trace, double xOffset,
@@ -39,61 +47,111 @@ public class RenderMechanLaser {
 		Hand activeHand;
 		if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove) {
 			activeHand = Hand.MAIN_HAND;
-		} else if (player.getHeldItemOffhand().getItem() instanceof ItemMechanGlove) {
+			@SuppressWarnings("static-access")
+			ItemStack stack = player.getHeldItem(activeHand)
+					.read((CompoundNBT) player.getHeldItem(activeHand).getTag().get("selectedstack"));
+			if (stack.getItem() == ItemInit.mechan_module_laser.get() && player.isHandActive()) {
+				IVertexBuilder builder;
+				double distance = Math.max(1, from.subtract(trace.getHitVec()).length());
+				long gameTime = player.world.getGameTime();
+				double v = gameTime * speedModifier;
+				float additiveThickness = (thickness * 3.5f) * calculateLaserFlickerModifier(gameTime);
+
+				float beam2r = 255 / 255f;
+				float beam2g = 180 / 255f;
+				float beam2b = 0 / 255f;
+
+				Vector3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
+				IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+
+				MatrixStack matrix = event.getMatrixStack();
+
+				matrix.push();
+
+				matrix.translate(-view.getX(), -view.getY(), -view.getZ());
+				matrix.translate(from.x, from.y, from.z);
+				matrix.rotate(Vector3f.YP
+						.rotationDegrees(MathHelper.lerp(ticks, -player.rotationYaw, -player.prevRotationYaw)));
+				matrix.rotate(Vector3f.XP
+						.rotationDegrees(MathHelper.lerp(ticks, player.rotationPitch, player.prevRotationPitch)));
+
+				MatrixStack.Entry matrixstack$entry = matrix.getLast();
+				Matrix3f matrixNormal = matrixstack$entry.getNormal();
+				Matrix4f positionMatrix = matrixstack$entry.getMatrix();
+
+				// additive laser beam
+				builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_ADDITIVE);
+				drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, additiveThickness,
+						activeHand, distance, 0.5, 1, ticks, r, 255, b, 0.7f);
+
+				// main laser, colored part
+				builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_BEAM);
+				drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness, activeHand,
+						distance, v, v + distance * 1.5, ticks, r, g, b, 1f);
+
+				// core
+				builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_CORE);
+				drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness / 2, activeHand,
+						distance, v, v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
+				matrix.pop();
+				buffer.finish();
+			}
+		}
+		if (player.getHeldItemOffhand().getItem() instanceof ItemMechanGlove) {
 			activeHand = Hand.OFF_HAND;
+			@SuppressWarnings("static-access")
+			ItemStack stack = player.getHeldItem(activeHand)
+					.read((CompoundNBT) player.getHeldItem(activeHand).getTag().get("selectedstack"));
+			if (stack.getItem() == ItemInit.mechan_module_laser.get() && player.isHandActive()) {
+				IVertexBuilder builder;
+				double distance = Math.max(1, from.subtract(trace.getHitVec()).length());
+				long gameTime = player.world.getGameTime();
+				double v = gameTime * speedModifier;
+				float additiveThickness = (thickness * 3.5f) * calculateLaserFlickerModifier(gameTime);
+
+				float beam2r = 255 / 255f;
+				float beam2g = 180 / 255f;
+				float beam2b = 0 / 255f;
+
+				Vector3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
+				IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+
+				MatrixStack matrix = event.getMatrixStack();
+
+				matrix.push();
+
+				matrix.translate(-view.getX(), -view.getY(), -view.getZ());
+				matrix.translate(from.x, from.y, from.z);
+				matrix.rotate(Vector3f.YP
+						.rotationDegrees(MathHelper.lerp(ticks, -player.rotationYaw, -player.prevRotationYaw)));
+				matrix.rotate(Vector3f.XP
+						.rotationDegrees(MathHelper.lerp(ticks, player.rotationPitch, player.prevRotationPitch)));
+
+				MatrixStack.Entry matrixstack$entry = matrix.getLast();
+				Matrix3f matrixNormal = matrixstack$entry.getNormal();
+				Matrix4f positionMatrix = matrixstack$entry.getMatrix();
+
+				// additive laser beam
+				builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_ADDITIVE);
+				drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, additiveThickness,
+						activeHand, distance, 0.5, 1, ticks, r, 255, b, 0.7f);
+
+				// main laser, colored part
+				builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_BEAM);
+				drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness, activeHand,
+						distance, v, v + distance * 1.5, ticks, r, g, b, 1f);
+
+				// core
+				builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_CORE);
+				drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness / 2, activeHand,
+						distance, v, v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
+				matrix.pop();
+				buffer.finish();
+			}
 		} else {
 			return;
 		}
-		@SuppressWarnings("static-access")
-		ItemStack stack = player.getHeldItem(activeHand)
-				.read((CompoundNBT) player.getHeldItem(activeHand).getTag().get("selectedstack"));
-		if (stack.getItem() == ItemInit.mechan_module_laser.get() && player.isHandActive()) {
-			IVertexBuilder builder;
-			double distance = Math.max(1, from.subtract(trace.getHitVec()).length());
-			long gameTime = player.world.getGameTime();
-			double v = gameTime * speedModifier;
-			float additiveThickness = (thickness * 3.5f) * calculateLaserFlickerModifier(gameTime);
 
-			float beam2r = 255 / 255f;
-			float beam2g = 180 / 255f;
-			float beam2b = 0 / 255f;
-
-			Vector3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
-			IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-
-			MatrixStack matrix = event.getMatrixStack();
-
-			matrix.push();
-
-			matrix.translate(-view.getX(), -view.getY(), -view.getZ());
-			matrix.translate(from.x, from.y, from.z);
-			matrix.rotate(
-					Vector3f.YP.rotationDegrees(MathHelper.lerp(ticks, -player.rotationYaw, -player.prevRotationYaw)));
-			matrix.rotate(Vector3f.XP
-					.rotationDegrees(MathHelper.lerp(ticks, player.rotationPitch, player.prevRotationPitch)));
-
-			MatrixStack.Entry matrixstack$entry = matrix.getLast();
-			Matrix3f matrixNormal = matrixstack$entry.getNormal();
-			Matrix4f positionMatrix = matrixstack$entry.getMatrix();
-
-			// additive laser beam
-			builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_ADDITIVE);
-			drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, additiveThickness, activeHand,
-					distance, 0.5, 1, ticks, r, 255, b, 0.7f);
-
-			// main laser, colored part
-			builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_BEAM);
-			drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness, activeHand, distance,
-					v, v + distance * 1.5, ticks, r, g, b, 1f);
-
-			// core
-			builder = buffer.getBuffer(RenderTypeInit.LASER_MAIN_CORE);
-			drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness / 2, activeHand,
-					distance, v, v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
-			matrix.pop();
-//        RenderSystem.disableDepthTest();
-			buffer.finish();
-		}
 	}
 
 	private static float calculateLaserFlickerModifier(long gameTime) {

@@ -3,18 +3,15 @@ package com.huto.forcesofreality.objects.items.coven.tool;
 import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
 import com.huto.forcesofreality.capabilities.covenant.ICovenant;
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ItemAllegianceIdentifier extends Item {
 

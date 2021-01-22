@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
 import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -51,12 +50,11 @@ public class SyncCovenPacket {
 
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			PlayerEntity player = Minecraft.getInstance().player;
+			PlayerEntity player = ctx.get().getSender();
 			if (player != null) {
 				Entity entity = player.world.getEntityByID(entityID);
 				if (entity instanceof PlayerEntity) {
-					entity.getCapability(CovenantProvider.COVEN_CAPA)
-							.ifPresent(covens -> covens.setDevotion(devotion));
+					entity.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> covens.setDevotion(devotion));
 				}
 			}
 		});

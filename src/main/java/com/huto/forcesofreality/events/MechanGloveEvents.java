@@ -30,7 +30,9 @@ public class MechanGloveEvents {
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (ClientEventSubscriber.keyBinds.get(0).isPressed()) {
-			ForcesOfReality.proxy.openMechanGui();
+			if (ForcesOfReality.findMechanGlove(ClientEventSubscriber.getClientPlayer()) != ItemStack.EMPTY
+					&& ForcesOfReality.findMechanGlove(ClientEventSubscriber.getClientPlayer()) != null)
+				ForcesOfReality.proxy.openMechanGui();
 		}
 	}
 

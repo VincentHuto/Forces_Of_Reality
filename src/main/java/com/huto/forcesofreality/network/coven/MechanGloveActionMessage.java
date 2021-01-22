@@ -6,6 +6,7 @@ import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 public class MechanGloveActionMessage {
@@ -24,12 +25,12 @@ public class MechanGloveActionMessage {
 			if (player == null)
 				return;
 			if (player.getHeldItemMainhand().getItem() instanceof ItemMechanGlove) {
-				((ItemMechanGlove) player.getHeldItemMainhand().getItem()).moduleUse(player,
+				((ItemMechanGlove) player.getHeldItemMainhand().getItem()).moduleUse(player, Hand.MAIN_HAND,
 						player.getHeldItemMainhand(), player.getEntityWorld());
 			}
 			if (player.getHeldItemOffhand().getItem() instanceof ItemMechanGlove) {
-				((ItemMechanGlove) player.getHeldItemOffhand().getItem()).moduleUse(player, player.getHeldItemOffhand(),
-						player.getEntityWorld());
+				((ItemMechanGlove) player.getHeldItemOffhand().getItem()).moduleUse(player, Hand.OFF_HAND,
+						player.getHeldItemOffhand(), player.getEntityWorld());
 			}
 		});
 		ctx.get().setPacketHandled(true);

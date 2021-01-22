@@ -1,6 +1,5 @@
 package com.huto.forcesofreality.models.armor;
 
-import com.huto.forcesofreality.entities.guardians.EntityHastur;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -10,7 +10,7 @@ import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.PacketUpdateMechanModule;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
-import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanModuleBase;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleBase;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -70,13 +70,15 @@ public class GuiMechanGloveViewer extends Screen {
 			buttons.get(i).renderButton(matrixStack, mouseX, mouseY, 511);
 			if (buttons.get(i).isHovered()) {
 				ItemStack stack = ForcesOfReality.findMechanGlove(player);
-				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-						.orElseThrow(NullPointerException::new);
-				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
-					ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-					List<ITextComponent> text = new ArrayList<ITextComponent>();
-					text.add(new StringTextComponent(I18n.format(pat.getItem().getName().getString())));
-					func_243308_b(matrixStack, text, mouseX, mouseY);
+				if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
+					IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+							.orElseThrow(NullPointerException::new);
+					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+						ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
+						List<ITextComponent> text = new ArrayList<ITextComponent>();
+						text.add(new StringTextComponent(I18n.format(pat.getItem().getName().getString())));
+						func_243308_b(matrixStack, text, mouseX, mouseY);
+					}
 				}
 			}
 		}
@@ -85,20 +87,22 @@ public class GuiMechanGloveViewer extends Screen {
 		GlStateManager.pushMatrix();
 		{
 			ItemStack stack = ForcesOfReality.findMechanGlove(player);
-			IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-					.orElseThrow(NullPointerException::new);
-			if (binderHandler instanceof MechanGloveItemHandler) {
-				handler = (MechanGloveItemHandler) binderHandler;
-				handler.load();
-				slotcount = handler.getSlots();
-				itemKey = stack.getTranslationKey();
-				for (int i = 0; i < buttons.size(); i++) {
-					GlStateManager.translatef(0, 0, 1);
-					RenderHelper.enableStandardItemLighting();
-					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
-						ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-						Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(
-								new ItemStack(pat.getItem()), (buttons.get(i).x + 2), buttons.get(i).y + 2);
+			if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
+				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+						.orElseThrow(NullPointerException::new);
+				if (binderHandler instanceof MechanGloveItemHandler) {
+					handler = (MechanGloveItemHandler) binderHandler;
+					handler.load();
+					slotcount = handler.getSlots();
+					itemKey = stack.getTranslationKey();
+					for (int i = 0; i < buttons.size(); i++) {
+						GlStateManager.translatef(0, 0, 1);
+						RenderHelper.enableStandardItemLighting();
+						if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+							ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
+							Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(
+									new ItemStack(pat.getItem()), (buttons.get(i).x + 2), buttons.get(i).y + 2);
+						}
 					}
 				}
 			}
@@ -129,99 +133,102 @@ public class GuiMechanGloveViewer extends Screen {
 		int verticalLoc = top + guiHeight;
 		buttons.clear();
 		ItemStack stack = ForcesOfReality.findMechanGlove(player);
-		IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-				.orElseThrow(NullPointerException::new);
-		if (stack.getItem() instanceof ItemMechanGlove) {
-			ItemMechanGlove glove = (ItemMechanGlove) stack.getItem();
-			if (binderHandler instanceof MechanGloveItemHandler) {
-				handler = (MechanGloveItemHandler) binderHandler;
-				handler.load();
-				slotcount = handler.getSlots();
-				itemKey = stack.getTranslationKey();
-				for (int i = 0; i < binderHandler.getSlots(); i++) {
-					if (i < 3) {
-						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 30),
-								(verticalLoc - 130) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
-									@SuppressWarnings("unused")
-									@Override
-									public void onPress(Button press) {
-										if (press instanceof GuiButtonTextured) {
-											player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
-											ItemStack currentStack = binderHandler
-													.getStackInSlot(((GuiButtonTextured) press).getId());
-											if (currentStack.getItem() instanceof ItemMechanModuleBase) {
-												ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
-														.getItem();
-												PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
-														((GuiButtonTextured) press).getId(), currentStack));
-												glove.setModuleStack(currentStack);
+		if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
+			IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+					.orElseThrow(NullPointerException::new);
+			if (stack.getItem() instanceof ItemMechanGlove) {
+				ItemMechanGlove glove = (ItemMechanGlove) stack.getItem();
+				if (binderHandler instanceof MechanGloveItemHandler) {
+					handler = (MechanGloveItemHandler) binderHandler;
+					handler.load();
+					slotcount = handler.getSlots();
+					itemKey = stack.getTranslationKey();
+					for (int i = 0; i < binderHandler.getSlots(); i++) {
+						if (i < 3) {
+							this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 30),
+									(verticalLoc - 130) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+										@SuppressWarnings("unused")
+										@Override
+										public void onPress(Button press) {
+											if (press instanceof GuiButtonTextured) {
+												player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+												ItemStack currentStack = binderHandler
+														.getStackInSlot(((GuiButtonTextured) press).getId());
+												if (currentStack.getItem() instanceof ItemMechanModuleBase) {
+													ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
+															.getItem();
+													PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
+															((GuiButtonTextured) press).getId(), currentStack));
+													glove.setModuleStack(currentStack);
+												}
 											}
 										}
-									}
-								}));
-					} else if (i < 6) {
-						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 63),
-								(verticalLoc - 265) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
-									@SuppressWarnings("unused")
-									@Override
-									public void onPress(Button press) {
-										if (press instanceof GuiButtonTextured) {
-											player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
-											ItemStack currentStack = binderHandler
-													.getStackInSlot(((GuiButtonTextured) press).getId());
-											if (currentStack.getItem() instanceof ItemMechanModuleBase) {
-												ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
-														.getItem();
-												PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
-														((GuiButtonTextured) press).getId(), currentStack));
-												glove.setModuleStack(currentStack);
 
-											}
-										}
-									}
-								}));
-					} else if (i < 9) {
-						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 95),
-								(verticalLoc - 400) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
-									@SuppressWarnings("unused")
-									@Override
-									public void onPress(Button press) {
-										if (press instanceof GuiButtonTextured) {
-											ItemStack currentStack = binderHandler
-													.getStackInSlot(((GuiButtonTextured) press).getId());
-											player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
-											if (currentStack.getItem() instanceof ItemMechanModuleBase) {
-												ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
-														.getItem();
-												PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
-														((GuiButtonTextured) press).getId(), currentStack));
-												glove.setModuleStack(currentStack);
+									}));
+						} else if (i < 6) {
+							this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 63),
+									(verticalLoc - 265) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+										@SuppressWarnings("unused")
+										@Override
+										public void onPress(Button press) {
+											if (press instanceof GuiButtonTextured) {
+												player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+												ItemStack currentStack = binderHandler
+														.getStackInSlot(((GuiButtonTextured) press).getId());
+												if (currentStack.getItem() instanceof ItemMechanModuleBase) {
+													ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
+															.getItem();
+													PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
+															((GuiButtonTextured) press).getId(), currentStack));
+													glove.setModuleStack(currentStack);
 
+												}
 											}
 										}
-									}
-								}));
-					} else if (i < 12) {
-						this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 130),
-								(verticalLoc - 410) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
-									@SuppressWarnings("unused")
-									@Override
-									public void onPress(Button press) {
-										if (press instanceof GuiButtonTextured) {
-											ItemStack currentStack = binderHandler
-													.getStackInSlot(((GuiButtonTextured) press).getId());
-											player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
-											if (currentStack.getItem() instanceof ItemMechanModuleBase) {
-												ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
-														.getItem();
-												PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
-														((GuiButtonTextured) press).getId(), currentStack));
-												glove.setModuleStack(currentStack);
+									}));
+						} else if (i < 9) {
+							this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 95),
+									(verticalLoc - 400) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+										@SuppressWarnings("unused")
+										@Override
+										public void onPress(Button press) {
+											if (press instanceof GuiButtonTextured) {
+												ItemStack currentStack = binderHandler
+														.getStackInSlot(((GuiButtonTextured) press).getId());
+												player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+												if (currentStack.getItem() instanceof ItemMechanModuleBase) {
+													ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
+															.getItem();
+													PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
+															((GuiButtonTextured) press).getId(), currentStack));
+													glove.setModuleStack(currentStack);
 
+												}
 											}
 										}
-									}
-								}));
+									}));
+						} else if (i < 12) {
+							this.addButton(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 130),
+									(verticalLoc - 410) + (i * 45), 20, 20, 174, 98, null, new IPressable() {
+										@SuppressWarnings("unused")
+										@Override
+										public void onPress(Button press) {
+											if (press instanceof GuiButtonTextured) {
+												ItemStack currentStack = binderHandler
+														.getStackInSlot(((GuiButtonTextured) press).getId());
+												player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
+												if (currentStack.getItem() instanceof ItemMechanModuleBase) {
+													ItemMechanModuleBase pat = (ItemMechanModuleBase) currentStack
+															.getItem();
+													PacketHandler.HANDLER.sendToServer(new PacketUpdateMechanModule(
+															((GuiButtonTextured) press).getId(), currentStack));
+													glove.setModuleStack(currentStack);
+
+												}
+											}
+										}
+									}));
+						}
 					}
 				}
 			}

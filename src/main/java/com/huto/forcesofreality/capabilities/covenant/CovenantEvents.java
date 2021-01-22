@@ -2,24 +2,31 @@ package com.huto.forcesofreality.capabilities.covenant;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.lang.reflect.Field;
 import java.util.Map;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
 import com.huto.forcesofreality.capabilities.adornments.AdornmentsApi;
+import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
 import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.EnchantmentInit;
 import com.huto.forcesofreality.init.ItemInit;
+import com.huto.forcesofreality.models.entity.lords.ModelPlayerTrueXanthousKing;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
 import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.huto.forcesofreality.objects.items.ItemAdornment;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,11 +36,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -42,29 +52,26 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class CovenantEvents {
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof PlayerEntity) {
-			CovenantProvider provider = new CovenantProvider();
-
-			event.addCapability(new ResourceLocation(ForcesOfReality.MOD_ID, "covenant"), provider);
-			event.addListener(provider::invalidate);
-
+			System.out.println("Attatches Capability");
+			event.addCapability(new ResourceLocation(ForcesOfReality.MOD_ID, "covenant"), new CovenantProvider());
 		}
 	}
 
 	@SubscribeEvent
 	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		if (event.getEntity() instanceof ServerPlayerEntity) {
-			ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
-			player.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
-				PacketHandler.sendCovenToClients(new SyncCovenPacket(covens.getDevotion(), player.getEntityId()),
-						player);
-			});
-		}
+		ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+		Map<EnumCovenants, Integer> covenant = CovenantProvider.getPlayerDevotion(player);
+		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
+				new CovenantPacketServer(covenant));
+		player.sendStatusMessage(
+				new StringTextComponent("Welcome! Current Covenant: " + TextFormatting.GOLD + covenant), false);
 	}
 
 	@SubscribeEvent
@@ -99,7 +106,6 @@ public class CovenantEvents {
 		}
 	}
 
-	// SWITCHED TO CLIENTRENDEREVENT.THERMALLAYERHELPER
 	@SubscribeEvent
 	public static void onDropAdornment(LivingDeathEvent e) {
 		if (e.getEntity() instanceof PlayerEntity) {
@@ -179,6 +185,20 @@ public class CovenantEvents {
 				}
 		}
 	}
+
+	@SubscribeEvent
+	public static void playerTick(PlayerTickEvent evt) {
+		if (!evt.player.world.isRemote) {
+			if (evt.player.world.getGameTime() % 100 == 0) {
+				evt.player.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
+					PacketHandler.sendCovenToClients(
+							new SyncCovenPacket(covens.getDevotion(), evt.player.getEntityId()), evt.player);
+				});
+			}
+		}
+	}
+
+
 
 	private static FontRenderer fontRenderer;
 

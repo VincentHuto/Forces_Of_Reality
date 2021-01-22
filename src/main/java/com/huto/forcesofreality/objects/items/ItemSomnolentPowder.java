@@ -8,9 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemManaPowder extends Item {
+public class ItemSomnolentPowder extends Item {
 
-	public ItemManaPowder(Properties prop) {
+	public ItemSomnolentPowder(Properties prop) {
 		super(prop);
 	}
 

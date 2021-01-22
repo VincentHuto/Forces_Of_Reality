@@ -11,13 +11,13 @@ import com.huto.forcesofreality.objects.items.ItemDryingAgent;
 import com.huto.forcesofreality.objects.items.ItemElderTome;
 import com.huto.forcesofreality.objects.items.ItemGrandPurgingStone;
 import com.huto.forcesofreality.objects.items.ItemHarmonicImprint;
-import com.huto.forcesofreality.objects.items.ItemManaPowder;
 import com.huto.forcesofreality.objects.items.ItemNullIngot;
 import com.huto.forcesofreality.objects.items.ItemPurgingStone;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
 import com.huto.forcesofreality.objects.items.ItemShatterIngot;
 import com.huto.forcesofreality.objects.items.ItemSlugBucket;
 import com.huto.forcesofreality.objects.items.ItemSoakingAgent;
+import com.huto.forcesofreality.objects.items.ItemSomnolentPowder;
 import com.huto.forcesofreality.objects.items.ItemSomnolentTome;
 import com.huto.forcesofreality.objects.items.ItemStormingAgent;
 import com.huto.forcesofreality.objects.items.ItemUpgrade;
@@ -50,10 +50,16 @@ import com.huto.forcesofreality.objects.items.coven.tool.ItemDiscordantBell;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemDivineFeather;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMachinaCage;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
-import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanModuleBase;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemStarSlug;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemTrickAxe;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemYellowTome;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleBase;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleBlade;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleLaser;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleRocket;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleSalvo;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleShortCircuit;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleThruster;
 import com.huto.forcesofreality.objects.items.tools.EnumModToolTiers;
 import com.huto.forcesofreality.objects.items.tools.ItemBowBlade;
 import com.huto.forcesofreality.objects.items.tools.ItemDebugTool;
@@ -141,7 +147,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> emanating_ingot = ITEMS.register("emanating_ingot",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> somnolent_powder = ITEMS.register("somnolent_powder",
-			() -> new ItemManaPowder(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
+			() -> new ItemSomnolentPowder(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> somnolent_crystal = ITEMS.register("somnolent_crystal",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> channeling_rod = ITEMS.register("channeling_rod",
@@ -346,23 +352,25 @@ public class ItemInit {
 					true));
 
 	// Gloves
-	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove", () -> new ItemMechanGlove(
-			new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
-			"mechan_glove", 3, Rarity.UNCOMMON));
+	public static final RegistryObject<Item> mechan_glove = ITEMS.register("mechan_glove",
+			() -> new ItemMechanGlove(
+					new Item.Properties().rarity(Rarity.UNCOMMON).maxStackSize(1)
+							.group(ForcesOfRealityItemGroup.instance).maxDamage(512),
+					"mechan_glove", 3, 5, Rarity.UNCOMMON));
 	public static final RegistryObject<Item> mechan_glove_superior = ITEMS.register("mechan_glove_superior",
-			() -> new ItemMechanGlove(
-					new Item.Properties().rarity(Rarity.RARE).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
-					"mechan_glove_superior", 6, Rarity.RARE));
+			() -> new ItemMechanGlove(new Item.Properties().rarity(Rarity.RARE).maxStackSize(1)
+					.group(ForcesOfRealityItemGroup.instance).maxDamage(1024), "mechan_glove_superior", 6, 10,
+					Rarity.RARE));
 	public static final RegistryObject<Item> mechan_glove_masterpiece = ITEMS.register("mechan_glove_masterpiece",
+			() -> new ItemMechanGlove(new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1)
+					.group(ForcesOfRealityItemGroup.instance).maxDamage(2048), "mechan_glove_masterpiece", 9, 15,
+					Rarity.EPIC));
+	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS.register("mechan_glove_godlike",
 			() -> new ItemMechanGlove(
-					new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(ForcesOfRealityItemGroup.instance),
-					"mechan_glove_masterpiece", 9, Rarity.EPIC));
-	public static final RegistryObject<Item> mechan_glove_godlike = ITEMS
-			.register("mechan_glove_godlike",
-					() -> new ItemMechanGlove(
-							new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
-									.group(ForcesOfRealityItemGroup.instance),
-							"mechan_glove_godlike", 9, ModTextFormatting.AURIC));
+					new Item.Properties().rarity(ModTextFormatting.AURIC).maxStackSize(1)
+							.group(ForcesOfRealityItemGroup.instance).maxDamage(4096),
+					"mechan_glove_godlike", 9, 35, ModTextFormatting.AURIC));
+
 	// Modules
 	public static final RegistryObject<Item> mechan_module = ITEMS
 			.register("mechan_module",
@@ -370,38 +378,31 @@ public class ItemInit {
 							new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 							"Base Module"));
 	public static final RegistryObject<Item> mechan_module_rocket = ITEMS.register("mechan_module_rocket",
-			() -> new ItemMechanModuleBase(
+			() -> new ItemMechanModuleRocket(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a singluar exploding rocket at an angle"));
 	public static final RegistryObject<Item> mechan_module_salvo = ITEMS.register("mechan_module_salvo",
-			() -> new ItemMechanModuleBase(
+			() -> new ItemMechanModuleSalvo(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fire Several homing rockets that track down targets around player"));
 	public static final RegistryObject<Item> mechan_module_shortcircuit = ITEMS.register("mechan_module_shortcircuit",
-			() -> new ItemMechanModuleBase(
+			() -> new ItemMechanModuleShortCircuit(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a ball of electricity that leaps between targets"));
 	public static final RegistryObject<Item> mechan_module_laser = ITEMS.register("mechan_module_laser",
-			() -> new ItemMechanModuleBase(
+			() -> new ItemMechanModuleLaser(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Fires a concetrated burst of energy from the glove"));
 	public static final RegistryObject<Item> mechan_module_blade = ITEMS.register("mechan_module_blade",
-			() -> new ItemMechanModuleBase(
+			() -> new ItemMechanModuleBlade(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Extrudes a small blade from the glove increasing damage dealt"));
 	public static final RegistryObject<Item> mechan_module_thruster = ITEMS.register("mechan_module_thruster",
-			() -> new ItemMechanModuleBase(
+			() -> new ItemMechanModuleThruster(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					"Increases the power of an equiped Machina Spark Director, Allows for boosting"));
 
 	// Food
-	/*
-	 * public static final RegistryObject<Item> akebi_pod =
-	 * ITEMS.register("akebi_pod", () -> new Item(new
-	 * Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new
-	 * Food.Builder() .hunger(6).saturation(1.5f).effect(new
-	 * EffectInstance(Effects.GLOWING, 6000, 5), 0.7f).build())));
-	 */
 	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",

@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import com.huto.forcesofreality.capabilities.karma.activation.KarmaActivationProvider;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
@@ -32,11 +31,11 @@ public class SyncKarmaPacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            PlayerEntity player = Minecraft.getInstance().player;
+            PlayerEntity player =ctx.get().getSender();
             if(player != null) {
                 Entity entity = player.world.getEntityByID(entityID);
                 if (entity instanceof PlayerEntity) {
-                    entity.getCapability(KarmaActivationProvider.KARMA_CAPA).ifPresent(iStealth -> iStealth.setKarmaActivation(activ ? 1:0));
+                    entity.getCapability(KarmaActivationProvider.KARMA_CAPA).ifPresent(kar -> kar.setKarmaActivation(activ ? 1:0));
             		ctx.get().setPacketHandled(true);
 
 				}

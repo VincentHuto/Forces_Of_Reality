@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.objects.items.coven.tool;
+package com.huto.forcesofreality.objects.items.coven.tool.modules;
 
 import java.util.List;
 

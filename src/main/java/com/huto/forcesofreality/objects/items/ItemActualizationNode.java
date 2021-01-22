@@ -6,7 +6,6 @@ import com.huto.forcesofreality.capabilities.karma.activation.IKarmaActivation;
 import com.huto.forcesofreality.capabilities.karma.activation.KarmaActivationProvider;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.SyncKarmaPacket;
-import com.huto.forcesofreality.network.karma.KarmaActivationPacketServer;
 import com.huto.forcesofreality.network.karma.KarmaPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;

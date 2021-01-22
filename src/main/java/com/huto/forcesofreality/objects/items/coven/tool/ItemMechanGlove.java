@@ -7,15 +7,13 @@ import javax.annotation.Nullable;
 
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.containers.MechanGloveItemHandler;
-import com.huto.forcesofreality.entities.projectiles.EntityDreadRocket;
-import com.huto.forcesofreality.entities.projectiles.EntityDreadRocketDirected;
-import com.huto.forcesofreality.entities.projectiles.EntityShortCircuit;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
+import com.huto.forcesofreality.objects.items.coven.tool.modules.IModuleUse;
 
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.Block;
@@ -27,6 +25,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -63,6 +62,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 public class ItemMechanGlove extends Item {
 	String name;
 	Integer size;
+	int range;
 	Rarity rare;
 	ItemStack moduleStack;
 	public String TAG_SELECTEDSTACK = "selectedstack";
@@ -71,11 +71,12 @@ public class ItemMechanGlove extends Item {
 	public static boolean swordstate;
 	public static String TAG_SWORDSTATE = "swordstate";
 
-	public ItemMechanGlove(Properties props, String name, Integer size, Rarity rarity) {
+	public ItemMechanGlove(Properties props, String name, Integer size, int range, Rarity rarity) {
 		super(props);
 		this.name = name;
 		this.size = size;
 		this.rare = rarity;
+		this.range = range;
 	}
 
 	@Override
@@ -89,11 +90,14 @@ public class ItemMechanGlove extends Item {
 		return UseAction.BOW;
 	}
 
+	public int getRange() {
+		return range;
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
 		super.onUse(worldIn, livingEntityIn, stack, count);
-		int range = 25;
 		RayTraceResult trace = livingEntityIn.pick(range, ClientEventSubscriber.getPartialTicks(), true);
 		switch (trace.getType()) {
 		case ENTITY: {
@@ -114,8 +118,9 @@ public class ItemMechanGlove extends Item {
 					worldIn.destroyBlock(hitPos, false);
 					worldIn.setBlockState(hitPos, smeltBlock.getBlock().getDefaultState());
 				} else {
-					if(worldIn.rand.nextInt(20) %3 ==0) {
-					worldIn.addEntity(new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(), hitPos.getZ(), smeltStack));
+					if (worldIn.rand.nextInt(20) % 3 == 0) {
+						worldIn.addEntity(
+								new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(), hitPos.getZ(), smeltStack));
 					}
 					worldIn.destroyBlock(hitPos, false);
 				}
@@ -123,9 +128,9 @@ public class ItemMechanGlove extends Item {
 				if (!hitBlock.getDefaultState().isAir() && hitBlock != Blocks.FIRE) {
 					if (hitBlock.isFlammable(hitBlock.getDefaultState(), worldIn,
 							((BlockRayTraceResult) trace).getPos(), ((BlockRayTraceResult) trace).getFace())) {
-				         BlockPos blockpos1 = hitPos.offset( ((BlockRayTraceResult) trace).getFace());
-					       BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(worldIn, blockpos1);
-				            worldIn.setBlockState(blockpos1, blockstate1, 11);
+						BlockPos blockpos1 = hitPos.offset(((BlockRayTraceResult) trace).getFace());
+						BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(worldIn, blockpos1);
+						worldIn.setBlockState(blockpos1, blockstate1, 11);
 
 					}
 				}
@@ -157,46 +162,34 @@ public class ItemMechanGlove extends Item {
 		swordstate = swordstateIn;
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-
-		ItemStack stack = playerIn.getHeldItem(handIn)
-				.read((CompoundNBT) playerIn.getHeldItem(handIn).getTag().get("selectedstack"));
-		if (stack.getItem() == ItemInit.mechan_module_laser.get()) {
-			playerIn.setActiveHand(handIn);
-		}
-		if (handIn == Hand.MAIN_HAND) {
-			if (worldIn.isRemote) {
-				if (!playerIn.isSneaking()) {
-					PacketHandler.MECHANGLOVE.sendToServer(new MechanGloveActionMessage());
-				}
-
-			}
-			if (!worldIn.isRemote) {
-				if (playerIn.isSneaking()) {
-					// open
-					playerIn.openContainer(new INamedContainerProvider() {
-						@Override
-						public ITextComponent getDisplayName() {
-							return playerIn.getHeldItem(handIn).getDisplayName();
-						}
-
-						@Nullable
-						@Override
-						public Container createMenu(int windowId, PlayerInventory p_createMenu_2_,
-								PlayerEntity p_createMenu_3_) {
-							return new ContainerMechanGlove(windowId, p_createMenu_3_.world,
-									p_createMenu_3_.getPosition(), p_createMenu_2_, p_createMenu_3_);
-						}
-					});
-
-				}
+		if (worldIn.isRemote) {
+			if (!playerIn.isSneaking()) {
+				PacketHandler.MECHANGLOVE.sendToServer(new MechanGloveActionMessage());
 			}
 		}
+		if (!worldIn.isRemote) {
+			if (playerIn.isSneaking()) {
+				// open
+				playerIn.openContainer(new INamedContainerProvider() {
+					@Override
+					public ITextComponent getDisplayName() {
+						return playerIn.getHeldItem(handIn).getDisplayName();
+					}
 
+					@Nullable
+					@Override
+					public Container createMenu(int windowId, PlayerInventory p_createMenu_2_,
+							PlayerEntity p_createMenu_3_) {
+						return new ContainerMechanGlove(windowId, p_createMenu_3_.world, p_createMenu_3_.getPosition(),
+								p_createMenu_2_, p_createMenu_3_);
+					}
+				});
+
+			}
+		}
 		return ActionResult.resultPass(playerIn.getHeldItem(handIn));
-
 	}
 
 	@Override
@@ -235,47 +228,15 @@ public class ItemMechanGlove extends Item {
 	}
 
 	@SuppressWarnings("static-access")
-	public void moduleUse(PlayerEntity playerIn, ItemStack itemStack, World worldIn) {
+	public void moduleUse(PlayerEntity playerIn, Hand handIn, ItemStack itemStack, World worldIn) {
 		if (itemStack.getTag() != null) {
 			if (itemStack.getTag().get(TAG_SELECTEDSTACK) != null) {
 				ItemStack moduleStack = itemStack.read((CompoundNBT) itemStack.getTag().get(TAG_SELECTEDSTACK));
-				if (moduleStack.getItem() == ItemInit.mechan_module_salvo.get()) {
-					EntityDreadRocket[] missArray = new EntityDreadRocket[5];
-					for (int i = 0; i < 5; i++) {
-						missArray[i] = new EntityDreadRocket((PlayerEntity) playerIn, false);
-						missArray[i].setPosition(playerIn.getPosX() + ((Math.random() - 0.5) * 3.5),
-								playerIn.getPosY() + 0.3, playerIn.getPosZ() + ((Math.random() - 0.5) * 3.5));
-						worldIn.addEntity(missArray[i]);
-					}
-				} else if (moduleStack.getItem() == ItemInit.mechan_module_rocket.get()) {
-					EntityDreadRocketDirected miss = new EntityDreadRocketDirected((PlayerEntity) playerIn, false);
-					miss.setPosition(playerIn.getPosX() - 0.5, playerIn.getPosY() + 0.6, playerIn.getPosZ() - 0.5);
-					miss.setDirectionMotion(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.0F, 1.0F);
-					System.out.println(miss.getThrower());
-					worldIn.addEntity(miss);
-				} else if (moduleStack.getItem() == ItemInit.mechan_module_shortcircuit.get()) {
-					EntityShortCircuit miss = new EntityShortCircuit((PlayerEntity) playerIn, true);
-					miss.setPosition(playerIn.getPosX() - 0.5, playerIn.getPosY() + 0.6, playerIn.getPosZ() - 0.5);
-					miss.setDirectionMotion(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 5.0F, 1.0F);
-					worldIn.addEntity(miss);
-				} else if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
-					// TODO "This is where id put my laser, IF I HAD ONE"
-				} else if (moduleStack.getItem() == ItemInit.mechan_module_thruster.get()) {
-					if (playerIn.inventory.armorInventory.get(2).getItem() instanceof ItemSparkDirector) {
-						ItemStack armor = playerIn.inventory.armorInventory.get(2);
-						if (armor.getOrCreateTag().getFloat("heightmodifier") == 0.1f) {
-							armor.getOrCreateTag().putFloat("heightmodifier", 0.2f);
-						} else {
-							armor.getOrCreateTag().putFloat("heightmodifier", 0.1f);
-						}
-					}
-				} else if (moduleStack.getItem() == ItemInit.mechan_module_blade.get()) {
-					if (!itemStack.getTag().getBoolean(TAG_SWORDSTATE)) {
-						itemStack.getTag().putBoolean(TAG_SWORDSTATE, true);
-					} else {
-						itemStack.getTag().putBoolean(TAG_SWORDSTATE, false);
-					}
-
+				if (moduleStack.getItem() instanceof IModuleUse) {
+					((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
+					itemStack.damageItem(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn, (entity) -> {
+						entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+					});
 				}
 			}
 		}
@@ -307,7 +268,6 @@ public class ItemMechanGlove extends Item {
 			return 1f;
 
 		}
-
 	}
 
 	@SuppressWarnings("static-access")
