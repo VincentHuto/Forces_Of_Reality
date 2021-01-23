@@ -125,8 +125,8 @@ public class GuiCovenPage extends Screen {
 		GlStateManager.popMatrix();
 
 		textBox.render(matrixStack, mouseX, mouseY, partialTicks);
-		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2)+20
-				&& mouseY <= (16 * 2)+20 + height)) {
+		if (!(mouseX >= (16 * 2) + 16 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2) + 20
+				&& mouseY <= (16 * 2) + 20 + height)) {
 			List<ITextComponent> text = new ArrayList<ITextComponent>();
 			text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
 			func_243308_b(matrixStack, text, centerX, centerY);
@@ -175,7 +175,7 @@ public class GuiCovenPage extends Screen {
 		}
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome
+					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome_adv
 							.get()) {
 						mc.displayGuiScreen(new GuiCovenTitle(true));
 					} else {
@@ -238,8 +238,11 @@ public class GuiCovenPage extends Screen {
 			return CovenPageLib.getMachinePageList();
 		case SELF:
 			return CovenPageLib.getSelfPageList();
+		case COMBINE:
+			return CovenPageLib.getCombinationPageList();
 		default:
 			break;
+
 		}
 		return null;
 	}

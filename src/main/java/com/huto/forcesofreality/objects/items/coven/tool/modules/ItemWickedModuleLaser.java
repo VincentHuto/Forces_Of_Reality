@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 public class ItemWickedModuleLaser extends ItemMechanModuleBase implements IModuleUse {
 
-	public ItemWickedModuleLaser(Properties properties, String useTextIn) {
-		super(properties, useTextIn);
+	public ItemWickedModuleLaser(Properties properties,int tier, String useTextIn) {
+		super(properties,tier, useTextIn);
 	}
 
 	@Override

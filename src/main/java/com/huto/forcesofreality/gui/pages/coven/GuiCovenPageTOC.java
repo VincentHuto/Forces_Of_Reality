@@ -144,7 +144,7 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		checkChapter();
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome
+					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome_adv
 							.get()) {
 						mc.displayGuiScreen(new GuiCovenTitle(true));
 					} else {
@@ -186,7 +186,7 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 					@Override
 					public void onPress(Button p_onPress_1_) {
 						if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand()
-								.getItem() == ItemInit.coven_tome.get()) {
+								.getItem() == ItemInit.coven_tome_adv.get()) {
 							mc.displayGuiScreen(new GuiCovenTitle(true));
 						} else {
 							mc.displayGuiScreen(new GuiCovenTitle(false));
@@ -245,6 +245,8 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		case SELF:
 			chapterPages = CovenPageLib.getSelfPageList();
 			break;
+		case COMBINE:
+			chapterPages = CovenPageLib.getCombinationPageList();
 		default:
 			break;
 
@@ -265,7 +267,8 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 			return CovenPageLib.getMachinePageList();
 		case SELF:
 			return CovenPageLib.getSelfPageList();
-
+		case COMBINE:
+			return CovenPageLib.getCombinationPageList();
 		default:
 			break;
 

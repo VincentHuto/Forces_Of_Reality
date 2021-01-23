@@ -1,10 +1,12 @@
 package com.huto.forcesofreality.objects.items;
 
+import java.util.List;
 
 import com.huto.forcesofreality.gui.pages.guide.GuiTomeTitle;
 import com.huto.forcesofreality.render.entity.item.RenderItemTome;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -12,6 +14,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,6 +37,13 @@ public class ItemElderTome extends ItemTome {
 
 		}
 		return new ActionResult<>(ActionResultType.SUCCESS, stack);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		tooltip.add(new StringTextComponent(TextFormatting.DARK_PURPLE + "Elder"));
+		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "A guide to the world as we know it."));
 	}
 
 	@Override

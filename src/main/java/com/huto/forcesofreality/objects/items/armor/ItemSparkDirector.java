@@ -8,6 +8,7 @@ import com.huto.forcesofreality.models.armor.ModelSparkDirector;
 import com.huto.forcesofreality.models.armor.ModelSparkDirectorArmored;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.PacketToggleDirectorFlightModeMessage;
+import com.huto.forcesofreality.network.coven.SetGlideAnim;
 import com.huto.forcesofreality.network.coven.SetGlidePkt;
 import com.huto.forcesofreality.particles.ParticleColor;
 import com.huto.forcesofreality.particles.data.GlowParticleData;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -71,7 +73,7 @@ public class ItemSparkDirector extends ArmorItem {
 		if (flightActive) {
 			if (stack.getOrCreateTag().getFloat(TAG_MODIFIER) == 0.2f) {
 				if (world.isRemote) {
-					//float rot = player.renderYawOffset;
+					// float rot = player.renderYawOffset;
 					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f,
 							0);
 					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f,
@@ -82,7 +84,7 @@ public class ItemSparkDirector extends ArmorItem {
 			} else {
 				if (world.isRemote) {
 					float rot = player.renderYawOffset;
-					//float rotSin = (float) (Math.sin(rot) * 100);
+					// float rotSin = (float) (Math.sin(rot) * 100);
 					float strRot = Float.valueOf(Float.toString(rot).substring(Float.toString(rot).length() - 2));
 					// System.out.println(Math.cos(strRot)*0.25f);
 					double x = player.getPosX() + Math.sin(strRot) * 0.35f;
@@ -109,7 +111,12 @@ public class ItemSparkDirector extends ArmorItem {
 							updateClientServerFlight((ServerPlayerEntity) player, true);
 						}
 					}
-					player.startFallFlying();
+					if (!world.isRemote) {
+						PacketHandler.HANDLER.sendToServer(new SetGlideAnim());
+					} else {
+						player.setPose(Pose.FALL_FLYING);
+						player.startFallFlying();
+					}
 				} else {
 					if (!world.isRemote) {
 						if (!((PlayerEntity) player).isCreative()) {

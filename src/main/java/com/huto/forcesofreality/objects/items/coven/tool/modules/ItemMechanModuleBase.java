@@ -17,13 +17,29 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemMechanModuleBase extends Item {
+public class ItemMechanModuleBase extends Item implements IModuleUse {
 	public static String TAG_TIER = "tier";
 	String useText;
+	int tier;
 
-	public ItemMechanModuleBase(Properties properties, String useTextIn) {
+	public ItemMechanModuleBase(Properties properties, int tier, String useTextIn) {
 		super(properties);
+		this.tier = tier;
 		this.useText = useTextIn;
+	}
+
+	@Override
+	public boolean canUseModule(int rarity) {
+		if (rarity >= tier) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int getTier() {
+		return tier;
 	}
 
 	@Override
@@ -53,15 +69,25 @@ public class ItemMechanModuleBase extends Item {
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Use: " + useText));
-		if (stack.getTag() != null) {
-			tooltip.add(new StringTextComponent(TextFormatting.GOLD + "" + stack.getTag().getInt(TAG_TIER)));
-		} else {
-			tooltip.add(new StringTextComponent(TextFormatting.GOLD + "" + 0));
-		}
-	}
+		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Level: " + tier));
+}
 
 	@Override
 	public boolean shouldSyncTag() {
 		return true;
+	}
+
+	@Override
+	public int getDamageCost() {
+		return 0;
+	}
+
+	@Override
+	public int getAllegianceChance() {
+		return 0;
+	}
+
+	@Override
+	public void use(PlayerEntity playerIn, Hand handIn, ItemStack itemStack, World worldIn) {
 	}
 }

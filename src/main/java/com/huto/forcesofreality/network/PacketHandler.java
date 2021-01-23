@@ -13,6 +13,7 @@ import com.huto.forcesofreality.network.coven.PacketDirectorToggleFlightMode;
 import com.huto.forcesofreality.network.coven.PacketToggleDirectorFlightModeMessage;
 import com.huto.forcesofreality.network.coven.PacketUpdateMechanModule;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
+import com.huto.forcesofreality.network.coven.SetGlideAnim;
 import com.huto.forcesofreality.network.coven.SetGlidePkt;
 import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.huto.forcesofreality.network.coven.SyncKarmaPacket;
@@ -106,10 +107,10 @@ public class PacketHandler {
 				ImportVibePacket.Handler::handle);
 		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
 				ExportVibePacket.Handler::handle);
-
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
-
+		HANDLER.registerMessage(networkID++, SetGlideAnim.class, SetGlideAnim::encode,
+				SetGlideAnim::decode, SetGlideAnim.Handler::handle);
 		// MindAdornments
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ForcesOfReality.MOD_ID, "runechannel"),
 				() -> "1.0", s -> true, s -> true);

@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public class ItemMechanModuleThruster extends ItemMechanModuleBase implements IModuleUse {
 
-	public ItemMechanModuleThruster(Properties properties, String useTextIn) {
-		super(properties, useTextIn);
+	public ItemMechanModuleThruster(Properties properties,int tier, String useTextIn) {
+		super(properties,tier, useTextIn);
 	}
 
 	@Override

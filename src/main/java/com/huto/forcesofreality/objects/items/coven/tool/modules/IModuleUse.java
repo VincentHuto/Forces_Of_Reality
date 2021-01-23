@@ -7,10 +7,14 @@ import net.minecraft.world.World;
 
 public interface IModuleUse {
 
+	int getTier();
+
 	int getDamageCost();
 
 	int getAllegianceChance();
 
-	public void use(PlayerEntity playerIn,Hand handIn, ItemStack itemStack, World worldIn);
+	public boolean canUseModule(int rarity);
+
+	public void use(PlayerEntity playerIn, Hand handIn, ItemStack itemStack, World worldIn);
 
 }

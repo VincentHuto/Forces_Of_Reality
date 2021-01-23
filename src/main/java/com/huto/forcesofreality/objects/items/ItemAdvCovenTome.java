@@ -21,9 +21,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemCovenTome extends ItemTome {
+public class ItemAdvCovenTome extends ItemTome {
 
-	public ItemCovenTome(Properties prop) {
+	public ItemAdvCovenTome(Properties prop) {
 		super(prop.setISTER(() -> RenderItemTome::new));
 	}
 
@@ -32,7 +32,7 @@ public class ItemCovenTome extends ItemTome {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (worldIn.isRemote) {
-			Minecraft.getInstance().displayGuiScreen(new GuiCovenTitle(false));
+			Minecraft.getInstance().displayGuiScreen(new GuiCovenTitle(true));
 			playerIn.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f, 1F);
 
 		}
@@ -42,15 +42,14 @@ public class ItemCovenTome extends ItemTome {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+		tooltip.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE + "Unlocked"));
 		tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Contains information on all known covens."));
-	
+
 	}
 
-	
-	
 	@Override
 	public Rarity getRarity(ItemStack par1ItemStack) {
-		return Rarity.RARE;
+		return Rarity.EPIC;
 	}
 
 }

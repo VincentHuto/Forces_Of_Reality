@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public class ItemMechanModuleRocket extends ItemMechanModuleBase implements IModuleUse {
 
-	public ItemMechanModuleRocket(Properties properties, String useTextIn) {
-		super(properties, useTextIn);
+	public ItemMechanModuleRocket(Properties properties,int tier, String useTextIn) {
+		super(properties,tier, useTextIn);
 	}
 
 	@Override

@@ -199,18 +199,12 @@ public class TomePageLib {
 				new ItemStack(ItemInit.frequency_matcher.get()), I18n.format(WANDS_PAGE_2)));
 		WandsPageList.add(new GuiTomePage(3, EnumTomeCatagories.WANDS, "Configuerer", "Swithcing Modes",
 				new ItemStack(ItemInit.absorber_configurer.get()), I18n.format(WANDS_PAGE_3)));
-		// Adornments
-/*		AdornmentsPageList.add(new GuiTomePage(1, EnumTomeCatagories.ADORNMENTS, "Adornments", "More than goodluck",
-				new ItemStack(ItemInit.rune_beast.get()), I18n.format(ADORNMENTS_PAGE_1)));
-		AdornmentsPageList.add(new GuiTomePage(2, EnumTomeCatagories.ADORNMENTS, "Adornments cont.", "Etching your mind",
-				new ItemStack(ItemInit.mind_spike.get()), I18n.format(ADORNMENTS_PAGE_2)));*/
 		// Elder
 		ElderPageList.add(new GuiTomePage(1, EnumTomeCatagories.ELDER, "The Elders", "Of the aeons old",
 				new ItemStack(ItemInit.anti_tear.get()), I18n.format(ELDER_PAGE_1)));
 		ElderPageList.add(new GuiTomePage(2, EnumTomeCatagories.ELDER, "Gem Enchanting", "Virtuosity at its finest",
 				new ItemStack(BlockInit.virtuous_enchanter.get()), I18n.format(ELDER_PAGE_2)));
-/*		ElderPageList.add(new GuiTomePage(3, EnumTomeCatagories.ELDER, "Elder Adornments", "Exclusive Perks",
-				new ItemStack(ItemInit.rune_milkweed_c.get()), I18n.format(ELDER_PAGE_2)));*/
+
 
 		// Adding Chapters
 		Collections.addAll(ChapterList, IntroPageList, KarmaPageList, WorldGenPageList, WorldGenPageList, ArmorPageList,
@@ -226,7 +220,6 @@ public class TomePageLib {
 		TOCPageList
 				.add(new GuiTomePageTOC(EnumTomeCatagories.GENERATION, new ItemStack(ItemInit.emanating_ingot.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.WANDS, new ItemStack(ItemInit.wand_consume_vibes.get())));
-	//	TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.ADORNMENTS, new ItemStack(ItemInit.rune_milkweed_c.get())));
 		TOCPageList.add(new GuiTomePageTOC(EnumTomeCatagories.ELDER, new ItemStack(ItemInit.elder_helmet.get())));
 
 		// Adding the table of contents to each chapter
@@ -237,7 +230,6 @@ public class TomePageLib {
 		BlocksPageList.add(0, TOCPageList.get(4));
 		GeneratePageList.add(0, TOCPageList.get(5));
 		WandsPageList.add(0, TOCPageList.get(6));
-	//	AdornmentsPageList.add(0, TOCPageList.get(7));
 		ElderPageList.add(0, TOCPageList.get(7));
 
 	}

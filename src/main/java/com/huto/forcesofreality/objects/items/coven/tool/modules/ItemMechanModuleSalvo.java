@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public class ItemMechanModuleSalvo extends ItemMechanModuleBase implements IModuleUse {
 
-	public ItemMechanModuleSalvo(Properties properties, String useTextIn) {
-		super(properties, useTextIn);
+	public ItemMechanModuleSalvo(Properties properties,int tier, String useTextIn) {
+		super(properties,tier, useTextIn);
 	}
 
 	@Override

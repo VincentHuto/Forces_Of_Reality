@@ -19,9 +19,14 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class RenderItemTome extends ItemStackTileEntityRenderer {
 	public final BookModel model = new BookModel();
-	public static ResourceLocation guide = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/somnolent_tome.png");
-	public static ResourceLocation elder = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/elder_tome.png");
-	public static ResourceLocation coven = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/coven_tome.png");
+	public static ResourceLocation guide = new ResourceLocation(ForcesOfReality.MOD_ID,
+			"textures/entity/somnolent_tome.png");
+	public static ResourceLocation elder = new ResourceLocation(ForcesOfReality.MOD_ID,
+			"textures/entity/elder_tome.png");
+	public static ResourceLocation coven = new ResourceLocation(ForcesOfReality.MOD_ID,
+			"textures/entity/coven_tome.png");
+	public static ResourceLocation covenadv = new ResourceLocation(ForcesOfReality.MOD_ID,
+			"textures/entity/adv_coven_tome.png");
 	public int ticks;
 	public float field_195523_f;
 	public float field_195524_g;
@@ -71,7 +76,8 @@ public class RenderItemTome extends ItemStackTileEntityRenderer {
 
 			ResourceLocation location = stack.getItem() == ItemInit.somnolent_tome.get() ? guide
 					: stack.getItem() == ItemInit.elder_tome.get() ? elder
-							: stack.getItem() == ItemInit.coven_tome.get() ? coven : guide;
+							: stack.getItem() == ItemInit.coven_tome.get() ? coven
+									: stack.getItem() == ItemInit.coven_tome_adv.get() ? covenadv : guide;
 
 			IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(model.getRenderType(location));
 			ms.scale(0.75f, 0.75f, 0.75f);

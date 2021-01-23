@@ -5,13 +5,16 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
+import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
+import com.huto.forcesofreality.capabilities.covenant.ICovenant;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.containers.MechanGloveItemHandler;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
-import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
+import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
@@ -27,6 +30,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
@@ -35,7 +39,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
 import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipeType;
@@ -57,6 +60,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -65,7 +69,7 @@ public class ItemMechanGlove extends Item {
 	String name;
 	Integer size;
 	int range;
-	Rarity rare;
+	int rare;
 	ItemStack moduleStack;
 	public String TAG_SELECTEDSTACK = "selectedstack";
 	public int selectedModuleSlot;
@@ -73,7 +77,7 @@ public class ItemMechanGlove extends Item {
 	public static boolean swordstate;
 	public static String TAG_SWORDSTATE = "swordstate";
 
-	public ItemMechanGlove(Properties props, String name, Integer size, int range, Rarity rarity) {
+	public ItemMechanGlove(Properties props, String name, Integer size, int range, int rarity) {
 		super(props);
 		this.name = name;
 		this.size = size;
@@ -83,8 +87,13 @@ public class ItemMechanGlove extends Item {
 
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return this.rare == ModTextFormatting.AURIC ? true : false;
+		return this.rare >= 4 ? true : false;
 
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == ItemInit.auric_ingot.get() ? true : super.getIsRepairable(toRepair, repair);
 	}
 
 	@Override
@@ -112,7 +121,7 @@ public class ItemMechanGlove extends Item {
 					BlockPos hitPos = ((BlockRayTraceResult) trace).getPos();
 					Block hitBlock = worldIn.getBlockState(hitPos).getBlock();
 					if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
-				
+
 						ItemStack smeltStack = worldIn.getRecipeManager()
 								.getRecipe(IRecipeType.SMELTING, new Inventory(new ItemStack(hitBlock)), worldIn)
 								.map(FurnaceRecipe::getRecipeOutput)
@@ -133,7 +142,8 @@ public class ItemMechanGlove extends Item {
 								worldIn.destroyBlock(hitPos, false);
 							}
 						} else {
-							if (!hitBlock.getDefaultState().isAir() && hitBlock != BlockInit.beyond_flames.get() && hitBlock != Blocks.FIRE) {
+							if (!hitBlock.getDefaultState().isAir() && hitBlock != BlockInit.beyond_flames.get()
+									&& hitBlock != Blocks.FIRE) {
 								if (hitBlock.isFlammable(hitBlock.getDefaultState(), worldIn,
 										((BlockRayTraceResult) trace).getPos(),
 										((BlockRayTraceResult) trace).getFace())) {
@@ -145,13 +155,14 @@ public class ItemMechanGlove extends Item {
 							}
 						}
 					} else if (moduleStack.getItem() == ItemInit.wicked_module_laser.get()) {
-						if (!hitBlock.getDefaultState().isAir() && hitBlock != Blocks.FIRE && hitBlock !=BlockInit.beyond_flames.get()) {
-								BlockPos blockpos1 = hitPos.offset(((BlockRayTraceResult) trace).getFace());
-								BlockBeyondFlame blockstate1 = (BlockBeyondFlame)BlockInit.beyond_flames.get();
-								BlockState state = blockstate1.getFireForPlacement(worldIn, blockpos1);
-								worldIn.setBlockState(blockpos1, state, 11);
+						if (!hitBlock.getDefaultState().isAir() && hitBlock != Blocks.FIRE
+								&& hitBlock != BlockInit.beyond_flames.get()) {
+							BlockPos blockpos1 = hitPos.offset(((BlockRayTraceResult) trace).getFace());
+							BlockBeyondFlame blockstate1 = (BlockBeyondFlame) BlockInit.beyond_flames.get();
+							BlockState state = blockstate1.getFireForPlacement(worldIn, blockpos1);
+							worldIn.setBlockState(blockpos1, state, 11);
 
-							}
+						}
 					}
 				}
 			}
@@ -220,11 +231,11 @@ public class ItemMechanGlove extends Item {
 				IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 						.orElseThrow(IllegalArgumentException::new);
 				if (handler != null) {
-					tooltip.add(new StringTextComponent(
-							TextFormatting.LIGHT_PURPLE + "Rarity: " + ModTextFormatting.toProperCase(rare.name())));
+					tooltip.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE + "Level: " + rare));
 					tooltip.add(new StringTextComponent(TextFormatting.GREEN + "Supported Modules: " + size));
 					if (stack.hasTag()) {
-						ItemStack selectedModuleStack = handler.getStackInSlot(stack.getTag().getInt(TAG_SELECTED));
+						@SuppressWarnings("static-access")
+						ItemStack selectedModuleStack = stack.read((CompoundNBT) stack.getTag().get(TAG_SELECTEDSTACK));
 						if (selectedModuleStack.getItem() != Items.AIR) {
 							tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Selected Module: "
 									+ I18n.format(selectedModuleStack.getTranslationKey())));
@@ -253,10 +264,28 @@ public class ItemMechanGlove extends Item {
 			if (itemStack.getTag().get(TAG_SELECTEDSTACK) != null) {
 				ItemStack moduleStack = itemStack.read((CompoundNBT) itemStack.getTag().get(TAG_SELECTEDSTACK));
 				if (moduleStack.getItem() instanceof IModuleUse) {
-					((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
-					itemStack.damageItem(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn, (entity) -> {
-						entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-					});
+					if (((IModuleUse) moduleStack.getItem()).canUseModule(rare)) {
+						((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
+						itemStack.damageItem(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn,
+								(entity) -> {
+									entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+								});
+						ICovenant coven = playerIn.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+
+						
+						if(worldIn.rand.nextInt(101) < ((IModuleUse) moduleStack.getItem()).getAllegianceChance()) {
+						coven.setCovenDevotion(EnumCovenants.MACHINE, -1);
+						PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+								new CovenantPacketServer(coven.getDevotion()));
+						playerIn.sendStatusMessage(
+								new StringTextComponent(
+										TextFormatting.RED + "Abuse of Power does not come without consequence"),
+								true);
+						}
+						
+					} else {
+						playerIn.sendStatusMessage(new StringTextComponent(TextFormatting.GRAY +"Glove not capable of using module!"), true);
+					}
 				}
 			}
 		}
@@ -273,21 +302,9 @@ public class ItemMechanGlove extends Item {
 		}
 	}
 
-	public float getHitDamage(Rarity rareIn) {
-		if (rareIn == Rarity.COMMON) {
-			return 1f;
-		} else if (rareIn == Rarity.UNCOMMON) {
-			return 2f;
-		} else if (rareIn == Rarity.RARE) {
-			return 3f;
-		} else if (rareIn == Rarity.EPIC) {
-			return 4f;
-		} else if (rareIn == ModTextFormatting.AURIC) {
-			return 5f;
-		} else {
-			return 1f;
+	public float getHitDamage(int rareIn) {
+		return rareIn;
 
-		}
 	}
 
 	@SuppressWarnings("static-access")

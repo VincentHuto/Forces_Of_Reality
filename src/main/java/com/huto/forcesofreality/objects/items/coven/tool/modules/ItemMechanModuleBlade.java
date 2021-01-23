@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 public class ItemMechanModuleBlade extends ItemMechanModuleBase implements IModuleUse {
 
-	public ItemMechanModuleBlade(Properties properties, String useTextIn) {
-		super(properties, useTextIn);
+	public ItemMechanModuleBlade(Properties properties,int tier, String useTextIn) {
+		super(properties,tier, useTextIn);
 	}
 
 	@Override
@@ -29,5 +29,6 @@ public class ItemMechanModuleBlade extends ItemMechanModuleBase implements IModu
 			itemStack.getTag().putBoolean("swordstate", false);
 		}
 	}
+
 
 }
