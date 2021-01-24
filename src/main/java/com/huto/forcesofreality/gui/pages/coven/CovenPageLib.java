@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.gui.pages.GuiTomeImage;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
@@ -104,156 +103,156 @@ public class CovenPageLib {
 		TOCPageList.clear();
 
 		// SELF
-		SelfPageList.add(new GuiCovenPage(1, EnumCovenants.SELF, "Self", "The Path of One",
+		SelfPageList.add(new GuiCovenPage(1, EnumTomeCovenants.SELF, "Self", "The Path of One",
 				new ItemStack(BlockInit.akebi.get()), I18n.format(SELF_PAGE_1)));
-		SelfPageList.add(new GuiCovenImagePage(2, EnumCovenants.SELF, "Guardian", "Tulpa", SELF_PAGE_2,
+		SelfPageList.add(new GuiCovenImagePage(2, EnumTomeCovenants.SELF, "Guardian", "Tulpa", SELF_PAGE_2,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/tulpa.png"), 0,
 						0, 104, 104, 0.00970625F)));
-		SelfPageList.add(new GuiCovenImagePage(3, EnumCovenants.SELF, "Lord", "Veritas", SELF_PAGE_3,
+		SelfPageList.add(new GuiCovenImagePage(3, EnumTomeCovenants.SELF, "Lord", "Veritas", SELF_PAGE_3,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		SelfPageList.add(new GuiCovenPage(4, EnumCovenants.SELF, "Animal", "Ibis",
+		SelfPageList.add(new GuiCovenPage(4, EnumTomeCovenants.SELF, "Animal", "Ibis",
 				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_4)));
-		SelfPageList.add(new GuiCovenImagePage(5, EnumCovenants.SELF, "Altar", "Bonsai", SELF_PAGE_5,
+		SelfPageList.add(new GuiCovenImagePage(5, EnumTomeCovenants.SELF, "Altar", "Bonsai", SELF_PAGE_5,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/altar.png"), 0,
 						0, 104, 104, 0.00970625F)));
-		SelfPageList.add(new GuiCovenPage(6, EnumCovenants.SELF, "Alignment", "Positive",
+		SelfPageList.add(new GuiCovenPage(6, EnumTomeCovenants.SELF, "Alignment", "Positive",
 				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_6)));
-		SelfPageList.add(new GuiCovenPage(7, EnumCovenants.SELF, "Tools", "Tricks of the Trade",
+		SelfPageList.add(new GuiCovenPage(7, EnumTomeCovenants.SELF, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_7)));
 
 		// HASTUR
-		HasturPageList.add(new GuiCovenPage(1, EnumCovenants.HASTUR, "Hastur", "The Great Deciever",
+		HasturPageList.add(new GuiCovenPage(1, EnumTomeCovenants.HASTUR, "Hastur", "The Great Deciever",
 				new ItemStack(ItemInit.yellow_sign.get()), I18n.format(HASTUR_PAGE_1)));
-		HasturPageList.add(new GuiCovenImagePage(2, EnumCovenants.HASTUR, "Guardian", "Hastur; The Lord in Yellow",
+		HasturPageList.add(new GuiCovenImagePage(2, EnumTomeCovenants.HASTUR, "Guardian", "Hastur; The Lord in Yellow",
 				HASTUR_PAGE_2,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/hastur/hastur.png"),
 						0, 0, 104, 104, 0.00970625F)));
-		HasturPageList.add(new GuiCovenImagePage(3, EnumCovenants.HASTUR, "Lord", "Hastur; The Great Xanthous Deciever",
+		HasturPageList.add(new GuiCovenImagePage(3, EnumTomeCovenants.HASTUR, "Lord", "Hastur; The Great Xanthous Deciever",
 				HASTUR_PAGE_3,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		HasturPageList.add(new GuiCovenPage(4, EnumCovenants.HASTUR, "Animal", "Hastur Vassal",
+		HasturPageList.add(new GuiCovenPage(4, EnumTomeCovenants.HASTUR, "Animal", "Hastur Vassal",
 				new ItemStack(ItemInit.unsettling_tapestry.get()), I18n.format(HASTUR_PAGE_4)));
-		HasturPageList.add(new GuiCovenImagePage(5, EnumCovenants.HASTUR, "Altar", "Untold Easel", HASTUR_PAGE_5,
+		HasturPageList.add(new GuiCovenImagePage(5, EnumTomeCovenants.HASTUR, "Altar", "Untold Easel", HASTUR_PAGE_5,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/hastur/altar.png"),
 						0, 0, 104, 104, 0.00970625F)));
-		HasturPageList.add(new GuiCovenPage(6, EnumCovenants.HASTUR, "Alignment", "Negative",
+		HasturPageList.add(new GuiCovenPage(6, EnumTomeCovenants.HASTUR, "Alignment", "Negative",
 				new ItemStack(ItemInit.unsettling_fabric.get()), I18n.format(HASTUR_PAGE_6)));
-		HasturPageList.add(new GuiCovenPage(7, EnumCovenants.HASTUR, "Tools", "Tricks of the Trade",
+		HasturPageList.add(new GuiCovenPage(7, EnumTomeCovenants.HASTUR, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.yellow_tome.get()), I18n.format(HASTUR_PAGE_7)));
 
 		// ELDRITCH
-		EldritchPageList.add(new GuiCovenPage(1, EnumCovenants.ELDRITCH, "Eldritch", "The Bizzare and Obscure",
+		EldritchPageList.add(new GuiCovenPage(1, EnumTomeCovenants.ELDRITCH, "Eldritch", "The Bizzare and Obscure",
 				new ItemStack(ItemInit.everwatchful_pendant.get()), I18n.format(ELDRITCH_PAGE_1)));
 		EldritchPageList
-				.add(new GuiCovenImagePage(2, EnumCovenants.ELDRITCH, "Guardian", "The Dark Young", ELDRITCH_PAGE_2,
+				.add(new GuiCovenImagePage(2, EnumTomeCovenants.ELDRITCH, "Guardian", "The Dark Young", ELDRITCH_PAGE_2,
 						new GuiTomeImage(
 								new ResourceLocation(ForcesOfReality.MOD_ID,
 										"textures/gui/pageimages/coven/eldritch/darkyoung.png"),
 								0, 0, 104, 104, 0.00970625F)));
-		EldritchPageList.add(new GuiCovenImagePage(3, EnumCovenants.ELDRITCH, "Lord", "*($8($?$!jrjsn+UFHHHHH",
+		EldritchPageList.add(new GuiCovenImagePage(3, EnumTomeCovenants.ELDRITCH, "Lord", "*($8($?$!jrjsn+UFHHHHH",
 				ELDRITCH_PAGE_3,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		EldritchPageList.add(new GuiCovenPage(4, EnumCovenants.ELDRITCH, "Animal", "Scuttling Occulus",
+		EldritchPageList.add(new GuiCovenPage(4, EnumTomeCovenants.ELDRITCH, "Animal", "Scuttling Occulus",
 				new ItemStack(ItemInit.suspicious_eye.get()), I18n.format(ELDRITCH_PAGE_4)));
 		EldritchPageList
-				.add(new GuiCovenImagePage(5, EnumCovenants.ELDRITCH, "Altar", "Occular Heap", ELDRITCH_PAGE_5,
+				.add(new GuiCovenImagePage(5, EnumTomeCovenants.ELDRITCH, "Altar", "Occular Heap", ELDRITCH_PAGE_5,
 						new GuiTomeImage(
 								new ResourceLocation(ForcesOfReality.MOD_ID,
 										"textures/gui/pageimages/coven/eldritch/altar.png"),
 								0, 0, 104, 104, 0.00970625F)));
-		EldritchPageList.add(new GuiCovenPage(6, EnumCovenants.ELDRITCH, "Alignment", "Negative",
+		EldritchPageList.add(new GuiCovenPage(6, EnumTomeCovenants.ELDRITCH, "Alignment", "Negative",
 				new ItemStack(ItemInit.ball_of_eyes.get()), I18n.format(ELDRITCH_PAGE_6)));
-		EldritchPageList.add(new GuiCovenPage(7, EnumCovenants.ELDRITCH, "Tools", "Tricks of the Trade",
+		EldritchPageList.add(new GuiCovenPage(7, EnumTomeCovenants.ELDRITCH, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.demon_flute.get()), I18n.format(ELDRITCH_PAGE_7)));
 
 		// Ascendant
-		AscendantPageList.add(new GuiCovenPage(1, EnumCovenants.ASCENDANT, "Ascendant", "The Heavens Above",
+		AscendantPageList.add(new GuiCovenPage(1, EnumTomeCovenants.ASCENDANT, "Ascendant", "The Heavens Above",
 				new ItemStack(ItemInit.crossed_keys.get()), I18n.format(ASCENDANT_PAGE_1)));
 		AscendantPageList
-				.add(new GuiCovenImagePage(2, EnumCovenants.ASCENDANT, "Guardian", "Seraph; The Holy Knight",
+				.add(new GuiCovenImagePage(2, EnumTomeCovenants.ASCENDANT, "Guardian", "Seraph; The Holy Knight",
 						ASCENDANT_PAGE_2,
 						new GuiTomeImage(
 								new ResourceLocation(ForcesOfReality.MOD_ID,
 										"textures/gui/pageimages/coven/ascendant/seraph.png"),
 								0, 0, 104, 104, 0.00970625F)));
-		AscendantPageList.add(new GuiCovenImagePage(3, EnumCovenants.ASCENDANT, "Lord", "Tetra: The Four-Fold Light",
+		AscendantPageList.add(new GuiCovenImagePage(3, EnumTomeCovenants.ASCENDANT, "Lord", "Tetra: The Four-Fold Light",
 				ASCENDANT_PAGE_3,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		AscendantPageList.add(new GuiCovenPage(4, EnumCovenants.ASCENDANT, "Animal", "Angelic Fowl",
+		AscendantPageList.add(new GuiCovenPage(4, EnumTomeCovenants.ASCENDANT, "Animal", "Angelic Fowl",
 				new ItemStack(ItemInit.seraph_feather.get()), I18n.format(ASCENDANT_PAGE_4)));
 		AscendantPageList
-				.add(new GuiCovenImagePage(5, EnumCovenants.ASCENDANT, "Altar", "Ascendant Altar", ASCENDANT_PAGE_5,
+				.add(new GuiCovenImagePage(5, EnumTomeCovenants.ASCENDANT, "Altar", "Ascendant Altar", ASCENDANT_PAGE_5,
 						new GuiTomeImage(
 								new ResourceLocation(ForcesOfReality.MOD_ID,
 										"textures/gui/pageimages/coven/ascendant/altar.png"),
 								0, 0, 104, 104, 0.00970625F)));
-		AscendantPageList.add(new GuiCovenPage(6, EnumCovenants.ASCENDANT, "Alignment", "Positive",
+		AscendantPageList.add(new GuiCovenPage(6, EnumTomeCovenants.ASCENDANT, "Alignment", "Positive",
 				new ItemStack(ItemInit.wing_fragment.get()), I18n.format(ASCENDANT_PAGE_6)));
-		AscendantPageList.add(new GuiCovenPage(7, EnumCovenants.ASCENDANT, "Tools", "Tricks of the Trade",
+		AscendantPageList.add(new GuiCovenPage(7, EnumTomeCovenants.ASCENDANT, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.divine_feather.get()), I18n.format(ASCENDANT_PAGE_7)));
 
 		// Beast
-		BeastPageList.add(new GuiCovenPage(1, EnumCovenants.BEAST, "Beast", "Unleash your Wild Side",
+		BeastPageList.add(new GuiCovenPage(1, EnumTomeCovenants.BEAST, "Beast", "Unleash your Wild Side",
 				new ItemStack(ItemInit.breath_of_the_beast.get()), I18n.format(BEAST_PAGE_1)));
 		BeastPageList
-				.add(new GuiCovenImagePage(2, EnumCovenants.BEAST, "Guardian", "Beast from Beyond", BEAST_PAGE_2,
+				.add(new GuiCovenImagePage(2, EnumTomeCovenants.BEAST, "Guardian", "Beast from Beyond", BEAST_PAGE_2,
 						new GuiTomeImage(
 								new ResourceLocation(ForcesOfReality.MOD_ID,
 										"textures/gui/pageimages/coven/beast/beastbeyond.png"),
 								0, 0, 104, 104, 0.00970625F)));
-		BeastPageList.add(new GuiCovenImagePage(3, EnumCovenants.BEAST, "Lord", "The Lord of the Wild", BEAST_PAGE_3,
+		BeastPageList.add(new GuiCovenImagePage(3, EnumTomeCovenants.BEAST, "Lord", "The Lord of the Wild", BEAST_PAGE_3,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		BeastPageList.add(new GuiCovenPage(4, EnumCovenants.BEAST, "Animal", "Deranged Beast",
+		BeastPageList.add(new GuiCovenPage(4, EnumTomeCovenants.BEAST, "Animal", "Deranged Beast",
 				new ItemStack(ItemInit.unkept_hide.get()), I18n.format(BEAST_PAGE_4)));
-		BeastPageList.add(new GuiCovenImagePage(5, EnumCovenants.BEAST, "Altar", "Sacrificial Pyre", BEAST_PAGE_5,
+		BeastPageList.add(new GuiCovenImagePage(5, EnumTomeCovenants.BEAST, "Altar", "Sacrificial Pyre", BEAST_PAGE_5,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/beast/altar.png"),
 						0, 0, 104, 104, 0.00970625F)));
-		BeastPageList.add(new GuiCovenPage(6, EnumCovenants.BEAST, "Alignment", "Negative",
+		BeastPageList.add(new GuiCovenPage(6, EnumTomeCovenants.BEAST, "Alignment", "Negative",
 				new ItemStack(ItemInit.blooddrawn_fang.get()), I18n.format(BEAST_PAGE_6)));
-		BeastPageList.add(new GuiCovenPage(7, EnumCovenants.BEAST, "Tools", "Tricks of the Trade",
+		BeastPageList.add(new GuiCovenPage(7, EnumTomeCovenants.BEAST, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.beastly_bone.get()), I18n.format(BEAST_PAGE_7)));
 
 		// Machine
-		MachinePageList.add(new GuiCovenPage(1, EnumCovenants.MACHINE, "Beast", "Unleash your Wild Side",
+		MachinePageList.add(new GuiCovenPage(1, EnumTomeCovenants.MACHINE, "Beast", "Unleash your Wild Side",
 				new ItemStack(ItemInit.integral_cog.get()), I18n.format(MACHINE_PAGE_1)));
 		MachinePageList
-				.add(new GuiCovenImagePage(2, EnumCovenants.MACHINE, "Guardian", "Malformed Automaton", MACHINE_PAGE_2,
+				.add(new GuiCovenImagePage(2, EnumTomeCovenants.MACHINE, "Guardian", "Malformed Automaton", MACHINE_PAGE_2,
 						new GuiTomeImage(
 								new ResourceLocation(ForcesOfReality.MOD_ID,
 										"textures/gui/pageimages/coven/machina/automaton.png"),
 								0, 0, 104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenImagePage(3, EnumCovenants.MACHINE, "Lord", "Mechan; The Great Tinkerer",
+		MachinePageList.add(new GuiCovenImagePage(3, EnumTomeCovenants.MACHINE, "Lord", "Mechan; The Great Tinkerer",
 				MACHINE_PAGE_3,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenPage(4, EnumCovenants.MACHINE, "Animal", "Dreadbot",
+		MachinePageList.add(new GuiCovenPage(4, EnumTomeCovenants.MACHINE, "Animal", "Dreadbot",
 				new ItemStack(ItemInit.mechan_module.get()), I18n.format(MACHINE_PAGE_4)));
-		MachinePageList.add(new GuiCovenImagePage(5, EnumCovenants.MACHINE, "Altar", "Machina Imperfecta",
+		MachinePageList.add(new GuiCovenImagePage(5, EnumTomeCovenants.MACHINE, "Altar", "Machina Imperfecta",
 				MACHINE_PAGE_5,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/altar.png"),
 						0, 0, 104, 104, 0.00970625F)));
-		MachinePageList.add(new GuiCovenPage(6, EnumCovenants.MACHINE, "Alignment", "Negative",
+		MachinePageList.add(new GuiCovenPage(6, EnumTomeCovenants.MACHINE, "Alignment", "Negative",
 				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_6)));
-		MachinePageList.add(new GuiCovenPage(7, EnumCovenants.MACHINE, "Tools", "Tricks of the Trade",
+		MachinePageList.add(new GuiCovenPage(7, EnumTomeCovenants.MACHINE, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.discared_gear.get()), I18n.format(MACHINE_PAGE_7)));
-		MachinePageList.add(new GuiCovenImagePage(8, EnumCovenants.MACHINE, "Machina Soul", "Life Spark",
+		MachinePageList.add(new GuiCovenImagePage(8, EnumTomeCovenants.MACHINE, "Machina Soul", "Life Spark",
 				MACHINE_PAGE_8,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/spark.png"),
@@ -261,22 +260,22 @@ public class CovenPageLib {
 
 		// Combination
 		// Elder
-		CombinationPageList.add(new GuiCovenPage(1, EnumCovenants.COMBINE, "Forbidden Techniques", "Crossing Streams",
+		CombinationPageList.add(new GuiCovenPage(1, EnumTomeCovenants.COMBINE, "Forbidden Techniques", "Crossing Streams",
 				new ItemStack(ItemInit.allegiance_identifier.get()), I18n.format(COMBIN_PAGE_1)));
-		CombinationPageList.add(new GuiCovenPage(2, EnumCovenants.COMBINE, "Direct Opposition", "Impossibilities",
+		CombinationPageList.add(new GuiCovenPage(2, EnumTomeCovenants.COMBINE, "Direct Opposition", "Impossibilities",
 				new ItemStack(ItemInit.destruction_orb.get()), I18n.format(COMBIN_PAGE_2)));
-		CombinationPageList.add(new GuiCovenPage(3, EnumCovenants.COMBINE, "What Can be done", "It comes with a cost",
+		CombinationPageList.add(new GuiCovenPage(3, EnumTomeCovenants.COMBINE, "What Can be done", "It comes with a cost",
 				new ItemStack(ItemInit.destruction_orb_contained.get()), I18n.format(COMBIN_PAGE_3)));
-		CombinationPageList.add(new GuiCovenPage(4, EnumCovenants.COMBINE, "Wicked Module", "Eldritch Machines",
+		CombinationPageList.add(new GuiCovenPage(4, EnumTomeCovenants.COMBINE, "Wicked Module", "Eldritch Machines",
 				new ItemStack(ItemInit.wicked_module_laser.get()), I18n.format(COMBIN_PAGE_4)));
-		CombinationPageList.add(new GuiCovenPage(5, EnumCovenants.COMBINE, "Anointed Bronze", "Holy Bars",
+		CombinationPageList.add(new GuiCovenPage(5, EnumTomeCovenants.COMBINE, "Anointed Bronze", "Holy Bars",
 				new ItemStack(ItemInit.anointed_iron_scrap.get()), I18n.format(COMBIN_PAGE_5)));
-		CombinationPageList.add(new GuiCovenPage(6, EnumCovenants.COMBINE, "Yellow Fiends", "Ensnared Beasts",
+		CombinationPageList.add(new GuiCovenPage(6, EnumTomeCovenants.COMBINE, "Yellow Fiends", "Ensnared Beasts",
 				new ItemStack(ItemInit.anointed_iron_scrap.get()), I18n.format(COMBIN_PAGE_6)));
 		CombinationPageList
-				.add(new GuiCovenPage(7, EnumCovenants.COMBINE, "Eldritch Beings", "Cornered Hounds",
+				.add(new GuiCovenPage(7, EnumTomeCovenants.COMBINE, "Eldritch Beings", "Cornered Hounds",
 						new ItemStack(ItemInit.anointed_iron_scrap.get()), I18n.format(COMBIN_PAGE_7)));
-		CombinationPageList.add(new GuiCovenPage(7, EnumCovenants.COMBINE, "Trick Weapons", "Tools of Deception",
+		CombinationPageList.add(new GuiCovenPage(7, EnumTomeCovenants.COMBINE, "Trick Weapons", "Tools of Deception",
 				new ItemStack(ItemInit.auric_trick_axe.get()), I18n.format(COMBIN_PAGE_8)));
 
 		// Adding Chapters
@@ -284,14 +283,14 @@ public class CovenPageLib {
 				BeastPageList, MachinePageList, CombinationPageList);
 
 		// TOC PAGES
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.SELF, new ItemStack(ItemInit.purging_stone.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.HASTUR, new ItemStack(ItemInit.yellow_sign.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.SELF, new ItemStack(ItemInit.purging_stone.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.HASTUR, new ItemStack(ItemInit.yellow_sign.get())));
 		TOCPageList
-				.add(new GuiCovenPageTOC(EnumCovenants.ELDRITCH, new ItemStack(ItemInit.everwatchful_pendant.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.ASCENDANT, new ItemStack(ItemInit.crossed_keys.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.BEAST, new ItemStack(ItemInit.breath_of_the_beast.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.MACHINE, new ItemStack(ItemInit.neurotic_mechanism.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumCovenants.COMBINE, new ItemStack(ItemInit.wicked_module_laser.get())));
+				.add(new GuiCovenPageTOC(EnumTomeCovenants.ELDRITCH, new ItemStack(ItemInit.everwatchful_pendant.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.ASCENDANT, new ItemStack(ItemInit.crossed_keys.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.BEAST, new ItemStack(ItemInit.breath_of_the_beast.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.MACHINE, new ItemStack(ItemInit.neurotic_mechanism.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.COMBINE, new ItemStack(ItemInit.wicked_module_laser.get())));
 
 		// Adding the table of contents to each chapter
 		SelfPageList.add(0, TOCPageList.get(0));

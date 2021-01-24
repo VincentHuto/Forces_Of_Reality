@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "IRI",
-    "IOI",
+    "IFI",
     "AOA"
   ],
   "key": {
@@ -14,6 +14,9 @@
     },
     "O": {
       "item": "forcesofreality:runed_obsidian"
+    },
+    "F": {
+      "item": "forcesofreality:vibratory_fuser"
     },
     "A": {
       "item": "forcesofreality:activated_obsidian"

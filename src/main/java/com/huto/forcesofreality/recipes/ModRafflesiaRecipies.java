@@ -16,8 +16,18 @@ public class ModRafflesiaRecipies {
 
 	public static RecipeRafflesia recipeSusEye, recipeFang, recipeGear, recipeFabric, recipeFeather;
 	public static RecipeRafflesia recipeBallEye, recipeNecBone, recipeNeurMech, recipeTapes, recipeWing;
+	public static RecipeRafflesia recipeConcAurum;
 
 	public static void init() {
+		
+		
+		
+		recipeConcAurum = registerRecipe(new ResourceLocation("concaurum"), new ItemStack(ItemInit.annointed_bronze.get(), 1),
+				100, Ingredient.fromItems(ItemInit.emanating_ingot.get()), Ingredient.fromItems(ItemInit.anointed_iron_scrap.get()),
+				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(ItemInit.discared_gear.get()),
+				Ingredient.fromItems(ItemInit.seraph_feather.get()));
+		
+		
 		recipeSusEye = registerRecipe(new ResourceLocation("suseye"), new ItemStack(ItemInit.suspicious_eye.get(), 1),
 				15, Ingredient.fromItems(ItemInit.grey_crystal.get()), Ingredient.fromItems(ItemInit.grey_powder.get()),
 				Ingredient.fromItems(ItemInit.discared_gear.get()), Ingredient.fromItems(BlockInit.akebi.get()),

@@ -9,7 +9,6 @@ import org.lwjgl.glfw.GLFW;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiTomeImage;
@@ -47,13 +46,12 @@ public class GuiCovenImagePage extends GuiCovenPage {
 	private final ImmutableList<GuiTomeImage> images;
 	GuiButtonTextured buttonTitle, buttonCloseTab;
 	List<GuiTomeImage> imagesArray;
-
 	TextFieldWidget textBox;
-	EnumCovenants catagory;
+	EnumTomeCovenants catagory;
 	Minecraft mc = Minecraft.getInstance();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenImagePage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn, String textIn,
+	public GuiCovenImagePage(int pageNumIn, EnumTomeCovenants catagoryIn, String titleIn, String subtitleIn, String textIn,
 			GuiTomeImage... imagesIn) {
 		super(pageNumIn, catagoryIn, titleIn, subtitleIn, new ItemStack(Items.AIR), textIn);
 		Preconditions.checkArgument(imagesIn.length <= 12);

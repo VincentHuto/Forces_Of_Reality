@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
@@ -41,10 +40,10 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 	GuiButtonTextured[] buttonArray = new GuiButtonTextured[chapterPages.size()];
 	public static List<GuiButtonTextured> buttonList = new ArrayList<GuiButtonTextured>();
 	ItemStack icon;
-	EnumCovenants catagory;
+	EnumTomeCovenants catagory;
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenPageTOC(EnumCovenants catagoryIn, ItemStack iconIn) {
+	public GuiCovenPageTOC(EnumTomeCovenants catagoryIn, ItemStack iconIn) {
 		super(0, catagoryIn, "Table of Contents", "", iconIn, "");
 		this.icon = iconIn;
 		this.catagory = catagoryIn;

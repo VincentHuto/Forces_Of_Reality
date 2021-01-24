@@ -24,7 +24,7 @@ public class Generator {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 		//generator.addProvider(new GeneratorLoot(generator));
 		// generator.addProvider(new GeneratorBlockTags(generator, helper));
-		//generator.addProvider(new GeneratorRecipes(generator));
+		generator.addProvider(new GeneratorRecipes(generator));
 	}
 
 	@SuppressWarnings("unused")

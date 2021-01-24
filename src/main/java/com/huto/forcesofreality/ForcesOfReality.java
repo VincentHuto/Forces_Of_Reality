@@ -61,12 +61,15 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -79,11 +82,13 @@ public class ForcesOfReality {
 	public static ForcesOfReality instance;
 	public static IProxy proxy = new IProxy() {
 	};
+	public static boolean hemosLoaded = false;
 
 	@SuppressWarnings("deprecation")
 	public ForcesOfReality() {
 		DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> proxy = new ClientProxy());
 		proxy.registerHandlers();
+		hemosLoaded = ModList.get().isLoaded("hemomancy");
 		instance = this;
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::commonSetup);
@@ -115,6 +120,7 @@ public class ForcesOfReality {
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}
+
 	// Creative Tab
 	public static class ForcesOfRealityItemGroup extends ItemGroup {
 		public static final ForcesOfRealityItemGroup instance = new ForcesOfRealityItemGroup(ItemGroup.GROUPS.length,
@@ -129,7 +135,7 @@ public class ForcesOfReality {
 			return new ItemStack(BlockInit.activated_obsidian.get());
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
 		// Automatically Registers BlockItems
@@ -170,7 +176,7 @@ public class ForcesOfReality {
 	}
 
 	private void clientSetup(final FMLClientSetupEvent event) {
-        MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
+		MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
 		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		this.addLayers();
@@ -182,6 +188,15 @@ public class ForcesOfReality {
 	}
 
 	public void setupOnLoaded(FMLLoadCompleteEvent event) {
+
+	}
+	
+	@SuppressWarnings("unused")
+	private void enqueueIMC(final InterModEnqueueEvent event) {
+	}
+
+	@SuppressWarnings("unused")
+	private void processIMC(final InterModProcessEvent event) {
 
 	}
 
@@ -210,21 +225,22 @@ public class ForcesOfReality {
 		}
 		return ItemStack.EMPTY;
 	}
+
 	public static ItemStack findMechanGloveInHand(PlayerEntity player) {
-		   ItemStack heldItem = player.getHeldItemMainhand();
-	        if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
-	            heldItem = player.getHeldItemOffhand();
-	            if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
-	                return ItemStack.EMPTY;
-	            }
-	        }
-	        return heldItem;
-	    }
-    public static boolean isArmed(PlayerEntity entity) {
-        return findMechanGloveInHand(entity).getItem() instanceof ItemMechanGlove;
-    }
-	
-	
+		ItemStack heldItem = player.getHeldItemMainhand();
+		if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
+			heldItem = player.getHeldItemOffhand();
+			if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
+				return ItemStack.EMPTY;
+			}
+		}
+		return heldItem;
+	}
+
+	public static boolean isArmed(PlayerEntity entity) {
+		return findMechanGloveInHand(entity).getItem() instanceof ItemMechanGlove;
+	}
+
 	@SubscribeEvent
 	public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
 		event.getRegistry().register(new CopyMechanGloveDataRecipe.Serializer()

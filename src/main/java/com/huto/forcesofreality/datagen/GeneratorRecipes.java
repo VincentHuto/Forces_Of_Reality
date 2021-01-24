@@ -65,99 +65,6 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addIngredient(Blocks.DIRT, 2).addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get()))
 				.build(consumer);
 
-		/*
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern.get()).
-		 * addIngredient(Items.PAPER) .addIngredient(ItemInit.rune_blank.get())
-		 * .addCriterion("has_rune_blank",
-		 * hasItem(ItemInit.rune_blank.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_beast_c.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Tags.Items.
-		 * GEMS_DIAMOND) .addIngredient(ItemInit.blooddrawn_fang.get())
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_beast.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.BEEF)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_clawmark.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.FLINT)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_communion.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.GHAST_TEAR)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_corruption_c.get
-		 * ()) .addIngredient(ItemInit.rune_pattern.get()).addIngredient(ItemInit.
-		 * nullifying_powder.get()) .addIngredient(Tags.Items.GEMS_DIAMOND)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_hunter_c.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.GOLDEN_SWORD)
-		 * .addIngredient(Tags.Items.GEMS_DIAMOND) .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_heir.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.STRING)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_impurity_c.get()
-		 * )
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.ROTTEN_FLESH)
-		 * .addIngredient(Tags.Items.GEMS_DIAMOND) .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_lake.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.WATER_BUCKET)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_metamorphosis_cw
-		 * .get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.GOLDEN_APPLE)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_metamorphosis.
-		 * get()) .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.
-		 * GOLDEN_CARROT) .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_milkweed_c.get()
-		 * ) .addIngredient(ItemInit.rune_pattern.get()).addIngredient(ItemInit.
-		 * suspicious_eye.get()) .addIngredient(Tags.Items.GEMS_DIAMOND)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_moon.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.REDSTONE)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_oedon.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.RED_DYE)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_radiance_c.get()
-		 * ) .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.
-		 * GLOWSTONE_DUST) .addIngredient(Tags.Items.GEMS_DIAMOND)
-		 * .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 * 
-		 * ShapelessRecipeBuilder.shapelessRecipe(ItemInit.rune_pattern_rapture.get())
-		 * .addIngredient(ItemInit.rune_pattern.get()).addIngredient(Items.
-		 * GLOWSTONE_DUST) .addCriterion("has_rune_pattern",
-		 * hasItem(ItemInit.rune_pattern.get())).build(consumer);
-		 */
-
 		// Misc
 
 		ShapelessRecipeBuilder.shapelessRecipe(ItemInit.vitreous_humor.get(), 1)
@@ -553,8 +460,10 @@ public class GeneratorRecipes extends RecipeProvider {
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.rafflesia_of_fidelity.get())
 				.key('R', BlockInit.rafflesia_flower.get()).key('I', BlockInit.anointed_iron_block.get())
-				.key('O', BlockInit.runed_obsidian.get()).key('A', BlockInit.activated_obsidian.get())
-				.patternLine("IRI").patternLine("IOI").patternLine("AOA")
+				.key('O', BlockInit.runed_obsidian.get()).key('F', BlockInit.vibratory_fuser.get()).key('A', BlockInit.activated_obsidian.get())
+				.patternLine("IRI")
+				.patternLine("IFI")
+				.patternLine("AOA")
 				.addCriterion("has_rafflesia_flower", hasItem(BlockInit.rafflesia_flower.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.skull_helmet.get()).key('B', ItemInit.beastly_bone.get())

@@ -7,7 +7,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
@@ -44,11 +43,11 @@ public class GuiCovenPage extends Screen {
 	GuiButtonTextured buttonTitle;
 	GuiButtonTextured buttonCloseTab;
 	TextFieldWidget textBox;
-	EnumCovenants catagory;
+	EnumTomeCovenants catagory;
 	Minecraft mc = Minecraft.getInstance();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenPage(int pageNumIn, EnumCovenants catagoryIn, String titleIn, String subtitleIn, ItemStack iconIn,
+	public GuiCovenPage(int pageNumIn, EnumTomeCovenants catagoryIn, String titleIn, String subtitleIn, ItemStack iconIn,
 			String textIn) {
 		super(titleComponent);
 		this.title = titleIn;
