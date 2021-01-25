@@ -87,7 +87,7 @@ public class CovenPageLib {
 	public static String COMBIN_PAGE_3 = "Examples of these impossibilites include Hastur-Self, Eldritch-Ascendant, and Machine-Beast, everyother combination, even of several should in theory be possible, with more similar covens being easy than others, and the more combined the harder it will be.";
 	public static String COMBIN_PAGE_4 = "As mentioned, to be able to combine several covens powers, you must be in good graces with each of the covens lords with a high alliegence to all partys involved, and even then, the materials needed to form such combinations are exotic and expensive, but will be worth the cost in the end.";
 	public static String COMBIN_PAGE_5 = "As a primary example, Calling on the powers of Both Mechan and Uzouthrhix will allow the creation of a corrupted glove module, channeling eldritch energy into the gauntlet to unleash a blast of destructive eldritch energy.";
-	public static String COMBIN_PAGE_6 = "Annointed Bronze is a blessed amalgam of both annointed iron scraps as well as auric energy, they can be created in a few ways, all forms however bestow enchanted properties unto the metal, giving it destructive powers on undead and beasts alike.";
+	public static String COMBIN_PAGE_6 = "Concecrated Aurum is a blessed amalgam of both annointed iron scraps as well as auric energy, they can be created in a few ways, all forms however bestow enchanted properties unto the metal, giving it destructive powers on undead and beasts alike.";
 	public static String COMBIN_PAGE_7 = "The cornered hounds are far more than a way of referencing their moods,they physically spawn out of the corners of rooms and hunt down whatever being they are instructed to, fading back to the abyss once finished off.";
 	public static String COMBIN_PAGE_8 = "Combining the Cunning wit of Hastur along with the ingenious technology of mechan provides us with a solution most tricky to our weapons and tools, Using trick tools they are items that function as 2 or more at once, from bowblades to trickaxes";
 
@@ -249,7 +249,7 @@ public class CovenPageLib {
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/machina/altar.png"),
 						0, 0, 104, 104, 0.00970625F)));
 		MachinePageList.add(new GuiCovenPage(6, EnumTomeCovenants.MACHINE, "Alignment", "Negative",
-				new ItemStack(ItemInit.neurotic_mechanism.get()), I18n.format(MACHINE_PAGE_6)));
+				new ItemStack(ItemInit.malfunctioning_mechanism.get()), I18n.format(MACHINE_PAGE_6)));
 		MachinePageList.add(new GuiCovenPage(7, EnumTomeCovenants.MACHINE, "Tools", "Tricks of the Trade",
 				new ItemStack(ItemInit.discared_gear.get()), I18n.format(MACHINE_PAGE_7)));
 		MachinePageList.add(new GuiCovenImagePage(8, EnumTomeCovenants.MACHINE, "Machina Soul", "Life Spark",
@@ -289,7 +289,7 @@ public class CovenPageLib {
 				.add(new GuiCovenPageTOC(EnumTomeCovenants.ELDRITCH, new ItemStack(ItemInit.everwatchful_pendant.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.ASCENDANT, new ItemStack(ItemInit.crossed_keys.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.BEAST, new ItemStack(ItemInit.breath_of_the_beast.get())));
-		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.MACHINE, new ItemStack(ItemInit.neurotic_mechanism.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.MACHINE, new ItemStack(ItemInit.malfunctioning_mechanism.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.COMBINE, new ItemStack(ItemInit.wicked_module_laser.get())));
 
 		// Adding the table of contents to each chapter

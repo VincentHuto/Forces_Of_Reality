@@ -22,7 +22,7 @@ public class ModRafflesiaRecipies {
 		
 		
 		
-		recipeConcAurum = registerRecipe(new ResourceLocation("concaurum"), new ItemStack(ItemInit.annointed_bronze.get(), 1),
+		recipeConcAurum = registerRecipe(new ResourceLocation("concaurum"), new ItemStack(ItemInit.concecrated_aurum.get(), 1),
 				100, Ingredient.fromItems(ItemInit.emanating_ingot.get()), Ingredient.fromItems(ItemInit.anointed_iron_scrap.get()),
 				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(ItemInit.discared_gear.get()),
 				Ingredient.fromItems(ItemInit.seraph_feather.get()));
@@ -66,19 +66,19 @@ public class ModRafflesiaRecipies {
 		recipeBallEye = registerRecipe(new ResourceLocation("balleye"), new ItemStack(ItemInit.ball_of_eyes.get(), 1),
 				30, Ingredient.fromItems(ItemInit.grey_crystal.get()), Ingredient.fromItems(ItemInit.grey_powder.get()),
 				Ingredient.fromItems(ItemInit.beastly_bone.get()), Ingredient.fromItems(BlockInit.akebi.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()),
 				Ingredient.fromItems(ItemInit.unsettling_tapestry.get()),
 				Ingredient.fromItems(ItemInit.wing_fragment.get()));
 
 		recipeNecBone = registerRecipe(new ResourceLocation("necbone"), new ItemStack(ItemInit.beastly_bone.get(), 1),
 				30, Ingredient.fromItems(ItemInit.grey_crystal.get()), Ingredient.fromItems(ItemInit.grey_powder.get()),
 				Ingredient.fromItems(ItemInit.ball_of_eyes.get()), Ingredient.fromItems(BlockInit.akebi.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()),
 				Ingredient.fromItems(ItemInit.unsettling_tapestry.get()),
 				Ingredient.fromItems(ItemInit.wing_fragment.get()));
 
 		recipeNeurMech = registerRecipe(new ResourceLocation("neurmech"),
-				new ItemStack(ItemInit.neurotic_mechanism.get(), 1), 30,
+				new ItemStack(ItemInit.malfunctioning_mechanism.get(), 1), 30,
 				Ingredient.fromItems(ItemInit.grey_crystal.get()), Ingredient.fromItems(ItemInit.grey_powder.get()),
 				Ingredient.fromItems(ItemInit.ball_of_eyes.get()), Ingredient.fromItems(BlockInit.akebi.get()),
 				Ingredient.fromItems(ItemInit.beastly_bone.get()),
@@ -90,14 +90,14 @@ public class ModRafflesiaRecipies {
 				Ingredient.fromItems(ItemInit.grey_crystal.get()), Ingredient.fromItems(ItemInit.grey_powder.get()),
 				Ingredient.fromItems(ItemInit.ball_of_eyes.get()), Ingredient.fromItems(BlockInit.akebi.get()),
 				Ingredient.fromItems(ItemInit.beastly_bone.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()),
 				Ingredient.fromItems(ItemInit.wing_fragment.get()));
 
 		recipeWing = registerRecipe(new ResourceLocation("wingfrag"), new ItemStack(ItemInit.wing_fragment.get(), 1),
 				30, Ingredient.fromItems(ItemInit.grey_crystal.get()), Ingredient.fromItems(ItemInit.grey_powder.get()),
 				Ingredient.fromItems(ItemInit.ball_of_eyes.get()), Ingredient.fromItems(BlockInit.akebi.get()),
 				Ingredient.fromItems(ItemInit.beastly_bone.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()),
 				Ingredient.fromItems(ItemInit.unsettling_tapestry.get()));
 
 	}

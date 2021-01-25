@@ -17,6 +17,7 @@ import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
 import com.huto.forcesofreality.entities.lords.EntityVeritas;
 import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
 import com.huto.forcesofreality.entities.mobs.EntityDerangedBeast;
+import com.huto.forcesofreality.entities.mobs.EntityDevotee;
 import com.huto.forcesofreality.entities.mobs.EntityDreadBot;
 import com.huto.forcesofreality.entities.mobs.EntityHasturVassal;
 import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
@@ -110,6 +111,10 @@ public class EntityInit {
 			() -> EntityType.Builder.<EntityHastur>create(EntityHastur::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur").toString()));
 
+	public static final RegistryObject<EntityType<EntityDevotee>> devotee = ENTITY_TYPES.register("devotee",
+			() -> EntityType.Builder.<EntityDevotee>create(EntityDevotee::new, EntityClassification.MONSTER)
+					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "devotee").toString()));
+	
 	public static final RegistryObject<EntityType<EntityXanthousKing>> xanthous_king = ENTITY_TYPES.register(
 			"xanthous_king",
 			() -> EntityType.Builder.<EntityXanthousKing>create(EntityXanthousKing::new, EntityClassification.MONSTER)
@@ -326,6 +331,7 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.uzouthrhix.get(), EntityUzouthrhix.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.xanthous_king.get(), EntityTrueXanthousKing.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.true_xanthous_king.get(), EntityTrueXanthousKing.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.devotee.get(), EntityDevotee.setAttributes().create());
 
 	}
 }

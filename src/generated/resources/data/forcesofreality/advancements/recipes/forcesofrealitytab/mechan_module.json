@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:mechan_module"
+    ]
+  },
+  "criteria": {
+    "has_auric_bar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:auric_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:mechan_module"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_auric_bar",
+      "has_the_recipe"
+    ]
+  ]
+}

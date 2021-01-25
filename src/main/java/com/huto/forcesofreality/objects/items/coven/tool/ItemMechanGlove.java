@@ -260,33 +260,42 @@ public class ItemMechanGlove extends Item {
 
 	@SuppressWarnings("static-access")
 	public void moduleUse(PlayerEntity playerIn, Hand handIn, ItemStack itemStack, World worldIn) {
+		ICovenant coven = playerIn.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+
 		if (itemStack.getTag() != null) {
 			if (itemStack.getTag().get(TAG_SELECTEDSTACK) != null) {
-				ItemStack moduleStack = itemStack.read((CompoundNBT) itemStack.getTag().get(TAG_SELECTEDSTACK));
-				if (moduleStack.getItem() instanceof IModuleUse) {
-					if (((IModuleUse) moduleStack.getItem()).canUseModule(rare)) {
-						((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
-						itemStack.damageItem(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn,
-								(entity) -> {
-									entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-								});
-						ICovenant coven = playerIn.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+				if (coven.getDevotionByCoven(EnumCovenants.MACHINE) > 1) {
 
-						
-						if(worldIn.rand.nextInt(101) < ((IModuleUse) moduleStack.getItem()).getAllegianceChance()) {
-						coven.setCovenDevotion(EnumCovenants.MACHINE, -1);
-						PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
-								new CovenantPacketServer(coven.getDevotion()));
-						playerIn.sendStatusMessage(
-								new StringTextComponent(
-										TextFormatting.RED + "Abuse of Power does not come without consequence"),
-								true);
+					ItemStack moduleStack = itemStack.read((CompoundNBT) itemStack.getTag().get(TAG_SELECTEDSTACK));
+					if (moduleStack.getItem() instanceof IModuleUse) {
+						if (((IModuleUse) moduleStack.getItem()).canUseModule(rare)) {
+							((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
+							itemStack.damageItem(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn,
+									(entity) -> {
+										entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+									});
+
+							if (worldIn.rand.nextInt(101) < ((IModuleUse) moduleStack.getItem())
+									.getAllegianceChance()) {
+								coven.setCovenDevotion(EnumCovenants.MACHINE, -1);
+								PacketHandler.CHANNELCOVENANT.send(
+										PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn),
+										new CovenantPacketServer(coven.getDevotion()));
+								playerIn.sendStatusMessage(new StringTextComponent(
+										TextFormatting.RED + "Abuse of Power does not come without consequence"), true);
+							}
+
+						} else {
+							playerIn.sendStatusMessage(
+									new StringTextComponent(TextFormatting.GRAY + "Glove not capable of using module!"),
+									true);
 						}
-						
-					} else {
-						playerIn.sendStatusMessage(new StringTextComponent(TextFormatting.GRAY +"Glove not capable of using module!"), true);
 					}
+				} else {
+					playerIn.sendStatusMessage(
+							new StringTextComponent(TextFormatting.RED + "Your Devotion is not high enough"), true);
 				}
+
 			}
 		}
 

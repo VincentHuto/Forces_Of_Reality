@@ -3,12 +3,15 @@ package com.huto.forcesofreality.objects.items.coven.tool.modules;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemWickedModuleLaser extends ItemMechanModuleBase implements IModuleUse {
 
-	public ItemWickedModuleLaser(Properties properties,int tier, String useTextIn) {
-		super(properties,tier, useTextIn);
+	public ItemWickedModuleLaser(Properties properties, int tier, String useTextIn) {
+		super(properties, tier, useTextIn);
 	}
 
 	@Override
@@ -22,9 +25,15 @@ public class ItemWickedModuleLaser extends ItemMechanModuleBase implements IModu
 	}
 
 	@Override
-	public void use(PlayerEntity playerIn,Hand handIn, ItemStack itemStack, World worldIn) {
+	public void use(PlayerEntity playerIn, Hand handIn, ItemStack itemStack, World worldIn) {
 		playerIn.setActiveHand(handIn);
 
+	}
+
+	@Override
+	public ITextComponent getDisplayName(ItemStack stack) {
+		return new StringTextComponent(
+				TextFormatting.DARK_PURPLE + "Wicked Module: " + TextFormatting.GOLD + "Eldritch Beam");
 	}
 
 }

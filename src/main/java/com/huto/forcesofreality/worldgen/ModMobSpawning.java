@@ -32,7 +32,6 @@ public class ModMobSpawning {
 			event.getSpawns().withSpawner(EntityClassification.CREATURE, new Spawners(EntityInit.ibis.get(), 6, 1, 6));
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
 					new Spawners(EntityInit.deranged_beast.get(), 10, 1, 3));
-
 		}
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.COLD)
 				|| BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.MOUNTAIN)
@@ -48,6 +47,8 @@ public class ModMobSpawning {
 						&& BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.OCEAN)) {
 			event.getSpawns().withSpawner(EntityClassification.MONSTER,
 					new Spawners(EntityInit.dread_bot.get(), 20, 1, 2));
+			event.getSpawns().withSpawner(EntityClassification.MONSTER,
+					new Spawners(EntityInit.devotee.get(), 5, 1, 2));
 		}
 
 		if (BiomeDictionary.hasType(biomeRegistryKey, BiomeDictionary.Type.END)

@@ -2,6 +2,10 @@ package com.huto.forcesofreality.entities.utils;
 
 import java.util.function.Predicate;
 
+import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
+import com.huto.forcesofreality.entities.mobs.EntityDerangedBeast;
+import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -27,9 +31,11 @@ import net.minecraft.entity.monster.piglin.AbstractPiglinEntity;
 import net.minecraft.entity.passive.AmbientEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class ModEntityPredicates {
@@ -44,6 +50,21 @@ public class ModEntityPredicates {
 			}
 		}
 	};
+	public static Predicate<Entity> VORPAL = new Predicate<Entity>() {
+		@Override
+		public boolean test(Entity e) {
+			if (e instanceof AbstractRaiderEntity || e instanceof ZombieEntity || e instanceof SkeletonEntity
+					|| e instanceof WitherSkeletonEntity || e instanceof SpiderEntity || e instanceof WitherEntity
+					|| e instanceof CreeperEntity || e instanceof EntityBeastFromBeyond
+					|| e instanceof EntitySummonedBeast || e instanceof EntityDerangedBeast || e instanceof WolfEntity
+					|| e instanceof AbstractPiglinEntity|| e instanceof PolarBearEntity) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
+
 	public static Predicate<Entity> COLDBLOODED = new Predicate<Entity>() {
 		@Override
 		public boolean test(Entity e) {

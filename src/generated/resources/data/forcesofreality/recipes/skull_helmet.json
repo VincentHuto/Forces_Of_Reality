@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "BFB",
-    "FFF",
-    "FFF"
+    "BBB",
+    "B B",
+    "FBF"
   ],
   "key": {
     "B": {
       "item": "forcesofreality:beastly_bone"
     },
     "F": {
-      "item": "forcesofreality:unkept_hide"
+      "item": "forcesofreality:blooddrawn_fang"
     }
   },
   "result": {

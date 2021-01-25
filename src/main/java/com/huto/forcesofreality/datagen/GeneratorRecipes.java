@@ -176,9 +176,9 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('A', ItemInit.anointed_iron_scrap.get()).patternLine("AAA").patternLine("AAA").patternLine("AAA")
 				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
 
-		ShapedRecipeBuilder.shapedRecipe(ItemInit.machina_cage.get()).key('A', ItemInit.anointed_iron_scrap.get())
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.machina_cage.get()).key('A', Items.IRON_INGOT)
 				.key('S', ItemInit.machina_soul.get()).patternLine("AAA").patternLine("ASA").patternLine(" A ")
-				.addCriterion("has_anointed_iron_scrap", hasItem(ItemInit.anointed_iron_scrap.get())).build(consumer);
+				.addCriterion("has_machina_soul", hasItem( ItemInit.machina_soul.get())).build(consumer);
 
 		/*
 		 * ShapedRecipeBuilder.shapedRecipe(ItemInit.rune_blank.get()).key('N',
@@ -425,7 +425,7 @@ public class GeneratorRecipes extends RecipeProvider {
 		 */
 
 		ShapedRecipeBuilder.shapedRecipe(BlockInit.machina_imperfecta.get()).key('A', BlockInit.auric_block.get())
-				.key('N', ItemInit.neurotic_mechanism.get()).key('D', ItemInit.discared_gear.get()).patternLine("ADA")
+				.key('N', ItemInit.malfunctioning_mechanism.get()).key('D', ItemInit.discared_gear.get()).patternLine("ADA")
 				.patternLine("ANA").patternLine("ADA")
 				.addCriterion("has_discared_gear", hasItem(ItemInit.discared_gear.get())).build(consumer);
 
@@ -467,7 +467,7 @@ public class GeneratorRecipes extends RecipeProvider {
 				.addCriterion("has_rafflesia_flower", hasItem(BlockInit.rafflesia_flower.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.skull_helmet.get()).key('B', ItemInit.beastly_bone.get())
-				.key('F', ItemInit.unkept_hide.get()).patternLine("BFB").patternLine("FFF").patternLine("FFF")
+				.key('F', ItemInit.blooddrawn_fang.get()).patternLine("BBB").patternLine("B B").patternLine("FBF")
 				.addCriterion("has_beastly_bone", hasItem(ItemInit.beastly_bone.get())).build(consumer);
 
 		ShapedRecipeBuilder.shapedRecipe(ItemInit.enticing_mantle.get()).key('B', ItemInit.beastly_bone.get())
@@ -486,6 +486,92 @@ public class GeneratorRecipes extends RecipeProvider {
 				.key('Q', Blocks.QUARTZ_BLOCK).key('K', ItemInit.karmic_drop.get()).patternLine("OOO")
 				.patternLine("OKQ").patternLine("QQQ")
 				.addCriterion("has_karmic_drop", hasItem(ItemInit.karmic_drop.get())).build(consumer);
+		
 
+		ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module.get())
+				.key('I', ItemInit.auric_ingot.get())
+				.key('M', ItemInit.malfunctioning_mechanism.get())
+				.key('K', ItemInit.machina_cage.get())
+				.patternLine("III")
+				.patternLine("IMI")
+				.patternLine("IKI")
+				.addCriterion("has_auric_bar", hasItem(ItemInit.auric_ingot.get())).build(consumer);
+		
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module_rocket.get())
+				.key('A', ItemInit.auric_ingot.get())
+				.key('I', Items.IRON_INGOT)
+				.key('M', ItemInit.mechan_module.get())
+				.key('G', Items.GUNPOWDER)
+				.patternLine("A A")
+				.patternLine("IMI")
+				.patternLine("GGG")
+				.addCriterion("has_mechan_module", hasItem(ItemInit.mechan_module.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module_salvo.get())
+				.key('A', ItemInit.auric_ingot.get())
+				.key('F', ItemInit.malfunctioning_mechanism.get())
+				.key('I', Items.IRON_INGOT)
+				.key('M', ItemInit.mechan_module_rocket.get())
+				.key('G', Items.GUNPOWDER)
+				.patternLine("AFA")
+				.patternLine("IMI")
+				.patternLine("GGG")
+				.addCriterion("has_mechan_module_rocket", hasItem(ItemInit.mechan_module_rocket.get())).build(consumer);
+	
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module_shortcircuit.get())
+				.key('A', ItemInit.auric_ingot.get())
+				.key('M', ItemInit.mechan_module.get())
+				.key('R', Items.REDSTONE)
+				.key('G', Items.GLOWSTONE)
+				.patternLine("RGR")
+				.patternLine("AMA")
+				.patternLine("RGR")
+				.addCriterion("has_mechan_module", hasItem(ItemInit.mechan_module.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module_laser.get())
+				.key('A', ItemInit.auric_ingot.get())
+				.key('M', ItemInit.mechan_module.get())
+				.key('R', Items.REDSTONE)
+				.key('G', Items.FIRE_CHARGE)
+				.patternLine("RGR")
+				.patternLine("AMA")
+				.patternLine("RGR")
+				.addCriterion("has_mechan_module", hasItem(ItemInit.mechan_module.get())).build(consumer);
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module_blade.get())
+				.key('A', ItemInit.auric_ingot.get())
+				.key('I', Items.IRON_SWORD)
+				.key('M', ItemInit.mechan_module.get())
+				.key('G', Items.GUNPOWDER)
+				.key('R', Items.REDSTONE)
+				.key('S', ItemInit.machina_soul.get())
+				.patternLine("IAI")
+				.patternLine("RMG")
+				.patternLine("SRS")
+				.addCriterion("has_mechan_module", hasItem(ItemInit.mechan_module.get())).build(consumer);
+		
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.mechan_module_thruster.get())
+				.key('M', ItemInit.mechan_module.get())
+				.key('K', ItemInit.machina_cage.get())
+				.key('G', Items.FIRE_CHARGE)
+				.key('S', ItemInit.machina_soul.get())
+				.key('F', ItemInit.energy_focus.get())
+				.patternLine("GKG")
+				.patternLine("FMF")
+				.patternLine("SGS")
+				.addCriterion("has_mechan_module", hasItem(ItemInit.mechan_module.get())).build(consumer);
+			
+			
+			ShapedRecipeBuilder.shapedRecipe(ItemInit.karmic_harvester.get())
+				.key('E', ItemInit.essence_drop.get())
+				.key('A', ItemInit.anti_tear.get())
+				.key('I', Items.IRON_INGOT)
+				.key('S', Items.STICK)
+				.patternLine("II")
+				.patternLine("EI")
+				.patternLine("AS")
+				.addCriterion("has_iron_ingot", hasItem(Items.IRON_INGOT)).build(consumer);
+			
+			
 	}
 }

@@ -83,35 +83,35 @@ public class ModFuserRecipies {
 				new ItemStack(ItemInit.auric_bow_blade.get(), 1), 200, Ingredient.fromItems(ItemInit.auric_ingot.get()),
 				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(Items.BOW),
 				Ingredient.fromItems(ItemInit.writhing_thread.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()),
 				Ingredient.fromItems(ItemInit.machina_soul.get()));
 
 		recipeNullBowBlade = registerRecipe(new ResourceLocation("null_bow_blade"),
 				new ItemStack(ItemInit.null_bow_blade.get(), 1), 100, Ingredient.fromItems(ItemInit.null_sword.get()),
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()));
 
 		recipeSomnolentBowBlade = registerRecipe(new ResourceLocation("somnolent_bow_blade"),
 				new ItemStack(ItemInit.somnolent_bow_blade.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_SWORD),
 				Ingredient.fromItems(Items.BOW), Ingredient.fromItems(ItemInit.writhing_thread.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()));
 
 		recipeAuricTrickAxe = registerRecipe(new ResourceLocation("auric_trick_axe"),
 				new ItemStack(ItemInit.auric_trick_axe.get(), 1), 200, Ingredient.fromItems(ItemInit.auric_ingot.get()),
 				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(Items.ENDER_EYE),
 				Ingredient.fromItems(ItemInit.writhing_thread.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()),
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()),
 				Ingredient.fromItems(ItemInit.machina_soul.get()));
 
 		recipeNullTrickAxe = registerRecipe(new ResourceLocation("null_trick_axe"),
 				new ItemStack(ItemInit.null_trick_axe.get(), 1), 100, Ingredient.fromItems(ItemInit.null_axe.get()),
 				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()));
 
 		recipeSomnolentTrickAxe = registerRecipe(new ResourceLocation("somnolent_trick_axe"),
 				new ItemStack(ItemInit.somnolent_trick_axe.get(), 1), 100, Ingredient.fromItems(Items.DIAMOND_AXE),
 				Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(ItemInit.writhing_thread.get()),
-				Ingredient.fromItems(ItemInit.neurotic_mechanism.get()));
+				Ingredient.fromItems(ItemInit.malfunctioning_mechanism.get()));
 
 		recipeGrandPurgingStone = registerRecipe(new ResourceLocation("grand_purging_stone"),
 				new ItemStack(ItemInit.grand_purging_stone.get(), 1), 100,

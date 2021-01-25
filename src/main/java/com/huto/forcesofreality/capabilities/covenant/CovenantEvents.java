@@ -2,31 +2,28 @@ package com.huto.forcesofreality.capabilities.covenant;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.capabilities.adornments.AdornmentsApi;
 import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
+import com.huto.forcesofreality.entities.utils.ModEntityPredicates;
+import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.EnchantmentInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.entity.lords.ModelPlayerTrueXanthousKing;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
 import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.huto.forcesofreality.objects.items.ItemAdornment;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,15 +32,17 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -51,8 +50,8 @@ import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class CovenantEvents {
@@ -129,6 +128,18 @@ public class CovenantEvents {
 		}
 	}
 
+	@SubscribeEvent
+	public static void onPlayerMine(BlockEvent.BreakEvent evt) {
+
+		Block block = evt.getWorld().getBlockState(evt.getPos()).getBlock();
+		if (Tags.Items.ORES.contains(block.asItem())) {
+			System.out.println("o");
+		}
+		if (Tags.Items.CROPS.contains(block.asItem())) {
+			System.out.println("c");
+		}
+	}
+
 	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying) {
 		updateClientServerFlight(player, allowFlying, allowFlying && player.abilities.isFlying);
 	}
@@ -165,6 +176,56 @@ public class CovenantEvents {
 	}
 
 	@SubscribeEvent
+	public static void onPlayerKillsEntity(LivingDeathEvent event) {
+
+		if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+			PlayerEntity p = (PlayerEntity) event.getSource().getTrueSource();
+			if (p.getHeldItemMainhand().getItem() == ItemInit.vorpal_blade.get()) {
+				if (ModEntityPredicates.VORPAL.test(event.getEntityLiving())) {
+					Vector3 pos = Vector3.fromEntityCenter(event.getEntityLiving());
+					World worldIn = event.getEntity().world;
+
+					List<Entity> list = worldIn.getEntitiesWithinAABB(Entity.class,
+							new AxisAlignedBB(event.getEntityLiving().getPosition().add(-8, -8, -8),
+									event.getEntityLiving().getPosition().add(5, 8, 8)));
+					for (Entity ent : list) {
+						if (ModEntityPredicates.VORPAL.test(ent)) {
+							ent.setFire(3);
+							ent.setGlowing(true);
+						}
+					}
+
+					if (!worldIn.isRemote) {
+						ServerWorld sWorld = (ServerWorld) worldIn;
+
+						for (int j = 0; j < 30; j++) {
+							sWorld.spawnParticle(ParticleTypes.CRIMSON_SPORE, pos.x, pos.y, pos.z, 1, Math.sin(j) / 9,
+									Math.sin(j) / 3, Math.cos(j) / 9, Math.sin(-j) / 9);
+							sWorld.spawnParticle(ParticleTypes.CRIMSON_SPORE, pos.x, pos.y, pos.z, 1, Math.cos(j) / 9,
+									Math.sin(j) / 3, Math.sin(j) / 9, Math.sin(-j) / 9);
+							sWorld.spawnParticle(ParticleTypes.CRIMSON_SPORE, pos.x, pos.y, pos.z, 1, Math.sin(-j) / 9,
+									Math.sin(j) / 3, Math.cos(-j) / 9, Math.sin(-j) / 9);
+							sWorld.spawnParticle(ParticleTypes.CRIMSON_SPORE, pos.x, pos.y, pos.z, 1, Math.cos(-j) / 9,
+									Math.sin(j) / 3, Math.sin(-j) / 9, Math.sin(-j) / 9);
+						}
+						for (int i = 0; i < 30; i++) {
+							sWorld.spawnParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 1, Math.sin(i) / 3,
+									Math.sin(i) / 3, Math.cos(i) / 3, 0.25f);
+							sWorld.spawnParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 1, Math.cos(i) / 3,
+									Math.sin(i) / 3, Math.sin(i) / 3, 0.25f);
+							sWorld.spawnParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 1,
+									Math.sin(-i) / 3, Math.sin(i) / 3, Math.cos(-i) / 3, 0.25f);
+							sWorld.spawnParticle(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 1,
+									Math.cos(-i) / 3, Math.sin(i) / 3, Math.sin(-i) / 3, 0.25f);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	@SubscribeEvent
 	public static void checkArmor(PlayerTickEvent e) {
 		if (e.player.ticksExisted > 80 && e.player.ticksExisted < 100) {
 			PlayerEntity player = e.player;
@@ -197,8 +258,6 @@ public class CovenantEvents {
 			}
 		}
 	}
-
-
 
 	private static FontRenderer fontRenderer;
 

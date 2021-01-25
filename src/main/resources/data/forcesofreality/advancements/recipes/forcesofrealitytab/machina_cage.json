@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_anointed_iron_scrap": {
+    "has_machina_soul": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "forcesofreality:anointed_iron_scrap"
+            "item": "forcesofreality:machina_soul"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_anointed_iron_scrap",
+      "has_machina_soul",
       "has_the_recipe"
     ]
   ]
