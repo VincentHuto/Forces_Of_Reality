@@ -10,16 +10,16 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemConcecratedAurum extends Item {
+public class ItemTwistedFabric extends Item {
 
-	public ItemConcecratedAurum(Properties properties) {
+	public ItemTwistedFabric(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(new StringTextComponent("A Stange Flowing Amalgam of ").mergeStyle(TextFormatting.ITALIC));
-		tooltip.add(new StringTextComponent("Holy Steel and Enchanted Bronze").mergeStyle(TextFormatting.ITALIC));
+		tooltip.add(new StringTextComponent("Eldritch corruption meets ").mergeStyle(TextFormatting.ITALIC));
+		tooltip.add(new StringTextComponent("Living Fabric...What Could Go Wrong?").mergeStyle(TextFormatting.ITALIC));
 
 		
 		super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -27,7 +27,7 @@ public class ItemConcecratedAurum extends Item {
 	
 	@Override
 	public ITextComponent getDisplayName(ItemStack stack) {
-		return new StringTextComponent(TextFormatting.AQUA + "Concecrated " + TextFormatting.GOLD + "Aurum");
+		return new StringTextComponent(TextFormatting.DARK_PURPLE + "Twisted " + TextFormatting.YELLOW + "Fabric");
 	}
 
 }

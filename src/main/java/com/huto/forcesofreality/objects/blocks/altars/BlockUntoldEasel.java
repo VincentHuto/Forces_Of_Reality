@@ -8,7 +8,7 @@ import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
 import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.capabilities.covenant.ICovenant;
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.coven.SyncCovenPacket;
+import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.objects.blocks.util.IBlockDevotionStation;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityUntoldEasel;
@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
@@ -84,8 +85,9 @@ public class BlockUntoldEasel extends Block implements IBlockDevotionStation {
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
 					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
-					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),
-							new SyncCovenPacket(coven.getDevotion(), player.getEntityId()));
+					PacketHandler.CHANNELCOVENANT.send(
+							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+							new CovenantPacketServer(coven.getDevotion()));
 
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 					player.sendStatusMessage(

@@ -18,19 +18,19 @@ public class ModFuserRecipies {
 
 	public static RecipeFuser recipeGrandPurgingStone, recipeGreyBar, recipeKarmicBar, recipePhantasmalPane,
 			recipeUpgradeBlock, recipeUpgradePeople, recipeUpgradeMob, recipeUpgradeAnimal, recipeUpgradeImport,
-			recipeUpgradeExport, recipeElderTome, recipeCovenTome, recipeOpal, recipeNullBowBlade, recipeSomnolentBowBlade,
-			recipeAuricBowBlade, recipeNullTrickAxe, recipeSomnolentTrickAxe, recipeAuricTrickAxe, recipeIdentifier,
-			recipeArmoredDirector, recipeAuricIngot, recipeCryingObsidian, recipePhantasmalGlass, recipeSeraphChest,
-			recipeAuricHelm, recipeAuricChest, recipeAuricLegs, recipeAuricBoots, recipeAuricDirector;
+			recipeUpgradeExport, recipeElderTome, recipeCovenTome, recipeOpal, recipeNullBowBlade,
+			recipeSomnolentBowBlade, recipeAuricBowBlade, recipeNullTrickAxe, recipeSomnolentTrickAxe,
+			recipeAuricTrickAxe, recipeIdentifier, recipeArmoredDirector, recipeAuricIngot, recipeCryingObsidian,
+			recipePhantasmalGlass, recipeSeraphChest, recipeAuricHelm, recipeAuricChest, recipeAuricLegs,
+			recipeAuricBoots, recipeAuricDirector, recipeAnointingFocus;
 
 	public static void init() {
 
-		recipeSeraphChest = registerRecipe(new ResourceLocation("seraph_wings"),
-				new ItemStack(ItemInit.seraph_wings.get(), 1), 30,
-				Ingredient.fromItems(ItemInit.anointed_iron_chestplate.get()),
-				Ingredient.fromItems(ItemInit.wing_fragment.get()), Ingredient.fromItems(ItemInit.wing_fragment.get()),
-				Ingredient.fromItems(ItemInit.wing_fragment.get()), Ingredient.fromItems(ItemInit.wing_fragment.get()),
-				Ingredient.fromItems(ItemInit.crossed_keys.get()));
+		recipeAnointingFocus = registerRecipe(new ResourceLocation("anointing_focus"),
+				new ItemStack(BlockInit.anointing_focus.get(), 1), 100,
+				Ingredient.fromItems(ItemInit.essence_drop.get()), Ingredient.fromItems(Blocks.CHISELED_QUARTZ_BLOCK),
+				Ingredient.fromItems(Blocks.CHISELED_QUARTZ_BLOCK), Ingredient.fromItems(BlockInit.gilded_wool.get()),
+				Ingredient.fromItems(Blocks.CHISELED_QUARTZ_BLOCK), Ingredient.fromItems(Blocks.CHISELED_QUARTZ_BLOCK));
 
 		recipeCryingObsidian = registerRecipe(new ResourceLocation("crying_obsidian"),
 				new ItemStack(Blocks.CRYING_OBSIDIAN, 1), 15, Ingredient.fromItems(ItemInit.essence_drop.get()),

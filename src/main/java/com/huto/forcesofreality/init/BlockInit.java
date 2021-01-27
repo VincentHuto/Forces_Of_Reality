@@ -214,6 +214,11 @@ public class BlockInit {
 	public static final RegistryObject<Block> ascendant_altar = BLOCKS.register("ascendant_altar",
 			() -> new BlockAscendantAltar(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> anointing_focus = BLOCKS.register("anointing_focus",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.7f, 15f).harvestLevel(1)
+					.harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+	
+	
 	// Eldritch
 	public static final RegistryObject<Block> occular_heap = BLOCKS.register("occular_heap", () -> new BlockOccularHeap(
 			Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
@@ -420,12 +425,6 @@ public class BlockInit {
 			() -> new BlockCapacitor(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Misc
-	/*
-	 * public static final RegistryObject<Block> runic_chisel_station =
-	 * BLOCKS.register("runic_chisel_station", () -> new BlockChiselStation(
-	 * Block.Properties.create(Material.ROCK).hardnessAndResistance(50f,
-	 * 1500f).sound(SoundType.STONE)));
-	 */
 	public static final RegistryObject<Block> rune_mod_station = BLOCKS.register("rune_mod_station",
 			() -> new BlockAdornmentModStation(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));

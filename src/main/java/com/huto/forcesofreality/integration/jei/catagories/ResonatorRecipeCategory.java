@@ -136,6 +136,9 @@ public class ResonatorRecipeCategory implements IRecipeCategory<RecipeResonator>
 		} else if (recipe.getRecipeType() == EnumEssecenceType.NULL) {
 			catalyst = BlockInit.anti_media.get();
 
+		} else if (recipe.getRecipeType() == EnumEssecenceType.ASCENDANT) {
+			catalyst = BlockInit.anointing_focus.get();
+
 		} else {
 			catalyst = BlockInit.somnolent_stone_smooth.get();
 

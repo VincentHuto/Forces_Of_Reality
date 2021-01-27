@@ -18,8 +18,8 @@ public class ItemNeuroticMechanism extends Item {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(new StringTextComponent("A Scrap of what was Nonfunctioning "));
-		tooltip.add(new StringTextComponent("Machinery now Hums with a Twisted Will"));
+		tooltip.add(new StringTextComponent("A Scrap of what was Nonfunctioning ").mergeStyle(TextFormatting.ITALIC));
+		tooltip.add(new StringTextComponent("Machinery now Hums with a Twisted Will").mergeStyle(TextFormatting.ITALIC));
 
 		
 		super.addInformation(stack, worldIn, tooltip, flagIn);

@@ -9,6 +9,7 @@ import com.huto.forcesofreality.network.coven.CovenantPacketClient;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.network.coven.MechanGloveOpenMessage;
+import com.huto.forcesofreality.network.coven.PacketAirDraw;
 import com.huto.forcesofreality.network.coven.PacketDirectorToggleFlightMode;
 import com.huto.forcesofreality.network.coven.PacketToggleDirectorFlightModeMessage;
 import com.huto.forcesofreality.network.coven.PacketUpdateMechanModule;
@@ -97,6 +98,8 @@ public class PacketHandler {
 				CovenantPacketServer::decode, CovenantPacketServer::handle);
 		CHANNELCOVENANT.messageBuilder(SyncCovenPacket.class, networkID++).encoder(SyncCovenPacket::encode)
 				.decoder(SyncCovenPacket::new).consumer(SyncCovenPacket::handle).add();
+		CHANNELCOVENANT.messageBuilder(PacketAirDraw.class, networkID++).decoder(PacketAirDraw::decode)
+				.encoder(PacketAirDraw::encode).consumer(PacketAirDraw::handle).add();
 
 		// Fly
 		HANDLER.registerMessage(networkID++, SetFlyPKT.class, SetFlyPKT::encode, SetFlyPKT::decode,
@@ -109,8 +112,8 @@ public class PacketHandler {
 				ExportVibePacket.Handler::handle);
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
-		HANDLER.registerMessage(networkID++, SetGlideAnim.class, SetGlideAnim::encode,
-				SetGlideAnim::decode, SetGlideAnim.Handler::handle);
+		HANDLER.registerMessage(networkID++, SetGlideAnim.class, SetGlideAnim::encode, SetGlideAnim::decode,
+				SetGlideAnim.Handler::handle);
 		// MindAdornments
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ForcesOfReality.MOD_ID, "runechannel"),
 				() -> "1.0", s -> true, s -> true);

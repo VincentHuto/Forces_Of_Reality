@@ -2,6 +2,7 @@ package com.huto.forcesofreality.events;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.network.PacketHandler;
+import com.huto.forcesofreality.network.coven.PacketAirDraw;
 import com.huto.forcesofreality.network.coven.PacketDirectorToggleFlightMode;
 
 import net.minecraftforge.event.TickEvent;
@@ -16,6 +17,13 @@ public class SparkDirectorModEvents {
 		if (ClientEventSubscriber.keyBinds.get(1).isPressed()) {
 			PacketHandler.MECHANGLOVE.sendToServer(new PacketDirectorToggleFlightMode());
 		}
+		
+		if (ClientEventSubscriber.keyBinds.get(2).isKeyDown()) {
+			PacketHandler.CHANNELCOVENANT.sendToServer(new PacketAirDraw(ClientEventSubscriber.getPartialTicks()));
+
+			
+		}
+		
 	}
 	
 	

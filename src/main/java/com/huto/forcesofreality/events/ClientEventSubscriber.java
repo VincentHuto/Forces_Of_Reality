@@ -207,9 +207,11 @@ public class ClientEventSubscriber {
 				"key.forcesofreality.category"));
 		keyBinds.add(1, new KeyBinding("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M,
 				"key.forcesofreality.category"));
-
+		keyBinds.add(2, new KeyBinding("key.forcesofreality.drawtest.desc", GLFW.GLFW_KEY_LEFT_CONTROL,
+				"key.forcesofreality.category"));
 		ClientRegistry.registerKeyBinding(keyBinds.get(0));
 		ClientRegistry.registerKeyBinding(keyBinds.get(1));
+		ClientRegistry.registerKeyBinding(keyBinds.get(2));
 
 	}
 

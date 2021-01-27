@@ -97,6 +97,8 @@ public class TileEntityVibeResonator extends TileVibeSimpleInventory implements 
 			resonantState = EnumEssecenceType.BOTH;
 		} else if (blockUnder == BlockInit.anti_media.get()) {
 			resonantState = EnumEssecenceType.NULL;
+		}else if (blockUnder == BlockInit.anointing_focus.get()) {
+			resonantState = EnumEssecenceType.ASCENDANT;
 		} else {
 			resonantState = EnumEssecenceType.NONE;
 		}

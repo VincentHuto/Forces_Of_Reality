@@ -23,7 +23,7 @@ public class ModResonatorRecipies {
 			recipeEnhancedChestplate, recipeEnhancedPants, recipeEnhancedBoots, recipeManaGem, recipeChannelingRod,
 			recipeManaDust, recipeEnchantedEarth, recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling,
 			recipieGreyIngot, recipieGreyDust, recipeElderHelm, recipeElderChestplate, recipeElderPants,
-			recipeElderBoots, recipeAuricBar, recipeNullSapling, recipeNulEarth, recipeNulStone, recipeNullMedia,
+			recipeElderBoots, recipeAnnoBar, recipeNullSapling, recipeNulEarth, recipeNulStone, recipeNullMedia,
 			recipeShattered, recipeEmanating;
 
 	// ReversionRecipies
@@ -46,9 +46,8 @@ public class ModResonatorRecipies {
 		recipeNullMedia = registerRecipe(new ResourceLocation("recipenullmedia"),
 				new ItemStack(BlockInit.anti_media.get(), 1), 10, EnumEssecenceType.NULL,
 				Ingredient.fromItems(Blocks.COBBLESTONE));
-
-		recipeAuricBar = registerRecipe(new ResourceLocation("recipeauricbar"),
-				new ItemStack(ItemInit.anointed_iron_scrap.get(), 1), 30, EnumEssecenceType.NULL,
+		recipeAnnoBar = registerRecipe(new ResourceLocation("recipeannointedbbar"),
+				new ItemStack(ItemInit.anointed_iron_scrap.get(), 1), 30, EnumEssecenceType.ASCENDANT,
 				Ingredient.fromItems(Items.IRON_INGOT));
 		recipeAntiTear = registerRecipe(new ResourceLocation("recipeantitear"),
 				new ItemStack(ItemInit.anti_tear.get(), 1), 30, EnumEssecenceType.KARMIC,

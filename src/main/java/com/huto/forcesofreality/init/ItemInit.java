@@ -38,6 +38,7 @@ import com.huto.forcesofreality.objects.items.armor.ItemWrithingChest;
 import com.huto.forcesofreality.objects.items.armor.ItemWrithingHelm;
 import com.huto.forcesofreality.objects.items.coven.ItemConcecratedAurum;
 import com.huto.forcesofreality.objects.items.coven.ItemNeuroticMechanism;
+import com.huto.forcesofreality.objects.items.coven.ItemTwistedFabric;
 import com.huto.forcesofreality.objects.items.coven.sign.ItemBeastBreath;
 import com.huto.forcesofreality.objects.items.coven.sign.ItemCrossedKeys;
 import com.huto.forcesofreality.objects.items.coven.sign.ItemIntegralCog;
@@ -171,7 +172,7 @@ public class ItemInit {
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> null_rod = ITEMS.register("null_rod",
 			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	
+
 	// Karma
 	public static final RegistryObject<Item> karmic_harvester = ITEMS.register("karmic_harvester",
 			() -> new SwordItem(ItemTier.STONE, 3, -1.4F,
@@ -187,7 +188,7 @@ public class ItemInit {
 			() -> new ItemPurgingStone(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> grand_purging_stone = ITEMS.register("grand_purging_stone",
 			() -> new ItemGrandPurgingStone(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	
+
 	// Materials
 	// Gems
 	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
@@ -225,7 +226,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> harmonic_imprint = ITEMS.register("harmonic_imprint",
 			() -> new ItemHarmonicImprint(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
+
 	// Hastur
+
 	public static final RegistryObject<Item> yellow_sign = ITEMS.register("yellow_sign", () -> new ItemYellowSign(
 			new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.UNCOMMON),
 			EnumCovenants.HASTUR, 10));
@@ -441,10 +444,14 @@ public class ItemInit {
 			() -> new ItemWickedModuleLaser(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.EPIC),
 					4, "A Funtional Anomaly, Fires a blast of Eldritch beam"));
-	//Eldritch+Beast+Hastur
+	//Eldritch+Hastur
+	public static final RegistryObject<Item> twisted_fabric = ITEMS.register("twisted_fabric",
+			() -> new ItemTwistedFabric(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
+	
+	// Eldritch+Beast+Hastur
 	public static final RegistryObject<Item> destruction_orb = ITEMS.register("destruction_orb",
 			() -> new ItemDestructOrb(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	//Ascendant+Machine+Self
+	// Ascendant+Machine+Self
 	public static final RegistryObject<Item> destruction_orb_contained = ITEMS.register("destruction_orb_contained",
 			() -> new ItemDestructOrbContained(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
@@ -710,9 +717,10 @@ public class ItemInit {
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_xanthous_king = ITEMS
 			.register("spawn_egg_xanthous_king", () -> new ModSpawnEggItem(EntityInit.xanthous_king, 10862336, 852039,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_devotee= ITEMS
-			.register("spawn_egg_devotee", () -> new ModSpawnEggItem(EntityInit.devotee, 4341573, 9604677,
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_devotee = ITEMS.register("spawn_egg_devotee",
+			() -> new ModSpawnEggItem(EntityInit.devotee, 4341573, 9604677,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,

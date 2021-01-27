@@ -16,12 +16,17 @@ public class ModRafflesiaRecipies {
 
 	public static RecipeRafflesia recipeSusEye, recipeFang, recipeGear, recipeFabric, recipeFeather;
 	public static RecipeRafflesia recipeBallEye, recipeNecBone, recipeNeurMech, recipeTapes, recipeWing;
-	public static RecipeRafflesia recipeConcAurum;
+	public static RecipeRafflesia recipeConcAurum,recipeSeraphChest;
 
 	public static void init() {
 		
-		
-		
+		recipeSeraphChest = registerRecipe(new ResourceLocation("seraph_wings"),
+				new ItemStack(ItemInit.seraph_wings.get(), 1), 130,
+				Ingredient.fromItems(ItemInit.anointed_iron_chestplate.get()),
+				Ingredient.fromItems(ItemInit.wing_fragment.get()), Ingredient.fromItems(ItemInit.wing_fragment.get()),
+				Ingredient.fromItems(ItemInit.wing_fragment.get()), Ingredient.fromItems(ItemInit.wing_fragment.get()),
+				Ingredient.fromItems(ItemInit.crossed_keys.get()));
+
 		recipeConcAurum = registerRecipe(new ResourceLocation("concaurum"), new ItemStack(ItemInit.concecrated_aurum.get(), 1),
 				100, Ingredient.fromItems(ItemInit.emanating_ingot.get()), Ingredient.fromItems(ItemInit.anointed_iron_scrap.get()),
 				Ingredient.fromItems(ItemInit.auric_ingot.get()), Ingredient.fromItems(ItemInit.discared_gear.get()),
