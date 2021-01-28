@@ -18,8 +18,8 @@ public class ItemTwistedFabric extends Item {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(new StringTextComponent("Eldritch corruption meets ").mergeStyle(TextFormatting.ITALIC));
-		tooltip.add(new StringTextComponent("Living Fabric...What Could Go Wrong?").mergeStyle(TextFormatting.ITALIC));
+		tooltip.add(new StringTextComponent("Somewhere Between Living Flesh").mergeStyle(TextFormatting.ITALIC));
+		tooltip.add(new StringTextComponent("And Possesed Fabric...").mergeStyle(TextFormatting.ITALIC));
 
 		
 		super.addInformation(stack, worldIn, tooltip, flagIn);
