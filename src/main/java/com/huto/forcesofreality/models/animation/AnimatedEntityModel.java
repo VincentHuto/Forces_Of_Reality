@@ -11,27 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class WREntityModel<T extends Entity> extends EntityModel<T>
+public abstract class AnimatedEntityModel<T extends Entity> extends EntityModel<T>
 {
     public T entity;
     public float globalSpeed = 0.5f;
     public final List<ModelRenderer> boxList = new ArrayList<>();
     public float time;
 
-    public WREntityModel() {}
+    public AnimatedEntityModel() {}
 
-    public WREntityModel(Function<ResourceLocation, RenderType> type) { super(type); }
+    public AnimatedEntityModel(Function<ResourceLocation, RenderType> type) { super(type); }
 
     public void setDefaultPose()
     {
-        for (ModelRenderer box : boxList) if (box instanceof WRModelRenderer) ((WRModelRenderer) box).setDefaultPose();
+        for (ModelRenderer box : boxList) if (box instanceof AnimatedModelRenderer) ((AnimatedModelRenderer) box).setDefaultPose();
     }
 
     public void resetToDefaultPose()
     {
         globalSpeed = 0.5f;
         for (ModelRenderer box : boxList)
-            if (box instanceof WRModelRenderer) ((WRModelRenderer) box).resetToDefaultPose();
+            if (box instanceof AnimatedModelRenderer) ((AnimatedModelRenderer) box).resetToDefaultPose();
     }
 
     public void setRotateAngle(ModelRenderer model, float x, float y, float z)
@@ -57,7 +57,7 @@ public abstract class WREntityModel<T extends Entity> extends EntityModel<T>
     /**
      * Rotate Angle X
      */
-    public void walk(WRModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float walk, float walkAmount)
+    public void walk(AnimatedModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float walk, float walkAmount)
     {
         box.walk(speed, degree, invert, offset, weight, walk, walkAmount);
     }
@@ -65,7 +65,7 @@ public abstract class WREntityModel<T extends Entity> extends EntityModel<T>
     /**
      * Rotate Angle Z
      */
-    public void flap(WRModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float flap, float flapAmount)
+    public void flap(AnimatedModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float flap, float flapAmount)
     {
         box.flap(speed, degree, invert, offset, weight, flap, flapAmount);
     }
@@ -73,7 +73,7 @@ public abstract class WREntityModel<T extends Entity> extends EntityModel<T>
     /**
      * Rotate Angle Y
      */
-    public void swing(WRModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float swing, float swingAmount)
+    public void swing(AnimatedModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float swing, float swingAmount)
     {
         box.swing(speed, degree, invert, offset, weight, swing, swingAmount);
     }
@@ -83,7 +83,7 @@ public abstract class WREntityModel<T extends Entity> extends EntityModel<T>
      *
      * @param bounce back and forth
      */
-    public void bob(WRModelRenderer box, float speed, float degree, boolean bounce, float limbSwing, float limbSwingAmount)
+    public void bob(AnimatedModelRenderer box, float speed, float degree, boolean bounce, float limbSwing, float limbSwingAmount)
     {
         box.bob(speed, degree, bounce, limbSwing, limbSwingAmount);
     }
@@ -134,9 +134,9 @@ public abstract class WREntityModel<T extends Entity> extends EntityModel<T>
     {
         for (ModelRenderer modelRenderer : boxList)
         {
-            if (modelRenderer instanceof WRModelRenderer)
+            if (modelRenderer instanceof AnimatedModelRenderer)
             {
-                WRModelRenderer box = (WRModelRenderer) modelRenderer;
+                AnimatedModelRenderer box = (AnimatedModelRenderer) modelRenderer;
                 box.rotationPointX = Mafs.linTerp(box.rotationPointX, box.defaultPositionX, time);
                 box.rotationPointY = Mafs.linTerp(box.rotationPointY, box.defaultPositionY, time);
                 box.rotationPointZ = Mafs.linTerp(box.rotationPointZ, box.defaultPositionZ, time);

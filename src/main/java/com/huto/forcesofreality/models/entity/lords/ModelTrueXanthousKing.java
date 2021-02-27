@@ -4,63 +4,63 @@ import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
 import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.models.animation.ModelAnimator;
-import com.huto.forcesofreality.models.animation.WREntityModel;
-import com.huto.forcesofreality.models.animation.WRModelRenderer;
+import com.huto.forcesofreality.models.animation.AnimatedEntityModel;
+import com.huto.forcesofreality.models.animation.AnimatedModelRenderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.util.math.MathHelper;
 
-public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing> {
-	private final WRModelRenderer whole;
-	private final WRModelRenderer upperBody;
-	private final WRModelRenderer hasturForm;
-	private final WRModelRenderer head;
-	private final WRModelRenderer body;
-	private final WRModelRenderer rightLeg;
-	private final WRModelRenderer rightLeg2;
-	private final WRModelRenderer leftLeg;
-	private final WRModelRenderer leftLeg2;
-	private final WRModelRenderer cape;
-	private final WRModelRenderer Body_r1;
-	private final WRModelRenderer bone3;
-	private final WRModelRenderer Body_r2;
-	private final WRModelRenderer cape2;
-	private final WRModelRenderer Body_r3;
-	private final WRModelRenderer Body_r4;
-	private final WRModelRenderer bone2;
-	private final WRModelRenderer Body_r5;
-	private final WRModelRenderer leftArm;
-	private final WRModelRenderer leftElbow;
-	private final WRModelRenderer rightArm;
-	private final WRModelRenderer rElbow;
-	private final WRModelRenderer staff;
-	private final WRModelRenderer bone;
-	private final WRModelRenderer crest;
-	private final WRModelRenderer crest2;
-	private final WRModelRenderer crest3;
-	private final WRModelRenderer crest4;
-	private final WRModelRenderer crest5;
+public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthousKing> {
+	private final AnimatedModelRenderer whole;
+	private final AnimatedModelRenderer upperBody;
+	private final AnimatedModelRenderer hasturForm;
+	private final AnimatedModelRenderer head;
+	private final AnimatedModelRenderer body;
+	private final AnimatedModelRenderer rightLeg;
+	private final AnimatedModelRenderer rightLeg2;
+	private final AnimatedModelRenderer leftLeg;
+	private final AnimatedModelRenderer leftLeg2;
+	private final AnimatedModelRenderer cape;
+	private final AnimatedModelRenderer Body_r1;
+	private final AnimatedModelRenderer bone3;
+	private final AnimatedModelRenderer Body_r2;
+	private final AnimatedModelRenderer cape2;
+	private final AnimatedModelRenderer Body_r3;
+	private final AnimatedModelRenderer Body_r4;
+	private final AnimatedModelRenderer bone2;
+	private final AnimatedModelRenderer Body_r5;
+	private final AnimatedModelRenderer leftArm;
+	private final AnimatedModelRenderer leftElbow;
+	private final AnimatedModelRenderer rightArm;
+	private final AnimatedModelRenderer rElbow;
+	private final AnimatedModelRenderer staff;
+	private final AnimatedModelRenderer bone;
+	private final AnimatedModelRenderer crest;
+	private final AnimatedModelRenderer crest2;
+	private final AnimatedModelRenderer crest3;
+	private final AnimatedModelRenderer crest4;
+	private final AnimatedModelRenderer crest5;
 	public ModelAnimator animator;
 
 	public ModelTrueXanthousKing() {
 		textureWidth = 512;
 		textureHeight = 512;
 
-		whole = new WRModelRenderer(this);
+		whole = new AnimatedModelRenderer(this);
 		whole.setRotationPoint(0.0F, -15.0F, -15.0F);
 		
 
-		upperBody = new WRModelRenderer(this);
+		upperBody = new AnimatedModelRenderer(this);
 		upperBody.setRotationPoint(0.1F, -19.0F, -19.0F);
 		
 
-		hasturForm = new WRModelRenderer(this);
+		hasturForm = new AnimatedModelRenderer(this);
 		hasturForm.setRotationPoint(0.0F, 0.0F, 0.0F);
 		upperBody.addChild(hasturForm);
 		
 
-		head = new WRModelRenderer(this);
+		head = new AnimatedModelRenderer(this);
 		head.setRotationPoint(0.0F, 12.0F, 21.0F);
 		hasturForm.addChild(head);
 		setRotateAngle(head, 0.2182F, 0.0F, 0.0F);
@@ -89,7 +89,7 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		head.setTextureOffset(173, 58).addBox(-5.1F, -8.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
 		head.setTextureOffset(185, 68).addBox(2.9F, -8.0F, 3.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
 
-		body = new WRModelRenderer(this);
+		body = new AnimatedModelRenderer(this);
 		body.setRotationPoint(-0.1F, 18.1615F, 20.1846F);
 		hasturForm.addChild(body);
 		body.setTextureOffset(112, 137).addBox(-4.0F, -6.1615F, -1.1846F, 8.0F, 14.0F, 4.0F, 0.0F, false);
@@ -101,35 +101,35 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		body.setTextureOffset(112, 137).addBox(-4.35F, -0.1615F, -1.1846F, 1.0F, 1.0F, 4.0F, 0.0F, false);
 		body.setTextureOffset(112, 137).addBox(-4.75F, 7.7385F, -1.1846F, 1.0F, 1.0F, 4.0F, 0.0F, false);
 
-		rightLeg = new WRModelRenderer(this);
+		rightLeg = new AnimatedModelRenderer(this);
 		rightLeg.setRotationPoint(-2.1F, 8.8385F, 0.8154F);
 		body.addChild(rightLeg);
 		rightLeg.setTextureOffset(134, 113).addBox(-2.0F, -1.0F, -2.0F, 4.0F, 8.0F, 4.0F, 0.0F, false);
 
-		rightLeg2 = new WRModelRenderer(this);
+		rightLeg2 = new AnimatedModelRenderer(this);
 		rightLeg2.setRotationPoint(0.0F, 7.0F, -2.0F);
 		rightLeg.addChild(rightLeg2);
 		rightLeg2.setTextureOffset(134, 113).addBox(-2.0F, 0.0F, -0.1F, 4.0F, 9.0F, 4.0F, 0.0F, false);
 		rightLeg2.setTextureOffset(28, 212).addBox(-2.0F, 7.0F, -1.1F, 4.0F, 2.0F, 1.0F, 0.0F, false);
 
-		leftLeg = new WRModelRenderer(this);
+		leftLeg = new AnimatedModelRenderer(this);
 		leftLeg.setRotationPoint(2.0F, 8.8385F, 0.8154F);
 		body.addChild(leftLeg);
 		leftLeg.setTextureOffset(134, 113).addBox(-1.9F, -1.0F, -2.0F, 4.0F, 8.0F, 4.0F, 0.0F, true);
 
-		leftLeg2 = new WRModelRenderer(this);
+		leftLeg2 = new AnimatedModelRenderer(this);
 		leftLeg2.setRotationPoint(-1.0F, 7.0F, -2.0F);
 		leftLeg.addChild(leftLeg2);
 		leftLeg2.setTextureOffset(134, 113).addBox(-0.9F, 0.0F, -0.1F, 4.0F, 9.0F, 4.0F, 0.0F, true);
 		leftLeg2.setTextureOffset(27, 204).addBox(-0.9F, 7.0F, -1.1F, 4.0F, 2.0F, 1.0F, 0.0F, true);
 
-		cape = new WRModelRenderer(this);
+		cape = new AnimatedModelRenderer(this);
 		cape.setRotationPoint(0.0F, -6.1615F, 3.8154F);
 		body.addChild(cape);
 		setRotateAngle(cape, -0.5672F, 0.0F, 0.0F);
 		
 
-		Body_r1 = new WRModelRenderer(this);
+		Body_r1 = new AnimatedModelRenderer(this);
 		Body_r1.setRotationPoint(3.0F, 1.6868F, 0.0746F);
 		cape.addChild(Body_r1);
 		setRotateAngle(Body_r1, 0.829F, 0.0F, 0.0F);
@@ -137,76 +137,76 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		Body_r1.setTextureOffset(152, 203).addBox(-10.0F, -0.9319F, -0.4824F, 3.0F, 11.0F, 2.0F, 0.0F, false);
 		Body_r1.setTextureOffset(217, 202).addBox(-7.0F, -1.9319F, -0.4824F, 8.0F, 12.0F, 2.0F, 0.0F, false);
 
-		bone3 = new WRModelRenderer(this);
+		bone3 = new AnimatedModelRenderer(this);
 		bone3.setRotationPoint(0.0F, 8.0F, 8.0F);
 		cape.addChild(bone3);
 		
 
-		Body_r2 = new WRModelRenderer(this);
+		Body_r2 = new AnimatedModelRenderer(this);
 		Body_r2.setRotationPoint(0.0F, 1.6868F, 1.0746F);
 		bone3.addChild(Body_r2);
 		setRotateAngle(Body_r2, 0.829F, 0.0F, 0.0F);
 		Body_r2.setTextureOffset(155, 214).addBox(-4.0F, -1.9319F, -0.4824F, 8.0F, 5.0F, 2.0F, 0.0F, false);
 
-		cape2 = new WRModelRenderer(this);
+		cape2 = new AnimatedModelRenderer(this);
 		cape2.setRotationPoint(0.0F, 3.0F, 4.0F);
 		bone3.addChild(cape2);
 		
 
-		Body_r3 = new WRModelRenderer(this);
+		Body_r3 = new AnimatedModelRenderer(this);
 		Body_r3.setRotationPoint(-8.0F, 1.3891F, 0.0237F);
 		cape2.addChild(Body_r3);
 		setRotateAngle(Body_r3, 0.829F, 0.0F, 0.0F);
 		Body_r3.setTextureOffset(152, 203).addBox(1.0F, -0.9319F, -0.4824F, 3.0F, 11.0F, 2.0F, 0.0F, false);
 		Body_r3.setTextureOffset(152, 203).addBox(12.0F, -0.9319F, -0.4824F, 3.0F, 11.0F, 2.0F, 0.0F, false);
 
-		Body_r4 = new WRModelRenderer(this);
+		Body_r4 = new AnimatedModelRenderer(this);
 		Body_r4.setRotationPoint(0.0F, 2.0647F, 0.761F);
 		cape2.addChild(Body_r4);
 		setRotateAngle(Body_r4, 0.829F, 0.0F, 0.0F);
 		Body_r4.setTextureOffset(182, 205).addBox(-4.0F, -1.9319F, -0.4824F, 8.0F, 12.0F, 2.0F, 0.0F, false);
 
-		bone2 = new WRModelRenderer(this);
+		bone2 = new AnimatedModelRenderer(this);
 		bone2.setRotationPoint(0.0F, 8.485F, 8.5337F);
 		cape2.addChild(bone2);
 		setRotateAngle(bone2, 0.7418F, 0.0F, 0.0F);
 		
 
-		Body_r5 = new WRModelRenderer(this);
+		Body_r5 = new AnimatedModelRenderer(this);
 		Body_r5.setRotationPoint(0.0F, 1.9696F, -0.3473F);
 		bone2.addChild(Body_r5);
 		setRotateAngle(Body_r5, 0.829F, 0.0F, 0.0F);
 		Body_r5.setTextureOffset(152, 224).addBox(-9.0F, -2.0746F, 1.6868F, 18.0F, 6.0F, 1.0F, 0.0F, false);
 
-		leftArm = new WRModelRenderer(this);
+		leftArm = new AnimatedModelRenderer(this);
 		leftArm.setRotationPoint(4.1F, -4.1615F, -0.1846F);
 		body.addChild(leftArm);
 		setRotateAngle(leftArm, 0.0F, 0.0F, -0.3927F);
 		leftArm.setTextureOffset(281, 22).addBox(-0.4751F, -2.1144F, -1.0F, 4.0F, 5.0F, 4.0F, 1.0F, false);
 		leftArm.setTextureOffset(92, 230).addBox(-0.4751F, -2.1144F, -1.0F, 4.0F, 11.0F, 4.0F, 0.0F, false);
 
-		leftElbow = new WRModelRenderer(this);
+		leftElbow = new AnimatedModelRenderer(this);
 		leftElbow.setRotationPoint(1.6173F, 8.7239F, 0.5F);
 		leftArm.addChild(leftElbow);
 		setRotateAngle(leftElbow, -1.0472F, 0.0F, 0.0F);
 		leftElbow.setTextureOffset(249, 266).addBox(-2.0924F, 2.1809F, -1.5331F, 4.0F, 7.0F, 4.0F, 0.0F, false);
 		leftElbow.setTextureOffset(0, 52).addBox(-1.0924F, -0.8191F, -0.5331F, 2.0F, 11.0F, 2.0F, 0.0F, false);
 
-		rightArm = new WRModelRenderer(this);
+		rightArm = new AnimatedModelRenderer(this);
 		rightArm.setRotationPoint(-4.1F, -4.1615F, -1.1846F);
 		body.addChild(rightArm);
 		setRotateAngle(rightArm, 0.0F, 0.0F, 0.3054F);
 		rightArm.setTextureOffset(54, 103).addBox(-4.6357F, -2.3177F, 0.0F, 4.0F, 5.0F, 4.0F, 1.0F, false);
 		rightArm.setTextureOffset(82, 281).addBox(-4.6357F, -2.3177F, 0.0F, 4.0F, 11.0F, 4.0F, 0.0F, false);
 
-		rElbow = new WRModelRenderer(this);
+		rElbow = new AnimatedModelRenderer(this);
 		rElbow.setRotationPoint(-2.2396F, 9.3559F, 2.5F);
 		rightArm.addChild(rElbow);
 		setRotateAngle(rElbow, -1.0908F, 0.0F, 0.0F);
 		rElbow.setTextureOffset(223, 266).addBox(-2.3961F, 2.5384F, -2.6233F, 4.0F, 7.0F, 4.0F, 0.0F, false);
 		rElbow.setTextureOffset(15, 52).addBox(-1.3961F, -0.4616F, -1.6233F, 2.0F, 11.0F, 2.0F, 0.0F, false);
 
-		staff = new WRModelRenderer(this);
+		staff = new AnimatedModelRenderer(this);
 		staff.setRotationPoint(-12.9947F, 73.0542F, -92.1387F);
 		rElbow.addChild(staff);
 		setRotateAngle(staff, 0.3927F, 0.0F, 0.0F);
@@ -219,13 +219,13 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		staff.setTextureOffset(208, 28).addBox(11.3865F, -23.9316F, 118.3771F, 2.0F, 1.0F, 5.0F, 0.0F, false);
 		staff.setTextureOffset(143, 2).addBox(11.3865F, -21.9316F, 118.3771F, 2.0F, 1.0F, 5.0F, 0.0F, false);
 
-		bone = new WRModelRenderer(this);
+		bone = new AnimatedModelRenderer(this);
 		bone.setRotationPoint(-0.5F, 17.5F, -3.6F);
 		upperBody.addChild(bone);
 		setRotateAngle(bone, 0.6109F, 0.0F, 0.0F);
 		
 
-		crest = new WRModelRenderer(this);
+		crest = new AnimatedModelRenderer(this);
 		crest.setRotationPoint(-21.6F, -3.5F, 28.3889F);
 		upperBody.addChild(crest);
 		crest.setTextureOffset(0, 256).addBox(6.5F, -3.5F, -0.3889F, 1.0F, 7.0F, 1.0F, 0.0F, false);
@@ -238,7 +238,7 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		crest.setTextureOffset(279, 183).addBox(-5.5F, -5.5F, -1.3889F, 11.0F, 11.0F, 1.0F, 0.0F, false);
 		crest.setTextureOffset(207, 195).addBox(-3.5F, -7.5F, -0.3889F, 7.0F, 1.0F, 1.0F, 0.0F, false);
 
-		crest2 = new WRModelRenderer(this);
+		crest2 = new AnimatedModelRenderer(this);
 		crest2.setRotationPoint(21.4F, -3.5F, 28.3889F);
 		upperBody.addChild(crest2);
 		crest2.setTextureOffset(63, 245).addBox(6.5F, -3.5F, -0.3889F, 1.0F, 7.0F, 1.0F, 0.0F, false);
@@ -251,7 +251,7 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		crest2.setTextureOffset(262, 279).addBox(-5.5F, -5.5F, -1.3889F, 11.0F, 11.0F, 1.0F, 0.0F, false);
 		crest2.setTextureOffset(172, 197).addBox(-3.5F, -7.5F, -0.3889F, 7.0F, 1.0F, 1.0F, 0.0F, false);
 
-		crest3 = new WRModelRenderer(this);
+		crest3 = new AnimatedModelRenderer(this);
 		crest3.setRotationPoint(-0.6F, -11.5F, 24.3889F);
 		upperBody.addChild(crest3);
 		crest3.setTextureOffset(52, 245).addBox(6.5F, -3.5F, -0.3889F, 1.0F, 7.0F, 1.0F, 0.0F, false);
@@ -264,7 +264,7 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		crest3.setTextureOffset(238, 279).addBox(-5.5F, -5.5F, -1.3889F, 11.0F, 11.0F, 1.0F, 0.0F, false);
 		crest3.setTextureOffset(82, 195).addBox(-3.5F, -7.5F, -0.3889F, 7.0F, 1.0F, 1.0F, 0.0F, false);
 
-		crest4 = new WRModelRenderer(this);
+		crest4 = new AnimatedModelRenderer(this);
 		crest4.setRotationPoint(17.525F, 16.5F, 25.375F);
 		upperBody.addChild(crest4);
 		crest4.setTextureOffset(62, 195).addBox(-6.625F, -3.5F, -0.375F, 1.0F, 7.0F, 1.0F, 0.0F, false);
@@ -276,7 +276,7 @@ public class ModelTrueXanthousKing extends WREntityModel<EntityTrueXanthousKing>
 		crest4.setTextureOffset(198, 37).addBox(-4.625F, -5.5F, -1.375F, 11.0F, 11.0F, 1.0F, 0.0F, false);
 		crest4.setTextureOffset(163, 0).addBox(-2.625F, -7.5F, -0.375F, 7.0F, 1.0F, 1.0F, 0.0F, false);
 
-		crest5 = new WRModelRenderer(this);
+		crest5 = new AnimatedModelRenderer(this);
 		crest5.setRotationPoint(-18.6F, 16.5F, 26.3889F);
 		upperBody.addChild(crest5);
 		crest5.setTextureOffset(124, 189).addBox(6.5F, -3.5F, -0.3889F, 1.0F, 7.0F, 1.0F, 0.0F, false);

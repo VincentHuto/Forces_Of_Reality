@@ -12,8 +12,8 @@ public class ModelAnimator {
 	private boolean correctAnimation = false;
 	private float partialTicks;
 	private IAnimatable entity;
-	private final HashMap<WRModelRenderer, BoxPosCache> boxPosCache = new HashMap<>();
-	private final HashMap<WRModelRenderer, BoxPosCache> prevPosCache = new HashMap<>();
+	private final HashMap<AnimatedModelRenderer, BoxPosCache> boxPosCache = new HashMap<>();
+	private final HashMap<AnimatedModelRenderer, BoxPosCache> prevPosCache = new HashMap<>();
 
 	private ModelAnimator() {
 	}
@@ -70,17 +70,17 @@ public class ModelAnimator {
 		endKeyframe();
 	}
 
-	public void rotate(WRModelRenderer box, float x, float y, float z) {
+	public void rotate(AnimatedModelRenderer box, float x, float y, float z) {
 		if (correctAnimation)
 			getPosCache(box).addRotation(x, y, z);
 	}
 
-	public void move(WRModelRenderer box, float x, float y, float z) {
+	public void move(AnimatedModelRenderer box, float x, float y, float z) {
 		if (correctAnimation)
 			getPosCache(box).addOffset(x, y, z);
 	}
 
-	private BoxPosCache getPosCache(WRModelRenderer box) {
+	private BoxPosCache getPosCache(AnimatedModelRenderer box) {
 		return boxPosCache.computeIfAbsent(box, (b) -> new BoxPosCache());
 	}
 
@@ -93,7 +93,7 @@ public class ModelAnimator {
 			int animationTick = entity.getAnimationTick();
 			if (animationTick >= prevTempTick && animationTick < tempTick) {
 				if (stationary) {
-					for (Map.Entry<WRModelRenderer, BoxPosCache> entry : prevPosCache.entrySet()) {
+					for (Map.Entry<AnimatedModelRenderer, BoxPosCache> entry : prevPosCache.entrySet()) {
 						ModelRenderer box = entry.getKey();
 						BoxPosCache cache = entry.getValue();
 						box.rotateAngleX += cache.getRotationX();
@@ -108,7 +108,7 @@ public class ModelAnimator {
 					float inc = MathHelper.sin(tick * Mafs.PI / 2f);
 					float dec = 1f - inc;
 
-					for (Map.Entry<WRModelRenderer, BoxPosCache> entry : prevPosCache.entrySet()) {
+					for (Map.Entry<AnimatedModelRenderer, BoxPosCache> entry : prevPosCache.entrySet()) {
 						ModelRenderer box = entry.getKey();
 						BoxPosCache cache = entry.getValue();
 						box.rotateAngleX += dec * cache.getRotationX();
@@ -119,7 +119,7 @@ public class ModelAnimator {
 						box.rotationPointZ += dec * cache.getOffsetZ();
 					}
 
-					for (Map.Entry<WRModelRenderer, BoxPosCache> entry : boxPosCache.entrySet()) {
+					for (Map.Entry<AnimatedModelRenderer, BoxPosCache> entry : boxPosCache.entrySet()) {
 						ModelRenderer box = entry.getKey();
 						BoxPosCache cache = entry.getValue();
 						box.rotateAngleX += inc * cache.getRotationX();

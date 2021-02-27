@@ -1,6 +1,8 @@
-package com.huto.forcesofreality.models.entity.guardians;
+package com.huto.forcesofreality.models.entity.lords;
 
-import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
+
+import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
+import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -8,7 +10,9 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelBeastFromBeyond extends EntityModel<EntityBeastFromBeyond> {
+
+
+public class ModelLordOfTheWild extends EntityModel<EntityLordOfTheWild> {
 	private final ModelRenderer Head;
 	private final ModelRenderer JawTop;
 	private final ModelRenderer JawBottom;

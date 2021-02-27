@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 
-public class WRModelRenderer extends ModelRenderer
+public class AnimatedModelRenderer extends ModelRenderer
 {
     public float defaultRotationX;
     public float defaultRotationY;
@@ -13,19 +13,19 @@ public class WRModelRenderer extends ModelRenderer
     public float defaultPositionY;
     public float defaultPositionZ;
 
-    public WRModelRenderer(WREntityModel<?> model)
+    public AnimatedModelRenderer(AnimatedEntityModel<?> model)
     {
         super(model);
         model.boxList.add(this);
     }
 
-    public WRModelRenderer(WREntityModel<?> model, int textureOffsetX, int textureOffsetY)
+    public AnimatedModelRenderer(AnimatedEntityModel<?> model, int textureOffsetX, int textureOffsetY)
     {
         this(model);
         setTextureOffset(textureOffsetX, textureOffsetY);
     }
 
-    public WRModelRenderer(Model model, int textureOffsetX, int textureOffsetY)
+    public AnimatedModelRenderer(Model model, int textureOffsetX, int textureOffsetY)
     {
         super(model);
         setTextureOffset(textureOffsetX, textureOffsetY);
