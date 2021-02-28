@@ -7,6 +7,7 @@ import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
 import com.huto.forcesofreality.entities.guardians.EntityHastur;
 import com.huto.forcesofreality.entities.guardians.EntityMalformedAutomaton;
 import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
+import com.huto.forcesofreality.entities.guardians.EntityTheFirstBeast;
 import com.huto.forcesofreality.entities.guardians.EntityTulpa;
 import com.huto.forcesofreality.entities.item.EntityManaDustItem;
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
@@ -30,6 +31,7 @@ import com.huto.forcesofreality.entities.passive.EntitySlug;
 import com.huto.forcesofreality.entities.projectiles.EntityCorruptNote;
 import com.huto.forcesofreality.entities.projectiles.EntityDreadRocket;
 import com.huto.forcesofreality.entities.projectiles.EntityDreadRocketDirected;
+import com.huto.forcesofreality.entities.projectiles.EntityFirstBeastBolt;
 import com.huto.forcesofreality.entities.projectiles.EntityHolyFlare;
 import com.huto.forcesofreality.entities.projectiles.EntityHolySpirit;
 import com.huto.forcesofreality.entities.projectiles.EntityJudgement;
@@ -114,17 +116,19 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityDevotee>> devotee = ENTITY_TYPES.register("devotee",
 			() -> EntityType.Builder.<EntityDevotee>create(EntityDevotee::new, EntityClassification.MONSTER)
 					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "devotee").toString()));
-	
+
 	public static final RegistryObject<EntityType<EntityXanthousKing>> xanthous_king = ENTITY_TYPES.register(
 			"xanthous_king",
 			() -> EntityType.Builder.<EntityXanthousKing>create(EntityXanthousKing::new, EntityClassification.MONSTER)
 					.size(4f, 6f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "xanthous_king").toString()));
-	
-	public static final RegistryObject<EntityType<EntityTrueXanthousKing>> true_xanthous_king = ENTITY_TYPES.register("true_xanthous_king",
-			() -> EntityType.Builder.<EntityTrueXanthousKing>create(EntityTrueXanthousKing::new, EntityClassification.MONSTER)
-					.size(1.2f, 2.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "true_xanthous_king").toString()));
-	
-	
+
+	public static final RegistryObject<EntityType<EntityTrueXanthousKing>> true_xanthous_king = ENTITY_TYPES.register(
+			"true_xanthous_king",
+			() -> EntityType.Builder
+					.<EntityTrueXanthousKing>create(EntityTrueXanthousKing::new, EntityClassification.MONSTER)
+					.size(1.2f, 2.3f)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "true_xanthous_king").toString()));
+
 	public static final RegistryObject<EntityType<EntityTentacle>> tentacle = ENTITY_TYPES.register("tentacle",
 			() -> EntityType.Builder.<EntityTentacle>create(EntityTentacle::new, EntityClassification.MONSTER)
 					.size(0.4F, 0.7F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "tentacle").toString()));
@@ -185,6 +189,12 @@ public class EntityInit {
 					.size(1.7f, 1.7f)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "beast_from_beyond").toString()));
 
+	public static final RegistryObject<EntityType<EntityTheFirstBeast>> the_first_beast = ENTITY_TYPES.register(
+			"the_first_beast",
+			() -> EntityType.Builder.<EntityTheFirstBeast>create(EntityTheFirstBeast::new, EntityClassification.MONSTER)
+					.size(1.7f, 2.7f)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "the_first_beast").toString()));
+
 	public static final RegistryObject<EntityType<EntityLordOfTheWild>> lord_of_the_wild = ENTITY_TYPES.register(
 			"lord_of_the_wild",
 			() -> EntityType.Builder.<EntityLordOfTheWild>create(EntityLordOfTheWild::new, EntityClassification.MONSTER)
@@ -215,7 +225,6 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityDreadBot>> dread_bot = ENTITY_TYPES.register("dread_bot",
 			() -> EntityType.Builder.<EntityDreadBot>create(EntityDreadBot::new, EntityClassification.MONSTER)
 					.size(1.0F, 1.0F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dread_bot").toString()));
-	// Machine
 
 	// Projectiles
 	public static final RegistryObject<EntityType<EntityPlayerTentacle>> player_tentacle = ENTITY_TYPES.register(
@@ -224,6 +233,12 @@ public class EntityInit {
 					.<EntityPlayerTentacle>create(EntityPlayerTentacle::new, EntityClassification.CREATURE)
 					.size(1.4F, 1.5F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "player_tentacle").toString()));
+
+	public static final RegistryObject<EntityType<EntityFirstBeastBolt>> first_hunter_bolt = ENTITY_TYPES.register(
+			"first_hunter_bolt",
+			() -> EntityType.Builder.<EntityFirstBeastBolt>create(EntityFirstBeastBolt::new, EntityClassification.MISC)
+					.size(0.5F, 0.5F).trackingRange(4).func_233608_b_(20)
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "first_hunter_bolt").toString()));
 
 	public static final RegistryObject<EntityType<EntityTrackingOrb>> tracking_orb = ENTITY_TYPES.register(
 			"tracking_orb",
@@ -330,8 +345,10 @@ public class EntityInit {
 		GlobalEntityTypeAttributes.put(EntityInit.lord_of_the_wild.get(), EntityLordOfTheWild.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.uzouthrhix.get(), EntityUzouthrhix.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.xanthous_king.get(), EntityTrueXanthousKing.setAttributes().create());
-		GlobalEntityTypeAttributes.put(EntityInit.true_xanthous_king.get(), EntityTrueXanthousKing.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.true_xanthous_king.get(),
+				EntityTrueXanthousKing.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.devotee.get(), EntityDevotee.setAttributes().create());
+		GlobalEntityTypeAttributes.put(EntityInit.the_first_beast.get(), EntityTheFirstBeast.setAttributes().create());
 
 	}
 }

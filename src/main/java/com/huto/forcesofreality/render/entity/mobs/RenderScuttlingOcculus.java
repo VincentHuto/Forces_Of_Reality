@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderScuttlingOcculus extends MobRenderer<EntityScuttlingOcculus, ModelScuttlingOcculus> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/scuttlingocculus/modelscuttlingocculus.png");
+			"textures/entity/scuttling_occulus/model_scuttling_occulus.png");
 
 	public RenderScuttlingOcculus(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelScuttlingOcculus(), 0.1f);

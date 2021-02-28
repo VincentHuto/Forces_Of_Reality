@@ -444,10 +444,10 @@ public class ItemInit {
 			() -> new ItemWickedModuleLaser(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).rarity(Rarity.EPIC),
 					4, "A Funtional Anomaly, Fires a blast of Eldritch beam"));
-	//Eldritch+Hastur
+	// Eldritch+Hastur
 	public static final RegistryObject<Item> twisted_fabric = ITEMS.register("twisted_fabric",
 			() -> new ItemTwistedFabric(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	
+
 	// Eldritch+Beast+Hastur
 	public static final RegistryObject<Item> destruction_orb = ITEMS.register("destruction_orb",
 			() -> new ItemDestructOrb(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
@@ -721,6 +721,10 @@ public class ItemInit {
 			() -> new ModSpawnEggItem(EntityInit.devotee, 4341573, 9604677,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_first_beast = ITEMS.register("spawn_egg_first_beast",
+			() -> new ModSpawnEggItem(EntityInit.the_first_beast, 6499072, 11777460,
+					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
+
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
@@ -732,7 +736,8 @@ public class ItemInit {
 				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
 				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl,
 				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild,
-				ItemInit.spawn_egg_uzouthrhix, ItemInit.spawn_egg_xanthous_king, ItemInit.spawn_egg_devotee);
+				ItemInit.spawn_egg_uzouthrhix, ItemInit.spawn_egg_xanthous_king, ItemInit.spawn_egg_devotee,
+				ItemInit.spawn_egg_first_beast);
 	}
 
 	@SuppressWarnings("unchecked")

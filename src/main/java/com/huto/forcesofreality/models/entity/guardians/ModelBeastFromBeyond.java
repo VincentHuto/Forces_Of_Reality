@@ -1,8 +1,7 @@
-package com.huto.forcesofreality.models.entity.lords;
+package com.huto.forcesofreality.models.entity.guardians;
 
 
-import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -12,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 
 
 
-public class ModelLordOfTheWild extends EntityModel<EntityLordOfTheWild> {
+public class ModelBeastFromBeyond extends EntityModel<EntityBeastFromBeyond> {
 	private final ModelRenderer Head;
 	private final ModelRenderer JawTop;
 	private final ModelRenderer JawBottom;
