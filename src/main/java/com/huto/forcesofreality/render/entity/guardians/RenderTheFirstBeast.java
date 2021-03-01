@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.HeldItemLayer;
+import net.minecraft.client.renderer.entity.model.IllagerModel;
+import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,8 +24,7 @@ public class RenderTheFirstBeast extends MobRenderer<EntityTheFirstBeast, ModelT
 
 	public RenderTheFirstBeast(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new ModelTheFirstBeast(), 1.5f);
-	//	this.addLayer(new BeastHeldItemLayer<EntityTheFirstBeast, ModelTheFirstBeast>(this));
-		this.addLayer(new HeldItemLayer<EntityTheFirstBeast, ModelTheFirstBeast>(this));
+		this.addLayer(new BeastHeldItemLayer<EntityTheFirstBeast, ModelTheFirstBeast>(this));
 
 	}
 

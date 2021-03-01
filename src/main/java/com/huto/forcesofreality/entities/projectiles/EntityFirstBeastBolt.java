@@ -3,9 +3,13 @@ package com.huto.forcesofreality.entities.projectiles;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Sets;
 import com.huto.forcesofreality.init.EntityInit;
+import com.huto.forcesofreality.init.ItemInit;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -13,18 +17,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityFirstBeastBolt extends AbstractArrowEntity {
 	private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityFirstBeastBolt.class,
@@ -38,11 +46,17 @@ public class EntityFirstBeastBolt extends AbstractArrowEntity {
 	}
 
 	public EntityFirstBeastBolt(World worldIn, double x, double y, double z) {
-		super(EntityInit.first_hunter_bolt.get(), x, y, z, worldIn);
+		super(EntityInit.first_beast_bolt.get(), x, y, z, worldIn);
 	}
 
 	public EntityFirstBeastBolt(World worldIn, LivingEntity shooter) {
-		super(EntityInit.first_hunter_bolt.get(), shooter, worldIn);
+		super(EntityInit.first_beast_bolt.get(), shooter, worldIn);
+	}
+
+	@Nonnull
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	public void setPotionEffect(ItemStack stack) {
@@ -145,6 +159,7 @@ public class EntityFirstBeastBolt extends AbstractArrowEntity {
 		this.dataManager.set(COLOR, p_191507_1_);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		if (this.potion != Potions.EMPTY && this.potion != null) {
@@ -188,6 +203,18 @@ public class EntityFirstBeastBolt extends AbstractArrowEntity {
 
 	}
 
+	@SuppressWarnings("unused")
+	@Override
+	protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
+		super.onEntityHit(p_213868_1_);
+		Entity entity = p_213868_1_.getEntity();
+			if (entity instanceof LivingEntity) {
+				((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SLOWNESS,1000,2));
+					
+		}
+
+	}
+
 	protected void arrowHit(LivingEntity living) {
 		super.arrowHit(living);
 
@@ -207,7 +234,7 @@ public class EntityFirstBeastBolt extends AbstractArrowEntity {
 
 	protected ItemStack getArrowStack() {
 		if (this.customPotionEffects.isEmpty() && this.potion == Potions.EMPTY) {
-			return new ItemStack(Items.ARROW);
+			return new ItemStack(ItemInit.first_beast_bolt.get());
 		} else {
 			ItemStack itemstack = new ItemStack(Items.TIPPED_ARROW);
 			PotionUtils.addPotionToItemStack(itemstack, this.potion);

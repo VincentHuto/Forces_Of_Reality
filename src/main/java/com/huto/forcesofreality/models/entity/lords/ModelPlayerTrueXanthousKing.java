@@ -356,6 +356,7 @@ public class ModelPlayerTrueXanthousKing extends AnimatedEntityModel<Entity> {
 		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
 		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
 
+		
 		// Head
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.75f;
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.75f;

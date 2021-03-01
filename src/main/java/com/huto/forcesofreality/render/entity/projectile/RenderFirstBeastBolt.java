@@ -16,12 +16,12 @@ import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderFirstHunterBolt<T extends EntityFirstBeastBolt> extends EntityRenderer<T> {
+public class RenderFirstBeastBolt<T extends EntityFirstBeastBolt> extends EntityRenderer<T> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/entity/first_hunter_bolt/model_first_hunter_bolt.png");
+			"textures/entity/first_beast_bolt/model_first_beast_bolt.png");
 
-	public RenderFirstHunterBolt(EntityRendererManager renderManagerIn) {
+	public RenderFirstBeastBolt(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);
 	}
 
@@ -52,7 +52,7 @@ public class RenderFirstHunterBolt<T extends EntityFirstBeastBolt> extends Entit
 		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(45.0F));
 		matrixStackIn.scale(0.05625F, 0.05625F, 0.05625F);
 		matrixStackIn.translate(-4.0D, 0.0D, 0.0D);
-		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutout(getEntityTexture(entityIn)));
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutout(TEXTURE));
 		MatrixStack.Entry matrixstack$entry = matrixStackIn.getLast();
 		Matrix4f matrix4f = matrixstack$entry.getMatrix();
 		Matrix3f matrix3f = matrixstack$entry.getNormal();

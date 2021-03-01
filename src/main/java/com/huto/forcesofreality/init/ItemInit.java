@@ -45,6 +45,8 @@ import com.huto.forcesofreality.objects.items.coven.sign.ItemIntegralCog;
 import com.huto.forcesofreality.objects.items.coven.sign.ItemWatchfulPendant;
 import com.huto.forcesofreality.objects.items.coven.sign.ItemYellowSign;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemAllegianceIdentifier;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemBeastBolt;
+import com.huto.forcesofreality.objects.items.coven.tool.ItemBeastCrossbow;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemDemonFlute;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemDestabilizationCharm;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemDiscordantBell;
@@ -93,6 +95,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
+import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.ShovelItem;
@@ -311,6 +314,11 @@ public class ItemInit {
 	public static final RegistryObject<Item> cloven_hooves = ITEMS.register("cloven_hooves",
 			() -> new ItemClovenHooves(EnumModArmorTiers.MANTLE, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<Item> first_beast_crossbow = ITEMS.register("first_beast_crossbow",
+			() -> new ItemBeastCrossbow(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<Item> first_beast_bolt = ITEMS.register("first_beast_bolt",
+			() -> new ItemBeastBolt(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
+
 	// Machine
 	public static final RegistryObject<Item> integral_cog = ITEMS.register("integral_cog",
 			() -> new ItemIntegralCog(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
@@ -759,6 +767,33 @@ public class ItemInit {
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void itemPropOverrideClient(final FMLClientSetupEvent event) {
+
+		ItemModelsProperties.registerProperty(ItemInit.first_beast_crossbow.get(), new ResourceLocation("pull"),
+				(p_239427_0_, p_239427_1_, p_239427_2_) -> {
+					if (p_239427_2_ == null) {
+						return 0.0F;
+					} else {
+						return ItemBeastCrossbow.isCharged(p_239427_0_) ? 0.0F
+								: (float) (p_239427_0_.getUseDuration() - p_239427_2_.getItemInUseCount())
+										/ (float) ItemBeastCrossbow.getChargeTime(p_239427_0_);
+					}
+				});
+		ItemModelsProperties.registerProperty(ItemInit.first_beast_crossbow.get(), new ResourceLocation("pulling"),
+				(p_239426_0_, p_239426_1_, p_239426_2_) -> {
+					return p_239426_2_ != null && p_239426_2_.isHandActive()
+							&& p_239426_2_.getActiveItemStack() == p_239426_0_ && !ItemBeastCrossbow.isCharged(p_239426_0_)
+									? 1.0F
+									: 0.0F;
+				});
+		ItemModelsProperties.registerProperty(ItemInit.first_beast_crossbow.get(), new ResourceLocation("charged"),
+				(p_239425_0_, p_239425_1_, p_239425_2_) -> {
+					return p_239425_2_ != null && ItemBeastCrossbow.isCharged(p_239425_0_) ? 1.0F : 0.0F;
+				});
+		ItemModelsProperties.registerProperty(ItemInit.first_beast_crossbow.get(), new ResourceLocation("firework"),
+				(p_239424_0_, p_239424_1_, p_239424_2_) -> {
+					return p_239424_2_ != null && ItemBeastCrossbow.isCharged(p_239424_0_)
+							&& ItemBeastCrossbow.hasChargedProjectile(p_239424_0_, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
+				});
 
 		ItemModelsProperties.registerProperty(channeling_ingot.get(), new ResourceLocation("pull"),
 				(p_239429_0_, p_239429_1_, p_239429_2_) -> {

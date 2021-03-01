@@ -7,10 +7,12 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Maps;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
+import com.huto.forcesofreality.entities.guardians.EntityTheFirstBeast;
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
 import com.huto.forcesofreality.sounds.SoundHandler;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
@@ -171,7 +173,7 @@ public class EntitySummonedBeast extends MonsterEntity {
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		super.collideWithEntity(entityIn);
-		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond
+		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond|| entityIn instanceof EntityTheFirstBeast
 				|| entityIn instanceof EntityLordOfTheWild)) {
 			entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
 		}

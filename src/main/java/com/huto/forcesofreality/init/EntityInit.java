@@ -234,11 +234,11 @@ public class EntityInit {
 					.size(1.4F, 1.5F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "player_tentacle").toString()));
 
-	public static final RegistryObject<EntityType<EntityFirstBeastBolt>> first_hunter_bolt = ENTITY_TYPES.register(
-			"first_hunter_bolt",
+	public static final RegistryObject<EntityType<EntityFirstBeastBolt>> first_beast_bolt = ENTITY_TYPES.register(
+			"first_beast_bolt",
 			() -> EntityType.Builder.<EntityFirstBeastBolt>create(EntityFirstBeastBolt::new, EntityClassification.MISC)
 					.size(0.5F, 0.5F).trackingRange(4).func_233608_b_(20)
-					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "first_hunter_bolt").toString()));
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "first_beast_bolt").toString()));
 
 	public static final RegistryObject<EntityType<EntityTrackingOrb>> tracking_orb = ENTITY_TYPES.register(
 			"tracking_orb",

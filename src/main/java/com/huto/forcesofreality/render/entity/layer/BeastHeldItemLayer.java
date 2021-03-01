@@ -48,10 +48,11 @@ public class BeastHeldItemLayer<T extends LivingEntity, M extends EntityModel<T>
 		if (!stack.isEmpty()) {
 			ms.push();
 			this.getEntityModel().translateHand(hand, ms);
+			boolean flag = hand == HandSide.LEFT;
 			ms.rotate(Vector3f.XP.rotationDegrees(-90.0F));
 			ms.rotate(Vector3f.YP.rotationDegrees(180.0F));
-			boolean flag = hand == HandSide.LEFT;
-			ms.translate((double) ((float) (flag ? -1 : 1) / 2.3F), 0.405D, -0.825D);
+			ms.translate((double)((float)(flag ? -1 : 1) / 16.0F)+0.1d, 0.325D, -0.325D);
+
 			Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(ent, stack, p_229135_3_, flag,
 					ms, p_229135_6_, p_229135_7_);
 			ms.pop();

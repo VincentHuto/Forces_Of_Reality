@@ -43,7 +43,7 @@ import com.huto.forcesofreality.render.entity.projectile.RenderCorruptNote;
 import com.huto.forcesofreality.render.entity.projectile.RenderDreadRocket;
 import com.huto.forcesofreality.render.entity.projectile.RenderDreadRocketDirected;
 import com.huto.forcesofreality.render.entity.projectile.RenderEldritchGrip;
-import com.huto.forcesofreality.render.entity.projectile.RenderFirstHunterBolt;
+import com.huto.forcesofreality.render.entity.projectile.RenderFirstBeastBolt;
 import com.huto.forcesofreality.render.entity.projectile.RenderHolyFlare;
 import com.huto.forcesofreality.render.entity.projectile.RenderHolySpirit;
 import com.huto.forcesofreality.render.entity.projectile.RenderPlayerTentacle;
@@ -166,8 +166,8 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket.get(), RenderDreadRocket::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket_directed.get(),
 				RenderDreadRocketDirected::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.first_hunter_bolt.get(),
-				RenderFirstHunterBolt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.first_beast_bolt.get(),
+				RenderFirstBeastBolt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_spirit.get(), RenderHolySpirit::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);

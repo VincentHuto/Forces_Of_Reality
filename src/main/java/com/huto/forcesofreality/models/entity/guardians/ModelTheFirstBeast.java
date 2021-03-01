@@ -5,6 +5,7 @@ import com.huto.forcesofreality.entities.passive.EntityDenizenSage;
 import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.models.animation.AnimatedEntityModel;
 import com.huto.forcesofreality.models.animation.AnimatedModelRenderer;
+import com.huto.forcesofreality.models.animation.ModelAnimator;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -44,9 +45,6 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 	private final AnimatedModelRenderer knife;
 	private final AnimatedModelRenderer leftArm;
 	private final AnimatedModelRenderer leftFore;
-	private final AnimatedModelRenderer crossbow;
-	private final AnimatedModelRenderer crossbowBody;
-	private final AnimatedModelRenderer bow;
 	private final AnimatedModelRenderer abs;
 	private final AnimatedModelRenderer cloth;
 	private final AnimatedModelRenderer rightLeg;
@@ -57,6 +55,8 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 	private final AnimatedModelRenderer leftBoot;
 	public ArmPose leftArmPose = ArmPose.EMPTY;
 	public ArmPose rightArmPose = ArmPose.EMPTY;
+	public ModelAnimator animator;
+	public final AnimatedModelRenderer[] headArray;
 
 	public ModelTheFirstBeast() {
 		textureWidth = 128;
@@ -64,12 +64,10 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 
 		whole = new AnimatedModelRenderer(this);
 		whole.setRotationPoint(0.0F, -14.0F, 3.0F);
-		
 
 		body = new AnimatedModelRenderer(this);
 		body.setRotationPoint(0.0F, 0.0F, 0.0F);
 		whole.addChild(body);
-		
 
 		upperBody = new AnimatedModelRenderer(this);
 		upperBody.setRotationPoint(0.0F, 5.0F, -3.0F);
@@ -141,7 +139,6 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 		head = new AnimatedModelRenderer(this);
 		head.setRotationPoint(0.0F, -13.0F, -3.0F);
 		upperBody.addChild(head);
-		
 
 		skull = new AnimatedModelRenderer(this);
 		skull.setRotationPoint(0.0F, 1.7778F, -2.6667F);
@@ -272,39 +269,6 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 		leftFore.setTextureOffset(25, 114).addBox(-1.775F, 6.2167F, 1.3333F, 0.0F, 8.0F, 6.0F, 0.0F, false);
 		leftFore.setTextureOffset(12, 0).addBox(-2.175F, 6.9167F, -2.5667F, 3.0F, 5.0F, 4.0F, 0.0F, false);
 
-		crossbow = new AnimatedModelRenderer(this);
-		crossbow.setRotationPoint(-0.675F, 13.9667F, -1.7667F);
-		leftFore.addChild(crossbow);
-		
-
-		crossbowBody = new AnimatedModelRenderer(this);
-		crossbowBody.setRotationPoint(4.65F, 21.95F, -4.8F);
-		crossbow.addChild(crossbowBody);
-		crossbowBody.setTextureOffset(75, 123).addBox(-5.5F, -21.0F, 4.0F, 2.0F, 3.0F, 1.0F, 0.0F, false);
-		crossbowBody.setTextureOffset(75, 123).addBox(-5.0F, -22.0F, 5.75F, 1.0F, 2.0F, 3.0F, 0.0F, false);
-		crossbowBody.setTextureOffset(75, 123).addBox(-5.5F, -21.0F, 5.0F, 2.0F, 2.0F, 1.0F, 0.0F, false);
-		crossbowBody.setTextureOffset(75, 118).addBox(-6.0F, -24.0F, 2.0F, 3.0F, 8.0F, 2.0F, 0.0F, false);
-		crossbowBody.setTextureOffset(75, 123).addBox(-5.5F, -26.0F, 1.0F, 2.0F, 3.0F, 1.0F, 0.0F, false);
-		crossbowBody.setTextureOffset(75, 123).addBox(-5.0F, -23.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-
-		bow = new AnimatedModelRenderer(this);
-		bow.setRotationPoint(1.65F, 20.95F, -6.3F);
-		crossbow.addChild(bow);
-		bow.setTextureOffset(75, 123).addBox(-2.0F, -15.0F, 3.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(3.0F, -16.0F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(2.0F, -15.5F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(4.0F, -15.5F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(4.0F, -17.0F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(71, 125).addBox(-5.0F, -15.0F, 3.0F, 7.0F, 2.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(2.0F, -14.5F, 3.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(-7.0F, -14.5F, 3.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(-6.0F, -15.5F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(-8.0F, -15.5F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(-8.0F, -17.0F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(75, 123).addBox(-7.0F, -16.0F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(92, 116).addBox(-6.0F, -16.0F, 3.0F, 9.0F, 0.0F, 1.0F, 0.0F, false);
-		bow.setTextureOffset(90, 115).addBox(-7.0F, -16.5F, 3.0F, 11.0F, 0.0F, 1.0F, 0.0F, false);
-
 		abs = new AnimatedModelRenderer(this);
 		abs.setRotationPoint(0.0F, 9.3F, -2.2F);
 		body.addChild(abs);
@@ -373,45 +337,36 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 		leftBoot.setTextureOffset(11, 113).addBox(-0.5F, 4.26F, -7.15F, 1.0F, 1.0F, 5.0F, 0.0F, false);
 		leftBoot.setTextureOffset(106, 92).addBox(-0.5F, 2.16F, -5.15F, 1.0F, 1.0F, 5.0F, 0.0F, false);
 		leftBoot.setTextureOffset(52, 65).addBox(-0.5F, 1.16F, -4.15F, 1.0F, 1.0F, 5.0F, 0.0F, false);
+
+		animator = ModelAnimator.create();
+		headArray = new AnimatedModelRenderer[] { head };
+		setDefaultPose();
 	}
 
 	@Override
-	public void setRotationAngles(EntityTheFirstBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	public void setLivingAnimations(EntityTheFirstBeast entityIn, float limbSwing, float limbSwingAmount,
+			float partialTick) {
+		super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
+		this.entity = entityIn;
+		resetToDefaultPose();
+		animator.update(entity, partialTick);
+		if (animator.setAnimation(EntityTheFirstBeast.ARROW_ANIMATION)) {
+			arrowAnim(partialTick);
+		}
+		idle(entity.ticksExisted + partialTick);
+	}
 
-		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
-		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
+	private void arrowAnim(float partialTick) {
+		animator.startKeyframe(35);
+		animator.rotate(leftArm, -(float) Math.toRadians(40), 0, 0);
+		animator.rotate(leftFore, -(float) Math.toRadians(25), 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(10);
 
-		// Head
-		this.head.rotateAngleX = (float) (headPitch * ((float) Math.PI / 180F) + Math.toRadians(15d) * 0.75f);
-		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.75f;
+	}
 
-		// Arms
-		this.rightArm.rotateAngleX = (float) (Math.sin((frame) * 0.04f) * 0.0325)
-				+ MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.5F * limbSwingAmount * 0.5F;
-		this.leftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.5F * limbSwingAmount * 0.5F;
-
-		this.leftFore.rotateAngleX = -Math
-				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.rightFore.rotateAngleX = -Math
-				.abs(MathHelper.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-
-		this.rightArm.rotateAngleZ = -(float) Math.abs(((Math.cos((frame) * 0.04f) * 0.0525)));
-		this.leftArm.rotateAngleZ = (float) -Math.abs(((Math.sin((frame) * 0.04f) * 0.0525)));
-
-		this.rightEar.rotateAngleZ = -(float) Math.abs(((Math.cos((frame) * 0.14f) * 0.0525)));
-		this.leftEar.rotateAngleZ = (float) -Math.abs(((Math.sin((frame) * 0.14f) * 0.0525)));
-		
-		this.topJaw.rotateAngleX = -limbSwingAmount * 0.33f;	
-		this.bottomJaw.rotateAngleX = limbSwingAmount * 0.33f;
-		
-		// Legs
-		this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.9662F) * 2.4F * limbSwingAmount / 2;
-		this.rightFemur.rotateAngleX = Math
-				.abs(MathHelper.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.9662F + (float) Math.PI) * 2.4F * limbSwingAmount / 2;
-		this.leftFemur.rotateAngleX = Math
-				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+	@Override
+	public void idle(float frame) {
 		// Mane
 		this.mane1.rotateAngleX = (float) ((float) Math.abs(Math.sin((frame) * 0.3f) * 0.25f) + Math.toRadians(8d));
 		this.mane2.rotateAngleX = (float) -Math.sin((frame) * 0.5f) * 0.15f;
@@ -420,6 +375,49 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 		this.beard.rotateAngleX = -(float) Math.abs(Math.sin((frame) * 0.3f) * 0.05f);
 		this.beard2.rotateAngleX = (float) Math.sin((frame) * 0.5f) * 0.06f;
 		this.beard3.rotateAngleX = (float) Math.sin((frame) * 0.7f) * 0.05f;
+
+	}
+
+	@Override
+	public void setRotationAngles(EntityTheFirstBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
+		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
+		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
+		faceTarget(netHeadYaw, headPitch, 1, headArray);
+
+		// Head
+		this.head.rotateAngleX = (float) (headPitch * ((float) Math.PI / 180F) + Math.toRadians(15d) * 0.75f);
+		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.75f;
+
+		// Arms
+		this.rightArm.rotateAngleX = (float) (Math.sin((frame) * 0.04f) * 0.0325)
+				+ MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.5F * limbSwingAmount * 0.5F;
+		if (entity.noActiveAnimation()) {
+			this.leftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.5F * limbSwingAmount * 0.5F;
+
+			this.leftFore.rotateAngleX = -Math
+					.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		}
+		this.rightFore.rotateAngleX = -Math
+				.abs(MathHelper.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+
+		this.rightArm.rotateAngleZ = -(float) Math.abs(((Math.cos((frame) * 0.04f) * 0.0525)));
+		this.leftArm.rotateAngleZ = (float) -Math.abs(((Math.sin((frame) * 0.04f) * 0.0525)));
+
+		this.rightEar.rotateAngleZ = -(float) Math.abs(((Math.cos((frame) * 0.14f) * 0.0525)));
+		this.leftEar.rotateAngleZ = (float) -Math.abs(((Math.sin((frame) * 0.14f) * 0.0525)));
+
+		this.topJaw.rotateAngleX = -limbSwingAmount * 0.33f;
+		this.bottomJaw.rotateAngleX = limbSwingAmount * 0.33f;
+
+		// Legs
+		this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.9662F) * 2.4F * limbSwingAmount / 2;
+		this.rightFemur.rotateAngleX = Math
+				.abs(MathHelper.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.9662F + (float) Math.PI) * 2.4F * limbSwingAmount / 2;
+		this.leftFemur.rotateAngleX = Math
+				.abs(MathHelper.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
 
 		boolean flag2 = entity.getPrimaryHand() == HandSide.RIGHT;
 		boolean flag3 = flag2 ? this.leftArmPose.func_241657_a_() : this.rightArmPose.func_241657_a_();
@@ -581,9 +579,19 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 	}
 
 	public void translateHand(HandSide sideIn, MatrixStack matrixStackIn) {
-		this.getArmForSide(sideIn).translateRotate(matrixStackIn);
-		this.leftArm.translateRotate(matrixStackIn);
-		this.rightArm.translateRotate(matrixStackIn);
+		switch (sideIn) {
+		case LEFT:
+			this.leftArm.translateRotate(matrixStackIn);
+			this.getArmForSide(sideIn).translateRotate(matrixStackIn);
+			break;
+		case RIGHT:
+			this.rightArm.translateRotate(matrixStackIn);
+			this.getArmForSide(sideIn).translateRotate(matrixStackIn);
+			break;
+		default:
+			break;
+
+		}
 	}
 
 	protected AnimatedModelRenderer getArmForSide(HandSide side) {
