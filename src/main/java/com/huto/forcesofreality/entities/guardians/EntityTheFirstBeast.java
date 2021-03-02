@@ -108,7 +108,7 @@ public class EntityTheFirstBeast extends MonsterEntity
 		super.func_241844_w(p_241844_1_);
 		if (this.rand.nextInt(300) == 0) {
 			ItemStack itemstack = this.getHeldItemOffhand();
-			if (itemstack.getItem() == Items.CROSSBOW) {
+			if (itemstack.getItem() == ItemInit.first_beast_crossbow.get()) {
 				Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(itemstack);
 				map.putIfAbsent(Enchantments.PIERCING, 1);
 				EnchantmentHelper.setEnchantments(map, itemstack);
@@ -172,8 +172,11 @@ public class EntityTheFirstBeast extends MonsterEntity
 			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			/*this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() + (double) f,
-					this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);*/
+			/*
+			 * this.world.addParticle(ParticleTypes.AMBIENT_ENTITY_EFFECT, this.getPosX() +
+			 * (double) f, this.getPosY() + 2.0D + (double) f1, this.getPosZ() + (double)
+			 * f2, 0.0D, 0.0D, 0.0D);
+			 */
 		}
 	}
 
@@ -603,12 +606,12 @@ public class EntityTheFirstBeast extends MonsterEntity
 					--this.field_220753_f;
 					if (this.field_220753_f == 0) {
 						this.field_220749_b = EntityTheFirstBeast.CrossbowState.READY_TO_ATTACK;
-						
+
 					}
 				} else if (this.field_220749_b == EntityTheFirstBeast.CrossbowState.READY_TO_ATTACK && flag) {
 					this.field_220748_a.attackEntityWithRangedAttack(livingentity, 1.0F);
-					ItemStack itemstack1 = this.field_220748_a
-							.getHeldItem(ProjectileHelper.getHandWith(this.field_220748_a, Items.CROSSBOW));
+					ItemStack itemstack1 = this.field_220748_a.getHeldItem(
+							ProjectileHelper.getHandWith(this.field_220748_a, ItemInit.first_beast_crossbow.get()));
 					ItemBeastCrossbow.setCharged(itemstack1, false);
 					this.field_220749_b = EntityTheFirstBeast.CrossbowState.UNCHARGED;
 

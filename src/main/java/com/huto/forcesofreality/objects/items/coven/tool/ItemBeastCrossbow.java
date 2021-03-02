@@ -21,10 +21,10 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ArrowItem;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.ShootableItem;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -45,14 +45,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
-	/** Set to {@code true} when the crossbow is 20% charged. */
+public class ItemBeastCrossbow extends CrossbowItem implements IVanishable {
+	/** Set to {@code true} w.hen the crossbow is 20% charged. */
 	private boolean isLoadingStart = false;
 	/** Set to {@code true} when the crossbow is 50% charged. */
 	private boolean isLoadingMiddle = false;
 
 	public ItemBeastCrossbow(Item.Properties propertiesIn) {
-		super(propertiesIn);
+		super(propertiesIn.maxStackSize(1));
 	}
 
 	public Predicate<ItemStack> getAmmoPredicate() {
@@ -71,6 +71,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	 * Called to trigger the item's "innate" right click behavior. To handle when
 	 * this item is used on a Block, see {@link #onItemUse}.
 	 */
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		if (isCharged(itemstack)) {
@@ -94,6 +95,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	 * Called when the player stops using an Item (stops holding the right mouse
 	 * button).
 	 */
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		int i = this.getUseDuration(stack) - timeLeft;
 		float f = getCharge(i, stack);
@@ -268,6 +270,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 		return abstractarrowentity;
 	}
 
+	
 	public static void fireProjectiles(World worldIn, LivingEntity shooter, Hand handIn, ItemStack stack,
 			float velocityIn, float inaccuracyIn) {
 		List<ItemStack> list = getChargedProjectiles(stack);
@@ -298,6 +301,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 		return new float[] { 1.0F, getRandomSoundPitch(flag), getRandomSoundPitch(!flag) };
 	}
 
+	
 	private static float getRandomSoundPitch(boolean flagIn) {
 		float f = flagIn ? 0.63F : 0.43F;
 		return 1.0F / (random.nextFloat() * 0.5F + 1.8F) + f;
@@ -307,6 +311,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	 * Called after {@plainlink #fireProjectiles} to clear the charged projectile
 	 * and to update the player advancements.
 	 */
+	
 	private static void fireProjectilesAfter(World worldIn, LivingEntity shooter, ItemStack stack) {
 		if (shooter instanceof ServerPlayerEntity) {
 			ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) shooter;
@@ -323,6 +328,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	/**
 	 * Called as the item is being used by an entity.
 	 */
+	@Override
 	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
 		if (!worldIn.isRemote) {
 			int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.QUICK_CHARGE, stack);
@@ -352,6 +358,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getUseDuration(ItemStack stack) {
 		return getChargeTime(stack) + 3;
 	}
@@ -359,6 +366,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	/**
 	 * The time the crossbow must be used to reload it
 	 */
+	
 	public static int getChargeTime(ItemStack stack) {
 		int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.QUICK_CHARGE, stack);
 		return i == 0 ? 25 : 25 - 5 * i;
@@ -374,10 +382,10 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	 * returns the action that specifies what animation to play when the items is
 	 * being used
 	 */
+	@Override
 	public UseAction getUseAction(ItemStack stack) {
 		return UseAction.BOW;
 	}
-
 	private SoundEvent getSoundEvent(int enchantmentLevel) {
 		switch (enchantmentLevel) {
 		case 1:
@@ -390,7 +398,6 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 			return SoundEvents.ITEM_CROSSBOW_LOADING_START;
 		}
 	}
-
 	private static float getCharge(int useTime, ItemStack stack) {
 		float f = (float) useTime / (float) getChargeTime(stack);
 		if (f > 1.0F) {
@@ -404,6 +411,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 	 * allows items to add custom lines of information to the mouseover description
 	 */
 	@OnlyIn(Dist.CLIENT)
+	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		List<ItemStack> list = getChargedProjectiles(stack);
@@ -432,7 +440,7 @@ public class ItemBeastCrossbow extends ShootableItem implements IVanishable {
 				? 1.6F
 				: 3.15F;
 	}
-
+	@Override
 	public int func_230305_d_() {
 		return 8;
 	}

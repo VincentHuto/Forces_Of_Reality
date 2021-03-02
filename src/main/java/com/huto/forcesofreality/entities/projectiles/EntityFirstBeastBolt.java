@@ -118,6 +118,10 @@ public class EntityFirstBeastBolt extends AbstractArrowEntity {
 	public void tick() {
 		super.tick();
 		if (this.world.isRemote) {
+			for (int i = 0; i < 2; i++) {
+			/*	this.world.addParticle(RedstoneParticleData.REDSTONE_DUST, this.getPosXRandom(0.5D),
+						this.getPosYRandom(), this.getPosZRandom(0.5D), 0, 0, 0);*/
+			}
 			if (this.inGround) {
 				if (this.timeInGround % 5 == 0) {
 					this.spawnPotionParticles(1);
@@ -208,9 +212,9 @@ public class EntityFirstBeastBolt extends AbstractArrowEntity {
 	protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
 		super.onEntityHit(p_213868_1_);
 		Entity entity = p_213868_1_.getEntity();
-			if (entity instanceof LivingEntity) {
-				((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SLOWNESS,1000,2));
-					
+		if (entity instanceof LivingEntity) {
+			((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 1000, 2));
+
 		}
 
 	}

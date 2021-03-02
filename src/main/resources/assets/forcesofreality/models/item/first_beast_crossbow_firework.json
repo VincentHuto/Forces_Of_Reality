@@ -6,9 +6,8 @@
 		"2": "forcesofreality:blocks/log_acacia_top",
 		"3": "forcesofreality:blocks/iron_block",
 		"4": "forcesofreality:blocks/crossbow_top",
-		"5": "first_beast_bolt/model_first_beast_bolt",
-		"6": "forcesofreality:blocks/crossbow_firework",
-		"particle": "forcesofreality:blocks/log_acacia"
+		"5": "forcesofreality:blocks/crossbow_firework",
+		"particle": "blocks/log_acacia"
 	},
 	"elements": [
 		{
@@ -211,12 +210,12 @@
 			"to": [7.75, 8.25, 8.5],
 			"rotation": {"angle": 45, "axis": "z", "origin": [7.75, 7.75, 3.5]},
 			"faces": {
-				"north": {"uv": [0, 5, 16, 11], "texture": "#6"},
-				"east": {"uv": [0, 5, 16, 11], "texture": "#6"},
-				"south": {"uv": [0, 5, 16, 11], "texture": "#6"},
-				"west": {"uv": [0, 5, 16, 11], "rotation": 180, "texture": "#6"},
-				"up": {"uv": [0, 5, 16, 11], "texture": "#6"},
-				"down": {"uv": [0, 5, 16, 11], "texture": "#6"}
+				"north": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"},
+				"east": {"uv": [0, 5, 16, 11], "texture": "#5"},
+				"south": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"},
+				"west": {"uv": [0, 0, 8.5, 2.5], "rotation": 180, "texture": "#5"},
+				"up": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"},
+				"down": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"}
 			}
 		},
 		{
@@ -225,9 +224,9 @@
 			"rotation": {"angle": -45, "axis": "z", "origin": [7.75, 7.75, 3.5]},
 			"faces": {
 				"north": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"},
-				"east": {"uv": [0, 5, 16, 11], "texture": "#6"},
+				"east": {"uv": [0, 5, 16, 11], "texture": "#5"},
 				"south": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"},
-				"west": {"uv": [0, 5, 16, 12], "rotation": 180, "texture": "#6"},
+				"west": {"uv": [0, 5, 16, 12], "rotation": 180, "texture": "#5"},
 				"up": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"},
 				"down": {"uv": [0, 0, 8.5, 2.5], "texture": "#5"}
 			}
@@ -371,10 +370,12 @@
 			"translation": [-0.25, 1.25, 2.25]
 		},
 		"firstperson_righthand": {
-			"translation": [0, 3.25, 1.25]
+			"rotation": [0, -9, 0],
+			"translation": [1.5, 3.75, 1.25]
 		},
 		"firstperson_lefthand": {
-			"translation": [0, 3.25, 1.25]
+			"rotation": [0, -11, 0],
+			"translation": [0.75, 3.75, 1]
 		},
 		"gui": {
 			"rotation": [33, -128, 0],

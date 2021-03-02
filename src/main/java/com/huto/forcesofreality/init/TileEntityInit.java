@@ -1,17 +1,18 @@
 package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
+import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation;
 import com.huto.forcesofreality.objects.tileenties.TileEntityIcoSphere;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMachinaImperfecta;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMagicLight;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMagicRingLight;
-import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation;
 import com.huto.forcesofreality.objects.tileenties.TileEntitySlimeRepelent;
 import com.huto.forcesofreality.objects.tileenties.TileEntityTeleporter;
 import com.huto.forcesofreality.objects.tileenties.TileEntityVirtuousEnchant;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAuspiciousBundle;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHasturPylon;
+import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHunterEffigy;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityOccularHeap;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntitySacrificePyre;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityUntoldEasel;
@@ -170,5 +171,9 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityRafflesiaOfFidelity>> rafflesia_of_fidelity = TILES
 			.register("rafflesia_of_fidelity", () -> TileEntityType.Builder
 					.create(TileEntityRafflesiaOfFidelity::new, BlockInit.rafflesia_of_fidelity.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<TileEntityHunterEffigy>> hunter_effigy = TILES
+			.register("hunter_effigy", () -> TileEntityType.Builder
+					.create(TileEntityHunterEffigy::new, BlockInit.hunter_effigy.get()).build(null));
 	
 }

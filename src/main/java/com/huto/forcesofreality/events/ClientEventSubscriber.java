@@ -65,6 +65,7 @@ import com.huto.forcesofreality.render.tiles.RenderMagicRingLight;
 import com.huto.forcesofreality.render.tiles.RenderVirtuousEnchanter;
 import com.huto.forcesofreality.render.tiles.coven.RenderAscendantAltar;
 import com.huto.forcesofreality.render.tiles.coven.RenderHasturPylon;
+import com.huto.forcesofreality.render.tiles.coven.RenderHunterEffigy;
 import com.huto.forcesofreality.render.tiles.coven.RenderIcoSphere;
 import com.huto.forcesofreality.render.tiles.coven.RenderMachinaImperfecta;
 import com.huto.forcesofreality.render.tiles.coven.RenderOccularHeap;
@@ -141,7 +142,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.crystal_harmonizer.get(), RenderCrystalHarmonizer::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rafflesia_of_fidelity.get(),
 				RenderRafflesiaOfFidelity::new);
-
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hunter_effigy.get(), RenderHunterEffigy::new);
 		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 
 		// ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(),
@@ -166,8 +167,7 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket.get(), RenderDreadRocket::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dread_rocket_directed.get(),
 				RenderDreadRocketDirected::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.first_beast_bolt.get(),
-				RenderFirstBeastBolt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.first_beast_bolt.get(), RenderFirstBeastBolt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.holy_spirit.get(), RenderHolySpirit::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur_spawn.get(), RenderHasturSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.slug.get(), RenderSlug::new);

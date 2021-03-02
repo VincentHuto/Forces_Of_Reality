@@ -7,7 +7,7 @@
 		"3": "forcesofreality:blocks/iron_block",
 		"4": "forcesofreality:blocks/crossbow_top",
 		"5": "forcesofreality:entity/first_beast_bolt/model_first_beast_bolt",
-		"particle": "forcesofreality:blocks/log_acacia"
+		"particle": "blocks/log_acacia"
 	},
 	"elements": [
 		{
@@ -370,10 +370,12 @@
 			"translation": [-0.25, 1.25, 2.25]
 		},
 		"firstperson_righthand": {
-			"translation": [0, 3.25, 1.25]
+			"rotation": [0, -9, 0],
+			"translation": [1.5, 3.75, 1.25]
 		},
 		"firstperson_lefthand": {
-			"translation": [0, 3.25, 1.25]
+			"rotation": [0, -11, 0],
+			"translation": [0.75, 3.75, 1]
 		},
 		"gui": {
 			"rotation": [33, -128, 0],

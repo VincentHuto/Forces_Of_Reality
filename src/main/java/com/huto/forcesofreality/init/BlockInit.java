@@ -19,6 +19,7 @@ import com.huto.forcesofreality.objects.blocks.BlockSlimeRepelent;
 import com.huto.forcesofreality.objects.blocks.BlockTeleporter;
 import com.huto.forcesofreality.objects.blocks.altars.BlockAscendantAltar;
 import com.huto.forcesofreality.objects.blocks.altars.BlockAuspiciousBundle;
+import com.huto.forcesofreality.objects.blocks.altars.BlockHunterEffigy;
 import com.huto.forcesofreality.objects.blocks.altars.BlockMachinaImperfecta;
 import com.huto.forcesofreality.objects.blocks.altars.BlockOccularHeap;
 import com.huto.forcesofreality.objects.blocks.altars.BlockSacrificePyre;
@@ -234,6 +235,10 @@ public class BlockInit {
 	public static final RegistryObject<Block> sacrificial_pyre = BLOCKS.register("sacrificial_pyre",
 			() -> new BlockSacrificePyre(Block.Properties.create(Material.WOOD).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.WOOD).notSolid()));
+	
+	public static final RegistryObject<Block> hunter_effigy = BLOCKS.register("hunter_effigy",
+			() -> new BlockHunterEffigy(Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f)
+					.sound(SoundType.STONE).notSolid()));
 
 	// Machine
 	public static final RegistryObject<Block> auric_block = BLOCKS.register("auric_block", () -> new Block(
@@ -513,6 +518,7 @@ public class BlockInit {
 			RenderTypeLookup.setRenderLayer(BlockInit.jungle_bonsai_stage_3.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.spruce_bonsai_stage_3.get(), RenderType.getCutoutMipped());
 			RenderTypeLookup.setRenderLayer(BlockInit.tectonic_absorber.get(), RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(BlockInit.hunter_effigy.get(), RenderType.getCutoutMipped());
 
 			RenderTypeLookup.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.getTranslucent());
 

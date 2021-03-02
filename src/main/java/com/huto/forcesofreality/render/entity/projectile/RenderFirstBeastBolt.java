@@ -16,7 +16,7 @@ import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class RenderFirstBeastBolt<T extends EntityFirstBeastBolt> extends EntityRenderer<T> {
+public class RenderFirstBeastBolt<T extends EntityFirstBeastBolt> extends EntityRenderer<EntityFirstBeastBolt> {
 
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
 			"textures/entity/first_beast_bolt/model_first_beast_bolt.png");
@@ -26,7 +26,7 @@ public class RenderFirstBeastBolt<T extends EntityFirstBeastBolt> extends Entity
 	}
 
 	@SuppressWarnings("unused")
-	public void render(T entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
+	public void render(EntityFirstBeastBolt entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int packedLightIn) {
 		matrixStackIn.push();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(
@@ -86,7 +86,7 @@ public class RenderFirstBeastBolt<T extends EntityFirstBeastBolt> extends Entity
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(T entity) {
+	public ResourceLocation getEntityTexture(EntityFirstBeastBolt entity) {
 		return TEXTURE;
 	}
 }
