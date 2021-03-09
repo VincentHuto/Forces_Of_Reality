@@ -95,7 +95,12 @@ public class ForcesOfReality {
 		modEventBus.addListener(this::clientSetup);
 		ParticleInit.PARTICLE_TYPES.register(modEventBus);
 		ItemInit.ITEMS.register(modEventBus);
+		ItemInit.MODELEDITEMS.register(modEventBus);
+		ItemInit.ADVITEMS.register(modEventBus);
+		ItemInit.HANDHELDITEMS.register(modEventBus);
+		ItemInit.SPAWNEGGS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
+		BlockInit.SPECIALBLOCKS.register(modEventBus);
 		TileEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
 		FeatureInit.FEATURES.register(modEventBus);

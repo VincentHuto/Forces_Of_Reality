@@ -82,6 +82,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			ForcesOfReality.MOD_ID);
+	public static final DeferredRegister<Block> SPECIALBLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+			ForcesOfReality.MOD_ID);
+
 
 	public static final RegistryObject<BlockMagicLight> light_block = BLOCKS.register("light_block",
 			() -> new BlockMagicLight());

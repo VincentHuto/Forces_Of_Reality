@@ -94,6 +94,8 @@ public class EntityTheFirstBeast extends MonsterEntity
 
 	public EntityTheFirstBeast(EntityType<? extends EntityTheFirstBeast> type, World worldIn) {
 		super(type, worldIn);
+		this.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(ItemInit.first_beast_crossbow.get()));
+
 
 	}
 

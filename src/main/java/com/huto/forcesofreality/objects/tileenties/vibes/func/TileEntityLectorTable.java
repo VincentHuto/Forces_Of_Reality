@@ -159,8 +159,8 @@ public class TileEntityLectorTable extends TileVibeSimpleInventory implements IT
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
-			if(vibes.getVibes() > 1) {
-			vibes.subtractVibes(0.1f);
+			if(vibes.getVibes() > 0.05f) {
+			vibes.subtractVibes(0.05f);
 			}
 		}
 	}

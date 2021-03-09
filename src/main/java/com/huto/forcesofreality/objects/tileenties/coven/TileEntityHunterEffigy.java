@@ -35,8 +35,6 @@ public class TileEntityHunterEffigy extends TileEntity implements ITickableTileE
 		for (ItemEntity itemEnt : items)
 			if (itemEnt.isAlive() && !itemEnt.getItem().isEmpty()) {
 				ItemStack stack = itemEnt.getItem();
-				System.out.println(itemEnt);
-
 				if (stack.getItem() == ItemInit.unkept_hide.get()) {
 					itemEnt.remove();
 					if (!world.isRemote) {
