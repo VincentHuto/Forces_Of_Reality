@@ -394,13 +394,13 @@ public class GeneratorRecipes extends RecipeProvider {
 		 * ShapedRecipeBuilder.shapedRecipe(ItemInit.self_reflection_mirror.get()).key('
 		 * G', Items.GOLD_INGOT) .key('A', ItemInit.auric_ingot.get()).key('L',
 		 * Ingredient.fromTag(ItemTags.LOGS)) .key('M',
-		 * BlockInit.rune_mod_station.get()).patternLine("AGA").patternLine("GMG").
-		 * patternLine("ALA") .addCriterion("has_rune_mod_station",
-		 * hasItem(BlockInit.rune_mod_station.get())).build(consumer);
+		 * BlockInit.self_reflection_station.get()).patternLine("AGA").patternLine("GMG").
+		 * patternLine("ALA") .addCriterion("has_self_reflection_station",
+		 * hasItem(BlockInit.self_reflection_station.get())).build(consumer);
 		 */
 
 		/*
-		 * ShapedRecipeBuilder.shapedRecipe(BlockInit.rune_mod_station.get()).key('G',
+		 * ShapedRecipeBuilder.shapedRecipe(BlockInit.self_reflection_station.get()).key('G',
 		 * Items.GOLD_INGOT) .key('R', BlockInit.reversion_catalyst.get()).key('L',
 		 * Ingredient.fromTag(ItemTags.LOGS)) .key('N',
 		 * BlockInit.nether_block.get()).key('F', ItemInit.energy_focus.get()) .key('A',

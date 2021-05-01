@@ -128,7 +128,7 @@ public class ClientEventSubscriber {
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rune_mod_station.get(), RenderAdornmentModStation::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.self_reflection_station.get(), RenderAdornmentModStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendant_altar.get(), RenderAscendantAltar::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);

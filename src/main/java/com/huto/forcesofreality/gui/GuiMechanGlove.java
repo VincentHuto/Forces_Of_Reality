@@ -50,7 +50,7 @@ public class GuiMechanGlove extends ContainerScreen<ContainerMechanGlove> {
 		super.init();
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "resource" })
 	@Override
 	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
 		RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);

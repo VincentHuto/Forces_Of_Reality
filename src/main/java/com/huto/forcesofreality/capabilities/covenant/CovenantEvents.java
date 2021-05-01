@@ -146,7 +146,6 @@ public class CovenantEvents {
 
 	public static void updateClientServerFlight(ServerPlayerEntity player, boolean allowFlying, boolean isFlying) {
 		if (player != null) {
-			PacketHandler.HANDLER.sendToServer(new SetFlyPKT(allowFlying, isFlying));
 			player.abilities.allowFlying = allowFlying;
 			player.abilities.isFlying = isFlying;
 		}
@@ -162,11 +161,19 @@ public class CovenantEvents {
 					if (slotChanged == EquipmentSlotType.CHEST) {
 						if (e.getTo().getItem() == ItemInit.seraph_wings.get()) {
 							if (!((PlayerEntity) player).isCreative()) {
-								updateClientServerFlight((ServerPlayerEntity) player, true);
+								if (player.world.isRemote) {
+									PacketHandler.HANDLER.sendToServer(new SetFlyPKT(true, true));
+								} else {
+									updateClientServerFlight((ServerPlayerEntity) player, true);
+								}
 							}
 						} else {
 							if (!((PlayerEntity) player).isCreative()) {
-								updateClientServerFlight((ServerPlayerEntity) player, false);
+								if (player.world.isRemote) {
+									PacketHandler.HANDLER.sendToServer(new SetFlyPKT(false, false));
+								} else {
+									updateClientServerFlight((ServerPlayerEntity) player, false);
+								}
 							}
 						}
 					}

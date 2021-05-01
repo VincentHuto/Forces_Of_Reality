@@ -102,9 +102,9 @@ public class TileEntityInit {
 			.register("runic_chisel_station", () -> TileEntityType.Builder
 					.create(TileEntityChiselStation::new, BlockInit.runic_chisel_station.get()).build(null));
 */
-	public static final RegistryObject<TileEntityType<TileEntityAdornmentModStation>> rune_mod_station = TILES
-			.register("rune_mod_station", () -> TileEntityType.Builder
-					.create(TileEntityAdornmentModStation::new, BlockInit.rune_mod_station.get()).build(null));
+	public static final RegistryObject<TileEntityType<TileEntityAdornmentModStation>> self_reflection_station = TILES
+			.register("self_reflection_station", () -> TileEntityType.Builder
+					.create(TileEntityAdornmentModStation::new, BlockInit.self_reflection_station.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntitySlimeRepelent>> slime_repelent = TILES
 			.register("slime_repelent", () -> TileEntityType.Builder

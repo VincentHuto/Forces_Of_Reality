@@ -433,7 +433,7 @@ public class BlockInit {
 			() -> new BlockCapacitor(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 	// Misc
-	public static final RegistryObject<Block> rune_mod_station = BLOCKS.register("rune_mod_station",
+	public static final RegistryObject<Block> self_reflection_station = BLOCKS.register("self_reflection_station",
 			() -> new BlockAdornmentModStation(
 					Block.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1500f).sound(SoundType.STONE)));
 

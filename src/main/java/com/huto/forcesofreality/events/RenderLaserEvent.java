@@ -8,6 +8,9 @@ import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
 import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.models.entity.lords.ModelPlayerTrueXanthousKing;
+import com.huto.forcesofreality.network.PacketHandler;
+import com.huto.forcesofreality.network.coven.CovenantPacketClient;
+import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
@@ -24,8 +27,10 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class RenderLaserEvent {
+
 	private static final Field shadowSize = ObfuscationReflectionHelper.findField(EntityRenderer.class,
 			"field_76989_e");
 	public static float defaultShadowSize;
@@ -34,7 +39,6 @@ public class RenderLaserEvent {
 	public static void renderPlayerEvent(RenderPlayerEvent.Pre evt) {
 		PlayerEntity playerEntity = evt.getPlayer();
 		playerEntity.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
-
 			try {
 				float f = shadowSize.getFloat(evt.getRenderer());
 				if (f != 0.0f) {
@@ -43,7 +47,11 @@ public class RenderLaserEvent {
 				if (covens.getDevotionByCoven(EnumCovenants.HASTUR) > 5
 						&& playerEntity.getHeldItemMainhand().getItem() == ItemInit.yellow_sign.get()) {
 					evt.setCanceled(true);
-
+					/*
+					 * PacketHandler.CHANNELCOVENANT.send(
+					 * PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> playerEntity), new
+					 * CovenantPacketClient());
+					 */
 					evt.getMatrixStack().push();
 					ModelPlayerTrueXanthousKing model = new ModelPlayerTrueXanthousKing();
 					IRenderTypeBuffer.Impl impl = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
@@ -63,7 +71,7 @@ public class RenderLaserEvent {
 					evt.getMatrixStack().pop();
 
 				} else {
-					shadowSize.setFloat(evt.getRenderer(), 1);
+					shadowSize.setFloat(evt.getRenderer(), 0.5f);
 				}
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();

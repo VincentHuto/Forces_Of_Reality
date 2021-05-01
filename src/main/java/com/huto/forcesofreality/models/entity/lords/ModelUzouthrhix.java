@@ -1220,7 +1220,7 @@ public class ModelUzouthrhix extends AnimatedEntityModel<EntityUzouthrhix> {
 		animator.endKeyframe();
 		animator.startKeyframe(46);
 		animator.rotate(lowerColumn, 0, 0, 0);
-		animator.rotate(upperTorso,0, 0, 0);
+		animator.rotate(upperTorso, 0, 0, 0);
 		animator.rotate(shoulder, 0, 0, 0);
 		animator.rotate(shoulder2, 0, 0, 0);
 		animator.rotate(shoulder3, 0, 0, 0);
@@ -1228,10 +1228,10 @@ public class ModelUzouthrhix extends AnimatedEntityModel<EntityUzouthrhix> {
 		animator.rotate(lShoulder, 0, 0, 0);
 		animator.rotate(rShoulder, 0, 0, 0);
 		animator.rotate(lFore, 0, 0, 0);
-		animator.rotate(rFore,0, 0, 0);
+		animator.rotate(rFore, 0, 0, 0);
 		animator.rotate(face, 0, 0, 0);
 		animator.rotate(neck1, 0, 0, 0);
-		
+
 		animator.endKeyframe();
 		animator.resetKeyframe(66);
 
@@ -1295,7 +1295,7 @@ public class ModelUzouthrhix extends AnimatedEntityModel<EntityUzouthrhix> {
 		this.eye11.rotateAngleY = (float) (Math.cos((frame)) * 0.0325);
 		this.eye12.rotateAngleZ = (float) (Math.sin((frame)) * 0.0325);
 		this.eye12.rotateAngleY = (float) (Math.cos((frame)) * 0.0325);
-
+		// cheese monke
 		// Body Eyes
 		this.backEye.rotateAngleZ = (float) (Math.sin((frame)) * 0.0325);
 		this.backEye.rotateAngleY = (float) (Math.cos((frame)) * 0.0325);

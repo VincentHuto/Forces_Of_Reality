@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityAdornmentModStation extends TileEntity implements ITickableTileEntity {
 
 	public TileEntityAdornmentModStation() {
-		super(TileEntityInit.rune_mod_station.get());
+		super(TileEntityInit.self_reflection_station.get());
 	}
 
 	@Override

@@ -62,6 +62,8 @@ public class GuiCovenTitle extends Screen {
 		int centerX = (width / 2) - guiWidth / 2;
 		int centerY = (height / 2) - guiHeight / 2;
 		this.renderBackground(matrixStack);
+		System.out.println("t");
+
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
