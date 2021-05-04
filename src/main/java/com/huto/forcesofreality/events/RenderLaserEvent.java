@@ -8,9 +8,6 @@ import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
 import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.models.entity.lords.ModelPlayerTrueXanthousKing;
-import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.coven.CovenantPacketClient;
-import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
@@ -27,7 +24,6 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class RenderLaserEvent {
 

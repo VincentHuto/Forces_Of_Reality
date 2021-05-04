@@ -7,7 +7,6 @@ import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
 import com.huto.forcesofreality.network.adornments.SyncPacket;
 import com.huto.forcesofreality.network.coven.CovenantPacketClient;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
-import com.huto.forcesofreality.network.coven.CovenantUpdateMorphPacket;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.network.coven.MechanGloveOpenMessage;
 import com.huto.forcesofreality.network.coven.PacketDirectorToggleFlightMode;
