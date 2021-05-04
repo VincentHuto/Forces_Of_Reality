@@ -8,13 +8,13 @@ import com.huto.forcesofreality.entities.projectiles.EntityHolyFlare;
 import com.huto.forcesofreality.entities.projectiles.EntityJudgement;
 import com.huto.forcesofreality.entities.projectiles.EntityStarStrike;
 import com.huto.forcesofreality.entities.summons.EntityThrone;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.ParticleUtil;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -148,14 +148,14 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		}*/
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					center.x + Math.sin(time + j) + ParticleUtil.inRange(-0.1, 0.1),
 					center.y + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
 					center.z  + Math.cos(time + j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 			
 			Collections.reverse(chakraColors);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					center.x - Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1),
 					center.y + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
 					center.z  + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);

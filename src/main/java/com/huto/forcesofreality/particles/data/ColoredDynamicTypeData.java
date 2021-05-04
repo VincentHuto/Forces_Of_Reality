@@ -1,11 +1,12 @@
 package com.huto.forcesofreality.particles.data;
 
 import com.huto.forcesofreality.init.ParticleInit;
-import com.huto.forcesofreality.particles.ParticleColor;
+import com.hutoslib.client.particle.ParticleColor;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
@@ -49,7 +50,7 @@ public class ColoredDynamicTypeData implements IParticleData {
 	};
 
 	public ColoredDynamicTypeData(float r, float g, float b, float scale, int age) {
-		this.type = ParticleInit.line.get();
+		this.type = ParticleInit.sparkle.get();
 		this.color = new ParticleColor(r, g, b);
 		this.scale = scale;
 		this.age = age;

@@ -9,11 +9,11 @@ import org.lwjgl.glfw.GLFW;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiTomeImage;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -199,7 +199,7 @@ public class GuiCovenImagePage extends GuiCovenPage {
 		}
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome
+					if (ClientUtils.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome
 							.get()) {
 						mc.displayGuiScreen(new GuiCovenTitle(true));
 					} else {

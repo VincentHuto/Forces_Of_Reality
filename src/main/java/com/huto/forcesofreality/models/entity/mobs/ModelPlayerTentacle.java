@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.models.entity.mobs;
 
 import com.huto.forcesofreality.entities.summons.EntityPlayerTentacle;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -42,7 +42,7 @@ public class ModelPlayerTentacle extends EntityModel<EntityPlayerTentacle> {
 	@Override
 	public void setRotationAngles(EntityPlayerTentacle entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		this.Base.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0625);
 		this.Base.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0625);

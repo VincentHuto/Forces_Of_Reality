@@ -8,10 +8,10 @@ import com.huto.forcesofreality.entities.summons.EntityHasturSpawn;
 import com.huto.forcesofreality.entities.summons.EntityTentacle;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.animation.Animation;
-import com.huto.forcesofreality.models.animation.IAnimatable;
-import com.huto.forcesofreality.models.animation.TickFloat;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.models.Animation;
+import com.hutoslib.client.models.IAnimatable;
+import com.hutoslib.client.models.TickFloat;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;

@@ -12,8 +12,8 @@ import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.objects.blocks.util.IBlockDevotionStation;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityUntoldEasel;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -85,8 +85,7 @@ public class BlockUntoldEasel extends Block implements IBlockDevotionStation {
 					te.devo.addDevotion(sac.getDevoAmount());
 					player.getHeldItemMainhand().shrink(1);
 					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
-					PacketHandler.CHANNELCOVENANT.send(
-							PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 							new CovenantPacketServer(coven.getDevotion()));
 
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);

@@ -9,7 +9,6 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.capabilities.adornments.AdornmentsApi;
 import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
 import com.huto.forcesofreality.entities.utils.ModEntityPredicates;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.EnchantmentInit;
 import com.huto.forcesofreality.init.ItemInit;
@@ -18,6 +17,7 @@ import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.SetFlyPKT;
 import com.huto.forcesofreality.network.coven.SyncCovenPacket;
 import com.huto.forcesofreality.objects.items.ItemAdornment;
+import com.hutoslib.math.Vector3;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.block.Block;

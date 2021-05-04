@@ -11,11 +11,11 @@ import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.objects.tileenties.util.EnumCrystalTypes;
 import com.huto.forcesofreality.objects.tileenties.util.IImportableTile;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.TileVibeSimpleInventory;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
 import com.huto.forcesofreality.recipes.ModHarmonizerRecipes;
 import com.huto.forcesofreality.recipes.RecipeHarmonizer;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

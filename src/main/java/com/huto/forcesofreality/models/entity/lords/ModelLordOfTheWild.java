@@ -2,7 +2,7 @@ package com.huto.forcesofreality.models.entity.lords;
 
 
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -674,7 +674,7 @@ public class ModelLordOfTheWild extends EntityModel<EntityLordOfTheWild> {
 	@Override
 	public void setRotationAngles(EntityLordOfTheWild entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
 		
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);

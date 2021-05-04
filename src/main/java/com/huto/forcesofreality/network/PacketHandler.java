@@ -1,7 +1,6 @@
 package com.huto.forcesofreality.network;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.models.animation.AnimationPacket;
 import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
 import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
 import com.huto.forcesofreality.network.adornments.SyncPacket;
@@ -29,7 +28,6 @@ import com.huto.forcesofreality.network.vibes.VibrationPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -57,15 +55,9 @@ public class PacketHandler {
 	public static final SimpleChannel CHANNELMODULETIER = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modulechannel"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-	public static final SimpleChannel ANIMATIONS = NetworkRegistry.ChannelBuilder
-			.named(new ResourceLocation(ForcesOfReality.MOD_ID, "animchannel"))
-			.clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals)
-			.networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
 
 	public static void registerChannels() {
 		// Register Networking packets
-		ANIMATIONS.messageBuilder(AnimationPacket.class, networkID++, NetworkDirection.PLAY_TO_CLIENT)
-				.encoder(AnimationPacket::encode).decoder(AnimationPacket::new).consumer(AnimationPacket::handle).add();
 
 		// Vibes
 		CHANNELVIBES.registerMessage(networkID++, VibrationPacketClient.class, VibrationPacketClient::encode,

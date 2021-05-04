@@ -3,8 +3,8 @@ package com.huto.forcesofreality.particles.data;
 import java.util.Random;
 
 import com.huto.forcesofreality.init.ParticleInit;
-import com.huto.forcesofreality.particles.ParticleColor;
 import com.huto.forcesofreality.particles.ParticleSparkle;
+import com.hutoslib.client.particle.ParticleColor;
 
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;

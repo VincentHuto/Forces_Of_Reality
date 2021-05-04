@@ -7,7 +7,7 @@ import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.objects.items.ItemHarmonicImprint;
 import com.huto.forcesofreality.objects.tileenties.TileEntityTeleporter;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

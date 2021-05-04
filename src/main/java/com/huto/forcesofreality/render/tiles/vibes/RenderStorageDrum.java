@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 import com.google.common.collect.ImmutableList;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.models.block.ModelDrumMagatama;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityStorageDrum;
+import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

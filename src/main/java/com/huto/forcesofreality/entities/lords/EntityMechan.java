@@ -2,15 +2,15 @@ package com.huto.forcesofreality.entities.lords;
 
 import java.util.List;
 
-import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.projectiles.EntityWolfShot;
 import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
+import com.hutoslib.common.PacketHandler;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -41,6 +41,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -144,11 +145,10 @@ public class EntityMechan extends MonsterEntity implements IEntityAdditionalSpaw
 		if (world.isRemote) {
 			world.addParticle(ParticleTypes.SMOKE, getPosX() + particleMod, getPosY() + 1.87f + particleMod,
 					getPosZ() + particleMod, 0, 0.01f, 0);
-			world.addParticle(GlowParticleData.createData(getParticleColor()), getPosX() + particleMod,
+			world.addParticle(GlowParticleFactory.createData(getParticleColor()), getPosX() + particleMod,
 					getPosY() + 1.87f, getPosZ() + particleMod, 0, world.rand.nextFloat() * 0.01f, 0);
-			world.addParticle(GlowParticleData.createData(new ParticleColor(200, 200, 0)), getPosX(), getPosY() + 1.87f,
-					getPosZ(), 0, world.rand.nextFloat() * 0.01f, 0);
-			 
+			world.addParticle(GlowParticleFactory.createData(new ParticleColor(200, 200, 0)), getPosX(),
+					getPosY() + 1.87f, getPosZ(), 0, world.rand.nextFloat() * 0.01f, 0);
 
 		}
 		// Protection
@@ -338,12 +338,16 @@ public class EntityMechan extends MonsterEntity implements IEntityAdditionalSpaw
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void shock(Entity target) {
 		playSound(SoundEvents.ENTITY_WOLF_HOWL, .25F, 1f);
 		this.setMotion(0, 0, 0);
 		Vector3 startVec = Vector3.fromEntityCenter(this);
 		Vector3 endVec = Vector3.fromEntityCenter(target);
-		ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0xFFAA00, 0xFFAA00);
+		Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
+		PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+				(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.YELLOW, 2, 10, 9, 0.2f);
+
 		target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
 	}
 

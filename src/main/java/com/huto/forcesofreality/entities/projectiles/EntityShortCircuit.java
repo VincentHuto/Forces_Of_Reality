@@ -4,9 +4,10 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
-import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.common.PacketHandler;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -15,6 +16,7 @@ import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -51,7 +53,10 @@ public class EntityShortCircuit extends ThrowableEntity {
 		Vector3 endVec = Vector3.fromEntityCenter(this).add(rand.nextInt(2) - rand.nextInt(2),
 				rand.nextInt(2) - rand.nextInt(2), rand.nextInt(2) - rand.nextInt(2));
 		if (this.rand.nextInt(10) % 2 == 0) {
-			ForcesOfReality.proxy.lightningFX(Vector3.fromEntityCenter(this), endVec, 5f, 0x0000, 0xFAFA00);
+			Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
+			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.YELLOW, 2, 10, 9, 0.2f);
+
 		}
 
 		for (int i = 0; i < 5; i++) {
@@ -111,7 +116,7 @@ public class EntityShortCircuit extends ThrowableEntity {
 		case BLOCK: {
 			EntityShorting[] shortings = new EntityShorting[5];
 			for (int i = 0; i < shortings.length; i++) {
-				shortings[i] = new EntityShorting((LivingEntity)func_234616_v_(),world);
+				shortings[i] = new EntityShorting((LivingEntity) func_234616_v_(), world);
 				shortings[i].setPosition(this.getPosX() + rand.nextInt(2) - rand.nextInt(2), this.getPosY(),
 						this.getPosZ() + rand.nextInt(2) - rand.nextInt(2));
 				if (shortings[i].findTarget()) {
@@ -124,7 +129,7 @@ public class EntityShortCircuit extends ThrowableEntity {
 		case ENTITY: {
 			EntityShorting[] shortings = new EntityShorting[5];
 			for (int i = 0; i < shortings.length; i++) {
-				shortings[i] = new EntityShorting((LivingEntity)func_234616_v_(),world);
+				shortings[i] = new EntityShorting((LivingEntity) func_234616_v_(), world);
 				shortings[i].setPosition(this.getPosX() + rand.nextInt(2) - rand.nextInt(2), this.getPosY(),
 						this.getPosZ() + rand.nextInt(2) - rand.nextInt(2));
 				if (shortings[i].findTarget()) {

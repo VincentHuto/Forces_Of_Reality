@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityMechan;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -266,7 +266,7 @@ public class ModelMechan extends EntityModel<EntityMechan> {
 	public void setRotationAngles(EntityMechan entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		
 		this.backGear.rotateAngleZ = (ageInTicks+ parTicks) * 0.1f;

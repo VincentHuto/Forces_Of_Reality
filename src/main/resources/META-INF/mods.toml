@@ -67,3 +67,10 @@ Please give me feedback its my first time!
     versionRange="[1.16.4]"
     ordering="NONE"
     side="BOTH"
+    
+[[dependencies.forcesofreality]]
+    modId="hutoslib"
+    mandatory=true
+    versionRange="[1,)"
+    ordering="NONE"
+    side="BOTH"    

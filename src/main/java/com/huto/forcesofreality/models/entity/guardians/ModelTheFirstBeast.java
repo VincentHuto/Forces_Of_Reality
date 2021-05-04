@@ -2,10 +2,10 @@ package com.huto.forcesofreality.models.entity.guardians;
 
 import com.huto.forcesofreality.entities.guardians.EntityTheFirstBeast;
 import com.huto.forcesofreality.entities.passive.EntityDenizenSage;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
-import com.huto.forcesofreality.models.animation.AnimatedEntityModel;
-import com.huto.forcesofreality.models.animation.AnimatedModelRenderer;
-import com.huto.forcesofreality.models.animation.ModelAnimator;
+import com.hutoslib.client.models.AnimatedEntityModel;
+import com.hutoslib.client.models.AnimatedModelRenderer;
+import com.hutoslib.client.models.ModelAnimator;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -383,7 +383,7 @@ public class ModelTheFirstBeast extends AnimatedEntityModel<EntityTheFirstBeast>
 			float netHeadYaw, float headPitch) {
 
 		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
-		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
+		float frame = entity.ticksExisted + ClientUtils.getPartialTicks();
 		faceTarget(netHeadYaw, headPitch, 1, headArray);
 
 		// Head

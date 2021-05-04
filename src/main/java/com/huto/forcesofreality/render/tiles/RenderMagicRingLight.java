@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import com.huto.forcesofreality.objects.tileenties.TileEntityMagicRingLight;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.ParticleUtil;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -32,22 +32,22 @@ public class RenderMagicRingLight extends TileEntityRenderer<TileEntityMagicRing
 		BlockPos pos = lightTile.getPos();
 		double time = world.getGameTime() * 0.05f;
 		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + 1 + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), 0.0, 0.05, 0.0);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + 1 + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), -0.0, -0.05, 0.0);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + 1 + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), -0.0, -0.05, -0);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + 1 + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), 0., 0.05, -0);

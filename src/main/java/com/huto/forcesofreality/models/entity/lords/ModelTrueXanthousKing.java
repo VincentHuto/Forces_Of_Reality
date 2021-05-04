@@ -2,10 +2,10 @@ package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
 import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
-import com.huto.forcesofreality.models.animation.ModelAnimator;
-import com.huto.forcesofreality.models.animation.AnimatedEntityModel;
-import com.huto.forcesofreality.models.animation.AnimatedModelRenderer;
+import com.hutoslib.client.models.AnimatedEntityModel;
+import com.hutoslib.client.models.AnimatedModelRenderer;
+import com.hutoslib.client.models.ModelAnimator;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -49,16 +49,13 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 
 		whole = new AnimatedModelRenderer(this);
 		whole.setRotationPoint(0.0F, -15.0F, -15.0F);
-		
 
 		upperBody = new AnimatedModelRenderer(this);
 		upperBody.setRotationPoint(0.1F, -19.0F, -19.0F);
-		
 
 		hasturForm = new AnimatedModelRenderer(this);
 		hasturForm.setRotationPoint(0.0F, 0.0F, 0.0F);
 		upperBody.addChild(hasturForm);
-		
 
 		head = new AnimatedModelRenderer(this);
 		head.setRotationPoint(0.0F, 12.0F, 21.0F);
@@ -127,7 +124,6 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 		cape.setRotationPoint(0.0F, -6.1615F, 3.8154F);
 		body.addChild(cape);
 		setRotateAngle(cape, -0.5672F, 0.0F, 0.0F);
-		
 
 		Body_r1 = new AnimatedModelRenderer(this);
 		Body_r1.setRotationPoint(3.0F, 1.6868F, 0.0746F);
@@ -140,7 +136,6 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 		bone3 = new AnimatedModelRenderer(this);
 		bone3.setRotationPoint(0.0F, 8.0F, 8.0F);
 		cape.addChild(bone3);
-		
 
 		Body_r2 = new AnimatedModelRenderer(this);
 		Body_r2.setRotationPoint(0.0F, 1.6868F, 1.0746F);
@@ -151,7 +146,6 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 		cape2 = new AnimatedModelRenderer(this);
 		cape2.setRotationPoint(0.0F, 3.0F, 4.0F);
 		bone3.addChild(cape2);
-		
 
 		Body_r3 = new AnimatedModelRenderer(this);
 		Body_r3.setRotationPoint(-8.0F, 1.3891F, 0.0237F);
@@ -170,7 +164,6 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 		bone2.setRotationPoint(0.0F, 8.485F, 8.5337F);
 		cape2.addChild(bone2);
 		setRotateAngle(bone2, 0.7418F, 0.0F, 0.0F);
-		
 
 		Body_r5 = new AnimatedModelRenderer(this);
 		Body_r5.setRotationPoint(0.0F, 1.9696F, -0.3473F);
@@ -223,7 +216,6 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 		bone.setRotationPoint(-0.5F, 17.5F, -3.6F);
 		upperBody.addChild(bone);
 		setRotateAngle(bone, 0.6109F, 0.0F, 0.0F);
-		
 
 		crest = new AnimatedModelRenderer(this);
 		crest.setRotationPoint(-21.6F, -3.5F, 28.3889F);
@@ -351,7 +343,7 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 
 	private void biteAnim() {
 		animator.startKeyframe(9);
-		
+
 		animator.endKeyframe();
 		animator.resetKeyframe(8);
 	}
@@ -365,7 +357,7 @@ public class ModelTrueXanthousKing extends AnimatedEntityModel<EntityTrueXanthou
 	public void setRotationAngles(EntityTrueXanthousKing entity, float limbSwing, float limbSwingAmount,
 			float ageInTicks, float netHeadYaw, float headPitch) {
 		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
-		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
+		float frame = entity.ticksExisted + ClientUtils.getPartialTicks();
 
 		// Head
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.75f;

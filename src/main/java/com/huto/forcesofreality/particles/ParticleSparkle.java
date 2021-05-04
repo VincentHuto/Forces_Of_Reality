@@ -1,6 +1,7 @@
 package com.huto.forcesofreality.particles;
 
 import com.huto.forcesofreality.init.RenderTypeInit;
+import com.hutoslib.client.particle.ParticleUtil;
 
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleRenderType;

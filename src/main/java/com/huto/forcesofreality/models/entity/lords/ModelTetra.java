@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityTetra;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -540,7 +540,7 @@ public class ModelTetra extends EntityModel<EntityTetra> {
 			float netHeadYaw, float headPitch) {
 		
 		
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		
 		float f = MathHelper.lerp(0, entity.oFlap, entity.wingRotation);

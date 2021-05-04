@@ -1,9 +1,9 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
-import com.huto.forcesofreality.models.animation.ModelAnimator;
-import com.huto.forcesofreality.models.animation.AnimatedEntityModel;
-import com.huto.forcesofreality.models.animation.AnimatedModelRenderer;
+import com.hutoslib.client.models.AnimatedEntityModel;
+import com.hutoslib.client.models.AnimatedModelRenderer;
+import com.hutoslib.client.models.ModelAnimator;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

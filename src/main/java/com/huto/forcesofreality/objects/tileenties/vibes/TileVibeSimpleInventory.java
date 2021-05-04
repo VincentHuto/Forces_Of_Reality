@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.huto.forcesofreality.capabilities.vibes.IVibrations;
 import com.huto.forcesofreality.capabilities.vibes.VibrationProvider;
-import com.huto.forcesofreality.objects.tileenties.util.TileMod;
+import com.hutoslib.common.tile.TileMod;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +23,7 @@ import net.minecraftforge.items.ItemStackHandler;
 public abstract class TileVibeSimpleInventory extends TileMod {
 	public final String TAG_VIBES = "vibes";
 	public IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
+
 	public TileVibeSimpleInventory(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
@@ -93,9 +94,11 @@ public abstract class TileVibeSimpleInventory extends TileMod {
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		markDirty();
 	}
+
 	public boolean canHopperExtract() {
 		return false;
 	}
+
 	/*
 	 * Extension of ItemStackHandler that uses our own slot array, allows for
 	 * control of writing, allows control over stack limits, and allows for

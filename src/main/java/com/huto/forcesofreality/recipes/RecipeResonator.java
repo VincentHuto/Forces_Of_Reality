@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.huto.forcesofreality.objects.tileenties.util.EnumEssecenceType;
+import com.hutoslib.common.recipe.IModRecipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

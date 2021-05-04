@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.models.entity.mobs;
 
 import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -699,7 +699,7 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 
 	@Override
 	public void setRotationAngles(EntityScuttlingOcculus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		
 		// Head

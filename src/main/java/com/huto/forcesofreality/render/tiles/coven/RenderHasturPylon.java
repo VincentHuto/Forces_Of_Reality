@@ -4,7 +4,7 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.models.block.ModelHasturPylon;
 import com.huto.forcesofreality.models.block.ObjModelHandler;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHasturPylon;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
+import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

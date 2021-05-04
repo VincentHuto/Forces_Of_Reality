@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -143,7 +143,7 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		checkChapter();
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome_adv
+					if (ClientUtils.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome_adv
 							.get()) {
 						mc.displayGuiScreen(new GuiCovenTitle(true));
 					} else {
@@ -184,7 +184,7 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 				arrowB = new GuiButtonCovenArrow(ARROWB, left, top + guiHeight - 10, 16, 14, 192, 1, new IPressable() {
 					@Override
 					public void onPress(Button p_onPress_1_) {
-						if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand()
+						if (ClientUtils.getClientPlayer().getHeldItemMainhand()
 								.getItem() == ItemInit.coven_tome_adv.get()) {
 							mc.displayGuiScreen(new GuiCovenTitle(true));
 						} else {

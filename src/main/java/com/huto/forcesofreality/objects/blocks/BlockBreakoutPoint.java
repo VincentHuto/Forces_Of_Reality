@@ -3,8 +3,8 @@ package com.huto.forcesofreality.objects.blocks;
 import java.util.Random;
 
 import com.huto.forcesofreality.init.BlockInit;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -36,11 +36,11 @@ public class BlockBreakoutPoint extends BushBlock {
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		super.animateTick(stateIn, worldIn, pos, rand);
 		if (stateIn.getBlock() == BlockInit.null_breakout_point.get()) {
-			worldIn.addParticle(GlowParticleData.createData(new ParticleColor(200, 0, 0)), pos.getX() + 0.5,
+			worldIn.addParticle(GlowParticleFactory.createData(new ParticleColor(200, 0, 0)), pos.getX() + 0.5,
 					pos.getY() + 0.8f, pos.getZ() + 0.5, 0, worldIn.rand.nextFloat() * 0.06f, 0);
 		}
 		if (stateIn.getBlock() == BlockInit.essence_breakout_point.get()) {
-			worldIn.addParticle(GlowParticleData.createData(new ParticleColor(0, 0, 200)), pos.getX() + 0.5,
+			worldIn.addParticle(GlowParticleFactory.createData(new ParticleColor(0, 0, 200)), pos.getX() + 0.5,
 					pos.getY() + 0.8f, pos.getZ() + 0.5, 0, worldIn.rand.nextFloat() * 0.06f, 0);
 
 		}

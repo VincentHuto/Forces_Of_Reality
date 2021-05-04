@@ -10,8 +10,8 @@ import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.PacketToggleDirectorFlightModeMessage;
 import com.huto.forcesofreality.network.coven.SetGlideAnim;
 import com.huto.forcesofreality.network.coven.SetGlidePkt;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -74,11 +74,11 @@ public class ItemSparkDirector extends ArmorItem {
 			if (stack.getOrCreateTag().getFloat(TAG_MODIFIER) == 0.2f) {
 				if (world.isRemote) {
 					// float rot = player.renderYawOffset;
-					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f,
+					world.addParticle(GlowParticleFactory.createData(new ParticleColor(255, 180, 0)), dx, dy, dz, 0, 0.06f,
 							0);
-					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f,
+					world.addParticle(GlowParticleFactory.createData(new ParticleColor(255, 100, 0)), dx, dy, dz, 0, 0.06f,
 							0);
-					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 60, 0)), dx, dy, dz, 0, 0.06f,
+					world.addParticle(GlowParticleFactory.createData(new ParticleColor(255, 60, 0)), dx, dy, dz, 0, 0.06f,
 							0);
 				}
 			} else {
@@ -90,7 +90,7 @@ public class ItemSparkDirector extends ArmorItem {
 					double x = player.getPosX() + Math.sin(strRot) * 0.35f;
 					double y = player.getPosY() + 1;
 					double z = player.getPosZ() - Math.abs(Math.cos(strRot)) * 0.35f;
-					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 100, 0)), x, y, z, 0, 0.06f,
+					world.addParticle(GlowParticleFactory.createData(new ParticleColor(255, 100, 0)), x, y, z, 0, 0.06f,
 							0);
 				}
 

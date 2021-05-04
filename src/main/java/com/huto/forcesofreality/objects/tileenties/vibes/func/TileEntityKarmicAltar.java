@@ -6,17 +6,17 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.capabilities.vibes.IVibrations;
 import com.huto.forcesofreality.capabilities.vibes.VibrationProvider;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.objects.tileenties.util.IExportableTile;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.TileVibeSimpleInventory;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.common.PacketHandler;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -27,7 +27,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
 
 public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements ITickableTileEntity, IExportableTile {
 	IVibrations vibes = getCapability(VibrationProvider.VIBE_CAPA).orElseThrow(IllegalStateException::new);
@@ -76,7 +79,7 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 			}
 
 		if (did)
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
 		return true;
 	}
 
@@ -127,11 +130,13 @@ public class TileEntityKarmicAltar extends TileVibeSimpleInventory implements IT
 			if (count % 10 == 0) {
 				count = 0;
 				if (world.isRemote) {
-					Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
-					Vector3 belowVec = Vector3.fromTileEntityCenter(this);
-					ForcesOfReality.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), 0xFFFFFF, 0x00000);
-					ForcesOfReality.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), 0x00000, 0xFFFFFF);
-
+					Vector3d vecabove = new Vector3d(getPos().getX(), getPos().getY(), getPos().getZ()).add(0.5, 0.5,
+							0.5);
+					Vector3d belowVec = new Vector3d(getPos().getX(), getPos().getY(), getPos().getZ());
+					PacketHandler.sendLightningSpawn(vecabove, belowVec, 15f,
+							(RegistryKey<World>) world.getDimensionKey(), ParticleColor.RED, 2, 10, 9, 0.2f);
+					PacketHandler.sendLightningSpawn(vecabove, belowVec, 15f,
+							(RegistryKey<World>) world.getDimensionKey(), ParticleColor.BLUE, 2, 10, 9, 0.2f);
 				}
 			}
 

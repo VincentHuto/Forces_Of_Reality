@@ -5,13 +5,14 @@ import com.huto.forcesofreality.capabilities.vibes.chunk.ChunkVibrationProvider;
 import com.huto.forcesofreality.capabilities.vibes.chunk.IChunkVibrations;
 import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityLectorTable;
 import com.huto.forcesofreality.render.effects.LectorVectorColorData;
-import com.huto.forcesofreality.render.effects.RenderShapes;
+import com.hutoslib.client.render.RenderShapes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.player.PlayerEntity;
@@ -109,8 +110,8 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 					}
 
 					// Draws the grid
-					RenderShapes.renderSizedColorRectangle(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn,
-							builder, gridSpacing * (x * 1.001f), 1.1f + yMod + distMod + chunkHeightMod,
+					renderSizedColorRectangle(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, builder,
+							gridSpacing * (x * 1.001f), 1.1f + yMod + distMod + chunkHeightMod,
 							gridSpacing * (z * 1.001f), 0.5f, 0.5f, 0.5f, gridColor, -chunkHeightMod);
 				}
 			}
@@ -120,5 +121,109 @@ public class RenderLectorTable extends TileEntityRenderer<TileEntityLectorTable>
 
 	public boolean isChunkVibeFull(IChunkVibrations currentChunkCap) {
 		return currentChunkCap.canReceive() ? false : true;
+	}
+
+	public static void renderSizedColorRectangle(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
+			int combinedLightIn, int combinedOverlayIn, IVertexBuilder builderIn, float xOffset, float yOffset,
+			float zOffset, float xScale, float yScale, float zScale, LectorVectorColorData color, float endYPoint) {
+
+		// Chest Panel
+		matrixStackIn.push();
+		IVertexBuilder builder = builderIn;
+		int r = (int) color.getRed(), g = (int) color.getGreen(), b = (int) color.getBlue();
+
+		matrixStackIn.translate(xOffset, yOffset, zOffset);
+		// Top
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0, yScale, 0).color(r, g, b, 255).tex(1, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, yScale, 0).color(r, g, b, 255).tex(1, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, yScale, -zScale).color(r, g, b, 255).tex(0, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0, yScale, -zScale).color(r, g, b, 255).tex(0, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+
+		// Bottom
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0, endYPoint + 0.0f, 0).color(r, g, b, 255).tex(1, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, endYPoint + 0, 0).color(r, g, b, 255).tex(1, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, endYPoint + 0, -zScale).color(r, g, b, 255).tex(0, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0, endYPoint + 0, -zScale).color(r, g, b, 255).tex(0, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+
+		// North
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, endYPoint + 0.0f, -zScale).color(r, g, b, 255)
+				.tex(1, 1).overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, endYPoint + 0, -zScale).color(r, g, b, 255).tex(1, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, yScale, -zScale).color(r, g, b, 255).tex(0, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, yScale, -zScale).color(r, g, b, 255).tex(0, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		// South
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, endYPoint + 0.0f, 0).color(r, g, b, 255).tex(1, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, yScale, 0).color(r, g, b, 255).tex(1, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, yScale, 0).color(r, g, b, 255).tex(0, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, endYPoint + 0f, 0).color(r, g, b, 255).tex(0, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+
+		// East
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, endYPoint + 0.0f, 0).color(r, g, b, 255).tex(1, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, yScale, 0).color(r, g, b, 255).tex(1, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, yScale, -zScale).color(r, g, b, 255).tex(0, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), xScale, endYPoint + 0f, -zScale).color(r, g, b, 255).tex(0, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		// West
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, endYPoint + 0.0f, 0).color(r, g, b, 255).tex(1, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, yScale, 0).color(r, g, b, 255).tex(1, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0f, yScale, -zScale).color(r, g, b, 255).tex(0, 0)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+		builder.pos(matrixStackIn.getLast().getMatrix(), 0, endYPoint + 0f, -zScale).color(r, g, b, 255).tex(0, 1)
+				.overlay(OverlayTexture.NO_OVERLAY).lightmap(combinedLightIn)
+				.normal(matrixStackIn.getLast().getNormal(), 0, 1, 0).endVertex();
+
+		matrixStackIn.pop();
+
+	}
+
+	public static void renderSizedColoredCube(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
+			int combinedLightIn, int combinedOverlayIn, IVertexBuilder builderIn, float xOffset, float yOffset,
+			float zOffset, float xScale, float yScale, LectorVectorColorData color) {
+
+		renderSizedColorRectangle(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, builderIn, xOffset,
+				yOffset, zOffset, xScale, yScale, xScale, color, 0);
 	}
 }

@@ -8,9 +8,9 @@ import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.projectiles.EntityHolySpirit;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.ParticleUtil;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -43,22 +43,22 @@ public class RenderHolySpirit extends EntityRenderer<EntityHolySpirit> {
 		double time = world.getGameTime() * 0.05f;
 		// Random rand = world.rand;
 		for (int j = 0; j < 6; j++) {
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, 0.05);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, 0.05);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, -0.05);
 
-			world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);
@@ -67,22 +67,22 @@ public class RenderHolySpirit extends EntityRenderer<EntityHolySpirit> {
 		Collections.reverse(chakraColors);
 		if (entityIn.ticksExisted > 40) {
 			for (int j = 0; j < 6; j++) {
-				world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, 0.05);
 
-				world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, 0.05);
 
-				world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, -0.05);
 
-				world.addParticle(GlowParticleData.createData(chakraColors.get(j)),
+				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
 						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
 						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);

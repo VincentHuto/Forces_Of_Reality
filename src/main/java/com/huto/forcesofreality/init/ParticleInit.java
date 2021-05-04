@@ -5,22 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.particles.ParticleColor;
 import com.huto.forcesofreality.particles.data.AjnaParticleData;
 import com.huto.forcesofreality.particles.data.AnahataParticleData;
-import com.huto.forcesofreality.particles.data.ColorParticleTypeData;
 import com.huto.forcesofreality.particles.data.ColoredDynamicTypeData;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
 import com.huto.forcesofreality.particles.data.ManipuraParticleData;
 import com.huto.forcesofreality.particles.data.MuladharaaParticleData;
-import com.huto.forcesofreality.particles.data.ParticleLineData;
 import com.huto.forcesofreality.particles.data.ParticleSparkleData;
 import com.huto.forcesofreality.particles.data.SahasraraParticleData;
 import com.huto.forcesofreality.particles.data.SvadhishthanaParticleData;
 import com.huto.forcesofreality.particles.data.VishuddhaParticleData;
-import com.huto.forcesofreality.particles.types.GlowParticleType;
-import com.huto.forcesofreality.particles.types.LineParticleType;
 import com.huto.forcesofreality.particles.types.SparkleParticleType;
+import com.hutoslib.client.particle.ParticleColor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.IParticleData;
@@ -46,11 +41,6 @@ public class ParticleInit {
 	// Wisp
 	@ObjectHolder(ForcesOfReality.MOD_ID + ":" + ParticleSparkleData.NAME)
 	public static ParticleType<ColoredDynamicTypeData> SPARKLE_TYPE;
-
-	public static final RegistryObject<ParticleType<ColorParticleTypeData>> glow = PARTICLE_TYPES.register("glow",
-			() -> new GlowParticleType());
-	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> line = PARTICLE_TYPES.register("line",
-			() -> new LineParticleType());
 	public static final RegistryObject<ParticleType<ColoredDynamicTypeData>> sparkle = PARTICLE_TYPES
 			.register("sparkle", () -> new SparkleParticleType());
 
@@ -72,8 +62,6 @@ public class ParticleInit {
 
 	@SubscribeEvent
 	public static void registerParticleFactories(ParticleFactoryRegisterEvent event) {
-		Minecraft.getInstance().particles.registerFactory(glow.get(), GlowParticleData::new);
-		Minecraft.getInstance().particles.registerFactory(line.get(), ParticleLineData::new);
 		Minecraft.getInstance().particles.registerFactory(sparkle.get(), ParticleSparkleData::new);
 		// Chakra Colors
 		Minecraft.getInstance().particles.registerFactory(sahasrara.get(), ParticleSparkleData::new);

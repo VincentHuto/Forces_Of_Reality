@@ -195,7 +195,7 @@ public class ForcesOfReality {
 	public void setupOnLoaded(FMLLoadCompleteEvent event) {
 
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 	}

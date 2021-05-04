@@ -4,9 +4,9 @@ import com.huto.forcesofreality.capabilities.vibes.IVibrations;
 import com.huto.forcesofreality.capabilities.vibes.VibrationProvider;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.vibes.VibrationPacketClient;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityCapacitor;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityStorageDrum;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;

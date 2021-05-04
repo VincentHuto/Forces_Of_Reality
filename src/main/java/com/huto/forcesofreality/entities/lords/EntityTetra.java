@@ -8,13 +8,13 @@ import com.huto.forcesofreality.entities.projectiles.EntityHolyFlare;
 import com.huto.forcesofreality.entities.projectiles.EntityJudgement;
 import com.huto.forcesofreality.entities.projectiles.EntityStarStrike;
 import com.huto.forcesofreality.entities.summons.EntityThrone;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.particles.ParticleColor;
-import com.huto.forcesofreality.particles.ParticleUtil;
-import com.huto.forcesofreality.particles.data.GlowParticleData;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particles.factory.GlowParticleFactory;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -136,21 +136,21 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 0)),
+			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 0)),
 					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
 					center.y + (j * 0.15) - 0.1 + ParticleUtil.inRange(-0.1, 0.1),
 					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-			world.addParticle(GlowParticleData.createData(new ParticleColor(229, 229, 229)),
+			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 229)),
 					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
 					center.y + (j * 0.15) - 0.1 + ParticleUtil.inRange(-0.1, 0.1),
 					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
 		}
 
-		world.addParticle(GlowParticleData.createData(new ParticleColor(250, 200, 0)),
+		world.addParticle(GlowParticleFactory.createData(new ParticleColor(250, 200, 0)),
 				center.x + ParticleUtil.inRange(-0.1, 0.1),
 				center.y + (1 * 0.15) - 1.3 + ParticleUtil.inRange(-0.2, 0.2),
 				center.z + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-		world.addParticle(GlowParticleData.createData(new ParticleColor(20, 0, 0)),
+		world.addParticle(GlowParticleFactory.createData(new ParticleColor(20, 0, 0)),
 				center.x + ParticleUtil.inRange(-0.1, 0.1),
 				center.y + (1 * 0.15) - 1.3 + ParticleUtil.inRange(-0.2, 0.2),
 				center.z + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
@@ -445,7 +445,7 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 									- (double) ent.getYOffset() - 0.5,
 							ent.getPosZ() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(), 0.0D, 0.0D,
 							0.0D);
-					world.addParticle(GlowParticleData.createData(new ParticleColor(255, 255, 0)),
+					world.addParticle(GlowParticleFactory.createData(new ParticleColor(255, 255, 0)),
 							ent.getPosX() + (world.rand.nextDouble() - 0.5D) * (double) ent.getWidth(),
 							ent.getPosY() + world.rand.nextDouble() * (double) ent.getHeight()
 									- (double) ent.getYOffset() - 0.5,

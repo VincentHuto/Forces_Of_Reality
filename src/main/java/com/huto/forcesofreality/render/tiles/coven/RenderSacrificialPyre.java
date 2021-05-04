@@ -4,7 +4,7 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.models.block.ModelFloatingSkull;
 import com.huto.forcesofreality.models.block.ModelHorizontalBone;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntitySacrificePyre;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
+import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -1,10 +1,10 @@
 package com.huto.forcesofreality.models.entity.lords;
 
 import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
-import com.huto.forcesofreality.models.animation.ModelAnimator;
-import com.huto.forcesofreality.models.animation.AnimatedEntityModel;
-import com.huto.forcesofreality.models.animation.AnimatedModelRenderer;
+import com.hutoslib.client.models.AnimatedEntityModel;
+import com.hutoslib.client.models.AnimatedModelRenderer;
+import com.hutoslib.client.models.ModelAnimator;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -1059,7 +1059,7 @@ public class ModelXanthousKing extends AnimatedEntityModel<EntityXanthousKing> {
 	public void setRotationAngles(EntityXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		netHeadYaw = MathHelper.wrapDegrees(netHeadYaw);
-		float frame = entity.ticksExisted + ClientEventSubscriber.getPartialTicks();
+		float frame = entity.ticksExisted + ClientUtils.getPartialTicks();
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * 0.5f;
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
 

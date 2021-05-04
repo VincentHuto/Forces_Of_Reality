@@ -2,8 +2,8 @@ package com.huto.forcesofreality.objects.items.tools;
 
 import java.util.List;
 
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

@@ -7,11 +7,11 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.EnumTomeCatagories;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -172,7 +172,7 @@ public class GuiTomePage extends Screen {
 		}
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
+					if (ClientUtils.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
 							.get()) {
 						mc.displayGuiScreen(new GuiTomeTitle(true));
 					} else {

@@ -98,10 +98,12 @@ public class TileEntityInit {
 			.register("thermal_influxer", () -> TileEntityType.Builder
 					.create(TileEntityThermalInfluxer::new, BlockInit.thermal_influxer.get()).build(null));
 
-/*	public static final RegistryObject<TileEntityType<TileEntityChiselStation>> runic_chisel_station = TILES
-			.register("runic_chisel_station", () -> TileEntityType.Builder
-					.create(TileEntityChiselStation::new, BlockInit.runic_chisel_station.get()).build(null));
-*/
+	/*
+	 * public static final RegistryObject<TileEntityType<TileEntityChiselStation>>
+	 * runic_chisel_station = TILES .register("runic_chisel_station", () ->
+	 * TileEntityType.Builder .create(TileEntityChiselStation::new,
+	 * BlockInit.runic_chisel_station.get()).build(null));
+	 */
 	public static final RegistryObject<TileEntityType<TileEntityAdornmentModStation>> self_reflection_station = TILES
 			.register("self_reflection_station", () -> TileEntityType.Builder
 					.create(TileEntityAdornmentModStation::new, BlockInit.self_reflection_station.get()).build(null));
@@ -175,5 +177,5 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityHunterEffigy>> hunter_effigy = TILES
 			.register("hunter_effigy", () -> TileEntityType.Builder
 					.create(TileEntityHunterEffigy::new, BlockInit.hunter_effigy.get()).build(null));
-	
+
 }

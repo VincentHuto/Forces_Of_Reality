@@ -7,10 +7,10 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.glfw.GLFW;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -47,8 +47,8 @@ public class GuiCovenPage extends Screen {
 	Minecraft mc = Minecraft.getInstance();
 
 	@OnlyIn(Dist.CLIENT)
-	public GuiCovenPage(int pageNumIn, EnumTomeCovenants catagoryIn, String titleIn, String subtitleIn, ItemStack iconIn,
-			String textIn) {
+	public GuiCovenPage(int pageNumIn, EnumTomeCovenants catagoryIn, String titleIn, String subtitleIn,
+			ItemStack iconIn, String textIn) {
 		super(titleComponent);
 		this.title = titleIn;
 		this.subtitle = subtitleIn;
@@ -174,8 +174,8 @@ public class GuiCovenPage extends Screen {
 		}
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.coven_tome_adv
-							.get()) {
+					if (ClientUtils.getClientPlayer().getHeldItemMainhand()
+							.getItem() == ItemInit.coven_tome_adv.get()) {
 						mc.displayGuiScreen(new GuiCovenTitle(true));
 					} else {
 						mc.displayGuiScreen(new GuiCovenTitle(false));

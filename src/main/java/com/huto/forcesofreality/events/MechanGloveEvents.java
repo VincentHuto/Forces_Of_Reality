@@ -3,6 +3,7 @@ package com.huto.forcesofreality.events;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
+import com.hutoslib.util.ClientUtils;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -30,8 +31,8 @@ public class MechanGloveEvents {
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (ClientEventSubscriber.keyBinds.get(0).isPressed()) {
-			if (ForcesOfReality.findMechanGlove(ClientEventSubscriber.getClientPlayer()) != ItemStack.EMPTY
-					&& ForcesOfReality.findMechanGlove(ClientEventSubscriber.getClientPlayer()) != null)
+			if (ForcesOfReality.findMechanGlove(ClientUtils.getClientPlayer()) != ItemStack.EMPTY
+					&& ForcesOfReality.findMechanGlove(ClientUtils.getClientPlayer()) != null)
 				ForcesOfReality.proxy.openMechanGui();
 		}
 	}

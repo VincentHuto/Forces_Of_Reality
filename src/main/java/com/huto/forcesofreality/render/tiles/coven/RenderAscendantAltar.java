@@ -3,7 +3,7 @@ package com.huto.forcesofreality.render.tiles.coven;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.models.block.ModelFloatingCandle;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
+import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

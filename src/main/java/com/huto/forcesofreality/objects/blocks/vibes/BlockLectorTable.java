@@ -3,8 +3,8 @@ package com.huto.forcesofreality.objects.blocks.vibes;
 import java.util.stream.Stream;
 
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityLectorTable;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

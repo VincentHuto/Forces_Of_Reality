@@ -8,8 +8,8 @@ import javax.annotation.Nonnull;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.objects.blocks.util.ModInventoryVibeHelper;
 import com.huto.forcesofreality.objects.items.ItemUpgrade;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityStorageDrum;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -10,12 +10,12 @@ import com.huto.forcesofreality.entities.summons.EntityHasturClone;
 import com.huto.forcesofreality.entities.summons.EntityHasturSpawn;
 import com.huto.forcesofreality.entities.summons.EntityTentacle;
 import com.huto.forcesofreality.init.EntityInit;
-import com.huto.forcesofreality.models.animation.Animation;
-import com.huto.forcesofreality.models.animation.AnimationPacket;
-import com.huto.forcesofreality.models.animation.IAnimatable;
-import com.huto.forcesofreality.models.animation.Mafs;
-import com.huto.forcesofreality.models.animation.TickFloat;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.models.Animation;
+import com.hutoslib.client.models.AnimationPacket;
+import com.hutoslib.client.models.IAnimatable;
+import com.hutoslib.client.models.TickFloat;
+import com.hutoslib.math.MathUtil;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -176,7 +176,7 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose) {
-				rotationYaw = (float) Mafs.getAngle(EntityXanthousKing.this, target) + 90f;
+				rotationYaw = (float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90f;
 			}
 
 			if (noActiveAnimation()) {
@@ -187,7 +187,7 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 				 * } else if (distFromTarget > 90) { //
 				 * AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION); } else
 				 */if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityXanthousKing.this, target) + 90,
+						&& MathHelper.degreesDifferenceAbs((float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90,
 								rotationYaw) < 30) {
 					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
 				}
@@ -600,11 +600,11 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose)
-				rotationYaw = (float) Mafs.getAngle(EntityXanthousKing.this, target) + 90f;
+				rotationYaw = (float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90f;
 
 			if (noActiveAnimation()) {
 				if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityXanthousKing.this, target) + 90,
+						&& MathHelper.degreesDifferenceAbs((float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90,
 								rotationYaw) < 30)
 					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
 			}

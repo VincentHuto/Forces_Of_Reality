@@ -9,12 +9,12 @@ import com.huto.forcesofreality.entities.projectiles.EntityWolfShot;
 import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.animation.Animation;
-import com.huto.forcesofreality.models.animation.AnimationPacket;
-import com.huto.forcesofreality.models.animation.IAnimatable;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemBeastBolt;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemBeastCrossbow;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.models.Animation;
+import com.hutoslib.client.models.AnimationPacket;
+import com.hutoslib.client.models.IAnimatable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -95,7 +95,6 @@ public class EntityTheFirstBeast extends MonsterEntity
 	public EntityTheFirstBeast(EntityType<? extends EntityTheFirstBeast> type, World worldIn) {
 		super(type, worldIn);
 		this.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(ItemInit.first_beast_crossbow.get()));
-
 
 	}
 

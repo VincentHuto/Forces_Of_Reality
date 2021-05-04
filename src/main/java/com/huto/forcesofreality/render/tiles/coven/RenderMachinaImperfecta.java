@@ -5,7 +5,7 @@ import com.huto.forcesofreality.models.block.ModelFloatingGearHoriz;
 import com.huto.forcesofreality.models.block.ModelFloatingGearVert;
 import com.huto.forcesofreality.models.block.ModelGearShaft;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMachinaImperfecta;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
+import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -31,35 +31,28 @@ public class RenderMachinaImperfecta extends TileEntityRenderer<TileEntityMachin
 
 		matrixStackIn.push();
 		matrixStackIn.push();
-		IRenderTypeBuffer.Impl impl = IRenderTypeBuffer
-				.getImpl(Tessellator.getInstance().getBuffer());
+		IRenderTypeBuffer.Impl impl = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
 		matrixStackIn.translate(0.5f, -1.12f, 0.5f);
-		matrixStackIn.rotate(Vector3f.YP.rotation(te.getWorld().getGameTime()*0.22f));
-		IVertexBuilder vb = impl.getBuffer(gearHoriz
-				.getRenderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/entity/model_floating_gear.png")));
+		matrixStackIn.rotate(Vector3f.YP.rotation(te.getWorld().getGameTime() * 0.22f));
+		IVertexBuilder vb = impl.getBuffer(gearHoriz.getRenderType(
+				new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/entity/model_floating_gear.png")));
 		IVertexBuilder vb1 = impl.getBuffer(gearshaft
 				.getRenderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/entity/model_gearshaft.png")));
-		gearHoriz.render(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
-				1.0F);
-		
+		gearHoriz.render(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
+
 		matrixStackIn.translate(0, .45, 0);
-		gearshaft.render(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
-				1.0F);
+		gearshaft.render(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
 		matrixStackIn.translate(0, -.45, 0);
-		
-		
-		matrixStackIn.rotate(Vector3f.YP.rotation(te.getWorld().getGameTime()*-0.44f));
+
+		matrixStackIn.rotate(Vector3f.YP.rotation(te.getWorld().getGameTime() * -0.44f));
 		matrixStackIn.translate(0, .38, 0);
-		
-		gearHoriz.render(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
-				1.0F);
-		gearshaft.render(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
-				1.0F);
+
+		gearHoriz.render(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
+		gearshaft.render(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
 		impl.finish();
 
 		matrixStackIn.pop();
 
-		
 		matrixStackIn.translate(0.5f, 0.55f, 0.5f);
 		matrixStackIn.scale(0.5f, 0.5f, 0.5f);
 		// Cubes
@@ -85,10 +78,9 @@ public class RenderMachinaImperfecta extends TileEntityRenderer<TileEntityMachin
 			matrixStackIn.rotate(Vector3f.YP.rotation(yRotate));
 			IRenderTypeBuffer.Impl irendertypebuffer$impl1 = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
-			IVertexBuilder ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(gearVert
-					.getRenderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/entity/model_floating_gear.png")));
-			gearVert.render(matrixStackIn, ivertexbuilder1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F,
-					1.0F);
+			IVertexBuilder ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(gearVert.getRenderType(
+					new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/entity/model_floating_gear.png")));
+			gearVert.render(matrixStackIn, ivertexbuilder1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
 
 			irendertypebuffer$impl1.finish();
 			matrixStackIn.pop();

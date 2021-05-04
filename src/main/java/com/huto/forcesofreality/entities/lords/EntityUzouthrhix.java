@@ -3,19 +3,20 @@ package com.huto.forcesofreality.entities.lords;
 import java.util.EnumSet;
 import java.util.List;
 
-import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.summons.EntityBlackGoat;
 import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.animation.Animation;
-import com.huto.forcesofreality.models.animation.AnimationPacket;
-import com.huto.forcesofreality.models.animation.IAnimatable;
-import com.huto.forcesofreality.models.animation.Mafs;
-import com.huto.forcesofreality.models.animation.TickFloat;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.client.models.Animation;
+import com.hutoslib.client.models.AnimationPacket;
+import com.hutoslib.client.models.IAnimatable;
+import com.hutoslib.client.models.TickFloat;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.common.PacketHandler;
+import com.hutoslib.math.MathUtil;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -51,6 +52,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -265,7 +267,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose) {
-				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
+				rotationYaw = (float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90f;
 			}
 
 			if (noActiveAnimation()) {
@@ -274,9 +276,8 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 
 				} else if (distFromTarget > 90) {
 					// AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
-				} else if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90,
-								rotationYaw) < 30) {
+				} else if (isClose && MathHelper.degreesDifferenceAbs(
+						(float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90, rotationYaw) < 30) {
 					AnimationPacket.send(EntityUzouthrhix.this, BITE_ANIMATION);
 				}
 			}
@@ -576,11 +577,14 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 		if (target != null) {
 			playSound(SoundHandler.ENTITY_DARK_YOUNG_HIT, .25F, 1f);
 			this.setMotion(0, 0, 0);
-			Vector3 startVec = Vector3.fromEntityCenter(this).add(0, 1, 0);
 			Vector3 endVec = Vector3.fromEntityCenter(target);
-			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0xFAAAFA);
-			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
-			ForcesOfReality.proxy.lightningFX(startVec, endVec, 2, 0, 0);
+			Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
+			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.BLACK, 2, 10, 9, 0.2f);
+			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.WHITE, 2, 10, 9, 0.2f);
+			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.PURPLE, 2, 10, 9, 0.2f);
 			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(27)) {
 				target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
 			}
@@ -722,12 +726,11 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose)
-				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
+				rotationYaw = (float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90f;
 
 			if (noActiveAnimation()) {
-				if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90,
-								rotationYaw) < 30)
+				if (isClose && MathHelper.degreesDifferenceAbs(
+						(float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90, rotationYaw) < 30)
 					AnimationPacket.send(EntityUzouthrhix.this, BITE_ANIMATION);
 			}
 		}
@@ -765,7 +768,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose)
-				rotationYaw = (float) Mafs.getAngle(EntityUzouthrhix.this, target) + 90f;
+				rotationYaw = (float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90f;
 
 			if (noActiveAnimation()) {
 				if (distFromTarget > 120) {

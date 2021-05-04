@@ -3,7 +3,7 @@ package com.huto.forcesofreality.models.entity.guardians;
 import java.util.Random;
 
 import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -630,7 +630,7 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 	public void setRotationAngles(EntityDarkYoung entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		//Head
 		this.upperJaw2.rotateAngleX = -limbSwingAmount * 0.13f;

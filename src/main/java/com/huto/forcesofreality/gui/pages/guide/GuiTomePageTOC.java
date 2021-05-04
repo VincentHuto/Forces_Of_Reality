@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.EnumTomeCatagories;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -113,8 +113,8 @@ public class GuiTomePageTOC extends GuiTomePage {
 		}
 		GlStateManager.popMatrix();
 
-		if (!(mouseX >=  0 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2)+20
-				&& mouseY <= (16 * 2)+20 + height)) {
+		if (!(mouseX >= 0 && mouseX <= (16 * 2) + 16 + width && mouseY >= (16 * 2) + 20
+				&& mouseY <= (16 * 2) + 20 + height)) {
 			List<ITextComponent> text = new ArrayList<ITextComponent>();
 			text.add(new StringTextComponent(I18n.format(icon.getDisplayName().getString())));
 			func_243308_b(matrixStack, text, centerX, centerY);
@@ -143,8 +143,7 @@ public class GuiTomePageTOC extends GuiTomePage {
 		checkChapter();
 		this.addButton(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
 				top + guiHeight - 209, 24, 16, 174, 32, null, (press) -> {
-					if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
-							.get()) {
+					if (ClientUtils.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome.get()) {
 						mc.displayGuiScreen(new GuiTomeTitle(true));
 					} else {
 						mc.displayGuiScreen(new GuiTomeTitle(false));
@@ -184,8 +183,8 @@ public class GuiTomePageTOC extends GuiTomePage {
 				arrowB = new GuiButtonBookArrow(ARROWB, left, top + guiHeight - 10, 16, 14, 192, 1, new IPressable() {
 					@Override
 					public void onPress(Button p_onPress_1_) {
-						if (ClientEventSubscriber.getClientPlayer().getHeldItemMainhand()
-								.getItem() == ItemInit.elder_tome.get()) {
+						if (ClientUtils.getClientPlayer().getHeldItemMainhand().getItem() == ItemInit.elder_tome
+								.get()) {
 							mc.displayGuiScreen(new GuiTomeTitle(true));
 						} else {
 							mc.displayGuiScreen(new GuiTomeTitle(false));

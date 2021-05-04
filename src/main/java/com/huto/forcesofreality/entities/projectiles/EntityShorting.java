@@ -5,9 +5,10 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
-import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
+import com.hutoslib.client.particle.ParticleColor;
+import com.hutoslib.common.PacketHandler;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;
@@ -23,10 +24,12 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -112,8 +115,11 @@ public class EntityShorting extends ThrowableEntity {
 		Random rand = new Random();
 		Vector3 endVec = Vector3.fromEntityCenter(this).add(rand.nextInt(2) - rand.nextInt(2),
 				rand.nextInt(2) - rand.nextInt(2), rand.nextInt(2) - rand.nextInt(2));
+		Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
+
 		if (this.rand.nextInt(10) % 3 == 0) {
-			ForcesOfReality.proxy.lightningFX(Vector3.fromEntityCenter(this), endVec, 2.5f, 0xFF00FF, 0xFFAA00);
+			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.YELLOW, 2, 10, 9, 0.2f);
 		}
 
 		boolean evil = isEvil();

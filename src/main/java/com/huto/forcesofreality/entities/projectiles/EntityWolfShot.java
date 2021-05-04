@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.common.base.Predicates;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;

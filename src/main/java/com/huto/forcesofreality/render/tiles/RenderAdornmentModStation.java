@@ -1,10 +1,9 @@
 package com.huto.forcesofreality.render.tiles;
 
-import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
 import com.huto.forcesofreality.capabilities.adornments.AdornmentsCapabilities;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
 import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -31,7 +30,7 @@ public class RenderAdornmentModStation extends TileEntityRenderer<TileEntityAdor
 	@Override
 	public void render(TileEntityAdornmentModStation te, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		PlayerEntity player = ClientEventSubscriber.getClientPlayer();
+		PlayerEntity player = ClientUtils.getClientPlayer();
 		if (player.isAlive()) {
 			GlStateManager.pushMatrix();
 			GlStateManager.color4f(1F, 1F, 1F, 1F);

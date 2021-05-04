@@ -16,8 +16,8 @@ import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.objects.blocks.util.IBlockDevotionStation;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMachinaImperfecta;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;

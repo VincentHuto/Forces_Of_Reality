@@ -9,9 +9,9 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.RenderTypeInit;
 import com.huto.forcesofreality.models.block.ModelDrumMagatama;
 import com.huto.forcesofreality.models.block.ModelFloatingCube;
-import com.huto.forcesofreality.objects.tileenties.util.ClientTickHandler;
 import com.huto.forcesofreality.objects.tileenties.util.EnumAbsorberStates;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

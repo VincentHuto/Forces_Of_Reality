@@ -15,8 +15,8 @@ import com.huto.forcesofreality.objects.tileenties.util.EnumAbsorberStates;
 import com.huto.forcesofreality.objects.tileenties.util.IExportableTile;
 import com.huto.forcesofreality.objects.tileenties.util.IImportableTile;
 import com.huto.forcesofreality.objects.tileenties.util.ITank;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.TileVibeSimpleInventory;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;

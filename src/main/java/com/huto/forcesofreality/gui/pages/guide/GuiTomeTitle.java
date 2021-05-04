@@ -2,12 +2,12 @@ package com.huto.forcesofreality.gui.pages.guide;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntityColin;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -122,7 +122,7 @@ public class GuiTomeTitle extends Screen {
 			IRenderTypeBuffer.Impl bufferIn = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
 
 			mc.getRenderManager().renderEntityStatic(
-					new EntityColin(EntityInit.colin.get(), ClientEventSubscriber.getClientPlayer().getEntityWorld()),
+					new EntityColin(EntityInit.colin.get(), ClientUtils.getClientPlayer().getEntityWorld()),
 					1, 0, 0, 33, 0, matrixStack, bufferIn, 0);
 
 			bufferIn.finish();

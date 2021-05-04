@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.models.entity.summons;
 
 import com.huto.forcesofreality.entities.summons.EntityHasturSpawn;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -112,7 +112,7 @@ public class ModelHasturSpawn extends EntityModel<EntityHasturSpawn> {
 	@Override
 	public void setRotationAngles(EntityHasturSpawn entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		this.Body.rotateAngleX = (float) (Math.sin((entity.ticksExisted+ parTicks)) * 0.0225);
 		this.Body.rotateAngleY = (float) (Math.cos((entity.ticksExisted+ parTicks)) * 0.0225);

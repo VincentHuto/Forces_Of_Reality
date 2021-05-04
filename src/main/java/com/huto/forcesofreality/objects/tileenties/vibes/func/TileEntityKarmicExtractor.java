@@ -5,9 +5,9 @@ import com.huto.forcesofreality.capabilities.karma.KarmaProvider;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.objects.tileenties.util.IExportableTile;
-import com.huto.forcesofreality.objects.tileenties.util.VanillaPacketDispatcher;
 import com.huto.forcesofreality.objects.tileenties.vibes.TileModVibes;
 import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
+import com.hutoslib.common.VanillaPacketDispatcher;
 
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

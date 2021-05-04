@@ -3,7 +3,7 @@ package com.huto.forcesofreality.models.entity.summons;
 import java.util.Random;
 
 import com.huto.forcesofreality.entities.summons.EntityBlackGoat;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -341,7 +341,7 @@ public class ModelBlackGoat extends EntityModel<EntityBlackGoat> {
 	public void setRotationAngles(EntityBlackGoat entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		
 		// Legs

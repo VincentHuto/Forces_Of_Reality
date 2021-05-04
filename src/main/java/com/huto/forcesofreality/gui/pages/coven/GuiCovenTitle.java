@@ -2,12 +2,12 @@ package com.huto.forcesofreality.gui.pages.coven;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -117,9 +117,8 @@ public class GuiCovenTitle extends Screen {
 			IRenderTypeBuffer.Impl bufferIn = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
 
 			mc.getRenderManager().renderEntityStatic(
-					new EntitySeraphim(EntityInit.seraphim.get(),
-							ClientEventSubscriber.getClientPlayer().getEntityWorld()),
-					1, 0, 0, 33, partialTicks, matrixStack, bufferIn, 255255255);
+					new EntitySeraphim(EntityInit.seraphim.get(), ClientUtils.getClientPlayer().getEntityWorld()), 1, 0,
+					0, 33, partialTicks, matrixStack, bufferIn, 255255255);
 
 			bufferIn.finish();
 			GlStateManager.rotatef(-25, 0, 10, 40);

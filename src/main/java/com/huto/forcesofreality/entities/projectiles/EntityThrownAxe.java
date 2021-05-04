@@ -3,9 +3,9 @@ package com.huto.forcesofreality.entities.projectiles;
 
 import javax.annotation.Nonnull;
 
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
+import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

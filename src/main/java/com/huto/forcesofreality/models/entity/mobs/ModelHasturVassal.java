@@ -2,7 +2,7 @@ package com.huto.forcesofreality.models.entity.mobs;
 
 import com.google.common.collect.ImmutableList;
 import com.huto.forcesofreality.entities.mobs.EntityHasturVassal;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
+import com.hutoslib.util.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -147,7 +147,7 @@ public class ModelHasturVassal extends EntityModel<EntityHasturVassal> {
 	@Override
 	public void setRotationAngles(EntityHasturVassal entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		float parTicks = ClientEventSubscriber.getPartialTicks();
+		float parTicks = ClientUtils.getPartialTicks();
 
 		for (ModelRenderer modelrenderer : this.tentacles) {
 			modelrenderer.rotateAngleX = (entity.ticksExisted+ parTicks);

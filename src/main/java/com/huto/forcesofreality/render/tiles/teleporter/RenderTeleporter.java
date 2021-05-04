@@ -5,9 +5,9 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 import com.google.common.collect.ImmutableList;
-import com.huto.forcesofreality.entities.utils.Vector3;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.objects.tileenties.TileEntityTeleporter;
+import com.hutoslib.math.Vector3;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -48,7 +48,7 @@ public class RenderTeleporter extends TileEntityRenderer<TileEntityTeleporter> {
 			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
 		Minecraft mc = Minecraft.getInstance();
-	//	if (tileEntityIn.getTeleportPosition().isPresent()) {
+		// if (tileEntityIn.getTeleportPosition().isPresent()) {
 		matrixStackIn.push();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90f));
 		if (tileEntityIn.getBlockState().getValues().get(FACING).toString().toUpperCase()
@@ -72,10 +72,10 @@ public class RenderTeleporter extends TileEntityRenderer<TileEntityTeleporter> {
 		ItemStack stack = new ItemStack(ItemInit.harmonic_imprint.get());
 		if (!stack.isEmpty()) {
 			mc.getItemRenderer().renderItem(stack, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
-				                                                                                                                                                                                                                                                                           	matrixStackIn, bufferIn);
+					matrixStackIn, bufferIn);
 		}
 		matrixStackIn.pop();
-	//	}
+		// }
 
 		RANDOM.setSeed(31100L);
 		double d0 = tileEntityIn.getPos().distanceSq(this.renderDispatcher.renderInfo.getProjectedView(), true);

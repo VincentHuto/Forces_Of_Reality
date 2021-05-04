@@ -1,4 +1,4 @@
-package com.huto.forcesofreality.objects.tileenties.util;
+package com.huto.forcesofreality.render.tiles;
 
 import com.huto.forcesofreality.ForcesOfReality;
 

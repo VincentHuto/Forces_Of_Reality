@@ -10,7 +10,6 @@ import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.capabilities.covenant.ICovenant;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.containers.MechanGloveItemHandler;
-import com.huto.forcesofreality.events.ClientEventSubscriber;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.network.PacketHandler;
@@ -19,6 +18,7 @@ import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
 import com.huto.forcesofreality.objects.items.coven.tool.modules.IModuleUse;
+import com.hutoslib.util.ClientUtils;
 
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.Block;
@@ -109,7 +109,7 @@ public class ItemMechanGlove extends Item {
 	@Override
 	public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
 		super.onUse(worldIn, livingEntityIn, stack, count);
-		RayTraceResult trace = livingEntityIn.pick(range, ClientEventSubscriber.getPartialTicks(), true);
+		RayTraceResult trace = livingEntityIn.pick(range, ClientUtils.getPartialTicks(), true);
 		switch (trace.getType()) {
 		case ENTITY: {
 		}
