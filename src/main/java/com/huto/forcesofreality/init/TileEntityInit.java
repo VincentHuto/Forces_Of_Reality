@@ -4,11 +4,7 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation;
 import com.huto.forcesofreality.objects.tileenties.TileEntityIcoSphere;
 import com.huto.forcesofreality.objects.tileenties.TileEntityMachinaImperfecta;
-import com.huto.forcesofreality.objects.tileenties.TileEntityMagicLight;
-import com.huto.forcesofreality.objects.tileenties.TileEntityMagicRingLight;
-import com.huto.forcesofreality.objects.tileenties.TileEntitySlimeRepelent;
-import com.huto.forcesofreality.objects.tileenties.TileEntityTeleporter;
-import com.huto.forcesofreality.objects.tileenties.TileEntityVirtuousEnchant;
+import com.huto.forcesofreality.objects.tileenties.TileEntityRafflesiaOfFidelity;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAuspiciousBundle;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHasturPylon;
@@ -16,24 +12,6 @@ import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHunterEffigy;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityOccularHeap;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntitySacrificePyre;
 import com.huto.forcesofreality.objects.tileenties.coven.TileEntityUntoldEasel;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityAutoInscriber;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityCrystalHarmonizer;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityKarmicAltar;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityKarmicExtractor;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityLectorTable;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityRafflesiaOfFidelity;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntitySomnolentHopper;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityVibeConcetrator;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityVibeFuser;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityVibeResonator;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityWandMaker;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityAbsorber;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityCapacitor;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityStorageDrum;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityTectonicAbsorber;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityThermalInfluxer;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityVibeGatherer;
-import com.huto.forcesofreality.objects.tileenties.vibes.gen.TileEntityWaveGatherer;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -44,48 +22,6 @@ public class TileEntityInit {
 	public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister
 			.create(ForgeRegistries.TILE_ENTITIES, ForcesOfReality.MOD_ID);
 
-	public static final RegistryObject<TileEntityType<TileEntityWandMaker>> wand_maker = TILES.register("wand_maker",
-			() -> TileEntityType.Builder.create(TileEntityWandMaker::new, BlockInit.wand_maker.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityVibeResonator>> vibe_resonator = TILES
-			.register("vibe_resonator", () -> TileEntityType.Builder
-					.create(TileEntityVibeResonator::new, BlockInit.vibe_resonator.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityWaveGatherer>> wave_gatherer = TILES
-			.register("wave_gatherer", () -> TileEntityType.Builder
-					.create(TileEntityWaveGatherer::new, BlockInit.wave_gatherer.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityVibeGatherer>> vibe_gatherer = TILES
-			.register("vibe_gatherer", () -> TileEntityType.Builder
-					.create(TileEntityVibeGatherer::new, BlockInit.vibe_gatherer.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityKarmicAltar>> karmic_altar = TILES.register(
-			"karmic_altar",
-			() -> TileEntityType.Builder.create(TileEntityKarmicAltar::new, BlockInit.karmic_altar.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityVirtuousEnchant>> virtuous_enchanter = TILES
-			.register("virtuous_enchanter", () -> TileEntityType.Builder
-					.create(TileEntityVirtuousEnchant::new, BlockInit.virtuous_enchanter.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityStorageDrum>> vibratory_storage_drum = TILES
-			.register("vibratory_storage_drum", () -> TileEntityType.Builder
-					.create(TileEntityStorageDrum::new, BlockInit.vibratory_storage_drum.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityCapacitor>> vibratory_capacitor = TILES
-			.register("vibratory_capacitor", () -> TileEntityType.Builder
-					.create(TileEntityCapacitor::new, BlockInit.vibratory_capacitor.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityKarmicExtractor>> karmic_extractor = TILES
-			.register("karmic_extractor", () -> TileEntityType.Builder
-					.create(TileEntityKarmicExtractor::new, BlockInit.karmic_extractor.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityVibeFuser>> vibratory_fuser = TILES.register(
-			"vibratory_fuser",
-			() -> TileEntityType.Builder.create(TileEntityVibeFuser::new, BlockInit.vibratory_fuser.get()).build(null));
-	public static final RegistryObject<TileEntityType<TileEntityAbsorber>> vibe_absorber = TILES.register(
-			"vibe_absorber",
-			() -> TileEntityType.Builder.create(TileEntityAbsorber::new, BlockInit.vibe_absorber.get()).build(null));
-
 	public static final RegistryObject<TileEntityType<TileEntityHasturPylon>> hastur_pylon = TILES.register(
 			"hastur_pylon",
 			() -> TileEntityType.Builder.create(TileEntityHasturPylon::new, BlockInit.hastur_pylon.get()).build(null));
@@ -93,10 +29,6 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityIcoSphere>> obj_icosahedron = TILES.register(
 			"obj_icosahedron",
 			() -> TileEntityType.Builder.create(TileEntityIcoSphere::new, BlockInit.obj_icosahedron.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityThermalInfluxer>> thermal_influxer = TILES
-			.register("thermal_influxer", () -> TileEntityType.Builder
-					.create(TileEntityThermalInfluxer::new, BlockInit.thermal_influxer.get()).build(null));
 
 	/*
 	 * public static final RegistryObject<TileEntityType<TileEntityChiselStation>>
@@ -108,10 +40,6 @@ public class TileEntityInit {
 			.register("self_reflection_station", () -> TileEntityType.Builder
 					.create(TileEntityAdornmentModStation::new, BlockInit.self_reflection_station.get()).build(null));
 
-	public static final RegistryObject<TileEntityType<TileEntitySlimeRepelent>> slime_repelent = TILES
-			.register("slime_repelent", () -> TileEntityType.Builder
-					.create(TileEntitySlimeRepelent::new, BlockInit.slime_repelent.get()).build(null));
-
 	public static final RegistryObject<TileEntityType<TileEntityAscendantAltar>> ascendant_altar = TILES
 			.register("ascendant_altar", () -> TileEntityType.Builder
 					.create(TileEntityAscendantAltar::new, BlockInit.ascendant_altar.get()).build(null));
@@ -119,9 +47,6 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityOccularHeap>> occular_heap = TILES.register(
 			"occular_heap",
 			() -> TileEntityType.Builder.create(TileEntityOccularHeap::new, BlockInit.occular_heap.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityTeleporter>> teleporter = TILES.register("teleporter",
-			() -> TileEntityType.Builder.create(TileEntityTeleporter::new, BlockInit.teleporter.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntitySacrificePyre>> sacrifice_pyre = TILES
 			.register("sacrifice_pyre", () -> TileEntityType.Builder
@@ -138,37 +63,6 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<TileEntityUntoldEasel>> untold_easel = TILES.register(
 			"untold_easel",
 			() -> TileEntityType.Builder.create(TileEntityUntoldEasel::new, BlockInit.untold_easel.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityMagicLight>> light_block = TILES.register("light_block",
-			() -> TileEntityType.Builder.create(TileEntityMagicLight::new, BlockInit.light_block.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityMagicRingLight>> light_ring_block = TILES
-			.register("light_ring_block", () -> TileEntityType.Builder
-					.create(TileEntityMagicRingLight::new, BlockInit.light_ring_block.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityAutoInscriber>> auto_inscriber = TILES
-			.register("auto_inscriber", () -> TileEntityType.Builder
-					.create(TileEntityAutoInscriber::new, BlockInit.auto_inscriber.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntitySomnolentHopper>> somnolent_hopper = TILES
-			.register("somnolent_hopper", () -> TileEntityType.Builder
-					.create(TileEntitySomnolentHopper::new, BlockInit.somnolent_hopper.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityLectorTable>> lector_table = TILES.register(
-			"lector_table",
-			() -> TileEntityType.Builder.create(TileEntityLectorTable::new, BlockInit.lector_table.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityTectonicAbsorber>> tectonic_absorber = TILES
-			.register("tectonic_absorber", () -> TileEntityType.Builder
-					.create(TileEntityTectonicAbsorber::new, BlockInit.tectonic_absorber.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityCrystalHarmonizer>> crystal_harmonizer = TILES
-			.register("crystal_harmonizer", () -> TileEntityType.Builder
-					.create(TileEntityCrystalHarmonizer::new, BlockInit.crystal_harmonizer.get()).build(null));
-
-	public static final RegistryObject<TileEntityType<TileEntityVibeConcetrator>> vibe_concentrator = TILES
-			.register("vibe_concentrator", () -> TileEntityType.Builder
-					.create(TileEntityVibeConcetrator::new, BlockInit.vibe_concentrator.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<TileEntityRafflesiaOfFidelity>> rafflesia_of_fidelity = TILES
 			.register("rafflesia_of_fidelity", () -> TileEntityType.Builder

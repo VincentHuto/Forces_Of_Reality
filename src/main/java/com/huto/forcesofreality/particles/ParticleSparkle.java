@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.particles;
 
 import com.huto.forcesofreality.init.RenderTypeInit;
-import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particle.ParticleUtils;
 
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleRenderType;
@@ -34,9 +34,9 @@ public class ParticleSparkle extends SpriteTexturedParticle {
         this.particleScale = scale;
         this.canCollide = false;
         this.initScale = scale;
-        this.motionX = ParticleUtil.inRange(-0.01, 0.01);
+        this.motionX = ParticleUtils.inRange(-0.01, 0.01);
         this.motionY = -0.02;
-        this.motionZ = ParticleUtil.inRange(-0.01, 0.01);
+		this.motionZ = ParticleUtils.inRange(-0.01, 0.01);
 //        this.particleAngle = 2.0f*(float)Math.PI;
         this.selectSpriteRandomly(sprite);
     }

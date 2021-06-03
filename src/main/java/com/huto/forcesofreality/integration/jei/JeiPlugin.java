@@ -6,18 +6,7 @@ import javax.annotation.Nonnull;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.integration.jei.catagories.AutoInscriberRecipeCategory;
-import com.huto.forcesofreality.integration.jei.catagories.HarmonizerRecipeCategory;
-import com.huto.forcesofreality.integration.jei.catagories.RafflesiaRecipeCategory;
-import com.huto.forcesofreality.integration.jei.catagories.ResonatorRecipeCategory;
-import com.huto.forcesofreality.integration.jei.catagories.VibeFuserRecipeCategory;
-import com.huto.forcesofreality.integration.jei.catagories.WandMakerRecipeCategory;
-import com.huto.forcesofreality.recipes.ModFuserRecipies;
-import com.huto.forcesofreality.recipes.ModHarmonizerRecipes;
-import com.huto.forcesofreality.recipes.ModInscriberRecipes;
 import com.huto.forcesofreality.recipes.ModRafflesiaRecipies;
-import com.huto.forcesofreality.recipes.ModResonatorRecipies;
-import com.huto.forcesofreality.recipes.ModWandRecipies;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -40,13 +29,6 @@ public class JeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
-		registry.addRecipeCategories(new WandMakerRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-		registry.addRecipeCategories(new ResonatorRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-		registry.addRecipeCategories(new VibeFuserRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-		// registry.addRecipeCategories(new
-		// ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-		registry.addRecipeCategories(new AutoInscriberRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
-		registry.addRecipeCategories(new HarmonizerRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new RafflesiaRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 
 	}
@@ -57,11 +39,6 @@ public class JeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(@Nonnull IRecipeRegistration registry) {
-		registry.addRecipes(ModWandRecipies.wandMakerRecipies, WandMakerRecipeCategory.UID);
-		registry.addRecipes(ModResonatorRecipies.resonatorRecipies, ResonatorRecipeCategory.UID);
-		registry.addRecipes(ModFuserRecipies.fuserRecipies, VibeFuserRecipeCategory.UID);
-		registry.addRecipes(ModInscriberRecipes.inscriberRecipies, AutoInscriberRecipeCategory.UID);
-		registry.addRecipes(ModHarmonizerRecipes.harmonizerRecipes, HarmonizerRecipeCategory.UID);
 		registry.addRecipes(ModRafflesiaRecipies.rafflesiaRecipies, RafflesiaRecipeCategory.UID);
 		registry.addIngredientInfo(new ItemStack(ItemInit.yellow_sign.get()), VanillaTypes.ITEM,
 				"The Yellow Sign of Lord Hastur Himself, carried at the hearts of his devotees.");
@@ -73,8 +50,6 @@ public class JeiPlugin implements IModPlugin {
 				"An intoxicating brew, carried by beastly men to invigorate and embolden them.");
 		registry.addIngredientInfo(new ItemStack(ItemInit.integral_cog.get()), VanillaTypes.ITEM,
 				"To the followers of the machine, this Itegral Cog is the most important piece of themselves");
-		registry.addIngredientInfo(new ItemStack(ItemInit.anti_tear.get()), VanillaTypes.ITEM,
-				"Can also be created by tossing Somnolent dust on the ground with glowstone dust and redstone dust");
 		registry.addIngredientInfo(new ItemStack(ItemInit.machina_soul.get()), VanillaTypes.ITEM,
 				"Created by tossing Somnolent dust on the ground with glowstone dust and redstone dust");
 
@@ -87,11 +62,6 @@ public class JeiPlugin implements IModPlugin {
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
 
-		registry.addRecipeCatalyst(new ItemStack(BlockInit.wand_maker.get()), WandMakerRecipeCategory.UID);
-		registry.addRecipeCatalyst(new ItemStack(BlockInit.vibe_resonator.get()), ResonatorRecipeCategory.UID);
-		registry.addRecipeCatalyst(new ItemStack(BlockInit.vibratory_fuser.get()), VibeFuserRecipeCategory.UID);
-		registry.addRecipeCatalyst(new ItemStack(BlockInit.auto_inscriber.get()), AutoInscriberRecipeCategory.UID);
-		registry.addRecipeCatalyst(new ItemStack(BlockInit.crystal_harmonizer.get()), HarmonizerRecipeCategory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.rafflesia_of_fidelity.get()), RafflesiaRecipeCategory.UID);
 
 	}

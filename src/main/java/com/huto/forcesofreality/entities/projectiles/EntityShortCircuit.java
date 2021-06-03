@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.init.EntityInit;
 import com.hutoslib.client.particle.ParticleColor;
-import com.hutoslib.common.PacketHandler;
+import com.hutoslib.common.HutosLibPacketHandler;
 import com.hutoslib.math.Vector3;
 
 import net.minecraft.entity.Entity;
@@ -54,7 +54,7 @@ public class EntityShortCircuit extends ThrowableEntity {
 				rand.nextInt(2) - rand.nextInt(2), rand.nextInt(2) - rand.nextInt(2));
 		if (this.rand.nextInt(10) % 2 == 0) {
 			Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
-			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+			HutosLibPacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.YELLOW, 2, 10, 9, 0.2f);
 
 		}

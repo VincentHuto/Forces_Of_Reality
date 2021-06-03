@@ -7,6 +7,7 @@ import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.sounds.SoundHandler;
+import com.hutoslib.common.item.HutosLibItemInit;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.trees.DarkOakTree;
@@ -210,7 +211,7 @@ public class EntityLordOfTheWild extends MonsterEntity implements IEntityAdditio
 	@Override
 	public ActionResultType func_230254_b_(PlayerEntity player, Hand handIn) {
 		ItemStack itemstack = player.getHeldItem(handIn);
-		if (itemstack.getItem() == ItemInit.cured_clay_flask.get()) {
+		if (itemstack.getItem() == HutosLibItemInit.cured_clay_flask.get()) {
 			player.playSound(SoundEvents.ENTITY_BLAZE_AMBIENT, 1.0F, 1.0F);
 			ItemStack itemstack1 = DrinkHelper.fill(itemstack, player,
 					ItemInit.breath_of_the_beast.get().getDefaultInstance());

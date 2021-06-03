@@ -2,14 +2,12 @@ package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
-import com.huto.forcesofreality.entities.guardians.EntityColin;
 import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
 import com.huto.forcesofreality.entities.guardians.EntityHastur;
 import com.huto.forcesofreality.entities.guardians.EntityMalformedAutomaton;
 import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
 import com.huto.forcesofreality.entities.guardians.EntityTheFirstBeast;
 import com.huto.forcesofreality.entities.guardians.EntityTulpa;
-import com.huto.forcesofreality.entities.item.EntityManaDustItem;
 import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
 import com.huto.forcesofreality.entities.lords.EntityMechan;
 import com.huto.forcesofreality.entities.lords.EntityTetra;
@@ -25,8 +23,6 @@ import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
 import com.huto.forcesofreality.entities.passive.EntityAngelicFowl;
 import com.huto.forcesofreality.entities.passive.EntityDenizen;
 import com.huto.forcesofreality.entities.passive.EntityDenizenSage;
-import com.huto.forcesofreality.entities.passive.EntityDreamWalker;
-import com.huto.forcesofreality.entities.passive.EntityIbis;
 import com.huto.forcesofreality.entities.passive.EntitySlug;
 import com.huto.forcesofreality.entities.projectiles.EntityCorruptNote;
 import com.huto.forcesofreality.entities.projectiles.EntityDreadRocket;
@@ -68,9 +64,6 @@ public class EntityInit {
 			ForcesOfReality.MOD_ID);
 
 	// Passive
-	public static final RegistryObject<EntityType<EntityIbis>> ibis = ENTITY_TYPES.register("ibis",
-			() -> EntityType.Builder.<EntityIbis>create(EntityIbis::new, EntityClassification.CREATURE).size(0.4F, 0.7F)
-					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "ibis").toString()));
 
 	public static final RegistryObject<EntityType<EntityAngelicFowl>> angelic_fowl = ENTITY_TYPES.register(
 			"angelic_fowl",
@@ -80,15 +73,6 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntitySlug>> slug = ENTITY_TYPES.register("slug",
 			() -> EntityType.Builder.<EntitySlug>create(EntitySlug::new, EntityClassification.CREATURE).size(0.4F, 0.1F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "slug").toString()));
-
-	public static final RegistryObject<EntityType<EntityDreamWalker>> dream_walker = ENTITY_TYPES.register(
-			"dream_walker",
-			() -> EntityType.Builder.<EntityDreamWalker>create(EntityDreamWalker::new, EntityClassification.CREATURE)
-					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "dream_walker").toString()));
-	// Elders
-	public static final RegistryObject<EntityType<EntityColin>> colin = ENTITY_TYPES.register("colin",
-			() -> EntityType.Builder.<EntityColin>create(EntityColin::new, EntityClassification.CREATURE)
-					.size(0.9f, 1.3f).build(new ResourceLocation(ForcesOfReality.MOD_ID, "colin").toString()));
 
 	// Denizens
 	public static final RegistryObject<EntityType<EntityDenizen>> denizen = ENTITY_TYPES.register("denizen",
@@ -304,18 +288,11 @@ public class EntityInit {
 					.setTrackingRange(64).setUpdateInterval(10).setShouldReceiveVelocityUpdates(true).size(0.25F, 0.25F)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "thrown_axe").toString()));
 
-	public static final RegistryObject<EntityType<EntityManaDustItem>> mana_dust = ENTITY_TYPES.register("mana_dust",
-			() -> EntityType.Builder.<EntityManaDustItem>create(EntityManaDustItem::new, EntityClassification.MISC)
-					.size(0.25F, 0.25F).build(new ResourceLocation(ForcesOfReality.MOD_ID, "mana_dust").toString()));
-
 	@SubscribeEvent
 	public static void registerAttributes(final FMLCommonSetupEvent event) {
-		GlobalEntityTypeAttributes.put(EntityInit.dream_walker.get(), EntityDreamWalker.setAttributes().create());
-		GlobalEntityTypeAttributes.put(EntityInit.colin.get(), EntityColin.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.hastur.get(), EntityHastur.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.denizen.get(), EntityDenizen.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.denizen_sage.get(), EntityDenizenSage.setAttributes().create());
-		GlobalEntityTypeAttributes.put(EntityInit.ibis.get(), EntityIbis.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.angelic_fowl.get(), EntityAngelicFowl.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.tentacle.get(), EntityTentacle.setAttributes().create());
 		GlobalEntityTypeAttributes.put(EntityInit.player_tentacle.get(), EntityPlayerTentacle.setAttributes().create());

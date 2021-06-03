@@ -143,9 +143,10 @@ public class ItemTrickAxe extends AxeItem {
 						EntityThrownAxe c = new EntityThrownAxe(playerentity, worldIn, copy);
 						c.func_234612_a_(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 1.5F,
 								1.0F);
-						if (stack.getItem() == ItemInit.null_trick_axe.get()) {
-							c.setFire(true);
-						} else if (stack.getItem() == ItemInit.auric_trick_axe.get()) {
+						/*
+						 * if (stack.getItem() == ItemInit.null_trick_axe.get()) { c.setFire(true); }
+						 * else
+						 */if (stack.getItem() == ItemInit.auric_trick_axe.get()) {
 							c.setAuric(true);
 						} else {
 						}

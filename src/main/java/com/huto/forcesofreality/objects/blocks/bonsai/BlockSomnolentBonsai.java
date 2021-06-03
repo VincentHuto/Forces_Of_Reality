@@ -11,7 +11,7 @@ public class BlockSomnolentBonsai extends BlockBonsai {
 	}
 	@Override
 	public Item getShearDrop() {
-		return BlockInit.akebi.get().asItem();
+		return BlockInit.abyssal_silt.get().asItem();
 	}
 
 }

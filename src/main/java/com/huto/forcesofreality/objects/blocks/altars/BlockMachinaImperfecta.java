@@ -265,7 +265,7 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 					.where('^', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(this)))
 					.where('#', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(BlockInit.auric_block.get())))
 					.where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
-					.where('M', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(BlockInit.contained_magma.get())))
+					.where('M', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(Blocks.MAGMA_BLOCK)))
 					.where('G', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(BlockInit.machine_glass.get())))
 					.build();
 		}

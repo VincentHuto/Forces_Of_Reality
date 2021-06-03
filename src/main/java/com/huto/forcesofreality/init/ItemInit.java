@@ -4,36 +4,24 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.ForcesOfReality.ForcesOfRealityItemGroup;
 import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
 import com.huto.forcesofreality.font.ModTextFormatting;
-import com.huto.forcesofreality.objects.items.ItemActualizationNode;
 import com.huto.forcesofreality.objects.items.ItemAdvCovenTome;
 import com.huto.forcesofreality.objects.items.ItemCovenTome;
 import com.huto.forcesofreality.objects.items.ItemDryingAgent;
-import com.huto.forcesofreality.objects.items.ItemElderTome;
-import com.huto.forcesofreality.objects.items.ItemGrandPurgingStone;
-import com.huto.forcesofreality.objects.items.ItemHarmonicImprint;
-import com.huto.forcesofreality.objects.items.ItemPurgingStone;
+import com.huto.forcesofreality.objects.items.ItemResonanceDestabalizer;
 import com.huto.forcesofreality.objects.items.ItemSacrificial;
 import com.huto.forcesofreality.objects.items.ItemSlugBucket;
 import com.huto.forcesofreality.objects.items.ItemSoakingAgent;
-import com.huto.forcesofreality.objects.items.ItemSomnolentPowder;
-import com.huto.forcesofreality.objects.items.ItemSomnolentTome;
 import com.huto.forcesofreality.objects.items.ItemStormingAgent;
-import com.huto.forcesofreality.objects.items.ItemUpgrade;
 import com.huto.forcesofreality.objects.items.ModSpawnEggItem;
 import com.huto.forcesofreality.objects.items.armor.EnumModArmorTiers;
-import com.huto.forcesofreality.objects.items.armor.ItemAttractionCharm;
 import com.huto.forcesofreality.objects.items.armor.ItemAuricHelm;
 import com.huto.forcesofreality.objects.items.armor.ItemBackWings;
 import com.huto.forcesofreality.objects.items.armor.ItemClovenHooves;
 import com.huto.forcesofreality.objects.items.armor.ItemEmpCharm;
 import com.huto.forcesofreality.objects.items.armor.ItemEnticingMantle;
 import com.huto.forcesofreality.objects.items.armor.ItemInfluenceSuppressor;
-import com.huto.forcesofreality.objects.items.armor.ItemMysteriousMask;
-import com.huto.forcesofreality.objects.items.armor.ItemRepulsionCharm;
 import com.huto.forcesofreality.objects.items.armor.ItemSkullHelmet;
-import com.huto.forcesofreality.objects.items.armor.ItemSlimeRepulsionCharm;
 import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
-import com.huto.forcesofreality.objects.items.armor.ItemVibeSeer;
 import com.huto.forcesofreality.objects.items.armor.ItemWrithingChest;
 import com.huto.forcesofreality.objects.items.armor.ItemWrithingHelm;
 import com.huto.forcesofreality.objects.items.coven.ItemConcecratedAurum;
@@ -67,18 +55,8 @@ import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModul
 import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemWickedModuleLaser;
 import com.huto.forcesofreality.objects.items.tools.EnumModToolTiers;
 import com.huto.forcesofreality.objects.items.tools.ItemBowBlade;
-import com.huto.forcesofreality.objects.items.tools.ItemDebugTool;
 import com.huto.forcesofreality.objects.items.tools.ItemDestructOrb;
 import com.huto.forcesofreality.objects.items.tools.ItemDestructOrbContained;
-import com.huto.forcesofreality.objects.items.tools.ItemFrequencyMatcher;
-import com.huto.forcesofreality.objects.items.tools.ItemKnapper;
-import com.huto.forcesofreality.objects.items.tools.ItemMakerActivator;
-import com.huto.forcesofreality.objects.items.tools.ItemManaExtractor;
-import com.huto.forcesofreality.objects.items.tools.ItemResonanceDestabalizer;
-import com.huto.forcesofreality.objects.items.tools.ItemSelfAnalyzer;
-import com.huto.forcesofreality.objects.items.tools.ItemWandConsumeVibes;
-import com.huto.forcesofreality.objects.items.tools.ItemWandGainVibes;
-import com.huto.forcesofreality.objects.items.tools.ToolVeinPickaxe;
 
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -86,22 +64,14 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.HoeItem;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.Rarity;
-import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -137,106 +107,11 @@ public class ItemInit {
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
 	// Books
-	public static final RegistryObject<Item> somnolent_tome = ITEMS.register("somnolent_tome",
-			() -> new ItemSomnolentTome(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> elder_tome = ITEMS.register("elder_tome",
-			() -> new ItemElderTome(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
 	public static final RegistryObject<Item> coven_tome = ITEMS.register("coven_tome",
 			() -> new ItemCovenTome(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> coven_tome_adv = ITEMS.register("coven_tome_adv",
 			() -> new ItemAdvCovenTome(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-
-	// Grey
-	public static final RegistryObject<Item> grey_ingot = ITEMS.register("grey_ingot",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> grey_powder = ITEMS.register("grey_powder",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> grey_crystal = ITEMS.register("grey_crystal",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
-	// Channeling
-	public static final RegistryObject<Item> essence_drop = ITEMS.register("essence_drop",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> channeling_ingot = ITEMS.register("channeling_ingot",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> emanating_ingot = ITEMS.register("emanating_ingot",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> somnolent_powder = ITEMS.register("somnolent_powder",
-			() -> new ItemSomnolentPowder(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> somnolent_crystal = ITEMS.register("somnolent_crystal",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> channeling_rod = ITEMS.register("channeling_rod",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
-	// Anti
-	public static final RegistryObject<Item> anti_tear = ITEMS.register("anti_tear",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_ingot = ITEMS.register("null_ingot",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> shattered_ingot = ITEMS.register("shattered_ingot",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> nullifying_powder = ITEMS.register("nullifying_powder",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_crystal = ITEMS.register("null_crystal",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_rod = ITEMS.register("null_rod",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
-	// Karma
-	public static final RegistryObject<Item> karmic_harvester = HANDHELDITEMS.register("karmic_harvester",
-			() -> new SwordItem(ItemTier.STONE, 3, -1.4F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> node_of_actualization = ITEMS.register("node_of_actualization",
-			() -> new ItemActualizationNode(new Item.Properties().group(ForcesOfRealityItemGroup.instance)
-					.maxStackSize(1).rarity(Rarity.RARE)));
-	public static final RegistryObject<Item> karmic_drop = ITEMS.register("karmic_drop",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> karmic_bar = ITEMS.register("karmic_bar",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> purging_stone = ITEMS.register("purging_stone",
-			() -> new ItemPurgingStone(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> grand_purging_stone = ITEMS.register("grand_purging_stone",
-			() -> new ItemGrandPurgingStone(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
-	// Materials
-	// Gems
-	public static final RegistryObject<Item> gem_hematite = ITEMS.register("gem_hematite",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> gem_ruby = ITEMS.register("gem_ruby",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> gem_onyx = ITEMS.register("gem_onyx",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> gem_sapphire = ITEMS.register("gem_sapphire",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> gem_topaz = ITEMS.register("gem_topaz",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> gem_amethyst = ITEMS.register("gem_amethyst",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> gem_opal = ITEMS.register("gem_opal",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> ibis_beak = ITEMS.register("ibis_beak",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> readied_pane = ITEMS.register("readied_pane",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> resonant_fuel = ITEMS.register("resonant_fuel",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> magatamabead = ITEMS.register("magatamabead",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> enhanced_magatama = ITEMS.register("enhanced_magatama",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> energy_focus = ITEMS.register("energy_focus",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> raw_clay_flask = ITEMS.register("raw_clay_flask",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> cured_clay_flask = ITEMS.register("cured_clay_flask",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> obsidian_flakes = ITEMS.register("obsidian_flakes",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> harmonic_imprint = ADVITEMS.register("harmonic_imprint",
-			() -> new ItemHarmonicImprint(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
 	// Hastur
 
@@ -429,24 +304,30 @@ public class ItemInit {
 	public static final RegistryObject<Item> neurotic_mechanism = ITEMS.register("neurotic_mechanism",
 			() -> new ItemNeuroticMechanism(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).rarity(ModTextFormatting.AURIC)));
-	public static final RegistryObject<Item> null_bow_blade = ADVITEMS.register("null_bow_blade",
-			() -> new ItemBowBlade(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(1024), 2,
-					8, 1));
-	public static final RegistryObject<Item> somnolent_bow_blade = ADVITEMS.register("somnolent_bow_blade",
-			() -> new ItemBowBlade(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(512), 1, 6,
-					1));
+	/*
+	 * public static final RegistryObject<Item> null_bow_blade =
+	 * ADVITEMS.register("null_bow_blade", () -> new ItemBowBlade( new
+	 * Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).
+	 * maxDamage(1024), 2, 8, 1)); public static final RegistryObject<Item>
+	 * somnolent_bow_blade = ADVITEMS.register("somnolent_bow_blade", () -> new
+	 * ItemBowBlade( new
+	 * Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).
+	 * maxDamage(512), 1, 6, 1));
+	 */
 	public static final RegistryObject<Item> auric_bow_blade = ADVITEMS.register("auric_bow_blade",
 			() -> new ItemBowBlade(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1).maxDamage(2048), 3,
 					10, 1));
-	public static final RegistryObject<Item> null_trick_axe = ADVITEMS.register("null_trick_axe",
-			() -> new ItemTrickAxe(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					EnumModToolTiers.NULL));
-	public static final RegistryObject<Item> somnolent_trick_axe = ADVITEMS.register("somnolent_trick_axe",
-			() -> new ItemTrickAxe(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
-					EnumModToolTiers.MYSTIC));
+	/*
+	 * public static final RegistryObject<Item> null_trick_axe =
+	 * ADVITEMS.register("null_trick_axe", () -> new ItemTrickAxe(new
+	 * Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+	 * EnumModToolTiers.NULL)); public static final RegistryObject<Item>
+	 * somnolent_trick_axe = ADVITEMS.register("somnolent_trick_axe", () -> new
+	 * ItemTrickAxe(new
+	 * Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
+	 * EnumModToolTiers.MYSTIC));
+	 */
 	public static final RegistryObject<Item> auric_trick_axe = ADVITEMS.register("auric_trick_axe",
 			() -> new ItemTrickAxe(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1),
 					EnumModToolTiers.AURIC));
@@ -473,32 +354,10 @@ public class ItemInit {
 			() -> new ItemDestructOrbContained(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
-	// Food
-	public static final RegistryObject<Item> singeri_soup = ITEMS.register("singeri_soup",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> raw_morel_on_a_stick = ITEMS.register("raw_morel_on_a_stick",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
-	@SuppressWarnings("deprecation")
-	public static final RegistryObject<Item> cooked_morel_on_a_stick = ITEMS.register("cooked_morel_on_a_stick",
-			() -> new Item(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).food(new Food.Builder().hunger(6)
-							.saturation(1.5f).effect(new EffectInstance(Effects.ABSORPTION, 6000, 5), 0.7f).build())));
-	public static final RegistryObject<Item> somnolent_bottle = ITEMS.register("somnolent_bottle",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> bucket_slug = ITEMS.register("bucket_slug",
 			() -> new ItemSlugBucket(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 
 	// Charms
-	public static final RegistryObject<Item> attraction_charm = ADVITEMS.register("attraction_charm",
-			() -> new ItemAttractionCharm(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> repulsion_charm = ADVITEMS.register("repulsion_charm",
-			() -> new ItemRepulsionCharm(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> slime_charm = ADVITEMS.register("slime_charm",
-			() -> new ItemSlimeRepulsionCharm(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
 	public static final RegistryObject<Item> drying_agent = ITEMS.register("drying_agent",
 			() -> new ItemDryingAgent(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> soaking_agent = ITEMS.register("soaking_agent",
@@ -507,12 +366,6 @@ public class ItemInit {
 			() -> new ItemStormingAgent(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 
 	// Armor
-	public static final RegistryObject<Item> vibrational_seer = ITEMS.register("vibrational_seer",
-			() -> new ItemVibeSeer(EnumModArmorTiers.CIRCLET, EquipmentSlotType.HEAD,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> mysterious_mask = ITEMS.register("mysterious_mask",
-			() -> new ItemMysteriousMask(EnumModArmorTiers.MASK, EquipmentSlotType.HEAD,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> influence_supressor = ITEMS.register("influence_supressor",
 			() -> new ItemInfluenceSuppressor(EnumModArmorTiers.SUPPRESSOR, EquipmentSlotType.HEAD,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance)));
@@ -531,31 +384,6 @@ public class ItemInit {
 
 	public static final RegistryObject<Item> anointed_iron_boots = ITEMS.register("anointed_iron_boots",
 			() -> new ArmorItem(EnumModArmorTiers.ANOINTED, EquipmentSlotType.FEET,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> null_helmet = ITEMS.register("null_helmet",
-			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.HEAD,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> null_chestplate = ITEMS.register("null_chestplate",
-			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> null_leggings = ITEMS.register("null_leggings",
-			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.LEGS,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> null_boots = ITEMS.register("null_boots",
-			() -> new ArmorItem(EnumModArmorTiers.NULL, EquipmentSlotType.FEET,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-
-	public static final RegistryObject<Item> elder_helmet = ITEMS.register("elder_helmet",
-			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.HEAD,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> elder_chestplate = ITEMS.register("elder_chestplate",
-			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.CHEST,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> elder_leggings = ITEMS.register("elder_leggings",
-			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.LEGS,
-					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
-	public static final RegistryObject<Item> elder_boots = ITEMS.register("elder_boots",
-			() -> new ArmorItem(EnumModArmorTiers.ELDER, EquipmentSlotType.FEET,
 					(new Item.Properties()).group(ForcesOfRealityItemGroup.instance).isImmuneToFire()));
 
 	public static final RegistryObject<Item> writhing_helmet = ITEMS.register("writhing_helmet",
@@ -577,86 +405,7 @@ public class ItemInit {
 			() -> new SwordItem(EnumModToolTiers.OLD_IRON, 3, -2.4F,
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
 
-	// Null
-	public static final RegistryObject<Item> null_pickaxe = HANDHELDITEMS.register("null_pickaxe",
-			() -> new PickaxeItem(EnumModToolTiers.NULL, 1, -2.8F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_shovel = HANDHELDITEMS.register("null_shovel",
-			() -> new ShovelItem(EnumModToolTiers.NULL, 1.5F, -3.0F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_hoe = HANDHELDITEMS.register("null_hoe",
-			() -> new HoeItem(EnumModToolTiers.NULL, -3, 0.0F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_axe = HANDHELDITEMS.register("null_axe",
-			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> null_sword = HANDHELDITEMS.register("null_sword",
-			() -> new SwordItem(EnumModToolTiers.NULL, 3, -2.4F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> duality_pick = HANDHELDITEMS.register("duality_pick",
-			() -> new ToolVeinPickaxe(EnumModToolTiers.NULL, 1, -2.8F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> duality_axe = HANDHELDITEMS.register("duality_axe",
-			() -> new AxeItem(EnumModToolTiers.NULL, 5.0F, -3.0F,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> absorber_configurer = ADVITEMS.register("absorber_configurer",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> frequency_matcher = ADVITEMS.register("frequency_matcher",
-			() -> new ItemFrequencyMatcher(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	// Knappers
-	public static final RegistryObject<Item> iron_knapper = HANDHELDITEMS.register("iron_knapper",
-			() -> new ItemKnapper(25f, 1, 0, ItemTier.IRON,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> obsidian_knapper = HANDHELDITEMS.register("obsidian_knapper",
-			() -> new ItemKnapper(50f, 1, 0, EnumModToolTiers.NULL,
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
-	// Hands
-	public static final RegistryObject<Item> mana_extractor = ITEMS.register("mana_extractor",
-			() -> new ItemManaExtractor(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> maker_activator = ITEMS.register("maker_activator",
-			() -> new ItemMakerActivator(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> vibration_debug_tool = ITEMS.register("vibration_debug_tool",
-			() -> new ItemDebugTool(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> self_analyzer = ITEMS.register("self_analyzer",
-			() -> new ItemSelfAnalyzer(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-
-	// Wands
-	public static final RegistryObject<Item> wand_consume_vibes = HANDHELDITEMS.register("wand_consume_vibes",
-			() -> new ItemWandConsumeVibes(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> wand_gain_vibes = HANDHELDITEMS.register("wand_gain_vibes",
-			() -> new ItemWandGainVibes(
-					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-
-	// Upgrades
-	public static final RegistryObject<Item> upgrade_wrench = HANDHELDITEMS.register("upgrade_wrench",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));
-	public static final RegistryObject<Item> upgrade_blank = ITEMS.register("upgrade_blank",
-			() -> new Item(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_block = ITEMS.register("upgrade_block",
-			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_player = ITEMS.register("upgrade_player",
-			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_animal = ITEMS.register("upgrade_animal",
-			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_mob = ITEMS.register("upgrade_mob",
-			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_export = ITEMS.register("upgrade_export",
-			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<Item> upgrade_import = ITEMS.register("upgrade_import",
-			() -> new ItemUpgrade(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
 	// Spawn Eggs
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_walker = SPAWNEGGS
-			.register("spawn_egg_dream_walker", () -> new ModSpawnEggItem(EntityInit.dream_walker, 0x000000, 0xFFFFFF,
-					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dream_colin = SPAWNEGGS.register("spawn_egg_colin",
-			() -> new ModSpawnEggItem(EntityInit.colin, 0x88008B, 0xFF7F00,
-					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = SPAWNEGGS.register("spawn_egg_hastur",
 			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
@@ -671,9 +420,6 @@ public class ItemInit {
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen_sage = SPAWNEGGS
 			.register("spawn_egg_denizen_sage", () -> new ModSpawnEggItem(EntityInit.denizen_sage, 8750204, 72037632,
-					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
-	public static final RegistryObject<ModSpawnEggItem> spawn_egg_ibis = SPAWNEGGS.register("spawn_egg_ibis",
-			() -> new ModSpawnEggItem(EntityInit.ibis, 9175040, 8672512,
 					new Item.Properties().group(ItemGroup.MISC).group(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_spawn = SPAWNEGGS
 			.register("spawn_egg_hastur_spawn", () -> new ModSpawnEggItem(EntityInit.hastur_spawn, 4539136, 13548032,
@@ -745,9 +491,8 @@ public class ItemInit {
 
 	@SubscribeEvent
 	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
-		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_dream_colin, ItemInit.spawn_egg_hastur,
-				ItemInit.spawn_egg_hastur_vassal, ItemInit.spawn_egg_dream_walker, ItemInit.spawn_egg_denizen,
-				ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_ibis, ItemInit.spawn_egg_tentacle,
+		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
+				ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_tentacle,
 				ItemInit.spawn_egg_hastur_spawn, ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim,
 				ItemInit.spawn_egg_throne, ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
 				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
@@ -802,21 +547,6 @@ public class ItemInit {
 				(p_239424_0_, p_239424_1_, p_239424_2_) -> {
 					return p_239424_2_ != null && ItemBeastCrossbow.isCharged(p_239424_0_)
 							&& ItemBeastCrossbow.hasChargedProjectile(p_239424_0_, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
-				});
-
-		ItemModelsProperties.registerProperty(channeling_ingot.get(), new ResourceLocation("pull"),
-				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
-					if (p_239429_2_ == null) {
-						return 0.0F;
-					} else {
-						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
-								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
-					}
-				});
-		ItemModelsProperties.registerProperty(channeling_ingot.get(), new ResourceLocation("pulling"),
-				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
-					return p_239428_2_ != null && p_239428_2_.isHandActive()
-							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
 				});
 
 		// Mechan Glove
@@ -876,21 +606,6 @@ public class ItemInit {
 						return 0;
 					}
 				});
-		// Imprint
-		ItemModelsProperties.registerProperty(harmonic_imprint.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "saved"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
 
 		// EMP Charm
 		ItemModelsProperties.registerProperty(emp_charm.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "on"),
@@ -908,145 +623,41 @@ public class ItemInit {
 					}
 				});
 
-		// Attract Charm
-		ItemModelsProperties.registerProperty(attraction_charm.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "on"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-
-		ItemModelsProperties.registerProperty(destabilization_charm.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "on"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-
-		// Slime Charm
-		ItemModelsProperties.registerProperty(slime_charm.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "on"),
-				new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-
-		// Repulsion Charm
-		ItemModelsProperties.registerProperty(repulsion_charm.get(), new ResourceLocation(ForcesOfReality.MOD_ID, "on"),
-				new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-
-		// Frequency Matcher
-		ItemModelsProperties.registerProperty(frequency_matcher.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "clear"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 0;
-							} else {
-								return 1;
-							}
-						}
-						return 0;
-					}
-				});
-
 		// Bow Blades
-		// Null
-		ItemModelsProperties.registerProperty(null_bow_blade.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-		ItemModelsProperties.registerProperty(null_bow_blade.get(), new ResourceLocation("pull"),
-				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
-					if (p_239429_2_ == null) {
-						return 0.0F;
-					} else {
-						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
-								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
-					}
-				});
-		ItemModelsProperties.registerProperty(null_bow_blade.get(), new ResourceLocation("pulling"),
-				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
-					return p_239428_2_ != null && p_239428_2_.isHandActive()
-							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
-				});
-
-		// Somnolent
-		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new ResourceLocation("pull"),
-				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
-					if (p_239429_2_ == null) {
-						return 0.0F;
-					} else {
-						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
-								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
-					}
-				});
-		ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new ResourceLocation("pulling"),
-				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
-					return p_239428_2_ != null && p_239428_2_.isHandActive()
-							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
-				});
+		/*
+		 * // Null ItemModelsProperties.registerProperty(null_bow_blade.get(), new
+		 * ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
+		 * 
+		 * @Override public float call(ItemStack stack, ClientWorld world, LivingEntity
+		 * ent) { if (stack.hasTag()) { if (stack.getTag().getBoolean("state")) { return
+		 * 1; } else { return 0; } } return 0; } });
+		 * ItemModelsProperties.registerProperty(null_bow_blade.get(), new
+		 * ResourceLocation("pull"), (p_239429_0_, p_239429_1_, p_239429_2_) -> { if
+		 * (p_239429_2_ == null) { return 0.0F; } else { return
+		 * p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F : (float)
+		 * (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F; }
+		 * }); ItemModelsProperties.registerProperty(null_bow_blade.get(), new
+		 * ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> {
+		 * return p_239428_2_ != null && p_239428_2_.isHandActive() &&
+		 * p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F; });
+		 * 
+		 * // Somnolent ItemModelsProperties.registerProperty(somnolent_bow_blade.get(),
+		 * new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new
+		 * IItemPropertyGetter() {
+		 * 
+		 * @Override public float call(ItemStack stack, ClientWorld world, LivingEntity
+		 * ent) { if (stack.hasTag()) { if (stack.getTag().getBoolean("state")) { return
+		 * 1; } else { return 0; } } return 0; } });
+		 * ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new
+		 * ResourceLocation("pull"), (p_239429_0_, p_239429_1_, p_239429_2_) -> { if
+		 * (p_239429_2_ == null) { return 0.0F; } else { return
+		 * p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F : (float)
+		 * (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F; }
+		 * }); ItemModelsProperties.registerProperty(somnolent_bow_blade.get(), new
+		 * ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> {
+		 * return p_239428_2_ != null && p_239428_2_.isHandActive() &&
+		 * p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F; });
+		 */
 
 		// Auric
 		ItemModelsProperties.registerProperty(auric_bow_blade.get(),
@@ -1079,65 +690,40 @@ public class ItemInit {
 				});
 
 		// Trick Axe
-		// Null
-		ItemModelsProperties.registerProperty(null_trick_axe.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation("pull"),
-				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
-					if (p_239429_2_ == null) {
-						return 0.0F;
-					} else {
-						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
-								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
-					}
-				});
-		ItemModelsProperties.registerProperty(null_trick_axe.get(), new ResourceLocation("pulling"),
-				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
-					return p_239428_2_ != null && p_239428_2_.isHandActive()
-							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
-				});
-
-		// Somnolent
-		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(),
-				new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
-					@Override
-					public float call(ItemStack stack, ClientWorld world, LivingEntity ent) {
-						if (stack.hasTag()) {
-							if (stack.getTag().getBoolean("state")) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-						return 0;
-					}
-				});
-		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new ResourceLocation("pull"),
-				(p_239429_0_, p_239429_1_, p_239429_2_) -> {
-					if (p_239429_2_ == null) {
-						return 0.0F;
-					} else {
-						return p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F
-								: (float) (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F;
-					}
-				});
-		ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new ResourceLocation("pulling"),
-				(p_239428_0_, p_239428_1_, p_239428_2_) -> {
-					return p_239428_2_ != null && p_239428_2_.isHandActive()
-							&& p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
-				});
+		/*
+		 * // Null ItemModelsProperties.registerProperty(null_trick_axe.get(), new
+		 * ResourceLocation(ForcesOfReality.MOD_ID, "open"), new IItemPropertyGetter() {
+		 * 
+		 * @Override public float call(ItemStack stack, ClientWorld world, LivingEntity
+		 * ent) { if (stack.hasTag()) { if (stack.getTag().getBoolean("state")) { return
+		 * 1; } else { return 0; } } return 0; } });
+		 * ItemModelsProperties.registerProperty(null_trick_axe.get(), new
+		 * ResourceLocation("pull"), (p_239429_0_, p_239429_1_, p_239429_2_) -> { if
+		 * (p_239429_2_ == null) { return 0.0F; } else { return
+		 * p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F : (float)
+		 * (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F; }
+		 * }); ItemModelsProperties.registerProperty(null_trick_axe.get(), new
+		 * ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> {
+		 * return p_239428_2_ != null && p_239428_2_.isHandActive() &&
+		 * p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F; });
+		 * 
+		 * // Somnolent ItemModelsProperties.registerProperty(somnolent_trick_axe.get(),
+		 * new ResourceLocation(ForcesOfReality.MOD_ID, "open"), new
+		 * IItemPropertyGetter() {
+		 * 
+		 * @Override public float call(ItemStack stack, ClientWorld world, LivingEntity
+		 * ent) { if (stack.hasTag()) { if (stack.getTag().getBoolean("state")) { return
+		 * 1; } else { return 0; } } return 0; } });
+		 * ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new
+		 * ResourceLocation("pull"), (p_239429_0_, p_239429_1_, p_239429_2_) -> { if
+		 * (p_239429_2_ == null) { return 0.0F; } else { return
+		 * p_239429_2_.getActiveItemStack() != p_239429_0_ ? 0.0F : (float)
+		 * (p_239429_0_.getUseDuration() - p_239429_2_.getItemInUseCount()) / 20.0F; }
+		 * }); ItemModelsProperties.registerProperty(somnolent_trick_axe.get(), new
+		 * ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> {
+		 * return p_239428_2_ != null && p_239428_2_.isHandActive() &&
+		 * p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F; });
+		 */
 
 		// Somnolent
 		ItemModelsProperties.registerProperty(auric_trick_axe.get(),

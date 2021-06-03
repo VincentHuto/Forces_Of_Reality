@@ -74,10 +74,8 @@ public class RenderItemTome extends ItemStackTileEntityRenderer {
 			IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer
 					.getImpl(Tessellator.getInstance().getBuffer());
 
-			ResourceLocation location = stack.getItem() == ItemInit.somnolent_tome.get() ? guide
-					: stack.getItem() == ItemInit.elder_tome.get() ? elder
-							: stack.getItem() == ItemInit.coven_tome.get() ? coven
-									: stack.getItem() == ItemInit.coven_tome_adv.get() ? covenadv : guide;
+			ResourceLocation location = stack.getItem() == ItemInit.coven_tome.get() ? coven
+					: stack.getItem() == ItemInit.coven_tome_adv.get() ? covenadv : guide;
 
 			IVertexBuilder ivertexbuilder = irendertypebuffer$impl.getBuffer(model.getRenderType(location));
 			ms.scale(0.75f, 0.75f, 0.75f);

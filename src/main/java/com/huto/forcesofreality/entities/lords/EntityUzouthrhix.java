@@ -14,8 +14,8 @@ import com.hutoslib.client.models.AnimationPacket;
 import com.hutoslib.client.models.IAnimatable;
 import com.hutoslib.client.models.TickFloat;
 import com.hutoslib.client.particle.ParticleColor;
-import com.hutoslib.common.PacketHandler;
-import com.hutoslib.math.MathUtil;
+import com.hutoslib.common.HutosLibPacketHandler;
+import com.hutoslib.math.MathUtils;
 import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.BlockState;
@@ -267,7 +267,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose) {
-				rotationYaw = (float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90f;
+				rotationYaw = (float) MathUtils.getAngle(EntityUzouthrhix.this, target) + 90f;
 			}
 
 			if (noActiveAnimation()) {
@@ -277,7 +277,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				} else if (distFromTarget > 90) {
 					// AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION);
 				} else if (isClose && MathHelper.degreesDifferenceAbs(
-						(float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90, rotationYaw) < 30) {
+						(float) MathUtils.getAngle(EntityUzouthrhix.this, target) + 90, rotationYaw) < 30) {
 					AnimationPacket.send(EntityUzouthrhix.this, BITE_ANIMATION);
 				}
 			}
@@ -579,11 +579,11 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 			this.setMotion(0, 0, 0);
 			Vector3 endVec = Vector3.fromEntityCenter(target);
 			Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
-			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+			HutosLibPacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.BLACK, 2, 10, 9, 0.2f);
-			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+			HutosLibPacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.WHITE, 2, 10, 9, 0.2f);
-			PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+			HutosLibPacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 					(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.PURPLE, 2, 10, 9, 0.2f);
 			if (target.getPositionVec().distanceTo(this.getPositionVec()) < rand.nextInt(27)) {
 				target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);
@@ -726,11 +726,11 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose)
-				rotationYaw = (float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90f;
+				rotationYaw = (float) MathUtils.getAngle(EntityUzouthrhix.this, target) + 90f;
 
 			if (noActiveAnimation()) {
 				if (isClose && MathHelper.degreesDifferenceAbs(
-						(float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90, rotationYaw) < 30)
+						(float) MathUtils.getAngle(EntityUzouthrhix.this, target) + 90, rotationYaw) < 30)
 					AnimationPacket.send(EntityUzouthrhix.this, BITE_ANIMATION);
 			}
 		}
@@ -768,7 +768,7 @@ public class EntityUzouthrhix extends MonsterEntity implements IEntityAdditional
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose)
-				rotationYaw = (float) MathUtil.getAngle(EntityUzouthrhix.this, target) + 90f;
+				rotationYaw = (float) MathUtils.getAngle(EntityUzouthrhix.this, target) + 90f;
 
 			if (noActiveAnimation()) {
 				if (distFromTarget > 120) {

@@ -23,10 +23,8 @@ public class InvWithLocation {
 
 	@Override
 	public boolean equals(Object o) {
-		return o instanceof InvWithLocation
-				&& handler.equals(((InvWithLocation) o).handler)
-				&& world == ((InvWithLocation) o).world
-				&& pos.equals(((InvWithLocation) o).pos);
+		return o instanceof InvWithLocation && handler.equals(((InvWithLocation) o).handler)
+				&& world == ((InvWithLocation) o).world && pos.equals(((InvWithLocation) o).pos);
 	}
 
 }

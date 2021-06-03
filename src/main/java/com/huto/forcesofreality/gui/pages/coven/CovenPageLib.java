@@ -104,7 +104,7 @@ public class CovenPageLib {
 
 		// SELF
 		SelfPageList.add(new GuiCovenPage(1, EnumTomeCovenants.SELF, "Self", "The Path of One",
-				new ItemStack(BlockInit.akebi.get()), I18n.format(SELF_PAGE_1)));
+				new ItemStack(BlockInit.bonsai_planter.get()), I18n.format(SELF_PAGE_1)));
 		SelfPageList.add(new GuiCovenImagePage(2, EnumTomeCovenants.SELF, "Guardian", "Tulpa", SELF_PAGE_2,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/tulpa.png"), 0,
@@ -114,15 +114,15 @@ public class CovenPageLib {
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/unkown.png"), 0, 0,
 						104, 104, 0.00970625F)));
 		SelfPageList.add(new GuiCovenPage(4, EnumTomeCovenants.SELF, "Animal", "Ibis",
-				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_4)));
+				new ItemStack(ItemInit.allegiance_identifier.get()), I18n.format(SELF_PAGE_4)));
 		SelfPageList.add(new GuiCovenImagePage(5, EnumTomeCovenants.SELF, "Altar", "Bonsai", SELF_PAGE_5,
 				new GuiTomeImage(
 						new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/pageimages/coven/self/altar.png"), 0,
 						0, 104, 104, 0.00970625F)));
 		SelfPageList.add(new GuiCovenPage(6, EnumTomeCovenants.SELF, "Alignment", "Positive",
-				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_6)));
+				new ItemStack(ItemInit.allegiance_identifier.get()), I18n.format(SELF_PAGE_6)));
 		SelfPageList.add(new GuiCovenPage(7, EnumTomeCovenants.SELF, "Tools", "Tricks of the Trade",
-				new ItemStack(ItemInit.ibis_beak.get()), I18n.format(SELF_PAGE_7)));
+				new ItemStack(ItemInit.allegiance_identifier.get()), I18n.format(SELF_PAGE_7)));
 
 		// HASTUR
 		HasturPageList.add(new GuiCovenPage(1, EnumTomeCovenants.HASTUR, "Hastur", "The Great Deciever",
@@ -283,7 +283,7 @@ public class CovenPageLib {
 				BeastPageList, MachinePageList, CombinationPageList);
 
 		// TOC PAGES
-		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.SELF, new ItemStack(ItemInit.purging_stone.get())));
+		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.SELF, new ItemStack(ItemInit.allegiance_identifier.get())));
 		TOCPageList.add(new GuiCovenPageTOC(EnumTomeCovenants.HASTUR, new ItemStack(ItemInit.yellow_sign.get())));
 		TOCPageList
 				.add(new GuiCovenPageTOC(EnumTomeCovenants.ELDRITCH, new ItemStack(ItemInit.everwatchful_pendant.get())));

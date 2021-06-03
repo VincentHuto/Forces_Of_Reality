@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.entities.projectiles.EntityHolySpirit;
 import com.hutoslib.client.particle.ParticleColor;
-import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particle.ParticleUtils;
 import com.hutoslib.client.particles.factory.GlowParticleFactory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -44,48 +44,48 @@ public class RenderHolySpirit extends EntityRenderer<EntityHolySpirit> {
 		// Random rand = world.rand;
 		for (int j = 0; j < 6; j++) {
 			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, 0.05);
+					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtils.inRange(-0.05, 0.05), 0.05, 0.0, 0.05);
 
 			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, 0.05);
+					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtils.inRange(-0.05, 0.05), -0.05, -0, 0.05);
 
 			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, -0.05);
+					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtils.inRange(-0.05, 0.05), -0.05, -0, -0.05);
 
 			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);
+					pos.getX() + 0.5 + Math.sin(time + j) + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+					pos.getZ() + 0.5 + Math.cos(time + j) + ParticleUtils.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);
 		}
 
 		Collections.reverse(chakraColors);
 		if (entityIn.ticksExisted > 40) {
 			for (int j = 0; j < 6; j++) {
 				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, 0.05);
+						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtils.inRange(-0.05, 0.05), 0.05, 0.0, 0.05);
 
 				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, 0.05);
+						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtils.inRange(-0.05, 0.05), -0.05, -0, 0.05);
 
 				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), -0.05, -0, -0.05);
+						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtils.inRange(-0.05, 0.05), -0.05, -0, -0.05);
 
 				world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getY() + ParticleUtil.inRange(-0.05, 0.05),
-						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtil.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);
+						pos.getX() + 0.5 - Math.cos(time - j) + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getY() + ParticleUtils.inRange(-0.05, 0.05),
+						pos.getZ() + 0.5 - Math.sin(time - j) + ParticleUtils.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);
 			}
 		}
 	}

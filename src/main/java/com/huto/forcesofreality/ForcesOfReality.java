@@ -6,18 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.huto.forcesofreality.capabilities.covenant.CovenantEvents;
-import com.huto.forcesofreality.capabilities.karma.KarmaEvents;
-import com.huto.forcesofreality.capabilities.karma.KarmaHudEventHandler;
-import com.huto.forcesofreality.capabilities.karma.activation.KarmaActivationEvents;
 import com.huto.forcesofreality.capabilities.tiledevotion.DevotionEvents;
-import com.huto.forcesofreality.capabilities.vibes.SeerEventHandler;
-import com.huto.forcesofreality.capabilities.vibes.VibrationEvents;
-import com.huto.forcesofreality.capabilities.vibes.chunk.ChunkVibrationEvents;
 import com.huto.forcesofreality.events.MechanGloveEvents;
 import com.huto.forcesofreality.events.RenderLaserEvent;
 import com.huto.forcesofreality.events.SparkDirectorModEvents;
 import com.huto.forcesofreality.gui.pages.coven.CovenPageLib;
-import com.huto.forcesofreality.gui.pages.guide.TomePageLib;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.CapabilityInit;
 import com.huto.forcesofreality.init.ContainerInit;
@@ -27,20 +20,12 @@ import com.huto.forcesofreality.init.FeatureInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.ParticleInit;
 import com.huto.forcesofreality.init.TileEntityInit;
-import com.huto.forcesofreality.init.TreeDecoratorInit;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
 import com.huto.forcesofreality.recipes.CopyMechanGloveDataRecipe;
-import com.huto.forcesofreality.recipes.ModFuserRecipies;
-import com.huto.forcesofreality.recipes.ModHarmonizerRecipes;
-import com.huto.forcesofreality.recipes.ModInscriberRecipes;
 import com.huto.forcesofreality.recipes.ModRafflesiaRecipies;
-import com.huto.forcesofreality.recipes.ModResonatorRecipies;
-import com.huto.forcesofreality.recipes.ModWandRecipies;
 import com.huto.forcesofreality.recipes.UpgradeMachinaLampDataRecipe;
 import com.huto.forcesofreality.render.entity.layer.AdornmentsRenderLayer;
-import com.huto.forcesofreality.worldgen.ModFeatures;
-import com.huto.forcesofreality.worldgen.ModOreGen;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
@@ -57,7 +42,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -106,7 +90,6 @@ public class ForcesOfReality {
 		FeatureInit.FEATURES.register(modEventBus);
 		EntityInit.ENTITY_TYPES.register(modEventBus);
 		EnchantmentInit.ENCHANTS.register(modEventBus);
-		TreeDecoratorInit.TREEDECORATORS.register(modEventBus);
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.addListener(MechanGloveEvents::pickupEvent);
@@ -114,15 +97,8 @@ public class ForcesOfReality {
 		MinecraftForge.EVENT_BUS.addListener(SparkDirectorModEvents::onClientTick);
 
 		// Register Capability Events
-		MinecraftForge.EVENT_BUS.register(ChunkVibrationEvents.class);
-		MinecraftForge.EVENT_BUS.register(VibrationEvents.class);
 		MinecraftForge.EVENT_BUS.register(DevotionEvents.class);
-		MinecraftForge.EVENT_BUS.register(KarmaActivationEvents.class);
-		MinecraftForge.EVENT_BUS.register(KarmaEvents.class);
 		MinecraftForge.EVENT_BUS.register(CovenantEvents.class);
-		MinecraftForge.EVENT_BUS.register(SeerEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(KarmaHudEventHandler.class);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModOreGen::addStuffToBiomes);
 
 	}
 
@@ -137,7 +113,7 @@ public class ForcesOfReality {
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(BlockInit.activated_obsidian.get());
+			return new ItemStack(BlockInit.untold_easel.get());
 		}
 	}
 
@@ -163,26 +139,14 @@ public class ForcesOfReality {
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
 		CapabilityInit.init();
-		ModWandRecipies.init();
-		ModResonatorRecipies.init();
-		ModFuserRecipies.init();
 		ModRafflesiaRecipies.init();
-		ModInscriberRecipes.init();
-		ModHarmonizerRecipes.init();
 		PacketHandler.registerChannels();
 		PacketHandler.registerMechanGloveChannels();
-		ModFeatures.setup();
-		MinecraftForge.EVENT_BUS.register(new ModFeatures());
-
-		event.enqueueWork(() -> {
-			ModOreGen.registerConfiguredFeatures();
-		});
 
 	}
 
 	private void clientSetup(final FMLClientSetupEvent event) {
 		MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
-		TomePageLib.registerPages();
 		CovenPageLib.registerPages();
 		this.addLayers();
 	}

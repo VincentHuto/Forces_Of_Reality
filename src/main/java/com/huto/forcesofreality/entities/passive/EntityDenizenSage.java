@@ -54,16 +54,16 @@ public class EntityDenizenSage extends AnimalEntity {
 	private static final DataParameter<Integer> DENIZEN_TYPE = EntityDataManager.createKey(EntityDenizenSage.class,
 			DataSerializers.VARINT);
 	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_grey.png"));
+		p_213410_0_.put(0, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/denizen_sage/model_denizen_sage_grey.png"));
 		p_213410_0_.put(1, new ResourceLocation(ForcesOfReality.MOD_ID,
 				"textures/entity/denizen_sage/model_denizen_sage_grey_cloak.png"));
-		p_213410_0_.put(2,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red.png"));
-		p_213410_0_.put(3,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_red_cloak.png"));
-		p_213410_0_.put(4,
-				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/denizen_sage/model_denizen_sage_white.png"));
+		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/denizen_sage/model_denizen_sage_red.png"));
+		p_213410_0_.put(3, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/denizen_sage/model_denizen_sage_red_cloak.png"));
+		p_213410_0_.put(4, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/denizen_sage/model_denizen_sage_white.png"));
 		p_213410_0_.put(5, new ResourceLocation(ForcesOfReality.MOD_ID,
 				"textures/entity/denizen_sage/model_denizen_sage_white_cloak.png"));
 	});
@@ -76,8 +76,8 @@ public class EntityDenizenSage extends AnimalEntity {
 	@Override
 	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
 		super.setEquipmentBasedOnDifficulty(difficulty);
-		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemInit.mana_extractor.get()));
-		this.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(ItemInit.cooked_morel_on_a_stick.get()));
+		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemInit.anointed_iron_sword.get()));
+		this.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(ItemInit.allegiance_identifier.get()));
 
 	}
 

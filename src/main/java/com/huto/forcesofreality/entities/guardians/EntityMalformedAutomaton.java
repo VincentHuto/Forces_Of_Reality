@@ -8,7 +8,7 @@ import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.sounds.SoundHandler;
 import com.hutoslib.client.particle.ParticleColor;
-import com.hutoslib.common.PacketHandler;
+import com.hutoslib.common.HutosLibPacketHandler;
 import com.hutoslib.math.Vector3;
 
 import net.minecraft.block.BlockState;
@@ -314,7 +314,7 @@ public class EntityMalformedAutomaton extends MonsterEntity implements IEntityAd
 		Vector3 startVec = Vector3.fromEntityCenter(this);
 		Vector3 endVec = Vector3.fromEntityCenter(target);
 		Vector3d speedVec = new Vector3d(endVec.x, endVec.y, endVec.z);
-		PacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
+		HutosLibPacketHandler.sendLightningSpawn(this.getPositionVec().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 				(RegistryKey<World>) this.world.getDimensionKey(), ParticleColor.YELLOW, 2, 10, 9, 0.2f);
 
 		target.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4f);

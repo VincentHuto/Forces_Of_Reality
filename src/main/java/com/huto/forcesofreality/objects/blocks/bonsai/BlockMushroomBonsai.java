@@ -13,7 +13,7 @@ public class BlockMushroomBonsai extends BlockBonsai {
 	@SuppressWarnings("deprecation")
 	@Override
 	public Item getShearDrop() {
-		return Item.getItemFromBlock(BlockInit.morel_mushroom.get());
+		return Item.getItemFromBlock(BlockInit.abyssal_silt.get());
 	}
 
 }

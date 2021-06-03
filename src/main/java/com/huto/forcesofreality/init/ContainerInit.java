@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
-import com.huto.forcesofreality.containers.ContainerVirtuousEnchanter;
 import com.huto.forcesofreality.containers.PlayerExpandedContainer;
 
 import net.minecraft.inventory.container.Container;
@@ -15,7 +14,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -28,10 +26,11 @@ public class ContainerInit {
 			.create(ForgeRegistries.CONTAINERS, ForcesOfReality.MOD_ID);
 	public static List<ContainerType<?>> RUNECONTAINER = new ArrayList<>();
 
-	public static final RegistryObject<ContainerType<ContainerVirtuousEnchanter>> virtuous_enchanter = CONTAINERS
-			.register("virtuous_enchanter", () -> IForgeContainerType.create(ContainerVirtuousEnchanter::new));
-	/*public static final RegistryObject<ContainerType<ContainerChiselStation>> runic_chisel_station = CONTAINERS
-			.register("runic_chisel_station", () -> IForgeContainerType.create(ContainerChiselStation::new));*/
+	/*
+	 * public static final RegistryObject<ContainerType<ContainerChiselStation>>
+	 * runic_chisel_station = CONTAINERS .register("runic_chisel_station", () ->
+	 * IForgeContainerType.create(ContainerChiselStation::new));
+	 */
 
 	@ObjectHolder("forcesofreality:player_runes")
 	public static ContainerType<PlayerExpandedContainer> PLAYER_ADORNMENTS = createAdornmentContainer("player_runes",
@@ -48,7 +47,7 @@ public class ContainerInit {
 	@SubscribeEvent
 	public static void onContainerRegister(final RegistryEvent.Register<ContainerType<?>> event) {
 		event.getRegistry().registerAll(RUNECONTAINER.toArray(new ContainerType[0]));
-	//	event.getRegistry().register(ContainerAdornmentBinder.type);
+		// event.getRegistry().register(ContainerAdornmentBinder.type);
 		event.getRegistry().register(ContainerMechanGlove.type);
 
 	}

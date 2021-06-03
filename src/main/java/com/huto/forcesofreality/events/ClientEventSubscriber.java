@@ -5,20 +5,17 @@ import org.lwjgl.glfw.GLFW;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.containers.ContainerMechanGlove;
 import com.huto.forcesofreality.gui.GuiMechanGlove;
-import com.huto.forcesofreality.gui.GuiVirtuousEnchanter;
 import com.huto.forcesofreality.gui.adornments.PlayerExpandedScreen;
 import com.huto.forcesofreality.init.ContainerInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.TileEntityInit;
 import com.huto.forcesofreality.render.entity.guardians.RenderBeastFromBeyond;
-import com.huto.forcesofreality.render.entity.guardians.RenderColin;
 import com.huto.forcesofreality.render.entity.guardians.RenderDarkYoung;
 import com.huto.forcesofreality.render.entity.guardians.RenderHastur;
 import com.huto.forcesofreality.render.entity.guardians.RenderMalformedAutomaton;
 import com.huto.forcesofreality.render.entity.guardians.RenderSeraphim;
 import com.huto.forcesofreality.render.entity.guardians.RenderTheFirstBeast;
 import com.huto.forcesofreality.render.entity.guardians.RenderTulpa;
-import com.huto.forcesofreality.render.entity.item.RenderManaDustItem;
 import com.huto.forcesofreality.render.entity.layer.ThermalLayerRender;
 import com.huto.forcesofreality.render.entity.lords.RenderLordOfTheWild;
 import com.huto.forcesofreality.render.entity.lords.RenderMechan;
@@ -35,8 +32,6 @@ import com.huto.forcesofreality.render.entity.mobs.RenderScuttlingOcculus;
 import com.huto.forcesofreality.render.entity.passive.RenderAngelicFowl;
 import com.huto.forcesofreality.render.entity.passive.RenderDenizen;
 import com.huto.forcesofreality.render.entity.passive.RenderDenizenSage;
-import com.huto.forcesofreality.render.entity.passive.RenderDreamWalker;
-import com.huto.forcesofreality.render.entity.passive.RenderIbis;
 import com.huto.forcesofreality.render.entity.passive.RenderSlug;
 import com.huto.forcesofreality.render.entity.projectile.RenderCorruptNote;
 import com.huto.forcesofreality.render.entity.projectile.RenderDreadRocket;
@@ -59,9 +54,6 @@ import com.huto.forcesofreality.render.entity.summons.RenderSummonedBeast;
 import com.huto.forcesofreality.render.entity.summons.RenderTentacle;
 import com.huto.forcesofreality.render.entity.summons.RenderThrone;
 import com.huto.forcesofreality.render.tiles.RenderAdornmentModStation;
-import com.huto.forcesofreality.render.tiles.RenderMagicLight;
-import com.huto.forcesofreality.render.tiles.RenderMagicRingLight;
-import com.huto.forcesofreality.render.tiles.RenderVirtuousEnchanter;
 import com.huto.forcesofreality.render.tiles.coven.RenderAscendantAltar;
 import com.huto.forcesofreality.render.tiles.coven.RenderHasturPylon;
 import com.huto.forcesofreality.render.tiles.coven.RenderHunterEffigy;
@@ -71,19 +63,6 @@ import com.huto.forcesofreality.render.tiles.coven.RenderOccularHeap;
 import com.huto.forcesofreality.render.tiles.coven.RenderRafflesiaOfFidelity;
 import com.huto.forcesofreality.render.tiles.coven.RenderSacrificialPyre;
 import com.huto.forcesofreality.render.tiles.coven.RenderUntoldEasel;
-import com.huto.forcesofreality.render.tiles.teleporter.RenderTeleporter;
-import com.huto.forcesofreality.render.tiles.vibes.RenderAbsorber;
-import com.huto.forcesofreality.render.tiles.vibes.RenderAutoInscriber;
-import com.huto.forcesofreality.render.tiles.vibes.RenderCapacitor;
-import com.huto.forcesofreality.render.tiles.vibes.RenderCrystalHarmonizer;
-import com.huto.forcesofreality.render.tiles.vibes.RenderKarmicAltar;
-import com.huto.forcesofreality.render.tiles.vibes.RenderKarmicExtractor;
-import com.huto.forcesofreality.render.tiles.vibes.RenderLectorTable;
-import com.huto.forcesofreality.render.tiles.vibes.RenderResonator;
-import com.huto.forcesofreality.render.tiles.vibes.RenderStorageDrum;
-import com.huto.forcesofreality.render.tiles.vibes.RenderThermalInfluxer;
-import com.huto.forcesofreality.render.tiles.vibes.RenderVibeFuser;
-import com.huto.forcesofreality.render.tiles.vibes.RenderWandMaker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -112,34 +91,18 @@ public class ClientEventSubscriber {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(ThermalLayerRender::renderWorld);
 		forgeBus.addListener(ThermalLayerRender::renderEntities);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.wand_maker.get(), RenderWandMaker::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_resonator.get(), RenderResonator::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_altar.get(), RenderKarmicAltar::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.karmic_extractor.get(), RenderKarmicExtractor::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.virtuous_enchanter.get(), RenderVirtuousEnchanter::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_storage_drum.get(), RenderStorageDrum::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_capacitor.get(), RenderCapacitor::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibratory_fuser.get(), RenderVibeFuser::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.vibe_absorber.get(), RenderAbsorber::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hastur_pylon.get(), RenderHasturPylon::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.obj_icosahedron.get(), RenderIcoSphere::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.thermal_influxer.get(), RenderThermalInfluxer::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.self_reflection_station.get(), RenderAdornmentModStation::new);
+		ClientRegistry.bindTileEntityRenderer(TileEntityInit.self_reflection_station.get(),
+				RenderAdornmentModStation::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.sacrifice_pyre.get(), RenderSacrificialPyre::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.ascendant_altar.get(), RenderAscendantAltar::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.machina_imperfecta.get(), RenderMachinaImperfecta::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.occular_heap.get(), RenderOccularHeap::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.untold_easel.get(), RenderUntoldEasel::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_block.get(), RenderMagicLight::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.light_ring_block.get(), RenderMagicRingLight::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.auto_inscriber.get(), RenderAutoInscriber::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.teleporter.get(), RenderTeleporter::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.lector_table.get(), RenderLectorTable::new);
-		ClientRegistry.bindTileEntityRenderer(TileEntityInit.crystal_harmonizer.get(), RenderCrystalHarmonizer::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.rafflesia_of_fidelity.get(),
 				RenderRafflesiaOfFidelity::new);
 		ClientRegistry.bindTileEntityRenderer(TileEntityInit.hunter_effigy.get(), RenderHunterEffigy::new);
-		ScreenManager.registerFactory(ContainerInit.virtuous_enchanter.get(), GuiVirtuousEnchanter::new);
 
 		// ScreenManager.registerFactory(ContainerInit.runic_chisel_station.get(),
 		// GuiChiselStation::new);
@@ -147,12 +110,9 @@ public class ClientEventSubscriber {
 		// ScreenManager.registerFactory(ContainerAdornmentBinder.type,
 		// GuiAdornmentBinder::new);
 		ScreenManager.registerFactory(ContainerMechanGlove.type, GuiMechanGlove::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.dream_walker.get(), RenderDreamWalker::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.colin.get(), RenderColin::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.hastur.get(), RenderHastur::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.denizen.get(), RenderDenizen::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.denizen_sage.get(), RenderDenizenSage::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.ibis.get(), RenderIbis::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.angelic_fowl.get(), RenderAngelicFowl::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.tentacle.get(), RenderTentacle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.player_tentacle.get(), RenderPlayerTentacle::new);
@@ -200,7 +160,6 @@ public class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.thrown_axe.get(),
 				renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityInit.mana_dust.get(), RenderManaDustItem::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.lord_of_the_wild.get(), RenderLordOfTheWild::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInit.uzouthrhix.get(), RenderUzouthrhix::new);
 

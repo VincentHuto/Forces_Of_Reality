@@ -12,7 +12,7 @@ import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.sounds.SoundHandler;
 import com.hutoslib.client.particle.ParticleColor;
-import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particle.ParticleUtils;
 import com.hutoslib.client.particles.factory.GlowParticleFactory;
 import com.hutoslib.math.Vector3;
 
@@ -137,23 +137,23 @@ public class EntityTetra extends MonsterEntity implements IEntityAdditionalSpawn
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
 			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 0)),
-					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.15) - 0.1 + ParticleUtil.inRange(-0.1, 0.1),
-					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+					center.x + Math.sin(time + j) * 0.55f + ParticleUtils.inRange(-0.1, 0.1),
+					center.y + (j * 0.15) - 0.1 + ParticleUtils.inRange(-0.1, 0.1),
+					center.z + Math.cos(time + j) * 0.55f + ParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
 			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 229)),
-					center.x + Math.sin(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.15) - 0.1 + ParticleUtil.inRange(-0.1, 0.1),
-					center.z + Math.cos(time + j) * 0.55f + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+					center.x + Math.sin(time + j) * 0.55f + ParticleUtils.inRange(-0.1, 0.1),
+					center.y + (j * 0.15) - 0.1 + ParticleUtils.inRange(-0.1, 0.1),
+					center.z + Math.cos(time + j) * 0.55f + ParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
 		}
 
 		world.addParticle(GlowParticleFactory.createData(new ParticleColor(250, 200, 0)),
-				center.x + ParticleUtil.inRange(-0.1, 0.1),
-				center.y + (1 * 0.15) - 1.3 + ParticleUtil.inRange(-0.2, 0.2),
-				center.z + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+				center.x + ParticleUtils.inRange(-0.1, 0.1),
+				center.y + (1 * 0.15) - 1.3 + ParticleUtils.inRange(-0.2, 0.2),
+				center.z + ParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
 		world.addParticle(GlowParticleFactory.createData(new ParticleColor(20, 0, 0)),
-				center.x + ParticleUtil.inRange(-0.1, 0.1),
-				center.y + (1 * 0.15) - 1.3 + ParticleUtil.inRange(-0.2, 0.2),
-				center.z + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
+				center.x + ParticleUtils.inRange(-0.1, 0.1),
+				center.y + (1 * 0.15) - 1.3 + ParticleUtils.inRange(-0.2, 0.2),
+				center.z + ParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
 
 		float diffMult = 1f;
 

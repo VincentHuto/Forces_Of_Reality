@@ -117,7 +117,6 @@ public class BlockBonsaiPlanter extends Block {
 		builder.add(FACING);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
@@ -133,24 +132,24 @@ public class BlockBonsaiPlanter extends Block {
 					BlockInit.spruce_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
 			return ActionResultType.SUCCESS;
 		}
-		if (sapling == Item.getItemFromBlock(BlockInit.morel_mushroom.get())
-				|| sapling == Item.getItemFromBlock(BlockInit.singeri_mushroom.get())) {
-
-			worldIn.setBlockState(pos,
-					BlockInit.mushroom_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
-			return ActionResultType.SUCCESS;
-		}
-		if (sapling == Item.getItemFromBlock(BlockInit.anti_sapling.get())) {
-			worldIn.setBlockState(pos,
-					BlockInit.anti_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
-			return ActionResultType.SUCCESS;
-		}
-		if (sapling == Item.getItemFromBlock(BlockInit.somnolent_sapling.get())) {
-			worldIn.setBlockState(pos,
-					BlockInit.somnolent_bonsai_stage_1.get().getDefaultState().with(FACING, state.get(FACING)));
-
-			return ActionResultType.SUCCESS;
-		} else {
+		/*
+		 * if (sapling == Item.getItemFromBlock(BlockInit.morel_mushroom.get()) ||
+		 * sapling == Item.getItemFromBlock(BlockInit.singeri_mushroom.get())) {
+		 * 
+		 * worldIn.setBlockState(pos,
+		 * BlockInit.mushroom_bonsai_stage_1.get().getDefaultState().with(FACING,
+		 * state.get(FACING))); return ActionResultType.SUCCESS; } if (sapling ==
+		 * Item.getItemFromBlock(BlockInit.anti_sapling.get())) {
+		 * worldIn.setBlockState(pos,
+		 * BlockInit.anti_bonsai_stage_1.get().getDefaultState().with(FACING,
+		 * state.get(FACING))); return ActionResultType.SUCCESS; } if (sapling ==
+		 * Item.getItemFromBlock(BlockInit.somnolent_sapling.get())) {
+		 * worldIn.setBlockState(pos,
+		 * BlockInit.somnolent_bonsai_stage_1.get().getDefaultState().with(FACING,
+		 * state.get(FACING)));
+		 * 
+		 * return ActionResultType.SUCCESS; }
+		 */ else {
 			return ActionResultType.PASS;
 
 		}

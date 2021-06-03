@@ -15,16 +15,6 @@ import com.huto.forcesofreality.network.coven.SetFlyPKT;
 import com.huto.forcesofreality.network.coven.SetGlideAnim;
 import com.huto.forcesofreality.network.coven.SetGlidePkt;
 import com.huto.forcesofreality.network.coven.SyncCovenPacket;
-import com.huto.forcesofreality.network.coven.SyncKarmaPacket;
-import com.huto.forcesofreality.network.karma.KarmaActivationPacketClient;
-import com.huto.forcesofreality.network.karma.KarmaActivationPacketServer;
-import com.huto.forcesofreality.network.karma.KarmaPacketClient;
-import com.huto.forcesofreality.network.karma.KarmaPacketServer;
-import com.huto.forcesofreality.network.vibes.ExportVibePacket;
-import com.huto.forcesofreality.network.vibes.ImportVibePacket;
-import com.huto.forcesofreality.network.vibes.UpdateChunkEnergyValueMessage;
-import com.huto.forcesofreality.network.vibes.VibrationPacketClient;
-import com.huto.forcesofreality.network.vibes.VibrationPacketServer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -42,12 +32,6 @@ public class PacketHandler {
 			.named(new ResourceLocation(ForcesOfReality.MOD_ID + ("main_channel")))
 			.clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals)
 			.networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
-	public static final SimpleChannel CHANNELVIBES = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "vibrationchannel"), () -> PROTOCOL_VERSION,
-			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-	public static final SimpleChannel CHANNELKARMA = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "karmachannel"), () -> PROTOCOL_VERSION,
-			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
 	public static final SimpleChannel CHANNELCOVENANT = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION,
@@ -58,29 +42,6 @@ public class PacketHandler {
 
 	public static void registerChannels() {
 		// Register Networking packets
-
-		// Vibes
-		CHANNELVIBES.registerMessage(networkID++, VibrationPacketClient.class, VibrationPacketClient::encode,
-				VibrationPacketClient::decode, VibrationPacketClient::handle);
-		CHANNELVIBES.registerMessage(networkID++, VibrationPacketServer.class, VibrationPacketServer::encode,
-				VibrationPacketServer::decode, VibrationPacketServer::handle);
-		CHANNELVIBES.registerMessage(networkID++, UpdateChunkEnergyValueMessage.class,
-				UpdateChunkEnergyValueMessage::encode, UpdateChunkEnergyValueMessage::decode,
-				UpdateChunkEnergyValueMessage::handle);
-
-		// Karma
-		CHANNELKARMA.registerMessage(networkID++, KarmaPacketClient.class, KarmaPacketClient::encode,
-				KarmaPacketClient::decode, KarmaPacketClient::handle);
-		CHANNELKARMA.registerMessage(networkID++, KarmaPacketServer.class, KarmaPacketServer::encode,
-				KarmaPacketServer::decode, KarmaPacketServer::handle);
-		CHANNELKARMA.registerMessage(networkID++, KarmaActivationPacketClient.class,
-				KarmaActivationPacketClient::encode, KarmaActivationPacketClient::decode,
-				KarmaActivationPacketClient::handle);
-		CHANNELKARMA.registerMessage(networkID++, KarmaActivationPacketServer.class,
-				KarmaActivationPacketServer::encode, KarmaActivationPacketServer::decode,
-				KarmaActivationPacketServer::handle);
-		CHANNELKARMA.messageBuilder(SyncKarmaPacket.class, networkID++).encoder(SyncKarmaPacket::encode)
-				.decoder(SyncKarmaPacket::new).consumer(SyncKarmaPacket::handle).add();
 
 		// Covenant
 		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketClient.class, CovenantPacketClient::encode,
@@ -94,10 +55,6 @@ public class PacketHandler {
 				SetFlyPKT.Handler::handle);
 		HANDLER.registerMessage(networkID++, SetGlidePkt.class, SetGlidePkt::encode, SetGlidePkt::decode,
 				SetGlidePkt.Handler::handle);
-		HANDLER.registerMessage(networkID++, ImportVibePacket.class, ImportVibePacket::encode, ImportVibePacket::decode,
-				ImportVibePacket.Handler::handle);
-		HANDLER.registerMessage(networkID++, ExportVibePacket.class, ExportVibePacket::encode, ExportVibePacket::decode,
-				ExportVibePacket.Handler::handle);
 		HANDLER.registerMessage(networkID++, PacketUpdateMechanModule.class, PacketUpdateMechanModule::encode,
 				PacketUpdateMechanModule::decode, PacketUpdateMechanModule.Handler::handle);
 		HANDLER.registerMessage(networkID++, SetGlideAnim.class, SetGlideAnim::encode, SetGlideAnim::decode,
@@ -135,10 +92,6 @@ public class PacketHandler {
 				.consumer(PacketToggleDirectorFlightModeMessage::handle).add();
 
 		return MECHANGLOVE;
-	}
-
-	public static void sendToClients(SyncKarmaPacket myPacket, PlayerEntity affectedEntity) {
-		CHANNELKARMA.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> affectedEntity), myPacket);
 	}
 
 	public static void sendCovenToClients(SyncCovenPacket myPacket, PlayerEntity affectedEntity) {

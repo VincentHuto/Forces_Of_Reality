@@ -12,7 +12,7 @@ import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.sounds.SoundHandler;
 import com.hutoslib.client.particle.ParticleColor;
-import com.hutoslib.client.particle.ParticleUtil;
+import com.hutoslib.client.particle.ParticleUtils;
 import com.hutoslib.client.particles.factory.GlowParticleFactory;
 import com.hutoslib.math.Vector3;
 
@@ -91,9 +91,9 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 	public void livingTick() {
 
 		if (!this.onGround && this.getMotion().y < 0.0D) {
-		//	this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
+			// this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
 		} else if (this.onGround && this.getMotion().y < 0.0D) {
-		//	this.setMotion(0, Math.sin(this.world.getGameTime()) * 0.15f, 0);
+			// this.setMotion(0, Math.sin(this.world.getGameTime()) * 0.15f, 0);
 
 		}
 
@@ -135,31 +135,33 @@ public class EntityVeritas extends MonsterEntity implements IEntityAdditionalSpa
 		Collections.addAll(chakraColors, new ParticleColor(162, 86, 160), new ParticleColor(96, 96, 186),
 				new ParticleColor(66, 184, 212), new ParticleColor(110, 200, 80), new ParticleColor(255, 165, 44),
 				new ParticleColor(243, 124, 59), new ParticleColor(229, 60, 81));
-	/*	for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
-			world.addParticle(ParticleInit.chakraData.get(j),
-					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosY() + (j * 0.5) + 0.1 + ParticleUtil.inRange(-0.1, 0.1),
-					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-			world.addParticle(ParticleTypes.WHITE_ASH,
-					getPosX() + 0.5 + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosY() + (j * 0.5) + ParticleUtil.inRange(-0.1, 0.1),
-					getPosZ() + 0.5 + -Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, 0, 0);
-
-		}*/
+		/*
+		 * for (int j = 0; j < ParticleInit.chakraData.size(); j++) {
+		 * world.addParticle(ParticleInit.chakraData.get(j), getPosX() + 0.5 +
+		 * Math.cos(time - j) + ParticleUtils.inRange(-0.1, 0.1), getPosY() + (j * 0.5)
+		 * + 0.1 + ParticleUtils.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time -
+		 * j) + ParticleUtils.inRange(-0.1, 0.1), 0, 0, 0);
+		 * world.addParticle(ParticleTypes.WHITE_ASH, getPosX() + 0.5 + Math.cos(time -
+		 * j) + ParticleUtils.inRange(-0.1, 0.1), getPosY() + (j * 0.5) +
+		 * ParticleUtils.inRange(-0.1, 0.1), getPosZ() + 0.5 + -Math.sin(time - j) +
+		 * ParticleUtils.inRange(-0.1, 0.1), 0, 0, 0);
+		 * 
+		 * }
+		 */
 		Vector3 center = Vector3.fromEntityCenter(this);
 		for (int j = 0; j < chakraColors.size(); j++) {
 			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-					center.x + Math.sin(time + j) + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
-					center.z  + Math.cos(time + j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-			
+					center.x + Math.sin(time + j) + ParticleUtils.inRange(-0.1, 0.1),
+					center.y + (j * 0.5) + 0.1f + ParticleUtils.inRange(-0.1, 0.1),
+					center.z + Math.cos(time + j) + ParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
+
 			Collections.reverse(chakraColors);
 
 			world.addParticle(GlowParticleFactory.createData(chakraColors.get(j)),
-					center.x - Math.sin(time - j) + ParticleUtil.inRange(-0.1, 0.1),
-					center.y + (j * 0.5) + 0.1f + ParticleUtil.inRange(-0.1, 0.1),
-					center.z  + Math.cos(time - j) + ParticleUtil.inRange(-0.1, 0.1), 0, -0.05, 0);
-			
+					center.x - Math.sin(time - j) + ParticleUtils.inRange(-0.1, 0.1),
+					center.y + (j * 0.5) + 0.1f + ParticleUtils.inRange(-0.1, 0.1),
+					center.z + Math.cos(time - j) + ParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
+
 		}
 
 		@SuppressWarnings("unused")

@@ -15,7 +15,7 @@ import com.hutoslib.client.models.Animation;
 import com.hutoslib.client.models.AnimationPacket;
 import com.hutoslib.client.models.IAnimatable;
 import com.hutoslib.client.models.TickFloat;
-import com.hutoslib.math.MathUtil;
+import com.hutoslib.math.MathUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -176,7 +176,7 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose) {
-				rotationYaw = (float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90f;
+				rotationYaw = (float) MathUtils.getAngle(EntityXanthousKing.this, target) + 90f;
 			}
 
 			if (noActiveAnimation()) {
@@ -186,9 +186,8 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 				 * 
 				 * } else if (distFromTarget > 90) { //
 				 * AnimationPacket.send(EntityUzouthrhix.this, CHARGE_ANIMATION); } else
-				 */if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90,
-								rotationYaw) < 30) {
+				 */if (isClose && MathHelper.degreesDifferenceAbs(
+						(float) MathUtils.getAngle(EntityXanthousKing.this, target) + 90, rotationYaw) < 30) {
 					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
 				}
 			}
@@ -600,12 +599,11 @@ public class EntityXanthousKing extends MonsterEntity implements IEntityAddition
 				getNavigator().tryMoveToEntityLiving(target, 1.2);
 
 			if (isClose)
-				rotationYaw = (float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90f;
+				rotationYaw = (float) MathUtils.getAngle(EntityXanthousKing.this, target) + 90f;
 
 			if (noActiveAnimation()) {
-				if (isClose
-						&& MathHelper.degreesDifferenceAbs((float) MathUtil.getAngle(EntityXanthousKing.this, target) + 90,
-								rotationYaw) < 30)
+				if (isClose && MathHelper.degreesDifferenceAbs(
+						(float) MathUtils.getAngle(EntityXanthousKing.this, target) + 90, rotationYaw) < 30)
 					AnimationPacket.send(EntityXanthousKing.this, BITE_ANIMATION);
 			}
 		}

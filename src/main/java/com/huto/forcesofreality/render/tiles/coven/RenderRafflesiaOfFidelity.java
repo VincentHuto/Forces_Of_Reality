@@ -2,7 +2,7 @@ package com.huto.forcesofreality.render.tiles.coven;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.models.block.ModelDrumMagatama;
-import com.huto.forcesofreality.objects.tileenties.vibes.func.TileEntityRafflesiaOfFidelity;
+import com.huto.forcesofreality.objects.tileenties.TileEntityRafflesiaOfFidelity;
 import com.huto.forcesofreality.render.tiles.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;

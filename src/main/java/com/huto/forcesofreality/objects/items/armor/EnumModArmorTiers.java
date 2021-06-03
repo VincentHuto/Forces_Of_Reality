@@ -14,10 +14,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum EnumModArmorTiers implements IArmorMaterial {
-	NULL(ForcesOfReality.MOD_ID + ":null", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F,
-			0.1F, () -> {
-				return Ingredient.fromItems(ItemInit.null_ingot.get());
-			}),
 	ANOINTED(ForcesOfReality.MOD_ID + ":anointed_iron", 37, new int[] { 3, 6, 8, 3 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.anointed_iron_scrap.get());
@@ -25,14 +21,6 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 	ELDER(ForcesOfReality.MOD_ID + ":elder", 37, new int[] { 1, 2, 3, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
 			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.unsettling_fabric.get());
-			}),
-	CIRCLET(ForcesOfReality.MOD_ID + ":vibrational_seer", 37, new int[] { 1, 1, 1, 1 }, 15,
-			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
-				return Ingredient.fromItems(ItemInit.null_ingot.get());
-			}),
-	MASK(ForcesOfReality.MOD_ID + ":mysterious_mask", 37, new int[] { 1, 1, 1, 1 }, 15,
-			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
-				return Ingredient.fromItems(ItemInit.null_ingot.get());
 			}),
 	SUPPRESSOR(ForcesOfReality.MOD_ID + ":influence_supressor", 37, new int[] { 1, 1, 1, 1 }, 15,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
@@ -42,7 +30,7 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			}),
-	MANTLE(ForcesOfReality.MOD_ID + ":mantle",5, new int[]{1, 3, 3, 2}, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+	MANTLE(ForcesOfReality.MOD_ID + ":mantle", 5, new int[] { 1, 3, 3, 2 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
 			3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.beastly_bone.get());
 			}),
@@ -51,15 +39,15 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
-	AURICHELM(ForcesOfReality.MOD_ID + ":auric_helm",17, new int[]{2, 4, 5, 2}, 25,
+	AURICHELM(ForcesOfReality.MOD_ID + ":auric_helm", 17, new int[] { 2, 4, 5, 2 }, 25,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
-	SPARKDIRECTOR_ARMORED(ForcesOfReality.MOD_ID + ":spark_director_armored", 17, new int[]{2, 5, 6, 2}, 25,
+	SPARKDIRECTOR_ARMORED(ForcesOfReality.MOD_ID + ":spark_director_armored", 17, new int[] { 2, 5, 6, 2 }, 25,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F, 0.3F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
-	AURICCHEST(ForcesOfReality.MOD_ID + ":auric_chest",  17, new int[]{2, 5, 6, 2}, 25,
+	AURICCHEST(ForcesOfReality.MOD_ID + ":auric_chest", 17, new int[] { 2, 5, 6, 2 }, 25,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 6.0F, 0.3F, () -> {
 				return Ingredient.fromItems(ItemInit.auric_ingot.get());
 			}),
@@ -67,19 +55,20 @@ public enum EnumModArmorTiers implements IArmorMaterial {
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.seraph_feather.get());
 			}),
-	WRITHING(ForcesOfReality.MOD_ID + ":writhing",  15, new int[]{1, 4, 5, 2}, 12,
+	WRITHING(ForcesOfReality.MOD_ID + ":writhing", 15, new int[] { 1, 4, 5, 2 }, 12,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.writhing_thread.get());
 			}),
-	WRITHINGHELM(ForcesOfReality.MOD_ID + ":writhinghelm", 15, new int[]{1, 4, 5, 2}, 12,
+	WRITHINGHELM(ForcesOfReality.MOD_ID + ":writhinghelm", 15, new int[] { 1, 4, 5, 2 }, 12,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.suspicious_eye.get());
 			}),
-	WRITHINGCHEST(ForcesOfReality.MOD_ID + ":writhingchest", 5, new int[]{1, 4, 5, 2}, 12,
+	WRITHINGCHEST(ForcesOfReality.MOD_ID + ":writhingchest", 5, new int[] { 1, 4, 5, 2 }, 12,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F, 0.1F, () -> {
 				return Ingredient.fromItems(ItemInit.writhing_thread.get());
 			});
 	;
+
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
 	private final String name;
 	private final int maxDamageFactor;

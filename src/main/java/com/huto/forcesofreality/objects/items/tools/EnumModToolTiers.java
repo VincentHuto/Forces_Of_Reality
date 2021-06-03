@@ -10,13 +10,13 @@ import net.minecraft.util.LazyValue;
 
 public enum EnumModToolTiers implements IItemTier {
 
-	NULL(5, 1024, 10.0F, 5.0F, 25, () -> {
-		return Ingredient.fromItems(ItemInit.shattered_ingot.get());
-	}),
-
-	MYSTIC(4, 512, 8.0F, 4.0F, 20, () -> {
-		return Ingredient.fromItems(ItemInit.emanating_ingot.get());
-	}), AURIC(6, 2048, 9.0F, 5.0F, 30, () -> {
+	/*
+	 * NULL(5, 1024, 10.0F, 5.0F, 25, () -> { return
+	 * Ingredient.fromItems(ItemInit.shattered_ingot.get()); }),
+	 * 
+	 * MYSTIC(4, 512, 8.0F, 4.0F, 20, () -> { return
+	 * Ingredient.fromItems(ItemInit.emanating_ingot.get()); }),
+	 */ AURIC(6, 2048, 9.0F, 5.0F, 30, () -> {
 		return Ingredient.fromItems(ItemInit.auric_ingot.get());
 	}), OLD_IRON(5, 1024, 3.0F, 7.0F, 10, () -> {
 		return Ingredient.fromItems(ItemInit.anointed_iron_scrap.get());
