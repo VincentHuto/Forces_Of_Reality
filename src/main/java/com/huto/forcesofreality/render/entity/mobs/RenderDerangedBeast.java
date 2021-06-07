@@ -3,8 +3,8 @@ package com.huto.forcesofreality.render.entity.mobs;
 import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.mobs.EntityDerangedBeast;
-import com.huto.forcesofreality.models.entity.mobs.ModelDerangedBeast;
+import com.huto.forcesofreality.entity.mob.EntityDerangedBeast;
+import com.huto.forcesofreality.model.entity.mob.ModelDerangedBeast;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

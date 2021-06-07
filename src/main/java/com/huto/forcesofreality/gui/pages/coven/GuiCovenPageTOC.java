@@ -7,7 +7,7 @@ import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.ItemInit;
-import com.hutoslib.util.ClientUtils;
+import com.hutoslib.client.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -82,11 +82,11 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
 
-			buttonTitle.renderButton(matrixStack, mouseX, mouseY, 311);
-			buttonCloseTab.renderButton(matrixStack, mouseX, mouseY, 411);
+			buttonTitle.render(matrixStack, mouseX, mouseY, 311);
+			buttonCloseTab.render(matrixStack, mouseX, mouseY, 411);
 
 			for (int i = 1; i < buttonList.size(); i++) {
-				buttonList.get(i).renderButton(matrixStack, mouseX, mouseY, 511);
+				buttonList.get(i).render(matrixStack, mouseX, mouseY, 511);
 				GlStateManager.translatef(0, 0, 10);
 				drawString(matrixStack, font, "Pg." + i, (buttonList.get(i).posX + 2), buttonList.get(i).posY + 2,
 						8060954);
@@ -95,8 +95,8 @@ public class GuiCovenPageTOC extends GuiCovenPage {
 
 			}
 
-			arrowF.renderButton(matrixStack, mouseX, mouseY, 511);
-			arrowB.renderButton(matrixStack, mouseX, mouseY, 511);
+			arrowF.render(matrixStack, mouseX, mouseY, 511);
+			arrowB.render(matrixStack, mouseX, mouseY, 511);
 
 		}
 		GlStateManager.popMatrix();

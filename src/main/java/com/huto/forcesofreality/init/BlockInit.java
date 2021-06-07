@@ -1,29 +1,29 @@
 package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.objects.blocks.BlockAbyssalSilt;
-import com.huto.forcesofreality.objects.blocks.BlockAdornmentModStation;
-import com.huto.forcesofreality.objects.blocks.BlockBeyondFlame;
-import com.huto.forcesofreality.objects.blocks.BlockDisplayGlass;
-import com.huto.forcesofreality.objects.blocks.BlockHasturPylon;
-import com.huto.forcesofreality.objects.blocks.BlockIcoSphere;
-import com.huto.forcesofreality.objects.blocks.BlockRafflesiaFlower;
-import com.huto.forcesofreality.objects.blocks.altars.BlockAscendantAltar;
-import com.huto.forcesofreality.objects.blocks.altars.BlockAuspiciousBundle;
-import com.huto.forcesofreality.objects.blocks.altars.BlockHunterEffigy;
-import com.huto.forcesofreality.objects.blocks.altars.BlockMachinaImperfecta;
-import com.huto.forcesofreality.objects.blocks.altars.BlockOccularHeap;
-import com.huto.forcesofreality.objects.blocks.altars.BlockSacrificePyre;
-import com.huto.forcesofreality.objects.blocks.altars.BlockUntoldEasel;
-import com.huto.forcesofreality.objects.blocks.bonsai.BlockBonsaiPlanter;
-import com.huto.forcesofreality.objects.blocks.bonsai.BlockJungleBonsai;
-import com.huto.forcesofreality.objects.blocks.bonsai.BlockMushroomBonsai;
-import com.huto.forcesofreality.objects.blocks.bonsai.BlockOakBonsai;
-import com.huto.forcesofreality.objects.blocks.bonsai.BlockSpruceBonsai;
-import com.huto.forcesofreality.objects.blocks.util.EnumBonsaiTypes;
+import com.huto.forcesofreality.block.BlockAbyssalSilt;
+import com.huto.forcesofreality.block.BlockAdornmentModStation;
+import com.huto.forcesofreality.block.BlockBeyondFlame;
+import com.huto.forcesofreality.block.BlockHasturPylon;
+import com.huto.forcesofreality.block.BlockIcoSphere;
+import com.huto.forcesofreality.block.BlockRafflesiaFlower;
+import com.huto.forcesofreality.block.altar.BlockAscendantAltar;
+import com.huto.forcesofreality.block.altar.BlockAuspiciousBundle;
+import com.huto.forcesofreality.block.altar.BlockHunterEffigy;
+import com.huto.forcesofreality.block.altar.BlockMachinaImperfecta;
+import com.huto.forcesofreality.block.altar.BlockOccularHeap;
+import com.huto.forcesofreality.block.altar.BlockSacrificePyre;
+import com.huto.forcesofreality.block.altar.BlockUntoldEasel;
+import com.huto.forcesofreality.block.bonsai.BlockBonsaiPlanter;
+import com.huto.forcesofreality.block.bonsai.BlockJungleBonsai;
+import com.huto.forcesofreality.block.bonsai.BlockMushroomBonsai;
+import com.huto.forcesofreality.block.bonsai.BlockOakBonsai;
+import com.huto.forcesofreality.block.bonsai.BlockSpruceBonsai;
+import com.huto.forcesofreality.block.util.EnumBonsaiTypes;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.GlassBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
@@ -102,9 +102,8 @@ public class BlockInit {
 	// Machine
 	public static final RegistryObject<Block> auric_block = BLOCKS.register("auric_block", () -> new Block(
 			Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 2000f).sound(SoundType.STONE)));
-	public static final RegistryObject<Block> machine_glass = BLOCKS.register("machine_glass",
-			() -> new BlockDisplayGlass(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f)
-					.sound(SoundType.GLASS).notSolid()));
+	public static final RegistryObject<Block> machine_glass = BLOCKS.register("machine_glass", () -> new GlassBlock(
+			Block.Properties.create(Material.GLASS).hardnessAndResistance(0.1f, 1f).sound(SoundType.GLASS).notSolid()));
 	public static final RegistryObject<Block> machina_imperfecta = BLOCKS.register("machina_imperfecta",
 			() -> new BlockMachinaImperfecta(Block.Properties.create(Material.IRON).hardnessAndResistance(50f, 1500f)
 					.sound(SoundType.ANVIL).notSolid()));

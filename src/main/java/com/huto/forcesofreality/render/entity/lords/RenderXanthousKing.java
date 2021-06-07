@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
-import com.huto.forcesofreality.models.entity.lords.ModelXanthousKing;
+import com.huto.forcesofreality.entity.lord.EntityXanthousKing;
+import com.huto.forcesofreality.model.entity.lord.ModelXanthousKing;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

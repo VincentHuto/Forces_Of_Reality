@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.render.entity.layer;
 
-import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
-import com.huto.forcesofreality.capabilities.adornments.AdornmentsCapabilities;
+import com.huto.forcesofreality.capabilitie.adornment.AdornmentsCapabilities;
+import com.huto.forcesofreality.capabilitie.adornment.IAdornmentsItemHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;

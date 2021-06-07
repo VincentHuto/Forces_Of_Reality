@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.guardians;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
-import com.huto.forcesofreality.models.entity.guardians.ModelBeastFromBeyond;
+import com.huto.forcesofreality.entity.guardian.EntityBeastFromBeyond;
+import com.huto.forcesofreality.model.entity.guardian.ModelBeastFromBeyond;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

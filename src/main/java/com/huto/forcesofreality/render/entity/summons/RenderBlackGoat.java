@@ -3,8 +3,8 @@ package com.huto.forcesofreality.render.entity.summons;
 import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.summons.EntityBlackGoat;
-import com.huto.forcesofreality.models.entity.summons.ModelBlackGoat;
+import com.huto.forcesofreality.entity.summon.EntityBlackGoat;
+import com.huto.forcesofreality.model.entity.summon.ModelBlackGoat;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -2,7 +2,7 @@ package com.huto.forcesofreality.network.coven;
 
 import java.util.function.Supplier;
 
-import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
+import com.huto.forcesofreality.item.armor.ItemSparkDirector;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;

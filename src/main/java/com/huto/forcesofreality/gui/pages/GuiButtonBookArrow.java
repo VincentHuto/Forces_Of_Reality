@@ -38,7 +38,7 @@ public class GuiButtonBookArrow extends Button {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void renderButton(MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
 		if (visible) {
 			GlStateManager.enableAlphaTest();
 			GlStateManager.enableBlend();

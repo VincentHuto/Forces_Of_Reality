@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityTetra;
-import com.huto.forcesofreality.models.entity.lords.ModelTetra;
+import com.huto.forcesofreality.entity.lord.EntityTetra;
+import com.huto.forcesofreality.model.entity.lord.ModelTetra;
 import com.huto.forcesofreality.render.entity.layer.LayerTetraGlow;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
-import com.huto.forcesofreality.models.entity.lords.ModelLordOfTheWild;
+import com.huto.forcesofreality.entity.lord.EntityLordOfTheWild;
+import com.huto.forcesofreality.model.entity.lord.ModelLordOfTheWild;
 import com.huto.forcesofreality.render.entity.layer.LayerLordOfTheWildLines;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;

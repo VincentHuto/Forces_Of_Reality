@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
-import com.huto.forcesofreality.models.entity.lords.ModelTrueXanthousKing;
+import com.huto.forcesofreality.entity.lord.EntityTrueXanthousKing;
+import com.huto.forcesofreality.model.entity.lord.ModelTrueXanthousKing;
 import com.huto.forcesofreality.render.entity.layer.LayerTrueXanthousGlow;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

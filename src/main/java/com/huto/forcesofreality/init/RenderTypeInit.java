@@ -47,7 +47,7 @@ public class RenderTypeInit extends RenderType {
 	public static final RenderType HASTURTRANS = makeType("hasturTrans", DefaultVertexFormats.POSITION_COLOR_TEX, 7,
 			256, false, true,
 			State.getBuilder().texture(new TextureState(hastur_pylon, false, false))
-					.transparency(CRUMBLING_TRANSPARENCY).writeMask(COLOR_DEPTH_WRITE).layer(field_239235_M_)
+					.transparency(CRUMBLING_TRANSPARENCY).writeMask(COLOR_DEPTH_WRITE).layer(VIEW_OFFSET_Z_LAYERING)
 					.build(false));
 
 	public static final RenderType SPHEREIN = makeType("sphereTrans", DefaultVertexFormats.POSITION_COLOR_TEX, 7, 256,
@@ -77,7 +77,7 @@ public class RenderTypeInit extends RenderType {
 
 	public static RenderType SolidBlockOverlay = makeType("SolidBlockOverlay", DefaultVertexFormats.POSITION_COLOR,
 			GL11.GL_QUADS, 256,
-			RenderType.State.getBuilder().layer(field_239235_M_).transparency(TRANSLUCENT_TRANSPARENCY)
+			RenderType.State.getBuilder().layer(VIEW_OFFSET_Z_LAYERING).transparency(TRANSLUCENT_TRANSPARENCY)
 					.texture(NO_TEXTURE).depthTest(DEPTH_LEQUAL).cull(CULL_DISABLED).lightmap(LIGHTMAP_DISABLED)
 					.writeMask(COLOR_WRITE).build(false));
 

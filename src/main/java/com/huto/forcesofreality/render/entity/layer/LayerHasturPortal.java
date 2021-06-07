@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.layer;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntityHastur;
-import com.huto.forcesofreality.models.entity.guardians.ModelHastur;
+import com.huto.forcesofreality.entity.guardian.EntityHastur;
+import com.huto.forcesofreality.model.entity.guardian.ModelHastur;
 import com.huto.forcesofreality.render.entity.guardians.BossColorMap;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

@@ -1,15 +1,15 @@
 package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladeDamage;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladeFireAspect;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladeFlame;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladeInfinity;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladeKnockBack;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladePower;
-import com.huto.forcesofreality.enchantments.EnchantmentBowBladePunch;
-import com.huto.forcesofreality.enchantments.EnchantmentInfluenceSuppression;
-import com.huto.forcesofreality.objects.items.ModItemPredicates;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladeDamage;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladeFireAspect;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladeFlame;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladeInfinity;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladeKnockBack;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladePower;
+import com.huto.forcesofreality.enchantment.EnchantmentBowBladePunch;
+import com.huto.forcesofreality.enchantment.EnchantmentInfluenceSuppression;
+import com.huto.forcesofreality.item.ModItemPredicates;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;

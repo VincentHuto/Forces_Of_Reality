@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.mobs;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.mobs.EntityHasturVassal;
-import com.huto.forcesofreality.models.entity.mobs.ModelHasturVassal;
+import com.huto.forcesofreality.entity.mob.EntityHasturVassal;
+import com.huto.forcesofreality.model.entity.mob.ModelHasturVassal;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.RenderType;

@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.guardians;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntityTheFirstBeast;
-import com.huto.forcesofreality.models.entity.guardians.ModelTheFirstBeast;
+import com.huto.forcesofreality.entity.guardian.EntityTheFirstBeast;
+import com.huto.forcesofreality.model.entity.guardian.ModelTheFirstBeast;
 import com.huto.forcesofreality.render.entity.layer.BeastHeldItemLayer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

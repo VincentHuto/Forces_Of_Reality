@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.render.entity.projectile;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.projectiles.EntityFirstBeastBolt;
+import com.huto.forcesofreality.entity.projectile.EntityFirstBeastBolt;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

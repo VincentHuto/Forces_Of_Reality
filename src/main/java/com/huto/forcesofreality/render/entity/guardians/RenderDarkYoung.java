@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.guardians;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
-import com.huto.forcesofreality.models.entity.guardians.ModelDarkYoung;
+import com.huto.forcesofreality.entity.guardian.EntityDarkYoung;
+import com.huto.forcesofreality.model.entity.guardian.ModelDarkYoung;
 import com.huto.forcesofreality.render.entity.layer.LayerDarkYoungDeath;
 import com.huto.forcesofreality.render.entity.layer.LayerDarkYoungPendant;
 import com.mojang.blaze3d.matrix.MatrixStack;

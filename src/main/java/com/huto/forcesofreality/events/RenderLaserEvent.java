@@ -4,10 +4,10 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
+import com.huto.forcesofreality.capabilitie.covenant.CovenantProvider;
+import com.huto.forcesofreality.capabilitie.covenant.EnumCovenants;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.entity.lords.ModelPlayerTrueXanthousKing;
+import com.huto.forcesofreality.model.entity.lord.ModelPlayerTrueXanthousKing;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.Minecraft;

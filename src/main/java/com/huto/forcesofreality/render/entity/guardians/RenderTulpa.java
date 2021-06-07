@@ -2,8 +2,8 @@ package com.huto.forcesofreality.render.entity.guardians;
 
 import javax.annotation.Nonnull;
 
-import com.huto.forcesofreality.entities.guardians.EntityTulpa;
-import com.huto.forcesofreality.models.entity.guardians.ModelTulpa;
+import com.huto.forcesofreality.entity.guardian.EntityTulpa;
+import com.huto.forcesofreality.model.entity.guardian.ModelTulpa;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;

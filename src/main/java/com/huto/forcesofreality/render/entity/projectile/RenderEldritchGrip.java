@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.projectile;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.summons.EntityEldritchGrip;
-import com.huto.forcesofreality.models.entity.summons.ModelEldritchGrip;
+import com.huto.forcesofreality.entity.summon.EntityEldritchGrip;
+import com.huto.forcesofreality.model.entity.summon.ModelEldritchGrip;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

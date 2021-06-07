@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.render.entity.projectile;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.projectiles.EntityHolyFlare;
+import com.huto.forcesofreality.entity.projectile.EntityHolyFlare;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

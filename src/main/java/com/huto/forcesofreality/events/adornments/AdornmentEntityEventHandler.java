@@ -4,12 +4,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.adornments.IAdornmentsItemHandler;
-import com.huto.forcesofreality.capabilities.adornments.AdornmentsCapabilities;
-import com.huto.forcesofreality.capabilities.adornments.AdornmentsContainer;
-import com.huto.forcesofreality.capabilities.adornments.AdornmentsContainerProvider;
+import com.huto.forcesofreality.capabilitie.adornment.AdornmentsCapabilities;
+import com.huto.forcesofreality.capabilitie.adornment.AdornmentsContainer;
+import com.huto.forcesofreality.capabilitie.adornment.AdornmentsContainerProvider;
+import com.huto.forcesofreality.capabilitie.adornment.IAdornmentsItemHandler;
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.adornments.SyncPacket;
+import com.huto.forcesofreality.network.adornment.SyncPacket;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;

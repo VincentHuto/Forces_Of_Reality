@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.gui.adornments;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.PlayerExpandedContainer;
+import com.huto.forcesofreality.container.PlayerExpandedContainer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -45,8 +45,8 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 	@Override
 	protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int p_146979_1_, int p_146979_2_) { // drawGuiContainerForegroundLayer
 		if (this.minecraft != null) { // this.minecraft
-			this.minecraft.fontRenderer.func_243248_b(matrixStack, new TranslationTextComponent("container.crafting"),
-					115 - 18, 8 + 22, 4210752);
+			this.minecraft.fontRenderer.drawText(matrixStack, new TranslationTextComponent("container.crafting"), 115 - 18,
+					8 + 22, 4210752);
 		}
 	}
 
@@ -79,19 +79,16 @@ public class PlayerExpandedScreen extends DisplayEffectsScreen<PlayerExpandedCon
 					(float) (l + 75 - 50) - this.oldMouseY, this.minecraft.player);
 		}
 	}
-	//No Longer necccisairy as you cannot acsess runes from INV anymore
-	/*@Override
-	public boolean keyPressed(int keyCode, int scanCode, int what) { // keyPressed
-		if (ClientEventSubscriber.KEY_ADORNMENTS.isActiveAndMatches(InputMappings.getInputByCode(keyCode, scanCode))) {
-			if (this.minecraft != null) {
-				this.minecraft.player.closeScreen();
-			}
-			return true;
-		} else {
-			return super.keyPressed(keyCode, scanCode, what);
-		}
-	}
-*/
+
+	// No Longer necccisairy as you cannot acsess runes from INV anymore
+	/*
+	 * @Override public boolean keyPressed(int keyCode, int scanCode, int what) { //
+	 * keyPressed if
+	 * (ClientEventSubscriber.KEY_ADORNMENTS.isActiveAndMatches(InputMappings.
+	 * getInputByCode(keyCode, scanCode))) { if (this.minecraft != null) {
+	 * this.minecraft.player.closeScreen(); } return true; } else { return
+	 * super.keyPressed(keyCode, scanCode, what); } }
+	 */
 	private void resetGuiLeft() {
 		this.guiLeft = (this.width - this.xSize) / 2; // width
 	}

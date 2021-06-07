@@ -2,7 +2,7 @@ package com.huto.forcesofreality.render.entity.item;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.objects.items.ItemTome;
+import com.huto.forcesofreality.item.ItemTome;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

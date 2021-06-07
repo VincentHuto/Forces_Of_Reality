@@ -1,9 +1,9 @@
 package com.huto.forcesofreality.events;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.ContainerMechanGlove;
-import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
-import com.hutoslib.util.ClientUtils;
+import com.huto.forcesofreality.container.ContainerMechanGlove;
+import com.huto.forcesofreality.item.coven.tool.ItemMechanGlove;
+import com.hutoslib.client.ClientUtils;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

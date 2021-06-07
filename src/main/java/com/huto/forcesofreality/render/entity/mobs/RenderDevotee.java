@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.mobs;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.mobs.EntityDevotee;
-import com.huto.forcesofreality.models.entity.mobs.ModelDevotee;
+import com.huto.forcesofreality.entity.mob.EntityDevotee;
+import com.huto.forcesofreality.model.entity.mob.ModelDevotee;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

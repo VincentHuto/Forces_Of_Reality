@@ -3,8 +3,8 @@ package com.huto.forcesofreality.gui.adornments;
 import org.lwjgl.opengl.GL11;
 
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
-import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
+import com.huto.forcesofreality.network.adornment.OpenAdornmentsInvPacket;
+import com.huto.forcesofreality.network.adornment.OpenNormalInvPacket;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 

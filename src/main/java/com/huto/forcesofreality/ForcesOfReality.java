@@ -5,8 +5,8 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.huto.forcesofreality.capabilities.covenant.CovenantEvents;
-import com.huto.forcesofreality.capabilities.tiledevotion.DevotionEvents;
+import com.huto.forcesofreality.capabilitie.covenant.CovenantEvents;
+import com.huto.forcesofreality.capabilitie.tiledevotion.DevotionEvents;
 import com.huto.forcesofreality.events.MechanGloveEvents;
 import com.huto.forcesofreality.events.RenderLaserEvent;
 import com.huto.forcesofreality.events.SparkDirectorModEvents;
@@ -20,11 +20,11 @@ import com.huto.forcesofreality.init.FeatureInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.ParticleInit;
 import com.huto.forcesofreality.init.TileEntityInit;
+import com.huto.forcesofreality.item.coven.tool.ItemMechanGlove;
 import com.huto.forcesofreality.network.PacketHandler;
-import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
-import com.huto.forcesofreality.recipes.CopyMechanGloveDataRecipe;
-import com.huto.forcesofreality.recipes.ModRafflesiaRecipies;
-import com.huto.forcesofreality.recipes.UpgradeMachinaLampDataRecipe;
+import com.huto.forcesofreality.recipe.CopyMechanGloveDataRecipe;
+import com.huto.forcesofreality.recipe.ModRafflesiaRecipies;
+import com.huto.forcesofreality.recipe.UpgradeMachinaLampDataRecipe;
 import com.huto.forcesofreality.render.entity.layer.AdornmentsRenderLayer;
 
 import net.minecraft.client.Minecraft;

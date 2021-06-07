@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.MechanGloveItemHandler;
+import com.huto.forcesofreality.container.MechanGloveItemHandler;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
+import com.huto.forcesofreality.item.coven.tool.ItemMechanGlove;
+import com.huto.forcesofreality.item.tool.coven.module.ItemMechanModuleBase;
 import com.huto.forcesofreality.network.PacketHandler;
 import com.huto.forcesofreality.network.coven.PacketUpdateMechanModule;
-import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
-import com.huto.forcesofreality.objects.items.coven.tool.modules.ItemMechanModuleBase;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -67,7 +67,7 @@ public class GuiMechanGloveViewer extends Screen {
 
 		GlStateManager.pushMatrix();
 		for (int i = 0; i < buttons.size(); i++) {
-			buttons.get(i).renderButton(matrixStack, mouseX, mouseY, 511);
+			buttons.get(i).render(matrixStack, mouseX, mouseY, 511);
 			if (buttons.get(i).isHovered()) {
 				ItemStack stack = ForcesOfReality.findMechanGlove(player);
 				if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {

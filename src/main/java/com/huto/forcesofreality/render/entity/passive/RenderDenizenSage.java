@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.passive;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.passive.EntityDenizenSage;
-import com.huto.forcesofreality.models.entity.passive.ModelDenizenSage;
+import com.huto.forcesofreality.entity.passive.EntityDenizenSage;
+import com.huto.forcesofreality.model.entity.passive.ModelDenizenSage;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

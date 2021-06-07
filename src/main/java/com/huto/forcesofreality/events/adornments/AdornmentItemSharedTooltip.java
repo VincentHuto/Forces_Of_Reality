@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.events.adornments;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.capabilities.adornments.AdornmentType;
-import com.huto.forcesofreality.capabilities.adornments.AdornmentsCapabilities;
+import com.huto.forcesofreality.capabilitie.adornment.AdornmentType;
+import com.huto.forcesofreality.capabilitie.adornment.AdornmentsCapabilities;
 
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;

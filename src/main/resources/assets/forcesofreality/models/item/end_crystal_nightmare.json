@@ -1,5 +1,0 @@
-{
-	"parent":"forge:item/default",
-	"loader": "forge:obj",
-	"model": "forcesofreality:models/block/end_crystal_nightmare.obj"
-}

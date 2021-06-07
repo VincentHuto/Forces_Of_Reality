@@ -1,7 +1,7 @@
 package com.huto.forcesofreality.events;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.objects.items.armor.ItemSparkDirector;
+import com.huto.forcesofreality.item.armor.ItemSparkDirector;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

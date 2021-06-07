@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.passive;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.passive.EntityAngelicFowl;
-import com.huto.forcesofreality.models.entity.passive.ModelAngelicFowl;
+import com.huto.forcesofreality.entity.passive.EntityAngelicFowl;
+import com.huto.forcesofreality.model.entity.passive.ModelAngelicFowl;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

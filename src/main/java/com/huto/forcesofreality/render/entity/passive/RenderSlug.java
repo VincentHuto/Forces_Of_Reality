@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.passive;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.passive.EntitySlug;
-import com.huto.forcesofreality.models.entity.passive.ModelSlug;
+import com.huto.forcesofreality.entity.passive.EntitySlug;
+import com.huto.forcesofreality.model.entity.passive.ModelSlug;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.ContainerMechanGlove;
+import com.huto.forcesofreality.container.ContainerMechanGlove;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

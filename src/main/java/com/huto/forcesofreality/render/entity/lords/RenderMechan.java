@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityMechan;
-import com.huto.forcesofreality.models.entity.lords.ModelMechan;
+import com.huto.forcesofreality.entity.lord.EntityMechan;
+import com.huto.forcesofreality.model.entity.lord.ModelMechan;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

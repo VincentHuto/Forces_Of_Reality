@@ -2,8 +2,8 @@ package com.huto.forcesofreality.network.coven;
 
 import java.util.function.Supplier;
 
-import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
-import com.huto.forcesofreality.capabilities.covenant.ICovenant;
+import com.huto.forcesofreality.capabilitie.covenant.CovenantProvider;
+import com.huto.forcesofreality.capabilitie.covenant.ICovenant;
 import com.huto.forcesofreality.network.PacketHandler;
 
 import net.minecraft.entity.player.ServerPlayerEntity;

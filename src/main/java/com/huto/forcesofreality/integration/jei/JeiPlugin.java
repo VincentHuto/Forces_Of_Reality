@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.recipes.ModRafflesiaRecipies;
+import com.huto.forcesofreality.recipe.ModRafflesiaRecipies;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.constants.VanillaTypes;

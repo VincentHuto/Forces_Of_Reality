@@ -1,13 +1,13 @@
 package com.huto.forcesofreality.gui.pages.coven;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
+import com.huto.forcesofreality.entity.guardian.EntitySeraphim;
 import com.huto.forcesofreality.gui.pages.GuiButtonTextured;
 import com.huto.forcesofreality.gui.pages.GuiUtil;
 import com.huto.forcesofreality.init.BlockInit;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
-import com.hutoslib.util.ClientUtils;
+import com.hutoslib.client.ClientUtils;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -83,7 +83,7 @@ public class GuiCovenTitle extends Screen {
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).render(matrixStack, mouseX, mouseY, partialTicks);
 			if (isElder) {
-				eyeButton.renderButton(matrixStack, mouseX, mouseY, 16);
+				eyeButton.render(matrixStack, mouseX, mouseY, 16);
 			}
 
 		}

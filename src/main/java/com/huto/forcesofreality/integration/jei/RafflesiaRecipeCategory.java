@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.BlockInit;
-import com.huto.forcesofreality.recipes.RecipeRafflesia;
+import com.huto.forcesofreality.recipe.RecipeRafflesia;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 

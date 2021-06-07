@@ -1,9 +1,9 @@
 package com.huto.forcesofreality.network;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.network.adornments.OpenAdornmentsInvPacket;
-import com.huto.forcesofreality.network.adornments.OpenNormalInvPacket;
-import com.huto.forcesofreality.network.adornments.SyncPacket;
+import com.huto.forcesofreality.network.adornment.OpenAdornmentsInvPacket;
+import com.huto.forcesofreality.network.adornment.OpenNormalInvPacket;
+import com.huto.forcesofreality.network.adornment.SyncPacket;
 import com.huto.forcesofreality.network.coven.CovenantPacketClient;
 import com.huto.forcesofreality.network.coven.CovenantPacketServer;
 import com.huto.forcesofreality.network.coven.MechanGloveActionMessage;

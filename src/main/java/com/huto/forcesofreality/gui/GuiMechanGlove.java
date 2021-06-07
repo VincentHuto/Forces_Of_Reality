@@ -1,9 +1,9 @@
 package com.huto.forcesofreality.gui;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.ContainerMechanGlove;
+import com.huto.forcesofreality.container.ContainerMechanGlove;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.render.tiles.ClientTickHandler;
+import com.huto.forcesofreality.render.tile.ClientTickHandler;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;

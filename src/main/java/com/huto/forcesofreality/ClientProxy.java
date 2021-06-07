@@ -2,8 +2,8 @@ package com.huto.forcesofreality;
 
 import com.huto.forcesofreality.gui.GuiMechanGloveViewer;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.armor.ModelOldIronChestPlate;
-import com.hutoslib.util.ClientUtils;
+import com.huto.forcesofreality.model.armor.ModelOldIronChestPlate;
+import com.hutoslib.client.ClientUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;

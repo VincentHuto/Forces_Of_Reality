@@ -1,17 +1,17 @@
 package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.objects.tileenties.TileEntityAdornmentModStation;
-import com.huto.forcesofreality.objects.tileenties.TileEntityIcoSphere;
-import com.huto.forcesofreality.objects.tileenties.TileEntityMachinaImperfecta;
-import com.huto.forcesofreality.objects.tileenties.TileEntityRafflesiaOfFidelity;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAscendantAltar;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityAuspiciousBundle;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHasturPylon;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityHunterEffigy;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityOccularHeap;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntitySacrificePyre;
-import com.huto.forcesofreality.objects.tileenties.coven.TileEntityUntoldEasel;
+import com.huto.forcesofreality.tile.TileEntityAdornmentModStation;
+import com.huto.forcesofreality.tile.TileEntityIcoSphere;
+import com.huto.forcesofreality.tile.TileEntityMachinaImperfecta;
+import com.huto.forcesofreality.tile.TileEntityRafflesiaOfFidelity;
+import com.huto.forcesofreality.tile.coven.TileEntityAscendantAltar;
+import com.huto.forcesofreality.tile.coven.TileEntityAuspiciousBundle;
+import com.huto.forcesofreality.tile.coven.TileEntityHasturPylon;
+import com.huto.forcesofreality.tile.coven.TileEntityHunterEffigy;
+import com.huto.forcesofreality.tile.coven.TileEntityOccularHeap;
+import com.huto.forcesofreality.tile.coven.TileEntitySacrificePyre;
+import com.huto.forcesofreality.tile.coven.TileEntityUntoldEasel;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;

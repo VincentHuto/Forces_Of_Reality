@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.summons;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.summons.EntityHasturClone;
-import com.huto.forcesofreality.models.entity.summons.ModelHasturClone;
+import com.huto.forcesofreality.entity.summon.EntityHasturClone;
+import com.huto.forcesofreality.model.entity.summon.ModelHasturClone;
 import com.huto.forcesofreality.render.entity.layer.LayerHasturClone;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

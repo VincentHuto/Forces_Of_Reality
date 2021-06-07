@@ -5,17 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.particles.data.AjnaParticleData;
-import com.huto.forcesofreality.particles.data.AnahataParticleData;
-import com.huto.forcesofreality.particles.data.ColoredDynamicTypeData;
-import com.huto.forcesofreality.particles.data.ManipuraParticleData;
-import com.huto.forcesofreality.particles.data.MuladharaaParticleData;
-import com.huto.forcesofreality.particles.data.ParticleSparkleData;
-import com.huto.forcesofreality.particles.data.SahasraraParticleData;
-import com.huto.forcesofreality.particles.data.SvadhishthanaParticleData;
-import com.huto.forcesofreality.particles.data.VishuddhaParticleData;
-import com.huto.forcesofreality.particles.types.SparkleParticleType;
-import com.hutoslib.client.particle.ParticleColor;
+import com.huto.forcesofreality.particle.data.AjnaParticleData;
+import com.huto.forcesofreality.particle.data.AnahataParticleData;
+import com.huto.forcesofreality.particle.data.ColoredDynamicTypeData;
+import com.huto.forcesofreality.particle.data.ManipuraParticleData;
+import com.huto.forcesofreality.particle.data.MuladharaaParticleData;
+import com.huto.forcesofreality.particle.data.ParticleSparkleData;
+import com.huto.forcesofreality.particle.data.SahasraraParticleData;
+import com.huto.forcesofreality.particle.data.SvadhishthanaParticleData;
+import com.huto.forcesofreality.particle.data.VishuddhaParticleData;
+import com.huto.forcesofreality.particle.type.SparkleParticleType;
+import com.hutoslib.client.particle.util.ParticleColor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.IParticleData;
@@ -62,6 +62,7 @@ public class ParticleInit {
 
 	@SubscribeEvent
 	public static void registerParticleFactories(ParticleFactoryRegisterEvent event) {
+
 		Minecraft.getInstance().particles.registerFactory(sparkle.get(), ParticleSparkleData::new);
 		// Chakra Colors
 		Minecraft.getInstance().particles.registerFactory(sahasrara.get(), ParticleSparkleData::new);

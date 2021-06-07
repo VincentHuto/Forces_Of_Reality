@@ -1,6 +1,6 @@
 package com.huto.forcesofreality.render.entity.layer;
 
-import com.huto.forcesofreality.capabilities.adornments.IAdornment;
+import com.huto.forcesofreality.capabilitie.adornment.IAdornment;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 

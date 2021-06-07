@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.layer;
 
-import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
+import com.huto.forcesofreality.entity.guardian.EntityDarkYoung;
 import com.huto.forcesofreality.init.ItemInit;
-import com.huto.forcesofreality.models.entity.guardians.ModelDarkYoung;
+import com.huto.forcesofreality.model.entity.guardian.ModelDarkYoung;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;

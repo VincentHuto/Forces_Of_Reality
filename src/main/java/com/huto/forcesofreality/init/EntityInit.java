@@ -1,50 +1,50 @@
 package com.huto.forcesofreality.init;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntityBeastFromBeyond;
-import com.huto.forcesofreality.entities.guardians.EntityDarkYoung;
-import com.huto.forcesofreality.entities.guardians.EntityHastur;
-import com.huto.forcesofreality.entities.guardians.EntityMalformedAutomaton;
-import com.huto.forcesofreality.entities.guardians.EntitySeraphim;
-import com.huto.forcesofreality.entities.guardians.EntityTheFirstBeast;
-import com.huto.forcesofreality.entities.guardians.EntityTulpa;
-import com.huto.forcesofreality.entities.lords.EntityLordOfTheWild;
-import com.huto.forcesofreality.entities.lords.EntityMechan;
-import com.huto.forcesofreality.entities.lords.EntityTetra;
-import com.huto.forcesofreality.entities.lords.EntityTrueXanthousKing;
-import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
-import com.huto.forcesofreality.entities.lords.EntityVeritas;
-import com.huto.forcesofreality.entities.lords.EntityXanthousKing;
-import com.huto.forcesofreality.entities.mobs.EntityDerangedBeast;
-import com.huto.forcesofreality.entities.mobs.EntityDevotee;
-import com.huto.forcesofreality.entities.mobs.EntityDreadBot;
-import com.huto.forcesofreality.entities.mobs.EntityHasturVassal;
-import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
-import com.huto.forcesofreality.entities.passive.EntityAngelicFowl;
-import com.huto.forcesofreality.entities.passive.EntityDenizen;
-import com.huto.forcesofreality.entities.passive.EntityDenizenSage;
-import com.huto.forcesofreality.entities.passive.EntitySlug;
-import com.huto.forcesofreality.entities.projectiles.EntityCorruptNote;
-import com.huto.forcesofreality.entities.projectiles.EntityDreadRocket;
-import com.huto.forcesofreality.entities.projectiles.EntityDreadRocketDirected;
-import com.huto.forcesofreality.entities.projectiles.EntityFirstBeastBolt;
-import com.huto.forcesofreality.entities.projectiles.EntityHolyFlare;
-import com.huto.forcesofreality.entities.projectiles.EntityHolySpirit;
-import com.huto.forcesofreality.entities.projectiles.EntityJudgement;
-import com.huto.forcesofreality.entities.projectiles.EntityShortCircuit;
-import com.huto.forcesofreality.entities.projectiles.EntityShorting;
-import com.huto.forcesofreality.entities.projectiles.EntityStarStrike;
-import com.huto.forcesofreality.entities.projectiles.EntityThrownAxe;
-import com.huto.forcesofreality.entities.projectiles.EntityTrackingOrb;
-import com.huto.forcesofreality.entities.projectiles.EntityWolfShot;
-import com.huto.forcesofreality.entities.summons.EntityBlackGoat;
-import com.huto.forcesofreality.entities.summons.EntityEldritchGrip;
-import com.huto.forcesofreality.entities.summons.EntityHasturClone;
-import com.huto.forcesofreality.entities.summons.EntityHasturSpawn;
-import com.huto.forcesofreality.entities.summons.EntityPlayerTentacle;
-import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
-import com.huto.forcesofreality.entities.summons.EntityTentacle;
-import com.huto.forcesofreality.entities.summons.EntityThrone;
+import com.huto.forcesofreality.entity.guardian.EntityBeastFromBeyond;
+import com.huto.forcesofreality.entity.guardian.EntityDarkYoung;
+import com.huto.forcesofreality.entity.guardian.EntityHastur;
+import com.huto.forcesofreality.entity.guardian.EntityMalformedAutomaton;
+import com.huto.forcesofreality.entity.guardian.EntitySeraphim;
+import com.huto.forcesofreality.entity.guardian.EntityTheFirstBeast;
+import com.huto.forcesofreality.entity.guardian.EntityTulpa;
+import com.huto.forcesofreality.entity.lord.EntityLordOfTheWild;
+import com.huto.forcesofreality.entity.lord.EntityMechan;
+import com.huto.forcesofreality.entity.lord.EntityTetra;
+import com.huto.forcesofreality.entity.lord.EntityTrueXanthousKing;
+import com.huto.forcesofreality.entity.lord.EntityUzouthrhix;
+import com.huto.forcesofreality.entity.lord.EntityVeritas;
+import com.huto.forcesofreality.entity.lord.EntityXanthousKing;
+import com.huto.forcesofreality.entity.mob.EntityDerangedBeast;
+import com.huto.forcesofreality.entity.mob.EntityDevotee;
+import com.huto.forcesofreality.entity.mob.EntityDreadBot;
+import com.huto.forcesofreality.entity.mob.EntityHasturVassal;
+import com.huto.forcesofreality.entity.mob.EntityScuttlingOcculus;
+import com.huto.forcesofreality.entity.passive.EntityAngelicFowl;
+import com.huto.forcesofreality.entity.passive.EntityDenizen;
+import com.huto.forcesofreality.entity.passive.EntityDenizenSage;
+import com.huto.forcesofreality.entity.passive.EntitySlug;
+import com.huto.forcesofreality.entity.projectile.EntityCorruptNote;
+import com.huto.forcesofreality.entity.projectile.EntityDreadRocket;
+import com.huto.forcesofreality.entity.projectile.EntityDreadRocketDirected;
+import com.huto.forcesofreality.entity.projectile.EntityFirstBeastBolt;
+import com.huto.forcesofreality.entity.projectile.EntityHolyFlare;
+import com.huto.forcesofreality.entity.projectile.EntityHolySpirit;
+import com.huto.forcesofreality.entity.projectile.EntityJudgement;
+import com.huto.forcesofreality.entity.projectile.EntityShortCircuit;
+import com.huto.forcesofreality.entity.projectile.EntityShorting;
+import com.huto.forcesofreality.entity.projectile.EntityStarStrike;
+import com.huto.forcesofreality.entity.projectile.EntityThrownAxe;
+import com.huto.forcesofreality.entity.projectile.EntityTrackingOrb;
+import com.huto.forcesofreality.entity.projectile.EntityWolfShot;
+import com.huto.forcesofreality.entity.summon.EntityBlackGoat;
+import com.huto.forcesofreality.entity.summon.EntityEldritchGrip;
+import com.huto.forcesofreality.entity.summon.EntityHasturClone;
+import com.huto.forcesofreality.entity.summon.EntityHasturSpawn;
+import com.huto.forcesofreality.entity.summon.EntityPlayerTentacle;
+import com.huto.forcesofreality.entity.summon.EntitySummonedBeast;
+import com.huto.forcesofreality.entity.summon.EntityTentacle;
+import com.huto.forcesofreality.entity.summon.EntityThrone;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -221,7 +221,7 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<EntityFirstBeastBolt>> first_beast_bolt = ENTITY_TYPES.register(
 			"first_beast_bolt",
 			() -> EntityType.Builder.<EntityFirstBeastBolt>create(EntityFirstBeastBolt::new, EntityClassification.MISC)
-					.size(0.5F, 0.5F).trackingRange(4).func_233608_b_(20)
+					.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
 					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "first_beast_bolt").toString()));
 
 	public static final RegistryObject<EntityType<EntityTrackingOrb>> tracking_orb = ENTITY_TYPES.register(

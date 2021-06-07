@@ -3,8 +3,8 @@ package com.huto.forcesofreality.render.entity.summons;
 import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.summons.EntitySummonedBeast;
-import com.huto.forcesofreality.models.entity.summons.ModelSummonedBeast;
+import com.huto.forcesofreality.entity.summon.EntitySummonedBeast;
+import com.huto.forcesofreality.model.entity.summon.ModelSummonedBeast;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;

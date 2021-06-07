@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.mobs;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.mobs.EntityScuttlingOcculus;
-import com.huto.forcesofreality.models.entity.mobs.ModelScuttlingOcculus;
+import com.huto.forcesofreality.entity.mob.EntityScuttlingOcculus;
+import com.huto.forcesofreality.model.entity.mob.ModelScuttlingOcculus;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

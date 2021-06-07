@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.mobs;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.mobs.EntityDreadBot;
-import com.huto.forcesofreality.models.entity.mobs.ModelDreadBot;
+import com.huto.forcesofreality.entity.mob.EntityDreadBot;
+import com.huto.forcesofreality.model.entity.mob.ModelDreadBot;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

@@ -2,10 +2,10 @@ package com.huto.forcesofreality.render.entity.layer;
 
 import java.util.List;
 
-import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
-import com.huto.forcesofreality.capabilities.covenant.ICovenant;
-import com.huto.forcesofreality.entities.utils.ModEntityPredicates;
+import com.huto.forcesofreality.capabilitie.covenant.CovenantProvider;
+import com.huto.forcesofreality.capabilitie.covenant.EnumCovenants;
+import com.huto.forcesofreality.capabilitie.covenant.ICovenant;
+import com.huto.forcesofreality.entity.util.ModEntityPredicates;
 import com.huto.forcesofreality.init.ItemInit;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

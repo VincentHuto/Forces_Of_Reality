@@ -38,7 +38,7 @@ maven {
 
 
 minecraft {
-	mappings channel: 'snapshot', version: '20201028-1.16.3'
+	mappings channel: 'snapshot', version: '20210309-1.16.4'
 
     runs {
         client {
@@ -98,7 +98,7 @@ dependencies {
    minecraft 'net.minecraftforge:forge:1.16.4-35.1.37'
    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.1.64:api")
    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.1.64")
-    implementation fg.deobf("curse.maven:hutoslib-478643:3335485")
+    compile fg.deobf("curse.maven:hutoslib-478643:3337034")
 }
  
 // Example for how to get properties into the manifest for reading by the runtime..

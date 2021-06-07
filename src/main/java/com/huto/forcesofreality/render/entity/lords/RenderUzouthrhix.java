@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.lords;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.lords.EntityUzouthrhix;
-import com.huto.forcesofreality.models.entity.lords.ModelUzouthrhix;
+import com.huto.forcesofreality.entity.lord.EntityUzouthrhix;
+import com.huto.forcesofreality.model.entity.lord.ModelUzouthrhix;
 import com.huto.forcesofreality.render.entity.layer.LayerUzouthrhixDeath;
 import com.huto.forcesofreality.render.entity.layer.LayerUzouthrihixGlow;
 import com.mojang.blaze3d.matrix.MatrixStack;

@@ -3,7 +3,7 @@ package com.huto.forcesofreality.events;
 import com.huto.forcesofreality.ForcesOfReality;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.init.RenderTypeInit;
-import com.huto.forcesofreality.objects.items.coven.tool.ItemMechanGlove;
+import com.huto.forcesofreality.item.coven.tool.ItemMechanGlove;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.containers.ContainerMechanGlove;
-import com.huto.forcesofreality.containers.PlayerExpandedContainer;
+import com.huto.forcesofreality.container.ContainerMechanGlove;
+import com.huto.forcesofreality.container.PlayerExpandedContainer;
 
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import com.huto.forcesofreality.capabilities.covenant.CovenantProvider;
-import com.huto.forcesofreality.capabilities.covenant.EnumCovenants;
+import com.huto.forcesofreality.capabilitie.covenant.CovenantProvider;
+import com.huto.forcesofreality.capabilitie.covenant.EnumCovenants;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

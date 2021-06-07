@@ -3,7 +3,7 @@ package com.huto.forcesofreality.render.entity.summons;
 import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.projectiles.EntityJudgement;
+import com.huto.forcesofreality.entity.projectile.EntityJudgement;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

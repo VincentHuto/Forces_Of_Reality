@@ -3,8 +3,8 @@ package com.huto.forcesofreality.render.entity.projectile;
 import javax.annotation.Nonnull;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.projectiles.EntityDreadRocketDirected;
-import com.huto.forcesofreality.models.entity.summons.ModelDreadRocketTracking;
+import com.huto.forcesofreality.entity.projectile.EntityDreadRocketDirected;
+import com.huto.forcesofreality.model.entity.summon.ModelDreadRocketTracking;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 

@@ -1,8 +1,8 @@
 package com.huto.forcesofreality.render.entity.guardians;
 
 import com.huto.forcesofreality.ForcesOfReality;
-import com.huto.forcesofreality.entities.guardians.EntityMalformedAutomaton;
-import com.huto.forcesofreality.models.entity.guardians.ModelMalformedAutomaton;
+import com.huto.forcesofreality.entity.guardian.EntityMalformedAutomaton;
+import com.huto.forcesofreality.model.entity.guardian.ModelMalformedAutomaton;
 import com.huto.forcesofreality.render.entity.layer.LayerAutomatonWindow;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;

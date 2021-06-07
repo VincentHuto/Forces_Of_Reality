@@ -2,7 +2,7 @@ package com.huto.forcesofreality.gui.adornments;
 
 import javax.annotation.Nullable;
 
-import com.huto.forcesofreality.containers.PlayerExpandedContainer;
+import com.huto.forcesofreality.container.PlayerExpandedContainer;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
