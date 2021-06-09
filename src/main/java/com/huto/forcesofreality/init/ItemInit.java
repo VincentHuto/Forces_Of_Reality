@@ -98,10 +98,6 @@ public class ItemInit {
 	public static final DeferredRegister<Item> SPAWNEGGS = DeferredRegister.create(ForgeRegistries.ITEMS,
 			ForcesOfReality.MOD_ID);
 
-	// Return Adornment
-	public static final RegistryObject<Item> resonance_destabalizer = ITEMS.register("resonance_destabalizer",
-			() -> new ItemResonanceDestabalizer(new Item.Properties().group(ForcesOfRealityItemGroup.instance)));
-
 	public static final RegistryObject<Item> allegiance_identifier = ITEMS.register("allegiance_identifier",
 			() -> new ItemAllegianceIdentifier(
 					new Item.Properties().group(ForcesOfRealityItemGroup.instance).maxStackSize(1)));

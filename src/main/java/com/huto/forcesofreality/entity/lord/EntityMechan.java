@@ -7,8 +7,8 @@ import com.huto.forcesofreality.entity.summon.EntitySummonedBeast;
 import com.huto.forcesofreality.init.EntityInit;
 import com.huto.forcesofreality.init.ItemInit;
 import com.huto.forcesofreality.sound.SoundHandler;
+import com.hutoslib.client.particle.factory.EmberParticleFactory;
 import com.hutoslib.client.particle.util.ParticleColor;
-import com.hutoslib.client.particle.factory.GlowParticleFactory;
 import com.hutoslib.common.HutosLibPacketHandler;
 import com.hutoslib.math.Vector3;
 
@@ -145,9 +145,10 @@ public class EntityMechan extends MonsterEntity implements IEntityAdditionalSpaw
 		if (world.isRemote) {
 			world.addParticle(ParticleTypes.SMOKE, getPosX() + particleMod, getPosY() + 1.87f + particleMod,
 					getPosZ() + particleMod, 0, 0.01f, 0);
-			world.addParticle(GlowParticleFactory.createData(getParticleColor()), getPosX() + particleMod,
-					getPosY() + 1.87f, getPosZ() + particleMod, 0, world.rand.nextFloat() * 0.01f, 0);
-			world.addParticle(GlowParticleFactory.createData(new ParticleColor(200, 200, 0)), getPosX(),
+			world.addParticle(EmberParticleFactory.createData(getParticleColor(), 1, 0.25f, 135),
+					getPosX() + particleMod, getPosY() + 1.87f, getPosZ() + particleMod, 0,
+					world.rand.nextFloat() * 0.01f, 0);
+			world.addParticle(EmberParticleFactory.createData(new ParticleColor(200, 200, 0), 1, 0.25f, 135), getPosX(),
 					getPosY() + 1.87f, getPosZ(), 0, world.rand.nextFloat() * 0.01f, 0);
 
 		}
@@ -212,7 +213,6 @@ public class EntityMechan extends MonsterEntity implements IEntityAdditionalSpaw
 		super.removeTrackingPlayer(player);
 		this.bossInfo.removePlayer(player);
 	}
-
 
 	@Override
 	protected SoundEvent getAmbientSound() {
