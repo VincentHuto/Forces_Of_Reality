@@ -7,7 +7,6 @@ import com.huto.forcesofreality.font.ModTextFormatting;
 import com.huto.forcesofreality.item.ItemAdvCovenTome;
 import com.huto.forcesofreality.item.ItemCovenTome;
 import com.huto.forcesofreality.item.ItemDryingAgent;
-import com.huto.forcesofreality.item.ItemResonanceDestabalizer;
 import com.huto.forcesofreality.item.ItemSacrificial;
 import com.huto.forcesofreality.item.ItemSlugBucket;
 import com.huto.forcesofreality.item.ItemSoakingAgent;
