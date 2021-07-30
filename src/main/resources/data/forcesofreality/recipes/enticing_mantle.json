@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BFB",
+    "FFF",
+    "FFF"
+  ],
+  "key": {
+    "B": {
+      "item": "forcesofreality:beastly_bone"
+    },
+    "F": {
+      "item": "forcesofreality:unkept_hide"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:enticing_mantle"
+  }
+}

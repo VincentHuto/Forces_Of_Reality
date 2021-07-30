@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "forcesofreality:items/auric_trick_axe_pulling_1"
+    }
+}

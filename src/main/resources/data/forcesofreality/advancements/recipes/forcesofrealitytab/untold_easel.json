@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:untold_easel"
+    ]
+  },
+  "criteria": {
+    "has_yellow_sign": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:yellow_sign"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:untold_easel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_yellow_sign",
+      "has_the_recipe"
+    ]
+  ]
+}

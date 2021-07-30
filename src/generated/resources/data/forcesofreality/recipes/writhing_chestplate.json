@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "RER",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "forcesofreality:writhing_thread"
+    },
+    "E": {
+      "item": "forcesofreality:ball_of_eyes"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:writhing_chestplate"
+  }
+}

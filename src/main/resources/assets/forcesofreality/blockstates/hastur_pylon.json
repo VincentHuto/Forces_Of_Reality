@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/hastur_pylon"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/hastur_pylon",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/hastur_pylon",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/hastur_pylon",
+			"y": 90
+		}
+	}
+}

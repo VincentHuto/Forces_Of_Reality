@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "forcesofreality:items/null_bow_blade_pulling_1"
+    }
+}

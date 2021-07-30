@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/occular_heap"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/occular_heap",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/occular_heap",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/occular_heap",
+			"y": 90
+		}
+	}
+}

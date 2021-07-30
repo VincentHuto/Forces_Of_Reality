@@ -1,0 +1,48 @@
+package com.huto.forcesofreality.render.entity.layer;
+
+import com.huto.forcesofreality.ForcesOfReality;
+import com.huto.forcesofreality.entity.guardian.EntityHastur;
+import com.huto.forcesofreality.model.entity.guardian.ModelHastur;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+
+public class LayerHasturAura extends RenderLayer<EntityHastur, ModelHastur> {
+	private static final ResourceLocation COLIN_ARMOR = new ResourceLocation(
+			ForcesOfReality.MOD_ID + ":textures/entity/hastur/hastur_aura.png");
+	private final ModelHastur hasturModel = new ModelHastur();
+
+	public LayerHasturAura(RenderLayerParent<EntityHastur, ModelHastur> entityRendererIn) {
+		super(entityRendererIn);
+	}
+
+	@Override
+	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn,
+			EntityHastur entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
+			float ageInTicks, float netHeadYaw, float headPitch) {
+		if (entitylivingbaseIn.isArmored()) {
+			float f = (float) entitylivingbaseIn.ticksExisted + partialTicks;
+			hasturModel.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
+			this.getEntityModel().copyModelAttributesTo(hasturModel);
+			float swirlSpeedMod = 0.00f;
+			if (!entitylivingbaseIn.isVulnerable()) {
+				swirlSpeedMod = 0.01f;
+			} else {
+				swirlSpeedMod = 0.04f;
+			}
+			IVertexBuilder ivertexbuilder = bufferIn
+					.getBuffer(RenderType.getEnergySwirl(COLIN_ARMOR, f * swirlSpeedMod, f * 0.01F));
+			hasturModel.setRotationAngles(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
+					headPitch);
+			hasturModel.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 0.5F, 0.5F,
+					0.5F, 0.5F);
+		}
+	}
+
+}

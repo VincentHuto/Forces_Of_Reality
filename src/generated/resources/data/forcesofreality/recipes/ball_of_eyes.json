@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forcesofreality:suspicious_eye"
+    },
+    {
+      "item": "forcesofreality:suspicious_eye"
+    },
+    {
+      "item": "forcesofreality:suspicious_eye"
+    },
+    {
+      "item": "forcesofreality:vitreous_humor"
+    },
+    {
+      "item": "forcesofreality:vitreous_humor"
+    }
+  ],
+  "result": {
+    "item": "forcesofreality:ball_of_eyes"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:writhing_boots"
+    ]
+  },
+  "criteria": {
+    "has_writhing_thread": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:writhing_thread"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:writhing_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_writhing_thread",
+      "has_the_recipe"
+    ]
+  ]
+}
