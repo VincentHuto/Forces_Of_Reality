@@ -11,7 +11,6 @@ import com.vincenthuto.forcesofreality.entity.projectile.EntityDreadRocketDirect
 import com.vincenthuto.forcesofreality.model.entity.summon.ModelDreadRocketTracking;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;

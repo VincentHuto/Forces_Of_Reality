@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.lord.EntityXanthousKing;
 import com.vincenthuto.forcesofreality.model.entity.lord.ModelXanthousKing;
-import com.vincenthuto.forcesofreality.model.entity.mob.ModelScuttlingOcculus;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.lord.EntityTetra;
 import com.vincenthuto.forcesofreality.model.entity.lord.ModelTetra;
-import com.vincenthuto.forcesofreality.model.entity.lord.ModelTrueXanthousKing;
 import com.vincenthuto.forcesofreality.render.entity.layer.LayerTetraGlow;
 
 import net.minecraft.client.renderer.MultiBufferSource;

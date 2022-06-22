@@ -44,7 +44,7 @@ public class ItemWatchfulPendant extends Item /* implements IAdornment, IRenderA
 //							Component.translatable(ChatFormatting.LIGHT_PURPLE + "You begin to see more clearly"),
 //							true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //				}
 //			}
 //		}
@@ -79,7 +79,7 @@ public class ItemWatchfulPendant extends Item /* implements IAdornment, IRenderA
 //					playerEnt.displayClientMessage(Component.translatable(
 //							ChatFormatting.LIGHT_PURPLE + "You suddenly feel as your being watched"), true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 //			}

@@ -1,5 +1,6 @@
 package com.vincenthuto.forcesofreality.gui;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,10 +11,12 @@ import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.container.ContainerMechanGlove;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
+import com.vincenthuto.hutoslib.client.screen.HLGuiUtils;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -52,7 +55,13 @@ public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove
 	@SuppressWarnings({ "deprecation", "resource" })
 	@Override
 	protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
-		drawTexturedQuad(leftPos, topPos, imageWidth, imageHeight, 0, 0, 1, 1, 0);
+		
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, GUI);
+		HLGuiUtils.drawTexturedModalRect(leftPos, topPos, 0, 0, imageWidth - 1, imageHeight);
+
+		
 	}
 
 	private void drawTexturedQuad(int x, int y, int width, int height, float tx, float ty, float tw, float th,

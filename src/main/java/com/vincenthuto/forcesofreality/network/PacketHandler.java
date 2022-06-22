@@ -3,15 +3,20 @@ package com.vincenthuto.forcesofreality.network;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.network.coven.MechanGloveActionMessage;
 import com.vincenthuto.forcesofreality.network.coven.MechanGloveOpenMessage;
+import com.vincenthuto.forcesofreality.network.coven.PacketCovenantClient;
+import com.vincenthuto.forcesofreality.network.coven.PacketCovenantServer;
 import com.vincenthuto.forcesofreality.network.coven.PacketDirectorToggleFlightMode;
 import com.vincenthuto.forcesofreality.network.coven.PacketToggleDirectorFlightModeMessage;
 import com.vincenthuto.forcesofreality.network.coven.PacketUpdateMechanModule;
 import com.vincenthuto.forcesofreality.network.coven.SetFlyPKT;
 import com.vincenthuto.forcesofreality.network.coven.SetGlideAnim;
 import com.vincenthuto.forcesofreality.network.coven.SetGlidePkt;
+import com.vincenthuto.forcesofreality.network.coven.SyncCovenPacket;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class PacketHandler {
@@ -28,18 +33,31 @@ public class PacketHandler {
 	public static final SimpleChannel CHANNELCOVENANT = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "covenantchannel"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+
 	public static final SimpleChannel CHANNELMODULETIER = NetworkRegistry.newSimpleChannel(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modulechannel"), () -> PROTOCOL_VERSION,
+			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+
+	public static SimpleChannel MECHANGLOVE = NetworkRegistry.newSimpleChannel(
+			new ResourceLocation(ForcesOfReality.MOD_ID, "mechanglovenetwork"), () -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
 	public static void registerChannels() {
 		// Register Networking packets
 
 		// Covenant
+		
+		CHANNELCOVENANT.registerMessage(networkID++, PacketCovenantServer.class, PacketCovenantServer::encode, PacketCovenantServer::decode,
+				PacketCovenantServer::handle);
+		CHANNELCOVENANT.registerMessage(networkID++, PacketCovenantClient.class, PacketCovenantClient::encode, PacketCovenantClient::decode,
+				PacketCovenantClient::handle);
+		CHANNELCOVENANT.registerMessage(networkID++, SyncCovenPacket.class, SyncCovenPacket::encode, SyncCovenPacket::decode,
+				SyncCovenPacket::handle);
+		
 //		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketClient.class, CovenantPacketClient::encode,
 //				CovenantPacketClient::decode, CovenantPacketClient::handle);
-//		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketServer.class, CovenantPacketServer::encode,
-//				CovenantPacketServer::decode, CovenantPacketServer::handle);
+//		CHANNELCOVENANT.registerMessage(networkID++, PacketCovenantServer.class, PacketCovenantServer::encode,
+//				PacketCovenantServer::decode, PacketCovenantServer::handle);
 //		CHANNELCOVENANT.messageBuilder(SyncCovenPacket.class, networkID++).encoder(SyncCovenPacket::encode)
 //				.decoder(SyncCovenPacket::new).consumer(SyncCovenPacket::handle).add();
 		// Fly
@@ -55,32 +73,23 @@ public class PacketHandler {
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ForcesOfReality.MOD_ID, "runechannel"),
 				() -> "1.0", s -> true, s -> true);
 
+		MECHANGLOVE.registerMessage(networkID++, MechanGloveActionMessage.class, MechanGloveActionMessage::encode,
+				MechanGloveActionMessage::decode, MechanGloveActionMessage::handle);
+
+		MECHANGLOVE.registerMessage(networkID++, PacketDirectorToggleFlightMode.class,
+				PacketDirectorToggleFlightMode::encode, PacketDirectorToggleFlightMode::decode,
+				PacketDirectorToggleFlightMode::handle);
+
+		MECHANGLOVE.registerMessage(networkID++, MechanGloveOpenMessage.class, MechanGloveOpenMessage::encode,
+				MechanGloveOpenMessage::decode, MechanGloveOpenMessage::handle);
+		MECHANGLOVE.registerMessage(networkID++, PacketToggleDirectorFlightModeMessage.class,
+				PacketToggleDirectorFlightModeMessage::encode, PacketToggleDirectorFlightModeMessage::decode,
+				PacketToggleDirectorFlightModeMessage::handle);
+
 	}
 
-	public static SimpleChannel MECHANGLOVE = NetworkRegistry.newSimpleChannel(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "mechanglovenetwork"), () -> PROTOCOL_VERSION,
-			PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-
-	public static SimpleChannel registerMechanGloveChannels() {
-		MECHANGLOVE.messageBuilder(MechanGloveOpenMessage.class, networkID++).decoder(MechanGloveOpenMessage::decode)
-				.encoder(MechanGloveOpenMessage::encode).consumer(MechanGloveOpenMessage::handle).add();
-		MECHANGLOVE.messageBuilder(MechanGloveActionMessage.class, networkID++)
-				.decoder(MechanGloveActionMessage::decode).encoder(MechanGloveActionMessage::encode)
-				.consumer(MechanGloveActionMessage::handle).add();
-
-		MECHANGLOVE.messageBuilder(PacketDirectorToggleFlightMode.class, networkID++)
-				.decoder(PacketDirectorToggleFlightMode::decode).encoder(PacketDirectorToggleFlightMode::encode)
-				.consumer(PacketDirectorToggleFlightMode::handle).add();
-		MECHANGLOVE.messageBuilder(PacketToggleDirectorFlightModeMessage.class, networkID++)
-				.decoder(PacketToggleDirectorFlightModeMessage::decode)
-				.encoder(PacketToggleDirectorFlightModeMessage::encode)
-				.consumer(PacketToggleDirectorFlightModeMessage::handle).add();
-
-		return MECHANGLOVE;
+	public static void sendCovenToClients(SyncCovenPacket myPacket, Player affectedEntity) {
+		CHANNELCOVENANT.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> affectedEntity), myPacket);
 	}
-//
-//	public static void sendCovenToClients(SyncCovenPacket myPacket, Player affectedEntity) {
-//		CHANNELCOVENANT.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> affectedEntity), myPacket);
-//	}
 
 }

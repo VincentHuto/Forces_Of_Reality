@@ -38,7 +38,7 @@ public class ItemYellowSign extends Item /* implements IAdornment, IRenderAdornm
 //					playerEnt.displayClientMessage(
 //							Component.translatable(ChatFormatting.YELLOW + "Lord Hastur Accepts your Fealty"), true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 //			}
@@ -74,7 +74,7 @@ public class ItemYellowSign extends Item /* implements IAdornment, IRenderAdornm
 //					playerEnt.displayClientMessage(
 //							Component.translatable(ChatFormatting.YELLOW + "Lord Hastur Renounces your Fealty"), true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+		//					new PacketCovenantServer(coven.getDevotion()));
 //				}
 //			}
 //		}

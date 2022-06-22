@@ -126,7 +126,6 @@ public class ItemMechanGlove extends Item {
 					tooltip.add(Component.translatable(ChatFormatting.LIGHT_PURPLE + "Level: " + rare));
 					tooltip.add(Component.translatable(ChatFormatting.GREEN + "Supported Modules: " + size));
 					if (stack.hasTag()) {
-						@SuppressWarnings("static-access")
 						ItemStack selectedModuleStack = ItemStack
 								.of((CompoundTag) stack.getTag().get(TAG_SELECTEDSTACK));
 						if (selectedModuleStack.getItem() != Items.AIR) {
@@ -240,42 +239,41 @@ public class ItemMechanGlove extends Item {
 	public void moduleUse(Player playerIn, InteractionHand handIn, ItemStack itemStack, Level worldIn) {
 		// ICovenant coven =
 		// playerIn.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+		if (itemStack != null) {
+			if (itemStack.getTag() != null) {
+				if (itemStack.getTag().get(TAG_SELECTEDSTACK) != null) {
+					// if (coven.getDevotionByCoven(EnumCovenants.MACHINE) > 1) {
 
-		if (itemStack.getTag() != null) {
-			if (itemStack.getTag().get(TAG_SELECTEDSTACK) != null) {
-				// if (coven.getDevotionByCoven(EnumCovenants.MACHINE) > 1) {
+					ItemStack moduleStack = ItemStack.of((CompoundTag) itemStack.getTag().get(TAG_SELECTEDSTACK));
+					if (moduleStack.getItem() instanceof IModuleUse) {
+						if (((IModuleUse) moduleStack.getItem()).canUseModule(rare)) {
+							((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
+							itemStack.hurtAndBreak(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn,
+									(entity) -> {
+										entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+									});
 
-				ItemStack moduleStack = ItemStack.of((CompoundTag) itemStack.getTag().get(TAG_SELECTEDSTACK));
-				if (moduleStack.getItem() instanceof IModuleUse) {
-					if (((IModuleUse) moduleStack.getItem()).canUseModule(rare)) {
-						((IModuleUse) moduleStack.getItem()).use(playerIn, handIn, itemStack, worldIn);
-						itemStack.hurtAndBreak(((IModuleUse) moduleStack.getItem()).getDamageCost(), playerIn,
-								(entity) -> {
-									entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-								});
-
-						if (worldIn.random.nextInt(101) < ((IModuleUse) moduleStack.getItem()).getAllegianceChance()) {
+							if (worldIn.random.nextInt(101) < ((IModuleUse) moduleStack.getItem())
+									.getAllegianceChance()) {
 //						//		coven.setCovenDevotion(EnumCovenants.MACHINE, -1);
 //								PacketHandler.CHANNELCOVENANT.send(
 //										PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerIn),
-//										new CovenantPacketServer(coven.getDevotion()));
+//										new PacketCovenantServer(coven.getDevotion()));
+								playerIn.displayClientMessage(Component.translatable(
+										ChatFormatting.RED + "Abuse of Power does not come without consequence"), true);
+							}
+
+						} else {
 							playerIn.displayClientMessage(
-									Component.translatable(
-											ChatFormatting.RED + "Abuse of Power does not come without consequence"),
+									Component.translatable(ChatFormatting.GRAY + "Glove not capable of using module!"),
 									true);
 						}
-
-					} else {
-						playerIn.displayClientMessage(
-								Component.translatable(ChatFormatting.GRAY + "Glove not capable of using module!"),
-								true);
 					}
+				} else {
+					playerIn.displayClientMessage(
+							Component.translatable(ChatFormatting.RED + "Your Devotion is not high enough"), true);
 				}
-			} else {
-				playerIn.displayClientMessage(
-						Component.translatable(ChatFormatting.RED + "Your Devotion is not high enough"), true);
 			}
-
 		}
 	}
 
@@ -371,7 +369,7 @@ public class ItemMechanGlove extends Item {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-		if (worldIn.isClientSide) {
+		if (worldIn.isClientSide()) {
 			if (!playerIn.isShiftKeyDown()) {
 				PacketHandler.MECHANGLOVE.sendToServer(new MechanGloveActionMessage());
 			}

@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 
 import com.vincenthuto.forcesofreality.init.BlockInit;
 import com.vincenthuto.forcesofreality.init.SoundInit;
-import com.vincenthuto.forcesofreality.tile.BlockEntityMachinaImperfecta;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityAuspiciousBundle;
 
 import net.minecraft.core.BlockPos;
@@ -77,8 +76,8 @@ public class BlockAuspiciousBundle extends Block implements EntityBlock {
 	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos,
 			@Nonnull RandomSource random) {
-		BlockEntityMachinaImperfecta tile = (BlockEntityMachinaImperfecta) world.getBlockEntity(pos);
-		if (tile != null && tile instanceof BlockEntityMachinaImperfecta) {
+		BlockEntityAuspiciousBundle tile = (BlockEntityAuspiciousBundle) world.getBlockEntity(pos);
+		if (tile != null && tile instanceof BlockEntityAuspiciousBundle) {
 			int count = (int) (6 * 0.5f);
 			if (count > 0) {
 				for (int i = 0; i < random.nextInt(count); i++) {

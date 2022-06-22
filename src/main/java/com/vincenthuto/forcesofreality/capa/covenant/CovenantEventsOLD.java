@@ -1,29 +1,20 @@
+package com.vincenthuto.forcesofreality.capa.covenant;
 //package com.vincenthuto.forcesofreality.capa.covenant;
 //
-//import java.awt.Color;
 //import java.awt.Point;
 //import java.util.List;
 //import java.util.Map;
 //
-//import com.mojang.blaze3d.platform.GlStateManager;
 //import com.vincenthuto.forcesofreality.ForcesOfReality;
-//import com.vincenthuto.forcesofreality.capa.adornment.AdornmentsApi;
-//import com.vincenthuto.forcesofreality.capa.adornment.IAdornmentsItemHandler;
 //import com.vincenthuto.forcesofreality.entity.util.ModEntityPredicates;
-//import com.vincenthuto.forcesofreality.font.ModTextFormatting;
-//import com.vincenthuto.forcesofreality.init.EnchantmentInit;
 //import com.vincenthuto.forcesofreality.init.ItemInit;
-//import com.vincenthuto.forcesofreality.item.ItemAdornment;
 //import com.vincenthuto.forcesofreality.network.PacketHandler;
-//import com.vincenthuto.forcesofreality.network.coven.CovenantPacketServer;
+//import com.vincenthuto.forcesofreality.network.coven.PacketCovenantServer;
 //import com.vincenthuto.forcesofreality.network.coven.SetFlyPKT;
-//import com.vincenthuto.forcesofreality.network.coven.SyncCovenPacket;
 //import com.vincenthuto.hutoslib.math.Vector3;
 //
 //import net.minecraft.ChatFormatting;
-//import net.minecraft.client.Minecraft;
 //import net.minecraft.client.gui.Font;
-//import net.minecraft.client.gui.GuiComponent;
 //import net.minecraft.core.particles.ParticleTypes;
 //import net.minecraft.network.chat.Component;
 //import net.minecraft.resources.ResourceLocation;
@@ -32,17 +23,8 @@
 //import net.minecraft.world.entity.Entity;
 //import net.minecraft.world.entity.EquipmentSlot;
 //import net.minecraft.world.entity.player.Player;
-//import net.minecraft.world.item.Item;
-//import net.minecraft.world.item.ItemStack;
-//import net.minecraft.world.item.Items;
-//import net.minecraft.world.item.enchantment.EnchantmentHelper;
 //import net.minecraft.world.level.Level;
-//import net.minecraft.world.level.block.Block;
 //import net.minecraft.world.phys.AABB;
-//import net.minecraftforge.api.distmarker.Dist;
-//import net.minecraftforge.api.distmarker.OnlyIn;
-//import net.minecraftforge.client.event.RenderGameOverlayEvent;
-//import net.minecraftforge.common.Tags;
 //import net.minecraftforge.event.AttachCapabilitiesEvent;
 //import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 //import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -50,7 +32,6 @@
 //import net.minecraftforge.event.entity.player.PlayerEvent;
 //import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 //import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
-//import net.minecraftforge.event.world.BlockEvent;
 //import net.minecraftforge.eventbus.api.SubscribeEvent;
 //import net.minecraftforge.network.PacketDistributor;
 //
@@ -68,7 +49,7 @@
 //		ServerPlayer player = (ServerPlayer) event.getPlayer();
 //		Map<EnumCovenants, Integer> covenant = CovenantProvider.getPlayerDevotion(player);
 //		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
-//				new CovenantPacketServer(covenant));
+//				new PacketCovenantServer(covenant));
 //		player.displayClientMessage(Component.translatable("Welcome! Current Covenant: " + ChatFormatting.GOLD + covenant),
 //				false);
 //	}
@@ -78,7 +59,7 @@
 //		ServerPlayer player = (ServerPlayer) event.getPlayer();
 //		Map<EnumCovenants, Integer> covenant = CovenantProvider.getPlayerDevotion(player);
 //		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
-//				new CovenantPacketServer(covenant));
+//				new PacketCovenantServer(covenant));
 //		player.displayClientMessage(Component.translatable("Welcome! Current Covenant: " + ChatFormatting.GOLD + covenant),
 //				false);
 //	}
@@ -100,32 +81,32 @@
 //				ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
 //						.orElseThrow(IllegalArgumentException::new);
 //				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-//						new CovenantPacketServer(coven.getDevotion()));
+//						new PacketCovenantServer(coven.getDevotion()));
 //			}
 //		}
 //	}
 //
-//	@SubscribeEvent
-//	public static void onDropAdornment(LivingDeathEvent e) {
-//		if (e.getEntity() instanceof Player) {
-//			Player player = (Player) e.getEntity();
-//			IAdornmentsItemHandler runes = AdornmentsApi.getAdornmentsHandler(player)
-//					.orElseThrow(IllegalArgumentException::new);
-//			for (int i = 0; i < runes.getSlots(); ++i) {
-//				if (!runes.getStackInSlot(i).isEmpty() && runes.getStackInSlot(i).getItem() instanceof ItemAdornment) {
+////	@SubscribeEvent
+////	public static void onDropAdornment(LivingDeathEvent e) {
+////		if (e.getEntity() instanceof Player) {
+////			Player player = (Player) e.getEntity();
+////			IAdornmentsItemHandler runes = AdornmentsApi.getAdornmentsHandler(player)
+////					.orElseThrow(IllegalArgumentException::new);
+////			for (int i = 0; i < runes.getSlots(); ++i) {
+////				if (!runes.getStackInSlot(i).isEmpty() && runes.getStackInSlot(i).getItem() instanceof ItemAdornment) {
 //					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
-//							.orElseThrow(IllegalArgumentException::new);
-//					ItemAdornment contractAdornment = (ItemAdornment) runes.getStackInSlot(i).getItem();
-//					coven.setCovenDevotion(contractAdornment.getAssignedCovenant(),
-//							-contractAdornment.getDeepenAmount());
-//					player.displayClientMessage(
-//							Component.translatable(ChatFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"), false);
+////							.orElseThrow(IllegalArgumentException::new);
+////					ItemAdornment contractAdornment = (ItemAdornment) runes.getStackInSlot(i).getItem();
+////					coven.setCovenDevotion(contractAdornment.getAssignedCovenant(),
+////							-contractAdornment.getDeepenAmount());
+////					player.displayClientMessage(
+////							Component.translatable(ChatFormatting.DARK_AQUA + "Your Lord Renounces your Fealty"), false);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-//							new CovenantPacketServer(coven.getDevotion()));
-//				}
-//			}
-//		}
-//	}
+//							new PacketCovenantServer(coven.getDevotion()));
+////				}
+////			}
+////		}
+////	}
 //
 //
 //	public static void updateClientServerFlight(ServerPlayer player, boolean allowFlying) {
@@ -241,17 +222,17 @@
 //		}
 //	}
 //
-//	@SubscribeEvent
-//	public static void playerTick(PlayerTickEvent evt) {
-//		if (!evt.player.level.isClientSide) {
-//			if (evt.player.level.getGameTime() % 100 == 0) {
-//				evt.player.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
-//					PacketHandler.sendCovenToClients(new SyncCovenPacket(covens.getDevotion(), evt.player.getId()),
-//							evt.player);
-//				});
-//			}
-//		}
-//	}
+////	@SubscribeEvent
+////	public static void playerTick(PlayerTickEvent evt) {
+////		if (!evt.player.level.isClientSide) {
+////			if (evt.player.level.getGameTime() % 100 == 0) {
+////				evt.player.getCapability(CovenantProvider.COVEN_CAPA).ifPresent(covens -> {
+////					PacketHandler.sendCovenToClients(new SyncCovenPacket(covens.getDevotion(), evt.player.getId()),
+////							evt.player);
+////				});
+////			}
+////		}
+////	}
 //
 //	private static Font fontRenderer;
 //

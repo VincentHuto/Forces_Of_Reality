@@ -44,7 +44,6 @@ import com.vincenthuto.forcesofreality.entity.summon.EntityHasturSpawn;
 import com.vincenthuto.forcesofreality.entity.summon.EntityPlayerTentacle;
 import com.vincenthuto.forcesofreality.entity.summon.EntitySummonedBeast;
 import com.vincenthuto.forcesofreality.entity.summon.EntityTentacle;
-import com.vincenthuto.forcesofreality.entity.summon.EntityThrone;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;

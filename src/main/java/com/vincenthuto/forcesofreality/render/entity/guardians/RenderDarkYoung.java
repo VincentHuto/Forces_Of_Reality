@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityDarkYoung;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelDarkYoung;
-import com.vincenthuto.forcesofreality.model.entity.guardian.ModelHastur;
 import com.vincenthuto.forcesofreality.render.entity.layer.LayerDarkYoungDeath;
 import com.vincenthuto.forcesofreality.render.entity.layer.LayerDarkYoungPendant;
 
@@ -12,8 +11,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class RenderDarkYoung extends MobRenderer<EntityDarkYoung, ModelDarkYoung> {
 

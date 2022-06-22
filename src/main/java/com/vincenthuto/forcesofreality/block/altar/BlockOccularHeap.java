@@ -3,10 +3,15 @@ package com.vincenthuto.forcesofreality.block.altar;
 import java.util.stream.Stream;
 
 import com.vincenthuto.forcesofreality.block.util.IBlockDevotionStation;
+import com.vincenthuto.forcesofreality.capa.covenant.CovenantProvider;
 import com.vincenthuto.forcesofreality.capa.covenant.EnumCovenants;
+import com.vincenthuto.forcesofreality.capa.covenant.ICovenant;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityDarkYoung;
 import com.vincenthuto.forcesofreality.init.EntityInit;
+import com.vincenthuto.forcesofreality.init.SoundInit;
 import com.vincenthuto.forcesofreality.item.ItemSacrificial;
+import com.vincenthuto.forcesofreality.network.PacketHandler;
+import com.vincenthuto.forcesofreality.network.coven.PacketCovenantServer;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityOccularHeap;
 import com.vincenthuto.hutoslib.common.network.VanillaPacketDispatcher;
 
@@ -14,6 +19,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,6 +45,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.PacketDistributor;
 
 public class BlockOccularHeap extends Block implements IBlockDevotionStation, EntityBlock {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -143,7 +150,7 @@ public class BlockOccularHeap extends Block implements IBlockDevotionStation, En
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
 			BlockHitResult hit) {
 		BlockEntityOccularHeap te = (BlockEntityOccularHeap) worldIn.getBlockEntity(pos);
-	//	ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getMainHandItem();
 		// Upgrade clause
 
@@ -163,40 +170,40 @@ public class BlockOccularHeap extends Block implements IBlockDevotionStation, En
 			ItemSacrificial sac = (ItemSacrificial) stack.getItem();
 			if (sac.getCoven() == te.getCovenType()) {
 				if (worldIn.isClientSide) {
-					// player.playSound(SoundHandler.ENTITY_SERAPHIM_FLARE, 0.6F, 0.8F);
+					player.playSound(SoundInit.ENTITY_SERAPHIM_FLARE.get(), 0.6F, 0.8F);
 					return InteractionResult.SUCCESS;
 				} else {
-//					if (te.devo.getDevotion() < 30) {
-//						te.checkStructure();
-//						//te.devo.addDevotion(sac.getDevoAmount());
-//						player.getMainHandItem().shrink(1);
-////						coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
-////						PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-////								new CovenantPacketServer(coven.getDevotion()));
-//						VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-//						player.displayClientMessage(
-//								Component.translatable(ChatFormatting.GOLD + "Your offering was accepted"), true);
-//						return InteractionResult.SUCCESS;
-//					} else {
-//						te.checkStructure();
-//						//te.devo.addDevotion(sac.getDevoAmount());
-//						player.getMainHandItem().shrink(1);
-////						coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
-////						PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-////								new CovenantPacketServer(coven.getDevotion()));
-//						VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-//						player.displayClientMessage(
-//								Component.translatable(
-//										ChatFormatting.DARK_PURPLE + "So much fealty was sure to draw attention..."),
-//								true);
-//						worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-//						worldIn.explode(null, pos.getX(), pos.getY(), pos.getZ(), 1.0F,
-//								Explosion.BlockInteraction.NONE);
-//						EntityDarkYoung summon = new EntityDarkYoung(EntityInit.dark_young.get(), worldIn);
-//						summon.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-//						worldIn.addFreshEntity(summon);
-//						return InteractionResult.SUCCESS;
-//					}
+					if (te.devo.getDevotion() < 30) {
+						te.checkStructure();
+						te.devo.addDevotion(sac.getDevoAmount());
+						player.getMainHandItem().shrink(1);
+						coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
+						PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+								new PacketCovenantServer(coven.getDevotion()));
+						VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+						player.displayClientMessage(
+								Component.translatable(ChatFormatting.GOLD + "Your offering was accepted"), true);
+						return InteractionResult.SUCCESS;
+					} else {
+						te.checkStructure();
+						te.devo.addDevotion(sac.getDevoAmount());
+						player.getMainHandItem().shrink(1);
+						coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
+						PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+								new PacketCovenantServer(coven.getDevotion()));
+						VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+						player.displayClientMessage(
+								Component.translatable(
+										ChatFormatting.DARK_PURPLE + "So much fealty was sure to draw attention..."),
+								true);
+						worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+						worldIn.explode(null, pos.getX(), pos.getY(), pos.getZ(), 1.0F,
+								Explosion.BlockInteraction.NONE);
+						EntityDarkYoung summon = new EntityDarkYoung(EntityInit.dark_young.get(), worldIn);
+						summon.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+						worldIn.addFreshEntity(summon);
+						return InteractionResult.SUCCESS;
+					}
 				}
 			} else {
 				player.displayClientMessage(Component.translatable(ChatFormatting.RED + "Incorrect Offering Type"),
@@ -216,7 +223,6 @@ public class BlockOccularHeap extends Block implements IBlockDevotionStation, En
 			return InteractionResult.FAIL;
 
 		}
-		return InteractionResult.FAIL;
 
 	}
 

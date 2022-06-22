@@ -47,7 +47,7 @@ public class ItemDivineFeather extends Item {
 //							coven.setCovenDevotion(EnumCovenants.ASCENDANT, -1);
 //							PacketHandler.CHANNELCOVENANT.send(
 //									PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerentity),
-//									new CovenantPacketServer(coven.getDevotion()));
+//									new PacketCovenantServer(coven.getDevotion()));
 							playerentity.displayClientMessage(Component.translatable(
 									ChatFormatting.DARK_AQUA + "Abuse of Power does not come without consequence"),
 									true);

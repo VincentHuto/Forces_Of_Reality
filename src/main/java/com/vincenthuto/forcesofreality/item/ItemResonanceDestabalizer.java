@@ -5,7 +5,12 @@ import java.util.Optional;
 
 import javax.annotation.Nullable;
 
+import com.vincenthuto.forcesofreality.capa.covenant.CovenantProvider;
+import com.vincenthuto.forcesofreality.capa.covenant.EnumCovenants;
+import com.vincenthuto.forcesofreality.capa.covenant.ICovenant;
 import com.vincenthuto.forcesofreality.init.SoundInit;
+import com.vincenthuto.forcesofreality.network.PacketHandler;
+import com.vincenthuto.forcesofreality.network.coven.PacketCovenantServer;
 import com.vincenthuto.hutoslib.math.DimensionalPosition;
 
 import net.minecraft.ChatFormatting;
@@ -25,6 +30,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.network.PacketDistributor;
 
 public class ItemResonanceDestabalizer extends Item {
 
@@ -89,15 +95,15 @@ public class ItemResonanceDestabalizer extends Item {
 					ServerLevel ovw = world.getServer().getLevel(key);
 					serverPlayer.teleportTo(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5, serverPlayer.getYRot(),
 							serverPlayer.getXRot());
-//					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
-//							.orElseThrow(NullPointerException::new);
+					ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
+							.orElseThrow(NullPointerException::new);
 //
-//					for (EnumCovenants cov : coven.getDevotion().keySet()) {
-//						coven.getDevotion().put(cov, 0);
-//					}
-//					serverPlayer.setExperienceLevels(0);
-//					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-//							new CovenantPacketServer(coven.getDevotion()));
+					for (EnumCovenants cov : coven.getDevotion().keySet()) {
+						coven.getDevotion().put(cov, 0);
+					}
+					serverPlayer.setExperienceLevels(0);
+					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 				}
@@ -108,7 +114,7 @@ public class ItemResonanceDestabalizer extends Item {
 
 				player.playSound(SoundInit.ENTITY_SERAPHIM_DEATH.get(), 0.6F, 0.8F);
 			}
-		
+
 		}
 		return InteractionResultHolder.success(stack);
 

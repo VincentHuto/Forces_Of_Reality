@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityMalformedAutomaton;
-import com.vincenthuto.forcesofreality.model.entity.guardian.ModelHastur;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelMalformedAutomaton;
 import com.vincenthuto.forcesofreality.render.entity.layer.LayerAutomatonWindow;
 

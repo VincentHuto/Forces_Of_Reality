@@ -24,7 +24,7 @@
 //				ICovenant covenant = sender.getCapability(CovenantProvider.COVEN_CAPA)
 //						.orElseThrow(IllegalStateException::new);
 //				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> sender),
-//						new CovenantPacketServer(covenant.getDevotion()));
+//						new PacketCovenantServer(covenant.getDevotion()));
 //			}
 //		});
 //		ctx.get().setPacketHandled(true);

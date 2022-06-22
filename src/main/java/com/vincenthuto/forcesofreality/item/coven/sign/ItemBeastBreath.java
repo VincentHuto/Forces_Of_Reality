@@ -37,7 +37,7 @@ public class ItemBeastBreath extends Item /* implements IAdornment, IRenderAdorn
 //									ChatFormatting.DARK_RED + "The Howl of a Great Beast can be Heard in the Distance"),
 //							true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 //			}
@@ -73,7 +73,7 @@ public class ItemBeastBreath extends Item /* implements IAdornment, IRenderAdorn
 //					playerEnt.displayClientMessage(
 //							Component.translatable(ChatFormatting.DARK_RED + "The Hunt has begun..."), true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 //			}

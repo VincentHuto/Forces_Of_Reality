@@ -2,29 +2,31 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
+import com.vincenthuto.forcesofreality.ForcesOfReality;
+import com.vincenthuto.forcesofreality.model.block.ModelHasturPylon;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityHasturPylon;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
 
 public class RenderHasturPylon implements BlockEntityRenderer<BlockEntityHasturPylon> {
-//	private final ModelHasturPylon pylon = new ModelHasturPylon();
+	private final ModelHasturPylon pylon;
 //	public static final NonNullLazy<ObjModelHandler> modelTorus = NonNullLazy
 //			.of(() -> ObjModelHandler.of("forcesofreality:models/block/torus.obj"));
 
 	public RenderHasturPylon(BlockEntityRendererProvider.Context rendererDispatcherIn) {
-		super();
+		pylon = new ModelHasturPylon(rendererDispatcherIn.bakeLayer(ModelHasturPylon.LAYER_LOCATION));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void render(BlockEntityHasturPylon te, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		
-		
 
 		// Cubes
 		matrixStackIn.translate(0.5, 1.6, 0.5);
@@ -35,10 +37,10 @@ public class RenderHasturPylon implements BlockEntityRenderer<BlockEntityHasturP
 		matrixStackIn.mulPose(Vector3f.YP.rotation((float) (0.05 * ticks)));
 		matrixStackIn.mulPose(Vector3f.ZN.rotationDegrees(180));
 		MultiBufferSource.BufferSource impl = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-		//VertexConsumer ivertexbuilder = impl.getBuffer(
-		//		pylon.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/hastur_pylon.png")));
-	//	pylon.renderToBuffer(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F,
-		//		1.0F, 1.0F);
+		VertexConsumer ivertexbuilder = impl.getBuffer(
+				pylon.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/hastur_pylon.png")));
+		pylon.renderToBuffer(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F,
+				1.0F, 1.0F);
 		impl.endBatch();
 		matrixStackIn.popPose();
 

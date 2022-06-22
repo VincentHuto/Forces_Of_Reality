@@ -11,12 +11,10 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class MechanGloveActionMessage {
 	public static MechanGloveActionMessage decode(final FriendlyByteBuf buffer) {
-		buffer.readByte();
 		return new MechanGloveActionMessage();
 	}
 
 	public static void encode(final MechanGloveActionMessage message, final FriendlyByteBuf buffer) {
-		buffer.writeByte(0);
 	}
 
 	public static void handle(final MechanGloveActionMessage message, final Supplier<NetworkEvent.Context> ctx) {
@@ -24,6 +22,7 @@ public class MechanGloveActionMessage {
 			Player player = ctx.get().getSender();
 			if (player == null)
 				return;
+
 			if (player.getMainHandItem().getItem() instanceof ItemMechanGlove) {
 				((ItemMechanGlove) player.getMainHandItem().getItem()).moduleUse(player, InteractionHand.MAIN_HAND,
 						player.getMainHandItem(), player.getCommandSenderWorld());

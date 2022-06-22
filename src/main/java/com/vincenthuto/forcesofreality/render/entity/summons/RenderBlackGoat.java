@@ -7,7 +7,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.summon.EntityBlackGoat;
-import com.vincenthuto.forcesofreality.model.entity.passive.ModelAngelicFowl;
 import com.vincenthuto.forcesofreality.model.entity.summon.ModelBlackGoat;
 
 import net.minecraft.client.renderer.MultiBufferSource;

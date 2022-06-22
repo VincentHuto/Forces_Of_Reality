@@ -44,7 +44,7 @@ public class ItemDemonFlute extends Item {
 //						coven.setCovenDevotion(EnumCovenants.ELDRITCH, -1);
 //						PacketHandler.CHANNELCOVENANT.send(
 //								PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerentity),
-//								new CovenantPacketServer(coven.getDevotion()));
+//								new PacketCovenantServer(coven.getDevotion()));
 						playerentity.displayClientMessage(Component.translatable(
 								ChatFormatting.DARK_PURPLE + "Abuse of Power does not come without consequence"), true);
 					}

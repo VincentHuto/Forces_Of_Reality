@@ -38,7 +38,7 @@ public class ItemIntegralCog extends Item /* implements IAdornment, IRenderAdorn
 //					playerEnt.displayClientMessage(
 //							Component.translatable(ChatFormatting.GOLD + "The gears in your mind spin freely"), true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 //			}
@@ -74,7 +74,7 @@ public class ItemIntegralCog extends Item /* implements IAdornment, IRenderAdorn
 //					playerEnt.displayClientMessage(
 //							Component.translatable(ChatFormatting.GOLD + "You feel as if your short circuiting"), true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //
 //				}
 //			}

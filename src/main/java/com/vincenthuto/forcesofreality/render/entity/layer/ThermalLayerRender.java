@@ -5,6 +5,9 @@ import java.util.List;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.vincenthuto.forcesofreality.capa.covenant.CovenantProvider;
+import com.vincenthuto.forcesofreality.capa.covenant.EnumCovenants;
+import com.vincenthuto.forcesofreality.capa.covenant.ICovenant;
 import com.vincenthuto.forcesofreality.entity.util.ModEntityPredicates;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 
@@ -64,48 +67,48 @@ public class ThermalLayerRender extends RenderType {
 		Minecraft mc = Minecraft.getInstance();
 		Player player = mc.player;
 		if (player.isAlive()) {
-//			ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
-//					.orElseThrow(IllegalArgumentException::new);
+			ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA)
+					.orElseThrow(IllegalArgumentException::new);
 			if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() != ItemInit.influence_supressor.get()) {
-//				if (coven != null && coven.getDevotion().get(EnumCovenants.BEAST) != null) {
-//					if (coven.getDevotion().get(EnumCovenants.BEAST) >= 10) {
-				// if (stack.getItem() == ItemInit.beastly_bone.get()) {}
-				List<Entity> entList = player.level.getEntities(player, player.getBoundingBox().inflate(30),
-						EntitySelector.ENTITY_STILL_ALIVE);
-				for (Entity ent : entList) {
-					if (ent instanceof LivingEntity) {
-						LivingEntity livEnt = (LivingEntity) ent;
-						if (livEnt != null) {
-							if (ModEntityPredicates.WARMBLOODED.test(ent)) {
-								renderEntityOutline(ent, 255, 125, 0,
-										(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
-							}
-							if (ModEntityPredicates.COLDBLOODED.test(ent)) {
-								renderEntityOutline(ent, 0, 125, 125,
-										(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
-							}
-							if (ModEntityPredicates.UNDEAD.test(ent)) {
-								renderEntityOutline(ent, 255, 255, 255,
-										(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
-							}
-							if (ModEntityPredicates.ENDERBLOOD.test(ent)) {
-								renderEntityOutline(ent, 255, 0, 255,
-										(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
-							}
-							if (ModEntityPredicates.PLANTBLOOD.test(ent)) {
-								renderEntityOutline(ent, 0, 125, 0,
-										(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
-							}
-							if (ModEntityPredicates.INFERNALBLOOD.test(ent)) {
-								renderEntityOutline(ent, 255, 0, 0,
-										(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+				if (coven != null && coven.getDevotion().get(EnumCovenants.BEAST) != null) {
+					if (coven.getDevotion().get(EnumCovenants.BEAST) >= 10) {
+						// if (stack.getItem() == ItemInit.beastly_bone.get()) {}
+						List<Entity> entList = player.level.getEntities(player, player.getBoundingBox().inflate(30),
+								EntitySelector.ENTITY_STILL_ALIVE);
+						for (Entity ent : entList) {
+							if (ent instanceof LivingEntity) {
+								LivingEntity livEnt = (LivingEntity) ent;
+								if (livEnt != null) {
+									if (ModEntityPredicates.WARMBLOODED.test(ent)) {
+										renderEntityOutline(ent, 255, 125, 0,
+												(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+									}
+									if (ModEntityPredicates.COLDBLOODED.test(ent)) {
+										renderEntityOutline(ent, 0, 125, 125,
+												(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+									}
+									if (ModEntityPredicates.UNDEAD.test(ent)) {
+										renderEntityOutline(ent, 255, 255, 255,
+												(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+									}
+									if (ModEntityPredicates.ENDERBLOOD.test(ent)) {
+										renderEntityOutline(ent, 255, 0, 255,
+												(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+									}
+									if (ModEntityPredicates.PLANTBLOOD.test(ent)) {
+										renderEntityOutline(ent, 0, 125, 0,
+												(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+									}
+									if (ModEntityPredicates.INFERNALBLOOD.test(ent)) {
+										renderEntityOutline(ent, 255, 0, 0,
+												(int) (Mth.cos((ent.tickCount + partialTicks) * 0.2f) * 35 + 45));
+									}
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		// }
-		// }
 	}
 }

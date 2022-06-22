@@ -46,7 +46,7 @@ public class ItemCrossedKeys extends Item /* implements IAdornment, IRenderAdorn
 //							Component.translatable(ChatFormatting.AQUA + "You hear the clang of bells in the distance"),
 //							true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //					if (!((Player) player).isCreative()) {
 //						updateClientServerFlight((ServerPlayer) player, true);
 //					}
@@ -87,7 +87,7 @@ public class ItemCrossedKeys extends Item /* implements IAdornment, IRenderAdorn
 //							Component.translatable(ChatFormatting.AQUA + "You hear an angelic screech in your mind"),
 //							true);
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //					if (!((Player) player).isCreative()) {
 //						updateClientServerFlight((ServerPlayer) player, false, false);
 //					}

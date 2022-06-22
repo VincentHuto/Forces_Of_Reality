@@ -51,7 +51,7 @@ public class ItemYellowTome extends Item {
 //									coven.getDevotionByCoven(EnumCovenants.HASTUR) - 1);
 //							PacketHandler.CHANNELCOVENANT.send(
 //									PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerentity),
-//									new CovenantPacketServer(coven.getDevotion()));
+//									new PacketCovenantServer(coven.getDevotion()));
 							playerentity.displayClientMessage(
 									Component.translatable(
 											ChatFormatting.YELLOW + "Abuse of Power does not come without consequence"),

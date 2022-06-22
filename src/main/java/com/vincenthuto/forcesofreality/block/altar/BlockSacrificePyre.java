@@ -5,9 +5,13 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
 import com.vincenthuto.forcesofreality.block.util.IBlockDevotionStation;
+import com.vincenthuto.forcesofreality.capa.covenant.CovenantProvider;
 import com.vincenthuto.forcesofreality.capa.covenant.EnumCovenants;
+import com.vincenthuto.forcesofreality.capa.covenant.ICovenant;
 import com.vincenthuto.forcesofreality.init.SoundInit;
 import com.vincenthuto.forcesofreality.item.ItemSacrificial;
+import com.vincenthuto.forcesofreality.network.PacketHandler;
+import com.vincenthuto.forcesofreality.network.coven.PacketCovenantServer;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntitySacrificePyre;
 import com.vincenthuto.hutoslib.common.network.VanillaPacketDispatcher;
 
@@ -16,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -40,6 +45,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.PacketDistributor;
 
 public class BlockSacrificePyre extends Block implements IBlockDevotionStation, EntityBlock {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -65,7 +71,7 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation, 
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
 			BlockHitResult hit) {
 		BlockEntitySacrificePyre te = (BlockEntitySacrificePyre) worldIn.getBlockEntity(pos);
-	//	ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
+		ICovenant coven = player.getCapability(CovenantProvider.COVEN_CAPA).orElseThrow(NullPointerException::new);
 		ItemStack stack = player.getMainHandItem();
 		// Upgrade clause
 		if (stack.isEmpty()) {
@@ -88,11 +94,11 @@ public class BlockSacrificePyre extends Block implements IBlockDevotionStation, 
 					player.playSound(SoundInit.ITEM_STAR_SLUG_STORM.get(), 0.6F, 0.8F);
 					return InteractionResult.SUCCESS;
 				} else {
-					//te.devo.addDevotion(sac.getDevoAmount());
+					te.devo.addDevotion(sac.getDevoAmount());
 					player.getMainHandItem().shrink(1);
-//					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
-//					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-//							new CovenantPacketServer(coven.getDevotion()));
+					coven.setCovenDevotion(te.getCovenType(), sac.devoAmount * te.sacMod);
+					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+							new PacketCovenantServer(coven.getDevotion()));
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 					player.displayClientMessage(
 							Component.translatable(ChatFormatting.GOLD + "Your offering was accepted"), true);

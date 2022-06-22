@@ -3,6 +3,8 @@ package com.vincenthuto.forcesofreality;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.vincenthuto.forcesofreality.capa.covenant.CovenantEvents;
+import com.vincenthuto.forcesofreality.capa.tiledevotion.DevotionEvents;
 import com.vincenthuto.forcesofreality.init.BlockEntityInit;
 import com.vincenthuto.forcesofreality.init.BlockInit;
 import com.vincenthuto.forcesofreality.init.ContainerInit;
@@ -13,6 +15,7 @@ import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.init.ParticleInit;
 import com.vincenthuto.forcesofreality.init.SoundInit;
 import com.vincenthuto.forcesofreality.item.coven.tool.ItemMechanGlove;
+import com.vincenthuto.forcesofreality.network.PacketHandler;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
@@ -61,6 +65,8 @@ public class ForcesOfReality {
 	@SuppressWarnings("deprecation")
 	public ForcesOfReality() {
 		DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> proxy = new ClientProxy());
+		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+
 		proxy.registerHandlers();
 		hemosLoaded = ModList.get().isLoaded("hemomancy");
 		instance = this;
@@ -73,19 +79,25 @@ public class ForcesOfReality {
 		ItemInit.SPAWNEGGS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
 		BlockInit.SPECIALBLOCKS.register(modEventBus);
+		BlockInit.BLOCKITEMS.register(modEventBus);
 		BlockEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
 		FeatureInit.FEATURES.register(modEventBus);
 		EntityInit.ENTITY_TYPES.register(modEventBus);
 		EnchantmentInit.ENCHANTS.register(modEventBus);
 		SoundInit.SOUND_EVENTS.register(modEventBus);
+		modEventBus.addListener(this::commonSetup);
+		modEventBus.addListener(this::clientSetup);
+		forgeBus.register(CovenantEvents.class);
+		forgeBus.register(DevotionEvents.class);
+
+
 	}
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
 //		CapabilityInit.init();
 //		ModRafflesiaRecipies.init();
-//		PacketHandler.registerChannels();
-//		PacketHandler.registerMechanGloveChannels();
+		PacketHandler.registerChannels();
 
 	}
 

@@ -9,7 +9,7 @@
 //import com.vincenthuto.forcesofreality.capa.covenant.ICovenant;
 //import com.vincenthuto.forcesofreality.font.ModTextFormatting;
 //import com.vincenthuto.forcesofreality.network.PacketHandler;
-//import com.vincenthuto.forcesofreality.network.coven.CovenantPacketServer;
+//import com.vincenthuto.forcesofreality.network.coven.PacketCovenantServer;
 //
 //import net.minecraft.ChatFormatting;
 //import net.minecraft.network.chat.Component;
@@ -72,7 +72,7 @@
 //					coven.setCovenDevotion(getAssignedCovenant(), getDeepenAmount());
 //					Player playerEnt = (Player) player;
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+//							new PacketCovenantServer(coven.getDevotion()));
 //				}
 //			}
 //		}
@@ -88,7 +88,7 @@
 //					coven.setCovenDevotion(getAssignedCovenant(), -getDeepenAmount());
 //					Player playerEnt = (Player) player;
 //					PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) playerEnt),
-//							new CovenantPacketServer(coven.getDevotion()));
+		//					new PacketCovenantServer(coven.getDevotion()));
 //				}
 //			}
 //		}

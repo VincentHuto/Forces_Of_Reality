@@ -4,9 +4,7 @@ package com.vincenthuto.forcesofreality.integration.jei;
 import javax.annotation.Nonnull;
 
 import com.vincenthuto.forcesofreality.ForcesOfReality;
-import com.vincenthuto.forcesofreality.init.BlockInit;
 import com.vincenthuto.forcesofreality.init.ItemInit;
-import com.vincenthuto.forcesofreality.recipe.ModRafflesiaRecipies;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.constants.VanillaTypes;

@@ -1,7 +1,5 @@
 package com.vincenthuto.forcesofreality.block;
 
-import java.util.stream.Stream;
-
 import javax.annotation.Nonnull;
 
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityHasturPylon;
@@ -22,28 +20,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockHasturPylon extends Block implements EntityBlock {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-	private static final VoxelShape SHAPE_N = Stream.of(Block.box(12, 8, 6, 13, 14, 10), Block.box(5, 6, 5, 11, 12, 11),
-			Block.box(6, 8, 3, 10, 14, 4), Block.box(3, 8, 6, 4, 14, 10), Block.box(6, 8, 12, 10, 14, 13),
-			Block.box(6, 1, 6, 10, 5, 10), Block.box(11, 3, 7, 12, 6, 9), Block.box(7, 3, 11, 9, 6, 12),
-			Block.box(7, 3, 4, 9, 6, 5), Block.box(4, 3, 7, 5, 6, 9), Block.box(4, 11, 11, 5, 16, 12),
-			Block.box(11, 11, 11, 12, 16, 12), Block.box(11, 11, 4, 12, 16, 5), Block.box(4, 11, 4, 5, 16, 5))
-			.reduce((v1, v2) -> {
-				return Shapes.join(v1, v2, BooleanOp.OR);
-			}).get();
-
-	private static final VoxelShape SHAPE_R = Block.box(-8, 0, -7, 24, 32, 25);
+	private static final VoxelShape SHAPE_N = Block.box(2, 1, 2, 14, 18, 14);
 
 	public BlockHasturPylon(Properties properties) {
 		super(properties);
@@ -52,8 +40,13 @@ public class BlockHasturPylon extends Block implements EntityBlock {
 	}
 
 	@Override
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
+
+	@Override
 	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return SHAPE_R;
+		return SHAPE_N;
 	}
 
 	@Override

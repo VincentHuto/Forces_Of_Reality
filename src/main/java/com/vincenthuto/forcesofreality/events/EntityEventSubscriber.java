@@ -2,6 +2,7 @@ package com.vincenthuto.forcesofreality.events;
 
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.init.EntityInit;
+import com.vincenthuto.forcesofreality.model.block.ModelHasturPylon;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelBeastFromBeyond;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelDarkYoung;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelHastur;
@@ -70,7 +71,6 @@ import com.vincenthuto.forcesofreality.render.entity.summons.RenderJudgement;
 import com.vincenthuto.forcesofreality.render.entity.summons.RenderSummonedBeast;
 import com.vincenthuto.forcesofreality.render.entity.summons.RenderTentacle;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -84,7 +84,8 @@ public class EntityEventSubscriber {
 	
 	@SubscribeEvent
 	public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		
+		event.registerLayerDefinition(ModelHasturPylon.LAYER_LOCATION, ModelHasturPylon::createBodyLayer);
+
 		event.registerLayerDefinition(ModelSummonedBeast.LAYER_LOCATION, ModelSummonedBeast::createBodyLayer);
 		event.registerLayerDefinition(ModelEldritchGrip.LAYER_LOCATION, ModelEldritchGrip::createBodyLayer);
 		event.registerLayerDefinition(ModelDreadRocketTracking.LAYER_LOCATION, ModelDreadRocketTracking::createBodyLayer);

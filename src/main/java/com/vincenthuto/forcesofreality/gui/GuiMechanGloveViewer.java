@@ -3,8 +3,6 @@ package com.vincenthuto.forcesofreality.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.container.MechanGloveItemHandler;
@@ -48,7 +46,6 @@ public class GuiMechanGloveViewer extends Screen {
 		this.player = playerIn;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		int centerX = (width / 2) - guiWidth / 2;

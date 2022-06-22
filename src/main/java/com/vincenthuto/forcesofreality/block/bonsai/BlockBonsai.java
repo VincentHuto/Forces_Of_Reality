@@ -262,7 +262,7 @@ public class BlockBonsai extends Block {
 			if (rand.nextInt(20) == 17) {
 //				coven.setCovenDevotion(EnumCovenants.SELF, 1);
 //				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-//						new CovenantPacketServer(coven.getDevotion()));
+//						new PacketCovenantServer(coven.getDevotion()));
 				player.displayClientMessage(Component.translatable(ChatFormatting.AQUA + "Your Patience has been Rewarded"),
 						true);
 			} else {
