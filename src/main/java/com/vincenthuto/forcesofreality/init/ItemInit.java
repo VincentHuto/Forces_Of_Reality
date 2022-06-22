@@ -11,14 +11,11 @@ import com.vincenthuto.forcesofreality.item.ItemStormingAgent;
 import com.vincenthuto.forcesofreality.item.armor.EnumModArmorTiers;
 import com.vincenthuto.forcesofreality.item.armor.ItemAuricHelm;
 import com.vincenthuto.forcesofreality.item.armor.ItemBackWings;
-import com.vincenthuto.forcesofreality.item.armor.ItemClovenHooves;
+import com.vincenthuto.forcesofreality.item.armor.ItemBeastlyArmor;
 import com.vincenthuto.forcesofreality.item.armor.ItemEmpCharm;
-import com.vincenthuto.forcesofreality.item.armor.ItemEnticingMantle;
 import com.vincenthuto.forcesofreality.item.armor.ItemInfluenceSuppressor;
-import com.vincenthuto.forcesofreality.item.armor.ItemSkullHelmet;
 import com.vincenthuto.forcesofreality.item.armor.ItemSparkDirector;
-import com.vincenthuto.forcesofreality.item.armor.ItemWrithingChest;
-import com.vincenthuto.forcesofreality.item.armor.ItemWrithingHelm;
+import com.vincenthuto.forcesofreality.item.armor.ItemWrithingArmor;
 import com.vincenthuto.forcesofreality.item.coven.ItemConcecratedAurum;
 import com.vincenthuto.forcesofreality.item.coven.ItemNeuroticMechanism;
 import com.vincenthuto.forcesofreality.item.coven.ItemTwistedFabric;
@@ -144,7 +141,7 @@ public class ItemInit {
 			() -> new ItemDivineFeather(
 					new Item.Properties().tab(ForcesOfRealityItemGroup.instance).stacksTo(1).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> seraph_wings = ITEMS.register("seraph_wings",
-			() -> new ItemBackWings(EnumModArmorTiers.SERAPHWINGS, EquipmentSlot.CHEST,
+			() -> new ItemBackWings(EnumModArmorTiers.ANOINTED, EquipmentSlot.CHEST,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
 
 	// Eldritch
@@ -182,17 +179,14 @@ public class ItemInit {
 	public static final RegistryObject<Item> unkept_hide = ITEMS.register("unkept_hide",
 			() -> new Item(new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> skull_helmet = ITEMS.register("skull_helmet",
-			() -> new ItemSkullHelmet(EnumModArmorTiers.SKULL, EquipmentSlot.HEAD,
-					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
+			() -> new ItemBeastlyArmor(EnumModArmorTiers.BEASTLY, EquipmentSlot.HEAD));
 	public static final RegistryObject<Item> enticing_mantle = ITEMS.register("enticing_mantle",
-			() -> new ItemEnticingMantle(EnumModArmorTiers.MANTLE, EquipmentSlot.CHEST,
-					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
+			() -> new ItemBeastlyArmor(EnumModArmorTiers.BEASTLY, EquipmentSlot.CHEST));
 	public static final RegistryObject<Item> legs_of_fawn = ITEMS.register("legs_of_fawn",
-			() -> new ArmorItem(EnumModArmorTiers.MANTLE, EquipmentSlot.LEGS,
-					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
+			() -> new ArmorItem(EnumModArmorTiers.BEASTLY, EquipmentSlot.LEGS,
+					new Item.Properties().tab(ForcesOfRealityItemGroup.instance).fireResistant()));
 	public static final RegistryObject<Item> cloven_hooves = ITEMS.register("cloven_hooves",
-			() -> new ItemClovenHooves(EnumModArmorTiers.MANTLE, EquipmentSlot.FEET,
-					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
+			() -> new ItemBeastlyArmor(EnumModArmorTiers.BEASTLY, EquipmentSlot.FEET));
 	public static final RegistryObject<Item> first_beast_crossbow = ITEMS.register("first_beast_crossbow",
 			() -> new ItemBeastCrossbow(new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
 	public static final RegistryObject<Item> first_beast_bolt = ITEMS.register("first_beast_bolt",
@@ -220,25 +214,23 @@ public class ItemInit {
 	public static final RegistryObject<Item> emp_charm = ADVITEMS.register("emp_charm", () -> new ItemEmpCharm(
 			new Item.Properties().tab(ForcesOfRealityItemGroup.instance).stacksTo(1).rarity(HLTextUtils.AURIC)));
 	public static final RegistryObject<Item> auric_helm = ITEMS.register("auric_helm",
-			() -> new ItemAuricHelm(EnumModArmorTiers.AURICHELM, EquipmentSlot.HEAD,
+			() -> new ItemAuricHelm(EnumModArmorTiers.AURIC, EquipmentSlot.HEAD,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC)));
 	public static final RegistryObject<Item> auric_chest = ITEMS.register("auric_chest",
-			() -> new ArmorItem(EnumModArmorTiers.AURICCHEST, EquipmentSlot.CHEST,
+			() -> new ArmorItem(EnumModArmorTiers.AURIC, EquipmentSlot.CHEST,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC)));
 	public static final RegistryObject<Item> auric_leggings = ITEMS.register("auric_leggings",
-			() -> new ArmorItem(EnumModArmorTiers.AURICCHEST, EquipmentSlot.LEGS,
+			() -> new ArmorItem(EnumModArmorTiers.AURIC, EquipmentSlot.LEGS,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC)));
 	public static final RegistryObject<Item> auric_boots = ITEMS.register("auric_boots",
-			() -> new ArmorItem(EnumModArmorTiers.AURICCHEST, EquipmentSlot.FEET,
+			() -> new ArmorItem(EnumModArmorTiers.AURIC, EquipmentSlot.FEET,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC)));
 	public static final RegistryObject<Item> machina_spark_director = MODELEDITEMS.register("machina_spark_director",
-			() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR, EquipmentSlot.CHEST,
+			() -> new ItemSparkDirector(EnumModArmorTiers.AURIC, EquipmentSlot.CHEST,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC), false));
-	public static final RegistryObject<Item> machina_spark_director_armored = MODELEDITEMS
-			.register("machina_spark_director_armored",
-					() -> new ItemSparkDirector(EnumModArmorTiers.SPARKDIRECTOR_ARMORED, EquipmentSlot.CHEST,
-							(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC),
-							true));
+	public static final RegistryObject<Item> machina_spark_director_armored = MODELEDITEMS.register(
+			"machina_spark_director_armored", () -> new ItemSparkDirector(EnumModArmorTiers.AURIC, EquipmentSlot.CHEST,
+					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance).rarity(HLTextUtils.AURIC), true));
 
 	// Gloves
 	public static final RegistryObject<Item> mechan_glove = MODELEDITEMS.register("mechan_glove",
@@ -373,11 +365,9 @@ public class ItemInit {
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
 
 	public static final RegistryObject<Item> writhing_helmet = ITEMS.register("writhing_helmet",
-			() -> new ItemWrithingHelm(EnumModArmorTiers.WRITHINGHELM, EquipmentSlot.HEAD,
-					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
+			() -> new ItemWrithingArmor(EnumModArmorTiers.WRITHING, EquipmentSlot.HEAD));
 	public static final RegistryObject<Item> writhing_chestplate = ITEMS.register("writhing_chestplate",
-			() -> new ItemWrithingChest(EnumModArmorTiers.WRITHINGCHEST, EquipmentSlot.CHEST,
-					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));
+			() -> new ItemWrithingArmor(EnumModArmorTiers.WRITHING, EquipmentSlot.CHEST));
 	public static final RegistryObject<Item> writhing_leggings = ITEMS.register("writhing_leggings",
 			() -> new ArmorItem(EnumModArmorTiers.WRITHING, EquipmentSlot.LEGS,
 					(new Item.Properties()).tab(ForcesOfRealityItemGroup.instance)));

@@ -2,6 +2,8 @@ package com.vincenthuto.forcesofreality.events;
 
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.init.EntityInit;
+import com.vincenthuto.forcesofreality.model.armor.ModelBeastlyArmor;
+import com.vincenthuto.forcesofreality.model.armor.ModelWrithingArmor;
 import com.vincenthuto.forcesofreality.model.block.ModelHasturPylon;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelBeastFromBeyond;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelDarkYoung;
@@ -73,6 +75,7 @@ import com.vincenthuto.forcesofreality.render.entity.summons.RenderTentacle;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -81,16 +84,39 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class EntityEventSubscriber {
-	
+
 	@SubscribeEvent
 	public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+
+		// Armor
+		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_HEAD_LAYER,
+				() -> ModelBeastlyArmor.createHeadLayer(EquipmentSlot.HEAD));
+		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_CHEST_LAYER,
+				() -> ModelBeastlyArmor.createBodyLayer(EquipmentSlot.CHEST));
+		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_LEGS_LAYER,
+				() -> ModelBeastlyArmor.createBodyLayer(EquipmentSlot.LEGS));
+		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_BOOTS_LAYER,
+				() -> ModelBeastlyArmor.createBodyLayer(EquipmentSlot.FEET));
+
+		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_HEAD_LAYER,
+				() -> ModelWrithingArmor.createHeadLayer(EquipmentSlot.HEAD));
+		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_CHEST_LAYER,
+				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.CHEST));
+		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_LEGS_LAYER,
+				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.LEGS));
+		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_BOOTS_LAYER,
+				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.FEET));
+
+		// Blocks
 		event.registerLayerDefinition(ModelHasturPylon.LAYER_LOCATION, ModelHasturPylon::createBodyLayer);
 
+		// Entities
 		event.registerLayerDefinition(ModelSummonedBeast.LAYER_LOCATION, ModelSummonedBeast::createBodyLayer);
 		event.registerLayerDefinition(ModelEldritchGrip.LAYER_LOCATION, ModelEldritchGrip::createBodyLayer);
-		event.registerLayerDefinition(ModelDreadRocketTracking.LAYER_LOCATION, ModelDreadRocketTracking::createBodyLayer);
+		event.registerLayerDefinition(ModelDreadRocketTracking.LAYER_LOCATION,
+				ModelDreadRocketTracking::createBodyLayer);
 		event.registerLayerDefinition(ModelBlackGoat.LAYER_LOCATION, ModelBlackGoat::createBodyLayer);
-	
+
 		event.registerLayerDefinition(ModelSlug.LAYER_LOCATION, ModelSlug::createBodyLayer);
 		event.registerLayerDefinition(ModelIbis.LAYER_LOCATION, ModelIbis::createBodyLayer);
 		event.registerLayerDefinition(ModelDenizenSage.LAYER_LOCATION, ModelDenizenSage::createBodyLayer);
@@ -111,7 +137,6 @@ public class EntityEventSubscriber {
 		event.registerLayerDefinition(ModelTetra.LAYER_LOCATION, ModelTetra::createBodyLayer);
 		event.registerLayerDefinition(ModelLordOfTheWild.LAYER_LOCATION, ModelLordOfTheWild::createBodyLayer);
 
-		
 		event.registerLayerDefinition(ModelTheFirstBeast.LAYER_LOCATION, ModelTheFirstBeast::createBodyLayer);
 		event.registerLayerDefinition(ModelSeraphim.LAYER_LOCATION, ModelSeraphim::createBodyLayer);
 		event.registerLayerDefinition(ModelMalformedAutomaton.LAYER_LOCATION, ModelMalformedAutomaton::createBodyLayer);
@@ -122,7 +147,7 @@ public class EntityEventSubscriber {
 		event.registerLayerDefinition(ModelBeastFromBeyond.LAYER_LOCATION, ModelBeastFromBeyond::createBodyLayer);
 
 	}
-	
+
 	@SubscribeEvent
 	public static void renderEntities(EntityRenderersEvent.RegisterRenderers event) {
 		EntityRenderers.register(EntityInit.mechan.get(), RenderMechan::new);
@@ -172,12 +197,11 @@ public class EntityEventSubscriber {
 		EntityRenderers.register(EntityInit.dark_young.get(), RenderDarkYoung::new);
 		EntityRenderers.register(EntityInit.summoned_beast.get(), RenderSummonedBeast::new);
 		EntityRenderers.register(EntityInit.thrown_axe.get(), (ctx) -> {
-	         return new ThrownItemRenderer<>(ctx, 1.0F, true);
-	      });
+			return new ThrownItemRenderer<>(ctx, 1.0F, true);
+		});
 		EntityRenderers.register(EntityInit.lord_of_the_wild.get(), RenderLordOfTheWild::new);
 		EntityRenderers.register(EntityInit.uzouthrhix.get(), RenderUzouthrhix::new);
 
 	}
 
-	
 }
