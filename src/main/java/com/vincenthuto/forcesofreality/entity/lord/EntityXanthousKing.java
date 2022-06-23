@@ -149,7 +149,7 @@ public class EntityXanthousKing extends Monster implements IEntityAdditionalSpaw
 					this.summonSpawnAid(random.nextInt(5));
 				}
 			} else if (attackRoll % 130 * diffMult == 0) {
-				this.summonClones(random.nextInt(2));
+		//		this.summonClones(random.nextInt(2));
 			}
 			if (this.isOnGround()) {
 				if (attackRoll % 100 * diffMult == 0) {

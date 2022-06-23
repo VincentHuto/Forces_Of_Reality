@@ -33,9 +33,6 @@ public class RenderXanthousKing extends MobRenderer<EntityXanthousKing, ModelXan
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
-		matrixStackIn.pushPose();
-		matrixStackIn.popPose();
-
 	}
 
 	@Override

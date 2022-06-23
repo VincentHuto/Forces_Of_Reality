@@ -23,6 +23,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,6 +50,7 @@ public class EntityTentacle extends Monster {
 				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/tentacle/model_tentacle_grey.png"));
 	});
 	public float deathTicks = 1;
+	   public final AnimationState idleAnimationState = new AnimationState();
 
 	public EntityTentacle(EntityType<? extends EntityTentacle> type, Level worldIn) {
 		super(type, worldIn);
@@ -116,7 +118,9 @@ public class EntityTentacle extends Monster {
 	@Override
 	public void tick() {
 		super.tick();
-
+		if (this.level.isClientSide()) {
+	            this.idleAnimationState.startIfStopped(this.tickCount);
+		}
 		// Particle Effects
 		float f = (this.random.nextFloat() - 0.5F) * 2.0F;
 		float f1 = -1;

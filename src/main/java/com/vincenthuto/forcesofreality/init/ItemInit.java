@@ -50,7 +50,10 @@ import com.vincenthuto.forcesofreality.item.tool.coven.module.ItemMechanModuleSh
 import com.vincenthuto.forcesofreality.item.tool.coven.module.ItemMechanModuleThruster;
 import com.vincenthuto.forcesofreality.item.tool.coven.module.ItemWickedModuleLaser;
 import com.vincenthuto.hutoslib.client.HLTextUtils;
+import com.vincenthuto.hutoslib.common.item.ModSpawnEggItem;
 
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
@@ -58,6 +61,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -65,6 +69,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -381,119 +386,117 @@ public class ItemInit {
 			() -> new SwordItem(EnumModToolTiers.OLD_IRON, 3, -2.4F,
 					new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
 
-//	// Spawn Eggs
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = SPAWNEGGS.register("spawn_egg_hastur",
-//			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_vassal = SPAWNEGGS
-//			.register("spawn_egg_hastur_vassal", () -> new ModSpawnEggItem(EntityInit.hastur_vassal, 10862336, 0x0000FF,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tentacle = SPAWNEGGS.register("spawn_egg_tentacle",
-//			() -> new ModSpawnEggItem(EntityInit.tentacle, 22073, 12371968,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen = SPAWNEGGS.register("spawn_egg_denizen",
-//			() -> new ModSpawnEggItem(EntityInit.denizen, 8750204, 12037632,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen_sage = SPAWNEGGS
-//			.register("spawn_egg_denizen_sage", () -> new ModSpawnEggItem(EntityInit.denizen_sage, 8750204, 72037632,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_spawn = SPAWNEGGS
-//			.register("spawn_egg_hastur_spawn", () -> new ModSpawnEggItem(EntityInit.hastur_spawn, 4539136, 13548032,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_slug = SPAWNEGGS.register("spawn_egg_slug",
-//			() -> new ModSpawnEggItem(EntityInit.slug, 7761777, 4206080,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_seraphim = SPAWNEGGS.register("spawn_egg_seraphim",
-//			() -> new ModSpawnEggItem(EntityInit.seraphim, 16515071, 16514816,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tetra = SPAWNEGGS.register("spawn_egg_tetra",
-//			() -> new ModSpawnEggItem(EntityInit.tetra, 14565021, 16464878,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
+	// Spawn Eggs
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur = SPAWNEGGS.register("spawn_egg_hastur",
+			() -> new ModSpawnEggItem(EntityInit.hastur, 10862336, 0,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_vassal = SPAWNEGGS
+			.register("spawn_egg_hastur_vassal", () -> new ModSpawnEggItem(EntityInit.hastur_vassal, 10862336, 0x0000FF,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tentacle = SPAWNEGGS.register("spawn_egg_tentacle",
+			() -> new ModSpawnEggItem(EntityInit.tentacle, 22073, 12371968,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen = SPAWNEGGS.register("spawn_egg_denizen",
+			() -> new ModSpawnEggItem(EntityInit.denizen, 8750204, 12037632,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_denizen_sage = SPAWNEGGS
+			.register("spawn_egg_denizen_sage", () -> new ModSpawnEggItem(EntityInit.denizen_sage, 8750204, 72037632,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_hastur_spawn = SPAWNEGGS
+			.register("spawn_egg_hastur_spawn", () -> new ModSpawnEggItem(EntityInit.hastur_spawn, 4539136, 13548032,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_slug = SPAWNEGGS.register("spawn_egg_slug",
+			() -> new ModSpawnEggItem(EntityInit.slug, 7761777, 4206080,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_seraphim = SPAWNEGGS.register("spawn_egg_seraphim",
+			() -> new ModSpawnEggItem(EntityInit.seraphim, 16515071, 16514816,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tetra = SPAWNEGGS.register("spawn_egg_tetra",
+			() -> new ModSpawnEggItem(EntityInit.tetra, 14565021, 16464878,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
 //	public static final RegistryObject<ModSpawnEggItem> spawn_egg_throne = SPAWNEGGS.register("spawn_egg_throne",
 //			() -> new ModSpawnEggItem(EntityInit.throne, 16777215, 12745984,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_beast_from_beyond = SPAWNEGGS
-//			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 9450752, 0,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_lord_of_the_wild = SPAWNEGGS
-//			.register("spawn_egg_lord_of_the_wild", () -> new ModSpawnEggItem(EntityInit.lord_of_the_wild, 9450752,
-//					7450752, new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_summoned_beast = SPAWNEGGS
-//			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 8155760, 9450752,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_malformed_automaton = SPAWNEGGS
-//			.register("spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton,
-//					15576576, 41873, new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dark_young = SPAWNEGGS
-//			.register("spawn_egg_dark_young", () -> new ModSpawnEggItem(EntityInit.dark_young, 0, 0xFA00FF,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tulpa = SPAWNEGGS.register("spawn_egg_tulpa",
-//			() -> new ModSpawnEggItem(EntityInit.tulpa, 0, 0,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_scuttling_occulus = SPAWNEGGS
-//			.register("spawn_egg_scuttling_occulus", () -> new ModSpawnEggItem(EntityInit.scuttling_occulus, 12764357,
-//					5767365, new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dread_bot = SPAWNEGGS.register("spawn_egg_dread_bot",
-//			() -> new ModSpawnEggItem(EntityInit.dread_bot, 12743680, 12764357,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_mechan = SPAWNEGGS.register("spawn_egg_mechan",
-//			() -> new ModSpawnEggItem(EntityInit.mechan, 12743680, 0,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_veritas = SPAWNEGGS.register("spawn_egg_veritas",
-//			() -> new ModSpawnEggItem(EntityInit.veritas, 0xFFFFFF, 0xFFFFFF,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_black_goat = SPAWNEGGS
-//			.register("spawn_egg_black_goat", () -> new ModSpawnEggItem(EntityInit.black_goat, 0xF23FaF, 0xF23FaF,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_angelic_fowl = SPAWNEGGS
-//			.register("spawn_egg_angelic_fowl", () -> new ModSpawnEggItem(EntityInit.angelic_fowl, 0xBDFFE2, 0xFFD25B,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_deranged_beast = SPAWNEGGS
-//			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 4603962, 5252864,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_uzouthrhix = SPAWNEGGS
-//			.register("spawn_egg_uzouthrhix", () -> new ModSpawnEggItem(EntityInit.uzouthrhix, 23862, 8133430,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_xanthous_king = SPAWNEGGS
-//			.register("spawn_egg_xanthous_king", () -> new ModSpawnEggItem(EntityInit.xanthous_king, 10862336, 852039,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_devotee = SPAWNEGGS.register("spawn_egg_devotee",
-//			() -> new ModSpawnEggItem(EntityInit.devotee, 4341573, 9604677,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//
-//	public static final RegistryObject<ModSpawnEggItem> spawn_egg_first_beast = SPAWNEGGS
-//			.register("spawn_egg_first_beast", () -> new ModSpawnEggItem(EntityInit.the_first_beast, 6499072, 11777460,
-//					new Item.Properties().tab(Itemtab.MISC).tab(ForcesOfRealityItemGroup.instance)));
-//
-//	@SubscribeEvent
-//	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
-//		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
-//				ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_tentacle,
-//				ItemInit.spawn_egg_hastur_spawn, ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim,
-//				ItemInit.spawn_egg_throne, ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
-//				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
-//				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
-//				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl,
-//				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild,
-//				ItemInit.spawn_egg_uzouthrhix, ItemInit.spawn_egg_xanthous_king, ItemInit.spawn_egg_devotee,
-//				ItemInit.spawn_egg_first_beast);
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	@SafeVarargs
-//	public static void registerSpawnEggColorHandler(ItemColors colors, RegistryObject<ModSpawnEggItem>... spawnEggs) {
-//		for (RegistryObject<ModSpawnEggItem> spawnEgg : spawnEggs) {
-//			registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.get().getColor(tintIndex), spawnEgg);
-//		}
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	public static void registerItemColorHandler(ItemColors colors, IItemColor itemColor,
-//			RegistryObject<ModSpawnEggItem>... items) {
-//		for (RegistryObject<ModSpawnEggItem> itemProvider : items) {
-//			colors.register(itemColor, itemProvider.get());
-//		}
-//	}
+//					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_beast_from_beyond = SPAWNEGGS
+			.register("spawn_egg_beast_from_beyond", () -> new ModSpawnEggItem(EntityInit.beast_from_beyond, 9450752, 0,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_lord_of_the_wild = SPAWNEGGS
+			.register("spawn_egg_lord_of_the_wild", () -> new ModSpawnEggItem(EntityInit.lord_of_the_wild, 9450752,
+					7450752, new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_summoned_beast = SPAWNEGGS
+			.register("spawn_egg_summoned_beast", () -> new ModSpawnEggItem(EntityInit.summoned_beast, 8155760, 9450752,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_malformed_automaton = SPAWNEGGS
+			.register("spawn_egg_malformed_automaton", () -> new ModSpawnEggItem(EntityInit.malformed_automaton,
+					15576576, 41873, new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dark_young = SPAWNEGGS
+			.register("spawn_egg_dark_young", () -> new ModSpawnEggItem(EntityInit.dark_young, 0, 0xFA00FF,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_tulpa = SPAWNEGGS.register("spawn_egg_tulpa",
+			() -> new ModSpawnEggItem(EntityInit.tulpa, 0, 0,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_scuttling_occulus = SPAWNEGGS
+			.register("spawn_egg_scuttling_occulus", () -> new ModSpawnEggItem(EntityInit.scuttling_occulus, 12764357,
+					5767365, new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_dread_bot = SPAWNEGGS.register("spawn_egg_dread_bot",
+			() -> new ModSpawnEggItem(EntityInit.dread_bot, 12743680, 12764357,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_mechan = SPAWNEGGS.register("spawn_egg_mechan",
+			() -> new ModSpawnEggItem(EntityInit.mechan, 12743680, 0,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_veritas = SPAWNEGGS.register("spawn_egg_veritas",
+			() -> new ModSpawnEggItem(EntityInit.veritas, 0xFFFFFF, 0xFFFFFF,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_black_goat = SPAWNEGGS
+			.register("spawn_egg_black_goat", () -> new ModSpawnEggItem(EntityInit.black_goat, 0xF23FaF, 0xF23FaF,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_angelic_fowl = SPAWNEGGS
+			.register("spawn_egg_angelic_fowl", () -> new ModSpawnEggItem(EntityInit.angelic_fowl, 0xBDFFE2, 0xFFD25B,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_deranged_beast = SPAWNEGGS
+			.register("spawn_egg_deranged_beast", () -> new ModSpawnEggItem(EntityInit.deranged_beast, 4603962, 5252864,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_uzouthrhix = SPAWNEGGS
+			.register("spawn_egg_uzouthrhix", () -> new ModSpawnEggItem(EntityInit.uzouthrhix, 23862, 8133430,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_xanthous_king = SPAWNEGGS
+			.register("spawn_egg_xanthous_king", () -> new ModSpawnEggItem(EntityInit.xanthous_king, 10862336, 852039,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_devotee = SPAWNEGGS.register("spawn_egg_devotee",
+			() -> new ModSpawnEggItem(EntityInit.devotee, 4341573, 9604677,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+
+	public static final RegistryObject<ModSpawnEggItem> spawn_egg_first_beast = SPAWNEGGS
+			.register("spawn_egg_first_beast", () -> new ModSpawnEggItem(EntityInit.the_first_beast, 6499072, 11777460,
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
+
+	@SubscribeEvent
+	public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
+		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
+				ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_tentacle,
+				ItemInit.spawn_egg_hastur_spawn, ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim,
+				/* ItemInit.spawn_egg_throne, */ ItemInit.spawn_egg_beast_from_beyond, ItemInit.spawn_egg_summoned_beast,
+				ItemInit.spawn_egg_malformed_automaton, ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa,
+				ItemInit.spawn_egg_scuttling_occulus, ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan,
+				ItemInit.spawn_egg_veritas, ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl,
+				ItemInit.spawn_egg_deranged_beast, ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild,
+				ItemInit.spawn_egg_uzouthrhix, ItemInit.spawn_egg_xanthous_king, ItemInit.spawn_egg_devotee,
+				ItemInit.spawn_egg_first_beast);
+	}
+
+	@SafeVarargs
+	public static void registerSpawnEggColorHandler(ItemColors colors, RegistryObject<ModSpawnEggItem>... spawnEggs) {
+		for (RegistryObject<ModSpawnEggItem> spawnEgg : spawnEggs) {
+			registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.get().getColor(tintIndex), spawnEgg);
+		}
+	}
+	@SafeVarargs
+	public static void registerItemColorHandler(ItemColors colors, ItemColor itemColor,
+			RegistryObject<ModSpawnEggItem>... items) {
+		for (RegistryObject<ModSpawnEggItem> itemProvider : items) {
+			colors.register(itemColor, itemProvider.get());
+		}
+	}
 
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent

@@ -1,12 +1,18 @@
 package com.vincenthuto.forcesofreality;
 
+import com.vincenthuto.forcesofreality.gui.GuiMechanGloveViewer;
+import com.vincenthuto.forcesofreality.init.ItemInit;
+import com.vincenthuto.hutoslib.client.HLClientUtils;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.ItemStack;
+
 public class ClientProxy implements IProxy {
-//	private final ModelOldIronChestPlate oldIronChest = new ModelOldIronChestPlate(1.0f);
-//
-//	@Override
-//	public void openMechanGui() {
-//		Minecraft.getInstance().displayGuiScreen(
-//				new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()), HLClientUtils.getClientPlayer()));
-//	}
+
+	@Override
+	public void openMechanGui() {
+		Minecraft.getInstance().setScreen(
+				new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()), HLClientUtils.getClientPlayer()));
+	}
 
 }

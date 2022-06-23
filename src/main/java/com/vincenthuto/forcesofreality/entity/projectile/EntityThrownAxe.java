@@ -148,30 +148,12 @@ public class EntityThrownAxe extends ThrowableProjectile implements ItemSupplier
 	}
 
 	private void dropAndKill() {
-		ItemStack stack = getItemStack();
+		ItemStack stack = getItem();
 		ItemEntity item = new ItemEntity(level, getX(), getY(), getZ(), stack);
 		level.addFreshEntity(item);
-		remove(RemovalReason.KILLED);
+		remove(RemovalReason.DISCARDED);
 	}
 
-	private ItemStack getItemStack() {
-		if (!stack.isEmpty()) {
-			stack.copy();
-//		} else {
-//			if (isFire()) {
-//				return new ItemStack(ItemInit.null_trick_axe.get());
-//			} else if (isAuric()) {
-//				return new ItemStack(ItemInit.auric_trick_axe.get());
-//			} else {
-//				return new ItemStack(ItemInit.somnolent_trick_axe.get());
-//			}
-//		}
-			return new ItemStack(ItemInit.auric_trick_axe.get());
-		}
-		return stack.copy();
-	}
-
-	@SuppressWarnings("static-access")
 	@Override
 	protected void onHit(@Nonnull HitResult pos) {
 		if (isReturning()) {
@@ -309,6 +291,6 @@ public class EntityThrownAxe extends ThrowableProjectile implements ItemSupplier
 	@Nonnull
 	@Override
 	public ItemStack getItem() {
-		return getItemStack();
+		return new ItemStack(ItemInit.auric_trick_axe.get());
 	}
 }
