@@ -2,6 +2,7 @@ package com.vincenthuto.forcesofreality.events;
 
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.init.EntityInit;
+import com.vincenthuto.forcesofreality.model.armor.ModelAuricArmor;
 import com.vincenthuto.forcesofreality.model.armor.ModelBeastlyArmor;
 import com.vincenthuto.forcesofreality.model.armor.ModelWrithingArmor;
 import com.vincenthuto.forcesofreality.model.block.ModelHasturPylon;
@@ -106,6 +107,9 @@ public class EntityEventSubscriber {
 				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.LEGS));
 		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_BOOTS_LAYER,
 				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.FEET));
+
+		event.registerLayerDefinition(ModelAuricArmor.AURIC_HEAD_LAYER,
+				() -> ModelAuricArmor.createHeadLayer(EquipmentSlot.HEAD));
 
 		// Blocks
 		event.registerLayerDefinition(ModelHasturPylon.LAYER_LOCATION, ModelHasturPylon::createBodyLayer);

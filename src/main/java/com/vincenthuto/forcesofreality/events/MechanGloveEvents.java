@@ -30,7 +30,7 @@ public class MechanGloveEvents {
 	}
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.keyBinds.get(0).consumeClick()) {
+		if (ClientEventSubscriber.mechanglovemode.consumeClick()) {
 			if (ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != ItemStack.EMPTY
 					&& ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != null)
 				ForcesOfReality.proxy.openMechanGui();

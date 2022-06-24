@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.vincenthuto.forcesofreality.capa.covenant.CovenantEvents;
 import com.vincenthuto.forcesofreality.capa.tiledevotion.DevotionEvents;
+import com.vincenthuto.forcesofreality.events.MechanGloveEvents;
+import com.vincenthuto.forcesofreality.gui.guide.ForcesLib;
 import com.vincenthuto.forcesofreality.init.BlockEntityInit;
 import com.vincenthuto.forcesofreality.init.BlockInit;
 import com.vincenthuto.forcesofreality.init.ContainerInit;
@@ -90,6 +92,7 @@ public class ForcesOfReality {
 		modEventBus.addListener(this::clientSetup);
 		forgeBus.register(CovenantEvents.class);
 		forgeBus.register(DevotionEvents.class);
+		forgeBus.addListener(MechanGloveEvents::onClientTick);
 
 
 	}
@@ -105,6 +108,8 @@ public class ForcesOfReality {
 //		MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
 //		CovenPageLib.registerPages();
 		// this.addLayers();
+		ForcesLib forces = new ForcesLib();
+		forces.registerTome();
 	}
 
 	public void setupOnLoaded(FMLLoadCompleteEvent event) {

@@ -27,16 +27,16 @@ import net.minecraftforge.common.util.Lazy;
 public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> {
 
 	public static final ModelLayerLocation BEASTLY_HEAD_LAYER = new ModelLayerLocation(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "writhing_helmet"), "main");
+			new ResourceLocation(ForcesOfReality.MOD_ID, "beastly_helmet"), "main");
 
 	public static final ModelLayerLocation BEASTLY_CHEST_LAYER = new ModelLayerLocation(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "writhing_chestplate"), "main");
+			new ResourceLocation(ForcesOfReality.MOD_ID, "beastly_chestplate"), "main");
 
 	public static final ModelLayerLocation BEASTLY_LEGS_LAYER = new ModelLayerLocation(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "writhing_leggings"), "main");
+			new ResourceLocation(ForcesOfReality.MOD_ID, "beastly_leggings"), "main");
 
 	public static final ModelLayerLocation BEASTLY_BOOTS_LAYER = new ModelLayerLocation(
-			new ResourceLocation(ForcesOfReality.MOD_ID, "writhing_boots"), "main");
+			new ResourceLocation(ForcesOfReality.MOD_ID, "beastly_boots"), "main");
 
 	public static final Lazy<ModelBeastlyArmor<LivingEntity>> helmet = Lazy
 			.of(() -> new ModelBeastlyArmor<>(Minecraft.getInstance().getEntityModels().bakeLayer(BEASTLY_HEAD_LAYER)));

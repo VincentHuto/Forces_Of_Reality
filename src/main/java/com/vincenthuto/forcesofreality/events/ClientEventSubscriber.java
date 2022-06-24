@@ -33,8 +33,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientEventSubscriber {
 
 	public static NonNullList<KeyMapping> keyBinds = NonNullList.create();
+	public static final KeyMapping mechanglovemode = new KeyMapping("key.forcesofreality.mechanglovemode.desc",
+			GLFW.GLFW_KEY_N, "key.forcesofreality.category");
+	public static final KeyMapping sparkdirector = new KeyMapping("key.forcesofreality.sparkdirector.desc",
+			GLFW.GLFW_KEY_M, "key.forcesofreality.category");
 
-	@SuppressWarnings("unchecked")
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 
@@ -60,13 +63,13 @@ public class ClientEventSubscriber {
 		// GuiAdornmentBinder::new);
 		MenuScreens.register(ContainerInit.mechan_glove_container.get(), GuiMechanGlove::new);
 
-		keyBinds.add(0, new KeyMapping("key.forcesofreality.mechanglovemode.desc", GLFW.GLFW_KEY_V,
-				"key.forcesofreality.category"));
-		keyBinds.add(1, new KeyMapping("key.forcesofreality.sparkdirector.desc", GLFW.GLFW_KEY_M,
-				"key.forcesofreality.category"));
-		ClientRegistry.registerKeyBinding(keyBinds.get(0));
-		ClientRegistry.registerKeyBinding(keyBinds.get(1));
+		keyBinds.add(0, mechanglovemode);
+		keyBinds.add(1, sparkdirector);
 
+		for (KeyMapping bind : keyBinds) {
+			ClientRegistry.registerKeyBinding(bind);
+
+		}
 	}
 
 }
