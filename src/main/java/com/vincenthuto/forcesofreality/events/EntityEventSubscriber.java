@@ -110,7 +110,12 @@ public class EntityEventSubscriber {
 
 		event.registerLayerDefinition(ModelAuricArmor.AURIC_HEAD_LAYER,
 				() -> ModelAuricArmor.createHeadLayer(EquipmentSlot.HEAD));
-
+		event.registerLayerDefinition(ModelAuricArmor.AURIC_CHEST_LAYER,
+				() -> ModelAuricArmor.createBodyLayer(EquipmentSlot.CHEST));
+		event.registerLayerDefinition(ModelAuricArmor.AURIC_LEGS_LAYER,
+				() -> ModelAuricArmor.createBodyLayer(EquipmentSlot.LEGS));
+		event.registerLayerDefinition(ModelAuricArmor.AURIC_BOOTS_LAYER,
+				() -> ModelAuricArmor.createBodyLayer(EquipmentSlot.FEET));
 		// Blocks
 		event.registerLayerDefinition(ModelHasturPylon.LAYER_LOCATION, ModelHasturPylon::createBodyLayer);
 

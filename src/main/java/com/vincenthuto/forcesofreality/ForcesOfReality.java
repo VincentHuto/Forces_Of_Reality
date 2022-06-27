@@ -106,7 +106,6 @@ public class ForcesOfReality {
 
 	private void clientSetup(final FMLClientSetupEvent event) {
 //		MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
-//		CovenPageLib.registerPages();
 		// this.addLayers();
 		ForcesLib forces = new ForcesLib();
 		forces.registerTome();

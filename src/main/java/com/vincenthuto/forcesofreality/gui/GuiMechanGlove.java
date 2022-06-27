@@ -52,30 +52,14 @@ public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove
 		super.init();
 	}
 
-	@SuppressWarnings({ "deprecation", "resource" })
 	@Override
 	protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
-		
+
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderSystem.setShaderTexture(0, GUI);
 		HLGuiUtils.drawTexturedModalRect(leftPos, topPos, 0, 0, imageWidth - 1, imageHeight);
 
-		
-	}
-
-	private void drawTexturedQuad(int x, int y, int width, int height, float tx, float ty, float tw, float th,
-			float z) {
-		Tesselator tess = Tesselator.getInstance();
-		BufferBuilder buffer = tess.getBuilder();
-
-		buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-		buffer.vertex((double) x + 0, (double) y + height, z).uv(tx, ty + th).endVertex();
-		buffer.vertex((double) x + width, (double) y + height, z).uv(tx + tw, ty + th).endVertex();
-		buffer.vertex((double) x + width, (double) y + 0, z).uv(tx + tw, ty).endVertex();
-		buffer.vertex((double) x + 0, (double) y + 0, z).uv(tx, ty).endVertex();
-
-		tess.end();
 	}
 
 	@Override
@@ -83,7 +67,6 @@ public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove
 		this.font.draw(matrixStack, "Modules", 7, 6, ChatFormatting.GOLD.getColor());
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void render(PoseStack matrixStack, int p_render_1_, int p_render_2_, float p_render_3_) {
 		this.renderBackground(matrixStack);

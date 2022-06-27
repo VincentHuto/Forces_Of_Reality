@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import com.vincenthuto.forcesofreality.ForcesOfReality.ForcesOfRealityItemGroup;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.model.armor.ModelAuricArmor;
+import com.vincenthuto.forcesofreality.model.armor.ModelAuricArmor;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -30,6 +31,12 @@ public class ItemAuricArmor extends ArmorItem {
 					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 				if (itemStack.getItem() == ItemInit.auric_helm.get()) {
 					return ModelAuricArmor.helmet.get();
+				} else if (itemStack.getItem() == ItemInit.auric_chest.get()) {
+					return ModelAuricArmor.chest.get();
+				} else if (itemStack.getItem() == ItemInit.auric_leggings.get()) {
+					return ModelAuricArmor.legs.get();
+				} else if (itemStack.getItem() == ItemInit.auric_boots.get()) {
+					return ModelAuricArmor.boots.get();
 				}
 				return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
 			}

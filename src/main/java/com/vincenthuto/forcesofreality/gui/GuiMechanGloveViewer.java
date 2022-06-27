@@ -3,6 +3,7 @@ package com.vincenthuto.forcesofreality.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.container.MechanGloveItemHandler;
@@ -17,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Button.OnPress;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +30,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-@OnlyIn(Dist.CLIENT)
 public class GuiMechanGloveViewer extends Screen {
 	final ResourceLocation texture = new ResourceLocation(ForcesOfReality.MOD_ID, "textures/gui/mechan_viewer_gui.png");
 	int guiWidth = 145;
@@ -51,23 +52,25 @@ public class GuiMechanGloveViewer extends Screen {
 		int centerX = (width / 2) - guiWidth / 2;
 		int centerY = (height / 2) - guiHeight / 2;
 		this.renderBackground(matrixStack);
-
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, texture);
 		HLGuiUtils.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth - 1, guiHeight);
 
 		for (int i = 0; i < renderables.size(); i++) {
 			renderables.get(i).render(matrixStack, mouseX, mouseY, 511);
-			// if (renderables.get(i).isHovered()) {
-			ItemStack stack = ForcesOfReality.findMechanGlove(player);
-			if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
-				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-						.orElseThrow(NullPointerException::new);
-				if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
-					ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-					List<Component> text = new ArrayList<>();
-					text.add(Component.translatable(I18n.get(pat.asItem().getDescription().getString())));
-					renderComponentTooltip(matrixStack, text, mouseX, mouseY);
+			if (((GuiButtonTextured) renderables.get(i)).isHoveredOrFocused()) {
+				ItemStack stack = ForcesOfReality.findMechanGlove(player);
+				if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
+					IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+							.orElseThrow(NullPointerException::new);
+					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+						ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
+						List<Component> text = new ArrayList<>();
+						text.add(Component.translatable(I18n.get(pat.asItem().getDescription().getString())));
+						renderComponentTooltip(matrixStack, text, mouseX, mouseY);
+					}
 				}
-				// }
 			}
 		}
 
@@ -84,8 +87,9 @@ public class GuiMechanGloveViewer extends Screen {
 					for (int i = 0; i < renderables.size(); i++) {
 						if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
 							ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-//							Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(pat.asItem()),
-//									(renderables.get(i).x + 2), renderables.get(i).y + 2);
+							Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(pat.asItem()),
+									((GuiButtonTextured) renderables.get(i)).x + 2,
+									((GuiButtonTextured) renderables.get(i)).y + 2);
 						}
 					}
 				}
@@ -145,6 +149,7 @@ public class GuiMechanGloveViewer extends Screen {
 						} else if (i < 6) {
 							this.addRenderableWidget(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 63),
 									(verticalLoc - 265) + (i * 45), 20, 20, 174, 98, null, new OnPress() {
+
 										@SuppressWarnings("unused")
 										@Override
 										public void onPress(Button press) {
@@ -184,7 +189,9 @@ public class GuiMechanGloveViewer extends Screen {
 											}
 										}
 									}));
-						} else if (i < 12) {
+						} else if (i < 12)
+
+						{
 							this.addRenderableWidget(new GuiButtonTextured(texture, i, sideLoc - (guiWidth - 130),
 									(verticalLoc - 410) + (i * 45), 20, 20, 174, 98, null, new OnPress() {
 										@SuppressWarnings("unused")

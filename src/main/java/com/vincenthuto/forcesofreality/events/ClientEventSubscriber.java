@@ -62,10 +62,8 @@ public class ClientEventSubscriber {
 		// ScreenManager.registerFactory(ContainerAdornmentBinder.type,
 		// GuiAdornmentBinder::new);
 		MenuScreens.register(ContainerInit.mechan_glove_container.get(), GuiMechanGlove::new);
-
 		keyBinds.add(0, mechanglovemode);
 		keyBinds.add(1, sparkdirector);
-
 		for (KeyMapping bind : keyBinds) {
 			ClientRegistry.registerKeyBinding(bind);
 

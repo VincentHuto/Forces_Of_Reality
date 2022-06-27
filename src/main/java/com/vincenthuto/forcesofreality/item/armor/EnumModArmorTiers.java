@@ -30,7 +30,7 @@ public enum EnumModArmorTiers implements ArmorMaterial {
 			0.1F, () -> {
 				return Ingredient.of(ItemInit.beastly_bone.get());
 			}),
-	AURIC(ForcesOfReality.MOD_ID + ":auric_helm", 17, new int[] { 2, 4, 5, 2 }, 25, SoundEvents.ARMOR_EQUIP_GENERIC,
+	AURIC(ForcesOfReality.MOD_ID + ":auric", 17, new int[] { 2, 4, 5, 2 }, 25, SoundEvents.ARMOR_EQUIP_GENERIC,
 			3.0F, 0.1F, () -> {
 				return Ingredient.of(ItemInit.auric_ingot.get());
 			}),
