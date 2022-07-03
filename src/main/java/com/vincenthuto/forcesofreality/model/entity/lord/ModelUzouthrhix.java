@@ -6,6 +6,7 @@ import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.lord.EntityUzouthrhix;
 
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -21,20 +22,22 @@ import net.minecraft.resources.ResourceLocation;
 // Paste this class into your mod and generate all required imports
 
 
-public class ModelUzouthrhix extends EntityModel<EntityUzouthrhix> {
+public class ModelUzouthrhix extends HierarchicalModel<EntityUzouthrhix> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modeluzouthrhix"), "main");
-	private final ModelPart wholeBody;
+	private final ModelPart root;
 
 	public ModelUzouthrhix(ModelPart root) {
-		this.wholeBody = root.getChild("wholeBody");
+		this.root = root.getChild("root");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition wholeBody = partdefinition.addOrReplaceChild("wholeBody", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition wholeBody = root.addOrReplaceChild("wholeBody", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition lowerColumn = wholeBody.addOrReplaceChild("lowerColumn", CubeListBuilder.create().texOffs(118, 138).addBox(-3.0F, -3.0455F, -4.2727F, 6.0F, 3.0F, 11.0F, new CubeDeformation(0.0F))
 		.texOffs(24, 136).addBox(-3.0F, -6.0455F, -6.2727F, 6.0F, 3.0F, 11.0F, new CubeDeformation(0.0F))
@@ -581,6 +584,7 @@ public class ModelUzouthrhix extends EntityModel<EntityUzouthrhix> {
 		.texOffs(158, 143).addBox(-2.0F, 0.2F, 6.0F, 4.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 8.0F));
 
 		return LayerDefinition.create(meshdefinition, 256, 256);
+
 	}
 
 	@Override
@@ -590,6 +594,10 @@ public class ModelUzouthrhix extends EntityModel<EntityUzouthrhix> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		wholeBody.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
+
+	@Override
+	public ModelPart root() {
+		return this.root;	}
 }
