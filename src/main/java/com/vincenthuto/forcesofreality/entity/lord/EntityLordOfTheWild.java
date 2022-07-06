@@ -29,6 +29,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -73,6 +74,7 @@ public class EntityLordOfTheWild extends Monster implements IEntityAdditionalSpa
 	public int deathTicks;
 	private final ServerBossEvent bossInfo = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(),
 			BossEvent.BossBarColor.GREEN, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+	public final AnimationState idleAnimationState = new AnimationState();
 
 	public EntityLordOfTheWild(EntityType<? extends EntityLordOfTheWild> type, Level worldIn) {
 		super(type, worldIn);
@@ -88,6 +90,9 @@ public class EntityLordOfTheWild extends Monster implements IEntityAdditionalSpa
 	@Override
 	public void tick() {
 		super.tick();
+		if (this.level.isClientSide()) {
+			this.idleAnimationState.startIfStopped(this.tickCount);
+		}
 		float diffMult = 1f;
 
 		// Protection

@@ -34,6 +34,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -88,6 +89,7 @@ public class EntityUzouthrhix extends Monster implements IEntityAdditionalSpawnD
 	private final ServerBossEvent bossInfo = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(),
 			BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 	public boolean clawStrikeFlag;
+	public final AnimationState idleAnimationState = new AnimationState();
 
 	public EntityUzouthrhix(EntityType<? extends EntityUzouthrhix> type, Level worldIn) {
 		super(type, worldIn);
@@ -208,7 +210,9 @@ public class EntityUzouthrhix extends Monster implements IEntityAdditionalSpawnD
 	public void tick() {
 		super.tick();
 		// updateAnimations();
-
+		if (this.level.isClientSide()) {
+			this.idleAnimationState.startIfStopped(this.tickCount);
+		}
 		float diffMult = 1f;
 
 		// Protection

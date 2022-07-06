@@ -32,6 +32,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -77,12 +78,12 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 	public float wingRotDelta = 1.0F;
 	private final ServerBossEvent bossInfo = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(),
 			BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+	public final AnimationState idleAnimationState = new AnimationState();
 
 	public EntityTetra(EntityType<? extends EntityTetra> type, Level worldIn) {
 		super(type, worldIn);
 
 	}
-
 
 	@Override
 	public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
@@ -126,7 +127,9 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 	@Override
 	public void tick() {
 		super.tick();
-
+		if (this.level.isClientSide()) {
+			this.idleAnimationState.startIfStopped(this.tickCount);
+		}
 		Level world = this.getCommandSenderWorld();
 		BlockPos pos = this.blockPosition();
 		double time = world.getGameTime() * 0.2f;
@@ -137,16 +140,16 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 		Collections.reverse(chakraColors);
 
 		Vector3 center = Vector3.fromEntityCenter(this);
-		for (int j = 0; j < chakraColors.size(); j++) {
-			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 0)),
-					center.x + Math.sin(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1),
-					center.y + (j * 0.15) - 0.1 + HLParticleUtils.inRange(-0.1, 0.1),
-					center.z + Math.cos(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
-			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 229)),
-					center.x + Math.sin(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1),
-					center.y + (j * 0.15) - 0.1 + HLParticleUtils.inRange(-0.1, 0.1),
-					center.z + Math.cos(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
-		}
+//		for (int j = 0; j < chakraColors.size(); j++) {
+//			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 0)),
+//					center.x + Math.sin(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1),
+//					center.y + (j * 0.15) - 0.1 + HLParticleUtils.inRange(-0.1, 0.1),
+//					center.z + Math.cos(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
+//			world.addParticle(GlowParticleFactory.createData(new ParticleColor(229, 229, 229)),
+//					center.x + Math.sin(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1),
+//					center.y + (j * 0.15) - 0.1 + HLParticleUtils.inRange(-0.1, 0.1),
+//					center.z + Math.cos(time + j) * 0.55f + HLParticleUtils.inRange(-0.1, 0.1), 0, -0.05, 0);
+//		}
 
 		world.addParticle(GlowParticleFactory.createData(new ParticleColor(250, 200, 0)),
 				center.x + HLParticleUtils.inRange(-0.1, 0.1),
@@ -187,7 +190,7 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 				this.magnificentFlash();
 
 			} else if (attackRoll % 130 * diffMult == 0) {
-			//	this.summonThroneAid(random.nextInt(2) + 2);
+				// this.summonThroneAid(random.nextInt(2) + 2);
 			} else if (attackRoll % 160 * diffMult == 0) {
 				this.summonJudgement(random.nextInt(3) + 3);
 			}
@@ -201,10 +204,10 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 			float f = (this.random.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.random.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.random.nextFloat() - 0.5F) * 8.0F;
-			this.level.addParticle(ParticleTypes.ENCHANT, this.getX() + f, this.getY() + 2.0D + f1,
+			this.level.addParticle(ParticleTypes.ENCHANT, this.getX() + f, this.getY() + 2.0D + f1, this.getZ() + f2,
+					0.0D, 0.0D, 0.0D);
+			this.level.addParticle(ParticleTypes.REVERSE_PORTAL, this.getX() + f, this.getY() + 2.0D + f1,
 					this.getZ() + f2, 0.0D, 0.0D, 0.0D);
-			this.level.addParticle(ParticleTypes.REVERSE_PORTAL, this.getX() + f,
-					this.getY() + 2.0D + f1, this.getZ() + f2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -249,8 +252,7 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 		if (livingentity != null && livingentity.getEyeY() > this.getEyeY() + this.heightOffset
 				&& this.canAttack(livingentity)) {
 			Vec3 vector3d = this.getDeltaMovement();
-			this.setDeltaMovement(
-					this.getDeltaMovement().add(0.0D, (0.3F - vector3d.y) * 0.3F, 0.0D));
+			this.setDeltaMovement(this.getDeltaMovement().add(0.0D, (0.3F - vector3d.y) * 0.3F, 0.0D));
 			this.hasImpulse = true;
 		}
 
@@ -315,17 +317,17 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 			float f = (this.random.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (this.random.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (this.random.nextFloat() - 0.5F) * 8.0F;
-			this.level.addParticle(ParticleTypes.ASH, this.getX() + f, this.getY() + 2.0D + f1,
-					this.getZ() + f2, 0.0D, 0.0D, 0.0D);
+			this.level.addParticle(ParticleTypes.ASH, this.getX() + f, this.getY() + 2.0D + f1, this.getZ() + f2, 0.0D,
+					0.0D, 0.0D);
 
 			if (this.deathTicks >= 100) {
-				this.level.addParticle(ParticleTypes.WHITE_ASH, this.getX() + f,
-						this.getY() + 2.0D + f1, this.getZ() + f2, 0.0D, 0.0D, 0.0D);
+				this.level.addParticle(ParticleTypes.WHITE_ASH, this.getX() + f, this.getY() + 2.0D + f1,
+						this.getZ() + f2, 0.0D, 0.0D, 0.0D);
 			}
 
 			if (this.deathTicks >= 150) {
-				this.level.addParticle(ParticleTypes.FLASH, this.getX() + f, this.getY() + 2.0D + f1,
-						this.getZ() + f2, 0.0D, 0.0D, 0.0D);
+				this.level.addParticle(ParticleTypes.FLASH, this.getX() + f, this.getY() + 2.0D + f1, this.getZ() + f2,
+						0.0D, 0.0D, 0.0D);
 			}
 
 		}
@@ -369,10 +371,9 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 					for (int countparticles = 0; countparticles <= 1; ++countparticles) {
 						ent.level.addParticle(ParticleTypes.PORTAL,
 								ent.getX() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(),
-								ent.getY() + level.random.nextDouble() * ent.getBbHeight()
-										- ent.getMyRidingOffset() - 0.5,
-								ent.getZ() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D,
-								0.0D);
+								ent.getY() + level.random.nextDouble() * ent.getBbHeight() - ent.getMyRidingOffset()
+										- 0.5,
+								ent.getZ() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D, 0.0D);
 					}
 				}
 			}
@@ -382,7 +383,7 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 	public void summonThroneAid(int numTent) {
 		EntityThrone[] tentArray = new EntityThrone[numTent];
 		for (int i = 0; i < numTent; i++) {
-		//	tentArray[i] = new EntityThrone(EntityInit.throne.get(), level);
+			// tentArray[i] = new EntityThrone(EntityInit.throne.get(), level);
 			tentArray[i].setTentacleType(random.nextInt(4));
 			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
 			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
@@ -433,16 +434,12 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 				for (int countparticles = 0; countparticles <= 30; ++countparticles) {
 					world.addParticle(ParticleTypes.FLASH,
 							ent.getX() + (world.random.nextDouble() - 0.5D) * ent.getBbWidth(),
-							ent.getY() + world.random.nextDouble() * ent.getBbHeight()
-									- ent.getMyRidingOffset() - 0.5,
-							ent.getZ() + (world.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D,
-							0.0D);
+							ent.getY() + world.random.nextDouble() * ent.getBbHeight() - ent.getMyRidingOffset() - 0.5,
+							ent.getZ() + (world.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D, 0.0D);
 					world.addParticle(GlowParticleFactory.createData(new ParticleColor(255, 255, 0)),
 							ent.getX() + (world.random.nextDouble() - 0.5D) * ent.getBbWidth(),
-							ent.getY() + world.random.nextDouble() * ent.getBbHeight()
-									- ent.getMyRidingOffset() - 0.5,
-							ent.getZ() + (world.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D,
-							0.0D);
+							ent.getY() + world.random.nextDouble() * ent.getBbHeight() - ent.getMyRidingOffset() - 0.5,
+							ent.getZ() + (world.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D, 0.0D);
 
 					ent.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE, .15F, 1f + (float) Math.random() * 0.2F);
 
