@@ -24,16 +24,6 @@ public class ModelSlug extends EntityModel<EntitySlug> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelslug"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart Tail;
-
-	public ModelSlug(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.Tail = root.getChild("Tail");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -70,11 +60,15 @@ public class ModelSlug extends EntityModel<EntitySlug> {
 
 		return LayerDefinition.create(meshdefinition, 16, 16);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
 
-	@Override
-	public void setupAnim(EntitySlug entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
+	private final ModelPart Tail;
 
+	public ModelSlug(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.Tail = root.getChild("Tail");
 	}
 
 	@Override
@@ -83,5 +77,11 @@ public class ModelSlug extends EntityModel<EntitySlug> {
 		Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntitySlug entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+
 	}
 }

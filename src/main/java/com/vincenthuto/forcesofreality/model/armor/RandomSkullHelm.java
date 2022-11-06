@@ -24,90 +24,6 @@ import net.minecraft.world.entity.Entity;
 public class RandomSkullHelm<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "randomskullhelm"), "main");
-	private final ModelPart bone22;
-	private final ModelPart bone23;
-	private final ModelPart bone25;
-	private final ModelPart bone31;
-	private final ModelPart bone24;
-	private final ModelPart bone29;
-	private final ModelPart bone30;
-	private final ModelPart bone33;
-	private final ModelPart bone32;
-	private final ModelPart bone34;
-	private final ModelPart bone19;
-	private final ModelPart bone28;
-	private final ModelPart bone20;
-	private final ModelPart bone16;
-	private final ModelPart bone35;
-	private final ModelPart bone18;
-	private final ModelPart bone38;
-	private final ModelPart bone17;
-	private final ModelPart bone37;
-	private final ModelPart bone36;
-	private final ModelPart bone39;
-	private final ModelPart bone42;
-	private final ModelPart bone41;
-	private final ModelPart bone40;
-	private final ModelPart bone26;
-	private final ModelPart bone27;
-	private final ModelPart bone6;
-	private final ModelPart bone7;
-	private final ModelPart bone8;
-	private final ModelPart bone9;
-	private final ModelPart bone11;
-	private final ModelPart bone5;
-	private final ModelPart bone13;
-	private final ModelPart bone12;
-	private final ModelPart bone14;
-	private final ModelPart bone10;
-	private final ModelPart bone15;
-	private final ModelPart bone2;
-	private final ModelPart bone43;
-	private final ModelPart bone3;
-
-	public RandomSkullHelm(ModelPart root) {
-		this.bone22 = root.getChild("bone22");
-		this.bone23 = root.getChild("bone23");
-		this.bone25 = root.getChild("bone25");
-		this.bone31 = root.getChild("bone31");
-		this.bone24 = root.getChild("bone24");
-		this.bone29 = root.getChild("bone29");
-		this.bone30 = root.getChild("bone30");
-		this.bone33 = root.getChild("bone33");
-		this.bone32 = root.getChild("bone32");
-		this.bone34 = root.getChild("bone34");
-		this.bone19 = root.getChild("bone19");
-		this.bone28 = root.getChild("bone28");
-		this.bone20 = root.getChild("bone20");
-		this.bone16 = root.getChild("bone16");
-		this.bone35 = root.getChild("bone35");
-		this.bone18 = root.getChild("bone18");
-		this.bone38 = root.getChild("bone38");
-		this.bone17 = root.getChild("bone17");
-		this.bone37 = root.getChild("bone37");
-		this.bone36 = root.getChild("bone36");
-		this.bone39 = root.getChild("bone39");
-		this.bone42 = root.getChild("bone42");
-		this.bone41 = root.getChild("bone41");
-		this.bone40 = root.getChild("bone40");
-		this.bone26 = root.getChild("bone26");
-		this.bone27 = root.getChild("bone27");
-		this.bone6 = root.getChild("bone6");
-		this.bone7 = root.getChild("bone7");
-		this.bone8 = root.getChild("bone8");
-		this.bone9 = root.getChild("bone9");
-		this.bone11 = root.getChild("bone11");
-		this.bone5 = root.getChild("bone5");
-		this.bone13 = root.getChild("bone13");
-		this.bone12 = root.getChild("bone12");
-		this.bone14 = root.getChild("bone14");
-		this.bone10 = root.getChild("bone10");
-		this.bone15 = root.getChild("bone15");
-		this.bone2 = root.getChild("bone2");
-		this.bone43 = root.getChild("bone43");
-		this.bone3 = root.getChild("bone3");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -194,10 +110,89 @@ public class RandomSkullHelm<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart bone22;
+	private final ModelPart bone23;
+	private final ModelPart bone25;
+	private final ModelPart bone31;
+	private final ModelPart bone24;
+	private final ModelPart bone29;
+	private final ModelPart bone30;
+	private final ModelPart bone33;
+	private final ModelPart bone32;
+	private final ModelPart bone34;
+	private final ModelPart bone19;
+	private final ModelPart bone28;
+	private final ModelPart bone20;
+	private final ModelPart bone16;
+	private final ModelPart bone35;
+	private final ModelPart bone18;
+	private final ModelPart bone38;
+	private final ModelPart bone17;
+	private final ModelPart bone37;
+	private final ModelPart bone36;
+	private final ModelPart bone39;
+	private final ModelPart bone42;
+	private final ModelPart bone41;
+	private final ModelPart bone40;
+	private final ModelPart bone26;
+	private final ModelPart bone27;
+	private final ModelPart bone6;
+	private final ModelPart bone7;
+	private final ModelPart bone8;
+	private final ModelPart bone9;
+	private final ModelPart bone11;
+	private final ModelPart bone5;
+	private final ModelPart bone13;
+	private final ModelPart bone12;
+	private final ModelPart bone14;
+	private final ModelPart bone10;
+	private final ModelPart bone15;
+	private final ModelPart bone2;
+	private final ModelPart bone43;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart bone3;
 
+	public RandomSkullHelm(ModelPart root) {
+		this.bone22 = root.getChild("bone22");
+		this.bone23 = root.getChild("bone23");
+		this.bone25 = root.getChild("bone25");
+		this.bone31 = root.getChild("bone31");
+		this.bone24 = root.getChild("bone24");
+		this.bone29 = root.getChild("bone29");
+		this.bone30 = root.getChild("bone30");
+		this.bone33 = root.getChild("bone33");
+		this.bone32 = root.getChild("bone32");
+		this.bone34 = root.getChild("bone34");
+		this.bone19 = root.getChild("bone19");
+		this.bone28 = root.getChild("bone28");
+		this.bone20 = root.getChild("bone20");
+		this.bone16 = root.getChild("bone16");
+		this.bone35 = root.getChild("bone35");
+		this.bone18 = root.getChild("bone18");
+		this.bone38 = root.getChild("bone38");
+		this.bone17 = root.getChild("bone17");
+		this.bone37 = root.getChild("bone37");
+		this.bone36 = root.getChild("bone36");
+		this.bone39 = root.getChild("bone39");
+		this.bone42 = root.getChild("bone42");
+		this.bone41 = root.getChild("bone41");
+		this.bone40 = root.getChild("bone40");
+		this.bone26 = root.getChild("bone26");
+		this.bone27 = root.getChild("bone27");
+		this.bone6 = root.getChild("bone6");
+		this.bone7 = root.getChild("bone7");
+		this.bone8 = root.getChild("bone8");
+		this.bone9 = root.getChild("bone9");
+		this.bone11 = root.getChild("bone11");
+		this.bone5 = root.getChild("bone5");
+		this.bone13 = root.getChild("bone13");
+		this.bone12 = root.getChild("bone12");
+		this.bone14 = root.getChild("bone14");
+		this.bone10 = root.getChild("bone10");
+		this.bone15 = root.getChild("bone15");
+		this.bone2 = root.getChild("bone2");
+		this.bone43 = root.getChild("bone43");
+		this.bone3 = root.getChild("bone3");
 	}
 
 	@Override
@@ -242,5 +237,10 @@ public class RandomSkullHelm<T extends Entity> extends EntityModel<T> {
 		bone2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone43.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

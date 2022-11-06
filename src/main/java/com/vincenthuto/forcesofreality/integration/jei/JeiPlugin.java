@@ -22,8 +22,10 @@ import net.minecraft.world.item.ItemStack;
 public class JeiPlugin implements IModPlugin {
 	private static final ResourceLocation ID = new ResourceLocation(ForcesOfReality.MOD_ID, "main");
 
+	@Nonnull
 	@Override
-	public void registerItemSubtypes(@Nonnull ISubtypeRegistration registry) {
+	public ResourceLocation getPluginUid() {
+		return ID;
 	}
 
 	@Override
@@ -33,7 +35,14 @@ public class JeiPlugin implements IModPlugin {
 	}
 
 	@Override
-	public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
+	public void registerItemSubtypes(@Nonnull ISubtypeRegistration registry) {
+	}
+
+	@Override
+	public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
+
+		//registry.addRecipeCatalyst(new ItemStack(BlockInit.rafflesia_of_fidelity.get()), RafflesiaRecipeCategory.UID);
+
 	}
 
 	@Override
@@ -59,15 +68,6 @@ public class JeiPlugin implements IModPlugin {
 	}
 
 	@Override
-	public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-
-		//registry.addRecipeCatalyst(new ItemStack(BlockInit.rafflesia_of_fidelity.get()), RafflesiaRecipeCategory.UID);
-
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getPluginUid() {
-		return ID;
+	public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
 	}
 }

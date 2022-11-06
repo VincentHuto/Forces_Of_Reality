@@ -9,12 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
 
 public class PacketToggleDirectorFlightModeMessage {
-	public PacketToggleDirectorFlightModeMessage(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	private boolean enabled;
-
 	public static PacketToggleDirectorFlightModeMessage decode(final FriendlyByteBuf buffer) {
 		boolean en = buffer.readBoolean();
 		return new PacketToggleDirectorFlightModeMessage(en);
@@ -34,5 +28,11 @@ public class PacketToggleDirectorFlightModeMessage {
 						true);
 			});
 		ctx.get().setPacketHandled(true);
+	}
+
+	private boolean enabled;
+
+	public PacketToggleDirectorFlightModeMessage(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

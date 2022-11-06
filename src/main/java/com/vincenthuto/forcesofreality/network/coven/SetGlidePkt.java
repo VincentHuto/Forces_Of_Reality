@@ -8,20 +8,6 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class SetGlidePkt {
 
-	private boolean allowGlide;
-
-	public SetGlidePkt(boolean allowGlide) {
-		this.allowGlide = allowGlide;
-	}
-
-	public static void encode(SetGlidePkt msg, FriendlyByteBuf buf) {
-		buf.writeBoolean(msg.allowGlide);
-	}
-
-	public static SetGlidePkt decode(FriendlyByteBuf buf) {
-		return new SetGlidePkt(buf.readBoolean());
-	}
-
 	public static class Handler {
 
 		public static void handle(final SetGlidePkt message, Supplier<NetworkEvent.Context> ctx) {
@@ -34,5 +20,19 @@ public class SetGlidePkt {
 			});
 			ctx.get().setPacketHandled(true);
 		}
+	}
+
+	public static SetGlidePkt decode(FriendlyByteBuf buf) {
+		return new SetGlidePkt(buf.readBoolean());
+	}
+
+	public static void encode(SetGlidePkt msg, FriendlyByteBuf buf) {
+		buf.writeBoolean(msg.allowGlide);
+	}
+
+	private boolean allowGlide;
+
+	public SetGlidePkt(boolean allowGlide) {
+		this.allowGlide = allowGlide;
 	}
 }

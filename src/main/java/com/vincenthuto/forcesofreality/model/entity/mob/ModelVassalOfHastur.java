@@ -24,28 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelVassalOfHastur extends EntityModel<EntityHasturVassal> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "vassalofhastur"), "main");
-	private final ModelPart body;
-	private final ModelPart tentacle1;
-	private final ModelPart tentacle2;
-	private final ModelPart tentacle3;
-	private final ModelPart tentacle4;
-	private final ModelPart tentacle5;
-	private final ModelPart tentacle6;
-	private final ModelPart tentacle7;
-	private final ModelPart tentacle8;
-
-	public ModelVassalOfHastur(ModelPart root) {
-		this.body = root.getChild("body");
-		this.tentacle1 = root.getChild("tentacle1");
-		this.tentacle2 = root.getChild("tentacle2");
-		this.tentacle3 = root.getChild("tentacle3");
-		this.tentacle4 = root.getChild("tentacle4");
-		this.tentacle5 = root.getChild("tentacle5");
-		this.tentacle6 = root.getChild("tentacle6");
-		this.tentacle7 = root.getChild("tentacle7");
-		this.tentacle8 = root.getChild("tentacle8");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -131,10 +109,27 @@ public class ModelVassalOfHastur extends EntityModel<EntityHasturVassal> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart body;
+	private final ModelPart tentacle1;
+	private final ModelPart tentacle2;
+	private final ModelPart tentacle3;
+	private final ModelPart tentacle4;
+	private final ModelPart tentacle5;
+	private final ModelPart tentacle6;
+	private final ModelPart tentacle7;
 
-	@Override
-	public void setupAnim(EntityHasturVassal entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart tentacle8;
 
+	public ModelVassalOfHastur(ModelPart root) {
+		this.body = root.getChild("body");
+		this.tentacle1 = root.getChild("tentacle1");
+		this.tentacle2 = root.getChild("tentacle2");
+		this.tentacle3 = root.getChild("tentacle3");
+		this.tentacle4 = root.getChild("tentacle4");
+		this.tentacle5 = root.getChild("tentacle5");
+		this.tentacle6 = root.getChild("tentacle6");
+		this.tentacle7 = root.getChild("tentacle7");
+		this.tentacle8 = root.getChild("tentacle8");
 	}
 
 	@Override
@@ -148,5 +143,10 @@ public class ModelVassalOfHastur extends EntityModel<EntityHasturVassal> {
 		tentacle6.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		tentacle7.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		tentacle8.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityHasturVassal entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

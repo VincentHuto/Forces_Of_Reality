@@ -40,25 +40,6 @@ public class BlockHasturPylon extends Block implements EntityBlock {
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState pState) {
-		return RenderShape.MODEL;
-	}
-
-	@Override
-	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return SHAPE_N;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return SHAPE_N;
-	}
-
-	@Override
-	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
-	}
-
-	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos,
 			@Nonnull RandomSource random) {
 		BlockEntityHasturPylon tile = (BlockEntityHasturPylon) world.getBlockEntity(pos);
@@ -75,6 +56,17 @@ public class BlockHasturPylon extends Block implements EntityBlock {
 				}
 			}
 		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void attack(BlockState state, Level worldIn, BlockPos pos, Player player) {
+		super.attack(state, worldIn, pos, player);
+	}
+
+	@Override
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+		builder.add(FACING);
 	}
 
 	@Override
@@ -110,13 +102,23 @@ public class BlockHasturPylon extends Block implements EntityBlock {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
+		return SHAPE_N;
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+		return SHAPE_N;
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -126,18 +128,16 @@ public class BlockHasturPylon extends Block implements EntityBlock {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-		builder.add(FACING);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void attack(BlockState state, Level worldIn, BlockPos pos, Player player) {
-		super.attack(state, worldIn, pos, player);
-	}
-
-	@Override
 	public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
 		return new BlockEntityHasturPylon(p_153215_, p_153216_);
+	}
+
+	@Override
+	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 }

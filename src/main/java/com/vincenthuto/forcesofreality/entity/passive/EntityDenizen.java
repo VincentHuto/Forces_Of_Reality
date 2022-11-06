@@ -64,25 +64,15 @@ public class EntityDenizen extends Animal {
 				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/denizen/model_denizen_white_cloak.png"));
 	});
 
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 16.0D)
+				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.15f)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0);
+	}
+
 	public EntityDenizen(EntityType<? extends EntityDenizen> type, Level worldIn) {
 		super(type, worldIn);
 
-	}
-
-	public ResourceLocation getDenizenTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getDenizenType(), TEXTURE_BY_ID.get(0));
-	}
-
-	public int getDenizenType() {
-		return this.entityData.get(DENIZEN_TYPE);
-	}
-
-	public void setDenizenType(int type) {
-		if (type <= 0 || type >= 6) {
-			type = this.random.nextInt(7);
-		}
-
-		this.entityData.set(DENIZEN_TYPE, type);
 	}
 
 	@Override
@@ -93,21 +83,14 @@ public class EntityDenizen extends Animal {
 	}
 
 	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-	}
+	@Nullable
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
+			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		this.setDenizenType(this.random.nextInt(7));
+		this.setDenizenType(1);
+		return spawnDataIn;
 
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 16.0D)
-				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.15f)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0);
 	}
 
 	@Override
@@ -116,8 +99,18 @@ public class EntityDenizen extends Animal {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ENTITY_DENIZEN_HURT.get();
+	public EntityDenizen getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
+		EntityDenizen catentity = EntityInit.denizen.get().create(p_241840_1_);
+		if (p_241840_2_ instanceof EntityDenizen) {
+			if (this.random.nextBoolean()) {
+				catentity.setDenizenType(this.getDenizenType());
+			} else {
+				catentity.setDenizenType(((EntityDenizen) p_241840_2_).getDenizenType());
+			}
+
+		}
+		return catentity;
+
 	}
 
 	@Override
@@ -125,9 +118,17 @@ public class EntityDenizen extends Animal {
 		return SoundInit.ENTITY_DENIZEN_DEATH.get();
 	}
 
+	public int getDenizenType() {
+		return this.entityData.get(DENIZEN_TYPE);
+	}
+
+	public ResourceLocation getDenizenTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getDenizenType(), TEXTURE_BY_ID.get(0));
+	}
+
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.PARROT_STEP, 0.15F, 1.0F);
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ENTITY_DENIZEN_HURT.get();
 	}
 
 	/**
@@ -144,28 +145,27 @@ public class EntityDenizen extends Animal {
 	}
 
 	@Override
-	@Nullable
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
-			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		this.setDenizenType(this.random.nextInt(7));
-		this.setDenizenType(1);
-		return spawnDataIn;
-
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(SoundEvents.PARROT_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
-	public EntityDenizen getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
-		EntityDenizen catentity = EntityInit.denizen.get().create(p_241840_1_);
-		if (p_241840_2_ instanceof EntityDenizen) {
-			if (this.random.nextBoolean()) {
-				catentity.setDenizenType(this.getDenizenType());
-			} else {
-				catentity.setDenizenType(((EntityDenizen) p_241840_2_).getDenizenType());
-			}
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+	}
 
+	public void setDenizenType(int type) {
+		if (type <= 0 || type >= 6) {
+			type = this.random.nextInt(7);
 		}
-		return catentity;
 
+		this.entityData.set(DENIZEN_TYPE, type);
 	}
 }

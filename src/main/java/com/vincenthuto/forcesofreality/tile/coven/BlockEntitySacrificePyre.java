@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockEntitySacrificePyre extends DevotionalBlockEntity {
+	private static final Random random = new Random();
 	public int ticks;
 	public float flip;
 	public float oFlip;
@@ -20,7 +21,6 @@ public class BlockEntitySacrificePyre extends DevotionalBlockEntity {
 	public float pageAngle;
 	public float tRot;
 	public float yFloatLevel;
-	private static final Random random = new Random();
 
 	public BlockEntitySacrificePyre(BlockPos worldPosition, BlockState blockState) {
 		super(BlockEntityInit.sacrifice_pyre.get(), worldPosition, blockState);

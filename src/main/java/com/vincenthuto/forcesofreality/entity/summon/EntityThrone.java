@@ -47,6 +47,11 @@ public class EntityThrone extends Monster {
 		p_213410_0_.put(2,
 				new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/throne/model_throne_green.png"));
 	});
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 30.0D)
+				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 1f);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityThrone(EntityType<? extends EntityThrone> type, Level worldIn) {
@@ -54,31 +59,25 @@ public class EntityThrone extends Monster {
 
 	}
 
-	public ResourceLocation getTentacleTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getTentacleType(), TEXTURE_BY_ID.get(0));
-	}
-
-	public int getTentacleType() {
-		return this.entityData.get(TENTACLE_TYPE);
-	}
-
-	public void setTentacleType(int type) {
-		if (type <= 0 || type >= 4) {
-			type = this.random.nextInt(5);
-		}
-
-		this.entityData.set(TENTACLE_TYPE, type);
-	}
-
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(TENTACLE_TYPE, 1);
+
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+		super.doPush(entityIn);
+		if (!(entityIn instanceof EntityThrone || entityIn instanceof EntitySeraphim
+				|| entityIn instanceof EntityTetra)) {
+			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		}
 
 	}
 
@@ -94,6 +93,56 @@ public class EntityThrone extends Monster {
 
 		return spawnDataIn;
 
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	public int getTentacleType() {
+		return this.entityData.get(TENTACLE_TYPE);
+	}
+
+	public ResourceLocation getTentacleTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getTentacleType(), TEXTURE_BY_ID.get(0));
+	}
+
+	@Override
+	public void playerTouch(Player entityIn) {
+		super.playerTouch(entityIn);
+		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 4d, 30));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
+
+	}
+
+	public void setTentacleType(int type) {
+		if (type <= 0 || type >= 4) {
+			type = this.random.nextInt(5);
+		}
+
+		this.entityData.set(TENTACLE_TYPE, type);
 	}
 
 	@Override
@@ -154,54 +203,5 @@ public class EntityThrone extends Monster {
 			this.remove(RemovalReason.KILLED);
 		}
 
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-
-	}
-
-	@Override
-	protected void doPush(Entity entityIn) {
-		super.doPush(entityIn);
-		if (!(entityIn instanceof EntityThrone || entityIn instanceof EntitySeraphim
-				|| entityIn instanceof EntityTetra)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-		}
-
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 4d, 30));
-		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
-
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 30.0D)
-				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 1f);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
 	}
 }

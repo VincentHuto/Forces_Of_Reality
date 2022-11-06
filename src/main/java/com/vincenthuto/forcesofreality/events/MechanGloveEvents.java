@@ -15,6 +15,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD)
 public class MechanGloveEvents {
+	public static void onClientTick(TickEvent.ClientTickEvent event) {
+		if (ClientEventSubscriber.mechanglovemode.consumeClick()) {
+			if (ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != ItemStack.EMPTY
+					&& ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != null)
+				ForcesOfReality.proxy.openMechanGui();
+		}
+	}
+
 	public static void pickupEvent(PlayerTickEvent event) {
 		if (event.player.containerMenu instanceof ContainerMechanGlove || event.player.isShiftKeyDown()) {
 			return;
@@ -26,14 +34,6 @@ public class MechanGloveEvents {
 				event.setResult(Event.Result.ALLOW);
 				return;
 			}
-		}
-	}
-
-	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.mechanglovemode.consumeClick()) {
-			if (ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != ItemStack.EMPTY
-					&& ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != null)
-				ForcesOfReality.proxy.openMechanGui();
 		}
 	}
 

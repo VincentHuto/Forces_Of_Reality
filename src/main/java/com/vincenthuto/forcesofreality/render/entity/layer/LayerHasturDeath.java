@@ -25,8 +25,25 @@ public class LayerHasturDeath extends RenderLayer<EntityHastur, ModelHastur> {
 			"textures/entity/hastur/modelhastur.png");
 	static Random random = new Random(432L);
 
-	private final ModelHastur model;
 	private static final RenderType DECAL = RenderType.entityDecal(TEXTURE);
+	private static void vertex01(VertexConsumer vertextBuilder, Matrix4f matrix4f, int alpha) {
+		vertextBuilder.vertex(matrix4f, 0.0F, 0.0F, 0.0F).color(0, 0, 0, alpha).endVertex();
+		vertextBuilder.vertex(matrix4f, -0.3F, -0.3F, -.3F).color(100, 100, 0, alpha).endVertex();
+	}
+
+	private static void vertex2(VertexConsumer vertextBuilder, Matrix4f matrix4f, float y, float x) {
+		vertextBuilder.vertex(matrix4f, -constant * x, y, -0.3F * x).color(100, 100, 0, 1).endVertex();
+	}
+
+	private static void vertex3(VertexConsumer vertextBuilder, Matrix4f matrix4f, float y, float x) {
+		vertextBuilder.vertex(matrix4f, constant * x, y, -0.3F * x).color(100, 100, 0, 1).endVertex();
+	}
+
+	private static void vertex4(VertexConsumer vertextBuilder, Matrix4f matrix4f, float y, float z) {
+		vertextBuilder.vertex(matrix4f, 0.0F, y, -0.3f * z).color(100, 100, 0, 1).endVertex();
+	}
+
+	private final ModelHastur model;
 
 	public LayerHasturDeath(RenderLayerParent<EntityHastur, ModelHastur> entityRendererIn) {
 		super(entityRendererIn);
@@ -86,22 +103,5 @@ public class LayerHasturDeath extends RenderLayer<EntityHastur, ModelHastur> {
 			matrixStackIn.popPose();
 		}
 
-	}
-
-	private static void vertex01(VertexConsumer vertextBuilder, Matrix4f matrix4f, int alpha) {
-		vertextBuilder.vertex(matrix4f, 0.0F, 0.0F, 0.0F).color(0, 0, 0, alpha).endVertex();
-		vertextBuilder.vertex(matrix4f, -0.3F, -0.3F, -.3F).color(100, 100, 0, alpha).endVertex();
-	}
-
-	private static void vertex2(VertexConsumer vertextBuilder, Matrix4f matrix4f, float y, float x) {
-		vertextBuilder.vertex(matrix4f, -constant * x, y, -0.3F * x).color(100, 100, 0, 1).endVertex();
-	}
-
-	private static void vertex3(VertexConsumer vertextBuilder, Matrix4f matrix4f, float y, float x) {
-		vertextBuilder.vertex(matrix4f, constant * x, y, -0.3F * x).color(100, 100, 0, 1).endVertex();
-	}
-
-	private static void vertex4(VertexConsumer vertextBuilder, Matrix4f matrix4f, float y, float z) {
-		vertextBuilder.vertex(matrix4f, 0.0F, y, -0.3f * z).color(100, 100, 0, 1).endVertex();
 	}
 }

@@ -11,13 +11,13 @@ import net.minecraft.world.item.ItemStack;
 public class ClientProxy implements IProxy {
 
 	@Override
-	public void openMechanGui() {
-		Minecraft.getInstance().setScreen(
-				new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()), HLClientUtils.getClientPlayer()));
+	public void openGuideGui() {
+		Minecraft.getInstance().setScreen(new ForcesTitlePage());
 	}
 
 	@Override
-	public void openGuideGui() {
-		Minecraft.getInstance().setScreen(new ForcesTitlePage());
+	public void openMechanGui() {
+		Minecraft.getInstance().setScreen(
+				new GuiMechanGloveViewer(new ItemStack(ItemInit.mechan_glove.get()), HLClientUtils.getClientPlayer()));
 	}
 }

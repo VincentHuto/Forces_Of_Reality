@@ -17,14 +17,14 @@ public class InvWithLocation {
 	}
 
 	@Override
-	public int hashCode() {
-		return 31 * handler.hashCode() ^ world.hashCode() ^ pos.hashCode();
-	}
-
-	@Override
 	public boolean equals(Object o) {
 		return o instanceof InvWithLocation && handler.equals(((InvWithLocation) o).handler)
 				&& world == ((InvWithLocation) o).world && pos.equals(((InvWithLocation) o).pos);
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * handler.hashCode() ^ world.hashCode() ^ pos.hashCode();
 	}
 
 }

@@ -18,20 +18,12 @@ public class DevotionProvider implements ICapabilitySerializable<Tag> {
 	public static final Capability<IDevotion> DEVO_CAPA = CapabilityManager.get(new CapabilityToken<IDevotion>() {
 	});
 
+	public static double getPlayerbloodVolume(Player player) {
+		return player.getCapability(DEVO_CAPA).orElseThrow(IllegalStateException::new).getDevotion();
+	}
 	Devotion capability = new Devotion();
+
 	private LazyOptional<IDevotion> instance = LazyOptional.of(() -> capability);
-
-	@Nonnull
-	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-		return cap == DEVO_CAPA ? instance.cast() : LazyOptional.empty();
-	}
-
-	@Override
-	public Tag serializeNBT() {
-		return writeNBT(DEVO_CAPA,
-				instance.orElseThrow(() -> new IllegalArgumentException("LazyOptional cannot be empty!")), null);
-	}
 
 	@Override
 	public void deserializeNBT(Tag nbt) {
@@ -39,14 +31,10 @@ public class DevotionProvider implements ICapabilitySerializable<Tag> {
 				null, nbt);
 	}
 
-	public static double getPlayerbloodVolume(Player player) {
-		return player.getCapability(DEVO_CAPA).orElseThrow(IllegalStateException::new).getDevotion();
-	}
-
-	public CompoundTag writeNBT(Capability<IDevotion> capability, IDevotion instance, Direction side) {
-		CompoundTag entry = new CompoundTag();
-		entry.putDouble("devotion", instance.getDevotion());
-		return entry;
+	@Nonnull
+	@Override
+	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+		return cap == DEVO_CAPA ? instance.cast() : LazyOptional.empty();
 	}
 
 	public void readNBT(Capability<IDevotion> capability, IDevotion instance, Direction side, Tag nbt) {
@@ -59,5 +47,17 @@ public class DevotionProvider implements ICapabilitySerializable<Tag> {
 			}
 		}
 
+	}
+
+	@Override
+	public Tag serializeNBT() {
+		return writeNBT(DEVO_CAPA,
+				instance.orElseThrow(() -> new IllegalArgumentException("LazyOptional cannot be empty!")), null);
+	}
+
+	public CompoundTag writeNBT(Capability<IDevotion> capability, IDevotion instance, Direction side) {
+		CompoundTag entry = new CompoundTag();
+		entry.putDouble("devotion", instance.getDevotion());
+		return entry;
 	}
 }

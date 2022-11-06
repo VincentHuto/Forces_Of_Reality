@@ -21,22 +21,51 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class BlockEntityRaffInventory extends TileMod {
 
-	public BlockEntityRaffInventory(BlockEntityType<?> BlockEntityTypeIn,BlockPos worldPosition, BlockState blockState) {
-		super(BlockEntityTypeIn, worldPosition, blockState);
+	/*
+	 * Extension of ItemStackHandler that uses our own slot array, allows for
+	 * control of writing, allows control over stack limits, and allows for
+	 * itemstack-slot validation
+	 */
+	public static class SimpleItemStackHandler extends ItemStackHandler {
+
+		private final boolean allowWrite;
+		private final BlockEntityRaffInventory tile;
+
+		public SimpleItemStackHandler(BlockEntityRaffInventory inv, boolean allowWrite) {
+			super(inv.getSizeInventory());
+			this.allowWrite = allowWrite;
+			tile = inv;
+		}
+
+		@Nonnull
+		@Override
+		public ItemStack extractItem(int slot, int amount, boolean simulate) {
+			if (allowWrite) {
+
+				return super.extractItem(slot, amount, simulate);
+			} else
+				return ItemStack.EMPTY;
+		}
+
+		@Nonnull
+		@Override
+		public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+			if (allowWrite) {
+				return super.insertItem(slot, stack, simulate);
+			} else
+				return stack;
+		}
+
+		@Override
+		public void onContentsChanged(int slot) {
+			tile.setChanged();
+		}
 	}
 
 	public SimpleItemStackHandler itemHandler = createItemHandler();
 
-	@Override
-	public void readPacketNBT(CompoundTag par1CompoundTag) {
-		itemHandler = createItemHandler();
-		itemHandler.deserializeNBT(par1CompoundTag);
-	}
-
-	@Override
-	public void writePacketNBT(CompoundTag par1CompoundTag) {
-		par1CompoundTag.merge(itemHandler.serializeNBT());
-
+	public BlockEntityRaffInventory(BlockEntityType<?> BlockEntityTypeIn,BlockPos worldPosition, BlockState blockState) {
+		super(BlockEntityTypeIn, worldPosition, blockState);
 	}
 
 	public boolean addItem(@Nullable Player player, ItemStack stack, @Nullable InteractionHand hand) {
@@ -59,14 +88,12 @@ public abstract class BlockEntityRaffInventory extends TileMod {
 		}
 	}
 
-	public abstract int getSizeInventory();
+	public boolean canHopperExtract() {
+		return false;
+	}
 
 	protected SimpleItemStackHandler createItemHandler() {
 		return new SimpleItemStackHandler(this, true);
-	}
-
-	public IItemHandlerModifiable getItemHandler() {
-		return itemHandler;
 	}
 
 	@Override
@@ -78,12 +105,20 @@ public abstract class BlockEntityRaffInventory extends TileMod {
 		return super.getCapability(cap, side);
 	}
 
+	public IItemHandlerModifiable getItemHandler() {
+		return itemHandler;
+	}
+
+	public abstract int getSizeInventory();
+
 	public BlockState getState() {
 		return level.getBlockState(worldPosition);
 	}
 
-	public void setBlockToUpdate() {
-		sendUpdates();
+	@Override
+	public void readPacketNBT(CompoundTag par1CompoundTag) {
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(par1CompoundTag);
 	}
 
 	public void sendUpdates() {
@@ -92,48 +127,13 @@ public abstract class BlockEntityRaffInventory extends TileMod {
 		setChanged();
 	}
 
-	public boolean canHopperExtract() {
-		return false;
+	public void setBlockToUpdate() {
+		sendUpdates();
 	}
 
-	/*
-	 * Extension of ItemStackHandler that uses our own slot array, allows for
-	 * control of writing, allows control over stack limits, and allows for
-	 * itemstack-slot validation
-	 */
-	public static class SimpleItemStackHandler extends ItemStackHandler {
+	@Override
+	public void writePacketNBT(CompoundTag par1CompoundTag) {
+		par1CompoundTag.merge(itemHandler.serializeNBT());
 
-		private final boolean allowWrite;
-		private final BlockEntityRaffInventory tile;
-
-		public SimpleItemStackHandler(BlockEntityRaffInventory inv, boolean allowWrite) {
-			super(inv.getSizeInventory());
-			this.allowWrite = allowWrite;
-			tile = inv;
-		}
-
-		@Nonnull
-		@Override
-		public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-			if (allowWrite) {
-				return super.insertItem(slot, stack, simulate);
-			} else
-				return stack;
-		}
-
-		@Nonnull
-		@Override
-		public ItemStack extractItem(int slot, int amount, boolean simulate) {
-			if (allowWrite) {
-
-				return super.extractItem(slot, amount, simulate);
-			} else
-				return ItemStack.EMPTY;
-		}
-
-		@Override
-		public void onContentsChanged(int slot) {
-			tile.setChanged();
-		}
 	}
 }

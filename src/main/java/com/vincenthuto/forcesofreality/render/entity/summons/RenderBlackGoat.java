@@ -30,6 +30,12 @@ public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat
 
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityBlackGoat entity) {
+		return TEXTURE;
+	}
+
 	@Override
 	public void render(EntityBlackGoat entityIn, float entityYaw, float partialTicks, PoseStack matrix,
 			MultiBufferSource buf, int packedLight) {
@@ -117,12 +123,6 @@ public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat
 			matrixStackIn.scale(1, d, 1);
 
 		}
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityBlackGoat entity) {
-		return TEXTURE;
 	}
 
 }

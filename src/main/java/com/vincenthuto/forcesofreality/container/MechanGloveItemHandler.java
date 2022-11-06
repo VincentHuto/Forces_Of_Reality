@@ -22,6 +22,28 @@ public class MechanGloveItemHandler extends ItemStackHandler {
 		this.itemStack = itemStack;
 	}
 
+	@Override
+	public void deserializeNBT(CompoundTag nbt) {
+		setSize(size);
+		ListTag tagList = nbt.getList("Items", Tag.TAG_COMPOUND);
+		for (int i = 0; i < tagList.size(); i++) {
+			CompoundTag itemTags = tagList.getCompound(i);
+			int slot = itemTags.getInt("Slot");
+
+			if (slot >= 0 && slot < stacks.size()) {
+				stacks.set(slot, ItemStack.of(itemTags));
+			}
+		}
+		onLoad();
+	}
+
+	@Nonnull
+	@Override
+	public ItemStack extractItem(int slot, int amount, boolean simulate) {
+		dirty = true;
+		return super.extractItem(slot, amount, simulate);
+	}
+
 	@Nonnull
 	@Override
 	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
@@ -40,34 +62,13 @@ public class MechanGloveItemHandler extends ItemStackHandler {
 		return super.insertItem(slot, stack, simulate);
 	}
 
-	@Nonnull
-	@Override
-	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		dirty = true;
-		return super.extractItem(slot, amount, simulate);
-	}
-
-	@Override
-	public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-		validateSlotIndex(slot);
-		if (!ItemStack.tagMatches(stack, stacks.get(slot))) {
-			onContentsChanged(slot);
-		}
-		this.stacks.set(slot, stack);
-	}
-
-	public void setDirty() {
-		this.dirty = true;
-	}
-
-	@Override
-	protected void onContentsChanged(int slot) {
-		super.onContentsChanged(slot);
-		dirty = true;
-	}
-
 	public void load() {
 		load(itemStack.getOrCreateTag());
+	}
+
+	public void load(@Nonnull CompoundTag nbt) {
+		if (nbt.contains("Inventory"))
+			deserializeNBT(nbt.getCompound("Inventory"));
 	}
 
 	public void loadIfNotLoaded() {
@@ -76,9 +77,10 @@ public class MechanGloveItemHandler extends ItemStackHandler {
 		loaded = true;
 	}
 
-	public void load(@Nonnull CompoundTag nbt) {
-		if (nbt.contains("Inventory"))
-			deserializeNBT(nbt.getCompound("Inventory"));
+	@Override
+	protected void onContentsChanged(int slot) {
+		super.onContentsChanged(slot);
+		dirty = true;
 	}
 
 	public void save() {
@@ -89,19 +91,17 @@ public class MechanGloveItemHandler extends ItemStackHandler {
 		}
 	}
 
-	@Override
-	public void deserializeNBT(CompoundTag nbt) {
-		setSize(size);
-		ListTag tagList = nbt.getList("Items", Tag.TAG_COMPOUND);
-		for (int i = 0; i < tagList.size(); i++) {
-			CompoundTag itemTags = tagList.getCompound(i);
-			int slot = itemTags.getInt("Slot");
+	public void setDirty() {
+		this.dirty = true;
+	}
 
-			if (slot >= 0 && slot < stacks.size()) {
-				stacks.set(slot, ItemStack.of(itemTags));
-			}
+	@Override
+	public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+		validateSlotIndex(slot);
+		if (!ItemStack.tagMatches(stack, stacks.get(slot))) {
+			onContentsChanged(slot);
 		}
-		onLoad();
+		this.stacks.set(slot, stack);
 	}
 
 }

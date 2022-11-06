@@ -26,22 +26,6 @@ public class ModelDenizenSage extends EntityModel<EntityDenizenSage> implements 
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "steve"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart RightArm;
-	private final ModelPart LeftArm;
-	private final ModelPart RightLeg;
-	private final ModelPart LeftLeg;
-
-	public ModelDenizenSage(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.RightArm = root.getChild("RightArm");
-		this.LeftArm = root.getChild("LeftArm");
-		this.RightLeg = root.getChild("RightLeg");
-		this.LeftLeg = root.getChild("LeftLeg");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -89,11 +73,21 @@ public class ModelDenizenSage extends EntityModel<EntityDenizenSage> implements 
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart RightArm;
+	private final ModelPart LeftArm;
+	private final ModelPart RightLeg;
 
-	@Override
-	public void setupAnim(EntityDenizenSage entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart LeftLeg;
 
+	public ModelDenizenSage(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.RightArm = root.getChild("RightArm");
+		this.LeftArm = root.getChild("LeftArm");
+		this.RightLeg = root.getChild("RightLeg");
+		this.LeftLeg = root.getChild("LeftLeg");
 	}
 
 	@Override
@@ -108,8 +102,14 @@ public class ModelDenizenSage extends EntityModel<EntityDenizenSage> implements 
 	}
 
 	@Override
+	public void setupAnim(EntityDenizenSage entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
+	}
+
+	@Override
 	public void translateToHand(HumanoidArm pSide, PoseStack pPoseStack) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

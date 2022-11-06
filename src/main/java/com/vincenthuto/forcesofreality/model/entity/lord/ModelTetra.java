@@ -18,16 +18,10 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModelTetra extends HierarchicalModel<EntityTetra> {
-	
-	
+
+
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeltetra"), "main");
-	private final ModelPart root;
-
-	public ModelTetra(ModelPart root) {
-		this.root = root.getChild("root");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -405,11 +399,10 @@ public class ModelTetra extends HierarchicalModel<EntityTetra> {
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void setupAnim(EntityTetra entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.idleAnimationState, TetraAnimations.IDLE, ageInTicks);
+	private final ModelPart root;
+
+	public ModelTetra(ModelPart root) {
+		this.root = root.getChild("root");
 	}
 
 	@Override
@@ -421,5 +414,12 @@ public class ModelTetra extends HierarchicalModel<EntityTetra> {
 	@Override
 	public ModelPart root() {
 		return this.root;
+	}
+
+	@Override
+	public void setupAnim(EntityTetra entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(entity.idleAnimationState, TetraAnimations.IDLE, ageInTicks);
 	}
 }

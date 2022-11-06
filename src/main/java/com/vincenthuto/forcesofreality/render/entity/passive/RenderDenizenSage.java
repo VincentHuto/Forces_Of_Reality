@@ -21,18 +21,18 @@ public class RenderDenizenSage extends MobRenderer<EntityDenizenSage, ModelDeniz
 
 	public RenderDenizenSage(Context renderManagerIn) {
 		super(renderManagerIn, new ModelDenizenSage(renderManagerIn.bakeLayer(ModelDenizenSage.LAYER_LOCATION)), 0.5f);
-		this.addLayer(new ItemInHandLayer<EntityDenizenSage, ModelDenizenSage>(this, null));
+		this.addLayer(new ItemInHandLayer<>(this, null));
 
+	}
+
+	@Override
+	public ResourceLocation getTextureLocation(EntityDenizenSage entity) {
+		return entity.getDenizenTypeName();
 	}
 
 	@Override
 	public void render(EntityDenizenSage entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityDenizenSage entity) {
-		return entity.getDenizenTypeName();
 	}
 }

@@ -62,11 +62,36 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class EntityVeritas extends Monster implements IEntityAdditionalSpawnData {
 
-	private BlockPos source = BlockPos.ZERO;
+	@OnlyIn(Dist.CLIENT)
+	private static class HasturMusic extends AbstractTickableSoundInstance {
+		private final EntityVeritas seraph;
+
+		public HasturMusic(EntityVeritas seraph) {
+			super(SoundInit.ENTITY_SERAPHIM_MUSIC.get(), SoundSource.RECORDS,RandomSource.create());
+
+			this.seraph = seraph;
+			this.x = seraph.getSource().getX();
+			this.y = seraph.getSource().getY();
+			this.z = seraph.getSource().getZ();
+			this.looping = true; //
+		}
+
+		@Override
+		public void tick() {
+			if (!seraph.isAlive()) {
+				this.stop();
+			}
+		}
+	}
 	private static final String TAG_SOURCE_X = "sourceX";
 	private static final String TAG_SOURCE_Y = "sourceY";
 	private static final String TAG_SOURCE_Z = "sourcesZ";
 
+	public static AttributeSupplier.Builder setAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 100.0D).add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.ATTACK_DAMAGE, 1.0D);
+	}
+	private BlockPos source = BlockPos.ZERO;
 	public int deathTicks;
 	private float heightOffset = 0.5F;
 	private int heightOffsetUpdateTime;
@@ -74,9 +99,13 @@ public class EntityVeritas extends Monster implements IEntityAdditionalSpawnData
 	public float destPos;
 	public float oFlapSpeed;
 	public float oFlap;
+
 	public float wingRotDelta = 1.0F;
+
 	private final ServerBossEvent bossInfo = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(),
 			BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+
+	int timer = 200;
 
 	public EntityVeritas(EntityType<? extends EntityVeritas> type, Level worldIn) {
 		super(type, worldIn);
@@ -84,8 +113,11 @@ public class EntityVeritas extends Monster implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-		return false;
+	public void addAdditionalSaveData(CompoundTag cmp) {
+		super.addAdditionalSaveData(cmp);
+		cmp.putInt(TAG_SOURCE_X, source.getX());
+		cmp.putInt(TAG_SOURCE_Y, source.getY());
+		cmp.putInt(TAG_SOURCE_Z, source.getZ());
 	}
 
 	@Override
@@ -122,7 +154,260 @@ public class EntityVeritas extends Monster implements IEntityAdditionalSpawnData
 		}
 	}
 
-	int timer = 200;
+	protected void applyEntityAI() {
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
+
+	}
+
+	@Override
+	public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+		return false;
+	}
+
+	@Override
+	protected void customServerAiStep() {
+		--this.heightOffsetUpdateTime;
+		if (this.heightOffsetUpdateTime <= 0) {
+			this.heightOffsetUpdateTime = 100;
+			this.heightOffset = 0.5F + (float) this.random.nextGaussian() * 3.0F;
+		}
+
+		LivingEntity livingentity = this.getTarget();
+		if (livingentity != null && livingentity.getEyeY() > this.getEyeY() + this.heightOffset
+				&& this.canAttack(livingentity)) {
+			Vec3 vector3d = this.getDeltaMovement();
+			this.setDeltaMovement(
+					this.getDeltaMovement().add(0.0D, (0.3F - vector3d.y) * 0.3F, 0.0D));
+			this.hasImpulse = true;
+		}
+
+		super.customServerAiStep();
+		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
+
+	}
+
+	@Override
+	protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHitIn) {
+		super.dropCustomDeathLoot(source, looting, recentlyHitIn);
+		ItemEntity itementity = this.spawnAtLocation(ItemInit.crossed_keys.get());
+		if (itementity != null) {
+			itementity.setExtendedLifetime();
+		}
+
+	}
+
+	private void dropExperience(int xp) {
+		while (xp > 0) {
+			int i = ExperienceOrb.getExperienceValue(xp);
+			xp -= i;
+			this.level.addFreshEntity(new ExperienceOrb(this.level, this.getX(), this.getY(), this.getZ(), i));
+		}
+
+	}
+
+	@Override
+	public Packet<?> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ENTITY_SERAPHIM_AMBIENT.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ENTITY_SERAPHIM_DEATH.get();
+
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ENTITY_SERAPHIM_HURT.get();
+
+	}
+
+	@Override
+	public ItemStack getOffhandItem() {
+		return new ItemStack(ItemInit.destruction_orb.get(), 1);
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.4F;
+	}
+
+	public BlockPos getSource() {
+		return source;
+	}
+
+	@Override
+	public void heal(float amount) {
+		super.heal(amount);
+
+	}
+
+	public boolean isArmored() {
+		return this.getHealth() <= this.getMaxHealth() / 2.0F;
+	}
+
+	public boolean isVulnerable() {
+		return this.getHealth() <= this.getMaxHealth() / 4.0F;
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(SoundEvents.HOGLIN_STEP, 0.15F, 1.0F);
+	}
+
+	// Attack types
+	public void pullPlayer(AABB effectBounds, double x, double y, double z) {
+		List<Entity> list = level.getEntitiesOfClass(Entity.class, effectBounds);
+		for (Entity ent : list) {
+			if (ent instanceof Player) {
+				Vec3 p = new Vec3(x, y, z);
+				Vec3 t = new Vec3(ent.getX(), ent.getY(), ent.getZ());
+				double distance = p.distanceTo(t) + 0.1D;
+				Vec3 r = new Vec3(t.x - p.x, t.y - p.y, t.z - p.z);
+				ent.setDeltaMovement(-r.x / 10.2D / distance * 3.3, -r.y / 10.2D / distance * 3.3,
+						-r.z / 10.2D / distance * 3.3);
+				if (level.isClientSide) {
+					for (int countparticles = 0; countparticles <= 1; ++countparticles) {
+						ent.level.addParticle(ParticleTypes.PORTAL,
+								ent.getX() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(),
+								ent.getY() + level.random.nextDouble() * ent.getBbHeight()
+										- ent.getMyRidingOffset() - 0.5,
+								ent.getZ() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D,
+								0.0D);
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag cmp) {
+		super.readAdditionalSaveData(cmp);
+		int x = cmp.getInt(TAG_SOURCE_X);
+		int y = cmp.getInt(TAG_SOURCE_Y);
+		int z = cmp.getInt(TAG_SOURCE_Z);
+		source = new BlockPos(x, y, z);
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void readSpawnData(FriendlyByteBuf additionalData) {
+		source = BlockPos.of(additionalData.readLong());
+		Minecraft.getInstance().getSoundManager().play(new HasturMusic(this));
+
+	}
+
+	@Override
+	protected void registerGoals() {
+
+		this.applyEntityAI();
+		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.12));
+		this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 3d, 5));
+		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1d, true));
+		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.2f));
+		this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, AbstractVillager.class, 6.0F));
+
+	}
+
+	@SuppressWarnings("unused")
+	private void spawnMissile() {
+		EntityStarStrike missile = new EntityStarStrike(this, true);
+		missile.setPos(this.getX() + (Math.random() - 0.5 * 0.1), this.getY() + 2.4 + (Math.random() - 0.5 * 0.1),
+				this.getZ() + (Math.random() - 0.5 * 0.1));
+		if (missile.findTarget()) {
+			playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
+
+			level.addFreshEntity(missile);
+		}
+	}
+
+	@SuppressWarnings("unused")
+	private void spawnMissileVortex(int numMiss) {
+
+		EntityStarStrike[] missArray = new EntityStarStrike[numMiss];
+		for (int i = 0; i < numMiss; i++) {
+			missArray[i] = new EntityStarStrike(this, true);
+
+			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.random.nextFloat() - 0.5F) * 8.0F;
+			missArray[i].setPos(this.getX() + (Math.random() - 0.5 * 0.1) + 0.5 + xMod,
+					this.getY() + 2.4 + (Math.random() - 0.5 * 0.1) + yMod,
+					this.getZ() + (Math.random() - 0.5 * 0.1) + 0.5 + zMod);
+			if (missArray[i].findTarget()) {
+				playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
+				level.addFreshEntity(missArray[i]);
+			}
+		}
+	}
+
+	@Override
+	public void startSeenByPlayer(ServerPlayer player) {
+		super.startSeenByPlayer(player);
+		this.bossInfo.addPlayer(player);
+	}
+
+	@Override
+	public void stopSeenByPlayer(ServerPlayer player) {
+		super.stopSeenByPlayer(player);
+		this.bossInfo.removePlayer(player);
+	}
+
+	public void summonHolyFlare(int numTent) {
+		EntityHolyFlare[] tentArray = new EntityHolyFlare[numTent];
+		for (int i = 0; i < numTent; i++) {
+			tentArray[i] = new EntityHolyFlare(EntityInit.holy_flare.get(), level);
+			float xMod = (this.random.nextFloat() - 0.5F) * 16.0F;
+			float yMod = (this.random.nextFloat() - 0.5F) * 2.0F;
+			float zMod = (this.random.nextFloat() - 0.5F) * 16.0F;
+			tentArray[i].setPos(this.getX() + 0.5 + xMod, this.getY() + 1.5 + yMod, this.getZ() + 0.5 + zMod);
+			if (!level.isClientSide) {
+				level.addFreshEntity(tentArray[i]);
+
+			}
+		}
+	}
+
+	public void summonJudgement(int numMiss) {
+		EntityJudgement[] missArray = new EntityJudgement[numMiss];
+		for (int i = 0; i < numMiss; i++) {
+			missArray[i] = new EntityJudgement(this, true);
+			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.random.nextFloat() - 0.5F) * 8.0F;
+			missArray[i].setPos(this.getX() + 0.5 + xMod, this.getY() + 1.5 + yMod, this.getZ() + 0.5 + zMod);
+			if (!level.isClientSide) {
+				playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
+
+				level.addFreshEntity(missArray[i]);
+
+			}
+		}
+	}
+
+	public void summonThroneAid(int numTent) {
+		EntityThrone[] tentArray = new EntityThrone[numTent];
+		for (int i = 0; i < numTent; i++) {
+		//	tentArray[i] = new EntityThrone(EntityInit.throne.get(), level);
+			tentArray[i].setTentacleType(random.nextInt(4));
+			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
+			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
+			float zMod = (this.random.nextFloat() - 0.5F) * 8.0F;
+			tentArray[i].setPos(this.getX() + 0.5 + xMod, this.getY() + 1.5 + yMod, this.getZ() + 0.5 + zMod);
+			if (!level.isClientSide) {
+				playSound(SoundInit.ENTITY_SERAPHIM_THRONE.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
+				level.addFreshEntity(tentArray[i]);
+
+			}
+		}
+	}
 
 	@SuppressWarnings("unused")
 	@Override
@@ -204,102 +489,6 @@ public class EntityVeritas extends Monster implements IEntityAdditionalSpawnData
 		}
 	}
 
-	@Override
-	public ItemStack getOffhandItem() {
-		return new ItemStack(ItemInit.destruction_orb.get(), 1);
-	}
-
-	@Override
-	protected void registerGoals() {
-
-		this.applyEntityAI();
-		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.12));
-		this.goalSelector.addGoal(5, new MoveTowardsTargetGoal(this, 3d, 5));
-		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1d, true));
-		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.2f));
-		this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, AbstractVillager.class, 6.0F));
-
-	}
-
-	protected void applyEntityAI() {
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
-
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 100.0D).add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.ATTACK_DAMAGE, 1.0D);
-	}
-
-	@Override
-	protected void customServerAiStep() {
-		--this.heightOffsetUpdateTime;
-		if (this.heightOffsetUpdateTime <= 0) {
-			this.heightOffsetUpdateTime = 100;
-			this.heightOffset = 0.5F + (float) this.random.nextGaussian() * 3.0F;
-		}
-
-		LivingEntity livingentity = this.getTarget();
-		if (livingentity != null && livingentity.getEyeY() > this.getEyeY() + this.heightOffset
-				&& this.canAttack(livingentity)) {
-			Vec3 vector3d = this.getDeltaMovement();
-			this.setDeltaMovement(
-					this.getDeltaMovement().add(0.0D, (0.3F - vector3d.y) * 0.3F, 0.0D));
-			this.hasImpulse = true;
-		}
-
-		super.customServerAiStep();
-		this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
-
-	}
-
-	@Override
-	public void startSeenByPlayer(ServerPlayer player) {
-		super.startSeenByPlayer(player);
-		this.bossInfo.addPlayer(player);
-	}
-
-	@Override
-	public void stopSeenByPlayer(ServerPlayer player) {
-		super.stopSeenByPlayer(player);
-		this.bossInfo.removePlayer(player);
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ENTITY_SERAPHIM_AMBIENT.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ENTITY_SERAPHIM_HURT.get();
-
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ENTITY_SERAPHIM_DEATH.get();
-
-	}
-
-	@Override
-	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.HOGLIN_STEP, 0.15F, 1.0F);
-	}
-
-	@Override
-	protected float getSoundVolume() {
-		return 0.4F;
-	}
-
-	@Override
-	public void heal(float amount) {
-		super.heal(amount);
-
-	}
-
 	// Death
 	/**
 	 * handles entity death timer, experience orb and particle creation
@@ -348,199 +537,10 @@ public class EntityVeritas extends Monster implements IEntityAdditionalSpawnData
 
 	}
 
-	// Attack types
-	public void pullPlayer(AABB effectBounds, double x, double y, double z) {
-		List<Entity> list = level.getEntitiesOfClass(Entity.class, effectBounds);
-		for (Entity ent : list) {
-			if (ent instanceof Player) {
-				Vec3 p = new Vec3(x, y, z);
-				Vec3 t = new Vec3(ent.getX(), ent.getY(), ent.getZ());
-				double distance = p.distanceTo(t) + 0.1D;
-				Vec3 r = new Vec3(t.x - p.x, t.y - p.y, t.z - p.z);
-				ent.setDeltaMovement(-r.x / 10.2D / distance * 3.3, -r.y / 10.2D / distance * 3.3,
-						-r.z / 10.2D / distance * 3.3);
-				if (level.isClientSide) {
-					for (int countparticles = 0; countparticles <= 1; ++countparticles) {
-						ent.level.addParticle(ParticleTypes.PORTAL,
-								ent.getX() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(),
-								ent.getY() + level.random.nextDouble() * ent.getBbHeight()
-										- ent.getMyRidingOffset() - 0.5,
-								ent.getZ() + (level.random.nextDouble() - 0.5D) * ent.getBbWidth(), 0.0D, 0.0D,
-								0.0D);
-					}
-				}
-			}
-		}
-	}
-
-	public void summonThroneAid(int numTent) {
-		EntityThrone[] tentArray = new EntityThrone[numTent];
-		for (int i = 0; i < numTent; i++) {
-		//	tentArray[i] = new EntityThrone(EntityInit.throne.get(), level);
-			tentArray[i].setTentacleType(random.nextInt(4));
-			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
-			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
-			float zMod = (this.random.nextFloat() - 0.5F) * 8.0F;
-			tentArray[i].setPos(this.getX() + 0.5 + xMod, this.getY() + 1.5 + yMod, this.getZ() + 0.5 + zMod);
-			if (!level.isClientSide) {
-				playSound(SoundInit.ENTITY_SERAPHIM_THRONE.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
-				level.addFreshEntity(tentArray[i]);
-
-			}
-		}
-	}
-
-	public void summonHolyFlare(int numTent) {
-		EntityHolyFlare[] tentArray = new EntityHolyFlare[numTent];
-		for (int i = 0; i < numTent; i++) {
-			tentArray[i] = new EntityHolyFlare(EntityInit.holy_flare.get(), level);
-			float xMod = (this.random.nextFloat() - 0.5F) * 16.0F;
-			float yMod = (this.random.nextFloat() - 0.5F) * 2.0F;
-			float zMod = (this.random.nextFloat() - 0.5F) * 16.0F;
-			tentArray[i].setPos(this.getX() + 0.5 + xMod, this.getY() + 1.5 + yMod, this.getZ() + 0.5 + zMod);
-			if (!level.isClientSide) {
-				level.addFreshEntity(tentArray[i]);
-
-			}
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private void spawnMissile() {
-		EntityStarStrike missile = new EntityStarStrike(this, true);
-		missile.setPos(this.getX() + (Math.random() - 0.5 * 0.1), this.getY() + 2.4 + (Math.random() - 0.5 * 0.1),
-				this.getZ() + (Math.random() - 0.5 * 0.1));
-		if (missile.findTarget()) {
-			playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
-
-			level.addFreshEntity(missile);
-		}
-	}
-
-	public void summonJudgement(int numMiss) {
-		EntityJudgement[] missArray = new EntityJudgement[numMiss];
-		for (int i = 0; i < numMiss; i++) {
-			missArray[i] = new EntityJudgement(this, true);
-			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
-			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
-			float zMod = (this.random.nextFloat() - 0.5F) * 8.0F;
-			missArray[i].setPos(this.getX() + 0.5 + xMod, this.getY() + 1.5 + yMod, this.getZ() + 0.5 + zMod);
-			if (!level.isClientSide) {
-				playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
-
-				level.addFreshEntity(missArray[i]);
-
-			}
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private void spawnMissileVortex(int numMiss) {
-
-		EntityStarStrike[] missArray = new EntityStarStrike[numMiss];
-		for (int i = 0; i < numMiss; i++) {
-			missArray[i] = new EntityStarStrike(this, true);
-
-			float xMod = (this.random.nextFloat() - 0.5F) * 8.0F;
-			float yMod = (this.random.nextFloat() - 0.5F) * 4.0F;
-			float zMod = (this.random.nextFloat() - 0.5F) * 8.0F;
-			missArray[i].setPos(this.getX() + (Math.random() - 0.5 * 0.1) + 0.5 + xMod,
-					this.getY() + 2.4 + (Math.random() - 0.5 * 0.1) + yMod,
-					this.getZ() + (Math.random() - 0.5 * 0.1) + 0.5 + zMod);
-			if (missArray[i].findTarget()) {
-				playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
-				level.addFreshEntity(missArray[i]);
-			}
-		}
-	}
-
-	@Override
-	protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHitIn) {
-		super.dropCustomDeathLoot(source, looting, recentlyHitIn);
-		ItemEntity itementity = this.spawnAtLocation(ItemInit.crossed_keys.get());
-		if (itementity != null) {
-			itementity.setExtendedLifetime();
-		}
-
-	}
-
-	private void dropExperience(int xp) {
-		while (xp > 0) {
-			int i = ExperienceOrb.getExperienceValue(xp);
-			xp -= i;
-			this.level.addFreshEntity(new ExperienceOrb(this.level, this.getX(), this.getY(), this.getZ(), i));
-		}
-
-	}
-
-	public boolean isArmored() {
-		return this.getHealth() <= this.getMaxHealth() / 2.0F;
-	}
-
-	public boolean isVulnerable() {
-		return this.getHealth() <= this.getMaxHealth() / 4.0F;
-	}
-
 	@Override
 	public void writeSpawnData(FriendlyByteBuf buffer) {
 		buffer.writeLong(source.asLong());
 
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void readSpawnData(FriendlyByteBuf additionalData) {
-		source = BlockPos.of(additionalData.readLong());
-		Minecraft.getInstance().getSoundManager().play(new HasturMusic(this));
-
-	}
-
-	@Override
-	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-
-	@Override
-	public void addAdditionalSaveData(CompoundTag cmp) {
-		super.addAdditionalSaveData(cmp);
-		cmp.putInt(TAG_SOURCE_X, source.getX());
-		cmp.putInt(TAG_SOURCE_Y, source.getY());
-		cmp.putInt(TAG_SOURCE_Z, source.getZ());
-	}
-
-	@Override
-	public void readAdditionalSaveData(CompoundTag cmp) {
-		super.readAdditionalSaveData(cmp);
-		int x = cmp.getInt(TAG_SOURCE_X);
-		int y = cmp.getInt(TAG_SOURCE_Y);
-		int z = cmp.getInt(TAG_SOURCE_Z);
-		source = new BlockPos(x, y, z);
-	}
-
-	public BlockPos getSource() {
-		return source;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private static class HasturMusic extends AbstractTickableSoundInstance {
-		private final EntityVeritas seraph;
-
-		public HasturMusic(EntityVeritas seraph) {
-			super(SoundInit.ENTITY_SERAPHIM_MUSIC.get(), SoundSource.RECORDS,RandomSource.create());
-
-			this.seraph = seraph;
-			this.x = seraph.getSource().getX();
-			this.y = seraph.getSource().getY();
-			this.z = seraph.getSource().getZ();
-			this.looping = true; //
-		}
-
-		@Override
-		public void tick() {
-			if (!seraph.isAlive()) {
-				this.stop();
-			}
-		}
 	}
 
 }

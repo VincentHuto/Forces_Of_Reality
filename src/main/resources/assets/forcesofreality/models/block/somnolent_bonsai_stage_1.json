@@ -1,6 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	  "render_type" : "cutout",
+	
 	"textures": {
 		"6": "forcesofreality:blocks/hardened_clay",
 		"7": "forcesofreality:blocks/hardened_clay_stained_orange",

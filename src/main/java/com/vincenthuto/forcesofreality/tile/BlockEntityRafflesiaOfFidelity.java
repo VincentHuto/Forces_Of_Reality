@@ -26,11 +26,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
-	int cooldown = 0;
-	int recipeKeepTicks = 0;
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
+	int cooldown = 0;
+	int recipeKeepTicks = 0;
 	public final String TAG_RANK = "rank";
 	public int rank = 1;
 	List<ItemStack> lastRecipe = null;
@@ -38,52 +38,6 @@ public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
 
 	public BlockEntityRafflesiaOfFidelity(BlockPos worldPosition, BlockState blockState) {
 		super(BlockEntityInit.rafflesia_of_fidelity.get(), worldPosition, blockState);
-	}
-
-	@Override
-	public void onLoad() {
-		super.onLoad();
-	}
-
-	public void addRank(float valIn) {
-		this.rank += valIn;
-	}
-
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rankIn) {
-		this.rank = rankIn;
-	}
-
-	public RecipeRafflesia getCurrentRecipe() {
-		for (RecipeRafflesia recipe_ : ModRafflesiaRecipies.rafflesiaRecipies) {
-			if (recipe_.matches(itemHandler)) {
-				currentRecipe = recipe_;
-			}
-		}
-
-		return currentRecipe;
-	}
-
-	public void updateRecipe() {
-		for (RecipeRafflesia recipe : ModRafflesiaRecipies.rafflesiaRecipies)
-			if (recipe.matches(itemHandler)) {
-				ItemStack output = recipe.getOutput().copy();
-				ItemEntity outputItem = new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.5,
-						worldPosition.getZ() + 0.5, output);
-				level.addFreshEntity(outputItem);
-			}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(level, worldPosition);
-	}
-
-	public boolean hasValidRecipe() {
-		for (RecipeRafflesia recipe : ModRafflesiaRecipies.rafflesiaRecipies)
-			if (recipe.matches(itemHandler))
-				return true;
-
-		return false;
 	}
 
 	@Override
@@ -119,42 +73,42 @@ public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
 //		}
 //	}
 
-	// Nbt
-	@Override
-	public void readPacketNBT(CompoundTag tag) {
-		super.readPacketNBT(tag);
-		itemHandler = createItemHandler();
-		itemHandler.deserializeNBT(tag);
-		rank = tag.getInt(TAG_RANK);
-
+	public void addRank(float valIn) {
+		this.rank += valIn;
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag tag) {
-		super.writePacketNBT(tag);
-		tag.merge(itemHandler.serializeNBT());
-		tag.putInt(TAG_RANK, rank);
+	protected SimpleItemStackHandler createItemHandler() {
+		return new SimpleItemStackHandler(this, false) {
+			@Override
+			protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+				return 1;
+			}
+		};
+	}
 
+	public RecipeRafflesia getCurrentRecipe() {
+		for (RecipeRafflesia recipe_ : ModRafflesiaRecipies.rafflesiaRecipies) {
+			if (recipe_.matches(itemHandler)) {
+				currentRecipe = recipe_;
+			}
+		}
+
+		return currentRecipe;
+	}
+
+	public int getRank() {
+		return rank;
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
+	public int getSizeInventory() {
+		return 7;
 	}
 
 	@Override
-	public void load(CompoundTag tag) {
-		super.load(tag);
-	}
-
-	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-		super.onDataPacket(net, pkt);
-		CompoundTag tag = pkt.getTag();
-		super.onDataPacket(net, pkt);
-		itemHandler = createItemHandler();
-		itemHandler.deserializeNBT(tag);
-		rank = tag.getInt(TAG_RANK);
+	public BlockState getState() {
+		return level.getBlockState(worldPosition);
 	}
 
 	@Override
@@ -169,19 +123,12 @@ public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
 
 	}
 
-	@Override
-	public int getSizeInventory() {
-		return 7;
-	}
+	public boolean hasValidRecipe() {
+		for (RecipeRafflesia recipe : ModRafflesiaRecipies.rafflesiaRecipies)
+			if (recipe.matches(itemHandler))
+				return true;
 
-	@Override
-	protected SimpleItemStackHandler createItemHandler() {
-		return new SimpleItemStackHandler(this, false) {
-			@Override
-			protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-				return 1;
-			}
-		};
+		return false;
 	}
 
 	public boolean isEmpty() {
@@ -193,24 +140,8 @@ public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
 	}
 
 	@Override
-	public boolean triggerEvent(int id, int param) {
-		switch (id) {
-		case SET_KEEP_TICKS_EVENT:
-			recipeKeepTicks = param;
-			return true;
-		case SET_COOLDOWN_EVENT:
-			cooldown = param;
-			return true;
-		case CRAFT_EFFECT_EVENT: {
-			level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(),
-					SoundEvents.AMBIENT_CAVE, SoundSource.BLOCKS, 1, 1, false);
-			return true;
-
-		}
-		default:
-			return super.triggerEvent(id, param);
-
-		}
+	public void load(CompoundTag tag) {
+		super.load(tag);
 	}
 
 	public void onActivated(Player player, ItemStack wand) {
@@ -253,13 +184,82 @@ public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
 	}
 
 	@Override
-	public BlockState getState() {
-		return level.getBlockState(worldPosition);
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+		super.onDataPacket(net, pkt);
+		CompoundTag tag = pkt.getTag();
+		super.onDataPacket(net, pkt);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		rank = tag.getInt(TAG_RANK);
+	}
+
+	@Override
+	public void onLoad() {
+		super.onLoad();
+	}
+
+	// Nbt
+	@Override
+	public void readPacketNBT(CompoundTag tag) {
+		super.readPacketNBT(tag);
+		itemHandler = createItemHandler();
+		itemHandler.deserializeNBT(tag);
+		rank = tag.getInt(TAG_RANK);
+
+	}
+
+	@Override
+	public void saveAdditional(CompoundTag tag) {
+		super.saveAdditional(tag);
 	}
 
 	@Override
 	public void setBlockToUpdate() {
 		sendUpdates();
+	}
+
+	public void setRank(int rankIn) {
+		this.rank = rankIn;
+	}
+
+	@Override
+	public boolean triggerEvent(int id, int param) {
+		switch (id) {
+		case SET_KEEP_TICKS_EVENT:
+			recipeKeepTicks = param;
+			return true;
+		case SET_COOLDOWN_EVENT:
+			cooldown = param;
+			return true;
+		case CRAFT_EFFECT_EVENT: {
+			level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(),
+					SoundEvents.AMBIENT_CAVE, SoundSource.BLOCKS, 1, 1, false);
+			return true;
+
+		}
+		default:
+			return super.triggerEvent(id, param);
+
+		}
+	}
+
+	public void updateRecipe() {
+		for (RecipeRafflesia recipe : ModRafflesiaRecipies.rafflesiaRecipies)
+			if (recipe.matches(itemHandler)) {
+				ItemStack output = recipe.getOutput().copy();
+				ItemEntity outputItem = new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.5,
+						worldPosition.getZ() + 0.5, output);
+				level.addFreshEntity(outputItem);
+			}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(level, worldPosition);
+	}
+
+	@Override
+	public void writePacketNBT(CompoundTag tag) {
+		super.writePacketNBT(tag);
+		tag.merge(itemHandler.serializeNBT());
+		tag.putInt(TAG_RANK, rank);
+
 	}
 
 }

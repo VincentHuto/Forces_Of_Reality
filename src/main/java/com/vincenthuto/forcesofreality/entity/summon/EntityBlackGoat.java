@@ -28,6 +28,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 public class EntityBlackGoat extends Monster {
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 30.0D)
+				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 5f);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityBlackGoat(EntityType<? extends EntityBlackGoat> type, Level worldIn) {
@@ -36,8 +41,8 @@ public class EntityBlackGoat extends Monster {
 	}
 
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
@@ -47,10 +52,59 @@ public class EntityBlackGoat extends Monster {
 	}
 
 	@Override
+	protected void doPush(Entity entityIn) {
+		super.doPush(entityIn);
+		if (!(entityIn instanceof EntityBlackGoat || entityIn instanceof EntityDarkYoung
+				|| entityIn instanceof EntityUzouthrhix)) {
+			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		}
+
+	}
+
+	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
 			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+
+	}
+
+	@Override
+	public boolean fireImmune() {
+		return true;
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	@Override
+	public void playerTouch(Player entityIn) {
+		super.playerTouch(entityIn);
+		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 1.3f, 30));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
 
 	}
 
@@ -112,59 +166,5 @@ public class EntityBlackGoat extends Monster {
 			this.remove(RemovalReason.KILLED);
 		}
 
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-
-	}
-
-	@Override
-	protected void doPush(Entity entityIn) {
-		super.doPush(entityIn);
-		if (!(entityIn instanceof EntityBlackGoat || entityIn instanceof EntityDarkYoung
-				|| entityIn instanceof EntityUzouthrhix)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-		}
-
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 1.3f, 30));
-		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
-
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 30.0D)
-				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 5f);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
-	}
-
-	@Override
-	public boolean fireImmune() {
-		return true;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
 	}
 }

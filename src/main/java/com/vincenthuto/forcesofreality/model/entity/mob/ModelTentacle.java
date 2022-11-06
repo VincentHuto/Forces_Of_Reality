@@ -26,21 +26,6 @@ public class ModelTentacle extends HierarchicalModel<EntityTentacle> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeltentacle"), "main");
 
-	private final ModelPart root;
-	private final ModelPart base;
-	private final ModelPart second;
-	private final ModelPart third;
-	private final ModelPart tip;
-
-	public ModelTentacle(ModelPart p_233362_) {
-		this.root = p_233362_.getChild("root");
-		this.base = root.getChild("base");
-		this.second = root.getChild("second");
-		this.third = second.getChild("third");
-		this.tip = third.getChild("tip");
-
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -68,12 +53,20 @@ public class ModelTentacle extends HierarchicalModel<EntityTentacle> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart root;
+	private final ModelPart base;
+	private final ModelPart second;
+	private final ModelPart third;
 
-	@Override
-	public void setupAnim(EntityTentacle entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.idleAnimationState, TentacleAnimations.IDLE, ageInTicks);
+	private final ModelPart tip;
+
+	public ModelTentacle(ModelPart p_233362_) {
+		this.root = p_233362_.getChild("root");
+		this.base = root.getChild("base");
+		this.second = root.getChild("second");
+		this.third = second.getChild("third");
+		this.tip = third.getChild("tip");
+
 	}
 
 	@Override
@@ -85,6 +78,13 @@ public class ModelTentacle extends HierarchicalModel<EntityTentacle> {
 	@Override
 	public ModelPart root() {
 		return this.root;
+	}
+
+	@Override
+	public void setupAnim(EntityTentacle entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(entity.idleAnimationState, TentacleAnimations.IDLE, ageInTicks);
 	}
 
 }

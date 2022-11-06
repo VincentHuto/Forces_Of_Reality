@@ -25,14 +25,6 @@ public class ModelTrueXanthousKing extends EntityModel<EntityTrueXanthousKing> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeltruexanthousking"), "main");
-	private final ModelPart whole;
-	private final ModelPart upperBody;
-
-	public ModelTrueXanthousKing(ModelPart root) {
-		this.whole = root.getChild("whole");
-		this.upperBody = root.getChild("upperBody");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -248,11 +240,13 @@ public class ModelTrueXanthousKing extends EntityModel<EntityTrueXanthousKing> {
 
 		return LayerDefinition.create(meshdefinition, 512, 512);
 	}
+	private final ModelPart whole;
 
-	@Override
-	public void setupAnim(EntityTrueXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
+	private final ModelPart upperBody;
 
+	public ModelTrueXanthousKing(ModelPart root) {
+		this.whole = root.getChild("whole");
+		this.upperBody = root.getChild("upperBody");
 	}
 
 	@Override
@@ -260,5 +254,11 @@ public class ModelTrueXanthousKing extends EntityModel<EntityTrueXanthousKing> {
 			float red, float green, float blue, float alpha) {
 		whole.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		upperBody.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityTrueXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+
 	}
 }

@@ -33,21 +33,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.PacketDistributor;
 
 public class CovenantEvents {
+	private static Font fontRenderer;
+
 	@SubscribeEvent
 	public static void attachCapabilitiesEntity(final AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof Player) {
 			event.addCapability(new ResourceLocation(ForcesOfReality.MOD_ID, "covenant"), new CovenantProvider());
 		}
-	}
-
-	@SubscribeEvent
-	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		ServerPlayer player = (ServerPlayer) event.getEntity();
-		Map<EnumCovenants, Integer> Covenant = CovenantProvider.getPlayerDevotion(player);
-		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
-				new PacketCovenantServer(Covenant));
-//		player.displayClientMessage(
-//				 Component.translatable("Welcome! Current Blood Tendency: " + ChatFormatting.GOLD + Covenant), false);
 	}
 
 	@SubscribeEvent
@@ -65,15 +57,6 @@ public class CovenantEvents {
 				new PacketCovenantServer(Covenant));
 //		player.displayClientMessage(
 //				 Component.translatable("Welcome! Current Blood Tendency: " + ChatFormatting.GOLD + Covenant), false);
-	}
-
-	@SubscribeEvent
-	public static void onPlayerHitsBlock(PlayerInteractEvent.LeftClickEmpty e) {
-		/*
-		 * // Causes particles when the air is hit if (e.getLevel().isRemote) {
-		 * PacketHandler.CHANNELBLOODVOLUME .sendToServer(new
-		 * PacketGroundBloodDraw(ClientEventSubscriber.getPartialTicks())); }
-		 */
 	}
 
 	@SubscribeEvent
@@ -101,35 +84,13 @@ public class CovenantEvents {
 	}
 
 	@SubscribeEvent
-	public static void playerDeath(PlayerEvent.Clone event) {
-
-		Player peorig = event.getOriginal();
-		Player playernew = event.getEntity();
-		if (event.isWasDeath()) {
-			peorig.reviveCaps();
-			ICovenant bloodTendencyNew = playernew.getCapability(CovenantProvider.COVEN_CAPA)
-					.orElseThrow(IllegalStateException::new);
-			bloodTendencyNew.setDevotion(peorig.getCapability(CovenantProvider.COVEN_CAPA)
-					.orElseThrow(IllegalArgumentException::new).getDevotion());
-			peorig.invalidateCaps();
-		}
-
+	public static void onPlayerHitsBlock(PlayerInteractEvent.LeftClickEmpty e) {
+		/*
+		 * // Causes particles when the air is hit if (e.getLevel().isRemote) {
+		 * PacketHandler.CHANNELBLOODVOLUME .sendToServer(new
+		 * PacketGroundBloodDraw(ClientEventSubscriber.getPartialTicks())); }
+		 */
 	}
-
-	@SubscribeEvent
-	public static void respawn(PlayerRespawnEvent event) {
-		if (event.getEntity() instanceof Player) {
-			Player player = (Player) event.getEntity();
-			if (!player.getCommandSenderWorld().isClientSide) {
-				ICovenant tendency = player.getCapability(CovenantProvider.COVEN_CAPA)
-						.orElseThrow(IllegalArgumentException::new);
-				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-						new PacketCovenantServer(tendency.getDevotion()));
-			}
-		}
-	}
-
-	private static Font fontRenderer;
 
 	@SuppressWarnings({ "deprecation", "unused" })
 	@OnlyIn(Dist.CLIENT)
@@ -157,7 +118,7 @@ public class CovenantEvents {
 					for (int i = 0; i < tendency.getDevotion().keySet().size(); i++) {
 						EnumCovenants selectedCoven = (EnumCovenants) tendency.getDevotion().keySet()
 								.toArray()[i];
-						// 
+						//
 						fontRenderer.draw(event.getPoseStack(), HLTextUtils.toProperCase(selectedCoven.toString()),
 								point.x, point.y + 20, new Color(255, 0, 0, 255).getRGB());
 						fontRenderer.draw(event.getPoseStack(),
@@ -187,7 +148,7 @@ public class CovenantEvents {
 							/*
 							 * AbstractGui.fill(event.getPoseStack(), 0, 0, event.getWindow().getWidth(),
 							 * event.getWindow().getHeight(), new Color(0, 0, 0, 0).getRGB());
-							 * 
+							 *
 							 * fontRenderer.drawString(event.getPoseStack(), "No Covenant", 5, 5, new
 							 * Color(0, 0, 0, 0).getRGB());
 							 */
@@ -197,6 +158,45 @@ public class CovenantEvents {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void playerDeath(PlayerEvent.Clone event) {
+
+		Player peorig = event.getOriginal();
+		Player playernew = event.getEntity();
+		if (event.isWasDeath()) {
+			peorig.reviveCaps();
+			ICovenant bloodTendencyNew = playernew.getCapability(CovenantProvider.COVEN_CAPA)
+					.orElseThrow(IllegalStateException::new);
+			bloodTendencyNew.setDevotion(peorig.getCapability(CovenantProvider.COVEN_CAPA)
+					.orElseThrow(IllegalArgumentException::new).getDevotion());
+			peorig.invalidateCaps();
+		}
+
+	}
+
+	@SubscribeEvent
+	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		ServerPlayer player = (ServerPlayer) event.getEntity();
+		Map<EnumCovenants, Integer> Covenant = CovenantProvider.getPlayerDevotion(player);
+		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
+				new PacketCovenantServer(Covenant));
+//		player.displayClientMessage(
+//				 Component.translatable("Welcome! Current Blood Tendency: " + ChatFormatting.GOLD + Covenant), false);
+	}
+
+	@SubscribeEvent
+	public static void respawn(PlayerRespawnEvent event) {
+		if (event.getEntity() instanceof Player) {
+			Player player = event.getEntity();
+			if (!player.getCommandSenderWorld().isClientSide) {
+				ICovenant tendency = player.getCapability(CovenantProvider.COVEN_CAPA)
+						.orElseThrow(IllegalArgumentException::new);
+				PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+						new PacketCovenantServer(tendency.getDevotion()));
 			}
 		}
 	}

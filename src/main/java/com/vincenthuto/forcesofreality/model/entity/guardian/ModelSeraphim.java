@@ -25,34 +25,6 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelseraphim"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart r;
-	private final ModelPart l;
-	private final ModelPart RightArm;
-	private final ModelPart LeftArm;
-	private final ModelPart LeftWing;
-	private final ModelPart LeftWing2;
-	private final ModelPart RightWing;
-	private final ModelPart RightWing2;
-	private final ModelPart LeftWing3;
-	private final ModelPart RightWing3;
-
-	public ModelSeraphim(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.r = root.getChild("r");
-		this.l = root.getChild("l");
-		this.RightArm = root.getChild("RightArm");
-		this.LeftArm = root.getChild("LeftArm");
-		this.LeftWing = root.getChild("LeftWing");
-		this.LeftWing2 = root.getChild("LeftWing2");
-		this.RightWing = root.getChild("RightWing");
-		this.RightWing2 = root.getChild("RightWing2");
-		this.LeftWing3 = root.getChild("LeftWing3");
-		this.RightWing3 = root.getChild("RightWing3");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -270,11 +242,33 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart r;
+	private final ModelPart l;
+	private final ModelPart RightArm;
+	private final ModelPart LeftArm;
+	private final ModelPart LeftWing;
+	private final ModelPart LeftWing2;
+	private final ModelPart RightWing;
+	private final ModelPart RightWing2;
+	private final ModelPart LeftWing3;
 
-	@Override
-	public void setupAnim(EntitySeraphim entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart RightWing3;
 
+	public ModelSeraphim(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.r = root.getChild("r");
+		this.l = root.getChild("l");
+		this.RightArm = root.getChild("RightArm");
+		this.LeftArm = root.getChild("LeftArm");
+		this.LeftWing = root.getChild("LeftWing");
+		this.LeftWing2 = root.getChild("LeftWing2");
+		this.RightWing = root.getChild("RightWing");
+		this.RightWing2 = root.getChild("RightWing2");
+		this.LeftWing3 = root.getChild("LeftWing3");
+		this.RightWing3 = root.getChild("RightWing3");
 	}
 
 	@Override
@@ -292,5 +286,11 @@ public class ModelSeraphim extends EntityModel<EntitySeraphim> {
 		RightWing2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftWing3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightWing3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntitySeraphim entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
 	}
 }

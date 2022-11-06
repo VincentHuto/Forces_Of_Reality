@@ -34,7 +34,7 @@ public class ClientEventSubscriber {
 
 	public static NonNullList<KeyMapping> keyBinds = NonNullList.create();
 	public static KeyMapping mechanglovemode;
-	public static KeyMapping sparkdirector;;
+	public static KeyMapping sparkdirector;
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {

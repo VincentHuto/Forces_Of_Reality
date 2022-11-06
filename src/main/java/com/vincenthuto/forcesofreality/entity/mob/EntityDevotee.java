@@ -29,19 +29,56 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class EntityDevotee extends Monster {
 
+	public static AttributeSupplier.Builder setAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+	}
+
 	public EntityDevotee(EntityType<? extends EntityDevotee> type, Level worldIn) {
 		super(type, worldIn);
 
 	}
 
+	protected void applyEntityAI() {
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
+	}
+
 	@Override
-	public void tick() {
-		super.tick();
-		float f = (this.random.nextFloat() - 0.5F) * 2.0F;
-		float f1 = (this.random.nextFloat() - 0.5F) * 1.0F;
-		float f2 = (this.random.nextFloat() - 0.5F) * 2.0F;
-		this.level.addParticle(ParticleTypes.ASH, this.getX() + f, this.getY() + 2.0D + f1,
-				this.getZ() + f2, 0.0D, 0.0D, 0.0D);
+	protected void customServerAiStep() {
+		super.customServerAiStep();
+
+	}
+
+	@Override
+	public Packet<?> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ENTITY_HASTUR_AMBIENT.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ENTITY_HASTUR_DEATH.get();
+
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ENTITY_HASTUR_HURT.get();
+
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.4F;
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -58,19 +95,15 @@ public class EntityDevotee extends Monster {
 
 	}
 
-	protected void applyEntityAI() {
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
-	}
-
-	@Override
-	protected void customServerAiStep() {
-		super.customServerAiStep();
-
+	@SuppressWarnings("unused")
+	private void spawnMissile() {
+		EntityTrackingOrb missile = new EntityTrackingOrb(this, true);
+		missile.setPos(this.getX() + (Math.random() - 0.5 * 0.1), this.getY() + 2.4 + (Math.random() - 0.5 * 0.1),
+				this.getZ() + (Math.random() - 0.5 * 0.1));
+		if (missile.findTarget()) {
+			playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
+			level.addFreshEntity(missile);
+		}
 	}
 
 	@Override
@@ -81,33 +114,6 @@ public class EntityDevotee extends Monster {
 	@Override
 	public void stopSeenByPlayer(ServerPlayer player) {
 		super.stopSeenByPlayer(player);
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ENTITY_HASTUR_AMBIENT.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ENTITY_HASTUR_HURT.get();
-
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ENTITY_HASTUR_DEATH.get();
-
-	}
-
-	@Override
-	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
-	}
-
-	@Override
-	protected float getSoundVolume() {
-		return 0.4F;
 	}
 
 	// Attack types
@@ -127,20 +133,14 @@ public class EntityDevotee extends Monster {
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private void spawnMissile() {
-		EntityTrackingOrb missile = new EntityTrackingOrb(this, true);
-		missile.setPos(this.getX() + (Math.random() - 0.5 * 0.1), this.getY() + 2.4 + (Math.random() - 0.5 * 0.1),
-				this.getZ() + (Math.random() - 0.5 * 0.1));
-		if (missile.findTarget()) {
-			playSound(SoundInit.ENTITY_HASTUR_HIT.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
-			level.addFreshEntity(missile);
-		}
-	}
-
 	@Override
-	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+	public void tick() {
+		super.tick();
+		float f = (this.random.nextFloat() - 0.5F) * 2.0F;
+		float f1 = (this.random.nextFloat() - 0.5F) * 1.0F;
+		float f2 = (this.random.nextFloat() - 0.5F) * 2.0F;
+		this.level.addParticle(ParticleTypes.ASH, this.getX() + f, this.getY() + 2.0D + f1,
+				this.getZ() + f2, 0.0D, 0.0D, 0.0D);
 	}
 
 }

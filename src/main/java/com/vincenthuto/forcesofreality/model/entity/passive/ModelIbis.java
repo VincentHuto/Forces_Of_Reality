@@ -24,24 +24,6 @@ public class ModelIbis<T extends Entity> extends EntityModel<T> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelibis"), "main");
-	private final ModelPart RightLeg;
-	private final ModelPart LeftLeg;
-	private final ModelPart Body;
-	private final ModelPart RightWing;
-	private final ModelPart LeftWing;
-	private final ModelPart Neck;
-	private final ModelPart Head;
-
-	public ModelIbis(ModelPart root) {
-		this.RightLeg = root.getChild("RightLeg");
-		this.LeftLeg = root.getChild("LeftLeg");
-		this.Body = root.getChild("Body");
-		this.RightWing = root.getChild("RightWing");
-		this.LeftWing = root.getChild("LeftWing");
-		this.Neck = root.getChild("Neck");
-		this.Head = root.getChild("Head");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -87,11 +69,23 @@ public class ModelIbis<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
+	private final ModelPart RightLeg;
+	private final ModelPart LeftLeg;
+	private final ModelPart Body;
+	private final ModelPart RightWing;
+	private final ModelPart LeftWing;
+	private final ModelPart Neck;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
+	private final ModelPart Head;
 
+	public ModelIbis(ModelPart root) {
+		this.RightLeg = root.getChild("RightLeg");
+		this.LeftLeg = root.getChild("LeftLeg");
+		this.Body = root.getChild("Body");
+		this.RightWing = root.getChild("RightWing");
+		this.LeftWing = root.getChild("LeftWing");
+		this.Neck = root.getChild("Neck");
+		this.Head = root.getChild("Head");
 	}
 
 	@Override
@@ -104,5 +98,11 @@ public class ModelIbis<T extends Entity> extends EntityModel<T> {
 		LeftWing.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Neck.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+
 	}
 }

@@ -27,6 +27,16 @@ public class RenderBeastFromBeyond extends MobRenderer<EntityBeastFromBeyond, Mo
 	}
 
 	@Override
+	public ResourceLocation getTextureLocation(EntityBeastFromBeyond entity) {
+		if (entity.deathTicks > 0) {
+			return DRAGON_DEAD_TEXTURES;
+		} else {
+			return TEXTURE;
+
+		}
+	}
+
+	@Override
 	public void render(EntityBeastFromBeyond entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
@@ -41,15 +51,5 @@ public class RenderBeastFromBeyond extends MobRenderer<EntityBeastFromBeyond, Mo
 	protected void scale(EntityBeastFromBeyond entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
 		super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
 		matrixStackIn.scale(2, 2, 2);
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityBeastFromBeyond entity) {
-		if (entity.deathTicks > 0) {
-			return DRAGON_DEAD_TEXTURES;
-		} else {
-			return TEXTURE;
-
-		}
 	}
 }

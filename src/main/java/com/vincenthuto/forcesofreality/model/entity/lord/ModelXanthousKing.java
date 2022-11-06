@@ -24,16 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelXanthousKing extends EntityModel<EntityXanthousKing> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelxanthousking"), "main");
-	private final ModelPart whole;
-	private final ModelPart upperBody;
-	private final ModelPart lowerBody;
-
-	public ModelXanthousKing(ModelPart root) {
-		this.whole = root.getChild("whole");
-		this.upperBody = root.getChild("upperBody");
-		this.lowerBody = root.getChild("lowerBody");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -606,10 +596,15 @@ public class ModelXanthousKing extends EntityModel<EntityXanthousKing> {
 
 		return LayerDefinition.create(meshdefinition, 512, 512);
 	}
+	private final ModelPart whole;
+	private final ModelPart upperBody;
 
-	@Override
-	public void setupAnim(EntityXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart lowerBody;
 
+	public ModelXanthousKing(ModelPart root) {
+		this.whole = root.getChild("whole");
+		this.upperBody = root.getChild("upperBody");
+		this.lowerBody = root.getChild("lowerBody");
 	}
 
 	@Override
@@ -617,5 +612,10 @@ public class ModelXanthousKing extends EntityModel<EntityXanthousKing> {
 		whole.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		upperBody.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		lowerBody.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

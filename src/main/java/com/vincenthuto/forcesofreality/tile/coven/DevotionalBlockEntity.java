@@ -15,12 +15,14 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class DevotionalBlockEntity extends BlockEntity implements IDevotionalTile {
 
-	public IDevotion devo = getCapability(DevotionProvider.DEVO_CAPA).orElseThrow(IllegalStateException::new);
 	static final String TAG_DEVO = "devotion";
-	public int clientDevo = 0;
 	public static final String TAG_MODIFIER = "modifier";
+	public IDevotion devo = getCapability(DevotionProvider.DEVO_CAPA).orElseThrow(IllegalStateException::new);
+	public int clientDevo = 0;
 	public int sacMod = 1;
-	
+
+	private boolean isVanilla = getClass().getName().startsWith("net.minecraft.");
+
 	public DevotionalBlockEntity(BlockEntityType<?> BlockEntityTypeIn, BlockPos worldPosition, BlockState blockState) {
 		super(BlockEntityTypeIn, worldPosition, blockState);
 	}
@@ -29,25 +31,26 @@ public class DevotionalBlockEntity extends BlockEntity implements IDevotionalTil
 		return devo;
 	}
 
+	public EnumCovenants getCovenType() {
+		return EnumCovenants.SELF;
+
+	}
+
 	public double getDevotion() {
 		return devo.getDevotion();
 	}
 
 	@Override
-	public void load(CompoundTag tag) {
-		super.load(tag);
-		if (tag != null) {
-			devo.setDevotion(tag.getInt(TAG_DEVO));
-		}
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
-		if (tag != null) {
-			tag.putDouble(TAG_DEVO, devo.getDevotion());
-		}
+	public CompoundTag getUpdateTag() {
+		CompoundTag tag = new CompoundTag();
+		tag.putDouble(TAG_DEVO, devo.getDevotion());
+		return tag;
 	}
 
 	@Override
@@ -59,10 +62,12 @@ public class DevotionalBlockEntity extends BlockEntity implements IDevotionalTil
 	}
 
 	@Override
-	public CompoundTag getUpdateTag() {
-		CompoundTag tag = new CompoundTag();
-		tag.putDouble(TAG_DEVO, devo.getDevotion());
-		return tag;
+	public void load(CompoundTag tag) {
+		super.load(tag);
+		if (tag != null) {
+			devo.setDevotion(tag.getInt(TAG_DEVO));
+		}
+
 	}
 
 	@Override
@@ -76,20 +81,15 @@ public class DevotionalBlockEntity extends BlockEntity implements IDevotionalTil
 	}
 
 	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-
+	public void saveAdditional(CompoundTag tag) {
+		super.saveAdditional(tag);
+		if (tag != null) {
+			tag.putDouble(TAG_DEVO, devo.getDevotion());
+		}
 	}
-
-	private boolean isVanilla = getClass().getName().startsWith("net.minecraft.");
 
 	public boolean shouldRefresh(Level world, BlockPos pos, BlockState oldState, BlockState newSate) {
 		return isVanilla ? (oldState.getBlock() != newSate.getBlock()) : oldState != newSate;
-	}
-
-	public EnumCovenants getCovenType() {
-		return EnumCovenants.SELF;
-
 	}
 
 }

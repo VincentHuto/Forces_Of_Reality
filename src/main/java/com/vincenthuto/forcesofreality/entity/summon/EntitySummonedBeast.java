@@ -48,6 +48,11 @@ public class EntitySummonedBeast extends Monster {
 		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID,
 				"textures/entity/summoned_beast/model_summoned_beast_white.png"));
 	});
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 30.0D)
+				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 5f);
+	}
+
 	public float deathTicks = 1;
 
 	public EntitySummonedBeast(EntityType<? extends EntitySummonedBeast> type, Level worldIn) {
@@ -55,31 +60,25 @@ public class EntitySummonedBeast extends Monster {
 
 	}
 
-	public ResourceLocation getBeastTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getBeastType(), TEXTURE_BY_ID.get(0));
-	}
-
-	public int getBeastType() {
-		return this.entityData.get(BEAST_TYPE);
-	}
-
-	public void setBeastType(int type) {
-		if (type <= 0 || type >= 4) {
-			type = this.random.nextInt(5);
-		}
-
-		this.entityData.set(BEAST_TYPE, type);
-	}
-
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(BEAST_TYPE, 1);
+
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+		super.doPush(entityIn);
+		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond
+				|| entityIn instanceof EntityTheFirstBeast || entityIn instanceof EntityLordOfTheWild)) {
+			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		}
 
 	}
 
@@ -96,6 +95,56 @@ public class EntitySummonedBeast extends Monster {
 
 		return spawnDataIn;
 
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	public int getBeastType() {
+		return this.entityData.get(BEAST_TYPE);
+	}
+
+	public ResourceLocation getBeastTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getBeastType(), TEXTURE_BY_ID.get(0));
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	@Override
+	public void playerTouch(Player entityIn) {
+		super.playerTouch(entityIn);
+		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 1.3d, 30));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
+
+	}
+
+	public void setBeastType(int type) {
+		if (type <= 0 || type >= 4) {
+			type = this.random.nextInt(5);
+		}
+
+		this.entityData.set(BEAST_TYPE, type);
 	}
 
 	@Override
@@ -156,54 +205,5 @@ public class EntitySummonedBeast extends Monster {
 			this.remove(RemovalReason.KILLED);
 		}
 
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-
-	}
-
-	@Override
-	protected void doPush(Entity entityIn) {
-		super.doPush(entityIn);
-		if (!(entityIn instanceof EntitySummonedBeast || entityIn instanceof EntityBeastFromBeyond
-				|| entityIn instanceof EntityTheFirstBeast || entityIn instanceof EntityLordOfTheWild)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-		}
-
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 1.3d, 30));
-		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
-
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 30.0D)
-				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 5f);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ITEM_STAR_SLUG_STRIKE.get();
 	}
 }

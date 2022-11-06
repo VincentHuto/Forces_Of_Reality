@@ -471,35 +471,6 @@ public class ItemInit {
 			.register("spawn_egg_first_beast", () -> new ModSpawnEggItem(EntityInit.the_first_beast, 6499072, 11777460,
 					new Item.Properties().tab(CreativeModeTab.TAB_MISC).tab(ForcesOfRealityItemGroup.instance)));
 
-	@SubscribeEvent
-	public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
-				ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_tentacle,
-				ItemInit.spawn_egg_hastur_spawn, ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim,
-				/* ItemInit.spawn_egg_throne, */ ItemInit.spawn_egg_beast_from_beyond,
-				ItemInit.spawn_egg_summoned_beast, ItemInit.spawn_egg_malformed_automaton,
-				ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa, ItemInit.spawn_egg_scuttling_occulus,
-				ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan, ItemInit.spawn_egg_veritas,
-				ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl, ItemInit.spawn_egg_deranged_beast,
-				ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild, ItemInit.spawn_egg_uzouthrhix,
-				ItemInit.spawn_egg_xanthous_king, ItemInit.spawn_egg_devotee, ItemInit.spawn_egg_first_beast);
-	}
-
-	@SafeVarargs
-	public static void registerSpawnEggColorHandler(ItemColors colors, RegistryObject<ModSpawnEggItem>... spawnEggs) {
-		for (RegistryObject<ModSpawnEggItem> spawnEgg : spawnEggs) {
-			registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.get().getColor(tintIndex), spawnEgg);
-		}
-	}
-
-	@SafeVarargs
-	public static void registerItemColorHandler(ItemColors colors, ItemColor itemColor,
-			RegistryObject<ModSpawnEggItem>... items) {
-		for (RegistryObject<ModSpawnEggItem> itemProvider : items) {
-			colors.register(itemColor, itemProvider.get());
-		}
-	}
-
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
@@ -638,7 +609,7 @@ public class ItemInit {
 					return 0.0F;
 				} else {
 					return ent.getUseItem() != stack ? 0.0F
-							: (float) (stack.getUseDuration() - ent.getUseItemRemainingTicks()) / 20.0F;
+							: (stack.getUseDuration() - ent.getUseItemRemainingTicks()) / 20.0F;
 				}
 			}
 		});
@@ -704,7 +675,7 @@ public class ItemInit {
 					return 0.0F;
 				} else {
 					return ent.getUseItem() != stack ? 0.0F
-							: (float) (stack.getUseDuration() - ent.getUseItemRemainingTicks()) / 20.0F;
+							: (stack.getUseDuration() - ent.getUseItemRemainingTicks()) / 20.0F;
 				}
 			}
 		});
@@ -715,6 +686,35 @@ public class ItemInit {
 			}
 		});
 
+	}
+
+	@SafeVarargs
+	public static void registerItemColorHandler(ItemColors colors, ItemColor itemColor,
+			RegistryObject<ModSpawnEggItem>... items) {
+		for (RegistryObject<ModSpawnEggItem> itemProvider : items) {
+			colors.register(itemColor, itemProvider.get());
+		}
+	}
+
+	@SubscribeEvent
+	public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
+		registerSpawnEggColorHandler(event.getItemColors(), ItemInit.spawn_egg_hastur, ItemInit.spawn_egg_hastur_vassal,
+				ItemInit.spawn_egg_denizen, ItemInit.spawn_egg_denizen_sage, ItemInit.spawn_egg_tentacle,
+				ItemInit.spawn_egg_hastur_spawn, ItemInit.spawn_egg_slug, ItemInit.spawn_egg_seraphim,
+				/* ItemInit.spawn_egg_throne, */ ItemInit.spawn_egg_beast_from_beyond,
+				ItemInit.spawn_egg_summoned_beast, ItemInit.spawn_egg_malformed_automaton,
+				ItemInit.spawn_egg_dark_young, ItemInit.spawn_egg_tulpa, ItemInit.spawn_egg_scuttling_occulus,
+				ItemInit.spawn_egg_dread_bot, ItemInit.spawn_egg_mechan, ItemInit.spawn_egg_veritas,
+				ItemInit.spawn_egg_black_goat, ItemInit.spawn_egg_angelic_fowl, ItemInit.spawn_egg_deranged_beast,
+				ItemInit.spawn_egg_tetra, ItemInit.spawn_egg_lord_of_the_wild, ItemInit.spawn_egg_uzouthrhix,
+				ItemInit.spawn_egg_xanthous_king, ItemInit.spawn_egg_devotee, ItemInit.spawn_egg_first_beast);
+	}
+
+	@SafeVarargs
+	public static void registerSpawnEggColorHandler(ItemColors colors, RegistryObject<ModSpawnEggItem>... spawnEggs) {
+		for (RegistryObject<ModSpawnEggItem> spawnEgg : spawnEggs) {
+			registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.get().getColor(tintIndex), spawnEgg);
+		}
 	}
 
 }

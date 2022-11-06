@@ -80,6 +80,133 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 	}
 
 	@Override
+	public void animateTick(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos,
+			@Nonnull RandomSource random) {
+		BlockEntityMachinaImperfecta tile = (BlockEntityMachinaImperfecta) world.getBlockEntity(pos);
+		if (tile != null && tile instanceof BlockEntityMachinaImperfecta) {
+			int count = (int) (6 * 0.5f);
+			if (count > 0) {
+				for (int i = 0; i < random.nextInt(count); i++) {
+					double randX = pos.getX() + random.nextDouble();
+					double randY = pos.getY() + random.nextDouble();
+					double randZ = pos.getZ() + random.nextDouble();
+					world.addParticle(DustParticleOptions.REDSTONE, randX, randY, randZ, 0, 0, 0);
+					world.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
+
+				}
+			}
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void attack(BlockState state, Level worldIn, BlockPos pos, Player player) {
+		super.attack(state, worldIn, pos, player);
+	}
+
+	@Override
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+		builder.add(FACING);
+	}
+
+	@Override
+	public EnumCovenants getCovenType() {
+		return EnumCovenants.MACHINE;
+	}
+
+	private BlockPattern getGolemPattern() {
+		if (this.golemPattern == null) {
+			this.golemPattern = BlockPatternBuilder.start()
+					.aisle("~~~^~~~", "~~GMG~~", "~#~#~#~", "~#~#~#~", "~~#~#~~", "~~#~#~~")
+					.where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)))
+					.where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(BlockInit.auric_block.get())))
+					.where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR)))
+					.where('M', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.MAGMA_BLOCK)))
+					.where('G', BlockInWorld.hasState(BlockStatePredicate.forBlock(BlockInit.machine_glass.get())))
+					.build();
+		}
+		return this.golemPattern;
+	}
+
+	@Override
+	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
+		return SHAPE_R;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+		return SHAPE_N;
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+	}
+
+	@Override
+	public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+		return new BlockEntityMachinaImperfecta(p_153215_, p_153216_);
+	}
+
+	@Override
+	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
+	}
+
+	// Golem Spawning
+	@Override
+	public void onPlace(BlockState state, Level worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+		if (!oldState.is(state.getBlock())) {
+			this.trySpawnGolem(worldIn, pos);
+		}
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	private void trySpawnGolem(Level world, BlockPos pos) {
+		BlockPattern.BlockPatternMatch blockpattern$patternhelper = this.getGolemPattern().find(world, pos);
+		if (blockpattern$patternhelper != null) {
+			blockpattern$patternhelper = this.getGolemPattern().find(world, pos);
+			if (blockpattern$patternhelper != null) {
+				for (int j = 0; j < this.getGolemPattern().getWidth(); ++j) {
+					for (int k = 0; k < this.getGolemPattern().getHeight(); ++k) {
+						BlockInWorld cachedblockinfo2 = blockpattern$patternhelper.getBlock(j, k, 0);
+						world.setBlock(cachedblockinfo2.getPos(), Blocks.AIR.defaultBlockState(), 2);
+						world.levelEvent(2001, cachedblockinfo2.getPos(), Block.getId(cachedblockinfo2.getState()));
+					}
+				}
+
+				BlockPos blockpos = blockpattern$patternhelper.getBlock(1, 2, 0).getPos();
+				EntityMalformedAutomaton irongolementity = new EntityMalformedAutomaton(
+						EntityInit.malformed_automaton.get(), world);
+				irongolementity.setPlayerCreated(true);
+				irongolementity.moveTo(blockpos.getX() + 0.5D, blockpos.getY() + 0.05D, blockpos.getZ() + 0.5D, 0.0F,
+						0.0F);
+				world.addFreshEntity(irongolementity);
+
+				for (ServerPlayer serverplayerentity1 : world.getEntitiesOfClass(ServerPlayer.class,
+						irongolementity.getBoundingBox().inflate(5.0D))) {
+					CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayerentity1, irongolementity);
+				}
+				for (int i1 = 0; i1 < this.getGolemPattern().getWidth(); ++i1) {
+					for (int j1 = 0; j1 < this.getGolemPattern().getHeight(); ++j1) {
+						BlockInWorld cachedblockinfo1 = blockpattern$patternhelper.getBlock(i1, j1, 0);
+						world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
+					}
+				}
+			}
+		}
+	}
+
+	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
 			BlockHitResult hit) {
 		BlockEntityMachinaImperfecta te = (BlockEntityMachinaImperfecta) worldIn.getBlockEntity(pos);
@@ -136,133 +263,6 @@ public class BlockMachinaImperfecta extends Block implements IBlockDevotionStati
 
 		}
 
-	}
-
-	@Override
-	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return SHAPE_R;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return SHAPE_N;
-	}
-
-	@Override
-	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
-	}
-
-	@Override
-	public void animateTick(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos,
-			@Nonnull RandomSource random) {
-		BlockEntityMachinaImperfecta tile = (BlockEntityMachinaImperfecta) world.getBlockEntity(pos);
-		if (tile != null && tile instanceof BlockEntityMachinaImperfecta) {
-			int count = (int) (6 * 0.5f);
-			if (count > 0) {
-				for (int i = 0; i < random.nextInt(count); i++) {
-					double randX = pos.getX() + random.nextDouble();
-					double randY = pos.getY() + random.nextDouble();
-					double randZ = pos.getZ() + random.nextDouble();
-					world.addParticle(DustParticleOptions.REDSTONE, randX, randY, randZ, 0, 0, 0);
-					world.addParticle(ParticleTypes.SMOKE, randX, randY, randZ, 0, 0, 0);
-
-				}
-			}
-		}
-	}
-
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-	}
-
-	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
-	}
-
-	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-		builder.add(FACING);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void attack(BlockState state, Level worldIn, BlockPos pos, Player player) {
-		super.attack(state, worldIn, pos, player);
-	}
-
-	@Override
-	public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-		return new BlockEntityMachinaImperfecta(p_153215_, p_153216_);
-	}
-
-	@Override
-	public EnumCovenants getCovenType() {
-		return EnumCovenants.MACHINE;
-	}
-
-	// Golem Spawning
-	@Override
-	public void onPlace(BlockState state, Level worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-		if (!oldState.is(state.getBlock())) {
-			this.trySpawnGolem(worldIn, pos);
-		}
-	}
-
-	private void trySpawnGolem(Level world, BlockPos pos) {
-		BlockPattern.BlockPatternMatch blockpattern$patternhelper = this.getGolemPattern().find(world, pos);
-		if (blockpattern$patternhelper != null) {
-			blockpattern$patternhelper = this.getGolemPattern().find(world, pos);
-			if (blockpattern$patternhelper != null) {
-				for (int j = 0; j < this.getGolemPattern().getWidth(); ++j) {
-					for (int k = 0; k < this.getGolemPattern().getHeight(); ++k) {
-						BlockInWorld cachedblockinfo2 = blockpattern$patternhelper.getBlock(j, k, 0);
-						world.setBlock(cachedblockinfo2.getPos(), Blocks.AIR.defaultBlockState(), 2);
-						world.levelEvent(2001, cachedblockinfo2.getPos(), Block.getId(cachedblockinfo2.getState()));
-					}
-				}
-
-				BlockPos blockpos = blockpattern$patternhelper.getBlock(1, 2, 0).getPos();
-				EntityMalformedAutomaton irongolementity = new EntityMalformedAutomaton(
-						EntityInit.malformed_automaton.get(), world);
-				irongolementity.setPlayerCreated(true);
-				irongolementity.moveTo(blockpos.getX() + 0.5D, blockpos.getY() + 0.05D, blockpos.getZ() + 0.5D, 0.0F,
-						0.0F);
-				world.addFreshEntity(irongolementity);
-
-				for (ServerPlayer serverplayerentity1 : world.getEntitiesOfClass(ServerPlayer.class,
-						irongolementity.getBoundingBox().inflate(5.0D))) {
-					CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayerentity1, irongolementity);
-				}
-				for (int i1 = 0; i1 < this.getGolemPattern().getWidth(); ++i1) {
-					for (int j1 = 0; j1 < this.getGolemPattern().getHeight(); ++j1) {
-						BlockInWorld cachedblockinfo1 = blockpattern$patternhelper.getBlock(i1, j1, 0);
-						world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
-					}
-				}
-			}
-		}
-	}
-
-	private BlockPattern getGolemPattern() {
-		if (this.golemPattern == null) {
-			this.golemPattern = BlockPatternBuilder.start()
-					.aisle("~~~^~~~", "~~GMG~~", "~#~#~#~", "~#~#~#~", "~~#~#~~", "~~#~#~~")
-					.where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(this)))
-					.where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(BlockInit.auric_block.get())))
-					.where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR)))
-					.where('M', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.MAGMA_BLOCK)))
-					.where('G', BlockInWorld.hasState(BlockStatePredicate.forBlock(BlockInit.machine_glass.get())))
-					.build();
-		}
-		return this.golemPattern;
 	}
 
 }

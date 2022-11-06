@@ -42,38 +42,6 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 	public static final Lazy<ModelAuricArmor<LivingEntity>> boots = Lazy
 			.of(() -> new ModelAuricArmor<>(Minecraft.getInstance().getEntityModels().bakeLayer(AURIC_BOOTS_LAYER)));
 
-	public ModelAuricArmor(ModelPart root) {
-		super(root, RenderType::entityTranslucent);
-
-	}
-
-	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
-		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
-		PartDefinition partdefinition = meshdefinition.getRoot();
-		if (slot.equals(EquipmentSlot.HEAD)) {
-
-			PartDefinition head = partdefinition.addOrReplaceChild("head",
-					CubeListBuilder.create().texOffs(0, 0)
-							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(32, 0)
-							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
-					PartPose.offset(0.0F, 0.0F, 0.0F));
-
-			PartDefinition helm = head.addOrReplaceChild("helm",
-					CubeListBuilder.create().texOffs(0, 88)
-							.addBox(-2.0F, -29.0F, -6.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(1.0F)).texOffs(34, 132)
-							.addBox(2.0F, -33.0F, -6.0F, 0.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(0, 135)
-							.addBox(1.0F, -32.0F, -6.0F, 2.0F, 2.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(0, 53)
-							.addBox(1.0F, -30.0F, 2.0F, 2.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(38, 53)
-							.addBox(2.0F, -34.0F, -6.0F, 0.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(48, 140)
-							.addBox(2.0F, -34.0F, -8.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(42, 136)
-							.addBox(2.0F, -33.0F, 2.0F, 0.0F, 10.0F, 3.0F, new CubeDeformation(0.0F)),
-					PartPose.offset(-2.0F, 21.0F, 2.0F));
-
-		}
-
-		return LayerDefinition.create(meshdefinition, 256, 256);
-	}
-
 	public static LayerDefinition createBodyLayer(EquipmentSlot slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -138,10 +106,35 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 
 	}
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
+		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
+		PartDefinition partdefinition = meshdefinition.getRoot();
+		if (slot.equals(EquipmentSlot.HEAD)) {
+
+			PartDefinition head = partdefinition.addOrReplaceChild("head",
+					CubeListBuilder.create().texOffs(0, 0)
+							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(32, 0)
+							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+					PartPose.offset(0.0F, 0.0F, 0.0F));
+
+			PartDefinition helm = head.addOrReplaceChild("helm",
+					CubeListBuilder.create().texOffs(0, 88)
+							.addBox(-2.0F, -29.0F, -6.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(1.0F)).texOffs(34, 132)
+							.addBox(2.0F, -33.0F, -6.0F, 0.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(0, 135)
+							.addBox(1.0F, -32.0F, -6.0F, 2.0F, 2.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(0, 53)
+							.addBox(1.0F, -30.0F, 2.0F, 2.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(38, 53)
+							.addBox(2.0F, -34.0F, -6.0F, 0.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(48, 140)
+							.addBox(2.0F, -34.0F, -8.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(42, 136)
+							.addBox(2.0F, -33.0F, 2.0F, 0.0F, 10.0F, 3.0F, new CubeDeformation(0.0F)),
+					PartPose.offset(-2.0F, 21.0F, 2.0F));
+
+		}
+
+		return LayerDefinition.create(meshdefinition, 256, 256);
+	}
+
+	public ModelAuricArmor(ModelPart root) {
+		super(root, RenderType::entityTranslucent);
 
 	}
 
@@ -154,5 +147,12 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 		rightLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		rightArm.render(poseStack, buffer, packedLight, packedOverlay);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+
 	}
 }

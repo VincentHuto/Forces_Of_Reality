@@ -24,6 +24,12 @@ public class RenderSummonedBeast extends MobRenderer<EntitySummonedBeast, ModelS
 
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntitySummonedBeast entity) {
+		return entity.getBeastTypeName();
+	}
+
 	@Override
 	public void render(EntitySummonedBeast entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
@@ -53,12 +59,6 @@ public class RenderSummonedBeast extends MobRenderer<EntitySummonedBeast, ModelS
 			matrixStackIn.scale(d, 1, d);
 
 		}
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntitySummonedBeast entity) {
-		return entity.getBeastTypeName();
 	}
 
 }

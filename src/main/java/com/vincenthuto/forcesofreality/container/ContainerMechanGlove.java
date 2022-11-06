@@ -16,15 +16,30 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerMechanGlove extends AbstractContainerMenu {
-	public ContainerMechanGlove(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
-		this(windowId, playerInventory);
-	}
+	public int slotcount = 0;
 
+	private int slotID;
+
+	public String itemKey = "";
+
+	@SuppressWarnings("rawtypes")
+//	public static final MenuType type = new MenuType<>(ContainerMechanGlove::new)
+//			.setRegistryName("mechan_glove_container");
+
+	private Inventory playerInv;
+
+	public MechanGloveItemHandler handler;
+	public ContainerMechanGlove(int openType, int windowId, Level world, BlockPos pos, Inventory playerInventory,
+			Player playerEntity) {
+		this(windowId, world, pos, playerInventory, playerEntity);
+	}
 	public ContainerMechanGlove(final int windowId, final Inventory playerInventory) {
 		this(windowId, playerInventory.player.level, playerInventory.player.blockPosition(), playerInventory,
 				playerInventory.player);
 	}
-
+	public ContainerMechanGlove(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
+		this(windowId, playerInventory);
+	}
 	public ContainerMechanGlove(int windowId, Level world, BlockPos pos, Inventory playerInventory,
 			Player playerEntity) {
 		super(ContainerInit.mechan_glove_container.get(), windowId);
@@ -51,26 +66,26 @@ public class ContainerMechanGlove extends AbstractContainerMenu {
 			playerEntity.closeContainer();
 	}
 
-	public ContainerMechanGlove(int openType, int windowId, Level world, BlockPos pos, Inventory playerInventory,
-			Player playerEntity) {
-		this(windowId, world, pos, playerInventory, playerEntity);
-	}
+	private void addMySlots(ItemStack stack) {
+		if (handler == null)
+			return;
 
-	public int slotcount = 0;
-	private int slotID;
-	public String itemKey = "";
-	@SuppressWarnings("rawtypes")
-//	public static final MenuType type = new MenuType<>(ContainerMechanGlove::new)
-//			.setRegistryName("mechan_glove_container");
+		int cols = slotcount % 3 == 0 ? 3 : 10;
+		int rows = slotcount / cols;
+		int slotindex = 0;
 
-	private Inventory playerInv;
-	public MechanGloveItemHandler handler;
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				int x = 7 + col * 18;
+				int y = 17 + row * 18;
 
-	@Override
-	public boolean stillValid(Player playerIn) {
-		if (slotID == -106)
-			return playerIn.getOffhandItem().getItem() instanceof ItemMechanGlove;
-		return playerIn.getInventory().getItem(slotID).getItem() instanceof ItemMechanGlove;
+				this.addSlot(new SlotMechanGlove(handler, slotindex, x + 1, y + 1));
+				slotindex++;
+				if (slotindex >= slotcount)
+					break;
+			}
+		}
+
 	}
 
 //	@Override
@@ -137,26 +152,30 @@ public class ContainerMechanGlove extends AbstractContainerMenu {
 		}
 	}
 
-	private void addMySlots(ItemStack stack) {
-		if (handler == null)
-			return;
+	private ItemStack findMechanGlove(Player playerEntity) {
+		Inventory inv = playerEntity.getInventory();
 
-		int cols = slotcount % 3 == 0 ? 3 : 10;
-		int rows = slotcount / cols;
-		int slotindex = 0;
-
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < cols; col++) {
-				int x = 7 + col * 18;
-				int y = 17 + row * 18;
-
-				this.addSlot(new SlotMechanGlove(handler, slotindex, x + 1, y + 1));
-				slotindex++;
-				if (slotindex >= slotcount)
-					break;
+		if (playerEntity.getMainHandItem().getItem() instanceof ItemMechanGlove) {
+			for (int i = 0; i <= 35; i++) {
+				ItemStack stack = inv.getItem(i);
+				if (stack == playerEntity.getMainHandItem()) {
+					slotID = i;
+					return stack;
+				}
+			}
+		} else if (playerEntity.getOffhandItem().getItem() instanceof ItemMechanGlove) {
+			slotID = -106;
+			return playerEntity.getOffhandItem();
+		} else {
+			for (int i = 0; i <= 35; i++) {
+				ItemStack stack = inv.getItem(i);
+				if (stack.getItem() instanceof ItemMechanGlove) {
+					slotID = i;
+					return stack;
+				}
 			}
 		}
-
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -183,29 +202,10 @@ public class ContainerMechanGlove extends AbstractContainerMenu {
 		return itemstack;
 	}
 
-	private ItemStack findMechanGlove(Player playerEntity) {
-		Inventory inv = playerEntity.getInventory();
-
-		if (playerEntity.getMainHandItem().getItem() instanceof ItemMechanGlove) {
-			for (int i = 0; i <= 35; i++) {
-				ItemStack stack = inv.getItem(i);
-				if (stack == playerEntity.getMainHandItem()) {
-					slotID = i;
-					return stack;
-				}
-			}
-		} else if (playerEntity.getOffhandItem().getItem() instanceof ItemMechanGlove) {
-			slotID = -106;
-			return playerEntity.getOffhandItem();
-		} else {
-			for (int i = 0; i <= 35; i++) {
-				ItemStack stack = inv.getItem(i);
-				if (stack.getItem() instanceof ItemMechanGlove) {
-					slotID = i;
-					return stack;
-				}
-			}
-		}
-		return ItemStack.EMPTY;
+	@Override
+	public boolean stillValid(Player playerIn) {
+		if (slotID == -106)
+			return playerIn.getOffhandItem().getItem() instanceof ItemMechanGlove;
+		return playerIn.getInventory().getItem(slotID).getItem() instanceof ItemMechanGlove;
 	}
 }

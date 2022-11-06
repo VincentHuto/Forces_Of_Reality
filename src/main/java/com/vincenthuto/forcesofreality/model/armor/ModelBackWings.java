@@ -22,28 +22,6 @@ import net.minecraft.world.entity.Entity;
 public class ModelBackWings<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelbackwings"), "main");
-	private final ModelPart LeftWing;
-	private final ModelPart LeftWing2;
-	private final ModelPart RightWing;
-	private final ModelPart RightWing2;
-	private final ModelPart LeftWing3;
-	private final ModelPart RightWing3;
-	private final ModelPart Body;
-	private final ModelPart LeftArm;
-	private final ModelPart RightArm;
-
-	public ModelBackWings(ModelPart root) {
-		this.LeftWing = root.getChild("LeftWing");
-		this.LeftWing2 = root.getChild("LeftWing2");
-		this.RightWing = root.getChild("RightWing");
-		this.RightWing2 = root.getChild("RightWing2");
-		this.LeftWing3 = root.getChild("LeftWing3");
-		this.RightWing3 = root.getChild("RightWing3");
-		this.Body = root.getChild("Body");
-		this.LeftArm = root.getChild("LeftArm");
-		this.RightArm = root.getChild("RightArm");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -108,10 +86,27 @@ public class ModelBackWings<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart LeftWing;
+	private final ModelPart LeftWing2;
+	private final ModelPart RightWing;
+	private final ModelPart RightWing2;
+	private final ModelPart LeftWing3;
+	private final ModelPart RightWing3;
+	private final ModelPart Body;
+	private final ModelPart LeftArm;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart RightArm;
 
+	public ModelBackWings(ModelPart root) {
+		this.LeftWing = root.getChild("LeftWing");
+		this.LeftWing2 = root.getChild("LeftWing2");
+		this.RightWing = root.getChild("RightWing");
+		this.RightWing2 = root.getChild("RightWing2");
+		this.LeftWing3 = root.getChild("LeftWing3");
+		this.RightWing3 = root.getChild("RightWing3");
+		this.Body = root.getChild("Body");
+		this.LeftArm = root.getChild("LeftArm");
+		this.RightArm = root.getChild("RightArm");
 	}
 
 	@Override
@@ -125,5 +120,10 @@ public class ModelBackWings<T extends Entity> extends EntityModel<T> {
 		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

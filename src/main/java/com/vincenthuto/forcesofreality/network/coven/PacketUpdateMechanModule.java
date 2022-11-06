@@ -10,25 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
 public class PacketUpdateMechanModule {
-	private int selected;
-	private ItemStack stack;
-
-	public PacketUpdateMechanModule(int selectedIn, ItemStack currentStack) {
-		this.selected = selectedIn;
-		this.stack = currentStack;
-	}
-
-	public static void encode(PacketUpdateMechanModule msg, FriendlyByteBuf buf) {
-		buf.writeInt(msg.selected);
-		buf.writeItem(msg.stack);
-	}
-
-	public static PacketUpdateMechanModule decode(FriendlyByteBuf buf) {
-		int select = buf.readInt();
-		ItemStack stk = buf.readItem();
-		return new PacketUpdateMechanModule(select, stk);
-	}
-
 	public static class Handler {
 		public static void handle(final PacketUpdateMechanModule msg, Supplier<NetworkEvent.Context> ctx) {
 			ctx.get().enqueueWork(() -> {
@@ -43,5 +24,24 @@ public class PacketUpdateMechanModule {
 			});
 			ctx.get().setPacketHandled(true);
 		}
+	}
+	public static PacketUpdateMechanModule decode(FriendlyByteBuf buf) {
+		int select = buf.readInt();
+		ItemStack stk = buf.readItem();
+		return new PacketUpdateMechanModule(select, stk);
+	}
+
+	public static void encode(PacketUpdateMechanModule msg, FriendlyByteBuf buf) {
+		buf.writeInt(msg.selected);
+		buf.writeItem(msg.stack);
+	}
+
+	private int selected;
+
+	private ItemStack stack;
+
+	public PacketUpdateMechanModule(int selectedIn, ItemStack currentStack) {
+		this.selected = selectedIn;
+		this.stack = currentStack;
 	}
 }

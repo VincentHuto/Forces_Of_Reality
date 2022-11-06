@@ -8,7 +8,11 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class PacketCovenantClient {
 
-	public PacketCovenantClient() {
+	public static PacketCovenantClient decode(final FriendlyByteBuf packetBuffer) {
+		return new PacketCovenantClient();
+	}
+
+	public static void encode(final PacketCovenantClient msg, final FriendlyByteBuf packetBuffer) {
 
 	}
 
@@ -25,11 +29,7 @@ public class PacketCovenantClient {
 		ctx.get().setPacketHandled(true);
 	}
 
-	public static void encode(final PacketCovenantClient msg, final FriendlyByteBuf packetBuffer) {
+	public PacketCovenantClient() {
 
-	}
-
-	public static PacketCovenantClient decode(final FriendlyByteBuf packetBuffer) {
-		return new PacketCovenantClient();
 	}
 }

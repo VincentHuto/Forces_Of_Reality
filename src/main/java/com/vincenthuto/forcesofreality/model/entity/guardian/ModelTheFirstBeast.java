@@ -27,12 +27,6 @@ public class ModelTheFirstBeast extends EntityModel<EntityTheFirstBeast> impleme
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelthefirstbeast"), "main");
-	private final ModelPart whole;
-
-	public ModelTheFirstBeast(ModelPart root) {
-		this.whole = root.getChild("whole");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -323,16 +317,22 @@ public class ModelTheFirstBeast extends EntityModel<EntityTheFirstBeast> impleme
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
-	@Override
-	public void setupAnim(EntityTheFirstBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart whole;
 
+	public ModelTheFirstBeast(ModelPart root) {
+		this.whole = root.getChild("whole");
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay,
 			float red, float green, float blue, float alpha) {
 		whole.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityTheFirstBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
 	}
 
 	@Override

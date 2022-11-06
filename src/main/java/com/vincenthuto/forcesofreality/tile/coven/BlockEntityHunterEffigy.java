@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockEntityHunterEffigy extends BlockEntity {
-	public int sacrifices = 0;
 	public static final String TAG_SACR = "sacrifices_made";
+	public int sacrifices = 0;
 
 	public BlockEntityHunterEffigy(BlockPos pos, BlockState state) {
 		super(BlockEntityInit.hunter_effigy.get(), pos, state);
@@ -58,28 +58,24 @@ public class BlockEntityHunterEffigy extends BlockEntity {
 		return sacrifices;
 	}
 
-	public void setSacrifices(int sacrifices) {
-		this.sacrifices = sacrifices;
+	@Override
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
+
+	@Override
+	public void handleUpdateTag(CompoundTag tag) {
+		super.handleUpdateTag(tag);
+		sacrifices = tag.getInt(TAG_SACR);
+
+	}
+
+
 
 	@Override
 	public void load(CompoundTag tag) {
 		super.load(tag);
 		sacrifices = tag.getInt(TAG_SACR);
-	}
-
-
-	
-	@Override
-	protected void saveAdditional(CompoundTag pTag) {
-		super.saveAdditional(pTag);
-		pTag.putInt(TAG_SACR, sacrifices);
-
-	}
-
-	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
@@ -91,10 +87,14 @@ public class BlockEntityHunterEffigy extends BlockEntity {
 	}
 
 	@Override
-	public void handleUpdateTag(CompoundTag tag) {
-		super.handleUpdateTag(tag);
-		sacrifices = tag.getInt(TAG_SACR);
+	protected void saveAdditional(CompoundTag pTag) {
+		super.saveAdditional(pTag);
+		pTag.putInt(TAG_SACR, sacrifices);
 
+	}
+
+	public void setSacrifices(int sacrifices) {
+		this.sacrifices = sacrifices;
 	}
 
 }

@@ -97,5 +97,5 @@ public class BlockBeyondFlame extends FireBlock {
 		}
 
 	}
-	
+
 }

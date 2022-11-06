@@ -16,6 +16,34 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class CopyMechanGloveDataRecipe extends ShapedRecipe {
+	public static class Serializer implements RecipeSerializer<CopyMechanGloveDataRecipe> {
+		@Override
+		public CopyMechanGloveDataRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+			try {
+				return new CopyMechanGloveDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json));
+			} catch (Exception exception) {
+				ForcesOfReality.LOGGER.info("Error reading CopyMechanGlove Recipe from packet: ", exception);
+				throw exception;
+			}
+		}
+
+		@Nullable
+		@Override
+		public CopyMechanGloveDataRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+			return new CopyMechanGloveDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer));
+		}
+
+		@Override
+		public void toNetwork(FriendlyByteBuf buffer, CopyMechanGloveDataRecipe recipe) {
+			try {
+				RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
+			} catch (Exception exception) {
+				ForcesOfReality.LOGGER.info("Error writing CopyMechanGlove Recipe to packet: ", exception);
+				throw exception;
+			}
+		}
+	}
+
 	public CopyMechanGloveDataRecipe(final ResourceLocation id, final String group, final int recipeWidth,
 			final int recipeHeight, final NonNullList<Ingredient> ingredients, final ItemStack recipeOutput) {
 		super(id, group, recipeWidth, recipeHeight, ingredients, recipeOutput);
@@ -46,34 +74,6 @@ public class CopyMechanGloveDataRecipe extends ShapedRecipe {
 		}
 
 		return craftingResult;
-	}
-
-	public static class Serializer implements RecipeSerializer<CopyMechanGloveDataRecipe> {
-		@Nullable
-		@Override
-		public CopyMechanGloveDataRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-			return new CopyMechanGloveDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer));
-		}
-
-		@Override
-		public CopyMechanGloveDataRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			try {
-				return new CopyMechanGloveDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json));
-			} catch (Exception exception) {
-				ForcesOfReality.LOGGER.info("Error reading CopyMechanGlove Recipe from packet: ", exception);
-				throw exception;
-			}
-		}
-
-		@Override
-		public void toNetwork(FriendlyByteBuf buffer, CopyMechanGloveDataRecipe recipe) {
-			try {
-				RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
-			} catch (Exception exception) {
-				ForcesOfReality.LOGGER.info("Error writing CopyMechanGlove Recipe to packet: ", exception);
-				throw exception;
-			}
-		}
 	}
 
 }

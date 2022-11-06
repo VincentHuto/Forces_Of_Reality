@@ -24,6 +24,13 @@ public class LayerHasturPortal extends RenderLayer<EntityHastur, ModelHastur> {
 	public static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
 			"textures/entity/temp_gray.png");
 
+	public static double angleOf(Vec3 p1, Vec3 p2) {
+		final double deltaY = p2.z - p1.z;
+		final double deltaX = p2.x - p1.x;
+		final double result = Math.toDegrees(Math.atan2(deltaY, deltaX));
+		return result < 0 ? 360d + result : result;
+	}
+
 	public LayerHasturPortal(RenderLayerParent<EntityHastur, ModelHastur> entityRendererIn) {
 		super(entityRendererIn);
 	}
@@ -93,13 +100,6 @@ public class LayerHasturPortal extends RenderLayer<EntityHastur, ModelHastur> {
 
 			matrix.popPose();
 		}
-	}
-
-	public static double angleOf(Vec3 p1, Vec3 p2) {
-		final double deltaY = p2.z - p1.z;
-		final double deltaX = p2.x - p1.x;
-		final double result = Math.toDegrees(Math.atan2(deltaY, deltaX));
-		return result < 0 ? 360d + result : result;
 	}
 
 }

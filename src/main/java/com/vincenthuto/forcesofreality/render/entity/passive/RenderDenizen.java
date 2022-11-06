@@ -23,14 +23,14 @@ public class RenderDenizen extends MobRenderer<EntityDenizen, ModelDenizen> {
 	}
 
 	@Override
+	public ResourceLocation getTextureLocation(EntityDenizen entity) {
+		return entity.getDenizenTypeName();
+	}
+
+	@Override
 	public void render(EntityDenizen entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityDenizen entity) {
-		return entity.getDenizenTypeName();
 	}
 }

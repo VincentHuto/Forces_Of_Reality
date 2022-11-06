@@ -24,24 +24,6 @@ import net.minecraft.world.entity.Entity;
 public class ModelWrithingChest<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelwrithingchest"), "main");
-	private final ModelPart Body;
-	private final ModelPart RightArm;
-	private final ModelPart LeftArm;
-	private final ModelPart eye1;
-	private final ModelPart eye2;
-	private final ModelPart eye3;
-	private final ModelPart eye4;
-
-	public ModelWrithingChest(ModelPart root) {
-		this.Body = root.getChild("Body");
-		this.RightArm = root.getChild("RightArm");
-		this.LeftArm = root.getChild("LeftArm");
-		this.eye1 = root.getChild("eye1");
-		this.eye2 = root.getChild("eye2");
-		this.eye3 = root.getChild("eye3");
-		this.eye4 = root.getChild("eye4");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -80,10 +62,23 @@ public class ModelWrithingChest<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Body;
+	private final ModelPart RightArm;
+	private final ModelPart LeftArm;
+	private final ModelPart eye1;
+	private final ModelPart eye2;
+	private final ModelPart eye3;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart eye4;
 
+	public ModelWrithingChest(ModelPart root) {
+		this.Body = root.getChild("Body");
+		this.RightArm = root.getChild("RightArm");
+		this.LeftArm = root.getChild("LeftArm");
+		this.eye1 = root.getChild("eye1");
+		this.eye2 = root.getChild("eye2");
+		this.eye3 = root.getChild("eye3");
+		this.eye4 = root.getChild("eye4");
 	}
 
 	@Override
@@ -95,5 +90,10 @@ public class ModelWrithingChest<T extends Entity> extends EntityModel<T> {
 		eye2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		eye3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		eye4.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

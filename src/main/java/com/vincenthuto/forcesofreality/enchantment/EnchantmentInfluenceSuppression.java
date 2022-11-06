@@ -12,12 +12,11 @@ public class EnchantmentInfluenceSuppression extends Enchantment {
 	}
 
 	/**
-	 * Returns the minimal value of enchantability needed on the enchantment level
-	 * passed.
+	 * Determines if this enchantment can be applied to a specific ItemStack.
 	 */
 	@Override
-	public int getMinCost(int enchantmentLevel) {
-		return 10 + 20 * (enchantmentLevel - 1);
+	public boolean canEnchant(ItemStack stack) {
+		return stack.getItem() instanceof ArmorItem ? true : super.canEnchant(stack);
 	}
 
 	@Override
@@ -34,11 +33,12 @@ public class EnchantmentInfluenceSuppression extends Enchantment {
 	}
 
 	/**
-	 * Determines if this enchantment can be applied to a specific ItemStack.
+	 * Returns the minimal value of enchantability needed on the enchantment level
+	 * passed.
 	 */
 	@Override
-	public boolean canEnchant(ItemStack stack) {
-		return stack.getItem() instanceof ArmorItem ? true : super.canEnchant(stack);
+	public int getMinCost(int enchantmentLevel) {
+		return 10 + 20 * (enchantmentLevel - 1);
 	}
 
 }

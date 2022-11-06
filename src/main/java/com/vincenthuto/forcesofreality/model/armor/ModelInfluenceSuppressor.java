@@ -24,18 +24,6 @@ import net.minecraft.world.entity.Entity;
 public class ModelInfluenceSuppressor<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelinfluencesuppressor"), "main");
-	private final ModelPart LeftBand;
-	private final ModelPart BackBand;
-	private final ModelPart RightBand;
-	private final ModelPart Mask;
-
-	public ModelInfluenceSuppressor(ModelPart root) {
-		this.LeftBand = root.getChild("LeftBand");
-		this.BackBand = root.getChild("BackBand");
-		this.RightBand = root.getChild("RightBand");
-		this.Mask = root.getChild("Mask");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -55,10 +43,17 @@ public class ModelInfluenceSuppressor<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 128, 64);
 	}
+	private final ModelPart LeftBand;
+	private final ModelPart BackBand;
+	private final ModelPart RightBand;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart Mask;
 
+	public ModelInfluenceSuppressor(ModelPart root) {
+		this.LeftBand = root.getChild("LeftBand");
+		this.BackBand = root.getChild("BackBand");
+		this.RightBand = root.getChild("RightBand");
+		this.Mask = root.getChild("Mask");
 	}
 
 	@Override
@@ -67,5 +62,10 @@ public class ModelInfluenceSuppressor<T extends Entity> extends EntityModel<T> {
 		BackBand.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightBand.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Mask.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

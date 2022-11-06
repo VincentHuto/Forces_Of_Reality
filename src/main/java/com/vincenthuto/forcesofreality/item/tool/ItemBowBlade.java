@@ -68,7 +68,7 @@ public class ItemBowBlade extends ProjectileWeaponItem {
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 		if (stack.hasTag()) {
-			float damageModSharp = 1.0F + (float) Math.max(0,
+			float damageModSharp = 1.0F + Math.max(0,
 					EnchantmentHelper.getItemEnchantmentLevel(EnchantmentInit.bow_blade_sharpness.get(), stack) - 1)
 					* 0.5F;
 			if (stack.getTag().getBoolean(TAG_STATE)) {
@@ -148,12 +148,12 @@ public class ItemBowBlade extends ProjectileWeaponItem {
 		}
 		if (knockbackMod > 0) {
 			if (target instanceof LivingEntity) {
-				target.knockback(knockbackMod * 0.5F, (double) Mth.sin(attacker.getYRot() * ((float) Math.PI / 180F)),
-						(double) (-Mth.cos(attacker.getYRot() * ((float) Math.PI / 180F))));
+				target.knockback(knockbackMod * 0.5F, Mth.sin(attacker.getYRot() * ((float) Math.PI / 180F)),
+						(-Mth.cos(attacker.getYRot() * ((float) Math.PI / 180F))));
 			} else {
-				target.push((double) (-Mth.sin(attacker.getYRot() * ((float) Math.PI / 180F)) * (float) knockbackMod * 0.5F),
+				target.push(-Mth.sin(attacker.getYRot() * ((float) Math.PI / 180F)) * knockbackMod * 0.5F,
 						0.1D,
-						(double) (Mth.cos(attacker.getYRot() * ((float) Math.PI / 180F)) * (float) knockbackMod * 0.5F));
+						Mth.cos(attacker.getYRot() * ((float) Math.PI / 180F)) * knockbackMod * 0.5F);
 			}
 
 			attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
@@ -161,7 +161,7 @@ public class ItemBowBlade extends ProjectileWeaponItem {
 		}
 		if (!compound.getBoolean(TAG_STATE)) {
 
-			float damageModSharp = 1.0F + (float) Math.max(0,
+			float damageModSharp = 1.0F + Math.max(0,
 					EnchantmentHelper.getItemEnchantmentLevel(EnchantmentInit.bow_blade_sharpness.get(), stack) - 1)
 					* 0.5F;
 			float damageModSmite = EnchantmentInit.bow_blade_smite.get().getDamageBonus(

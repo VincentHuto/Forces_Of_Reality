@@ -31,6 +31,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 public class EntityHasturClone extends Monster {
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 5.0D).add(Attributes.ATTACK_KNOCKBACK)
+				.add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 0.5f);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityHasturClone(EntityType<? extends EntityHasturClone> type, Level worldIn) {
@@ -39,13 +44,23 @@ public class EntityHasturClone extends Monster {
 	}
 
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
+
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+		super.doPush(entityIn);
+		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur
+				|| entityIn instanceof EntityXanthousKing || entityIn instanceof EntityTrueXanthousKing)) {
+			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		}
 
 	}
 
@@ -57,6 +72,49 @@ public class EntityHasturClone extends Monster {
 
 		return spawnDataIn;
 
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ENTITY_HASTUR_HIT.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ENTITY_HASTUR_HIT.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ENTITY_HASTUR_HIT.get();
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	@Override
+	public void playerTouch(Player entityIn) {
+		super.playerTouch(entityIn);
+		float g = (this.random.nextFloat() - 0.5F) * 2.0F;
+		float g1 = -1;
+		float g2 = (this.random.nextFloat() - 0.5F) * 2.0F;
+		for (int i = 0; i < 20; i++) {
+			this.level.addParticle(ParticleTypes.SMOKE, this.getX() + g, this.getY() + 2.0D + g1,
+					this.getZ() + g2, 0.0D, 0.0D, 0.0D);
+		}
+		entityIn.hurt(DamageSource.mobAttack(this), 1f);
+		this.setHealth(0);
+
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 2d, 30));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -101,63 +159,5 @@ public class EntityHasturClone extends Monster {
 	protected void tickDeath() {
 		this.remove(RemovalReason.KILLED);
 
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		super.playerTouch(entityIn);
-		float g = (this.random.nextFloat() - 0.5F) * 2.0F;
-		float g1 = -1;
-		float g2 = (this.random.nextFloat() - 0.5F) * 2.0F;
-		for (int i = 0; i < 20; i++) {
-			this.level.addParticle(ParticleTypes.SMOKE, this.getX() + g, this.getY() + 2.0D + g1,
-					this.getZ() + g2, 0.0D, 0.0D, 0.0D);
-		}
-		entityIn.hurt(DamageSource.mobAttack(this), 1f);
-		this.setHealth(0);
-
-	}
-
-	@Override
-	protected void doPush(Entity entityIn) {
-		super.doPush(entityIn);
-		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur
-				|| entityIn instanceof EntityXanthousKing || entityIn instanceof EntityTrueXanthousKing)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
-		}
-
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new MoveTowardsTargetGoal(this, 2d, 30));
-		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
-		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 5.0D).add(Attributes.ATTACK_KNOCKBACK)
-				.add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 0.5f);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ENTITY_HASTUR_HIT.get();
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ENTITY_HASTUR_HIT.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ENTITY_HASTUR_HIT.get();
 	}
 }

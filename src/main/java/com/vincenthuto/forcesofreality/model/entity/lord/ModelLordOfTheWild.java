@@ -22,12 +22,6 @@ public class ModelLordOfTheWild extends HierarchicalModel<EntityLordOfTheWild> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modellordofthewild"), "main");
-	private final ModelPart wholebody;
-
-	public ModelLordOfTheWild(ModelPart root) {
-		this.wholebody = root.getChild("wholebody");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -516,11 +510,10 @@ public class ModelLordOfTheWild extends HierarchicalModel<EntityLordOfTheWild> {
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void setupAnim(EntityLordOfTheWild entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.idleAnimationState, LordOfTheWildAnimations.IDLE, ageInTicks);
+	private final ModelPart wholebody;
+
+	public ModelLordOfTheWild(ModelPart root) {
+		this.wholebody = root.getChild("wholebody");
 	}
 
 	@Override
@@ -532,5 +525,12 @@ public class ModelLordOfTheWild extends HierarchicalModel<EntityLordOfTheWild> {
 	@Override
 	public ModelPart root() {
 		return this.wholebody;
+	}
+
+	@Override
+	public void setupAnim(EntityLordOfTheWild entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(entity.idleAnimationState, LordOfTheWildAnimations.IDLE, ageInTicks);
 	}
 }

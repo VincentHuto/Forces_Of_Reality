@@ -48,37 +48,6 @@ public class ModelWrithingArmor<T extends LivingEntity> extends HumanoidModel<T>
 	public static final Lazy<ModelWrithingArmor<LivingEntity>> boots = Lazy.of(
 			() -> new ModelWrithingArmor<>(Minecraft.getInstance().getEntityModels().bakeLayer(WRITHING_BOOTS_LAYER)));
 
-	public ModelWrithingArmor(ModelPart root) {
-		super(root, RenderType::entityTranslucent);
-
-	}
-
-	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
-		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
-		PartDefinition partdefinition = meshdefinition.getRoot();
-		if (slot.equals(EquipmentSlot.HEAD)) {
-
-			PartDefinition head = partdefinition.addOrReplaceChild("head",
-					CubeListBuilder.create().texOffs(0, 0)
-							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(32, 0)
-							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)).texOffs(0, 0)
-							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(-3.0F, -9.0F, -1.0F, 6.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 56)
-							.addBox(-2.0F, -10.0F, -5.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(-1.0F, -9.0F, 1.0F, 2.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(-1.0F, -8.3F, 5.0F, 2.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(-5.0F, -8.6F, 0.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(3.0F, -8.6F, 0.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(-0.5F, -1.3F, 5.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(3.0F, -3.6F, 0.5F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
-							.addBox(3.0F, -3.6F, 0.5F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
-					PartPose.offset(0.0F, 0.0F, 0.0F));
-		}
-
-		return LayerDefinition.create(meshdefinition, 256, 256);
-
-	}
-
 	public static LayerDefinition createBodyLayer(EquipmentSlot slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -137,10 +106,35 @@ public class ModelWrithingArmor<T extends LivingEntity> extends HumanoidModel<T>
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
+		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
+		PartDefinition partdefinition = meshdefinition.getRoot();
+		if (slot.equals(EquipmentSlot.HEAD)) {
+
+			PartDefinition head = partdefinition.addOrReplaceChild("head",
+					CubeListBuilder.create().texOffs(0, 0)
+							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(32, 0)
+							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)).texOffs(0, 0)
+							.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(-3.0F, -9.0F, -1.0F, 6.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 56)
+							.addBox(-2.0F, -10.0F, -5.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(-1.0F, -9.0F, 1.0F, 2.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(-1.0F, -8.3F, 5.0F, 2.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(-5.0F, -8.6F, 0.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(3.0F, -8.6F, 0.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(-0.5F, -1.3F, 5.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(3.0F, -3.6F, 0.5F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(19, 58)
+							.addBox(3.0F, -3.6F, 0.5F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+					PartPose.offset(0.0F, 0.0F, 0.0F));
+		}
+
+		return LayerDefinition.create(meshdefinition, 256, 256);
+
+	}
+
+	public ModelWrithingArmor(ModelPart root) {
+		super(root, RenderType::entityTranslucent);
+
 	}
 
 	@Override
@@ -153,5 +147,11 @@ public class ModelWrithingArmor<T extends LivingEntity> extends HumanoidModel<T>
 		leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		rightArm.render(poseStack, buffer, packedLight, packedOverlay);
 
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 	}
 }

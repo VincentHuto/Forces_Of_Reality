@@ -25,6 +25,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 public class EntityScuttlingOcculus extends Monster {
+	public static AttributeSupplier.Builder setAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D).add(Attributes.MOVEMENT_SPEED, 0.3D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 1.15D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityScuttlingOcculus(EntityType<? extends EntityScuttlingOcculus> type, Level worldIn) {
@@ -33,8 +38,8 @@ public class EntityScuttlingOcculus extends Monster {
 	}
 
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
@@ -54,6 +59,26 @@ public class EntityScuttlingOcculus extends Monster {
 	}
 
 	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.SPIDER_AMBIENT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.SPIDER_DEATH;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundEvents.SPIDER_HURT;
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	@Override
 	public void playerTouch(Player entityIn) {
 		super.playerTouch(entityIn);
 		entityIn.hurt(DamageSource.mobAttack(this), 1f);
@@ -68,31 +93,6 @@ public class EntityScuttlingOcculus extends Monster {
 		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D).add(Attributes.MOVEMENT_SPEED, 0.3D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 1.15D).add(Attributes.ATTACK_DAMAGE, 1.0D);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundEvents.SPIDER_AMBIENT;
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.SPIDER_DEATH;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.SPIDER_HURT;
 	}
 
 }

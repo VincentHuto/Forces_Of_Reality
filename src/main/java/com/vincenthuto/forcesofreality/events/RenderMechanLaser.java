@@ -27,17 +27,80 @@ import net.minecraftforge.client.event.RenderLevelLastEvent;
 
 public class RenderMechanLaser {
 
-	public static void renderLaser(RenderLevelLastEvent event, Player player, float ticks) {
-		if (ForcesOfReality.findMechanGloveInHand(player).getItem() instanceof ItemMechanGlove) {
-			int range = ((ItemMechanGlove) ForcesOfReality.findMechanGloveInHand(player).getItem()).getRange();
-			Vec3 playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
-			HitResult trace = player.pick(range, ticks, false);
-			drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
+	private static float calculateLaserFlickerModifier(long gameTime) {
+		return 0.9f + 0.1f * Mth.sin(gameTime * 0.99f) * Mth.sin(gameTime * 0.3f) * Mth.sin(gameTime * 0.1f);
+	}
+
+	private static void drawBeam(double xOffset, double yOffset, double zOffset, VertexConsumer builder,
+			Matrix4f positionMatrix, Matrix3f matrixNormalIn, float thickness, InteractionHand hand, double distance,
+			double v1, double v2, float ticks, float r, float g, float b, float alpha) {
+		Vector3f vector3f = new Vector3f(0.0f, 1.0f, 0.0f);
+		vector3f.transform(matrixNormalIn);
+		LocalPlayer player = Minecraft.getInstance().player;
+		// Support for hand sides remembering to take into account of Skin options
+		if (Minecraft.getInstance().options.mainHand().get() != HumanoidArm.RIGHT)
+			hand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+		float startXOffset = -0.25f;
+		float startYOffset = -.115f;
+		float startZOffset = 0.65f + (1 - player.getFieldOfViewModifier());
+		if (hand == InteractionHand.OFF_HAND) {
+			startYOffset = -.120f;
+			startXOffset = 0.25f;
+		}
+		float f = (Mth.lerp(ticks, player.xRotO, player.getXRot()) - Mth.lerp(ticks, player.xBobO, player.xBob));
+		float f1 = (Mth.lerp(ticks, player.yRotO, player.getYRot()) - Mth.lerp(ticks, player.yBobO, player.yBob));
+		startXOffset = startXOffset + (f1 / 750);
+		startYOffset = startYOffset + (f / 750);
+
+		Vector4f vec1 = new Vector4f(startXOffset, -thickness + startYOffset, startZOffset, 1.0F);
+		vec1.transform(positionMatrix);
+		Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset,
+				1.0F);
+		vec2.transform(positionMatrix);
+		Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset,
+				1.0F);
+		vec3.transform(positionMatrix);
+		Vector4f vec4 = new Vector4f(startXOffset, thickness + startYOffset, startZOffset, 1.0F);
+		vec4.transform(positionMatrix);
+
+		if (hand == InteractionHand.MAIN_HAND) {
+			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
+			// be necessary with culling disabled but here we are....
+			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
 		} else {
-			int range = 5;
-			Vec3 playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
-			HitResult trace = player.pick(range, ticks, false);
-			drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
+			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
+			// be necessary with culling disabled but here we are....
+			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x(), vector3f.y(), vector3f.z());
 		}
 	}
 
@@ -152,80 +215,17 @@ public class RenderMechanLaser {
 
 	}
 
-	private static float calculateLaserFlickerModifier(long gameTime) {
-		return 0.9f + 0.1f * Mth.sin(gameTime * 0.99f) * Mth.sin(gameTime * 0.3f) * Mth.sin(gameTime * 0.1f);
-	}
-
-	private static void drawBeam(double xOffset, double yOffset, double zOffset, VertexConsumer builder,
-			Matrix4f positionMatrix, Matrix3f matrixNormalIn, float thickness, InteractionHand hand, double distance,
-			double v1, double v2, float ticks, float r, float g, float b, float alpha) {
-		Vector3f vector3f = new Vector3f(0.0f, 1.0f, 0.0f);
-		vector3f.transform(matrixNormalIn);
-		LocalPlayer player = Minecraft.getInstance().player;
-		// Support for hand sides remembering to take into account of Skin options
-		if (Minecraft.getInstance().options.mainHand().get() != HumanoidArm.RIGHT)
-			hand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
-		float startXOffset = -0.25f;
-		float startYOffset = -.115f;
-		float startZOffset = 0.65f + (1 - player.getFieldOfViewModifier());
-		if (hand == InteractionHand.OFF_HAND) {
-			startYOffset = -.120f;
-			startXOffset = 0.25f;
-		}
-		float f = (Mth.lerp(ticks, player.xRotO, player.getXRot()) - Mth.lerp(ticks, player.xBobO, player.xBob));
-		float f1 = (Mth.lerp(ticks, player.yRotO, player.getYRot()) - Mth.lerp(ticks, player.yBobO, player.yBob));
-		startXOffset = startXOffset + (f1 / 750);
-		startYOffset = startYOffset + (f / 750);
-
-		Vector4f vec1 = new Vector4f(startXOffset, -thickness + startYOffset, startZOffset, 1.0F);
-		vec1.transform(positionMatrix);
-		Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset,
-				1.0F);
-		vec2.transform(positionMatrix);
-		Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset,
-				1.0F);
-		vec3.transform(positionMatrix);
-		Vector4f vec4 = new Vector4f(startXOffset, thickness + startYOffset, startZOffset, 1.0F);
-		vec4.transform(positionMatrix);
-
-		if (hand == InteractionHand.MAIN_HAND) {
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
-			// be necessary with culling disabled but here we are....
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+	public static void renderLaser(RenderLevelLastEvent event, Player player, float ticks) {
+		if (ForcesOfReality.findMechanGloveInHand(player).getItem() instanceof ItemMechanGlove) {
+			int range = ((ItemMechanGlove) ForcesOfReality.findMechanGloveInHand(player).getItem()).getRange();
+			Vec3 playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
+			HitResult trace = player.pick(range, ticks, false);
+			drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
 		} else {
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
-			// be necessary with culling disabled but here we are....
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			int range = 5;
+			Vec3 playerPos = player.getEyePosition(ticks).add(0, -0.15f, 0);
+			HitResult trace = player.pick(range, ticks, false);
+			drawLasers(event, playerPos, trace, 0, 0, 0, 255 / 255f, 180 / 255f, 0, 0.02f, player, ticks, -0.02f);
 		}
 	}
 

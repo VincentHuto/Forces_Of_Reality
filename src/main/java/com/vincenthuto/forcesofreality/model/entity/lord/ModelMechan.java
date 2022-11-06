@@ -25,24 +25,6 @@ public class ModelMechan extends EntityModel<EntityMechan> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelmechan"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart RightArm;
-	private final ModelPart LeftArm;
-	private final ModelPart RightLeg;
-	private final ModelPart LeftLeg;
-	private final ModelPart Turret;
-
-	public ModelMechan(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.RightArm = root.getChild("RightArm");
-		this.LeftArm = root.getChild("LeftArm");
-		this.RightLeg = root.getChild("RightLeg");
-		this.LeftLeg = root.getChild("LeftLeg");
-		this.Turret = root.getChild("Turret");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -281,10 +263,23 @@ public class ModelMechan extends EntityModel<EntityMechan> {
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart RightArm;
+	private final ModelPart LeftArm;
+	private final ModelPart RightLeg;
+	private final ModelPart LeftLeg;
 
-	@Override
-	public void setupAnim(EntityMechan entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart Turret;
 
+	public ModelMechan(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.RightArm = root.getChild("RightArm");
+		this.LeftArm = root.getChild("LeftArm");
+		this.RightLeg = root.getChild("RightLeg");
+		this.LeftLeg = root.getChild("LeftLeg");
+		this.Turret = root.getChild("Turret");
 	}
 
 	@Override
@@ -297,5 +292,10 @@ public class ModelMechan extends EntityModel<EntityMechan> {
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Turret.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityMechan entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

@@ -23,22 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelDerangedBeast extends EntityModel<EntityDerangedBeast> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelderangedbeast"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart LeftLeg;
-	private final ModelPart RightLeg;
-	private final ModelPart BottomLeftLeg;
-	private final ModelPart BottomRightLeg;
-
-	public ModelDerangedBeast(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.LeftLeg = root.getChild("LeftLeg");
-		this.RightLeg = root.getChild("RightLeg");
-		this.BottomLeftLeg = root.getChild("BottomLeftLeg");
-		this.BottomRightLeg = root.getChild("BottomRightLeg");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -108,10 +92,21 @@ public class ModelDerangedBeast extends EntityModel<EntityDerangedBeast> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart LeftLeg;
+	private final ModelPart RightLeg;
+	private final ModelPart BottomLeftLeg;
 
-	@Override
-	public void setupAnim(EntityDerangedBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart BottomRightLeg;
 
+	public ModelDerangedBeast(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.LeftLeg = root.getChild("LeftLeg");
+		this.RightLeg = root.getChild("RightLeg");
+		this.BottomLeftLeg = root.getChild("BottomLeftLeg");
+		this.BottomRightLeg = root.getChild("BottomRightLeg");
 	}
 
 	@Override
@@ -122,5 +117,10 @@ public class ModelDerangedBeast extends EntityModel<EntityDerangedBeast> {
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		BottomLeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		BottomRightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityDerangedBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

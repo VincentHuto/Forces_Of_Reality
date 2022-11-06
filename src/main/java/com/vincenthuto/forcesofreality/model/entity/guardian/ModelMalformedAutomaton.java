@@ -24,18 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelMalformedAutomaton extends EntityModel<EntityMalformedAutomaton> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelmalformedautomaton"), "main");
-	private final ModelPart head;
-	private final ModelPart neck;
-	private final ModelPart chest;
-	private final ModelPart hips;
-
-	public ModelMalformedAutomaton(ModelPart root) {
-		this.head = root.getChild("head");
-		this.neck = root.getChild("neck");
-		this.chest = root.getChild("chest");
-		this.hips = root.getChild("hips");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -273,10 +261,17 @@ public class ModelMalformedAutomaton extends EntityModel<EntityMalformedAutomato
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
+	private final ModelPart head;
+	private final ModelPart neck;
+	private final ModelPart chest;
 
-	@Override
-	public void setupAnim(EntityMalformedAutomaton entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart hips;
 
+	public ModelMalformedAutomaton(ModelPart root) {
+		this.head = root.getChild("head");
+		this.neck = root.getChild("neck");
+		this.chest = root.getChild("chest");
+		this.hips = root.getChild("hips");
 	}
 
 	@Override
@@ -285,5 +280,10 @@ public class ModelMalformedAutomaton extends EntityModel<EntityMalformedAutomato
 		neck.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		chest.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		hips.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityMalformedAutomaton entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

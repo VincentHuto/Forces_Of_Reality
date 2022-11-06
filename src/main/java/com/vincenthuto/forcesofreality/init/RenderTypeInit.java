@@ -19,13 +19,9 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RenderTypeInit extends RenderType {
 
-	public RenderTypeInit(String pName, VertexFormat pFormat, Mode pMode, int pBufferSize, boolean pAffectsCrumbling,
-			boolean pSortOnUpload, Runnable pSetupState, Runnable pClearState) {
-		super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
-	}
-
 	private final static ResourceLocation laserBeam = new ResourceLocation(
 			ForcesOfReality.MOD_ID + ":textures/misc/laser.png");
+
 	private final static ResourceLocation laserBeam2 = new ResourceLocation(
 			ForcesOfReality.MOD_ID + ":textures/misc/laser2.png");
 	private final static ResourceLocation laserBeamGlow = new ResourceLocation(
@@ -36,7 +32,6 @@ public class RenderTypeInit extends RenderType {
 			ForcesOfReality.MOD_ID + ":textures/blocks/hastur_pylon.png");
 	private final static ResourceLocation end_trans = new ResourceLocation(
 			ForcesOfReality.MOD_ID + ":textures/blocks/end_portal.png");
-
 	@SuppressWarnings("unused")
 	private static final LineStateShard THICK_LINES = new LineStateShard(OptionalDouble.of(3.0D));
 
@@ -57,12 +52,12 @@ public class RenderTypeInit extends RenderType {
 			CompositeState.builder().setTextureState(new TextureStateShard(orbTrans, false, false))
 					.setTransparencyState(CRUMBLING_TRANSPARENCY).setWriteMaskState(COLOR_DEPTH_WRITE)
 					.createCompositeState(false));
+
 	public static final RenderType ENDTRANS = create("end_trans", DefaultVertexFormat.POSITION_COLOR_TEX,
 			VertexFormat.Mode.QUADS, 256, false, true,
 			CompositeState.builder().setTextureState(new TextureStateShard(end_trans, false, false))
 					.setTransparencyState(CRUMBLING_TRANSPARENCY).setWriteMaskState(COLOR_DEPTH_WRITE)
 					.createCompositeState(false));
-
 	public static final RenderType LASER_MAIN_BEAM = create("MiningLaserMainBeam",
 			DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, false, true,
 			RenderType.CompositeState.builder().setTextureState(new TextureStateShard(laserBeam2, false, false))
@@ -117,5 +112,10 @@ public class RenderTypeInit extends RenderType {
 			return "forcesofreality:em_rend";
 		}
 	};
+
+	public RenderTypeInit(String pName, VertexFormat pFormat, Mode pMode, int pBufferSize, boolean pAffectsCrumbling,
+			boolean pSortOnUpload, Runnable pSetupState, Runnable pClearState) {
+		super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
+	}
 
 }

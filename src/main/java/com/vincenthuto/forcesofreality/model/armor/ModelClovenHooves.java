@@ -24,62 +24,6 @@ import net.minecraft.world.entity.Entity;
 public class ModelClovenHooves<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelclovenhooves"), "main");
-	private final ModelPart bone;
-	private final ModelPart bone2;
-	private final ModelPart bone3;
-	private final ModelPart bone4;
-	private final ModelPart bone5;
-	private final ModelPart bone6;
-	private final ModelPart bone7;
-	private final ModelPart bone8;
-	private final ModelPart bone9;
-	private final ModelPart bone10;
-	private final ModelPart bone11;
-	private final ModelPart bone12;
-	private final ModelPart bone13;
-	private final ModelPart bone14;
-	private final ModelPart bone19;
-	private final ModelPart bone20;
-	private final ModelPart bone21;
-	private final ModelPart bone22;
-	private final ModelPart bone15;
-	private final ModelPart bone16;
-	private final ModelPart bone17;
-	private final ModelPart bone18;
-	private final ModelPart bone23;
-	private final ModelPart bone24;
-	private final ModelPart bone25;
-	private final ModelPart bone26;
-
-	public ModelClovenHooves(ModelPart root) {
-		this.bone = root.getChild("bone");
-		this.bone2 = root.getChild("bone2");
-		this.bone3 = root.getChild("bone3");
-		this.bone4 = root.getChild("bone4");
-		this.bone5 = root.getChild("bone5");
-		this.bone6 = root.getChild("bone6");
-		this.bone7 = root.getChild("bone7");
-		this.bone8 = root.getChild("bone8");
-		this.bone9 = root.getChild("bone9");
-		this.bone10 = root.getChild("bone10");
-		this.bone11 = root.getChild("bone11");
-		this.bone12 = root.getChild("bone12");
-		this.bone13 = root.getChild("bone13");
-		this.bone14 = root.getChild("bone14");
-		this.bone19 = root.getChild("bone19");
-		this.bone20 = root.getChild("bone20");
-		this.bone21 = root.getChild("bone21");
-		this.bone22 = root.getChild("bone22");
-		this.bone15 = root.getChild("bone15");
-		this.bone16 = root.getChild("bone16");
-		this.bone17 = root.getChild("bone17");
-		this.bone18 = root.getChild("bone18");
-		this.bone23 = root.getChild("bone23");
-		this.bone24 = root.getChild("bone24");
-		this.bone25 = root.getChild("bone25");
-		this.bone26 = root.getChild("bone26");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -138,10 +82,61 @@ public class ModelClovenHooves<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart bone;
+	private final ModelPart bone2;
+	private final ModelPart bone3;
+	private final ModelPart bone4;
+	private final ModelPart bone5;
+	private final ModelPart bone6;
+	private final ModelPart bone7;
+	private final ModelPart bone8;
+	private final ModelPart bone9;
+	private final ModelPart bone10;
+	private final ModelPart bone11;
+	private final ModelPart bone12;
+	private final ModelPart bone13;
+	private final ModelPart bone14;
+	private final ModelPart bone19;
+	private final ModelPart bone20;
+	private final ModelPart bone21;
+	private final ModelPart bone22;
+	private final ModelPart bone15;
+	private final ModelPart bone16;
+	private final ModelPart bone17;
+	private final ModelPart bone18;
+	private final ModelPart bone23;
+	private final ModelPart bone24;
+	private final ModelPart bone25;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart bone26;
 
+	public ModelClovenHooves(ModelPart root) {
+		this.bone = root.getChild("bone");
+		this.bone2 = root.getChild("bone2");
+		this.bone3 = root.getChild("bone3");
+		this.bone4 = root.getChild("bone4");
+		this.bone5 = root.getChild("bone5");
+		this.bone6 = root.getChild("bone6");
+		this.bone7 = root.getChild("bone7");
+		this.bone8 = root.getChild("bone8");
+		this.bone9 = root.getChild("bone9");
+		this.bone10 = root.getChild("bone10");
+		this.bone11 = root.getChild("bone11");
+		this.bone12 = root.getChild("bone12");
+		this.bone13 = root.getChild("bone13");
+		this.bone14 = root.getChild("bone14");
+		this.bone19 = root.getChild("bone19");
+		this.bone20 = root.getChild("bone20");
+		this.bone21 = root.getChild("bone21");
+		this.bone22 = root.getChild("bone22");
+		this.bone15 = root.getChild("bone15");
+		this.bone16 = root.getChild("bone16");
+		this.bone17 = root.getChild("bone17");
+		this.bone18 = root.getChild("bone18");
+		this.bone23 = root.getChild("bone23");
+		this.bone24 = root.getChild("bone24");
+		this.bone25 = root.getChild("bone25");
+		this.bone26 = root.getChild("bone26");
 	}
 
 	@Override
@@ -172,5 +167,10 @@ public class ModelClovenHooves<T extends Entity> extends EntityModel<T> {
 		bone24.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone25.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone26.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

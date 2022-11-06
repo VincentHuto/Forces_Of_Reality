@@ -28,29 +28,28 @@ public class RenderMalformedAutomaton extends MobRenderer<EntityMalformedAutomat
 		this.addLayer(new LayerAutomatonWindow(this));
 	}
 
+	@Override
+	public ResourceLocation getTextureLocation(EntityMalformedAutomaton entity) {
+		if (entity.deathTicks > 0) {
+			return DRAGON_DEAD_TEXTURES;
+		} else {
+			return TEXTURE;
+
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void render(EntityMalformedAutomaton entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		matrixStackIn.pushPose();
-		
+
 		GlStateManager._enableBlend();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 		GlStateManager._disableBlend();
-		
+
 		matrixStackIn.popPose();
 
-	}
-
-	@Override
-	protected void setupRotations(EntityMalformedAutomaton entityLiving, PoseStack matrixStackIn, float ageInTicks,
-			float rotationYaw, float partialTicks) {
-		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-		if (!(entityLiving.animationSpeed < 0.01D)) {
-			float f1 = entityLiving.animationPosition - entityLiving.animationSpeed * (1.0F - partialTicks) + 6.0F;
-			float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
-			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(3.5F * f2));
-		}
 	}
 
 	// Growth Scaling
@@ -61,12 +60,13 @@ public class RenderMalformedAutomaton extends MobRenderer<EntityMalformedAutomat
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(EntityMalformedAutomaton entity) {
-		if (entity.deathTicks > 0) {
-			return DRAGON_DEAD_TEXTURES;
-		} else {
-			return TEXTURE;
-
+	protected void setupRotations(EntityMalformedAutomaton entityLiving, PoseStack matrixStackIn, float ageInTicks,
+			float rotationYaw, float partialTicks) {
+		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+		if (!(entityLiving.animationSpeed < 0.01D)) {
+			float f1 = entityLiving.animationPosition - entityLiving.animationSpeed * (1.0F - partialTicks) + 6.0F;
+			float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
+			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(3.5F * f2));
 		}
 	}
 }

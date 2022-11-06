@@ -18,19 +18,24 @@ public class RenderHasturVassal extends MobRenderer<EntityHasturVassal, ModelVas
 			"textures/entity/hastur_vassal/model_hastur_vassal.png");
 	private static final RenderType RENDER_TYPE = RenderType.eyes(TEXTURE);
 
+	public static RenderType getRenderType() {
+		return RENDER_TYPE;
+	}
+
 	public RenderHasturVassal(Context renderManagerIn) {
 		super(renderManagerIn, new ModelVassalOfHastur(renderManagerIn.bakeLayer(ModelVassalOfHastur.LAYER_LOCATION)), 0.8f);
 
 	}
 
 	@Override
+	protected float getBob(EntityHasturVassal livingBase, float partialTicks) {
+		return Mth.lerp(partialTicks, livingBase.lastTentacleAngle, livingBase.tentacleAngle);
+	}
+
+	@Override
 	public ResourceLocation getTextureLocation(EntityHasturVassal entity) {
 		return TEXTURE;
 
-	}
-
-	public static RenderType getRenderType() {
-		return RENDER_TYPE;
 	}
 
 	@Override
@@ -43,11 +48,6 @@ public class RenderHasturVassal extends MobRenderer<EntityHasturVassal, ModelVas
 		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(f));
 		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f1));
 //		matrixStackIn.translate(0.0D, (double) -1.2F, 0.0D);
-	}
-
-	@Override
-	protected float getBob(EntityHasturVassal livingBase, float partialTicks) {
-		return Mth.lerp(partialTicks, livingBase.lastTentacleAngle, livingBase.tentacleAngle);
 	}
 
 }

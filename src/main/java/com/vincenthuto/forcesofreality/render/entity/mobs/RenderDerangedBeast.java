@@ -24,17 +24,17 @@ public class RenderDerangedBeast extends MobRenderer<EntityDerangedBeast, ModelD
 
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityDerangedBeast entity) {
+		return entity.getBeastTypeName();
+	}
+
 	@Override
 	public void render(EntityDerangedBeast entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityDerangedBeast entity) {
-		return entity.getBeastTypeName();
 	}
 
 }

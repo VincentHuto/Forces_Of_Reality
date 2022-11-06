@@ -73,6 +73,56 @@ public class ForcesOfReality {
 
 	public static boolean hemosLoaded = false;
 
+	public static Pair<ResourceLocation, BlockItem> createItemBlock(Pair<Block, ResourceLocation> block) {
+		return Pair.of(block.getSecond(),
+				new BlockItem(block.getFirst(), new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
+	}
+
+
+
+	public static ItemStack findMechanGlove(Player player) {
+		if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof ItemMechanGlove)
+			return player.getItemInHand(InteractionHand.MAIN_HAND);
+		if (player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof ItemMechanGlove)
+			return player.getItemInHand(InteractionHand.OFF_HAND);
+		Inventory inventory = player.getInventory();
+		for (int i = 0; i <= 35; i++) {
+			ItemStack stack = inventory.getItem(i);
+			if (stack.getItem() instanceof ItemMechanGlove)
+				return stack;
+		}
+		return ItemStack.EMPTY;
+	}
+
+	public static ItemStack findMechanGloveInHand(Player player) {
+		ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
+		if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
+			heldItem = player.getItemInHand(InteractionHand.OFF_HAND);
+			if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
+				return ItemStack.EMPTY;
+			}
+		}
+		return heldItem;
+	}
+
+	public static boolean isArmed(Player entity) {
+		return findMechanGloveInHand(entity).getItem() instanceof ItemMechanGlove;
+	}
+
+	@SubscribeEvent
+	public static void onRegisterItems(final RegisterEvent event) {
+		if (event.getRegistryKey() != ForgeRegistries.Keys.ITEMS) {
+			return;
+		}
+
+		BlockInit.getAllBlockEntriesAsStream().map(m -> new Pair<>(m.get(), m.getId())).map(t -> createItemBlock(t))
+				.forEach(item -> registerBlockItem(event, item));
+	}
+
+	private static void registerBlockItem(RegisterEvent event, Pair<ResourceLocation, BlockItem> item) {
+		event.register(ForgeRegistries.Keys.ITEMS, helper -> helper.register(item.getFirst(), item.getSecond()));
+	}
+
 	@SuppressWarnings("deprecation")
 	public ForcesOfReality() {
 		DistExecutor.callWhenOn(Dist.CLIENT, () -> () -> proxy = new ClientProxy());
@@ -106,34 +156,6 @@ public class ForcesOfReality {
 
 	}
 
-	
-
-	@SubscribeEvent
-	public static void onRegisterItems(final RegisterEvent event) {
-		if (event.getRegistryKey() != ForgeRegistries.Keys.ITEMS) {
-			return;
-		}
-
-		BlockInit.getAllBlockEntriesAsStream().map(m -> new Pair<>(m.get(), m.getId())).map(t -> createItemBlock(t))
-				.forEach(item -> registerBlockItem(event, item));
-	}
-
-	private static void registerBlockItem(RegisterEvent event, Pair<ResourceLocation, BlockItem> item) {
-		event.register(ForgeRegistries.Keys.ITEMS, helper -> helper.register(item.getFirst(), item.getSecond()));
-	}
-
-	public static Pair<ResourceLocation, BlockItem> createItemBlock(Pair<Block, ResourceLocation> block) {
-		return Pair.of(block.getSecond(),
-				new BlockItem((Block) block.getFirst(), new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
-	}
-	
-	private void commonSetup(final FMLCommonSetupEvent event) {
-//		CapabilityInit.init();
-//		ModRafflesiaRecipies.init();
-		PacketHandler.registerChannels();
-
-	}
-
 	private void clientSetup(final FMLClientSetupEvent event) {
 //		MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
 		// this.addLayers();
@@ -141,16 +163,10 @@ public class ForcesOfReality {
 		forces.registerTome();
 	}
 
-	public void setupOnLoaded(FMLLoadCompleteEvent event) {
-
-	}
-
-	@SuppressWarnings("unused")
-	private void enqueueIMC(final InterModEnqueueEvent event) {
-	}
-
-	@SuppressWarnings("unused")
-	private void processIMC(final InterModProcessEvent event) {
+	private void commonSetup(final FMLCommonSetupEvent event) {
+//		CapabilityInit.init();
+//		ModRafflesiaRecipies.init();
+		PacketHandler.registerChannels();
 
 	}
 
@@ -202,33 +218,17 @@ public class ForcesOfReality {
 //				.setRegistryName(new ResourceLocation(MOD_ID, "machina_cage")));
 //	}
 
-	public static ItemStack findMechanGlove(Player player) {
-		if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof ItemMechanGlove)
-			return player.getItemInHand(InteractionHand.MAIN_HAND);
-		if (player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof ItemMechanGlove)
-			return player.getItemInHand(InteractionHand.OFF_HAND);
-		Inventory inventory = player.getInventory();
-		for (int i = 0; i <= 35; i++) {
-			ItemStack stack = inventory.getItem(i);
-			if (stack.getItem() instanceof ItemMechanGlove)
-				return stack;
-		}
-		return ItemStack.EMPTY;
+	@SuppressWarnings("unused")
+	private void enqueueIMC(final InterModEnqueueEvent event) {
 	}
 
-	public static ItemStack findMechanGloveInHand(Player player) {
-		ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-		if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
-			heldItem = player.getItemInHand(InteractionHand.OFF_HAND);
-			if (!(heldItem.getItem() instanceof ItemMechanGlove)) {
-				return ItemStack.EMPTY;
-			}
-		}
-		return heldItem;
+	@SuppressWarnings("unused")
+	private void processIMC(final InterModProcessEvent event) {
+
 	}
 
-	public static boolean isArmed(Player entity) {
-		return findMechanGloveInHand(entity).getItem() instanceof ItemMechanGlove;
+	public void setupOnLoaded(FMLLoadCompleteEvent event) {
+
 	}
 
 }

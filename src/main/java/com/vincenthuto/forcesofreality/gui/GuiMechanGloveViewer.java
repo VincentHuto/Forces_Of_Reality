@@ -40,72 +40,16 @@ public class GuiMechanGloveViewer extends Screen {
 	Player player;
 	public MechanGloveItemHandler handler;
 
+	public int slotcount = 0;
+
+	public String itemKey = "";
+
 	@OnlyIn(Dist.CLIENT)
 	public GuiMechanGloveViewer(ItemStack currentBinderIn, Player playerIn) {
 		super(Component.translatable("View All Patterns"));
 		this.icon = currentBinderIn;
 		this.player = playerIn;
 	}
-
-	@Override
-	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		int centerX = (width / 2) - guiWidth / 2;
-		int centerY = (height / 2) - guiHeight / 2;
-		this.renderBackground(matrixStack);
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.setShaderTexture(0, texture);
-		HLGuiUtils.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth - 1, guiHeight);
-
-		for (int i = 0; i < renderables.size(); i++) {
-			renderables.get(i).render(matrixStack, mouseX, mouseY, 511);
-			if (((GuiButtonTextured) renderables.get(i)).isHoveredOrFocused()) {
-				ItemStack stack = ForcesOfReality.findMechanGlove(player);
-				if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
-					IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-							.orElseThrow(NullPointerException::new);
-					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
-						ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-						List<Component> text = new ArrayList<>();
-						text.add(Component.translatable(I18n.get(pat.asItem().getDescription().getString())));
-						renderComponentTooltip(matrixStack, text, mouseX, mouseY);
-					}
-				}
-			}
-		}
-
-		{
-			ItemStack stack = ForcesOfReality.findMechanGlove(player);
-			if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
-				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-						.orElseThrow(NullPointerException::new);
-				if (binderHandler instanceof MechanGloveItemHandler) {
-					handler = (MechanGloveItemHandler) binderHandler;
-					handler.load();
-					slotcount = handler.getSlots();
-					itemKey = stack.getDescriptionId();
-					for (int i = 0; i < renderables.size(); i++) {
-						if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
-							ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-							Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(pat.asItem()),
-									((GuiButtonTextured) renderables.get(i)).x + 2,
-									((GuiButtonTextured) renderables.get(i)).y + 2);
-						}
-					}
-				}
-			}
-		}
-
-		{
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(icon, -1, -1);
-
-		}
-
-	}
-
-	public int slotcount = 0;
-	public String itemKey = "";
-
 	@Override
 	protected void init() {
 		left = width / 2 - guiWidth / 2;
@@ -221,13 +165,69 @@ public class GuiMechanGloveViewer extends Screen {
 	}
 
 	@Override
+	public boolean isPauseScreen() {
+		return false;
+	}
+
+	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
 		return super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
 	@Override
-	public boolean isPauseScreen() {
-		return false;
+	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+		int centerX = (width / 2) - guiWidth / 2;
+		int centerY = (height / 2) - guiHeight / 2;
+		this.renderBackground(matrixStack);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, texture);
+		HLGuiUtils.drawTexturedModalRect(centerX, centerY, 0, 0, guiWidth - 1, guiHeight);
+
+		for (int i = 0; i < renderables.size(); i++) {
+			renderables.get(i).render(matrixStack, mouseX, mouseY, 511);
+			if (((GuiButtonTextured) renderables.get(i)).isHoveredOrFocused()) {
+				ItemStack stack = ForcesOfReality.findMechanGlove(player);
+				if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
+					IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+							.orElseThrow(NullPointerException::new);
+					if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+						ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
+						List<Component> text = new ArrayList<>();
+						text.add(Component.translatable(I18n.get(pat.asItem().getDescription().getString())));
+						renderComponentTooltip(matrixStack, text, mouseX, mouseY);
+					}
+				}
+			}
+		}
+
+		{
+			ItemStack stack = ForcesOfReality.findMechanGlove(player);
+			if (stack != null && stack != ItemStack.EMPTY && stack.getItem() instanceof ItemMechanGlove) {
+				IItemHandler binderHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+						.orElseThrow(NullPointerException::new);
+				if (binderHandler instanceof MechanGloveItemHandler) {
+					handler = (MechanGloveItemHandler) binderHandler;
+					handler.load();
+					slotcount = handler.getSlots();
+					itemKey = stack.getDescriptionId();
+					for (int i = 0; i < renderables.size(); i++) {
+						if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
+							ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
+							Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(pat.asItem()),
+									((GuiButtonTextured) renderables.get(i)).x + 2,
+									((GuiButtonTextured) renderables.get(i)).y + 2);
+						}
+					}
+				}
+			}
+		}
+
+		{
+			Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(icon, -1, -1);
+
+		}
+
 	}
 
 }

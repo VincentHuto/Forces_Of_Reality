@@ -24,18 +24,6 @@ import net.minecraft.world.entity.Entity;
 public class ModelWrithingHelmet<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelwrithinghelmet"), "main");
-	private final ModelPart Head;
-	private final ModelPart bone3;
-	private final ModelPart bone;
-	private final ModelPart bone2;
-
-	public ModelWrithingHelmet(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.bone3 = root.getChild("bone3");
-		this.bone = root.getChild("bone");
-		this.bone2 = root.getChild("bone2");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -57,10 +45,17 @@ public class ModelWrithingHelmet<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart bone3;
+	private final ModelPart bone;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart bone2;
 
+	public ModelWrithingHelmet(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.bone3 = root.getChild("bone3");
+		this.bone = root.getChild("bone");
+		this.bone2 = root.getChild("bone2");
 	}
 
 	@Override
@@ -69,5 +64,10 @@ public class ModelWrithingHelmet<T extends Entity> extends EntityModel<T> {
 		bone3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

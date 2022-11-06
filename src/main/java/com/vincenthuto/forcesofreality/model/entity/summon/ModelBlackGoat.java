@@ -19,12 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelBlackGoat extends EntityModel<EntityBlackGoat> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelblackgoat"), "main");
-	private final ModelPart body;
-
-	public ModelBlackGoat(ModelPart root) {
-		this.body = root.getChild("body");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -166,7 +160,7 @@ public class ModelBlackGoat extends EntityModel<EntityBlackGoat> {
 		.texOffs(16, 39).addBox(0.0F, 2.1F, -4.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(12, 39).addBox(2.0F, 4.1F, -4.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(8, 39).addBox(2.0F, 2.1F, -3.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
-		
+
 		.texOffs(38, 31).addBox(2.0F, 4.1F, -1.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(38, 23).addBox(1.0F, 2.1F, -1.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(0, 26).addBox(0.0F, 1.1F, -3.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
@@ -179,13 +173,19 @@ public class ModelBlackGoat extends EntityModel<EntityBlackGoat> {
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
-	@Override
-	public void setupAnim(EntityBlackGoat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart body;
 
+	public ModelBlackGoat(ModelPart root) {
+		this.body = root.getChild("body");
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityBlackGoat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

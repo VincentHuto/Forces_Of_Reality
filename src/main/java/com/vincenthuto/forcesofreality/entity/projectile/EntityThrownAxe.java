@@ -63,11 +63,29 @@ public class EntityThrownAxe extends ThrowableProjectile implements ItemSupplier
 	}
 
 	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		if (!stack.isEmpty()) {
+			compound.put("fly_stack", stack.save(new CompoundTag()));
+		}
+		compound.putBoolean("flare", isFire());
+		compound.putBoolean("auric", isAuric());
+
+	}
+
+	@Override
 	protected void defineSynchedData() {
 		entityData.define(BOUNCES, 0);
 		entityData.define(FLARE, false);
 		entityData.define(AURIC, false);
 		entityData.define(RETURN_TO, -1);
+	}
+
+	private void dropAndKill() {
+		ItemStack stack = getItem();
+		ItemEntity item = new ItemEntity(level, getX(), getY(), getZ(), stack);
+		level.addFreshEntity(item);
+		remove(RemovalReason.DISCARDED);
 	}
 
 	@Nonnull
@@ -76,82 +94,40 @@ public class EntityThrownAxe extends ThrowableProjectile implements ItemSupplier
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
+	private int getEntityToReturnTo() {
+		return entityData.get(RETURN_TO);
+	}
+
+	@Override
+	protected float getGravity() {
+		return 100f;
+	}
+
+	@Nonnull
+	@Override
+	public ItemStack getItem() {
+		return new ItemStack(ItemInit.auric_trick_axe.get());
+	}
+
+	private int getTimesBounced() {
+		return entityData.get(BOUNCES);
+	}
+
 	@Override
 	public boolean ignoreExplosion() {
 		return true;
 	}
 
-	@Override
-	public void tick() {
-		// Standard motion
-		Vec3 old = getDeltaMovement();
-
-		super.tick();
-
-		if (!bounced) {
-			// Reset the drag applied by super
-			setDeltaMovement(old);
-		}
-
-		bounced = false;
-
-		// Returning motion
-		if (isReturning()) {
-			Entity thrower = getOwner();
-			if (thrower != null) {
-				Vector3 motion = Vector3.fromEntityCenter(thrower).subtract(Vector3.fromEntityCenter(this)).normalize();
-				setDeltaMovement(motion.toVec3());
-			}
-		}
-
-		// Client FX
-		if (level.isClientSide && isFire()) {
-			double r = 0.1;
-			double m = 0.1;
-			for (int i = 0; i < 3; i++) {
-				level.addParticle(ParticleTypes.CRIMSON_SPORE, getX() + r * (Math.random() - 0.5),
-						getY() + r * (Math.random() - 0.5), getZ() + r * (Math.random() - 0.5),
-						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
-			}
-		} else if (level.isClientSide && !isFire() && !isAuric()) {
-			double r = 0.1;
-			double m = 0.1;
-			for (int i = 0; i < 3; i++) {
-				level.addParticle(ParticleTypes.WARPED_SPORE, getX() + r * (Math.random() - 0.5),
-						getY() + r * (Math.random() - 0.5), getZ() + r * (Math.random() - 0.5),
-						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
-			}
-		}
-		if (level.isClientSide && isAuric()) {
-			double r = 0.1;
-			double m = 0.1;
-			for (int i = 0; i < 3; i++) {
-				level.addParticle(ParticleTypes.DRIPPING_HONEY, getX() + r * (Math.random() - 0.5),
-						getY() + r * (Math.random() - 0.5), getZ() + r * (Math.random() - 0.5),
-						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
-
-			}
-		}
-
-		// Server state control
-		if (!level.isClientSide && (getTimesBounced() >= MAX_BOUNCES || tickCount > 30)) {
-			Entity thrower = getOwner();
-			if (thrower == null) {
-				dropAndKill();
-			} else {
-				setEntityToReturnTo(thrower.getId());
-				if (distanceToSqr(thrower) < 2) {
-					dropAndKill();
-				}
-			}
-		}
+	public boolean isAuric() {
+		return entityData.get(AURIC);
 	}
 
-	private void dropAndKill() {
-		ItemStack stack = getItem();
-		ItemEntity item = new ItemEntity(level, getX(), getY(), getZ(), stack);
-		level.addFreshEntity(item);
-		remove(RemovalReason.DISCARDED);
+	public boolean isFire() {
+		return entityData.get(FLARE);
+	}
+
+	private boolean isReturning() {
+		return getEntityToReturnTo() > -1;
 	}
 
 	@Override
@@ -226,58 +202,6 @@ public class EntityThrownAxe extends ThrowableProjectile implements ItemSupplier
 	}
 
 	@Override
-	protected float getGravity() {
-		return 100f;
-	}
-
-	private int getTimesBounced() {
-		return entityData.get(BOUNCES);
-	}
-
-	private void setTimesBounced(int times) {
-		entityData.set(BOUNCES, times);
-	}
-
-	public boolean isFire() {
-		return entityData.get(FLARE);
-	}
-
-	public void setFire(boolean fire) {
-		entityData.set(FLARE, fire);
-	}
-
-	public boolean isAuric() {
-		return entityData.get(AURIC);
-	}
-
-	public void setAuric(boolean auric) {
-		entityData.set(AURIC, auric);
-	}
-
-	private boolean isReturning() {
-		return getEntityToReturnTo() > -1;
-	}
-
-	private int getEntityToReturnTo() {
-		return entityData.get(RETURN_TO);
-	}
-
-	private void setEntityToReturnTo(int entityID) {
-		entityData.set(RETURN_TO, entityID);
-	}
-
-	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		if (!stack.isEmpty()) {
-			compound.put("fly_stack", stack.save(new CompoundTag()));
-		}
-		compound.putBoolean("flare", isFire());
-		compound.putBoolean("auric", isAuric());
-
-	}
-
-	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		if (compound.contains("fly_stack")) {
@@ -288,9 +212,85 @@ public class EntityThrownAxe extends ThrowableProjectile implements ItemSupplier
 
 	}
 
-	@Nonnull
+	public void setAuric(boolean auric) {
+		entityData.set(AURIC, auric);
+	}
+
+	private void setEntityToReturnTo(int entityID) {
+		entityData.set(RETURN_TO, entityID);
+	}
+
+	public void setFire(boolean fire) {
+		entityData.set(FLARE, fire);
+	}
+
+	private void setTimesBounced(int times) {
+		entityData.set(BOUNCES, times);
+	}
+
 	@Override
-	public ItemStack getItem() {
-		return new ItemStack(ItemInit.auric_trick_axe.get());
+	public void tick() {
+		// Standard motion
+		Vec3 old = getDeltaMovement();
+
+		super.tick();
+
+		if (!bounced) {
+			// Reset the drag applied by super
+			setDeltaMovement(old);
+		}
+
+		bounced = false;
+
+		// Returning motion
+		if (isReturning()) {
+			Entity thrower = getOwner();
+			if (thrower != null) {
+				Vector3 motion = Vector3.fromEntityCenter(thrower).subtract(Vector3.fromEntityCenter(this)).normalize();
+				setDeltaMovement(motion.toVec3());
+			}
+		}
+
+		// Client FX
+		if (level.isClientSide && isFire()) {
+			double r = 0.1;
+			double m = 0.1;
+			for (int i = 0; i < 3; i++) {
+				level.addParticle(ParticleTypes.CRIMSON_SPORE, getX() + r * (Math.random() - 0.5),
+						getY() + r * (Math.random() - 0.5), getZ() + r * (Math.random() - 0.5),
+						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
+			}
+		} else if (level.isClientSide && !isFire() && !isAuric()) {
+			double r = 0.1;
+			double m = 0.1;
+			for (int i = 0; i < 3; i++) {
+				level.addParticle(ParticleTypes.WARPED_SPORE, getX() + r * (Math.random() - 0.5),
+						getY() + r * (Math.random() - 0.5), getZ() + r * (Math.random() - 0.5),
+						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
+			}
+		}
+		if (level.isClientSide && isAuric()) {
+			double r = 0.1;
+			double m = 0.1;
+			for (int i = 0; i < 3; i++) {
+				level.addParticle(ParticleTypes.DRIPPING_HONEY, getX() + r * (Math.random() - 0.5),
+						getY() + r * (Math.random() - 0.5), getZ() + r * (Math.random() - 0.5),
+						m * (Math.random() - 0.5), m * (Math.random() - 0.5), m * (Math.random() - 0.5));
+
+			}
+		}
+
+		// Server state control
+		if (!level.isClientSide && (getTimesBounced() >= MAX_BOUNCES || tickCount > 30)) {
+			Entity thrower = getOwner();
+			if (thrower == null) {
+				dropAndKill();
+			} else {
+				setEntityToReturnTo(thrower.getId());
+				if (distanceToSqr(thrower) < 2) {
+					dropAndKill();
+				}
+			}
+		}
 	}
 }

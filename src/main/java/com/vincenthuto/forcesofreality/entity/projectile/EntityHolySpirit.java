@@ -28,6 +28,143 @@ public class EntityHolySpirit extends AbstractHurtingProjectile {
 		super(p_i50173_1_, p_i50173_2_);
 	}
 
+	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		compound.put("power", this.newDoubleList(new double[] { this.xPower, this.yPower, this.zPower }));
+	}
+
+	@Override
+	protected boolean canHitEntity(Entity p_230298_1_) {
+		return super.canHitEntity(p_230298_1_) && !p_230298_1_.noPhysics;
+	}
+
+	@Override
+	public Packet<?> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+
+	}
+
+	/**
+	 * Gets how bright this entity is.
+	 */
+	public float getBrightness() {
+		return 1.0F;
+	}
+
+	/**
+	 * Return the motion factor for this projectile. The factor is multiplied by the
+	 * original motion.
+	 */
+	@Override
+	protected float getInertia() {
+		return 1F;
+	}
+
+	@Override
+	public float getPickRadius() {
+		return 1.0F;
+	}
+
+	@Override
+	protected ParticleOptions getTrailParticle() {
+		return ParticleTypes.WHITE_ASH;
+	}
+
+	/**
+	 * Called when the entity is attacked.
+	 */
+	@Override
+	public boolean hurt(DamageSource source, float amount) {
+		if (this.isInvulnerableTo(source)) {
+			return false;
+		} else {
+			this.markHurt();
+			Entity entity = source.getEntity();
+			if (entity != null) {
+				Vec3 vector3d = entity.getLookAngle();
+				this.setDeltaMovement(vector3d);
+				this.xPower = vector3d.x * 0.1D;
+				this.yPower = vector3d.y * 0.1D;
+				this.zPower = vector3d.z * 0.1D;
+				this.setOwner(entity);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	/**
+	 * Returns true if other Entities should be prevented from moving through this
+	 * Entity.
+	 */
+	@Override
+	public boolean isPickable() {
+		return true;
+	}
+
+	@Override
+	protected void onHit(@Nonnull HitResult pos) {
+		switch (pos.getType()) {
+		case BLOCK: {
+			remove(RemovalReason.KILLED);
+			break;
+		}
+		case ENTITY: {
+			((EntityHitResult) pos).getEntity().hurt(DamageSource.MAGIC, 10f);
+			remove(RemovalReason.KILLED);
+			break;
+		}
+		default: {
+			remove(RemovalReason.KILLED);
+			break;
+		}
+		}
+	}
+
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		if (compound.contains("power", 9)) {
+			ListTag listnbt = compound.getList("power", 6);
+			if (listnbt.size() == 3) {
+				this.xPower = listnbt.getDouble(0);
+				this.yPower = listnbt.getDouble(1);
+				this.zPower = listnbt.getDouble(2);
+			}
+		}
+
+	}
+
+	public void setDirectionMotion(Entity shooter, float x, float y, float z, float velocity, float inaccuracy) {
+		float f = -Mth.sin(y * ((float) Math.PI / 180F)) * Mth.cos(x * ((float) Math.PI / 180F));
+		float f1 = -Mth.sin((x + z) * ((float) Math.PI / 180F));
+		float f2 = Mth.cos(y * ((float) Math.PI / 180F)) * Mth.cos(x * ((float) Math.PI / 180F));
+		this.shoot(f, f1, f2, velocity, inaccuracy);
+		Vec3 vector3d = shooter.getDeltaMovement();
+		this.setDeltaMovement(this.getDeltaMovement().add(vector3d.x, vector3d.y, vector3d.z));
+	}
+
+	@Override
+	public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
+		Vec3 vector3d = (new Vec3(x, y, z)).normalize().scale(velocity);
+		this.setDeltaMovement(vector3d);
+		float f = Mth.sqrt((float) distanceToSqr(vector3d));
+		this.setYRot((float) (Mth.atan2(vector3d.x, vector3d.z) * (180F / (float) Math.PI)));
+		this.setXRot((float) (Mth.atan2(vector3d.y, f) * (180F / (float) Math.PI)));
+		this.yRotO = this.getYRot();
+		this.xRotO = this.getXRot();
+	}
+
+	@Override
+	protected boolean shouldBurn() {
+		return false;
+	}
+
 	/**
 	 * Checks if the entity is in range to render.
 	 */
@@ -81,142 +218,5 @@ public class EntityHolySpirit extends AbstractHurtingProjectile {
 
 			this.remove(RemovalReason.KILLED);
 		}
-	}
-
-	@Override
-	protected boolean canHitEntity(Entity p_230298_1_) {
-		return super.canHitEntity(p_230298_1_) && !p_230298_1_.noPhysics;
-	}
-
-	@Override
-	protected boolean shouldBurn() {
-		return false;
-	}
-
-	/**
-	 * Return the motion factor for this projectile. The factor is multiplied by the
-	 * original motion.
-	 */
-	@Override
-	protected float getInertia() {
-		return 1F;
-	}
-
-	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.put("power", this.newDoubleList(new double[] { this.xPower, this.yPower, this.zPower }));
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		if (compound.contains("power", 9)) {
-			ListTag listnbt = compound.getList("power", 6);
-			if (listnbt.size() == 3) {
-				this.xPower = listnbt.getDouble(0);
-				this.yPower = listnbt.getDouble(1);
-				this.zPower = listnbt.getDouble(2);
-			}
-		}
-
-	}
-
-	/**
-	 * Returns true if other Entities should be prevented from moving through this
-	 * Entity.
-	 */
-	@Override
-	public boolean isPickable() {
-		return true;
-	}
-
-	@Override
-	public float getPickRadius() {
-		return 1.0F;
-	}
-
-	/**
-	 * Called when the entity is attacked.
-	 */
-	@Override
-	public boolean hurt(DamageSource source, float amount) {
-		if (this.isInvulnerableTo(source)) {
-			return false;
-		} else {
-			this.markHurt();
-			Entity entity = source.getEntity();
-			if (entity != null) {
-				Vec3 vector3d = entity.getLookAngle();
-				this.setDeltaMovement(vector3d);
-				this.xPower = vector3d.x * 0.1D;
-				this.yPower = vector3d.y * 0.1D;
-				this.zPower = vector3d.z * 0.1D;
-				this.setOwner(entity);
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	@Override
-	protected ParticleOptions getTrailParticle() {
-		return ParticleTypes.WHITE_ASH;
-	}
-
-	@Override
-	protected void onHit(@Nonnull HitResult pos) {
-		switch (pos.getType()) {
-		case BLOCK: {
-			remove(RemovalReason.KILLED);
-			break;
-		}
-		case ENTITY: {
-			((EntityHitResult) pos).getEntity().hurt(DamageSource.MAGIC, 10f);
-			remove(RemovalReason.KILLED);
-			break;
-		}
-		default: {
-			remove(RemovalReason.KILLED);
-			break;
-		}
-		}
-	}
-
-	@Override
-	public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-		Vec3 vector3d = (new Vec3(x, y, z)).normalize().scale(velocity);
-		this.setDeltaMovement(vector3d);
-		float f = Mth.sqrt((float) distanceToSqr(vector3d));
-		this.setYRot((float) (Mth.atan2(vector3d.x, vector3d.z) * (180F / (float) Math.PI)));
-		this.setXRot((float) (Mth.atan2(vector3d.y, f) * (180F / (float) Math.PI)));
-		this.yRotO = this.getYRot();
-		this.xRotO = this.getXRot();
-	}
-
-	public void setDirectionMotion(Entity shooter, float x, float y, float z, float velocity, float inaccuracy) {
-		float f = -Mth.sin(y * ((float) Math.PI / 180F)) * Mth.cos(x * ((float) Math.PI / 180F));
-		float f1 = -Mth.sin((x + z) * ((float) Math.PI / 180F));
-		float f2 = Mth.cos(y * ((float) Math.PI / 180F)) * Mth.cos(x * ((float) Math.PI / 180F));
-		this.shoot(f, f1, f2, velocity, inaccuracy);
-		Vec3 vector3d = shooter.getDeltaMovement();
-		this.setDeltaMovement(this.getDeltaMovement().add(vector3d.x, vector3d.y, vector3d.z));
-	}
-
-	/**
-	 * Gets how bright this entity is.
-	 */
-	public float getBrightness() {
-		return 1.0F;
-	}
-
-	@Override
-	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-
 	}
 }

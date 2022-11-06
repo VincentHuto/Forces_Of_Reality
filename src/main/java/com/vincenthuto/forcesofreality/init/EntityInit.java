@@ -120,7 +120,7 @@ public class EntityInit {
 			() -> EntityType.Builder
 					.<EntityHasturVassal>of(EntityHasturVassal::new, MobCategory.WATER_CREATURE)
 					.sized(0.8F, 0.8F).clientTrackingRange(8)
-					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_vassal").toString()));;
+					.build(new ResourceLocation(ForcesOfReality.MOD_ID, "hastur_vassal").toString()));
 
 	public static final RegistryObject<EntityType<EntityHasturSpawn>> hastur_spawn = ENTITY_TYPES.register(
 			"hastur_spawn",

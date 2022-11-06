@@ -27,6 +27,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 public class EntityDreadBot extends Monster {
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 5.0D).add(Attributes.ATTACK_KNOCKBACK)
+				.add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 10.5f);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityDreadBot(EntityType<? extends EntityDreadBot> type, Level worldIn) {
@@ -35,41 +40,13 @@ public class EntityDreadBot extends Monster {
 	}
 
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-
-	}
-
-	@Override
-	@Nullable
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
-			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-
-		return spawnDataIn;
-
-	}
-
-	@Override
-	public void tick() {
-		super.tick();
-	}
-
-	@Override
-	protected void tickDeath() {
-		super.tickDeath();
-		// this.remove(RemovalReason.KILLED);
-
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1f);
 
 	}
 
@@ -85,25 +62,13 @@ public class EntityDreadBot extends Monster {
 	}
 
 	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-		this.targetSelector.addGoal(6, new GoalFireDreadRocket(this));
-		this.targetSelector.addGoal(1, new GoalFireDreadRocket(this));
+	@Nullable
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
+			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 
-	}
+		return spawnDataIn;
 
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 5.0D).add(Attributes.ATTACK_KNOCKBACK)
-				.add(Attributes.MOVEMENT_SPEED, 0.2f).add(Attributes.MAX_HEALTH, 10.5f);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
 	}
 
 	@Override
@@ -119,5 +84,40 @@ public class EntityDreadBot extends Monster {
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
 		return SoundInit.ENTITY_DREADBOT_HURT.get();
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	@Override
+	public void playerTouch(Player entityIn) {
+		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1f);
+
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(6, new GoalFireDreadRocket(this));
+		this.targetSelector.addGoal(1, new GoalFireDreadRocket(this));
+
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+	}
+
+	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		// this.remove(RemovalReason.KILLED);
+
 	}
 }

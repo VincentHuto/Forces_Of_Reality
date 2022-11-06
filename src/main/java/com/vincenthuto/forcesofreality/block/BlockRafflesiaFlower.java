@@ -25,8 +25,73 @@ public class BlockRafflesiaFlower extends BushBlock implements BonemealableBlock
 	}
 
 	@Override
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.below();
+		BlockState blockstate = worldIn.getBlockState(blockpos);
+		if (blockstate.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
+			return true;
+		} else {
+			return worldIn.getRawBrightness(pos, 0) < 13
+					&& blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.core.Direction.UP, this);
+		}
+	}
+
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return SHAPE;
+	}
+
+	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+		return rand.nextFloat() < 0.4D;
+	}
+
+	@Override
+	public boolean isBonemealSuccess(Level p_220878_, RandomSource p_220879_, BlockPos p_220880_,
+			BlockState p_220881_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+//	public boolean grow(ServerLevel world, BlockPos pos, BlockState state, Random rand) {
+//		world.removeBlock(pos, false);
+//		ConfiguredFeature<?, ?> configuredfeature;
+//		if (this == Blocks.BROWN_MUSHROOM) {
+//			configuredfeature = Features.HUGE_BROWN_MUSHROOM;
+//		} else {
+//			if (this != Blocks.RED_MUSHROOM) {
+//				world.setBlock(pos, state, 3);
+//				return false;
+//			}
+//
+//			configuredfeature = Features.HUGE_RED_MUSHROOM;
+//		}
+//
+//		if (configuredfeature.place(world, world.getChunkSource().getGenerator(), rand, pos)) {
+//			return true;
+//		} else {
+//			world.setBlock(pos, state, 3);
+//			return false;
+//		}
+//	}
+
+	/**
+	 * Whether this IGrowable can grow
+	 */
+	@Override
+	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
+
+	@Override
+	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
+		return state.isSolidRender(worldIn, pos);
+	}
+
+	@Override
+	public void performBonemeal(ServerLevel p_220874_, RandomSource p_220875_, BlockPos p_220876_,
+			BlockState p_220877_) {
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -63,71 +128,6 @@ public class BlockRafflesiaFlower extends BushBlock implements BonemealableBlock
 			}
 		}
 
-	}
-
-	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return state.isSolidRender(worldIn, pos);
-	}
-
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.below();
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
-			return true;
-		} else {
-			return worldIn.getRawBrightness(pos, 0) < 13
-					&& blockstate.canSustainPlant(worldIn, blockpos, net.minecraft.core.Direction.UP, this);
-		}
-	}
-
-//	public boolean grow(ServerLevel world, BlockPos pos, BlockState state, Random rand) {
-//		world.removeBlock(pos, false);
-//		ConfiguredFeature<?, ?> configuredfeature;
-//		if (this == Blocks.BROWN_MUSHROOM) {
-//			configuredfeature = Features.HUGE_BROWN_MUSHROOM;
-//		} else {
-//			if (this != Blocks.RED_MUSHROOM) {
-//				world.setBlock(pos, state, 3);
-//				return false;
-//			}
-//
-//			configuredfeature = Features.HUGE_RED_MUSHROOM;
-//		}
-//
-//		if (configuredfeature.place(world, world.getChunkSource().getGenerator(), rand, pos)) {
-//			return true;
-//		} else {
-//			world.setBlock(pos, state, 3);
-//			return false;
-//		}
-//	}
-
-	/**
-	 * Whether this IGrowable can grow
-	 */
-	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return true;
-	}
-
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
-		return rand.nextFloat() < 0.4D;
-	}
-	
-	@Override
-	public void performBonemeal(ServerLevel p_220874_, RandomSource p_220875_, BlockPos p_220876_,
-			BlockState p_220877_) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isBonemealSuccess(Level p_220878_, RandomSource p_220879_, BlockPos p_220880_,
-			BlockState p_220881_) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 //	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {

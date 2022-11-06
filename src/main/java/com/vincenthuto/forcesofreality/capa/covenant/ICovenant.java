@@ -4,15 +4,15 @@ import java.util.Map;
 
 public interface ICovenant {
 
+	public boolean getCovenAlignment(EnumCovenants covenIn);
+
 	public Map<EnumCovenants, Integer> getDevotion();
-
-	public void setDevotion(Map<EnumCovenants, Integer> devotion);
-
-	public void setCovenDevotion(EnumCovenants covenIn, int value);
 
 	public int getDevotionByCoven(EnumCovenants covenIn);
 
 	public EnumCovenants getOpposingCoven(EnumCovenants covenIn);
 
-	public boolean getCovenAlignment(EnumCovenants covenIn);
+	public void setCovenDevotion(EnumCovenants covenIn, int value);
+
+	public void setDevotion(Map<EnumCovenants, Integer> devotion);
 }

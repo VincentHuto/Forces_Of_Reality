@@ -20,16 +20,16 @@ public class RenderAngelicFowl extends MobRenderer<EntityAngelicFowl, ModelAngel
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(EntityAngelicFowl entity) {
-		return TEXTURE;
-
-	}
-
-	@Override
 	protected float getBob(EntityAngelicFowl livingBase, float partialTicks) {
 		float f = Mth.lerp(partialTicks, livingBase.oFlap, livingBase.wingRotation);
 		float f1 = Mth.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.destPos);
 		return (Mth.sin(f) + 1.0F) * f1;
+	}
+
+	@Override
+	public ResourceLocation getTextureLocation(EntityAngelicFowl entity) {
+		return TEXTURE;
+
 	}
 
 }

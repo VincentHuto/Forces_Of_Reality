@@ -261,14 +261,14 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 ////					Point point = new Point(centerX - 60, centerY - 36), center = new Point(centerX, centerY);
 ////					for (int i = 0; i < coven.getDevotion().keySet().size(); i++) {
 ////						EnumCovenants selectedCoven = (EnumCovenants) coven.getDevotion().keySet().toArray()[i];
-////						
+////
 ////						fontRenderer.draw(event.getPoseStack(),
 ////								ModTextFormatting.toProperCase(selectedCoven.toString()), point.x, point.y + 20,
 ////								new Color(255, 0, 0, 255).getRGB());
 ////						fontRenderer.draw(event.getPoseStack(),
 ////								String.valueOf(coven.getDevotionByCoven(selectedCoven)), point.x, point.y + 30,
 ////								new Color(255, 0, 0, 255).getRGB());
-////						
+////
 ////						if (selectedCoven.equals(EnumCovenants.SELF)) {
 ////							renderItem = Items.CRAFTING_TABLE;
 ////						} else if (selectedCoven.equals(EnumCovenants.HASTUR)) {
@@ -284,7 +284,7 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 ////						} else {
 ////							renderItem = Items.BARRIER;
 ////						}
-////						
+////
 ////						GlStateManager._enableAlphaTest();
 ////						GlStateManager._enableBlend();
 ////						Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(renderItem),
@@ -292,7 +292,7 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 ////						// GuiUtil.drawScaledTexturedModalRect(point.x, point.y, 0, 0, 16, 16, 0.062f);
 ////						GlStateManager._disableBlend();
 ////						GlStateManager._disableAlphaTest();
-////						
+////
 ////						point = rotatePointAbout(point, center, angleBetweenEach);
 ////					}
 ////				}

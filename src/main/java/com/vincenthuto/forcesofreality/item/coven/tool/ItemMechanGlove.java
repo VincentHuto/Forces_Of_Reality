@@ -334,7 +334,7 @@ public class ItemMechanGlove extends Item {
 								&& hitBlock != BlockInit.beyond_flames.get()) {
 							BlockPos blockpos1 = hitPos.relative(((BlockHitResult) trace).getDirection());
 							BlockBeyondFlame blockstate1 = (BlockBeyondFlame) BlockInit.beyond_flames.get();
-							BlockState state = blockstate1.getState(worldIn, blockpos1);
+							BlockState state = BaseFireBlock.getState(worldIn, blockpos1);
 							worldIn.setBlock(blockpos1, state, 11);
 
 						}

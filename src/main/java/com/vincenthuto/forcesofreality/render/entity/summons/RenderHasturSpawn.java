@@ -24,6 +24,12 @@ public class RenderHasturSpawn extends MobRenderer<EntityHasturSpawn, ModelHastu
 
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityHasturSpawn entity) {
+		return entity.getSpawnTypeName();
+	}
+
 	@Override
 	public void render(EntityHasturSpawn entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
@@ -53,12 +59,6 @@ public class RenderHasturSpawn extends MobRenderer<EntityHasturSpawn, ModelHastu
 			matrixStackIn.scale(d, d, d);
 
 		}
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityHasturSpawn entity) {
-		return entity.getSpawnTypeName();
 	}
 
 }

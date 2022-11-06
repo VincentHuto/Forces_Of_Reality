@@ -26,12 +26,6 @@ public class ModelUzouthrhix extends HierarchicalModel<EntityUzouthrhix> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeluzouthrhix"), "main");
-	private final ModelPart root;
-
-	public ModelUzouthrhix(ModelPart root) {
-		this.root = root.getChild("root");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -1006,11 +1000,10 @@ public class ModelUzouthrhix extends HierarchicalModel<EntityUzouthrhix> {
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void setupAnim(EntityUzouthrhix entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.idleAnimationState, UzouthrhixAnimations.IDLE, ageInTicks);
+	private final ModelPart root;
+
+	public ModelUzouthrhix(ModelPart root) {
+		this.root = root.getChild("root");
 	}
 
 	@Override
@@ -1022,5 +1015,12 @@ public class ModelUzouthrhix extends HierarchicalModel<EntityUzouthrhix> {
 	@Override
 	public ModelPart root() {
 		return this.root;
+	}
+
+	@Override
+	public void setupAnim(EntityUzouthrhix entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(entity.idleAnimationState, UzouthrhixAnimations.IDLE, ageInTicks);
 	}
 }

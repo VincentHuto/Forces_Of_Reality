@@ -24,6 +24,12 @@ public class RenderTentacle extends MobRenderer<EntityTentacle, ModelTentacle> {
 
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityTentacle entity) {
+		return entity.getTentacleTypeName();
+	}
+
 	@Override
 	public void render(EntityTentacle entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
@@ -53,12 +59,6 @@ public class RenderTentacle extends MobRenderer<EntityTentacle, ModelTentacle> {
 			matrixStackIn.scale(d, d, d);
 
 		}
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityTentacle entity) {
-		return entity.getTentacleTypeName();
 	}
 
 }

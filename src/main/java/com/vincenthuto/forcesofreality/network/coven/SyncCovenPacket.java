@@ -15,14 +15,6 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class SyncCovenPacket {
 
-	private Map<EnumCovenants, Integer> devotion = new HashMap<>();
-	private final int entityID;
-
-	public SyncCovenPacket(Map<EnumCovenants, Integer> devotionIn, int entityID) {
-		this.devotion = devotionIn;
-		this.entityID = entityID;
-	}
-
 	public static SyncCovenPacket decode(final FriendlyByteBuf packetBuffer) {
 		Map<EnumCovenants, Integer> devo = new HashMap<>();
 		for (EnumCovenants key : EnumCovenants.values()) {
@@ -32,7 +24,6 @@ public class SyncCovenPacket {
 		int entID = packetBuffer.readInt();
 		return new SyncCovenPacket(devo, entID);
 	}
-
 	public static void encode(final SyncCovenPacket msg, final FriendlyByteBuf packetBuffer) {
 		CompoundTag covenTag = new CompoundTag();
 		for (EnumCovenants key : EnumCovenants.values()) {
@@ -61,5 +52,14 @@ public class SyncCovenPacket {
 		});
 		ctx.get().setPacketHandled(true);
 
+	}
+
+	private Map<EnumCovenants, Integer> devotion = new HashMap<>();
+
+	private final int entityID;
+
+	public SyncCovenPacket(Map<EnumCovenants, Integer> devotionIn, int entityID) {
+		this.devotion = devotionIn;
+		this.entityID = entityID;
 	}
 }

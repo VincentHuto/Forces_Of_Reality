@@ -24,6 +24,13 @@ public class LayerAutomatonWindow extends RenderLayer<EntityMalformedAutomaton, 
 	public static final ResourceLocation GLASSBREAK2 = new ResourceLocation(ForcesOfReality.MOD_ID,
 			"textures/blocks/machine_glass_break_2.png");
 
+	public static double angleOf(Vec3 p1, Vec3 p2) {
+		final double deltaY = p2.z - p1.z;
+		final double deltaX = p2.x - p1.x;
+		final double result = Math.toDegrees(Math.atan2(deltaY, deltaX));
+		return result < 0 ? 360d + result : result;
+	}
+
 	public LayerAutomatonWindow(RenderLayerParent<EntityMalformedAutomaton, ModelMalformedAutomaton> entityRendererIn) {
 		super(entityRendererIn);
 	}
@@ -117,13 +124,6 @@ public class LayerAutomatonWindow extends RenderLayer<EntityMalformedAutomaton, 
 				.endVertex();
 		matrix.popPose();
 
-	}
-
-	public static double angleOf(Vec3 p1, Vec3 p2) {
-		final double deltaY = p2.z - p1.z;
-		final double deltaX = p2.x - p1.x;
-		final double result = Math.toDegrees(Math.atan2(deltaY, deltaX));
-		return result < 0 ? 360d + result : result;
 	}
 
 }

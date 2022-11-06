@@ -23,20 +23,14 @@ import com.vincenthuto.forcesofreality.block.bonsai.BlockOakBonsai;
 import com.vincenthuto.forcesofreality.block.bonsai.BlockSpruceBonsai;
 import com.vincenthuto.forcesofreality.block.util.EnumBonsaiTypes;
 
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -200,80 +194,6 @@ public class BlockInit {
 	public static final RegistryObject<Block> self_reflection_station = BLOCKS.register("self_reflection_station",
 			() -> new BlockAdornmentModStation(
 					Block.Properties.of(Material.STONE).strength(50f, 1500f).sound(SoundType.STONE)));
-
-	// OBJ
-//	public static final RegistryObject<Block> obj_icosahedron = BLOCKS.register("obj_icosahedron",
-//			() -> new BlockIcoSphere(
-//					Block.Properties.of(Material.STONE).strength(50f, 1500f).sound(SoundType.STONE).noOcclusion()));
-	/*
-	 * public static final RegistryObject<Block> end_crystal_somnolent =
-	 * BLOCKS.register("end_crystal_somnolent", () -> new
-	 * BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(
-	 * 50f, 1500f) .sound(SoundType.STONE).notSolid())); public static final
-	 * RegistryObject<Block> end_crystal_nightmare =
-	 * BLOCKS.register("end_crystal_nightmare", () -> new
-	 * BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(
-	 * 50f, 1500f) .sound(SoundType.STONE).notSolid())); public static final
-	 * RegistryObject<Block> raw_hematite = BLOCKS.register("raw_hematite", () ->
-	 * new
-	 * BlockCrystalObj(Block.Properties.create(Material.ROCK).hardnessAndResistance(
-	 * 50f, 1500f) .sound(SoundType.STONE).notSolid()));
-	 */
-
-	@SubscribeEvent
-	public static void registerBlocks(FMLClientSetupEvent event) {
-		if (FMLEnvironment.dist == Dist.CLIENT) {
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.rafflesia_flower.get(), RenderType.cutout());
-			// -ItemBlockRenderTypes.setRenderLayer(BlockInit.obj_icosahedron.get(),
-			// RenderType.cutoutMipped());
-			/*
-			 * RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_somnolent.get(),
-			 * RenderType.getCutout());
-			 * RenderTypeLookup.setRenderLayer(BlockInit.end_crystal_nightmare.get(),
-			 * RenderType.getCutout());
-			 * RenderTypeLookup.setRenderLayer(BlockInit.raw_hematite.get(),
-			 * RenderType.getCutout());
-			 */
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.sacrificial_pyre.get(), RenderType.cutout());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.auspicious_bundle.get(), RenderType.cutout());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.machina_imperfecta.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.machine_glass.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.occular_heap.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.untold_easel.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.bonsai_planter.get(), RenderType.cutoutMipped());
-
-			// RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_1.get(),
-			// RenderType.getCutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.mushroom_bonsai_stage_1.get(), RenderType.cutoutMipped());
-			// RenderTypeLookup.setRenderLayer(BlockInit.somnolent_bonsai_stage_1.get(),
-			// RenderType.getCutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.oak_bonsai_stage_1.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.jungle_bonsai_stage_1.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.spruce_bonsai_stage_1.get(), RenderType.cutoutMipped());
-
-			// RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_2.get(),
-			// RenderType.getCutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.mushroom_bonsai_stage_2.get(), RenderType.cutoutMipped());
-			// RenderTypeLookup.setRenderLayer(BlockInit.somnolent_bonsai_stage_2.get(),
-			// RenderType.getCutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.oak_bonsai_stage_2.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.jungle_bonsai_stage_2.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.spruce_bonsai_stage_2.get(), RenderType.cutoutMipped());
-
-			// RenderTypeLookup.setRenderLayer(BlockInit.anti_bonsai_stage_3.get(),
-			// RenderType.getCutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.mushroom_bonsai_stage_3.get(), RenderType.cutoutMipped());
-			// RenderTypeLookup.setRenderLayer(BlockInit.somnolent_bonsai_stage_3.get(),
-			// RenderType.getCutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.oak_bonsai_stage_3.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.jungle_bonsai_stage_3.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.spruce_bonsai_stage_3.get(), RenderType.cutoutMipped());
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.hunter_effigy.get(), RenderType.cutoutMipped());
-
-			ItemBlockRenderTypes.setRenderLayer(BlockInit.beyond_flames.get(), RenderType.translucent());
-
-		}
-	}
 
 	public static Stream<RegistryObject<Block>> getAllBlockEntriesAsStream() {
 

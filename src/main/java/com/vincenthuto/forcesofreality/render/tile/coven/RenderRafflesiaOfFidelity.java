@@ -23,7 +23,7 @@ public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntit
 	@Override
 	public void render(BlockEntityRafflesiaOfFidelity te, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		
+
 		int items = 0;
 		for (int i = 0; i < te.getSizeInventory(); i++)
 			if (te.getItemHandler().getStackInSlot(i).isEmpty())
@@ -78,7 +78,7 @@ public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntit
 			matrixStackIn.popPose();
 
 		}
-		
+
 		matrixStackIn.translate(0.5, 1.8, 0.5);
 		matrixStackIn.scale(0.75f, 0.75f, 0.75f);
 		// Cubes

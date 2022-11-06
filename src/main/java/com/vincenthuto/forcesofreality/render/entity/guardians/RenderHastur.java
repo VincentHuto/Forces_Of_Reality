@@ -32,16 +32,6 @@ public class RenderHastur extends MobRenderer<EntityHastur, ModelHastur> {
 	}
 
 	@Override
-	public void render(EntityHastur entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
-			MultiBufferSource bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
-		matrixStackIn.pushPose();
-		matrixStackIn.popPose();
-
-	}
-
-	@Override
 	public ResourceLocation getTextureLocation(EntityHastur entity) {
 		if (entity.deathTicks > 0) {
 			return DRAGON_DEAD_TEXTURES;
@@ -49,5 +39,15 @@ public class RenderHastur extends MobRenderer<EntityHastur, ModelHastur> {
 			return TEXTURE;
 
 		}
+	}
+
+	@Override
+	public void render(EntityHastur entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
+			MultiBufferSource bufferIn, int packedLightIn) {
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
+		matrixStackIn.pushPose();
+		matrixStackIn.popPose();
+
 	}
 }

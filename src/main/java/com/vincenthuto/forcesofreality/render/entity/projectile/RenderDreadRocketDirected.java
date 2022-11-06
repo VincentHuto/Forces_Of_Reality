@@ -29,6 +29,12 @@ public class RenderDreadRocketDirected extends EntityRenderer<EntityDreadRocketD
 		leashKnotModel = new ModelDreadRocketTracking(renderManagerIn.bakeLayer(ModelDreadRocketTracking.LAYER_LOCATION));
 
 	}
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityDreadRocketDirected entity) {
+		return TEXTURE;
+	}
+
 	@Override
 	public void render(EntityDreadRocketDirected entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
@@ -45,12 +51,6 @@ public class RenderDreadRocketDirected extends EntityRenderer<EntityDreadRocketD
 
 		matrixStackIn.popPose();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityDreadRocketDirected entity) {
-		return TEXTURE;
 	}
 
 }

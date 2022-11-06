@@ -25,12 +25,6 @@ public class BlockEntityInit {
 			"hastur_pylon",
 			() -> BlockEntityType.Builder.of(BlockEntityHasturPylon::new, BlockInit.hastur_pylon.get()).build(null));
 
-	/*
-	 * public static final RegistryObject<BlockEntityType<BlockEntityChiselStation>>
-	 * runic_chisel_station = TILES .register("runic_chisel_station", () ->
-	 * BlockEntityType.Builder .create(BlockEntityChiselStation::new,
-	 * BlockInit.runic_chisel_station.get()).build(null));
-	 */
 	public static final RegistryObject<BlockEntityType<BlockEntityAdornmentModStation>> self_reflection_station = TILES
 			.register("self_reflection_station", () -> BlockEntityType.Builder
 					.of(BlockEntityAdornmentModStation::new, BlockInit.self_reflection_station.get()).build(null));

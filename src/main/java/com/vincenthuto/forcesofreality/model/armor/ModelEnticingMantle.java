@@ -24,52 +24,6 @@ import net.minecraft.world.entity.Entity;
 public class ModelEnticingMantle<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelenticingmantle"), "main");
-	private final ModelPart bone18;
-	private final ModelPart bone19;
-	private final ModelPart bone16;
-	private final ModelPart bone17;
-	private final ModelPart bone15;
-	private final ModelPart bone14;
-	private final ModelPart bone13;
-	private final ModelPart bone;
-	private final ModelPart bone3;
-	private final ModelPart bone2;
-	private final ModelPart bone11;
-	private final ModelPart bone12;
-	private final ModelPart bone5;
-	private final ModelPart bone10;
-	private final ModelPart bone4;
-	private final ModelPart bone20;
-	private final ModelPart bone9;
-	private final ModelPart bone8;
-	private final ModelPart bone7;
-	private final ModelPart Body;
-	private final ModelPart bone6;
-
-	public ModelEnticingMantle(ModelPart root) {
-		this.bone18 = root.getChild("bone18");
-		this.bone19 = root.getChild("bone19");
-		this.bone16 = root.getChild("bone16");
-		this.bone17 = root.getChild("bone17");
-		this.bone15 = root.getChild("bone15");
-		this.bone14 = root.getChild("bone14");
-		this.bone13 = root.getChild("bone13");
-		this.bone = root.getChild("bone");
-		this.bone3 = root.getChild("bone3");
-		this.bone2 = root.getChild("bone2");
-		this.bone11 = root.getChild("bone11");
-		this.bone12 = root.getChild("bone12");
-		this.bone5 = root.getChild("bone5");
-		this.bone10 = root.getChild("bone10");
-		this.bone4 = root.getChild("bone4");
-		this.bone20 = root.getChild("bone20");
-		this.bone9 = root.getChild("bone9");
-		this.bone8 = root.getChild("bone8");
-		this.bone7 = root.getChild("bone7");
-		this.Body = root.getChild("Body");
-		this.bone6 = root.getChild("bone6");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -118,10 +72,51 @@ public class ModelEnticingMantle<T extends Entity> extends EntityModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart bone18;
+	private final ModelPart bone19;
+	private final ModelPart bone16;
+	private final ModelPart bone17;
+	private final ModelPart bone15;
+	private final ModelPart bone14;
+	private final ModelPart bone13;
+	private final ModelPart bone;
+	private final ModelPart bone3;
+	private final ModelPart bone2;
+	private final ModelPart bone11;
+	private final ModelPart bone12;
+	private final ModelPart bone5;
+	private final ModelPart bone10;
+	private final ModelPart bone4;
+	private final ModelPart bone20;
+	private final ModelPart bone9;
+	private final ModelPart bone8;
+	private final ModelPart bone7;
+	private final ModelPart Body;
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart bone6;
 
+	public ModelEnticingMantle(ModelPart root) {
+		this.bone18 = root.getChild("bone18");
+		this.bone19 = root.getChild("bone19");
+		this.bone16 = root.getChild("bone16");
+		this.bone17 = root.getChild("bone17");
+		this.bone15 = root.getChild("bone15");
+		this.bone14 = root.getChild("bone14");
+		this.bone13 = root.getChild("bone13");
+		this.bone = root.getChild("bone");
+		this.bone3 = root.getChild("bone3");
+		this.bone2 = root.getChild("bone2");
+		this.bone11 = root.getChild("bone11");
+		this.bone12 = root.getChild("bone12");
+		this.bone5 = root.getChild("bone5");
+		this.bone10 = root.getChild("bone10");
+		this.bone4 = root.getChild("bone4");
+		this.bone20 = root.getChild("bone20");
+		this.bone9 = root.getChild("bone9");
+		this.bone8 = root.getChild("bone8");
+		this.bone7 = root.getChild("bone7");
+		this.Body = root.getChild("Body");
+		this.bone6 = root.getChild("bone6");
 	}
 
 	@Override
@@ -147,5 +142,10 @@ public class ModelEnticingMantle<T extends Entity> extends EntityModel<T> {
 		bone7.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone6.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

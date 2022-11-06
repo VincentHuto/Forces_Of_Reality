@@ -44,6 +44,11 @@ public class EntityDerangedBeast extends Monster {
 		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID,
 				"textures/entity/deranged_beast/model_deranged_beast_white.png"));
 	});
+	public static AttributeSupplier.Builder setAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 7.0D).add(Attributes.MOVEMENT_SPEED, 0.3D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 1.15D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityDerangedBeast(EntityType<? extends EntityDerangedBeast> type, Level worldIn) {
@@ -51,25 +56,9 @@ public class EntityDerangedBeast extends Monster {
 
 	}
 
-	public ResourceLocation getBeastTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getBeastType(), TEXTURE_BY_ID.get(0));
-	}
-
-	public int getBeastType() {
-		return this.entityData.get(BEAST_TYPE);
-	}
-
-	public void setBeastType(int type) {
-		if (type <= 0 || type >= 4) {
-			type = this.random.nextInt(5);
-		}
-
-		this.entityData.set(BEAST_TYPE, type);
-	}
-
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	protected int calculateFallDamage(float distance, float damageMultiplier) {
+		return 0;
 	}
 
 	@Override
@@ -77,6 +66,16 @@ public class EntityDerangedBeast extends Monster {
 		super.defineSynchedData();
 		this.entityData.define(BEAST_TYPE, 1);
 
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+		super.doPush(entityIn);
+		/*
+		 * if (!(entityIn instanceof EntityDerangedBeast || entityIn instanceof
+		 * EntityBeastFromBeyond)) {
+		 * entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f); }
+		 */
 	}
 
 	@Override
@@ -88,6 +87,58 @@ public class EntityDerangedBeast extends Monster {
 
 		return spawnDataIn;
 
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.WOLF_AMBIENT;
+	}
+
+	public int getBeastType() {
+		return this.entityData.get(BEAST_TYPE);
+	}
+
+	public ResourceLocation getBeastTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getBeastType(), TEXTURE_BY_ID.get(0));
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.WOLF_DEATH;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundEvents.WOLF_HURT;
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
+	@Override
+	public void playerTouch(Player entityIn) {
+		super.playerTouch(entityIn);
+		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
+
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+
+	}
+
+	public void setBeastType(int type) {
+		if (type <= 0 || type >= 4) {
+			type = this.random.nextInt(5);
+		}
+
+		this.entityData.set(BEAST_TYPE, type);
 	}
 
 	@Override
@@ -119,56 +170,5 @@ public class EntityDerangedBeast extends Monster {
 		 * world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(),
 		 * SoundEvents.BLOCK_SNOW_BREAK, SoundCategory.HOSTILE, 3f, 1.2f, false); } } }
 		 */
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		super.playerTouch(entityIn);
-		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f);
-
-	}
-
-	@Override
-	protected void doPush(Entity entityIn) {
-		super.doPush(entityIn);
-		/*
-		 * if (!(entityIn instanceof EntityDerangedBeast || entityIn instanceof
-		 * EntityBeastFromBeyond)) {
-		 * entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5f); }
-		 */
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 7.0D).add(Attributes.MOVEMENT_SPEED, 0.3D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 1.15D).add(Attributes.ATTACK_DAMAGE, 1.0D);
-	}
-
-	@Override
-	protected int calculateFallDamage(float distance, float damageMultiplier) {
-		return 0;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundEvents.WOLF_AMBIENT;
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.WOLF_DEATH;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.WOLF_HURT;
 	}
 }

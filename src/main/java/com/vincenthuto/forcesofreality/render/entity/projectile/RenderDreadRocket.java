@@ -30,6 +30,12 @@ public class RenderDreadRocket extends EntityRenderer<EntityDreadRocket> {
 
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityDreadRocket entity) {
+		return TEXTURE;
+	}
+
 	@Override
 	public void render(EntityDreadRocket entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
@@ -45,12 +51,6 @@ public class RenderDreadRocket extends EntityRenderer<EntityDreadRocket> {
 
 		matrixStackIn.popPose();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityDreadRocket entity) {
-		return TEXTURE;
 	}
 
 }

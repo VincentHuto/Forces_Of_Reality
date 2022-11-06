@@ -24,26 +24,6 @@ public class ModelVeritas extends EntityModel<EntityVeritas> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelveritas"), "main");
-	private final ModelPart Head;
-	private final ModelPart Halo;
-	private final ModelPart Neck;
-	private final ModelPart Body;
-	private final ModelPart RightArm;
-	private final ModelPart LeftArm;
-	private final ModelPart RightLeg;
-	private final ModelPart LeftLeg;
-
-	public ModelVeritas(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Halo = root.getChild("Halo");
-		this.Neck = root.getChild("Neck");
-		this.Body = root.getChild("Body");
-		this.RightArm = root.getChild("RightArm");
-		this.LeftArm = root.getChild("LeftArm");
-		this.RightLeg = root.getChild("RightLeg");
-		this.LeftLeg = root.getChild("LeftLeg");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -157,11 +137,25 @@ public class ModelVeritas extends EntityModel<EntityVeritas> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart Halo;
+	private final ModelPart Neck;
+	private final ModelPart Body;
+	private final ModelPart RightArm;
+	private final ModelPart LeftArm;
+	private final ModelPart RightLeg;
 
-	@Override
-	public void setupAnim(EntityVeritas entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart LeftLeg;
 
+	public ModelVeritas(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Halo = root.getChild("Halo");
+		this.Neck = root.getChild("Neck");
+		this.Body = root.getChild("Body");
+		this.RightArm = root.getChild("RightArm");
+		this.LeftArm = root.getChild("LeftArm");
+		this.RightLeg = root.getChild("RightLeg");
+		this.LeftLeg = root.getChild("LeftLeg");
 	}
 
 	@Override
@@ -175,5 +169,11 @@ public class ModelVeritas extends EntityModel<EntityVeritas> {
 		LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityVeritas entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
 	}
 }

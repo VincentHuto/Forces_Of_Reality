@@ -24,14 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelscuttlingocculus"), "main");
-	private final ModelPart whole;
-	private final ModelPart bone;
-
-	public ModelScuttlingOcculus(ModelPart root) {
-		this.whole = root.getChild("whole");
-		this.bone = root.getChild("bone");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -261,15 +253,23 @@ public class ModelScuttlingOcculus extends EntityModel<EntityScuttlingOcculus> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart whole;
 
-	@Override
-	public void setupAnim(EntityScuttlingOcculus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart bone;
 
+	public ModelScuttlingOcculus(ModelPart root) {
+		this.whole = root.getChild("whole");
+		this.bone = root.getChild("bone");
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		whole.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityScuttlingOcculus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

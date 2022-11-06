@@ -77,18 +77,44 @@ public class ForcesLib extends TomeLib {
 	public static String COMBINE_PAGE_7 = "The cornered hounds are far more than a way of referencing their moods,they physically spawn out of the corners of rooms and hunt down whatever being they are instructed to, fading back to the abyss once finished off.";
 	public static String COMBINE_PAGE_8 = "Combining the Cunning wit of Hastur along with the ingenious technology of mechan provides us with a solution most tricky to our weapons and tools, Using trick tools they are items that function as 2 or more at once, from bowblades to trickaxes";
 
-	public static List<TomeChapter> chapters = new ArrayList<TomeChapter>();;
-	public static List<GuiGuidePage> introPages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> selfPages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> hasturPages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> eldritchPages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> ascendantPages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> beastPages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> machinePages = new ArrayList<GuiGuidePage>();
-	public static List<GuiGuidePage> combinePages = new ArrayList<GuiGuidePage>();
+	public static List<TomeChapter> chapters = new ArrayList<>();
+	public static List<GuiGuidePage> introPages = new ArrayList<>();
+	public static List<GuiGuidePage> selfPages = new ArrayList<>();
+	public static List<GuiGuidePage> hasturPages = new ArrayList<>();
+	public static List<GuiGuidePage> eldritchPages = new ArrayList<>();
+	public static List<GuiGuidePage> ascendantPages = new ArrayList<>();
+	public static List<GuiGuidePage> beastPages = new ArrayList<>();
+	public static List<GuiGuidePage> machinePages = new ArrayList<>();
+	public static List<GuiGuidePage> combinePages = new ArrayList<>();
 
 	public static TomeChapter introChapter, selfChapter, hasturChapter, eldritchChapter, ascendantChapter, beastChapter,
 			machineChapter, combineChapter;
+
+	@Override
+	public List<TomeChapter> getChapters() {
+		return chapters;
+	}
+
+	@Override
+	public GuiGuideTitlePage getTitle() {
+		return new ForcesTitlePage();
+	}
+
+	@Override
+	public void registerChapters() {
+		introChapter = new TomeChapter("Intro", TabColor.BLACK, new ForcesGuideTOC("Intro"), introPages);
+		selfChapter = new TomeChapter("Self", TabColor.WHITE, new ForcesGuideTOC("Self"), selfPages);
+		hasturChapter = new TomeChapter("Hastur", TabColor.YELLOW, new ForcesGuideTOC("Hastur"), hasturPages);
+		eldritchChapter = new TomeChapter("Eldritch", TabColor.PURPLE, new ForcesGuideTOC("Eldritch"), eldritchPages);
+		ascendantChapter = new TomeChapter("Ascendant", TabColor.CYAN, new ForcesGuideTOC("Ascendant"), ascendantPages);
+		beastChapter = new TomeChapter("Beast", TabColor.RED, new ForcesGuideTOC("Beast"), beastPages);
+		machineChapter = new TomeChapter("Machine", TabColor.ORANGE, new ForcesGuideTOC("Machine"), machinePages);
+		combineChapter = new TomeChapter("Combine", TabColor.RAINBOW, new ForcesGuideTOC("Combine"), combinePages);
+
+		Collections.addAll(chapters, introChapter, selfChapter, hasturChapter, eldritchChapter, ascendantChapter,
+				beastChapter, machineChapter, combineChapter);
+
+	}
 
 	@Override
 	public void registerTome() {
@@ -164,32 +190,6 @@ public class ForcesLib extends TomeLib {
 		combinePages.add(new ForcesGuidePage(8, "Combine", "Trick Weapons", "Tricks of the Trade", COMBINE_PAGE_8));
 
 		registerChapters();
-	}
-
-	@Override
-	public void registerChapters() {
-		introChapter = new TomeChapter("Intro", TabColor.BLACK, new ForcesGuideTOC("Intro"), introPages);
-		selfChapter = new TomeChapter("Self", TabColor.WHITE, new ForcesGuideTOC("Self"), selfPages);
-		hasturChapter = new TomeChapter("Hastur", TabColor.YELLOW, new ForcesGuideTOC("Hastur"), hasturPages);
-		eldritchChapter = new TomeChapter("Eldritch", TabColor.PURPLE, new ForcesGuideTOC("Eldritch"), eldritchPages);
-		ascendantChapter = new TomeChapter("Ascendant", TabColor.CYAN, new ForcesGuideTOC("Ascendant"), ascendantPages);
-		beastChapter = new TomeChapter("Beast", TabColor.RED, new ForcesGuideTOC("Beast"), beastPages);
-		machineChapter = new TomeChapter("Machine", TabColor.ORANGE, new ForcesGuideTOC("Machine"), machinePages);
-		combineChapter = new TomeChapter("Combine", TabColor.RAINBOW, new ForcesGuideTOC("Combine"), combinePages);
-
-		Collections.addAll(chapters, introChapter, selfChapter, hasturChapter, eldritchChapter, ascendantChapter,
-				beastChapter, machineChapter, combineChapter);
-
-	}
-
-	@Override
-	public GuiGuideTitlePage getTitle() {
-		return new ForcesTitlePage();
-	}
-
-	@Override
-	public List<TomeChapter> getChapters() {
-		return chapters;
 	}
 
 }

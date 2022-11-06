@@ -35,8 +35,13 @@ public class EntityDreadRocketDirected extends ThrowableProjectile {
 		thrower = throwerIn;
 	}
 
-	public LivingEntity getThrower() {
-		return thrower;
+	@Override
+	public void addAdditionalSaveData(CompoundTag cmp) {
+		super.addAdditionalSaveData(cmp);
+	}
+
+	@Override
+	protected void defineSynchedData() {
 	}
 
 	@Nonnull
@@ -45,23 +50,8 @@ public class EntityDreadRocketDirected extends ThrowableProjectile {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
-	@Override
-	public void tick() {
-		super.tick();
-		level.addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
-		level.addParticle(ParticleTypes.CRIT, this.getX() + (Math.random() - 0.5) * 0.4,
-				this.getY() + (Math.random() - 0.5) * 0.4, this.getZ() + (Math.random() - 0.5) * 0.4, 0, 0, 0);
-
-	}
-
-	@Override
-	public void addAdditionalSaveData(CompoundTag cmp) {
-		super.addAdditionalSaveData(cmp);
-	}
-
-	@Override
-	public void readAdditionalSaveData(CompoundTag cmp) {
-		super.readAdditionalSaveData(cmp);
+	public LivingEntity getThrower() {
+		return thrower;
 	}
 
 	@Override
@@ -90,6 +80,22 @@ public class EntityDreadRocketDirected extends ThrowableProjectile {
 		}
 	}
 
+	@Override
+	public void readAdditionalSaveData(CompoundTag cmp) {
+		super.readAdditionalSaveData(cmp);
+	}
+
+	public void setDirectionMotion(Entity shooter, float p_234612_2_, float p_234612_3_, float p_234612_4_,
+			float p_234612_5_, float p_234612_6_) {
+		float f = -Mth.sin(p_234612_3_ * ((float) Math.PI / 180F)) * Mth.cos(p_234612_2_ * ((float) Math.PI / 180F));
+		float f1 = -Mth.sin((p_234612_2_ + p_234612_4_) * ((float) Math.PI / 180F));
+		float f2 = Mth.cos(p_234612_3_ * ((float) Math.PI / 180F)) * Mth.cos(p_234612_2_ * ((float) Math.PI / 180F));
+		this.shoot(f, f1, f2, p_234612_5_, p_234612_6_);
+		Vec3 vector3d = shooter.getDeltaMovement();
+		this.setDeltaMovement(
+				this.getDeltaMovement().add(vector3d.x, shooter.isOnGround() ? 0.0D : vector3d.y, vector3d.z));
+	}
+
 	/**
 	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z
 	 * direction.
@@ -109,19 +115,13 @@ public class EntityDreadRocketDirected extends ThrowableProjectile {
 		this.xRotO = this.getXRot();
 	}
 
-	public void setDirectionMotion(Entity shooter, float p_234612_2_, float p_234612_3_, float p_234612_4_,
-			float p_234612_5_, float p_234612_6_) {
-		float f = -Mth.sin(p_234612_3_ * ((float) Math.PI / 180F)) * Mth.cos(p_234612_2_ * ((float) Math.PI / 180F));
-		float f1 = -Mth.sin((p_234612_2_ + p_234612_4_) * ((float) Math.PI / 180F));
-		float f2 = Mth.cos(p_234612_3_ * ((float) Math.PI / 180F)) * Mth.cos(p_234612_2_ * ((float) Math.PI / 180F));
-		this.shoot(f, f1, f2, p_234612_5_, p_234612_6_);
-		Vec3 vector3d = shooter.getDeltaMovement();
-		this.setDeltaMovement(
-				this.getDeltaMovement().add(vector3d.x, shooter.isOnGround() ? 0.0D : vector3d.y, vector3d.z));
-	}
-
 	@Override
-	protected void defineSynchedData() {
+	public void tick() {
+		super.tick();
+		level.addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+		level.addParticle(ParticleTypes.CRIT, this.getX() + (Math.random() - 0.5) * 0.4,
+				this.getY() + (Math.random() - 0.5) * 0.4, this.getZ() + (Math.random() - 0.5) * 0.4, 0, 0, 0);
+
 	}
 
 }

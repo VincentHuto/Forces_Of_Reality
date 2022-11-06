@@ -27,16 +27,6 @@ public class RenderTrueXanthousKing extends MobRenderer<EntityTrueXanthousKing, 
 	}
 
 	@Override
-	public void render(EntityTrueXanthousKing entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
-			MultiBufferSource bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
-		matrixStackIn.pushPose();
-		matrixStackIn.popPose();
-
-	}
-
-	@Override
 	public ResourceLocation getTextureLocation(EntityTrueXanthousKing entity) {
 		if (entity.deathTicks > 0) {
 			return DRAGON_DEAD_TEXTURES;
@@ -44,5 +34,15 @@ public class RenderTrueXanthousKing extends MobRenderer<EntityTrueXanthousKing, 
 			return TEXTURE;
 
 		}
+	}
+
+	@Override
+	public void render(EntityTrueXanthousKing entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
+			MultiBufferSource bufferIn, int packedLightIn) {
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
+		matrixStackIn.pushPose();
+		matrixStackIn.popPose();
+
 	}
 }

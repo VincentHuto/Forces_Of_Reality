@@ -60,8 +60,10 @@ public class EntityDreadRocket extends ThrowableProjectile {
 		setEvil(evil);
 	}
 
-	public LivingEntity getThrower() {
-		return thrower;
+	@Override
+	public void addAdditionalSaveData(CompoundTag cmp) {
+		super.addAdditionalSaveData(cmp);
+		cmp.putInt(TAG_TIME, time);
 	}
 
 	@Override
@@ -70,22 +72,45 @@ public class EntityDreadRocket extends ThrowableProjectile {
 		entityData.define(TARGET, 0);
 	}
 
+	public boolean findTarget() {
+		LivingEntity target = getTargetEntity();
+		if (target != null && target.isAlive())
+			return true;
+		if (target != null)
+			setTarget(null);
+
+		double range = 25;
+		AABB bounds = new AABB(getX() - range, getY() - range, getZ() - range, getX() + range, getY() + range,
+				getZ() + range);
+		@SuppressWarnings("rawtypes")
+		List entities;
+		if (isEvil()) {
+			entities = level.getEntitiesOfClass(Player.class, bounds);
+		} else {
+			entities = level.getEntitiesOfClass(Entity.class, bounds, (Predicates.instanceOf(LivingEntity.class)));
+			if (entities.contains(this.getOwner())) {
+				entities.remove(this.getOwner());
+			}
+		}
+		while (entities.size() > 0) {
+			Entity e = (Entity) entities.get(level.random.nextInt(entities.size()));
+			if (!(e instanceof LivingEntity) || !e.isAlive()) { // Just in case...
+				entities.remove(e);
+				continue;
+			}
+
+			target = (LivingEntity) e;
+			setTarget(target);
+			break;
+		}
+
+		return target != null;
+	}
+
 	@Nonnull
 	@Override
 	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-
-	public void setEvil(boolean evil) {
-		entityData.set(EVIL, evil);
-	}
-
-	public boolean isEvil() {
-		return entityData.get(EVIL);
-	}
-
-	public void setTarget(LivingEntity e) {
-		entityData.set(TARGET, e == null ? -1 : e.getId());
 	}
 
 	public LivingEntity getTargetEntity() {
@@ -95,6 +120,54 @@ public class EntityDreadRocket extends ThrowableProjectile {
 			return (LivingEntity) e;
 
 		return null;
+	}
+
+	public LivingEntity getThrower() {
+		return thrower;
+	}
+
+	public boolean isEvil() {
+		return entityData.get(EVIL);
+	}
+
+	@Override
+	protected void onHit(@Nonnull HitResult pos) {
+		switch (pos.getType()) {
+		case BLOCK: {
+			Block block = level.getBlockState(((BlockHitResult) pos).getBlockPos()).getBlock();
+			if (!(block instanceof BushBlock) && !(block instanceof LeavesBlock))
+				if (!level.isClientSide) {
+					this.level.explode(this, this.getX(), this.getY() + this.getBbHeight() / 16.0F,
+							this.getZ(), 1.0F, Explosion.BlockInteraction.NONE);
+				}
+			remove(RemovalReason.KILLED);
+			break;
+		}
+		case ENTITY: {
+			if (((EntityHitResult) pos).getEntity() == getTargetEntity())
+				getTargetEntity().addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 255));
+			remove(RemovalReason.KILLED);
+			break;
+		}
+		default: {
+			remove(RemovalReason.KILLED);
+			break;
+		}
+		}
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag cmp) {
+		super.readAdditionalSaveData(cmp);
+		time = cmp.getInt(TAG_TIME);
+	}
+
+	public void setEvil(boolean evil) {
+		entityData.set(EVIL, evil);
+	}
+
+	public void setTarget(LivingEntity e) {
+		entityData.set(TARGET, e == null ? -1 : e.getId());
 	}
 
 	@Override
@@ -161,79 +234,6 @@ public class EntityDreadRocket extends ThrowableProjectile {
 		}
 
 		time++;
-	}
-
-	@Override
-	public void addAdditionalSaveData(CompoundTag cmp) {
-		super.addAdditionalSaveData(cmp);
-		cmp.putInt(TAG_TIME, time);
-	}
-
-	@Override
-	public void readAdditionalSaveData(CompoundTag cmp) {
-		super.readAdditionalSaveData(cmp);
-		time = cmp.getInt(TAG_TIME);
-	}
-
-	public boolean findTarget() {
-		LivingEntity target = getTargetEntity();
-		if (target != null && target.isAlive())
-			return true;
-		if (target != null)
-			setTarget(null);
-
-		double range = 25;
-		AABB bounds = new AABB(getX() - range, getY() - range, getZ() - range, getX() + range, getY() + range,
-				getZ() + range);
-		@SuppressWarnings("rawtypes")
-		List entities;
-		if (isEvil()) {
-			entities = level.getEntitiesOfClass(Player.class, bounds);
-		} else {
-			entities = level.getEntitiesOfClass(Entity.class, bounds, (Predicates.instanceOf(LivingEntity.class)));
-			if (entities.contains(this.getOwner())) {
-				entities.remove(this.getOwner());
-			}
-		}
-		while (entities.size() > 0) {
-			Entity e = (Entity) entities.get(level.random.nextInt(entities.size()));
-			if (!(e instanceof LivingEntity) || !e.isAlive()) { // Just in case...
-				entities.remove(e);
-				continue;
-			}
-
-			target = (LivingEntity) e;
-			setTarget(target);
-			break;
-		}
-
-		return target != null;
-	}
-
-	@Override
-	protected void onHit(@Nonnull HitResult pos) {
-		switch (pos.getType()) {
-		case BLOCK: {
-			Block block = level.getBlockState(((BlockHitResult) pos).getBlockPos()).getBlock();
-			if (!(block instanceof BushBlock) && !(block instanceof LeavesBlock))
-				if (!level.isClientSide) {
-					this.level.explode(this, this.getX(), this.getY() + this.getBbHeight() / 16.0F,
-							this.getZ(), 1.0F, Explosion.BlockInteraction.NONE);
-				}
-			remove(RemovalReason.KILLED);
-			break;
-		}
-		case ENTITY: {
-			if (((EntityHitResult) pos).getEntity() == getTargetEntity())
-				getTargetEntity().addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 255));
-			remove(RemovalReason.KILLED);
-			break;
-		}
-		default: {
-			remove(RemovalReason.KILLED);
-			break;
-		}
-		}
 	}
 
 }

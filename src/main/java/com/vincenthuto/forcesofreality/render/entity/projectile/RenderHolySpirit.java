@@ -29,6 +29,12 @@ public class RenderHolySpirit extends EntityRenderer<EntityHolySpirit> {
 		super(renderManager);
 	}
 
+	@Nonnull
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull EntityHolySpirit entity) {
+		return new ResourceLocation(ForcesOfReality.MOD_ID + "textures/entity/tracker.png");
+	}
+
 	@Override
 	public void render(EntityHolySpirit entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
@@ -88,12 +94,6 @@ public class RenderHolySpirit extends EntityRenderer<EntityHolySpirit> {
 						pos.getZ() + 0.5 - Math.sin(time - j) + HLParticleUtils.inRange(-0.05, 0.05), 0.05, 0.0, -0.05);
 			}
 		}
-	}
-
-	@Nonnull
-	@Override
-	public ResourceLocation getTextureLocation(@Nonnull EntityHolySpirit entity) {
-		return new ResourceLocation(ForcesOfReality.MOD_ID + "textures/entity/tracker.png");
 	}
 
 }

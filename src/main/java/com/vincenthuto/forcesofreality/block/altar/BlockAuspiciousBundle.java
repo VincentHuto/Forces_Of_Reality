@@ -57,23 +57,6 @@ public class BlockAuspiciousBundle extends Block implements EntityBlock {
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
-			BlockHitResult hit) {
-		ItemStack stack = player.getMainHandItem();
-		if (stack.getItem() instanceof FlintAndSteelItem) {
-			if (!worldIn.isClientSide) {
-				worldIn.setBlockAndUpdate(pos, BlockInit.sacrificial_pyre.get().defaultBlockState());
-			} else {
-				player.playSound(SoundInit.ENTITY_SERAPHIM_FLARE.get(), 0.6F, 0.8F);
-			}
-			return InteractionResult.SUCCESS;
-
-		}
-		return InteractionResult.FAIL;
-
-	}
-
-	@Override
 	public void animateTick(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos,
 			@Nonnull RandomSource random) {
 		BlockEntityAuspiciousBundle tile = (BlockEntityAuspiciousBundle) world.getBlockEntity(pos);
@@ -91,6 +74,17 @@ public class BlockAuspiciousBundle extends Block implements EntityBlock {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public void attack(BlockState state, Level worldIn, BlockPos pos, Player player) {
+		super.attack(state, worldIn, pos, player);
+	}
+
+	@Override
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+		builder.add(FACING);
+	}
+
 	@Override
 	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return SHAPE_R;
@@ -102,17 +96,8 @@ public class BlockAuspiciousBundle extends Block implements EntityBlock {
 	}
 
 	@Override
-	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
-	}
-
-	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-	}
-
-	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -122,19 +107,34 @@ public class BlockAuspiciousBundle extends Block implements EntityBlock {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-		builder.add(FACING);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void attack(BlockState state, Level worldIn, BlockPos pos, Player player) {
-		super.attack(state, worldIn, pos, player);
-	}
-
-	@Override
 	public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
 		return new BlockEntityAuspiciousBundle(p_153215_, p_153216_);
+	}
+
+	@Override
+	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
+			BlockHitResult hit) {
+		ItemStack stack = player.getMainHandItem();
+		if (stack.getItem() instanceof FlintAndSteelItem) {
+			if (!worldIn.isClientSide) {
+				worldIn.setBlockAndUpdate(pos, BlockInit.sacrificial_pyre.get().defaultBlockState());
+			} else {
+				player.playSound(SoundInit.ENTITY_SERAPHIM_FLARE.get(), 0.6F, 0.8F);
+			}
+			return InteractionResult.SUCCESS;
+
+		}
+		return InteractionResult.FAIL;
+
 	}
 
 }

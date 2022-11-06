@@ -104,10 +104,10 @@
 //	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull RecipeRafflesia recipe,
 //			@Nonnull IIngredients ingredients) {
 //		recipeLayout.getItemStacks().init(0, true, 65, 52);
-//		
+//
 //		GlStateManager._scaled(1.2, 4.2, 1.2);
 //		recipeLayout.getItemStacks().set(0, new ItemStack(BlockInit.rafflesia_of_fidelity.get()));
-//		
+//
 //
 //		int index = 1;
 //		double angleBetweenEach = 360.0 / ingredients.getInputs(VanillaTypes.ITEM).size();

@@ -33,10 +33,10 @@
 //	@Override
 //	public void render(BlockEntityIcoSphere te, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn,
 //			int combinedLightIn, int combinedOverlayIn) {
-//		
+//
 //	//	GlStateManager._color4f(1F, 1F, 1F, 1F);
 //	//	GlStateManager._translated(te.getBlockPos().getX(), te.getBlockPos().getY(), te.getBlockPos().getZ());
-//		
+//
 //		for (int i = 0; i < 16; i++) {
 //			count += 0.0002;
 //			if (count > 12) {

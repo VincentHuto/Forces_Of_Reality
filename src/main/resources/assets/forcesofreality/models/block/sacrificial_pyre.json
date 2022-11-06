@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"render_type": "cutout",
 	"textures": {
 		"0": "forcesofreality:blocks/dark_oak_top",
 		"1": "forcesofreality:blocks/dark_oak",

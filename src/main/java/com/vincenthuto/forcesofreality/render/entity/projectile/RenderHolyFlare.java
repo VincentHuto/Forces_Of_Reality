@@ -21,15 +21,15 @@ public class RenderHolyFlare extends EntityRenderer<EntityHolyFlare> {
 	}
 
 	@Override
+	public ResourceLocation getTextureLocation(EntityHolyFlare entity) {
+		return TEXTURE;
+	}
+
+	@Override
 	public void render(EntityHolyFlare entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityHolyFlare entity) {
-		return TEXTURE;
 	}
 
 }

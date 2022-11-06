@@ -46,14 +46,14 @@ public class PacketHandler {
 		// Register Networking packets
 
 		// Covenant
-		
+
 		CHANNELCOVENANT.registerMessage(networkID++, PacketCovenantServer.class, PacketCovenantServer::encode, PacketCovenantServer::decode,
 				PacketCovenantServer::handle);
 		CHANNELCOVENANT.registerMessage(networkID++, PacketCovenantClient.class, PacketCovenantClient::encode, PacketCovenantClient::decode,
 				PacketCovenantClient::handle);
 		CHANNELCOVENANT.registerMessage(networkID++, SyncCovenPacket.class, SyncCovenPacket::encode, SyncCovenPacket::decode,
 				SyncCovenPacket::handle);
-		
+
 //		CHANNELCOVENANT.registerMessage(networkID++, CovenantPacketClient.class, CovenantPacketClient::encode,
 //				CovenantPacketClient::decode, CovenantPacketClient::handle);
 //		CHANNELCOVENANT.registerMessage(networkID++, PacketCovenantServer.class, PacketCovenantServer::encode,

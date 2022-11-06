@@ -13,12 +13,12 @@ public class EnchantmentBowBladeLooting extends Enchantment {
 	}
 
 	/**
-	 * Returns the minimal value of enchantability needed on the enchantment level
-	 * passed.
+	 * Determines if the enchantment passed can be applyied together with this
+	 * enchantment.
 	 */
 	@Override
-	public int getMinCost(int enchantmentLevel) {
-		return 15 + (enchantmentLevel - 1) * 9;
+	public boolean checkCompatibility(Enchantment ench) {
+		return super.checkCompatibility(ench) && ench != Enchantments.SILK_TOUCH;
 	}
 
 	@Override
@@ -35,11 +35,11 @@ public class EnchantmentBowBladeLooting extends Enchantment {
 	}
 
 	/**
-	 * Determines if the enchantment passed can be applyied together with this
-	 * enchantment.
+	 * Returns the minimal value of enchantability needed on the enchantment level
+	 * passed.
 	 */
 	@Override
-	public boolean checkCompatibility(Enchantment ench) {
-		return super.checkCompatibility(ench) && ench != Enchantments.SILK_TOUCH;
+	public int getMinCost(int enchantmentLevel) {
+		return 15 + (enchantmentLevel - 1) * 9;
 	}
 }

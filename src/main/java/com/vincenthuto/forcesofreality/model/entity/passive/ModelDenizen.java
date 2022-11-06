@@ -24,20 +24,6 @@ public class ModelDenizen extends EntityModel<EntityDenizen> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeldenizen"), "main");
-	private final ModelPart right_arm;
-	private final ModelPart body;
-	private final ModelPart head;
-	private final ModelPart left_arm;
-	private final ModelPart left_leg;
-
-	public ModelDenizen(ModelPart root) {
-		this.right_arm = root.getChild("right_arm");
-		this.body = root.getChild("body");
-		this.head = root.getChild("head");
-		this.left_arm = root.getChild("left_arm");
-		this.left_leg = root.getChild("left_leg");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -84,11 +70,19 @@ public class ModelDenizen extends EntityModel<EntityDenizen> {
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
+	private final ModelPart right_arm;
+	private final ModelPart body;
+	private final ModelPart head;
+	private final ModelPart left_arm;
 
-	@Override
-	public void setupAnim(EntityDenizen entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart left_leg;
 
+	public ModelDenizen(ModelPart root) {
+		this.right_arm = root.getChild("right_arm");
+		this.body = root.getChild("body");
+		this.head = root.getChild("head");
+		this.left_arm = root.getChild("left_arm");
+		this.left_leg = root.getChild("left_leg");
 	}
 
 	@Override
@@ -99,5 +93,11 @@ public class ModelDenizen extends EntityModel<EntityDenizen> {
 		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		left_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		left_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityDenizen entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
 	}
 }

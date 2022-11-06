@@ -88,6 +88,26 @@ public class BlockBonsai extends Block {
 	}
 
 	@Override
+	public void appendHoverText(ItemStack stack, BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+		tooltip.add(Component.translatable(ChatFormatting.GOLD + "Stage: " + stage));
+		tooltip.add(Component.translatable(
+				ChatFormatting.GREEN + "Species: " + ModTextFormatting.toProperCase(bonsaiType.name())));
+		tooltip.add(Component.translatable(
+				ChatFormatting.GOLD + "Grows: " + getShearDrop().asItem().getDescription().getString()));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+		builder.add(FACING);
+		builder.add(STAGE);
+	}
+
+	public EnumBonsaiTypes getBonsaiType() {
+		return bonsaiType;
+	}
+
+	@Override
 	public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return SHAPE_R;
 	}
@@ -108,9 +128,32 @@ public class BlockBonsai extends Block {
 		}
 	}
 
+	public Item getShearDrop() {
+		return null;
+	}
+
+	public int getStage() {
+		return stage;
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+	}
+
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
 		return true;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+	}
+
+	@Override
+	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
 	}
 
 	@Override
@@ -200,59 +243,16 @@ public class BlockBonsai extends Block {
 	}
 
 	@Override
-	public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
-	}
-
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-	}
-
-	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
 		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
-	}
-
-	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-		builder.add(FACING);
-		builder.add(STAGE);
-	}
-
-	public EnumBonsaiTypes getBonsaiType() {
-		return bonsaiType;
 	}
 
 	public void setBonsaiType(EnumBonsaiTypes bonsaiType) {
 		this.bonsaiType = bonsaiType;
 	}
 
-	public int getStage() {
-		return stage;
-	}
-
 	public void setStage(int stage) {
 		this.stage = stage;
-	}
-
-	@Override
-	public void appendHoverText(ItemStack stack, BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
-		tooltip.add(Component.translatable(ChatFormatting.GOLD + "Stage: " + stage));
-		tooltip.add(Component.translatable(
-				ChatFormatting.GREEN + "Species: " + ModTextFormatting.toProperCase(bonsaiType.name())));
-		tooltip.add(Component.translatable(
-				ChatFormatting.GOLD + "Grows: " + getShearDrop().asItem().getDescription().getString()));
-	}
-
-	public Item getShearDrop() {
-		return null;
 	}
 
 	public void updatePlayerDevotion(Level worldIn, Player player) {

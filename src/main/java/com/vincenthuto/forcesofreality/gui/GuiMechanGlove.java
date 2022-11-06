@@ -19,6 +19,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
 public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove> {
+	private ResourceLocation GUI;
+
 	public GuiMechanGlove(ContainerMechanGlove container, Inventory playerInventory, Component name) {
 		super(container, playerInventory, name);
 
@@ -41,26 +43,15 @@ public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove
 		}
 	}
 
-	private ResourceLocation GUI;
-
 	@Override
 	protected void init() {
 		super.init();
 	}
 
 	@Override
-	protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
+	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.setShaderTexture(0, GUI);
-		HLGuiUtils.drawTexturedModalRect(leftPos, topPos, 0, 0, imageWidth - 1, imageHeight);
-
-	}
-
-	@Override
-	protected void renderLabels(PoseStack matrixStack, int x, int y) {
-		this.font.draw(matrixStack, "Modules", 7, 6, ChatFormatting.GOLD.getColor());
+		return super.keyPressed(keyCode, scanCode, modifiers);
 	}
 
 	@Override
@@ -80,8 +71,17 @@ public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove
 	}
 
 	@Override
-	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+	protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
 
-		return super.keyPressed(keyCode, scanCode, modifiers);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, GUI);
+		HLGuiUtils.drawTexturedModalRect(leftPos, topPos, 0, 0, imageWidth - 1, imageHeight);
+
+	}
+
+	@Override
+	protected void renderLabels(PoseStack matrixStack, int x, int y) {
+		this.font.draw(matrixStack, "Modules", 7, 6, ChatFormatting.GOLD.getColor());
 	}
 }

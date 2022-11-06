@@ -25,24 +25,6 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeldarkyoung"), "main");
-	public final ModelPart frontHead;
-	public final ModelPart rearHead;
-	private final ModelPart body;
-	private final ModelPart leftFrontLeg;
-	private final ModelPart rightFrontLeg;
-	private final ModelPart leftBackLeg;
-	private final ModelPart rightBackLeg;
-
-	public ModelDarkYoung(ModelPart root) {
-		this.frontHead = root.getChild("frontHead");
-		this.rearHead = root.getChild("rearHead");
-		this.body = root.getChild("body");
-		this.leftFrontLeg = root.getChild("leftFrontLeg");
-		this.rightFrontLeg = root.getChild("rightFrontLeg");
-		this.leftBackLeg = root.getChild("leftBackLeg");
-		this.rightBackLeg = root.getChild("rightBackLeg");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -485,11 +467,23 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
+	public final ModelPart frontHead;
+	public final ModelPart rearHead;
+	private final ModelPart body;
+	private final ModelPart leftFrontLeg;
+	private final ModelPart rightFrontLeg;
+	private final ModelPart leftBackLeg;
 
-	@Override
-	public void setupAnim(EntityDarkYoung entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart rightBackLeg;
 
+	public ModelDarkYoung(ModelPart root) {
+		this.frontHead = root.getChild("frontHead");
+		this.rearHead = root.getChild("rearHead");
+		this.body = root.getChild("body");
+		this.leftFrontLeg = root.getChild("leftFrontLeg");
+		this.rightFrontLeg = root.getChild("rightFrontLeg");
+		this.leftBackLeg = root.getChild("leftBackLeg");
+		this.rightBackLeg = root.getChild("rightBackLeg");
 	}
 
 	@Override
@@ -502,5 +496,11 @@ public class ModelDarkYoung extends EntityModel<EntityDarkYoung> {
 		rightFrontLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		leftBackLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		rightBackLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityDarkYoung entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
 	}
 }

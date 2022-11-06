@@ -26,6 +26,16 @@ public class RenderDarkYoung extends MobRenderer<EntityDarkYoung, ModelDarkYoung
 	}
 
 	@Override
+	public ResourceLocation getTextureLocation(EntityDarkYoung entity) {
+		if (entity.deathTicks > 0) {
+			return DRAGON_DEAD_TEXTURES;
+		} else {
+			return TEXTURE;
+
+		}
+	}
+
+	@Override
 	public void render(EntityDarkYoung entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
@@ -51,15 +61,5 @@ public class RenderDarkYoung extends MobRenderer<EntityDarkYoung, ModelDarkYoung
 
 		}
 
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityDarkYoung entity) {
-		if (entity.deathTicks > 0) {
-			return DRAGON_DEAD_TEXTURES;
-		} else {
-			return TEXTURE;
-
-		}
 	}
 }

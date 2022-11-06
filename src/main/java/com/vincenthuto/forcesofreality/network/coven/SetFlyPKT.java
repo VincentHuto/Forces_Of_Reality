@@ -8,23 +8,6 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class SetFlyPKT {
 
-	private boolean allowFlying;
-	private boolean isFlying;
-
-	public SetFlyPKT(boolean allowFlying, boolean isFlying) {
-		this.allowFlying = allowFlying;
-		this.isFlying = isFlying;
-	}
-
-	public static void encode(SetFlyPKT msg, FriendlyByteBuf buf) {
-		buf.writeBoolean(msg.allowFlying);
-		buf.writeBoolean(msg.isFlying);
-	}
-
-	public static SetFlyPKT decode(FriendlyByteBuf buf) {
-		return new SetFlyPKT(buf.readBoolean(), buf.readBoolean());
-	}
-
 	public static class Handler {
 
 		public static void handle(final SetFlyPKT message, Supplier<NetworkEvent.Context> ctx) {
@@ -34,5 +17,22 @@ public class SetFlyPKT {
 			});
 			ctx.get().setPacketHandled(true);
 		}
+	}
+	public static SetFlyPKT decode(FriendlyByteBuf buf) {
+		return new SetFlyPKT(buf.readBoolean(), buf.readBoolean());
+	}
+
+	public static void encode(SetFlyPKT msg, FriendlyByteBuf buf) {
+		buf.writeBoolean(msg.allowFlying);
+		buf.writeBoolean(msg.isFlying);
+	}
+
+	private boolean allowFlying;
+
+	private boolean isFlying;
+
+	public SetFlyPKT(boolean allowFlying, boolean isFlying) {
+		this.allowFlying = allowFlying;
+		this.isFlying = isFlying;
 	}
 }

@@ -52,333 +52,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityHasturSpawn extends FlyingMob implements Enemy {
-	private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(EntityHasturSpawn.class,
-			EntityDataSerializers.INT);
-	private Vec3 orbitOffset = Vec3.ZERO;
-	private BlockPos orbitPosition = BlockPos.ZERO;
-	private EntityHasturSpawn.AttackPhase attackPhase = EntityHasturSpawn.AttackPhase.CIRCLE;
-	private static final EntityDataAccessor<Integer> SPAWN_TYPE = SynchedEntityData.defineId(EntityHasturSpawn.class,
-			EntityDataSerializers.INT);
-	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
-		p_213410_0_.put(0, new ResourceLocation(ForcesOfReality.MOD_ID,
-				"textures/entity/hastur_spawn/model_hastur_spawn_green.png"));
-		p_213410_0_.put(1, new ResourceLocation(ForcesOfReality.MOD_ID,
-				"textures/entity/hastur_spawn/model_hastur_spawn_brown.png"));
-		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID,
-				"textures/entity/hastur_spawn/model_hastur_spawn_grey.png"));
-	});
-	public float deathTicks = 1;
-
-	public EntityHasturSpawn(EntityType<? extends EntityHasturSpawn> type, Level worldIn) {
-		super(type, worldIn);
-		this.xpReward = 5;
-		this.moveControl = new EntityHasturSpawn.MoveHelperController(this);
-		this.lookControl = new EntityHasturSpawn.LookHelperController(this);
-	}
-
-	public ResourceLocation getSpawnTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getSpawnType(), TEXTURE_BY_ID.get(0));
-	}
-
-	public int getSpawnType() {
-		return this.entityData.get(SPAWN_TYPE);
-	}
-
-	public void setSpawnType(int type) {
-		if (type <= 0 || type >= 4) {
-			type = this.random.nextInt(5);
-		}
-
-		this.entityData.set(SPAWN_TYPE, type);
-	}
-
-	@Override
-	protected BodyRotationControl createBodyControl() {
-		return new EntityHasturSpawn.BodyHelperController(this);
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new EntityHasturSpawn.PickAttackGoal());
-		this.goalSelector.addGoal(2, new EntityHasturSpawn.SweepAttackGoal());
-		this.goalSelector.addGoal(3, new EntityHasturSpawn.OrbitPointGoal());
-	//	this.targetSelector.addGoal(1, new EntityHasturSpawn.AttackPlayerGoal());
-	}
-
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(SIZE, 0);
-		this.entityData.define(SPAWN_TYPE, 1);
-	}
-
-	public void setPhantomSize(int sizeIn) {
-		this.entityData.set(SIZE, Mth.clamp(sizeIn, 0, 64));
-	}
-
-	private void updatePhantomSize() {
-		this.refreshDimensions();
-		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(6 + this.getPhantomSize());
-	}
-
-	public int getPhantomSize() {
-		return this.entityData.get(SIZE);
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return sizeIn.height * 0.35F;
-	}
-
-	@Override
-	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
-		if (SIZE.equals(key)) {
-			this.updatePhantomSize();
-		}
-
-		super.onSyncedDataUpdated(key);
-	}
-
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return true;
-	}
-
-	/**
-	 * Called to update the entity's position/logic.
-	 */
-	@Override
-	public void tick() {
-		super.tick();
-
-		// Particle Effects
-		float g = (this.random.nextFloat() - 0.5F) * 2.0F;
-		float g1 = -1;
-		float g2 = (this.random.nextFloat() - 0.5F) * 2.0F;
-		if (tickCount < 2) {
-			this.level.addParticle(ParticleTypes.POOF, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2, 0.0D,
-					0.0D, 0.0D);
-		}
-		if (tickCount > 2 && tickCount < 20) {
-			this.level.addParticle(ParticleTypes.ITEM_SLIME, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2,
-					0.0D, 0.0D, 0.0D);
-		}
-		if (tickCount > 150 && tickCount < 200) {
-			this.level.addParticle(ParticleTypes.ITEM_SLIME, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2,
-					0.0D, 0.0D, 0.0D);
-
-		}
-		if (tickCount == 200) {
-			this.level.addParticle(ParticleTypes.POOF, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2, 0.0D,
-					0.0D, 0.0D);
-			if (!this.level.isClientSide) {
-				// this.remove(RemovalReason.KILLED);
-				this.setHealth(0);
-			} else {
-				if (!level.isClientSide) {
-					level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.SLIME_DEATH,
-							SoundSource.HOSTILE, 3f, 1.2f, false);
-				}
-			}
-		}
-
-		if (this.level.isClientSide) {
-			float f = Mth.cos((this.getId() * 3 + this.tickCount) * 0.13F + (float) Math.PI);
-			float f1 = Mth.cos((this.getId() * 3 + this.tickCount + 1) * 0.13F + (float) Math.PI);
-			if (f > 0.0F && f1 <= 0.0F) {
-				this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.PHANTOM_FLAP,
-						this.getSoundSource(), 0.95F + this.random.nextFloat() * 0.05F,
-						0.95F + this.random.nextFloat() * 0.05F, false);
-			}
-		}
-	}
-
-	/**
-	 * Called frequently so the entity can update its state every tick as required.
-	 * For example, zombies and skeletons use this to react to sunlight and start to
-	 * burn.
-	 */
-	@Override
-	public void aiStep() {
-		if (this.isAlive() && this.isSunBurnTick()) {
-			// this.setFire(8);
-		}
-
-		super.aiStep();
-	}
-
-	@Override
-	protected void tickDeath() {
-		// Particle Effects
-		float g = (this.random.nextFloat() - 0.5F) * 2.0F;
-		float g1 = -1;
-		float g2 = (this.random.nextFloat() - 0.5F) * 2.0F;
-		deathTicks -= 0.05;
-		if (this.deathTicks <= 0.1) {
-			if (level.isClientSide) {
-				level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.SLIME_BLOCK_BREAK,
-						SoundSource.HOSTILE, 3f, 0.2f, false);
-				this.level.addParticle(ParticleTypes.POOF, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2,
-						0.0D, 0.0D, 0.0D);
-			}
-		}
-
-		if (this.deathTicks <= 0.1 && !this.level.isClientSide) {
-			this.remove(RemovalReason.KILLED);
-		}
-
-	}
-
-	@Override
-	protected void customServerAiStep() {
-		super.customServerAiStep();
-	}
-
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
-			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		this.orbitPosition = this.blockPosition().above(5);
-		this.setPhantomSize(0);
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		this.setSpawnType(this.random.nextInt(4));
-		this.populateDefaultEquipmentSlots(random, difficultyIn);
-
-		return spawnDataIn;
-
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		if (compound.contains("AX")) {
-			this.orbitPosition = new BlockPos(compound.getInt("AX"), compound.getInt("AY"), compound.getInt("AZ"));
-		}
-
-		this.setPhantomSize(compound.getInt("Size"));
-	}
-
-	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("AX", this.orbitPosition.getX());
-		compound.putInt("AY", this.orbitPosition.getY());
-		compound.putInt("AZ", this.orbitPosition.getZ());
-		compound.putInt("Size", this.getPhantomSize());
-	}
-
-	/**
-	 * Checks if the entity is in range to render.
-	 */
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public boolean shouldRenderAtSqrDistance(double distance) {
-		return true;
-	}
-
-	@Override
-	public SoundSource getSoundSource() {
-		return SoundSource.HOSTILE;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundEvents.PHANTOM_AMBIENT;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.PHANTOM_HURT;
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.PHANTOM_DEATH;
-	}
-
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEAD;
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 16.0D).add(Attributes.ATTACK_DAMAGE,
-				1);
-	}
-
-	/**
-	 * Returns the volume for the sounds this mob makes.
-	 */
-	@Override
-	protected float getSoundVolume() {
-		return 0.3F;
-	}
-
-	@Override
-	public boolean canAttackType(EntityType<?> typeIn) {
-		return true;
-	}
-
-	@Override
-	public EntityDimensions getDimensions(Pose poseIn) {
-		int i = this.getPhantomSize();
-		EntityDimensions entitysize = super.getDimensions(poseIn);
-		float f = (entitysize.width + 0.2F * i) / entitysize.width;
-		return entitysize.scale(f);
-	}
-
 	static enum AttackPhase {
 		CIRCLE, SWOOP;
 	}
-
-//	class AttackPlayerGoal extends Goal {
-//		private final TargetingConditions attackTargeting = (new TargetingConditions()).range(64.0D);
-//		private int tickDelay = 20;
-//
-//		private AttackPlayerGoal() {
-//		}
-//
-//		/**
-//		 * Returns whether execution should begin. You can also read and cache any state
-//		 * necessary for execution in this method as well.
-//		 */
-//		@Override
-//		public boolean canUse() {
-//			if (this.tickDelay > 0) {
-//				--this.tickDelay;
-//				return false;
-//			} else {
-//				this.tickDelay = 60;
-//				List<Player> list = EntityHasturSpawn.this.level.getNearbyPlayers(this.attackTargeting,
-//						EntityHasturSpawn.this, EntityHasturSpawn.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
-//				if (!list.isEmpty()) {
-//					list.sort(Comparator.<Entity, Double>comparing(Entity::getY).reversed());
-//
-//					for (Player playerentity : list) {
-//						if (EntityHasturSpawn.this.canAttack(playerentity, TargetingConditions.DEFAULT)) {
-//							EntityHasturSpawn.this.setTarget(playerentity);
-//							return true;
-//						}
-//					}
-//				}
-//
-//				return false;
-//			}
-//		}
-//
-//		/**
-//		 * Returns whether an in-progress EntityAIBase should continue executing
-//		 */
-//		@Override
-//		public boolean canContinueToUse() {
-//			LivingEntity livingentity = EntityHasturSpawn.this.getTarget();
-//			return livingentity != null ? EntityHasturSpawn.this.canAttack(livingentity, TargetingConditions.DEFAULT)
-//					: false;
-//		}
-//	}
-
 	class BodyHelperController extends BodyRotationControl {
 		public BodyHelperController(Mob mob) {
 			super(mob);
@@ -393,7 +69,6 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			EntityHasturSpawn.this.yBodyRot = EntityHasturSpawn.this.getYRot();
 		}
 	}
-
 	class LookHelperController extends LookControl {
 		public LookHelperController(Mob entityIn) {
 			super(entityIn);
@@ -406,7 +81,6 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 		public void tick() {
 		}
 	}
-
 	abstract class MoveGoal extends Goal {
 		public MoveGoal() {
 			this.setFlags(EnumSet.of(Goal.Flag.MOVE));
@@ -417,7 +91,6 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 					EntityHasturSpawn.this.getY(), EntityHasturSpawn.this.getZ()) < 4.0D;
 		}
 	}
-
 	class MoveHelperController extends MoveControl {
 		private float speedFactor = 0.1F;
 
@@ -464,7 +137,6 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 					.setDeltaMovement(vector3d.add((new Vec3(d3, d5, d4)).subtract(vector3d).scale(0.2D)));
 		}
 	}
-
 	class OrbitPointGoal extends EntityHasturSpawn.MoveGoal {
 		private float angle;
 		private float distance;
@@ -482,6 +154,16 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 		public boolean canUse() {
 			return EntityHasturSpawn.this.getTarget() == null
 					|| EntityHasturSpawn.this.attackPhase == EntityHasturSpawn.AttackPhase.CIRCLE;
+		}
+
+		private void selectNext() {
+			if (BlockPos.ZERO.equals(EntityHasturSpawn.this.orbitPosition)) {
+				EntityHasturSpawn.this.orbitPosition = EntityHasturSpawn.this.blockPosition();
+			}
+
+			this.angle += this.clockwise * 15.0F * ((float) Math.PI / 180F);
+			EntityHasturSpawn.this.orbitOffset = Vec3.atLowerCornerOf(EntityHasturSpawn.this.orbitPosition)
+					.add(this.distance * Mth.cos(this.angle), -4.0F + this.height, this.distance * Mth.sin(this.angle));
 		}
 
 		/**
@@ -534,18 +216,7 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			}
 
 		}
-
-		private void selectNext() {
-			if (BlockPos.ZERO.equals(EntityHasturSpawn.this.orbitPosition)) {
-				EntityHasturSpawn.this.orbitPosition = EntityHasturSpawn.this.blockPosition();
-			}
-
-			this.angle += this.clockwise * 15.0F * ((float) Math.PI / 180F);
-			EntityHasturSpawn.this.orbitOffset = Vec3.atLowerCornerOf(EntityHasturSpawn.this.orbitPosition)
-					.add(this.distance * Mth.cos(this.angle), -4.0F + this.height, this.distance * Mth.sin(this.angle));
-		}
 	}
-
 	class PickAttackGoal extends Goal {
 		private int tickDelay;
 
@@ -562,6 +233,16 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			return livingentity != null
 					? EntityHasturSpawn.this.canAttack(EntityHasturSpawn.this.getTarget(), TargetingConditions.DEFAULT)
 					: false;
+		}
+
+		private void setAnchorAboveTarget() {
+			EntityHasturSpawn.this.orbitPosition = EntityHasturSpawn.this.getTarget().blockPosition()
+					.above(5 /* + EntityHasturSpawn.this.rand.nextInt(5) */);
+			if (EntityHasturSpawn.this.orbitPosition.getY() < EntityHasturSpawn.this.level.getSeaLevel()) {
+				EntityHasturSpawn.this.orbitPosition = new BlockPos(EntityHasturSpawn.this.orbitPosition.getX(),
+						EntityHasturSpawn.this.getTarget().getY() + 13, EntityHasturSpawn.this.orbitPosition.getZ());
+			}
+
 		}
 
 		/**
@@ -602,30 +283,15 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			}
 
 		}
-
-		private void setAnchorAboveTarget() {
-			EntityHasturSpawn.this.orbitPosition = EntityHasturSpawn.this.getTarget().blockPosition()
-					.above(5 /* + EntityHasturSpawn.this.rand.nextInt(5) */);
-			if (EntityHasturSpawn.this.orbitPosition.getY() < EntityHasturSpawn.this.level.getSeaLevel()) {
-				EntityHasturSpawn.this.orbitPosition = new BlockPos(EntityHasturSpawn.this.orbitPosition.getX(),
-						EntityHasturSpawn.this.getTarget().getY() + 13, EntityHasturSpawn.this.orbitPosition.getZ());
-			}
-
-		}
 	}
 
 	class SweepAttackGoal extends EntityHasturSpawn.MoveGoal {
-		private SweepAttackGoal() {
-		}
-
 		/**
-		 * Returns whether execution should begin. You can also read and cache any state
-		 * necessary for execution in this method as well.
+		 * Keep ticking a continuous task that has already been started
 		 */
-		@Override
-		public boolean canUse() {
-			return EntityHasturSpawn.this.getTarget() != null
-					&& EntityHasturSpawn.this.attackPhase == EntityHasturSpawn.AttackPhase.SWOOP;
+		Random rand = new Random();
+
+		private SweepAttackGoal() {
 		}
 
 		/**
@@ -664,6 +330,16 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 		}
 
 		/**
+		 * Returns whether execution should begin. You can also read and cache any state
+		 * necessary for execution in this method as well.
+		 */
+		@Override
+		public boolean canUse() {
+			return EntityHasturSpawn.this.getTarget() != null
+					&& EntityHasturSpawn.this.attackPhase == EntityHasturSpawn.AttackPhase.SWOOP;
+		}
+
+		/**
 		 * Execute a one shot task or start executing a continuous task
 		 */
 		@Override
@@ -679,11 +355,6 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			EntityHasturSpawn.this.setTarget((LivingEntity) null);
 			EntityHasturSpawn.this.attackPhase = EntityHasturSpawn.AttackPhase.CIRCLE;
 		}
-
-		/**
-		 * Keep ticking a continuous task that has already been started
-		 */
-		Random rand = new Random();
 
 		@Override
 		public void tick() {
@@ -704,5 +375,334 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			}
 
 		}
+	}
+
+	private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(EntityHasturSpawn.class,
+			EntityDataSerializers.INT);
+
+	private static final EntityDataAccessor<Integer> SPAWN_TYPE = SynchedEntityData.defineId(EntityHasturSpawn.class,
+			EntityDataSerializers.INT);
+
+	public static final Map<Integer, ResourceLocation> TEXTURE_BY_ID = Util.make(Maps.newHashMap(), (p_213410_0_) -> {
+		p_213410_0_.put(0, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/hastur_spawn/model_hastur_spawn_green.png"));
+		p_213410_0_.put(1, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/hastur_spawn/model_hastur_spawn_brown.png"));
+		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID,
+				"textures/entity/hastur_spawn/model_hastur_spawn_grey.png"));
+	});
+
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 16.0D).add(Attributes.ATTACK_DAMAGE,
+				1);
+	}
+
+	private Vec3 orbitOffset = Vec3.ZERO;
+
+	private BlockPos orbitPosition = BlockPos.ZERO;
+
+	private EntityHasturSpawn.AttackPhase attackPhase = EntityHasturSpawn.AttackPhase.CIRCLE;
+
+	public float deathTicks = 1;
+
+	public EntityHasturSpawn(EntityType<? extends EntityHasturSpawn> type, Level worldIn) {
+		super(type, worldIn);
+		this.xpReward = 5;
+		this.moveControl = new EntityHasturSpawn.MoveHelperController(this);
+		this.lookControl = new EntityHasturSpawn.LookHelperController(this);
+	}
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		compound.putInt("AX", this.orbitPosition.getX());
+		compound.putInt("AY", this.orbitPosition.getY());
+		compound.putInt("AZ", this.orbitPosition.getZ());
+		compound.putInt("Size", this.getPhantomSize());
+	}
+
+	/**
+	 * Called frequently so the entity can update its state every tick as required.
+	 * For example, zombies and skeletons use this to react to sunlight and start to
+	 * burn.
+	 */
+	@Override
+	public void aiStep() {
+		if (this.isAlive() && this.isSunBurnTick()) {
+			// this.setFire(8);
+		}
+
+		super.aiStep();
+	}
+
+	@Override
+	public boolean canAttackType(EntityType<?> typeIn) {
+		return true;
+	}
+
+	@Override
+	protected BodyRotationControl createBodyControl() {
+		return new EntityHasturSpawn.BodyHelperController(this);
+	}
+
+	@Override
+	protected void customServerAiStep() {
+		super.customServerAiStep();
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(SIZE, 0);
+		this.entityData.define(SPAWN_TYPE, 1);
+	}
+
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
+			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		this.orbitPosition = this.blockPosition().above(5);
+		this.setPhantomSize(0);
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		this.setSpawnType(this.random.nextInt(4));
+		this.populateDefaultEquipmentSlots(random, difficultyIn);
+
+		return spawnDataIn;
+
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.PHANTOM_AMBIENT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.PHANTOM_DEATH;
+	}
+
+	@Override
+	public EntityDimensions getDimensions(Pose poseIn) {
+		int i = this.getPhantomSize();
+		EntityDimensions entitysize = super.getDimensions(poseIn);
+		float f = (entitysize.width + 0.2F * i) / entitysize.width;
+		return entitysize.scale(f);
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundEvents.PHANTOM_HURT;
+	}
+
+	@Override
+	public MobType getMobType() {
+		return MobType.UNDEAD;
+	}
+
+	public int getPhantomSize() {
+		return this.entityData.get(SIZE);
+	}
+
+	@Override
+	public SoundSource getSoundSource() {
+		return SoundSource.HOSTILE;
+	}
+
+	/**
+	 * Returns the volume for the sounds this mob makes.
+	 */
+	@Override
+	protected float getSoundVolume() {
+		return 0.3F;
+	}
+
+	public int getSpawnType() {
+		return this.entityData.get(SPAWN_TYPE);
+	}
+
+	public ResourceLocation getSpawnTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getSpawnType(), TEXTURE_BY_ID.get(0));
+	}
+
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
+		return sizeIn.height * 0.35F;
+	}
+
+	@Override
+	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+		if (SIZE.equals(key)) {
+			this.updatePhantomSize();
+		}
+
+		super.onSyncedDataUpdated(key);
+	}
+
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		if (compound.contains("AX")) {
+			this.orbitPosition = new BlockPos(compound.getInt("AX"), compound.getInt("AY"), compound.getInt("AZ"));
+		}
+
+		this.setPhantomSize(compound.getInt("Size"));
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(1, new EntityHasturSpawn.PickAttackGoal());
+		this.goalSelector.addGoal(2, new EntityHasturSpawn.SweepAttackGoal());
+		this.goalSelector.addGoal(3, new EntityHasturSpawn.OrbitPointGoal());
+	//	this.targetSelector.addGoal(1, new EntityHasturSpawn.AttackPlayerGoal());
+	}
+
+//	class AttackPlayerGoal extends Goal {
+//		private final TargetingConditions attackTargeting = (new TargetingConditions()).range(64.0D);
+//		private int tickDelay = 20;
+//
+//		private AttackPlayerGoal() {
+//		}
+//
+//		/**
+//		 * Returns whether execution should begin. You can also read and cache any state
+//		 * necessary for execution in this method as well.
+//		 */
+//		@Override
+//		public boolean canUse() {
+//			if (this.tickDelay > 0) {
+//				--this.tickDelay;
+//				return false;
+//			} else {
+//				this.tickDelay = 60;
+//				List<Player> list = EntityHasturSpawn.this.level.getNearbyPlayers(this.attackTargeting,
+//						EntityHasturSpawn.this, EntityHasturSpawn.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
+//				if (!list.isEmpty()) {
+//					list.sort(Comparator.<Entity, Double>comparing(Entity::getY).reversed());
+//
+//					for (Player playerentity : list) {
+//						if (EntityHasturSpawn.this.canAttack(playerentity, TargetingConditions.DEFAULT)) {
+//							EntityHasturSpawn.this.setTarget(playerentity);
+//							return true;
+//						}
+//					}
+//				}
+//
+//				return false;
+//			}
+//		}
+//
+//		/**
+//		 * Returns whether an in-progress EntityAIBase should continue executing
+//		 */
+//		@Override
+//		public boolean canContinueToUse() {
+//			LivingEntity livingentity = EntityHasturSpawn.this.getTarget();
+//			return livingentity != null ? EntityHasturSpawn.this.canAttack(livingentity, TargetingConditions.DEFAULT)
+//					: false;
+//		}
+//	}
+
+	public void setPhantomSize(int sizeIn) {
+		this.entityData.set(SIZE, Mth.clamp(sizeIn, 0, 64));
+	}
+
+	public void setSpawnType(int type) {
+		if (type <= 0 || type >= 4) {
+			type = this.random.nextInt(5);
+		}
+
+		this.entityData.set(SPAWN_TYPE, type);
+	}
+
+	@Override
+	protected boolean shouldDespawnInPeaceful() {
+		return true;
+	}
+
+	/**
+	 * Checks if the entity is in range to render.
+	 */
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public boolean shouldRenderAtSqrDistance(double distance) {
+		return true;
+	}
+
+	/**
+	 * Called to update the entity's position/logic.
+	 */
+	@Override
+	public void tick() {
+		super.tick();
+
+		// Particle Effects
+		float g = (this.random.nextFloat() - 0.5F) * 2.0F;
+		float g1 = -1;
+		float g2 = (this.random.nextFloat() - 0.5F) * 2.0F;
+		if (tickCount < 2) {
+			this.level.addParticle(ParticleTypes.POOF, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2, 0.0D,
+					0.0D, 0.0D);
+		}
+		if (tickCount > 2 && tickCount < 20) {
+			this.level.addParticle(ParticleTypes.ITEM_SLIME, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2,
+					0.0D, 0.0D, 0.0D);
+		}
+		if (tickCount > 150 && tickCount < 200) {
+			this.level.addParticle(ParticleTypes.ITEM_SLIME, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2,
+					0.0D, 0.0D, 0.0D);
+
+		}
+		if (tickCount == 200) {
+			this.level.addParticle(ParticleTypes.POOF, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2, 0.0D,
+					0.0D, 0.0D);
+			if (!this.level.isClientSide) {
+				// this.remove(RemovalReason.KILLED);
+				this.setHealth(0);
+			} else {
+				if (!level.isClientSide) {
+					level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.SLIME_DEATH,
+							SoundSource.HOSTILE, 3f, 1.2f, false);
+				}
+			}
+		}
+
+		if (this.level.isClientSide) {
+			float f = Mth.cos((this.getId() * 3 + this.tickCount) * 0.13F + (float) Math.PI);
+			float f1 = Mth.cos((this.getId() * 3 + this.tickCount + 1) * 0.13F + (float) Math.PI);
+			if (f > 0.0F && f1 <= 0.0F) {
+				this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.PHANTOM_FLAP,
+						this.getSoundSource(), 0.95F + this.random.nextFloat() * 0.05F,
+						0.95F + this.random.nextFloat() * 0.05F, false);
+			}
+		}
+	}
+
+	@Override
+	protected void tickDeath() {
+		// Particle Effects
+		float g = (this.random.nextFloat() - 0.5F) * 2.0F;
+		float g1 = -1;
+		float g2 = (this.random.nextFloat() - 0.5F) * 2.0F;
+		deathTicks -= 0.05;
+		if (this.deathTicks <= 0.1) {
+			if (level.isClientSide) {
+				level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.SLIME_BLOCK_BREAK,
+						SoundSource.HOSTILE, 3f, 0.2f, false);
+				this.level.addParticle(ParticleTypes.POOF, this.getX() + g, this.getY() + 2.0D + g1, this.getZ() + g2,
+						0.0D, 0.0D, 0.0D);
+			}
+		}
+
+		if (this.deathTicks <= 0.1 && !this.level.isClientSide) {
+			this.remove(RemovalReason.KILLED);
+		}
+
+	}
+
+	private void updatePhantomSize() {
+		this.refreshDimensions();
+		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(6 + this.getPhantomSize());
 	}
 }

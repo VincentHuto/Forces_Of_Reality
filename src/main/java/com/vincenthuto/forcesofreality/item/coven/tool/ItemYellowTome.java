@@ -73,7 +73,7 @@ public class ItemYellowTome extends Item {
 							Component.translatable("Lord Hastur does not grant you his power"), true);
 					stack.hurtAndBreak(1, playerentity, (p_220009_1_) -> {
 						p_220009_1_.broadcastBreakEvent(playerentity.getUsedItemHand());
-					});	
+					});
 		}
 
 			}

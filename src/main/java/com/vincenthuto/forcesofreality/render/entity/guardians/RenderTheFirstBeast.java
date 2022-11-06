@@ -22,18 +22,18 @@ public class RenderTheFirstBeast extends MobRenderer<EntityTheFirstBeast, ModelT
 	public RenderTheFirstBeast(Context renderManagerIn) {
 		super(renderManagerIn, new ModelTheFirstBeast(renderManagerIn.bakeLayer(ModelTheFirstBeast.LAYER_LOCATION)),
 				1.5f);
-		this.addLayer(new BeastHeldItemLayer<EntityTheFirstBeast, ModelTheFirstBeast>(this));
+		this.addLayer(new BeastHeldItemLayer<>(this));
 
+	}
+
+	@Override
+	public ResourceLocation getTextureLocation(EntityTheFirstBeast entity) {
+		return TEXTURE;
 	}
 
 	@Override
 	public void render(EntityTheFirstBeast entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityTheFirstBeast entity) {
-		return TEXTURE;
 	}
 }

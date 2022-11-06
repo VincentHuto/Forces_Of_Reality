@@ -25,24 +25,6 @@ public class ModelBeastFromBeyond extends EntityModel<EntityBeastFromBeyond> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modelbeastfrombeyond"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart LeftLeg;
-	private final ModelPart LeftLeg2;
-	private final ModelPart RightLeg;
-	private final ModelPart RightLeg2;
-	private final ModelPart Tail;
-
-	public ModelBeastFromBeyond(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.LeftLeg = root.getChild("LeftLeg");
-		this.LeftLeg2 = root.getChild("LeftLeg2");
-		this.RightLeg = root.getChild("RightLeg");
-		this.RightLeg2 = root.getChild("RightLeg2");
-		this.Tail = root.getChild("Tail");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -161,11 +143,23 @@ public class ModelBeastFromBeyond extends EntityModel<EntityBeastFromBeyond> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart LeftLeg;
+	private final ModelPart LeftLeg2;
+	private final ModelPart RightLeg;
+	private final ModelPart RightLeg2;
 
-	@Override
-	public void setupAnim(EntityBeastFromBeyond entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
+	private final ModelPart Tail;
 
+	public ModelBeastFromBeyond(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.LeftLeg = root.getChild("LeftLeg");
+		this.LeftLeg2 = root.getChild("LeftLeg2");
+		this.RightLeg = root.getChild("RightLeg");
+		this.RightLeg2 = root.getChild("RightLeg2");
+		this.Tail = root.getChild("Tail");
 	}
 
 	@Override
@@ -178,5 +172,11 @@ public class ModelBeastFromBeyond extends EntityModel<EntityBeastFromBeyond> {
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightLeg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityBeastFromBeyond entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
+
 	}
 }

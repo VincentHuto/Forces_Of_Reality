@@ -29,13 +29,6 @@ public class RenderXanthousKing extends MobRenderer<EntityXanthousKing, ModelXan
 	}
 
 	@Override
-	public void render(EntityXanthousKing entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
-			MultiBufferSource bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
-	}
-
-	@Override
 	public ResourceLocation getTextureLocation(EntityXanthousKing entity) {
 		if (entity.deathTicks > 0) {
 			return DRAGON_DEAD_TEXTURES;
@@ -43,5 +36,12 @@ public class RenderXanthousKing extends MobRenderer<EntityXanthousKing, ModelXan
 			return TEXTURE;
 
 		}
+	}
+
+	@Override
+	public void render(EntityXanthousKing entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
+			MultiBufferSource bufferIn, int packedLightIn) {
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
 	}
 }

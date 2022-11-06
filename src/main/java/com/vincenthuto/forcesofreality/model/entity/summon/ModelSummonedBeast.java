@@ -21,18 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelSummonedBeast extends EntityModel<EntitySummonedBeast> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelsummonedbeast"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart LeftLeg;
-	private final ModelPart RightLeg;
-
-	public ModelSummonedBeast(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.LeftLeg = root.getChild("LeftLeg");
-		this.RightLeg = root.getChild("RightLeg");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -93,10 +81,17 @@ public class ModelSummonedBeast extends EntityModel<EntitySummonedBeast> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart LeftLeg;
 
-	@Override
-	public void setupAnim(EntitySummonedBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart RightLeg;
 
+	public ModelSummonedBeast(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.LeftLeg = root.getChild("LeftLeg");
+		this.RightLeg = root.getChild("RightLeg");
 	}
 
 	@Override
@@ -105,5 +100,10 @@ public class ModelSummonedBeast extends EntityModel<EntitySummonedBeast> {
 		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntitySummonedBeast entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

@@ -47,74 +47,6 @@ public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> 
 	public static final Lazy<ModelBeastlyArmor<LivingEntity>> boots = Lazy.of(
 			() -> new ModelBeastlyArmor<>(Minecraft.getInstance().getEntityModels().bakeLayer(BEASTLY_BOOTS_LAYER)));
 
-	public ModelBeastlyArmor(ModelPart root) {
-		super(root, RenderType::entityTranslucent);
-
-	}
-
-	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
-		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
-		PartDefinition partdefinition = meshdefinition.getRoot();
-		if (slot.equals(EquipmentSlot.HEAD)) {
-			PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(108, 153)
-					.addBox(6.0F, -13.0F, -4.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(3.0F, -12.0F, -3.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 154)
-					.addBox(-6.0F, -13.0F, -4.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-5.0F, -12.0F, -3.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(9.0F, -17.0F, -6.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-12.0F, -17.0F, -6.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-10.0F, -15.0F, -5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(7.0F, -15.0F, -5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(109, 149)
-					.addBox(-3.5F, -5.3211F, -4.4894F, 7.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 148)
-					.addBox(4.3F, -9.0F, -4.1F, 1.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(108, 148)
-					.addBox(-5.3F, -9.0F, -4.1F, 1.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-0.7F, -5.6097F, -14.0604F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-0.7F, -4.454F, -17.0461F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(168, 127)
-					.addBox(3.5F, -10.0F, -7.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(168, 127)
-					.addBox(-3.5F, -10.0F, -7.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 97)
-					.addBox(-3.0F, -10.0F, -7.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-12.0F, -17.0F, 5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(9.0F, -17.0F, 5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(0.3F, -4.5752F, -15.4351F, 1.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-10.0F, -15.0F, 4.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 154)
-					.addBox(-6.0F, -13.0F, 2.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-5.0F, -12.0F, 1.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(7.0F, -15.0F, 4.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(3.0F, -12.0F, 1.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(6.0F, -13.0F, 2.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-4.0F, -11.0F, 0.0F, 8.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-4.0F, -9.0F, 5.0F, 8.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 137)
-					.addBox(-2.9F, -9.1906F, -9.2093F, 6.0F, 3.0F, 12.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-4.0F, -10.0F, -8.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-4.0F, -11.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-4.0F, -8.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-4.0F, -10.0F, -5.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(3.0F, -10.0F, -5.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(3.0F, -10.0F, -8.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(3.0F, -11.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(3.0F, -8.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(112, 150)
-					.addBox(-3.0F, -3.8844F, -11.2491F, 1.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(115, 148)
-					.addBox(2.0F, -3.8844F, -11.2491F, 1.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(108, 149)
-					.addBox(-2.5F, -5.3211F, -13.4894F, 5.0F, 1.0F, 11.0F, new CubeDeformation(0.0F)).texOffs(109, 151)
-					.addBox(-4.0F, -5.7919F, -11.6477F, 1.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)).texOffs(108, 148)
-					.addBox(3.0F, -5.7919F, -11.6477F, 1.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-1.7F, -4.5752F, -15.4351F, 1.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
-					.addBox(-3.5F, -6.7456F, -10.347F, 7.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(109, 148)
-					.addBox(-3.0F, -6.0333F, -12.4182F, 6.0F, 1.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(110, 145)
-					.addBox(3.3F, -9.0F, -4.1F, 1.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(109, 146)
-					.addBox(-4.3F, -9.0F, -4.1F, 1.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(108, 150)
-					.addBox(-4.0F, -10.0F, -4.0F, 8.0F, 1.0F, 9.0F, new CubeDeformation(0.0F)),
-					PartPose.offset(0.0F, 0.0F, 0.0F));
-
-			PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1",
-					CubeListBuilder.create().texOffs(112, 152).addBox(-2.5F, 2.2544F, 5.653F, 5.0F, 1.0F, 7.0F,
-							new CubeDeformation(0.0F)),
-					PartPose.offsetAndRotation(0.0F, -7.7F, -18.0F, 0.1309F, 0.0F, 0.0F));
-		}
-		return LayerDefinition.create(meshdefinition, 256, 256);
-
-	}
-
 	public static LayerDefinition createBodyLayer(EquipmentSlot slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -180,10 +112,72 @@ public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> 
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
+		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
+		PartDefinition partdefinition = meshdefinition.getRoot();
+		if (slot.equals(EquipmentSlot.HEAD)) {
+			PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(108, 153)
+					.addBox(6.0F, -13.0F, -4.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(3.0F, -12.0F, -3.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 154)
+					.addBox(-6.0F, -13.0F, -4.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-5.0F, -12.0F, -3.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(9.0F, -17.0F, -6.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-12.0F, -17.0F, -6.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-10.0F, -15.0F, -5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(7.0F, -15.0F, -5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(109, 149)
+					.addBox(-3.5F, -5.3211F, -4.4894F, 7.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 148)
+					.addBox(4.3F, -9.0F, -4.1F, 1.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(108, 148)
+					.addBox(-5.3F, -9.0F, -4.1F, 1.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-0.7F, -5.6097F, -14.0604F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-0.7F, -4.454F, -17.0461F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(168, 127)
+					.addBox(3.5F, -10.0F, -7.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(168, 127)
+					.addBox(-3.5F, -10.0F, -7.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 97)
+					.addBox(-3.0F, -10.0F, -7.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-12.0F, -17.0F, 5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(9.0F, -17.0F, 5.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(0.3F, -4.5752F, -15.4351F, 1.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-10.0F, -15.0F, 4.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 154)
+					.addBox(-6.0F, -13.0F, 2.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-5.0F, -12.0F, 1.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(7.0F, -15.0F, 4.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(3.0F, -12.0F, 1.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(6.0F, -13.0F, 2.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-4.0F, -11.0F, 0.0F, 8.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-4.0F, -9.0F, 5.0F, 8.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 137)
+					.addBox(-2.9F, -9.1906F, -9.2093F, 6.0F, 3.0F, 12.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-4.0F, -10.0F, -8.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-4.0F, -11.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-4.0F, -8.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-4.0F, -10.0F, -5.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(3.0F, -10.0F, -5.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(3.0F, -10.0F, -8.0F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(3.0F, -11.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(3.0F, -8.0F, -7.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(112, 150)
+					.addBox(-3.0F, -3.8844F, -11.2491F, 1.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(115, 148)
+					.addBox(2.0F, -3.8844F, -11.2491F, 1.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(108, 149)
+					.addBox(-2.5F, -5.3211F, -13.4894F, 5.0F, 1.0F, 11.0F, new CubeDeformation(0.0F)).texOffs(109, 151)
+					.addBox(-4.0F, -5.7919F, -11.6477F, 1.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)).texOffs(108, 148)
+					.addBox(3.0F, -5.7919F, -11.6477F, 1.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-1.7F, -4.5752F, -15.4351F, 1.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
+					.addBox(-3.5F, -6.7456F, -10.347F, 7.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(109, 148)
+					.addBox(-3.0F, -6.0333F, -12.4182F, 6.0F, 1.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(110, 145)
+					.addBox(3.3F, -9.0F, -4.1F, 1.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(109, 146)
+					.addBox(-4.3F, -9.0F, -4.1F, 1.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)).texOffs(108, 150)
+					.addBox(-4.0F, -10.0F, -4.0F, 8.0F, 1.0F, 9.0F, new CubeDeformation(0.0F)),
+					PartPose.offset(0.0F, 0.0F, 0.0F));
+
+			PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1",
+					CubeListBuilder.create().texOffs(112, 152).addBox(-2.5F, 2.2544F, 5.653F, 5.0F, 1.0F, 7.0F,
+							new CubeDeformation(0.0F)),
+					PartPose.offsetAndRotation(0.0F, -7.7F, -18.0F, 0.1309F, 0.0F, 0.0F));
+		}
+		return LayerDefinition.create(meshdefinition, 256, 256);
+
+	}
+
+	public ModelBeastlyArmor(ModelPart root) {
+		super(root, RenderType::entityTranslucent);
+
 	}
 
 	@Override
@@ -196,5 +190,11 @@ public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> 
 		leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		rightArm.render(poseStack, buffer, packedLight, packedOverlay);
 
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 	}
 }

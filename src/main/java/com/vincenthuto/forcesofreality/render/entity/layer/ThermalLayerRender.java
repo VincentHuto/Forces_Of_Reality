@@ -28,23 +28,7 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 
 public class ThermalLayerRender extends RenderType {
 
-	private ThermalLayerRender(String pName, VertexFormat pFormat, Mode pMode, int pBufferSize,
-			boolean pAffectsCrumbling, boolean pSortOnUpload, Runnable pSetupState, Runnable pClearState) {
-		super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
-	}
-
-	public static void renderWorld(RenderLevelLastEvent evt) {
-		PoseStack ms = evt.getPoseStack();
-		float partialTicks = evt.getPartialTick();
-		renderThermalLayers(ms, partialTicks);
-	}
-
 	private static final Object2IntMap<Entity> ENTITY_OUTLINE_MAP = new Object2IntOpenHashMap<>(1);
-
-	public static void renderEntityOutline(Entity entity, int red, int green, int blue, int alpha) {
-		ENTITY_OUTLINE_MAP.put(entity,
-				((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF)));
-	}
 
 	public static void renderEntities(RenderLivingEvent.Pre<? super LivingEntity, ?> event) {
 		LivingEntity entity = event.getEntity();
@@ -61,6 +45,11 @@ public class ThermalLayerRender extends RenderType {
 			renderer.render(entity, yaw, partialTicks, ms, buffer, 15728640);
 			buffer.endOutlineBatch();
 		}
+	}
+
+	public static void renderEntityOutline(Entity entity, int red, int green, int blue, int alpha) {
+		ENTITY_OUTLINE_MAP.put(entity,
+				((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF)));
 	}
 
 	private static void renderThermalLayers(PoseStack ms, float partialTicks) {
@@ -110,5 +99,16 @@ public class ThermalLayerRender extends RenderType {
 				}
 			}
 		}
+	}
+
+	public static void renderWorld(RenderLevelLastEvent evt) {
+		PoseStack ms = evt.getPoseStack();
+		float partialTicks = evt.getPartialTick();
+		renderThermalLayers(ms, partialTicks);
+	}
+
+	private ThermalLayerRender(String pName, VertexFormat pFormat, Mode pMode, int pBufferSize,
+			boolean pAffectsCrumbling, boolean pSortOnUpload, Runnable pSetupState, Runnable pClearState) {
+		super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
 	}
 }

@@ -21,24 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelHasturSpawn extends EntityModel<EntityHasturSpawn> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "modelhasturspawn"), "main");
-	private final ModelPart Head;
-	private final ModelPart Body;
-	private final ModelPart FrontTent;
-	private final ModelPart BackTent;
-	private final ModelPart RightTent;
-	private final ModelPart LeftTent;
-	private final ModelPart Waist;
-
-	public ModelHasturSpawn(ModelPart root) {
-		this.Head = root.getChild("Head");
-		this.Body = root.getChild("Body");
-		this.FrontTent = root.getChild("FrontTent");
-		this.BackTent = root.getChild("BackTent");
-		this.RightTent = root.getChild("RightTent");
-		this.LeftTent = root.getChild("LeftTent");
-		this.Waist = root.getChild("Waist");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -93,10 +75,23 @@ public class ModelHasturSpawn extends EntityModel<EntityHasturSpawn> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+	private final ModelPart Head;
+	private final ModelPart Body;
+	private final ModelPart FrontTent;
+	private final ModelPart BackTent;
+	private final ModelPart RightTent;
+	private final ModelPart LeftTent;
 
-	@Override
-	public void setupAnim(EntityHasturSpawn entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart Waist;
 
+	public ModelHasturSpawn(ModelPart root) {
+		this.Head = root.getChild("Head");
+		this.Body = root.getChild("Body");
+		this.FrontTent = root.getChild("FrontTent");
+		this.BackTent = root.getChild("BackTent");
+		this.RightTent = root.getChild("RightTent");
+		this.LeftTent = root.getChild("LeftTent");
+		this.Waist = root.getChild("Waist");
 	}
 
 	@Override
@@ -108,5 +103,10 @@ public class ModelHasturSpawn extends EntityModel<EntityHasturSpawn> {
 		RightTent.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LeftTent.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Waist.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityHasturSpawn entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

@@ -32,6 +32,12 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 
 public class EntityEldritchGrip extends Monster {
+	public static AttributeSupplier.Builder setAttributes() {
+		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 16.0D)
+				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0f)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 1f);
+	}
+
 	public float deathTicks = 1;
 
 	public EntityEldritchGrip(EntityType<? extends EntityEldritchGrip> type, Level worldIn) {
@@ -40,13 +46,29 @@ public class EntityEldritchGrip extends Monster {
 	}
 
 	@Override
-	protected float getSoundVolume() {
-		return 0.3f;
+	public boolean canBeLeashed(Player player) {
+		return false;
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
+
+	}
+
+	@Override
+	public boolean displayFireAnimation() {
+		return false;
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+		super.doPush(entityIn);
+		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur
+				|| entityIn instanceof EntityXanthousKing || entityIn instanceof EntityTrueXanthousKing)) {
+			((LivingEntity) entityIn).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
+
+		}
 
 	}
 
@@ -60,29 +82,30 @@ public class EntityEldritchGrip extends Monster {
 	}
 
 	@Override
-	public boolean displayFireAnimation() {
-		return false;
-	}
-
-	@Override
-	public boolean isPickable() {
-		return false;
-	}
-
-	@Override
-	public boolean canBeLeashed(Player player) {
-		return false;
-	}
-
-	@Override
-	public boolean isPushable() {
-		return false;
+	protected SoundEvent getAmbientSound() {
+		return SoundInit.ENTITY_TENTACLE_AMBIENT.get();
 	}
 
 	@Override
 	public AABB getBoundingBoxForCulling() {
 		return super.getBoundingBoxForCulling().inflate(10);
 	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundInit.ENTITY_TENTACLE_DEATH.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ENTITY_TENTACLE_HURT.get();
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.3f;
+	}
+
 
 	@Override
 	public boolean isAffectedByPotions() {
@@ -95,10 +118,32 @@ public class EntityEldritchGrip extends Monster {
 	}
 
 	@Override
+	public boolean isPickable() {
+		return false;
+	}
+
+	@Override
+	public boolean isPushable() {
+		return false;
+	}
+
+	@Override
 	public boolean isUnderWater() {
 		return true;
 	}
 
+	@Override
+	public void playerTouch(Player entityIn) {
+		super.playerTouch(entityIn);
+		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.5f);
+		entityIn.setDeltaMovement(0, -0.5f, 0);
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+	}
 
 	@Override
 	public void tick() {
@@ -160,50 +205,5 @@ public class EntityEldritchGrip extends Monster {
 			this.remove(RemovalReason.KILLED);
 		}
 
-	}
-
-	@Override
-	public void playerTouch(Player entityIn) {
-		super.playerTouch(entityIn);
-		// entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.5f);
-		entityIn.setDeltaMovement(0, -0.5f, 0);
-	}
-
-	@Override
-	protected void doPush(Entity entityIn) {
-		super.doPush(entityIn);
-		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur
-				|| entityIn instanceof EntityXanthousKing || entityIn instanceof EntityTrueXanthousKing)) {
-			((LivingEntity) entityIn).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
-
-		}
-
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-	}
-
-	public static AttributeSupplier.Builder setAttributes() {
-		return LivingEntity.createLivingAttributes().add(Attributes.FOLLOW_RANGE, 16.0D)
-				.add(Attributes.ATTACK_KNOCKBACK).add(Attributes.MOVEMENT_SPEED, 0f)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 1f);
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return SoundInit.ENTITY_TENTACLE_AMBIENT.get();
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundInit.ENTITY_TENTACLE_DEATH.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ENTITY_TENTACLE_HURT.get();
 	}
 }

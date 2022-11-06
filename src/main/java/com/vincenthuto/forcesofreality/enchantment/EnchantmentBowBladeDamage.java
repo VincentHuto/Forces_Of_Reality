@@ -26,25 +26,36 @@ public class EnchantmentBowBladeDamage extends Enchantment {
 	}
 
 	/**
-	 * Returns the minimal value of enchantability needed on the enchantment level
-	 * passed.
+	 * Determines if this enchantment can be applied to a specific ItemStack.
 	 */
 	@Override
-	public int getMinCost(int enchantmentLevel) {
-		return MIN_COST[this.damageType] + (enchantmentLevel - 1) * LEVEL_COST[this.damageType];
-	}
-
-	@Override
-	public int getMaxCost(int enchantmentLevel) {
-		return this.getMinCost(enchantmentLevel) + LEVEL_COST_SPAN[this.damageType];
+	public boolean canEnchant(ItemStack stack) {
+		return stack.getItem() instanceof AxeItem ? true : super.canEnchant(stack);
 	}
 
 	/**
-	 * Returns the maximum level that the enchantment can have.
+	 * Determines if the enchantment passed can be applyied together with this
+	 * enchantment.
 	 */
 	@Override
-	public int getMaxLevel() {
-		return 5;
+	public boolean checkCompatibility(Enchantment ench) {
+		return !(ench instanceof EnchantmentBowBladeDamage);
+	}
+
+	/**
+	 * Called whenever a mob is damaged with an item that has this enchantment on
+	 * it.
+	 */
+	@Override
+	public void doPostAttack(LivingEntity user, Entity target, int level) {
+		if (target instanceof LivingEntity) {
+			LivingEntity livingentity = (LivingEntity) target;
+			if (this.damageType == 2 && livingentity.getMobType() == MobType.ARTHROPOD) {
+				int i = 20 + user.getRandom().nextInt(10 * level);
+				livingentity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, i, 3));
+			}
+		}
+
 	}
 
 	/**
@@ -63,36 +74,25 @@ public class EnchantmentBowBladeDamage extends Enchantment {
 		}
 	}
 
-	/**
-	 * Determines if the enchantment passed can be applyied together with this
-	 * enchantment.
-	 */
 	@Override
-	public boolean checkCompatibility(Enchantment ench) {
-		return !(ench instanceof EnchantmentBowBladeDamage);
+	public int getMaxCost(int enchantmentLevel) {
+		return this.getMinCost(enchantmentLevel) + LEVEL_COST_SPAN[this.damageType];
 	}
 
 	/**
-	 * Determines if this enchantment can be applied to a specific ItemStack.
+	 * Returns the maximum level that the enchantment can have.
 	 */
 	@Override
-	public boolean canEnchant(ItemStack stack) {
-		return stack.getItem() instanceof AxeItem ? true : super.canEnchant(stack);
+	public int getMaxLevel() {
+		return 5;
 	}
 
 	/**
-	 * Called whenever a mob is damaged with an item that has this enchantment on
-	 * it.
+	 * Returns the minimal value of enchantability needed on the enchantment level
+	 * passed.
 	 */
 	@Override
-	public void doPostAttack(LivingEntity user, Entity target, int level) {
-		if (target instanceof LivingEntity) {
-			LivingEntity livingentity = (LivingEntity) target;
-			if (this.damageType == 2 && livingentity.getMobType() == MobType.ARTHROPOD) {
-				int i = 20 + user.getRandom().nextInt(10 * level);
-				livingentity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, i, 3));
-			}
-		}
-
+	public int getMinCost(int enchantmentLevel) {
+		return MIN_COST[this.damageType] + (enchantmentLevel - 1) * LEVEL_COST[this.damageType];
 	}
 }

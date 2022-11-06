@@ -15,6 +15,12 @@ public class BlockSomnicEarth extends SpreadingSnowyDirtBlock implements Bonemea
 		super(properties);
 	}
 
+	@Override
+	public boolean isBonemealSuccess(Level p_220878_, RandomSource p_220879_, BlockPos p_220880_,
+			BlockState p_220881_) {
+		return true;
+	}
+
 	/**
 	 * Whether this IGrowable can grow
 	 */
@@ -22,12 +28,6 @@ public class BlockSomnicEarth extends SpreadingSnowyDirtBlock implements Bonemea
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return worldIn.getBlockState(pos.above()).isAir();
-	}
-
-	@Override
-	public boolean isBonemealSuccess(Level p_220878_, RandomSource p_220879_, BlockPos p_220880_,
-			BlockState p_220881_) {
-		return true;
 	}
 
 	@Override

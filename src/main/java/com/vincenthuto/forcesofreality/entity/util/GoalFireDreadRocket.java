@@ -32,6 +32,20 @@ public class GoalFireDreadRocket extends Goal {
 		return livingentity != null && livingentity.isAlive() && this.blaze.canAttack(livingentity);
 	}
 
+	private double getFollowDistance() {
+		return this.blaze.getAttributeValue(Attributes.FOLLOW_RANGE);
+	}
+
+	private void spawnWolfShot() {
+		EntityDreadRocket missile = new EntityDreadRocket(blaze, true);
+		missile.setPos(blaze.getX() + (Math.random() - 0.5 * 0.1), blaze.getY() + 1,
+				blaze.getZ() + (Math.random() - 0.5 * 0.1));
+		if (missile.findTarget()) {
+			blaze.playSound(SoundEvents.REDSTONE_TORCH_BURNOUT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+			blaze.level.addFreshEntity(missile);
+		}
+	}
+
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
@@ -92,20 +106,6 @@ public class GoalFireDreadRocket extends Goal {
 			}
 
 			super.tick();
-		}
-	}
-
-	private double getFollowDistance() {
-		return this.blaze.getAttributeValue(Attributes.FOLLOW_RANGE);
-	}
-
-	private void spawnWolfShot() {
-		EntityDreadRocket missile = new EntityDreadRocket(blaze, true);
-		missile.setPos(blaze.getX() + (Math.random() - 0.5 * 0.1), blaze.getY() + 1,
-				blaze.getZ() + (Math.random() - 0.5 * 0.1));
-		if (missile.findTarget()) {
-			blaze.playSound(SoundEvents.REDSTONE_TORCH_BURNOUT, 0.6F, 0.8F + (float) Math.random() * 0.2F);
-			blaze.level.addFreshEntity(missile);
 		}
 	}
 

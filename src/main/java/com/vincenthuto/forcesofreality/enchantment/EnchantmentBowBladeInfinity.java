@@ -12,12 +12,12 @@ public class EnchantmentBowBladeInfinity extends Enchantment {
 	}
 
 	/**
-	 * Returns the minimal value of enchantability needed on the enchantment level
-	 * passed.
+	 * Determines if the enchantment passed can be applyied together with this
+	 * enchantment.
 	 */
 	@Override
-	public int getMinCost(int enchantmentLevel) {
-		return 20;
+	public boolean checkCompatibility(Enchantment ench) {
+		return ench instanceof MendingEnchantment ? false : super.checkCompatibility(ench);
 	}
 
 	@Override
@@ -34,11 +34,11 @@ public class EnchantmentBowBladeInfinity extends Enchantment {
 	}
 
 	/**
-	 * Determines if the enchantment passed can be applyied together with this
-	 * enchantment.
+	 * Returns the minimal value of enchantability needed on the enchantment level
+	 * passed.
 	 */
 	@Override
-	public boolean checkCompatibility(Enchantment ench) {
-		return ench instanceof MendingEnchantment ? false : super.checkCompatibility(ench);
+	public int getMinCost(int enchantmentLevel) {
+		return 20;
 	}
 }

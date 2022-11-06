@@ -15,9 +15,20 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.items.IItemHandler;
 
 public class RecipeRafflesia implements IModRecipe {
+	public static RecipeRafflesia read(FriendlyByteBuf buf) {
+		ResourceLocation id = buf.readResourceLocation();
+		Ingredient[] inputs = new Ingredient[buf.readVarInt()];
+		for (int i = 0; i < inputs.length; i++) {
+			inputs[i] = Ingredient.fromNetwork(buf);
+		}
+		ItemStack output = buf.readItem();
+		float vibes = buf.readFloat();
+		return new RecipeRafflesia(id, output, vibes, inputs);
+	}
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final ImmutableList<Ingredient> inputs;
+
 	private final float vibes;
 
 	public RecipeRafflesia(ResourceLocation id, ItemStack output, float vibesIn, Ingredient... inputs) {
@@ -27,6 +38,25 @@ public class RecipeRafflesia implements IModRecipe {
 		this.output = output;
 		this.inputs = ImmutableList.copyOf(inputs);
 		this.vibes = vibesIn;
+	}
+
+	@Override
+	public ResourceLocation getId() {
+		return id;
+	}
+
+	@Override
+	public List<Ingredient> getInputs() {
+		return inputs;
+	}
+
+	@Override
+	public ItemStack getOutput() {
+		return output;
+	}
+
+	public float getVibeUsage() {
+		return vibes;
 	}
 
 	public boolean matches(IItemHandler inv) {
@@ -56,25 +86,6 @@ public class RecipeRafflesia implements IModRecipe {
 		return ingredientsMissing.isEmpty();
 	}
 
-	@Override
-	public ResourceLocation getId() {
-		return id;
-	}
-
-	@Override
-	public List<Ingredient> getInputs() {
-		return inputs;
-	}
-
-	@Override
-	public ItemStack getOutput() {
-		return output;
-	}
-
-	public float getVibeUsage() {
-		return vibes;
-	}
-
 	public void write(FriendlyByteBuf buf) {
 		buf.writeResourceLocation(id);
 		buf.writeVarInt(inputs.size());
@@ -83,17 +94,6 @@ public class RecipeRafflesia implements IModRecipe {
 		}
 		buf.writeItemStack(output, false);
 		buf.writeFloat(vibes);
-	}
-
-	public static RecipeRafflesia read(FriendlyByteBuf buf) {
-		ResourceLocation id = buf.readResourceLocation();
-		Ingredient[] inputs = new Ingredient[buf.readVarInt()];
-		for (int i = 0; i < inputs.length; i++) {
-			inputs[i] = Ingredient.fromNetwork(buf);
-		}
-		ItemStack output = buf.readItem();
-		float vibes = buf.readFloat();
-		return new RecipeRafflesia(id, output, vibes, inputs);
 	}
 
 }

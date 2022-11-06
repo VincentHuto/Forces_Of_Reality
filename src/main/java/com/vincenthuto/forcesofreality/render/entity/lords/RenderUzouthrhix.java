@@ -29,6 +29,16 @@ public class RenderUzouthrhix extends MobRenderer<EntityUzouthrhix, ModelUzouthr
 	}
 
 	@Override
+	public ResourceLocation getTextureLocation(EntityUzouthrhix entity) {
+		if (entity.isArmored()) {
+			return DRAGON_DEAD_TEXTURES;
+		} else {
+			return TEXTURE;
+
+		}
+	}
+
+	@Override
 	public void render(EntityUzouthrhix entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
 			MultiBufferSource bufferIn, int packedLightIn) {
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
@@ -54,15 +64,5 @@ public class RenderUzouthrhix extends MobRenderer<EntityUzouthrhix, ModelUzouthr
 
 		}
 
-	}
-
-	@Override
-	public ResourceLocation getTextureLocation(EntityUzouthrhix entity) {
-		if (entity.isArmored()) {
-			return DRAGON_DEAD_TEXTURES;
-		} else {
-			return TEXTURE;
-
-		}
 	}
 }

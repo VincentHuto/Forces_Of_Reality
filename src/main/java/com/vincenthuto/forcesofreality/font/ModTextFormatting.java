@@ -17,29 +17,27 @@ public class ModTextFormatting {
 	 */
 	public static Rarity AURIC = Rarity.create("Auric", ChatFormatting.GOLD);
 
-	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {
-		int stringLength = parString.length();
-		if (stringLength < 1) {
-			return "";
+	public static String convertInitToLang(String text) {
+		if (text == null || text.isEmpty()) {
+			return text;
 		}
-		String outputString = "";
-		for (int i = 0; i < stringLength; i++) {
-			if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 0) {
-				outputString = outputString + ChatFormatting.WHITE + parString.substring(i, i + 1);
-			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 1) {
-				outputString = outputString + ChatFormatting.GOLD + parString.substring(i, i + 1);
-			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 87) {
-				outputString = outputString + ChatFormatting.WHITE + parString.substring(i, i + 1);
+
+		StringBuilder converted = new StringBuilder();
+		boolean convertNext = true;
+		for (char ch : text.toCharArray()) {
+			if (ch == '_') {
+				ch = ' ';
+				convertNext = true;
+			} else if (convertNext) {
+				ch = Character.toTitleCase(ch);
+				convertNext = false;
 			} else {
-				outputString = outputString + ChatFormatting.BLACK + parString.substring(i, i + 1);
+				ch = Character.toLowerCase(ch);
 			}
+			converted.append(ch);
 		}
-		// return color to a common one after (most chat is white, but for other GUI
-		// might want black)
-		if (parReturnToBlack) {
-			return outputString + ChatFormatting.BLACK;
-		}
-		return outputString + ChatFormatting.WHITE;
+
+		return converted.toString();
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -68,8 +66,7 @@ public class ModTextFormatting {
 		return outputString + ChatFormatting.WHITE;
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public static String stringToRedObf(String parString, int parShineLocation, boolean parReturnToBlack) {
+	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {
 		int stringLength = parString.length();
 		if (stringLength < 1) {
 			return "";
@@ -77,11 +74,11 @@ public class ModTextFormatting {
 		String outputString = "";
 		for (int i = 0; i < stringLength; i++) {
 			if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 0) {
-				outputString = outputString + ChatFormatting.OBFUSCATED + parString.substring(i, i + 1);
+				outputString = outputString + ChatFormatting.WHITE + parString.substring(i, i + 1);
 			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 1) {
-				outputString = outputString + ChatFormatting.RED + parString.substring(i, i + 1);
+				outputString = outputString + ChatFormatting.GOLD + parString.substring(i, i + 1);
 			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 87) {
-				outputString = outputString + ChatFormatting.OBFUSCATED + parString.substring(i, i + 1);
+				outputString = outputString + ChatFormatting.WHITE + parString.substring(i, i + 1);
 			} else {
 				outputString = outputString + ChatFormatting.BLACK + parString.substring(i, i + 1);
 			}
@@ -106,6 +103,32 @@ public class ModTextFormatting {
 				ChatFormatting.DARK_PURPLE };
 		for (int i = 0; i < stringLength; i++) {
 			outputString = outputString + colorChar[i % 8] + parString.substring(i, i + 1);
+		}
+		// return color to a common one after (most chat is white, but for other GUI
+		// might want black)
+		if (parReturnToBlack) {
+			return outputString + ChatFormatting.BLACK;
+		}
+		return outputString + ChatFormatting.WHITE;
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public static String stringToRedObf(String parString, int parShineLocation, boolean parReturnToBlack) {
+		int stringLength = parString.length();
+		if (stringLength < 1) {
+			return "";
+		}
+		String outputString = "";
+		for (int i = 0; i < stringLength; i++) {
+			if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 0) {
+				outputString = outputString + ChatFormatting.OBFUSCATED + parString.substring(i, i + 1);
+			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 1) {
+				outputString = outputString + ChatFormatting.RED + parString.substring(i, i + 1);
+			} else if ((i + parShineLocation + System.nanoTime() / 20) % 88 == 87) {
+				outputString = outputString + ChatFormatting.OBFUSCATED + parString.substring(i, i + 1);
+			} else {
+				outputString = outputString + ChatFormatting.BLACK + parString.substring(i, i + 1);
+			}
 		}
 		// return color to a common one after (most chat is white, but for other GUI
 		// might want black)
@@ -176,29 +199,6 @@ public class ModTextFormatting {
 			}
 		}
 		return newString;
-	}
-
-	public static String convertInitToLang(String text) {
-		if (text == null || text.isEmpty()) {
-			return text;
-		}
-
-		StringBuilder converted = new StringBuilder();
-		boolean convertNext = true;
-		for (char ch : text.toCharArray()) {
-			if (ch == '_') {
-				ch = ' ';
-				convertNext = true;
-			} else if (convertNext) {
-				ch = Character.toTitleCase(ch);
-				convertNext = false;
-			} else {
-				ch = Character.toLowerCase(ch);
-			}
-			converted.append(ch);
-		}
-
-		return converted.toString();
 	}
 
 }

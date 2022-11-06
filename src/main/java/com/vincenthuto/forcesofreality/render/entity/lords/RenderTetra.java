@@ -27,14 +27,6 @@ public class RenderTetra extends MobRenderer<EntityTetra, ModelTetra> {
 	}
 
 	@Override
-	public void render(EntityTetra entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
-			MultiBufferSource bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
-
-	}
-
-	@Override
 	protected float getBob(EntityTetra livingBase, float partialTicks) {
 		return 1f;
 	}
@@ -47,5 +39,13 @@ public class RenderTetra extends MobRenderer<EntityTetra, ModelTetra> {
 			return TEXTURE;
 
 		}
+	}
+
+	@Override
+	public void render(EntityTetra entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
+			MultiBufferSource bufferIn, int packedLightIn) {
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
+
 	}
 }

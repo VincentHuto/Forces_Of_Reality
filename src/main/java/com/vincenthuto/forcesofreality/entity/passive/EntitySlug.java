@@ -64,6 +64,12 @@ public class EntitySlug extends Animal {
 		p_213410_0_.put(2, new ResourceLocation(ForcesOfReality.MOD_ID, "textures/entity/slug/model_slug_brown.png"));
 	});
 
+	public static AttributeSupplier.Builder setAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D).add(Attributes.MOVEMENT_SPEED, 0.15F);
+	}
+
+	int timer = 0;
+
 	public EntitySlug(EntityType<? extends EntitySlug> type, Level worldIn) {
 		super(type, worldIn);
 	}
@@ -73,56 +79,23 @@ public class EntitySlug extends Animal {
 		return true;
 	}
 
-	int timer = 0;
-
 	@Override
-	public void tick() {
-		super.tick();
-
-		if (!level.isClientSide) {
-			// System.out.println(world.getBlockState(this.getPosition().add(0, 1,
-			// 0)).getBlock());
-			if (level.getBlockState(this.blockPosition().offset(0, 1, 0)).getBlock() instanceof CropBlock) {
-				// Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
-				if (timer <= 150) {
-					timer++;
-					if (timer % 15 == 0) {
-						this.playSound(SoundEvents.CHORUS_FLOWER_DEATH, 1, 1);
-					}
-				}
-
-				if (timer > 150) {
-					level.setBlock(this.blockPosition().offset(0, 1, 0), Blocks.AIR.defaultBlockState(), 2);
-					this.playSound(SoundEvents.PLAYER_BURP, 1, 1);
-					timer = 0;
-				}
-			}
-		}
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(SLUG_TYPE, random.nextInt(3));
 	}
 
 	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
-		this.goalSelector.addGoal(0, new MoveToBlockGoal(this, 1.5f, 10) {
-			@Override
-			protected boolean isValidTarget(LevelReader worldIn, BlockPos pos) {
-				if (worldIn.getBlockState(pos).getBlock() instanceof CropBlock) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		});
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.SUGAR), false));
-		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(4, new RandomStrollGoal(this, 0.75D));
+	@Nullable
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
+			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		this.setSlugType(this.random.nextInt(4));
+		Level world = worldIn.getLevel();
+		this.setSlugType(1);
 
-	}
+		return spawnDataIn;
 
-	public static AttributeSupplier.Builder setAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D).add(Attributes.MOVEMENT_SPEED, 0.15F);
 	}
 
 	@Override
@@ -131,13 +104,36 @@ public class EntitySlug extends Animal {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundInit.ENTITY_TENTACLE_HURT.get();
+	public EntitySlug getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
+		EntitySlug catentity = EntityInit.slug.get().create(p_241840_1_);
+		if (p_241840_2_ instanceof EntitySlug) {
+			if (this.random.nextBoolean()) {
+				catentity.setSlugType(this.getSlugType());
+			} else {
+				catentity.setSlugType(((EntitySlug) p_241840_2_).getSlugType());
+			}
+
+		}
+		return catentity;
+
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundInit.ENTITY_TENTACLE_DEATH.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundInit.ENTITY_TENTACLE_HURT.get();
+	}
+
+	public int getSlugType() {
+		return this.entityData.get(SLUG_TYPE);
+	}
+
+	public ResourceLocation getSlugTypeName() {
+		return TEXTURE_BY_ID.getOrDefault(this.getSlugType(), TEXTURE_BY_ID.get(0));
 	}
 
 	/**
@@ -146,6 +142,11 @@ public class EntitySlug extends Animal {
 	@Override
 	protected float getSoundVolume() {
 		return 0.2F;
+	}
+
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
+		return this.isBaby() ? sizeIn.height * 0.1F : 1F;
 	}
 
 	@Override
@@ -170,26 +171,24 @@ public class EntitySlug extends Animal {
 	}
 
 	@Override
-	public EntitySlug getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
-		EntitySlug catentity = EntityInit.slug.get().create(p_241840_1_);
-		if (p_241840_2_ instanceof EntitySlug) {
-			if (this.random.nextBoolean()) {
-				catentity.setSlugType(this.getSlugType());
-			} else {
-				catentity.setSlugType(((EntitySlug) p_241840_2_).getSlugType());
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
+		this.goalSelector.addGoal(0, new MoveToBlockGoal(this, 1.5f, 10) {
+			@Override
+			protected boolean isValidTarget(LevelReader worldIn, BlockPos pos) {
+				if (worldIn.getBlockState(pos).getBlock() instanceof CropBlock) {
+					return true;
+				} else {
+					return false;
+				}
 			}
+		});
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.SUGAR), false));
+		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(4, new RandomStrollGoal(this, 0.75D));
 
-		}
-		return catentity;
-
-	}
-
-	public ResourceLocation getSlugTypeName() {
-		return TEXTURE_BY_ID.getOrDefault(this.getSlugType(), TEXTURE_BY_ID.get(0));
-	}
-
-	public int getSlugType() {
-		return this.entityData.get(SLUG_TYPE);
 	}
 
 	public void setSlugType(int type) {
@@ -201,26 +200,27 @@ public class EntitySlug extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(SLUG_TYPE, random.nextInt(3));
-	}
+	public void tick() {
+		super.tick();
 
-	@Override
-	@Nullable
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn,
-			MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		this.setSlugType(this.random.nextInt(4));
-		Level world = worldIn.getLevel();
-		this.setSlugType(1);
+		if (!level.isClientSide) {
+			// System.out.println(world.getBlockState(this.getPosition().add(0, 1,
+			// 0)).getBlock());
+			if (level.getBlockState(this.blockPosition().offset(0, 1, 0)).getBlock() instanceof CropBlock) {
+				// Block crop = world.getBlockState(this.getPosition().add(0, 1, 0)).getBlock();
+				if (timer <= 150) {
+					timer++;
+					if (timer % 15 == 0) {
+						this.playSound(SoundEvents.CHORUS_FLOWER_DEATH, 1, 1);
+					}
+				}
 
-		return spawnDataIn;
-
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return this.isBaby() ? sizeIn.height * 0.1F : 1F;
+				if (timer > 150) {
+					level.setBlock(this.blockPosition().offset(0, 1, 0), Blocks.AIR.defaultBlockState(), 2);
+					this.playSound(SoundEvents.PLAYER_BURP, 1, 1);
+					timer = 0;
+				}
+			}
+		}
 	}
 }

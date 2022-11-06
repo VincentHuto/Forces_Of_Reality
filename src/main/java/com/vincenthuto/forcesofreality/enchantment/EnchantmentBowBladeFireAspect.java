@@ -10,15 +10,6 @@ public class EnchantmentBowBladeFireAspect extends Enchantment {
 		super(rarityIn, EnchantmentInit.BOWBLADE, slots);
 	}
 
-	/**
-	 * Returns the minimal value of enchantability needed on the enchantment level
-	 * passed.
-	 */
-	@Override
-	public int getMinCost(int enchantmentLevel) {
-		return 10 + 20 * (enchantmentLevel - 1);
-	}
-
 	@Override
 	public int getMaxCost(int enchantmentLevel) {
 		return super.getMinCost(enchantmentLevel) + 50;
@@ -30,5 +21,14 @@ public class EnchantmentBowBladeFireAspect extends Enchantment {
 	@Override
 	public int getMaxLevel() {
 		return 2;
+	}
+
+	/**
+	 * Returns the minimal value of enchantability needed on the enchantment level
+	 * passed.
+	 */
+	@Override
+	public int getMinCost(int enchantmentLevel) {
+		return 10 + 20 * (enchantmentLevel - 1);
 	}
 }

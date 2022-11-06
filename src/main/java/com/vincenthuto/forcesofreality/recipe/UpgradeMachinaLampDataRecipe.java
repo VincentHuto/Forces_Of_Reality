@@ -17,6 +17,34 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class UpgradeMachinaLampDataRecipe extends ShapedRecipe {
+	public static class Serializer implements RecipeSerializer<UpgradeMachinaLampDataRecipe> {
+		@Override
+		public UpgradeMachinaLampDataRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+			try {
+				return new UpgradeMachinaLampDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json));
+			} catch (Exception exception) {
+				ForcesOfReality.LOGGER.info("Error reading Machina Recipe from packet: ", exception);
+				throw exception;
+			}
+		}
+
+		@Nullable
+		@Override
+		public UpgradeMachinaLampDataRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+			return new UpgradeMachinaLampDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer));
+		}
+
+		@Override
+		public void toNetwork(FriendlyByteBuf buffer, UpgradeMachinaLampDataRecipe recipe) {
+			try {
+				RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
+			} catch (Exception exception) {
+				ForcesOfReality.LOGGER.info("Error writing Machina Recipe to packet: ", exception);
+				throw exception;
+			}
+		}
+	}
+
 	public static String TAG_TIER = "tier";
 
 	public UpgradeMachinaLampDataRecipe(final ResourceLocation id, final String group, final int recipeWidth,
@@ -50,34 +78,6 @@ public class UpgradeMachinaLampDataRecipe extends ShapedRecipe {
 		}
 
 		return craftingResult;
-	}
-
-	public static class Serializer implements RecipeSerializer<UpgradeMachinaLampDataRecipe> {
-		@Nullable
-		@Override
-		public UpgradeMachinaLampDataRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-			return new UpgradeMachinaLampDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer));
-		}
-
-		@Override
-		public UpgradeMachinaLampDataRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			try {
-				return new UpgradeMachinaLampDataRecipe(RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json));
-			} catch (Exception exception) {
-				ForcesOfReality.LOGGER.info("Error reading Machina Recipe from packet: ", exception);
-				throw exception;
-			}
-		}
-
-		@Override
-		public void toNetwork(FriendlyByteBuf buffer, UpgradeMachinaLampDataRecipe recipe) {
-			try {
-				RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
-			} catch (Exception exception) {
-				ForcesOfReality.LOGGER.info("Error writing Machina Recipe to packet: ", exception);
-				throw exception;
-			}
-		}
 	}
 
 }

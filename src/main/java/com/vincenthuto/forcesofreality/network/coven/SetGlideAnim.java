@@ -7,16 +7,6 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class SetGlideAnim {
 
-	public SetGlideAnim() {
-	}
-
-	public static void encode(SetGlideAnim msg, FriendlyByteBuf buf) {
-	}
-
-	public static SetGlideAnim decode(FriendlyByteBuf buf) {
-		return new SetGlideAnim();
-	}
-
 	public static class Handler {
 
 		public static void handle(final SetGlideAnim message, Supplier<NetworkEvent.Context> ctx) {
@@ -25,5 +15,15 @@ public class SetGlideAnim {
 			});
 			ctx.get().setPacketHandled(true);
 		}
+	}
+
+	public static SetGlideAnim decode(FriendlyByteBuf buf) {
+		return new SetGlideAnim();
+	}
+
+	public static void encode(SetGlideAnim msg, FriendlyByteBuf buf) {
+	}
+
+	public SetGlideAnim() {
 	}
 }

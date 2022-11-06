@@ -24,12 +24,6 @@ public class ModelDreadRocketTracking<T extends Entity> extends EntityModel<T> {
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "custom_model"), "main");
-	private final ModelPart rocket;
-
-	public ModelDreadRocketTracking(ModelPart root) {
-		this.rocket = root.getChild("rocket");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -87,15 +81,21 @@ public class ModelDreadRocketTracking<T extends Entity> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 16, 16);
 	}
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
+	private final ModelPart rocket;
 
+	public ModelDreadRocketTracking(ModelPart root) {
+		this.rocket = root.getChild("rocket");
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay,
 			float red, float green, float blue, float alpha) {
 		rocket.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch) {
+
 	}
 }

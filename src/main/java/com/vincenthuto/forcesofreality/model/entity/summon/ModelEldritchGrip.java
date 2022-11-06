@@ -21,12 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelEldritchGrip extends EntityModel<EntityEldritchGrip> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ForcesOfReality.MOD_ID, "eldritch_grip"), "main");
-	private final ModelPart bone;
-
-	public ModelEldritchGrip(ModelPart root) {
-		this.bone = root.getChild("bone");
-	}
-
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
@@ -36,13 +30,19 @@ public class ModelEldritchGrip extends EntityModel<EntityEldritchGrip> {
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void setupAnim(EntityEldritchGrip entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	private final ModelPart bone;
 
+	public ModelEldritchGrip(ModelPart root) {
+		this.bone = root.getChild("bone");
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public void setupAnim(EntityEldritchGrip entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
 	}
 }

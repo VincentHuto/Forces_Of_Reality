@@ -13,11 +13,6 @@ public class ModelTrackingOrb extends EntityModel<EntityTrackingOrb> {
 	}
 
 	@Override
-	public void setupAnim(EntityTrackingOrb entity, float limbSwing, float limbSwingAmount, float ageInTicks,
-			float netHeadYaw, float headPitch) {
-	}
-
-	@Override
 	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay,
 			float red, float green, float blue, float alpha) {
 	}
@@ -26,5 +21,10 @@ public class ModelTrackingOrb extends EntityModel<EntityTrackingOrb> {
 		modelRenderer.xRot = x;
 		modelRenderer.yRot = y;
 		modelRenderer.zRot = z;
+	}
+
+	@Override
+	public void setupAnim(EntityTrackingOrb entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+			float netHeadYaw, float headPitch) {
 	}
 }

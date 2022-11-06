@@ -26,16 +26,6 @@ public class RenderSeraphim extends MobRenderer<EntitySeraphim, ModelSeraphim> {
 	}
 
 	@Override
-	public void render(EntitySeraphim entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
-			MultiBufferSource bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-
-		matrixStackIn.pushPose();
-		matrixStackIn.popPose();
-
-	}
-
-	@Override
 	protected float getBob(EntitySeraphim livingBase, float partialTicks) {
 		return 1f;
 	}
@@ -48,5 +38,15 @@ public class RenderSeraphim extends MobRenderer<EntitySeraphim, ModelSeraphim> {
 			return TEXTURE;
 
 		}
+	}
+
+	@Override
+	public void render(EntitySeraphim entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn,
+			MultiBufferSource bufferIn, int packedLightIn) {
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
+		matrixStackIn.pushPose();
+		matrixStackIn.popPose();
+
 	}
 }
