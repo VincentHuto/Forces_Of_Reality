@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -42,7 +42,7 @@ public class CovenantEvents {
 
 	@SubscribeEvent
 	public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		ServerPlayer player = (ServerPlayer) event.getPlayer();
+		ServerPlayer player = (ServerPlayer) event.getEntity();
 		Map<EnumCovenants, Integer> Covenant = CovenantProvider.getPlayerDevotion(player);
 		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
 				new PacketCovenantServer(Covenant));
@@ -59,7 +59,7 @@ public class CovenantEvents {
 
 	@SubscribeEvent
 	public static void onDimensionChange(PlayerChangedDimensionEvent event) {
-		ServerPlayer player = (ServerPlayer) event.getPlayer();
+		ServerPlayer player = (ServerPlayer) event.getEntity();
 		Map<EnumCovenants, Integer> Covenant = CovenantProvider.getPlayerDevotion(player);
 		PacketHandler.CHANNELCOVENANT.send(PacketDistributor.PLAYER.with(() -> player),
 				new PacketCovenantServer(Covenant));
@@ -104,7 +104,7 @@ public class CovenantEvents {
 	public static void playerDeath(PlayerEvent.Clone event) {
 
 		Player peorig = event.getOriginal();
-		Player playernew = event.getPlayer();
+		Player playernew = event.getEntity();
 		if (event.isWasDeath()) {
 			peorig.reviveCaps();
 			ICovenant bloodTendencyNew = playernew.getCapability(CovenantProvider.COVEN_CAPA)
@@ -134,7 +134,7 @@ public class CovenantEvents {
 	@SuppressWarnings({ "deprecation", "unused" })
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(receiveCanceled = true)
-	public static void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
+	public static void onRenderGameOverlay(RenderGuiOverlayEvent.Post event) {
 
 		if (fontRenderer == null) {
 			fontRenderer = Minecraft.getInstance().font;

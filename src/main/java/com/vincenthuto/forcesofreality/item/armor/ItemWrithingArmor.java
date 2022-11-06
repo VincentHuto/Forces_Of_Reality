@@ -13,7 +13,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class ItemWrithingArmor extends ArmorItem {
 
@@ -22,11 +22,10 @@ public class ItemWrithingArmor extends ArmorItem {
 	}
 
 	@Override
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(new IItemRenderProperties() {
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
 			@Override
-			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-					
+			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entityLiving, ItemStack itemStack,
 					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 				if (itemStack.getItem() == ItemInit.writhing_helmet.get()) {
 					return ModelWrithingArmor.helmet.get();
@@ -37,7 +36,7 @@ public class ItemWrithingArmor extends ArmorItem {
 				} else if (itemStack.getItem() == ItemInit.writhing_boots.get()) {
 					return ModelWrithingArmor.boots.get();
 				}
-				return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
+				return IClientItemExtensions.super.getHumanoidArmorModel(entityLiving, itemStack, armorSlot, _default);
 			}
 		});
 	}

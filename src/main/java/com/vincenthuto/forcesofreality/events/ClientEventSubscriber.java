@@ -21,7 +21,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.NonNullList;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,10 +33,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientEventSubscriber {
 
 	public static NonNullList<KeyMapping> keyBinds = NonNullList.create();
-	public static final KeyMapping mechanglovemode = new KeyMapping("key.forcesofreality.mechanglovemode.desc",
-			GLFW.GLFW_KEY_N, "key.forcesofreality.category");
-	public static final KeyMapping sparkdirector = new KeyMapping("key.forcesofreality.sparkdirector.desc",
-			GLFW.GLFW_KEY_M, "key.forcesofreality.category");
+	public static KeyMapping mechanglovemode;
+	public static KeyMapping sparkdirector;;
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
@@ -62,12 +60,14 @@ public class ClientEventSubscriber {
 		// ScreenManager.registerFactory(ContainerAdornmentBinder.type,
 		// GuiAdornmentBinder::new);
 		MenuScreens.register(ContainerInit.mechan_glove_container.get(), GuiMechanGlove::new);
-		keyBinds.add(0, mechanglovemode);
-		keyBinds.add(1, sparkdirector);
-		for (KeyMapping bind : keyBinds) {
-			ClientRegistry.registerKeyBinding(bind);
+	}
 
-		}
+	public static void initKeybinds(RegisterKeyMappingsEvent ev) {
+		ev.register(mechanglovemode= new KeyMapping("key.forcesofreality.mechanglovemode.desc",
+				GLFW.GLFW_KEY_N, "key.forcesofreality.category"));
+		ev.register(sparkdirector  = new KeyMapping("key.forcesofreality.sparkdirector.desc",
+				GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
+
 	}
 
 }

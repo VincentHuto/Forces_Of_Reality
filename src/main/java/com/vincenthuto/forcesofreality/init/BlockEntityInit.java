@@ -19,7 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlockEntityInit {
 	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister
-			.create(ForgeRegistries.BLOCK_ENTITIES, ForcesOfReality.MOD_ID);
+			.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ForcesOfReality.MOD_ID);
 
 	public static final RegistryObject<BlockEntityType<BlockEntityHasturPylon>> hastur_pylon = TILES.register(
 			"hastur_pylon",

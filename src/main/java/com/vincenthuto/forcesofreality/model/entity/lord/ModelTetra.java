@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.lord.EntityTetra;
 import com.vincenthuto.forcesofreality.model.entity.mob.anim.TetraAnimations;
-import com.vincenthuto.forcesofreality.model.entity.mob.anim.UzouthrhixAnimations;
 
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -19,8 +18,8 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModelTetra extends HierarchicalModel<EntityTetra> {
-	// This layer location should be baked with EntityRendererProvider.Context in
-	// the entity renderer and passed into this model's constructor
+	
+	
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			new ResourceLocation(ForcesOfReality.MOD_ID, "modeltetra"), "main");
 	private final ModelPart root;

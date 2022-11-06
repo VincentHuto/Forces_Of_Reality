@@ -3,8 +3,10 @@ package com.vincenthuto.forcesofreality;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mojang.datafixers.util.Pair;
 import com.vincenthuto.forcesofreality.capa.covenant.CovenantEvents;
 import com.vincenthuto.forcesofreality.capa.tiledevotion.DevotionEvents;
+import com.vincenthuto.forcesofreality.events.ClientEventSubscriber;
 import com.vincenthuto.forcesofreality.events.MechanGloveEvents;
 import com.vincenthuto.forcesofreality.gui.guide.ForcesLib;
 import com.vincenthuto.forcesofreality.init.BlockEntityInit;
@@ -19,14 +21,19 @@ import com.vincenthuto.forcesofreality.init.SoundInit;
 import com.vincenthuto.forcesofreality.item.coven.tool.ItemMechanGlove;
 import com.vincenthuto.forcesofreality.network.PacketHandler;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +44,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod("forcesofreality")
 @Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD)
@@ -81,7 +90,6 @@ public class ForcesOfReality {
 		ItemInit.SPAWNEGGS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
 		BlockInit.SPECIALBLOCKS.register(modEventBus);
-		BlockInit.BLOCKITEMS.register(modEventBus);
 		BlockEntityInit.TILES.register(modEventBus);
 		ContainerInit.CONTAINERS.register(modEventBus);
 		FeatureInit.FEATURES.register(modEventBus);
@@ -90,6 +98,7 @@ public class ForcesOfReality {
 		SoundInit.SOUND_EVENTS.register(modEventBus);
 		modEventBus.addListener(this::commonSetup);
 		modEventBus.addListener(this::clientSetup);
+		modEventBus.addListener(ClientEventSubscriber::initKeybinds);
 		forgeBus.register(CovenantEvents.class);
 		forgeBus.register(DevotionEvents.class);
 		forgeBus.addListener(MechanGloveEvents::onClientTick);
@@ -97,6 +106,27 @@ public class ForcesOfReality {
 
 	}
 
+	
+
+	@SubscribeEvent
+	public static void onRegisterItems(final RegisterEvent event) {
+		if (event.getRegistryKey() != ForgeRegistries.Keys.ITEMS) {
+			return;
+		}
+
+		BlockInit.getAllBlockEntriesAsStream().map(m -> new Pair<>(m.get(), m.getId())).map(t -> createItemBlock(t))
+				.forEach(item -> registerBlockItem(event, item));
+	}
+
+	private static void registerBlockItem(RegisterEvent event, Pair<ResourceLocation, BlockItem> item) {
+		event.register(ForgeRegistries.Keys.ITEMS, helper -> helper.register(item.getFirst(), item.getSecond()));
+	}
+
+	public static Pair<ResourceLocation, BlockItem> createItemBlock(Pair<Block, ResourceLocation> block) {
+		return Pair.of(block.getSecond(),
+				new BlockItem((Block) block.getFirst(), new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
+	}
+	
 	private void commonSetup(final FMLCommonSetupEvent event) {
 //		CapabilityInit.init();
 //		ModRafflesiaRecipies.init();

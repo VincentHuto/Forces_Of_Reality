@@ -123,7 +123,6 @@ public class EntityTetra extends Monster implements IEntityAdditionalSpawnData {
 
 	int timer = 200;
 
-	@SuppressWarnings("unused")
 	@Override
 	public void tick() {
 		super.tick();

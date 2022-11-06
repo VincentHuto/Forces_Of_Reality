@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import com.vincenthuto.forcesofreality.ForcesOfReality.ForcesOfRealityItemGroup;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.model.armor.ModelAuricArmor;
-import com.vincenthuto.forcesofreality.model.armor.ModelAuricArmor;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,7 +13,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class ItemAuricArmor extends ArmorItem {
 
@@ -23,11 +22,12 @@ public class ItemAuricArmor extends ArmorItem {
 	}
 
 	@Override
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(new IItemRenderProperties() {
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
+
 			@Override
-			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-					
+			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entityLiving, ItemStack itemStack,
+
 					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 				if (itemStack.getItem() == ItemInit.auric_helm.get()) {
 					return ModelAuricArmor.helmet.get();
@@ -38,7 +38,7 @@ public class ItemAuricArmor extends ArmorItem {
 				} else if (itemStack.getItem() == ItemInit.auric_boots.get()) {
 					return ModelAuricArmor.boots.get();
 				}
-				return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
+				return IClientItemExtensions.super.getHumanoidArmorModel(entityLiving, itemStack, armorSlot, _default);
 			}
 		});
 	}
