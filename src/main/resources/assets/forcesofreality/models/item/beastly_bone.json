@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/beastly_bone"
+       "layer0": "forcesofreality:item/beastly_bone"
    }
 }

@@ -2,9 +2,9 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.BlockEntityMachinaImperfecta;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -27,7 +27,7 @@ public class RenderMachinaImperfecta implements BlockEntityRenderer<BlockEntityM
 		matrixStackIn.pushPose();
 		MultiBufferSource.BufferSource impl = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 		matrixStackIn.translate(0.5f, -1.12f, 0.5f);
-		matrixStackIn.mulPose(Vector3f.YP.rotation(te.getLevel().getGameTime() * 0.22f));
+		matrixStackIn.mulPose(Vector3.YP.rotation(te.getLevel().getGameTime() * 0.22f).toMoj());
 //		VertexConsumer vb = impl.getBuffer(gearHoriz
 //				.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/entity/model_floating_gear.png")));
 //		VertexConsumer vb1 = impl.getBuffer(gearshaft
@@ -38,7 +38,7 @@ public class RenderMachinaImperfecta implements BlockEntityRenderer<BlockEntityM
 //		gearshaft.renderToBuffer(matrixStackIn, vb1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
 //		matrixStackIn.translate(0, -.45, 0);
 //
-//		matrixStackIn.mulPose(Vector3f.YP.rotation(te.getLevel().getGameTime() * -0.44f));
+//		matrixStackIn.mulPose(Vector3.YP.rotation(te.getLevel().getGameTime() * -0.44f));
 //		matrixStackIn.translate(0, .38, 0);
 //
 //		gearHoriz.renderToBuffer(matrixStackIn, vb, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
@@ -69,7 +69,7 @@ public class RenderMachinaImperfecta implements BlockEntityRenderer<BlockEntityM
 			matrixStackIn.pushPose();
 			matrixStackIn.translate(x, y, z);
 			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 0.5F);
-			matrixStackIn.mulPose(Vector3f.YP.rotation(yRotate));
+			matrixStackIn.mulPose(Vector3.YP.rotation(yRotate).toMoj());
 			MultiBufferSource.BufferSource irendertypebuffer$impl1 = MultiBufferSource
 					.immediate(Tesselator.getInstance().getBuilder());
 //			VertexConsumer ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(gearVert.renderType(

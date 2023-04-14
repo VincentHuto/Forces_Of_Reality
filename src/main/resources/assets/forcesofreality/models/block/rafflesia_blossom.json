@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "forcesofreality:blocks/rafflesia_core",
-		"1": "forcesofreality:blocks/rafflesia_meat",
-		"2": "forcesofreality:blocks/rafflesia_petal",
-		"3": "forcesofreality:blocks/rafflesia_base",
-		"particle": "forcesofreality:blocks/rafflesia_core"
+		"0": "forcesofreality:block/rafflesia_core",
+		"1": "forcesofreality:block/rafflesia_meat",
+		"2": "forcesofreality:block/rafflesia_petal",
+		"3": "forcesofreality:block/rafflesia_base",
+		"particle": "forcesofreality:block/rafflesia_core"
 	},
 	"elements": [
 		{

@@ -1,6 +1,6 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "forcesofreality:items/star_slug"
+       "layer0": "forcesofreality:item/star_slug"
    }
 }

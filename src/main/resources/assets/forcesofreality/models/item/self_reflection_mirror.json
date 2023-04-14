@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/self_reflection_mirror"
+       "layer0": "forcesofreality:item/self_reflection_mirror"
    }
 }

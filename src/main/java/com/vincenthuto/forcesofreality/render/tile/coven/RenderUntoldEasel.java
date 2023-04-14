@@ -2,17 +2,17 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityUntoldEasel;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FaceInfo;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -35,33 +35,33 @@ public class RenderUntoldEasel implements BlockEntityRenderer<BlockEntityUntoldE
 		matrixStackIn.pushPose();
 		matrixStackIn.translate(0.5F, 1F, 0.69F);
 		matrixStackIn.translate(0.025F, -0.32F, 0.025F);
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
+		matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
 		if (te.getBlockState().getValues().get(FACING).toString().toUpperCase().equals(FaceInfo.EAST.toString())) {
-			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180f));
-			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+			matrixStackIn.mulPose(Vector3.YP.rotationDegrees(180f).toMoj());
+			matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 			matrixStackIn.translate(-0.36f, -0.14D, 0.02F);
 		} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
 				.equals(FaceInfo.WEST.toString())) {
-			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+			matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 			matrixStackIn.translate(0.05f, -0.16D, -0.02F);
 		} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
 				.equals(FaceInfo.NORTH.toString())) {
-			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-90f));
-			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+			matrixStackIn.mulPose(Vector3.YP.rotationDegrees(-90f).toMoj());
+			matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 
 			matrixStackIn.translate(-0.16f, -0.2D, -0.24F);
 		} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
 				.equals(FaceInfo.SOUTH.toString())) {
-			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
-			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+			matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
+			matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 			matrixStackIn.translate(-0.12f, -0.05D, 0.2F);
 		}
 		matrixStackIn.scale(0.25f, 0.25f, 0.25f);
 		ItemStack stack = new ItemStack(ItemInit.yellow_sign.get());
 		if (!stack.isEmpty()) {
 
-			mc.getItemRenderer().renderStatic(stack, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
-					matrixStackIn, bufferIn, combinedOverlayIn);
+			mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, combinedOverlayIn,
+					matrixStackIn, bufferIn, te.getLevel(), combinedOverlayIn);
 
 		}
 		matrixStackIn.popPose();
@@ -91,7 +91,7 @@ public class RenderUntoldEasel implements BlockEntityRenderer<BlockEntityUntoldE
 			MultiBufferSource.BufferSource irendertypebuffer$impl1 = MultiBufferSource
 					.immediate(Tesselator.getInstance().getBuilder());
 //			VertexConsumer ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(magatamas
-//					.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/sphere_outside.png")));
+//					.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/block/sphere_outside.png")));
 //			magatamas.renderToBuffer(matrixStackIn, ivertexbuilder1, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F,
 //					1.0F, 1.0F);
 			irendertypebuffer$impl1.endBatch();

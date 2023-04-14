@@ -27,11 +27,11 @@ public class RenderTypeInit extends RenderType {
 	private final static ResourceLocation laserBeamGlow = new ResourceLocation(
 			ForcesOfReality.MOD_ID + ":textures/misc/laser_glow.png");
 	private final static ResourceLocation orbTrans = new ResourceLocation(
-			ForcesOfReality.MOD_ID + ":textures/blocks/sphere_outside_trans.png");
+			ForcesOfReality.MOD_ID + ":textures/block/sphere_outside_trans.png");
 	private final static ResourceLocation hastur_pylon = new ResourceLocation(
-			ForcesOfReality.MOD_ID + ":textures/blocks/hastur_pylon.png");
+			ForcesOfReality.MOD_ID + ":textures/block/hastur_pylon.png");
 	private final static ResourceLocation end_trans = new ResourceLocation(
-			ForcesOfReality.MOD_ID + ":textures/blocks/end_portal.png");
+			ForcesOfReality.MOD_ID + ":textures/block/end_portal.png");
 	@SuppressWarnings("unused")
 	private static final LineStateShard THICK_LINES = new LineStateShard(OptionalDouble.of(3.0D));
 

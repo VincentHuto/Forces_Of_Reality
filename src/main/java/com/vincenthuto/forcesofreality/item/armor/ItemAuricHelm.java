@@ -1,12 +1,11 @@
 package com.vincenthuto.forcesofreality.item.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class ItemAuricHelm extends ArmorItem {
 
-	public ItemAuricHelm(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn) {
+	public ItemAuricHelm(ArmorMaterial materialIn, ArmorItem.Type slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
 	}
 
@@ -15,7 +14,7 @@ public class ItemAuricHelm extends ArmorItem {
 //		consumer.accept(new IItemRenderProperties() {
 //			@Override
 //			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+//					ArmorItem.Type armorSlot, HumanoidModel<?> _default) {
 //				if (itemStack.getItem() == ItemInit.auric_helm.get()) {
 //					return ModelAuricHelm.helmet.get();
 //

@@ -81,7 +81,7 @@ public class EntityScuttlingOcculus extends Monster {
 	@Override
 	public void playerTouch(Player entityIn) {
 		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1f);
+		entityIn.hurt(entityIn.damageSources().mobAttack(this), 1f);
 		entityIn.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 1));
 
 	}

@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/mechan_module_shortcircuit"
+       "layer0": "forcesofreality:item/mechan_module_shortcircuit"
    }
 }

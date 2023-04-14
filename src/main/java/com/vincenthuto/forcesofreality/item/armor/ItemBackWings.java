@@ -1,12 +1,11 @@
 package com.vincenthuto.forcesofreality.item.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class ItemBackWings extends ArmorItem {
 
-	public ItemBackWings(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn) {
+	public ItemBackWings(ArmorMaterial materialIn, ArmorItem.Type slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
 	}
 //
@@ -14,7 +13,7 @@ public class ItemBackWings extends ArmorItem {
 //	@Override
 //	@OnlyIn(Dist.CLIENT)
 //	public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//			EquipmentSlot armorSlot, A _default) {
+//			ArmorItem.Type armorSlot, A _default) {
 //		float wingRotation = 0;
 //		float destPos;
 //		float oFlapSpeed;
@@ -41,7 +40,7 @@ public class ItemBackWings extends ArmorItem {
 //			if (itemStack != ItemStack.EMPTY) {
 //				if (itemStack.getItem() instanceof ArmorItem) {
 //					ModelBackWings model = new ModelBackWings();
-//					model.body.visible = armorSlot == EquipmentSlot.CHEST;
+//					model.body.visible = armorSlot == ArmorItem.Type.CHEST;
 //					model.young = _default.young;
 //					model.crouching = _default.crouching;
 //					model.riding = _default.riding;
@@ -71,7 +70,7 @@ public class ItemBackWings extends ArmorItem {
 //			if (itemStack != ItemStack.EMPTY) {
 //				if (itemStack.getItem() instanceof ArmorItem) {
 //					ModelBackWings model = new ModelBackWings();
-//					model.body.visible = armorSlot == EquipmentSlot.CHEST;
+//					model.body.visible = armorSlot == ArmorItem.Type.CHEST;
 //					model.young = _default.young;
 //					model.crouching = _default.crouching;
 //					model.riding = _default.riding;

@@ -72,7 +72,7 @@ public class CovenantEvents {
 //				PacketHandler.CHANNELBLOODVOLUME.sendToServer(new PacketEntityHitParticle(trace.getLocation().x,
 //						trace.getLocation().y, trace.getLocation().z));
 //			}
-//			if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemInit.chitinite_chestplate.get()) {
+//			if (player.getItemBySlot(ArmorItem.Type.HEAD).getItem() == ItemInit.chitinite_chestplate.get()) {
 //				e.setAmount((float) (e.getAmount() * 0.25));
 //				double dist = e.getEntityLiving().distanceTo(player);
 //				HitResult trace = e.getEntityLiving().pick(dist, 0, false);
@@ -125,7 +125,7 @@ public class CovenantEvents {
 								String.valueOf(tendency.getDevotionByCoven(selectedCoven)), point.x, point.y + 30,
 								new Color(255, 0, 0, 255).getRGB());
 
-						Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(renderItem),
+						Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(event.getPoseStack(), new ItemStack(renderItem),
 								point.x, point.y);
 
 						point = MathUtils.rotatePointAbout(point, center, angleBetweenEach);

@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "forcesofreality:items/somnolent_trick_axe"
+		"layer0": "forcesofreality:item/somnolent_trick_axe"
 	},
 	"overrides": [
 		{

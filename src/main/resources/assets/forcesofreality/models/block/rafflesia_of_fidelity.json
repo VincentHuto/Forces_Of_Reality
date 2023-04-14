@@ -2,17 +2,17 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "forcesofreality:blocks/rafflesia_core",
-		"1": "forcesofreality:blocks/rafflesia_meat",
-		"2": "forcesofreality:blocks/rafflesia_petal",
-		"3": "forcesofreality:blocks/rafflesia_base",
-		"4": "forcesofreality:blocks/wandmakerbase",
-		"5": "forcesofreality:blocks/netherblock_bottom",
-		"6": "forcesofreality:blocks/netherblock_side",
-		"7": "forcesofreality:blocks/netherblock_top",
-		"8": "forcesofreality:blocks/activated_obsidian",
-		"9": "forcesofreality:blocks/anointed_iron_block",
-		"particle": "forcesofreality:blocks/rafflesia_core"
+		"0": "forcesofreality:block/rafflesia_core",
+		"1": "forcesofreality:block/rafflesia_meat",
+		"2": "forcesofreality:block/rafflesia_petal",
+		"3": "forcesofreality:block/rafflesia_base",
+		"4": "forcesofreality:block/wandmakerbase",
+		"5": "forcesofreality:block/netherblock_bottom",
+		"6": "forcesofreality:block/netherblock_side",
+		"7": "forcesofreality:block/netherblock_top",
+		"8": "forcesofreality:block/activated_obsidian",
+		"9": "forcesofreality:block/anointed_iron_block",
+		"particle": "forcesofreality:block/rafflesia_core"
 	},
 	"elements": [
 		{

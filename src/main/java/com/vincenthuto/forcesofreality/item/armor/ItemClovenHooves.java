@@ -1,12 +1,11 @@
 package com.vincenthuto.forcesofreality.item.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class ItemClovenHooves extends ArmorItem {
 
-	public ItemClovenHooves(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn) {
+	public ItemClovenHooves(ArmorMaterial materialIn, ArmorItem.Type slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
 	}
 
@@ -14,12 +13,12 @@ public class ItemClovenHooves extends ArmorItem {
 //	@Override
 //	@OnlyIn(Dist.CLIENT)
 //	public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//			EquipmentSlot armorSlot, A _default) {
+//			ArmorItem.Type armorSlot, A _default) {
 //		if (itemStack != ItemStack.EMPTY) {
 //			if (itemStack.getItem() instanceof ArmorItem) {
 //				ModelClovenHooves model = new ModelClovenHooves();
-//				model.leftLeg.visible = armorSlot == EquipmentSlot.FEET;
-//				model.rightLeg.visible = armorSlot == EquipmentSlot.FEET;
+//				model.leftLeg.visible = armorSlot == ArmorItem.Type.FEET;
+//				model.rightLeg.visible = armorSlot == ArmorItem.Type.FEET;
 //				model.young = _default.young;
 //				model.crouching = _default.crouching;
 //				model.riding = _default.riding;

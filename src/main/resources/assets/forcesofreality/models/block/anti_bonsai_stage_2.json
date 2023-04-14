@@ -3,13 +3,13 @@
   "parent" : "block/block",
   "render_type" : "cutout",
   "textures" : {
-    "0" : "forcesofreality:blocks/anti_leaves",
-    "3" : "forcesofreality:blocks/dark_oak",
-    "5" : "forcesofreality:blocks/dirt_podzol_top_full",
-    "6" : "forcesofreality:blocks/hardened_clay",
-    "7" : "forcesofreality:blocks/hardened_clay_stained_orange",
-    "8" : "forcesofreality:blocks/hardened_clay_stained_red",
-    "particle" : "forcesofreality:blocks/anti_leaves"
+    "0" : "forcesofreality:block/anti_leaves",
+    "3" : "forcesofreality:block/dark_oak",
+    "5" : "forcesofreality:block/dirt_podzol_top_full",
+    "6" : "forcesofreality:block/hardened_clay",
+    "7" : "forcesofreality:block/hardened_clay_stained_orange",
+    "8" : "forcesofreality:block/hardened_clay_stained_red",
+    "particle" : "forcesofreality:block/anti_leaves"
   },
   "elements" : [ {
     "from" : [ 2, 0, 4 ],

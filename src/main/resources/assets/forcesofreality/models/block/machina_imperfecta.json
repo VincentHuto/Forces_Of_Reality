@@ -4,10 +4,10 @@
   "render_type" : "translucent",
   "texture_size" : [ 64, 64 ],
   "textures" : {
-    "0" : "forcesofreality:blocks/machine_glass",
-    "1" : "forcesofreality:blocks/auric_block",
-    "2" : "forcesofreality:blocks/wool_colored_black",
-    "particle" : "forcesofreality:blocks/auric_block"
+    "0" : "forcesofreality:block/machine_glass",
+    "1" : "forcesofreality:block/auric_block",
+    "2" : "forcesofreality:block/wool_colored_black",
+    "particle" : "forcesofreality:block/auric_block"
   },
   "elements" : [ {
     "from" : [ 2, 0, -1 ],

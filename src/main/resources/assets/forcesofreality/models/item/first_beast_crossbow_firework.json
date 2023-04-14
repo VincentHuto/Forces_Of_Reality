@@ -1,12 +1,12 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "forcesofreality:blocks/log_acacia",
-		"1": "forcesofreality:blocks/morel_stem",
-		"2": "forcesofreality:blocks/log_acacia_top",
-		"3": "forcesofreality:blocks/iron_block",
-		"4": "forcesofreality:blocks/crossbow_top",
-		"5": "forcesofreality:blocks/crossbow_firework",
+		"0": "forcesofreality:block/log_acacia",
+		"1": "forcesofreality:block/morel_stem",
+		"2": "forcesofreality:block/log_acacia_top",
+		"3": "forcesofreality:block/iron_block",
+		"4": "forcesofreality:block/crossbow_top",
+		"5": "forcesofreality:block/crossbow_firework",
 		"particle": "blocks/log_acacia"
 	},
 	"elements": [

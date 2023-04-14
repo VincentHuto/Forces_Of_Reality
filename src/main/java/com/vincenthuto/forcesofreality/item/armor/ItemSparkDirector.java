@@ -18,7 +18,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -46,7 +45,7 @@ public class ItemSparkDirector extends ArmorItem {
 	// float heightModifier = 0.1f;
 	float jumpTicks = 0;
 
-	public ItemSparkDirector(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn, boolean isArmoredIn) {
+	public ItemSparkDirector(ArmorMaterial materialIn, ArmorItem.Type slot, Properties builderIn, boolean isArmoredIn) {
 		super(materialIn, slot, builderIn);
 		this.isArmored = isArmoredIn;
 	}
@@ -92,12 +91,12 @@ public class ItemSparkDirector extends ArmorItem {
 //	@Override
 //	@OnlyIn(Dist.CLIENT)
 //	public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//			EquipmentSlot armorSlot, A _default) {
+//			ArmorItem.Type armorSlot, A _default) {
 //		if (itemStack != ItemStack.EMPTY) {
 //			if (itemStack.getItem() instanceof ArmorItem) {
 //				if (!isArmored) {
 //					ModelSparkDirector model = new ModelSparkDirector();
-//					model.body.visible = armorSlot == EquipmentSlot.CHEST;
+//					model.body.visible = armorSlot == ArmorItem.Type.CHEST;
 //					model.young = _default.young;
 //					model.crouching = _default.crouching;
 //					model.riding = _default.riding;
@@ -109,7 +108,7 @@ public class ItemSparkDirector extends ArmorItem {
 //
 //				else if (isArmored) {
 //					ModelSparkDirectorArmored model = new ModelSparkDirectorArmored();
-//					model.body.visible = armorSlot == EquipmentSlot.CHEST;
+//					model.body.visible = armorSlot == ArmorItem.Type.CHEST;
 //					model.young = _default.young;
 //					model.crouching = _default.crouching;
 //					model.riding = _default.riding;

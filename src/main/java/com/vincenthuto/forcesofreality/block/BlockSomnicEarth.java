@@ -3,8 +3,8 @@ package com.vincenthuto.forcesofreality.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -21,13 +21,10 @@ public class BlockSomnicEarth extends SpreadingSnowyDirtBlock implements Bonemea
 		return true;
 	}
 
-	/**
-	 * Whether this IGrowable can grow
-	 */
-	@SuppressWarnings("deprecation")
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return worldIn.getBlockState(pos.above()).isAir();
+	public boolean isValidBonemealTarget(LevelReader p_256559_, BlockPos p_50898_, BlockState p_50899_,
+			boolean p_50900_) {
+		return true;
 	}
 
 	@Override

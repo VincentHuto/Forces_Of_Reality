@@ -2,7 +2,6 @@ package com.vincenthuto.forcesofreality.item.armor;
 
 import java.util.function.Consumer;
 
-import com.vincenthuto.forcesofreality.ForcesOfReality.ForcesOfRealityItemGroup;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.model.armor.ModelAuricArmor;
 
@@ -17,8 +16,8 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class ItemAuricArmor extends ArmorItem {
 
-	public ItemAuricArmor(ArmorMaterial materialIn, EquipmentSlot slot) {
-		super(materialIn, slot, new Item.Properties().tab(ForcesOfRealityItemGroup.instance).fireResistant());
+	public ItemAuricArmor(ArmorMaterial materialIn, ArmorItem.Type slot) {
+		super(materialIn, slot, new Item.Properties());
 	}
 
 	@Override

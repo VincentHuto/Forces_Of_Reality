@@ -75,7 +75,7 @@ public class EntityTentacle extends Monster {
 		super.doPush(entityIn);
 		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur
 				|| entityIn instanceof EntityXanthousKing || entityIn instanceof EntityTrueXanthousKing)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+			entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 		}
 
 	}
@@ -126,7 +126,7 @@ public class EntityTentacle extends Monster {
 	@Override
 	public void playerTouch(Player entityIn) {
 		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 
 	}
 

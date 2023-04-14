@@ -2,10 +2,10 @@ package com.vincenthuto.forcesofreality.render.entity.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityMalformedAutomaton;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelMalformedAutomaton;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -18,11 +18,11 @@ import net.minecraft.world.phys.Vec3;
 public class LayerAutomatonWindow extends RenderLayer<EntityMalformedAutomaton, ModelMalformedAutomaton> {
 
 	public static final ResourceLocation GLASSTEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/blocks/machine_glass.png");
+			"textures/block/machine_glass.png");
 	public static final ResourceLocation GLASSBREAK1 = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/blocks/machine_glass_break_1.png");
+			"textures/block/machine_glass_break_1.png");
 	public static final ResourceLocation GLASSBREAK2 = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/blocks/machine_glass_break_2.png");
+			"textures/block/machine_glass_break_2.png");
 
 	public static double angleOf(Vec3 p1, Vec3 p2) {
 		final double deltaY = p2.z - p1.z;
@@ -109,7 +109,7 @@ public class LayerAutomatonWindow extends RenderLayer<EntityMalformedAutomaton, 
 		// Leg Panel
 		matrix.pushPose();
 		matrix.translate(-0.51f, 0.1, 0.22);
-		matrix.mulPose(Vector3f.YP.rotationDegrees(90f));
+		matrix.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
 		builder.vertex(matrix.last().pose(), 0.0f, 0.26f, 0).color(r, g, b, 255).uv(1, 1)
 				.overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix.last().normal(), 0, 1, 0)
 				.endVertex();

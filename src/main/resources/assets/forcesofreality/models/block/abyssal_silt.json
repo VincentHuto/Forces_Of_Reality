@@ -1,6 +1,6 @@
 {
    "parent": "block/cube_all",
    "textures": {
-       "all": "forcesofreality:blocks/abyssal_silt"
+       "all": "forcesofreality:block/abyssal_silt"
    }
 }

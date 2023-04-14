@@ -50,26 +50,26 @@
 //			matrixStackIn.pushPose();
 //			matrixStackIn.translate(0.5F, 1F, 0.69F);
 //			matrixStackIn.translate(0.025F, -0.32F, 0.025F);
-//			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
+//			matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
 //			if (te.getBlockState().getValues().get(FACING).toString().toUpperCase().equals(FaceInfo.EAST.toString())) {
-//				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180f));
-//				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+//				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(180f).toMoj());
+//				matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 //
 //				matrixStackIn.translate(-0.22, 0.38D, -0.2F);
 //			} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
 //					.equals(FaceInfo.WEST.toString())) {
-//				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+//				matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 //				matrixStackIn.translate(0.21, 0.36D, -0.25F);
 //			} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
 //					.equals(FaceInfo.NORTH.toString())) {
-//				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-90f));
-//				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+//				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(-90f).toMoj());
+//				matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 //
 //				matrixStackIn.translate(-0.028F, 0.28D, -0.42F);
 //			} else if (te.getBlockState().getValues().get(FACING).toString().toUpperCase()
 //					.equals(FaceInfo.SOUTH.toString())) {
-//				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
-//				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(22.5f));
+//				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
+//				matrixStackIn.mulPose(Vector3.XP.rotationDegrees(22.5f).toMoj());
 //
 //				matrixStackIn.translate(0.02F, 0.45D, -0.02F);
 //			}
@@ -77,7 +77,7 @@
 //			ItemStack stack = runes.getStackInSlot(0);
 //			if (!stack.isEmpty()) {
 //
-//				mc.getItemRenderer().renderStatic(stack, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
+//				mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, combinedOverlayIn,
 //						matrixStackIn, bufferIn, items);
 //
 //			}
@@ -86,13 +86,13 @@
 //			for (int i = 1; i < runes.getSlots(); i++) {
 //				matrixStackIn.pushPose();
 //				matrixStackIn.translate(0.5F, 1F, 0.5F);
-//				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(angles[i] + (float) time));
+//				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(angles[i] + (float) time));
 //				matrixStackIn.translate(0.025F, -0.25F, 0.025F);
-//				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
+//				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
 //				matrixStackIn.translate(0.35, 0.3175D, 0F);
 //				matrixStackIn.scale(0.1f, 0.1f, 0.1f);
 //				ItemStack stack2 = runes.getStackInSlot(i);
-//				mc.getItemRenderer().renderStatic(stack2, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
+//				mc.getItemRenderer().renderStatic(stack2, ItemDisplayContext.FIXED, combinedLightIn, combinedOverlayIn,
 //						matrixStackIn, bufferIn, i);
 //				matrixStackIn.popPose();
 //			}

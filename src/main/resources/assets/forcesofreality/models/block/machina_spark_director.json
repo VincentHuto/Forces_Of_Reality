@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "forcesofreality:blocks/auric_block",
+		"0": "forcesofreality:block/auric_block",
 		"1": "forcesofreality:models/armor/spark_director_layer_1",
-		"particle": "forcesofreality:blocks/auric_block"
+		"particle": "forcesofreality:block/auric_block"
 	},
 	"elements": [
 		{

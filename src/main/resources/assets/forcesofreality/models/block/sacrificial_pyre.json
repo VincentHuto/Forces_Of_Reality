@@ -3,10 +3,10 @@
 	"parent": "block/block",
 	"render_type": "cutout",
 	"textures": {
-		"0": "forcesofreality:blocks/dark_oak_top",
-		"1": "forcesofreality:blocks/dark_oak",
-		"2": "forcesofreality:blocks/dirt_podzol_top",
-		"particle": "forcesofreality:blocks/dark_oak_top"
+		"0": "forcesofreality:block/dark_oak_top",
+		"1": "forcesofreality:block/dark_oak",
+		"2": "forcesofreality:block/dirt_podzol_top",
+		"particle": "forcesofreality:block/dark_oak_top"
 	},
 	"elements": [
 		{

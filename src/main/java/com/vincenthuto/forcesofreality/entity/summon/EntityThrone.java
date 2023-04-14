@@ -76,7 +76,7 @@ public class EntityThrone extends Monster {
 		super.doPush(entityIn);
 		if (!(entityIn instanceof EntityThrone || entityIn instanceof EntitySeraphim
 				|| entityIn instanceof EntityTetra)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+			entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 		}
 
 	}
@@ -126,7 +126,7 @@ public class EntityThrone extends Monster {
 	@Override
 	public void playerTouch(Player entityIn) {
 		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 
 	}
 

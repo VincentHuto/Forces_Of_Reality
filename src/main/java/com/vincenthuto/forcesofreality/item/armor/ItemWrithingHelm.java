@@ -1,12 +1,11 @@
 package com.vincenthuto.forcesofreality.item.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class ItemWrithingHelm extends ArmorItem {
 
-	public ItemWrithingHelm(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn) {
+	public ItemWrithingHelm(ArmorMaterial materialIn, ArmorItem.Type slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
 	}
 
@@ -14,7 +13,7 @@ public class ItemWrithingHelm extends ArmorItem {
 //	@Override
 //	@OnlyIn(Dist.CLIENT)
 //	public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//			EquipmentSlot armorSlot, A _default) {
+//			ArmorItem.Type armorSlot, A _default) {
 //		if (itemStack != ItemStack.EMPTY) {
 //			if (itemStack.getItem() instanceof ArmorItem) {
 //				ModelWrithingHelmet model = new ModelWrithingHelmet();

@@ -2,12 +2,12 @@ package com.vincenthuto.forcesofreality.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.container.ContainerMechanGlove;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.hutoslib.client.screen.HLGuiUtils;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -62,8 +62,8 @@ public class GuiMechanGlove extends AbstractContainerScreen<ContainerMechanGlove
 
 		matrixStack.pushPose();
 		double time = ClientTickHandler.ticksInGame;
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees((float) time));
-		Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(ItemInit.mechan_glove.get()),
+		matrixStack.mulPose(Vector3.YP.rotationDegrees((float) time).toMoj());
+		Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(matrixStack, new ItemStack(ItemInit.mechan_glove.get()),
 				leftPos - 20, topPos - 15);
 
 		matrixStack.popPose();

@@ -3,14 +3,14 @@
   "parent" : "block/block",
   "render_type" : "cutout",
   "textures" : {
-    "5" : "forcesofreality:blocks/morel_stem",
-    "6" : "forcesofreality:blocks/hardened_clay",
-    "7" : "forcesofreality:blocks/hardened_clay_stained_orange",
-    "8" : "forcesofreality:blocks/hardened_clay_stained_red",
-    "9" : "forcesofreality:blocks/morel_cap",
-    "11" : "forcesofreality:blocks/mycelium_top",
-    "12" : "forcesofreality:blocks/singeri_mushroom",
-    "particle" : "forcesofreality:blocks/morel_mushroom"
+    "5" : "forcesofreality:block/morel_stem",
+    "6" : "forcesofreality:block/hardened_clay",
+    "7" : "forcesofreality:block/hardened_clay_stained_orange",
+    "8" : "forcesofreality:block/hardened_clay_stained_red",
+    "9" : "forcesofreality:block/morel_cap",
+    "11" : "forcesofreality:block/mycelium_top",
+    "12" : "forcesofreality:block/singeri_mushroom",
+    "particle" : "forcesofreality:block/morel_mushroom"
   },
   "elements" : [ {
     "from" : [ 1.99999, 0, 3.99999 ],

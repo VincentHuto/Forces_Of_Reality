@@ -1,6 +1,6 @@
 {
 	"parent": "item/bow",
 	"textures": {
-		"layer0": "forcesofreality:items/null_trick_axe_pulling_2"
+		"layer0": "forcesofreality:item/null_trick_axe_pulling_2"
 	}
 }

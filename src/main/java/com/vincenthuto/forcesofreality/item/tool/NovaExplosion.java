@@ -85,17 +85,17 @@ public class NovaExplosion extends Explosion {
 	// Copies of private super fields
 	private final Level world;
 
-	private final Explosion.BlockInteraction mode;
+	private final BlockInteraction mode;
 
 	private final double x, y, z;
 
 	private final float size;
 
 	public NovaExplosion(Level world, @Nullable Entity entity, double x, double y, double z, float radius,
-			boolean causesFire, Explosion.BlockInteraction mode) {
-		super(world, entity, x, y, z, radius, causesFire, mode);
+			boolean causesFire, BlockInteraction block) {
+		super(world, entity, x, y, z, radius, causesFire, block);
 		this.world = world;
-		this.mode = mode;
+		this.mode = block;
 		this.size = radius;
 		this.x = x;
 		this.y = y;
@@ -107,7 +107,7 @@ public class NovaExplosion extends Explosion {
 	public void finalizeExplosion(boolean spawnParticles) {
 		world.playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F,
 				(1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F);
-		boolean differentMode = mode != Explosion.BlockInteraction.NONE;
+		boolean differentMode = mode != BlockInteraction.KEEP;
 		if (size >= 2.0F && differentMode) {
 			world.addParticle(ParticleTypes.EXPLOSION_EMITTER, x, y, z, 1.0D, 0.0D, 0.0D);
 		} else {
@@ -149,7 +149,7 @@ public class NovaExplosion extends Explosion {
 								.withRandom(world.random).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
 								.withParameter(LootContextParams.TOOL, ItemStack.EMPTY)
 								.withOptionalParameter(LootContextParams.BLOCK_ENTITY, BlockEntity);
-						if (mode == Explosion.BlockInteraction.DESTROY) {
+						if (mode == BlockInteraction.KEEP) {
 							builder.withParameter(LootContextParams.EXPLOSION_RADIUS, size);
 						}
 
@@ -163,11 +163,12 @@ public class NovaExplosion extends Explosion {
 			}
 		}
 
-		// PE: Drop all together
-		if (getSourceMob() == null) {
-			createLootDrop(allDrops, world, x, y, z);
-		} else {
-			createLootDrop(allDrops, world, getSourceMob().blockPosition());
-		}
+//		// PE: Drop all together
+		
+		//		if (getSourceMob() == null) {
+//			createLootDrop(allDrops, world, x, y, z);
+//		} else {
+//			createLootDrop(allDrops, world, getSourceMob().blockPosition());
+//		}
 	}
 }

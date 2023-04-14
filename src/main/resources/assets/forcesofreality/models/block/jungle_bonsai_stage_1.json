@@ -3,13 +3,13 @@
   "parent" : "block/block",
   "render_type" : "cutout",
   "textures" : {
-    "3" : "forcesofreality:blocks/junglegrasstop",
-    "4" : "forcesofreality:blocks/log_jungle",
-    "5" : "forcesofreality:blocks/log_jungle_top",
-    "6" : "forcesofreality:blocks/hardened_clay",
-    "7" : "forcesofreality:blocks/hardened_clay_stained_orange",
-    "8" : "forcesofreality:blocks/hardened_clay_stained_red",
-    "particle" : "forcesofreality:blocks/junglegrasstop"
+    "3" : "forcesofreality:block/junglegrasstop",
+    "4" : "forcesofreality:block/log_jungle",
+    "5" : "forcesofreality:block/log_jungle_top",
+    "6" : "forcesofreality:block/hardened_clay",
+    "7" : "forcesofreality:block/hardened_clay_stained_orange",
+    "8" : "forcesofreality:block/hardened_clay_stained_red",
+    "particle" : "forcesofreality:block/junglegrasstop"
   },
   "elements" : [ {
     "from" : [ 1.99999, 0, 3.99999 ],

@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "forcesofreality:blocks/bell_sides",
-		"2": "forcesofreality:blocks/bell_handle",
-		"3": "forcesofreality:blocks/abyssal_silt",
-		"particle": "forcesofreality:blocks/bell_handle"
+		"1": "forcesofreality:block/bell_sides",
+		"2": "forcesofreality:block/bell_handle",
+		"3": "forcesofreality:block/abyssal_silt",
+		"particle": "forcesofreality:block/bell_handle"
 	},
 	"elements": [
 		{

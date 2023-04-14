@@ -7,14 +7,15 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.Level.ExplosionInteraction;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -40,7 +41,7 @@ public class EntityHolySpirit extends AbstractHurtingProjectile {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 
 	}
@@ -112,7 +113,7 @@ public class EntityHolySpirit extends AbstractHurtingProjectile {
 			break;
 		}
 		case ENTITY: {
-			((EntityHitResult) pos).getEntity().hurt(DamageSource.MAGIC, 10f);
+			((EntityHitResult) pos).getEntity().hurt(((EntityHitResult) pos).getEntity().damageSources().magic(), 10f);
 			remove(RemovalReason.KILLED);
 			break;
 		}
@@ -188,7 +189,7 @@ public class EntityHolySpirit extends AbstractHurtingProjectile {
 		if (tickCount > 75) {
 			if (!level.isClientSide) {
 				this.level.explode(this, this.getX(), this.getY() + this.getBbHeight() / 16.0F, this.getZ(),
-						3.0F, Explosion.BlockInteraction.NONE);
+						3.0F, ExplosionInteraction.NONE);
 			}
 			remove(RemovalReason.KILLED);
 		}

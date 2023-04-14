@@ -59,7 +59,7 @@ public class EntityHasturClone extends Monster {
 		super.doPush(entityIn);
 		if (!(entityIn instanceof EntityTentacle || entityIn instanceof EntityHastur
 				|| entityIn instanceof EntityXanthousKing || entityIn instanceof EntityTrueXanthousKing)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+			entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 		}
 
 	}
@@ -104,7 +104,7 @@ public class EntityHasturClone extends Monster {
 			this.level.addParticle(ParticleTypes.SMOKE, this.getX() + g, this.getY() + 2.0D + g1,
 					this.getZ() + g2, 0.0D, 0.0D, 0.0D);
 		}
-		entityIn.hurt(DamageSource.mobAttack(this), 1f);
+		entityIn.hurt(entityIn.damageSources().mobAttack(this), 1f);
 		this.setHealth(0);
 
 	}

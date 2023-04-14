@@ -26,22 +26,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
@@ -55,7 +50,6 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 public class ItemMechanGlove extends Item {
 	@SuppressWarnings("rawtypes")
@@ -194,7 +188,8 @@ public class ItemMechanGlove extends Item {
 	@SuppressWarnings("static-access")
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		DamageSource mechanGloveSource = DamageSource.playerAttack((Player) attacker);
+		DamageSource mechanGloveSource = attacker.damageSources().playerAttack((Player) attacker);
+
 		if (stack.getTag() != null) {
 			if (stack.getTag().get(TAG_SELECTEDSTACK) != null) {
 				ItemStack moduleStack = ItemStack.of((CompoundTag) stack.getTag().get(TAG_SELECTEDSTACK));
@@ -296,39 +291,39 @@ public class ItemMechanGlove extends Item {
 					Block hitBlock = worldIn.getBlockState(hitPos).getBlock();
 					if (moduleStack.getItem() == ItemInit.mechan_module_laser.get()) {
 
-						ItemStack smeltStack = worldIn.getRecipeManager()
-								.getRecipeFor(RecipeType.SMELTING, new SimpleContainer(new ItemStack(hitBlock)),
-										worldIn)
-								.map(SmeltingRecipe::getResultItem)
-								.filter(itemStack -> !new ItemStack(hitBlock).isEmpty())
-								.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack,
-										new ItemStack(hitBlock).getCount() * new ItemStack(hitBlock).getCount()))
-								.orElse(new ItemStack(hitBlock));
-						if (smeltStack.getItem() != new ItemStack(hitBlock).getItem()) {
-							if (smeltStack.getItem() instanceof BlockItem) {
-								BlockItem smeltBlock = (BlockItem) smeltStack.getItem();
-								worldIn.destroyBlock(hitPos, false);
-								worldIn.setBlockAndUpdate(hitPos, smeltBlock.getBlock().defaultBlockState());
-							} else {
-								if (worldIn.random.nextInt(20) % 3 == 0) {
-									worldIn.addFreshEntity(new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(),
-											hitPos.getZ(), smeltStack));
-								}
-								worldIn.destroyBlock(hitPos, false);
-							}
-						} else {
-							if (!hitBlock.defaultBlockState().isAir() && hitBlock != BlockInit.beyond_flames.get()
-									&& hitBlock != Blocks.FIRE) {
-								if (hitBlock.isFlammable(hitBlock.defaultBlockState(), worldIn,
-										((BlockHitResult) trace).getBlockPos(),
-										((BlockHitResult) trace).getDirection())) {
-									BlockPos blockpos1 = hitPos.relative(((BlockHitResult) trace).getDirection());
-									BlockState blockstate1 = BaseFireBlock.getState(worldIn, blockpos1);
-									worldIn.setBlock(blockpos1, blockstate1, 11);
-
-								}
-							}
-						}
+//						ItemStack smeltStack = worldIn.getRecipeManager()
+//								.getRecipeFor(RecipeType.SMELTING, new SimpleContainer(new ItemStack(hitBlock)),
+//										worldIn)
+//								.map(SmeltingRecipe::getResultItem)
+//								.filter(itemStack -> !new ItemStack(hitBlock).isEmpty())
+//								.map(itemStack -> ItemHandlerHelper.copyStackWithSize(itemStack,
+//										new ItemStack(hitBlock).getCount() * new ItemStack(hitBlock).getCount()))
+//								.orElse(new ItemStack(hitBlock));
+//						if (smeltStack.getItem() != new ItemStack(hitBlock).getItem()) {
+//							if (smeltStack.getItem() instanceof BlockItem) {
+//								BlockItem smeltBlock = (BlockItem) smeltStack.getItem();
+//								worldIn.destroyBlock(hitPos, false);
+//								worldIn.setBlockAndUpdate(hitPos, smeltBlock.getBlock().defaultBlockState());
+//							} else {
+//								if (worldIn.random.nextInt(20) % 3 == 0) {
+//									worldIn.addFreshEntity(new ItemEntity(worldIn, hitPos.getX(), hitPos.getY(),
+//											hitPos.getZ(), smeltStack));
+//								}
+//								worldIn.destroyBlock(hitPos, false);
+//							}
+//						} else {
+//							if (!hitBlock.defaultBlockState().isAir() && hitBlock != BlockInit.beyond_flames.get()
+//									&& hitBlock != Blocks.FIRE) {
+//								if (hitBlock.isFlammable(hitBlock.defaultBlockState(), worldIn,
+//										((BlockHitResult) trace).getBlockPos(),
+//										((BlockHitResult) trace).getDirection())) {
+//									BlockPos blockpos1 = hitPos.relative(((BlockHitResult) trace).getDirection());
+//									BlockState blockstate1 = BaseFireBlock.getState(worldIn, blockpos1);
+//									worldIn.setBlock(blockpos1, blockstate1, 11);
+//
+//								}
+//							}
+//						}
 					} else if (moduleStack.getItem() == ItemInit.wicked_module_laser.get()) {
 						if (!hitBlock.defaultBlockState().isAir() && hitBlock != Blocks.FIRE
 								&& hitBlock != BlockInit.beyond_flames.get()) {

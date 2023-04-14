@@ -2,16 +2,16 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "forcesofreality:blocks/wandmakerbase",
-		"2": "forcesofreality:blocks/wandmakerplatform",
-		"3": "forcesofreality:blocks/wandmakercolumn",
-		"4": "forcesofreality:blocks/dark_oak",
-		"5": "forcesofreality:blocks/dark_oak_top",
-		"6": "forcesofreality:blocks/rune_mod_top",
-		"7": "forcesofreality:blocks/gold_block",
-		"8": "forcesofreality:blocks/mirror",
-		"9": "forcesofreality:blocks/mirror_animated",
-		"particle": "forcesofreality:blocks/wandmakerbase"
+		"0": "forcesofreality:block/wandmakerbase",
+		"2": "forcesofreality:block/wandmakerplatform",
+		"3": "forcesofreality:block/wandmakercolumn",
+		"4": "forcesofreality:block/dark_oak",
+		"5": "forcesofreality:block/dark_oak_top",
+		"6": "forcesofreality:block/rune_mod_top",
+		"7": "forcesofreality:block/gold_block",
+		"8": "forcesofreality:block/mirror",
+		"9": "forcesofreality:block/mirror_animated",
+		"particle": "forcesofreality:block/wandmakerbase"
 	},
 	"elements": [
 		{

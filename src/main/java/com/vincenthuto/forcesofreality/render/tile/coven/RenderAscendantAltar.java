@@ -2,9 +2,9 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityAscendantAltar;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -44,7 +44,7 @@ public class RenderAscendantAltar implements BlockEntityRenderer<BlockEntityAsce
 			matrixStackIn.pushPose();
 			matrixStackIn.translate(x, y, z);
 			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 0.5F);
-			matrixStackIn.mulPose(Vector3f.YP.rotation(yRotate));
+			matrixStackIn.mulPose(Vector3.YP.rotation(yRotate).toMoj());
 			MultiBufferSource.BufferSource irendertypebuffer$impl = MultiBufferSource
 					.immediate(Tesselator.getInstance().getBuilder());
 			//VertexConsumer ivertexbuilder = irendertypebuffer$impl.getBuffer(black_candle

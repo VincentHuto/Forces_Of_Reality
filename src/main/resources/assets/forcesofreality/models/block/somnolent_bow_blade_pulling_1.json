@@ -1,6 +1,6 @@
 {
 	"parent": "item/bow",
 	"textures": {
-		"layer0": "forcesofreality:items/somnolent_bow_blade_pulling_1"
+		"layer0": "forcesofreality:item/somnolent_bow_blade_pulling_1"
 	}
 }

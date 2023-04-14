@@ -232,8 +232,7 @@ public class BlockEntityRafflesiaOfFidelity extends BlockEntityRaffInventory {
 			cooldown = param;
 			return true;
 		case CRAFT_EFFECT_EVENT: {
-			level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(),
-					SoundEvents.AMBIENT_CAVE, SoundSource.BLOCKS, 1, 1, false);
+			level.playLocalSound(worldPosition,SoundEvents.AMBIENT_CAVE.get(), SoundSource.BLOCKS, 1f, 1f, false);
 			return true;
 
 		}

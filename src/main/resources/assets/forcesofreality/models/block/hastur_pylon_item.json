@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "forcesofreality:blocks/hastur_stone_core",
-		"1": "forcesofreality:blocks/hastur_stone_smooth",
-		"particle": "forcesofreality:blocks/hastur_stone_core"
+		"0": "forcesofreality:block/hastur_stone_core",
+		"1": "forcesofreality:block/hastur_stone_smooth",
+		"particle": "forcesofreality:block/hastur_stone_core"
 	},
 	"elements": [
 		{

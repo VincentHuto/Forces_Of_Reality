@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/integral_cog"
+       "layer0": "forcesofreality:item/integral_cog"
    }
 }

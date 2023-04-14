@@ -4,10 +4,10 @@ import javax.annotation.Nonnull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.summon.EntityBlackGoat;
 import com.vincenthuto.forcesofreality.model.entity.summon.ModelBlackGoat;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -23,7 +23,7 @@ public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat
 	protected static final ResourceLocation TEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
 			"textures/entity/black_goat/model_black_goat.png");
 	public static final ResourceLocation GLASSTEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/blocks/end_portal_circle.png");
+			"textures/block/end_portal_circle.png");
 
 	public RenderBlackGoat(Context renderManagerIn) {
 		super(renderManagerIn, new ModelBlackGoat(renderManagerIn.bakeLayer(ModelBlackGoat.LAYER_LOCATION)), 0.5f);
@@ -53,7 +53,7 @@ public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat
 					escale += 0.08f;
 					matrix.scale(escale, escale, escale);
 				}
-				matrix.mulPose(Vector3f.YP.rotation(e * escale * 0.3f));
+				matrix.mulPose(Vector3.YP.rotation(e * escale * 0.3f).toMoj());
 				VertexConsumer builder = buf.getBuffer(RenderType.entityTranslucent(GLASSTEXTURE));
 				int color = 0xB6B900;
 				int r = color >> 16 & 255, g = color & 255, b = color >> 16 & 255;
@@ -80,7 +80,7 @@ public class RenderBlackGoat extends MobRenderer<EntityBlackGoat, ModelBlackGoat
 		 * float d = entityIn.deathTicks; float dscale = d * 0.005f + 0.8f; if (d > 0) {
 		 * // matrix.scale(scale, scale, scale); matrix.translate(0, 0.1, 0);
 		 * matrix.scale(1, 1, 1); if (dscale > 5) { dscale -= 0.08f;
-		 * matrix.scale(dscale, dscale, dscale); } matrix.rotate(Vector3f.YP.rotation(d
+		 * matrix.scale(dscale, dscale, dscale); } matrix.rotate(Vector3.YP.rotation(d
 		 * * dscale * 0.3f)); IVertexBuilder builder =
 		 * buf.getBuffer(RenderType.getEntityTranslucent(GLASSTEXTURE)); int color =
 		 * 0xB6B900; int r = color >> 16 & 255, g = color & 255, b = color >> 16 & 255;

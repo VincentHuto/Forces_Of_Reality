@@ -11,10 +11,10 @@ import com.vincenthuto.hutoslib.math.Vector3;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -104,7 +104,7 @@ public class EntityStarStrike extends ThrowableProjectile {
 
 	@Nonnull
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -208,10 +208,10 @@ public class EntityStarStrike extends ThrowableProjectile {
 				LivingEntity thrower = (LivingEntity) getOwner();
 				if (thrower != null) {
 					Player player = thrower instanceof Player ? (Player) thrower : null;
-					target.hurt(player == null ? DamageSource.mobAttack(thrower) : DamageSource.playerAttack(player),
+					target.hurt(player == null ? thrower.damageSources().mobAttack(target) : target.damageSources().playerAttack(player),
 							evil ? 12 : 7);
 				} else
-					target.hurt(DamageSource.GENERIC, evil ? 12 : 7);
+					target.hurt(target.damageSources().generic(), evil ? 12 : 7);
 
 				remove(RemovalReason.KILLED);
 			}

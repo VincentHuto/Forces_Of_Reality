@@ -1,14 +1,14 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "forcesofreality:blocks/anointed_iron_block",
-		"2": "forcesofreality:blocks/anointing_focus",
-		"3": "forcesofreality:blocks/log_big_oak",
-		"6": "forcesofreality:blocks/blade",
-		"7": "forcesofreality:blocks/auric_block",
-		"9": "forcesofreality:blocks/log_big_oak_top",
-		"11": "forcesofreality:blocks/anointed_flames",
-		"particle": "forcesofreality:blocks/anointed_iron_block"
+		"0": "forcesofreality:block/anointed_iron_block",
+		"2": "forcesofreality:block/anointing_focus",
+		"3": "forcesofreality:block/log_big_oak",
+		"6": "forcesofreality:block/blade",
+		"7": "forcesofreality:block/auric_block",
+		"9": "forcesofreality:block/log_big_oak_top",
+		"11": "forcesofreality:block/anointed_flames",
+		"particle": "forcesofreality:block/anointed_iron_block"
 	},
 	"elements": [
 		{

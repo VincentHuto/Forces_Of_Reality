@@ -16,7 +16,7 @@ import com.vincenthuto.hutoslib.math.DimensionalPosition;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -91,7 +91,7 @@ public class ItemResonanceDestabalizer extends Item {
 					DimensionalPosition p = lastPos.get();
 					BlockPos bp = p.getPosition();
 					ResourceLocation dimRL = p.getDimension();
-					ResourceKey<Level> key = ResourceKey.create(Registry.DIMENSION_REGISTRY, dimRL);
+					ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, dimRL);
 					ServerLevel ovw = world.getServer().getLevel(key);
 					serverPlayer.teleportTo(ovw, bp.getX() + 0.5, bp.getY(), bp.getZ() + 0.5, serverPlayer.getYRot(),
 							serverPlayer.getXRot());

@@ -75,7 +75,8 @@ public class SoundInit {
 	public static final RegistryObject<SoundEvent> ITEM_BOW_BLADE_CLOSE = makeSoundEvent("item.bow_blade.close");
 
 	private static RegistryObject<SoundEvent> makeSoundEvent(String name) {
-		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(ForcesOfReality.MOD_ID, name)));
+		return SOUND_EVENTS.register(name, () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(ForcesOfReality.MOD_ID, name), 1f));
+
 	}
 
 }

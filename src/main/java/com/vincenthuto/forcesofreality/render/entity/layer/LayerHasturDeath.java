@@ -2,13 +2,14 @@ package com.vincenthuto.forcesofreality.render.entity.layer;
 
 import java.util.Random;
 
+import org.joml.Matrix4f;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityHastur;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelHastur;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -79,12 +80,12 @@ public class LayerHasturDeath extends RenderLayer<EntityHastur, ModelHastur> {
 			matrixStackIn.pushPose();
 			matrixStackIn.translate(0.0D, -0D, 0.0D);
 			for (int i = 0; i < (f5 * f5) / 2.0F * 90.0F; ++i) {
-				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(random.nextFloat() * -360.0F));
-				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(random.nextFloat() * 360.0F));
-				matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(random.nextFloat() * -360.0F));
-				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(random.nextFloat() * 360.0F));
-				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(random.nextFloat() * -360.0F));
-				matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(random.nextFloat() * 360.0F + f5 * 90.0F));
+				matrixStackIn.mulPose(Vector3.XP.rotationDegrees(random.nextFloat() * -360.0F).toMoj());
+				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(random.nextFloat() * 360.0F).toMoj());
+				matrixStackIn.mulPose(Vector3.ZP.rotationDegrees(random.nextFloat() * -360.0F).toMoj());
+				matrixStackIn.mulPose(Vector3.XP.rotationDegrees(random.nextFloat() * 360.0F).toMoj());
+				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(random.nextFloat() * -360.0F).toMoj());
+				matrixStackIn.mulPose(Vector3.ZP.rotationDegrees(random.nextFloat() * 360.0F + f5 * 90.0F).toMoj());
 				float f3 = random.nextFloat() * 2;
 				float f4 = random.nextFloat() * -2;
 				Matrix4f matrix4f = matrixStackIn.last().pose();

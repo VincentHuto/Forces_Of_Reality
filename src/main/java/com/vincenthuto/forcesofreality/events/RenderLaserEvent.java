@@ -38,11 +38,11 @@ public class RenderLaserEvent {
 //					MultiBufferSource.BufferSource impl = MultiBufferSource
 //							.immediate(Tesselator.getInstance().getBuilder());
 //					evt.getPoseStack().translate(0, 1.5, 0);
-//					evt.getPoseStack().mulPose(new Quaternion(Vector3f.XP, 180, true));
+//					evt.getPoseStack().mulPose(new Quaternion(Vector3.XP, 180, true));
 //					model.setupAnim(evt.getEntityLiving(), evt.getPlayer().animationPosition,
 //							evt.getPlayer().animationSpeed, evt.getEntityLiving().tickCount,
 //							evt.getPlayer().getYHeadRot() * .25f, evt.getPlayer().getXRot());
-//					evt.getPoseStack().mulPose(new Quaternion(Vector3f.YP, evt.getPlayer().getYRot(), true));
+//					evt.getPoseStack().mulPose(new Quaternion(Vector3.YP, evt.getPlayer().getYRot(), true));
 //					VertexConsumer ivertexbuilder = impl
 //							.getBuffer(model.renderType((new ResourceLocation(ForcesOfReality.MOD_ID,
 //									"textures/entity/true_xanthous_king/model_true_xanthous_king.png"))));

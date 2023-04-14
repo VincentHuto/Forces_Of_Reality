@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/occular_seed"
+       "layer0": "forcesofreality:item/occular_seed"
    }
 }

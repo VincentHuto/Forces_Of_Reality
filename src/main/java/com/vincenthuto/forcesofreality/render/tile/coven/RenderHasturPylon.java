@@ -3,11 +3,11 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.model.block.ModelHasturPylon;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityHasturPylon;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -34,11 +34,11 @@ public class RenderHasturPylon implements BlockEntityRenderer<BlockEntityHasturP
 		float y = (float) Math.cos((ticks + 50) / 5F) / 10F;
 		matrixStackIn.pushPose();
 		matrixStackIn.translate(0, y, 0);
-		matrixStackIn.mulPose(Vector3f.YP.rotation((float) (0.05 * ticks)));
-		matrixStackIn.mulPose(Vector3f.ZN.rotationDegrees(180));
+		matrixStackIn.mulPose(Vector3.YP.rotation((float) (0.05 * ticks)).toMoj());
+		matrixStackIn.mulPose(Vector3.ZN.rotationDegrees(180).toMoj());
 		MultiBufferSource.BufferSource impl = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 		VertexConsumer ivertexbuilder = impl.getBuffer(
-				pylon.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/hastur_pylon.png")));
+				pylon.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/block/hastur_pylon.png")));
 		pylon.renderToBuffer(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F,
 				1.0F, 1.0F);
 		impl.endBatch();

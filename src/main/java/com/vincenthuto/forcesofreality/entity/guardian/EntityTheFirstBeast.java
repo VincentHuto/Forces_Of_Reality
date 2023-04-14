@@ -21,6 +21,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -367,7 +368,7 @@ private static final String TAG_SOURCE_Z = "sourcesZ";
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -455,12 +456,11 @@ private static final String TAG_SOURCE_Z = "sourcesZ";
 		this.playSound(SoundInit.ENTITY_BEAST_FROM_BEYOND_STEP.get(), 0.15F, 1.0F);
 	}
 
+	
 	@Override
 	protected void populateDefaultEquipmentSlots(RandomSource p_217055_, DifficultyInstance p_217056_) {
 		super.populateDefaultEquipmentSlots(p_217055_, p_217056_);
-		this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(ItemInit.first_beast_crossbow.get()));
-
-	}
+		this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(ItemInit.first_beast_crossbow.get()));	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag cmp) {

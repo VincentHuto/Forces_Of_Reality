@@ -2,10 +2,10 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntitySacrificePyre;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -40,9 +40,9 @@ public class RenderSacrificialPyre implements BlockEntityRenderer<BlockEntitySac
 			f1 += ((float) Math.PI * 2F);
 		}
 		float f2 = te.pageAngle + f1 * partialTicks;
-		matrixStackIn.mulPose(Vector3f.YP.rotation(-f2 + 55));
-		matrixStackIn.mulPose(Vector3f.ZN.rotationDegrees(180));
-		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(10));
+		matrixStackIn.mulPose(Vector3.YP.rotation(-f2 + 55).toMoj());
+		matrixStackIn.mulPose(Vector3.ZN.rotationDegrees(180).toMoj());
+		matrixStackIn.mulPose(Vector3.XP.rotationDegrees(10).toMoj());
 
 		float f3 = Mth.lerp(partialTicks, te.oFlip, te.flip);
 		float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
@@ -82,7 +82,7 @@ public class RenderSacrificialPyre implements BlockEntityRenderer<BlockEntitySac
 			matrixStackIn.pushPose();
 			matrixStackIn.translate(x, y, z);
 			float yRotate = (float) Math.max(1.6F, Math.sin(ticks * 1.1F) / 2F + 0.5F);
-			matrixStackIn.mulPose(Vector3f.YP.rotation(yRotate));
+			matrixStackIn.mulPose(Vector3.YP.rotation(yRotate).toMoj());
 			MultiBufferSource.BufferSource irendertypebuffer$impl1 = MultiBufferSource
 					.immediate(Tesselator.getInstance().getBuilder());
 //			VertexConsumer ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(boneHoriz

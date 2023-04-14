@@ -4,11 +4,11 @@ import javax.annotation.Nonnull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.projectile.EntityDreadRocketDirected;
 import com.vincenthuto.forcesofreality.model.entity.summon.ModelDreadRocketTracking;
+import com.vincenthuto.hutoslib.math.Quaternion;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -41,8 +41,8 @@ public class RenderDreadRocketDirected extends EntityRenderer<EntityDreadRocketD
 		matrixStackIn.pushPose();
 		matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
 		matrixStackIn.translate(0, -1, 0);
-		matrixStackIn.mulPose(new Quaternion(Vector3f.YP, (float) entityIn.getDeltaMovement().z * 5, false));
-		matrixStackIn.mulPose(new Quaternion(Vector3f.YP, (float) entityIn.getDeltaMovement().x * 5, false));
+		matrixStackIn.mulPose(new Quaternion(Vector3.YP, (float) entityIn.getDeltaMovement().z * 5, false).toMoj());
+		matrixStackIn.mulPose(new Quaternion(Vector3.YP, (float) entityIn.getDeltaMovement().x * 5, false).toMoj());
 
 		this.leashKnotModel.setupAnim(entityIn, 0.0F, 0.0F, 0.0F, 5.0F, 0.0F);
 		VertexConsumer ivertexbuilder = bufferIn.getBuffer(this.leashKnotModel.renderType(TEXTURE));

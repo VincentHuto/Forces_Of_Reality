@@ -21,6 +21,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -188,7 +189,7 @@ public class EntityDarkYoung extends Monster implements IEntityAdditionalSpawnDa
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -334,7 +335,7 @@ public class EntityDarkYoung extends Monster implements IEntityAdditionalSpawnDa
 			HLPacketHandler.sendLightningSpawn(this.position().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 					this.level.dimension(), ParticleColor.PURPLE, 2, 10, 9, 0.2f);
 			if (target.position().distanceTo(this.position()) < random.nextInt(7)) {
-				target.hurt(DamageSource.LIGHTNING_BOLT, 4f);
+				target.hurt(target.damageSources().lightningBolt(), 4f);
 			}
 		}
 	}

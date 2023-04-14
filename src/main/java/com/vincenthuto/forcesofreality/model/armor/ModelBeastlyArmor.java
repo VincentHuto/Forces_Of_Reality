@@ -20,8 +20,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.common.util.Lazy;
 
 public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> {
@@ -47,7 +47,7 @@ public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> 
 	public static final Lazy<ModelBeastlyArmor<LivingEntity>> boots = Lazy.of(
 			() -> new ModelBeastlyArmor<>(Minecraft.getInstance().getEntityModels().bakeLayer(BEASTLY_BOOTS_LAYER)));
 
-	public static LayerDefinition createBodyLayer(EquipmentSlot slot) {
+	public static LayerDefinition createBodyLayer(ArmorItem.Type slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -112,10 +112,10 @@ public class ModelBeastlyArmor<T extends LivingEntity> extends HumanoidModel<T> 
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
+	public static LayerDefinition createHeadLayer(ArmorItem.Type slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
-		if (slot.equals(EquipmentSlot.HEAD)) {
+		if (slot.equals(ArmorItem.Type.HELMET)) {
 			PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(108, 153)
 					.addBox(6.0F, -13.0F, -4.0F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)).texOffs(108, 153)
 					.addBox(3.0F, -12.0F, -3.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(108, 154)

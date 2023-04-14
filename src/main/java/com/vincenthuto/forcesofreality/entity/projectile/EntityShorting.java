@@ -12,10 +12,10 @@ import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -114,7 +114,7 @@ public class EntityShorting extends ThrowableProjectile {
 
 	@Nonnull
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -142,7 +142,7 @@ public class EntityShorting extends ThrowableProjectile {
 		}
 		case ENTITY: {
 			if (((EntityHitResult) pos).getEntity() == getTargetEntity()) {
-				((EntityHitResult) pos).getEntity().hurt(DamageSource.GENERIC, 2f);
+				((EntityHitResult) pos).getEntity().hurt(getTargetEntity().damageSources().generic(), 2f);
 				remove(RemovalReason.KILLED);
 
 			}
@@ -213,11 +213,11 @@ public class EntityShorting extends ThrowableProjectile {
 					Player player = thrower instanceof Player ? (Player) thrower : null;
 					if (thrower != null)
 						target.hurt(
-								player == null ? DamageSource.mobAttack(thrower) : DamageSource.playerAttack(player),
+								player == null ? thrower.damageSources().mobAttack(thrower) : player.damageSources().playerAttack(player),
 								evil ? 12 : 7);
 
 				} else
-					target.hurt(DamageSource.GENERIC, evil ? 12 : 7);
+					target.hurt(target.damageSources().generic(), evil ? 12 : 7);
 				remove(RemovalReason.KILLED);
 			}
 

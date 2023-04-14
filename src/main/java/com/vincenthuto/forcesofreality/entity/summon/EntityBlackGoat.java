@@ -56,7 +56,7 @@ public class EntityBlackGoat extends Monster {
 		super.doPush(entityIn);
 		if (!(entityIn instanceof EntityBlackGoat || entityIn instanceof EntityDarkYoung
 				|| entityIn instanceof EntityUzouthrhix)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+			entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 		}
 
 	}
@@ -97,7 +97,7 @@ public class EntityBlackGoat extends Monster {
 	@Override
 	public void playerTouch(Player entityIn) {
 		super.playerTouch(entityIn);
-		entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+		entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 
 	}
 

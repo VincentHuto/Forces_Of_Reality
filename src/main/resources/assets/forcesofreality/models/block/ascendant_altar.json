@@ -2,12 +2,12 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "forcesofreality:blocks/gold_block",
-		"1": "forcesofreality:blocks/quartz_block_bottom",
-		"2": "forcesofreality:blocks/quartz_block_chiseled_top",
-		"3": "forcesofreality:blocks/quartz_block_lines",
-		"4": "forcesofreality:blocks/gilded_wool",
-		"particle": "forcesofreality:blocks/gold_block"
+		"0": "forcesofreality:block/gold_block",
+		"1": "forcesofreality:block/quartz_block_bottom",
+		"2": "forcesofreality:block/quartz_block_chiseled_top",
+		"3": "forcesofreality:block/quartz_block_lines",
+		"4": "forcesofreality:block/gilded_wool",
+		"particle": "forcesofreality:block/gold_block"
 	},
 	"elements": [
 		{

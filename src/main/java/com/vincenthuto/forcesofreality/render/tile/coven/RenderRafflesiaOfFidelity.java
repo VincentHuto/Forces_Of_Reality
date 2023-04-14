@@ -2,15 +2,15 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.BlockEntityRafflesiaOfFidelity;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntityRafflesiaOfFidelity> {
@@ -43,10 +43,10 @@ public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntit
 			matrixStackIn.pushPose();
 			if (i == 0) {
 				matrixStackIn.translate(0.5F, 1.5F, 0.5F);
-				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(angles[i] + (float) time));
+				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(angles[i] + (float) time).toMoj());
 				// Edit True Radius
 				matrixStackIn.translate(0.025F, -0.5F, 0.025F);
-				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
+				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
 				// Edit Radius Movement
 				matrixStackIn.translate(0D, 0.175D + i * 0.55, 0F);
 				// Block/Item Scale
@@ -54,16 +54,16 @@ public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntit
 				ItemStack stack = te.getItemHandler().getStackInSlot(i);
 				Minecraft mc = Minecraft.getInstance();
 				if (!stack.isEmpty()) {
-					mc.getItemRenderer().renderStatic(stack, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
-							matrixStackIn, bufferIn, i);
+					mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, combinedOverlayIn,
+							matrixStackIn, bufferIn, te.getLevel(), i);
 				}
 
 			} else {
 				matrixStackIn.translate(0.5F, 2.5f, 0.5F);
-				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(angles[i] + (float) time));
+				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(angles[i] + (float) time).toMoj());
 				// Edit True Radius
 				matrixStackIn.translate(.1, -1.7F, 0.65F);
-				matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90f));
+				matrixStackIn.mulPose(Vector3.YP.rotationDegrees(90f).toMoj());
 				// Edit Radius Movement
 				matrixStackIn.translate(0D, 0.175f + 0.25, 0F);
 				// Block/Item Scale
@@ -71,8 +71,8 @@ public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntit
 				ItemStack stack = te.getItemHandler().getStackInSlot(i);
 				Minecraft mc = Minecraft.getInstance();
 				if (!stack.isEmpty()) {
-					mc.getItemRenderer().renderStatic(stack, TransformType.FIXED, combinedLightIn, combinedOverlayIn,
-							matrixStackIn, bufferIn, i);
+					mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, combinedOverlayIn,
+							matrixStackIn, bufferIn, te.getLevel(), i);
 				}
 			}
 			matrixStackIn.popPose();
@@ -107,13 +107,13 @@ public class RenderRafflesiaOfFidelity implements BlockEntityRenderer<BlockEntit
 			matrixStackIn.pushPose();
 			matrixStackIn.translate(x, y, z);
 			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 0.5F);
-			matrixStackIn.mulPose(Vector3f.YP.rotation(yRotate));
-			matrixStackIn.mulPose(Vector3f.ZP.rotation(135));
+			matrixStackIn.mulPose(Vector3.YP.rotation(yRotate).toMoj());
+			matrixStackIn.mulPose(Vector3.ZP.rotation(135).toMoj());
 
 			MultiBufferSource.BufferSource irendertypebuffer$impl = MultiBufferSource
 					.immediate(Tesselator.getInstance().getBuilder());
 //			VertexConsumer ivertexbuilder = irendertypebuffer$impl.getBuffer(magatamas
-//					.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/end_portal_red.png")));
+//					.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/block/end_portal_red.png")));
 //			magatamas.renderToBuffer(matrixStackIn, ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F,
 //					1.0F, 1.0F);
 			irendertypebuffer$impl.endBatch();

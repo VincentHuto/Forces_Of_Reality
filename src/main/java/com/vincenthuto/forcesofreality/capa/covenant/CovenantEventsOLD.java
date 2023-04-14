@@ -21,7 +21,7 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 //import net.minecraft.server.level.ServerLevel;
 //import net.minecraft.server.level.ServerPlayer;
 //import net.minecraft.world.entity.Entity;
-//import net.minecraft.world.entity.EquipmentSlot;
+//import net.minecraft.world.entity.ArmorItem.Type;
 //import net.minecraft.world.entity.player.Player;
 //import net.minecraft.world.level.Level;
 //import net.minecraft.world.phys.AABB;
@@ -126,8 +126,8 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 //			if (e.getEntityLiving() instanceof Player) {
 //				Player player = (Player) e.getEntityLiving();
 //				if (player != null) {
-//					EquipmentSlot slotChanged = e.getSlot();
-//					if (slotChanged == EquipmentSlot.CHEST) {
+//					ArmorItem.Type slotChanged = e.getSlot();
+//					if (slotChanged == ArmorItem.Type.CHEST) {
 //						if (e.getTo().getItem() == ItemInit.seraph_wings.get()) {
 //							if (!player.isCreative()) {
 //								if (player.level.isClientSide) {
@@ -207,7 +207,7 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 //			Player player = e.player;
 //			if (!e.player.level.isClientSide)
 //				if (player != null) {
-//					if (e.player.getItemBySlot(EquipmentSlot.CHEST).getItem() == ItemInit.seraph_wings.get()) {
+//					if (e.player.getItemBySlot(ArmorItem.Type.CHEST).getItem() == ItemInit.seraph_wings.get()) {
 //						// System.out.println("EQUIPED WINGS");
 //						if (!player.getCommandSenderWorld().isClientSide) {
 //							if (!player.isCreative()) {
@@ -287,7 +287,7 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 ////
 ////						GlStateManager._enableAlphaTest();
 ////						GlStateManager._enableBlend();
-////						Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(renderItem),
+////						Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(event.getPoseStack(), new ItemStack(renderItem),
 ////								point.x, point.y);
 ////						// GuiUtil.drawScaledTexturedModalRect(point.x, point.y, 0, 0, 16, 16, 0.062f);
 ////						GlStateManager._disableBlend();
@@ -303,8 +303,8 @@ package com.vincenthuto.forcesofreality.capa.covenant;
 ////						.bind(new ResourceLocation("minecraft", "textures/gui/icons.png"));
 ////
 ////				// Coven color Overlay
-////				if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() != ItemInit.influence_supressor.get()
-////						&& !(EnchantmentHelper.getEnchantments(player.getItemBySlot(EquipmentSlot.HEAD))
+////				if (player.getItemBySlot(ArmorItem.Type.HEAD).getItem() != ItemInit.influence_supressor.get()
+////						&& !(EnchantmentHelper.getEnchantments(player.getItemBySlot(ArmorItem.Type.HEAD))
 ////								.containsKey(EnchantmentInit.influence_suppression.get()))) {
 ////					for (EnumCovenants covens : coven.getDevotion().keySet()) {
 ////						if (coven.getDevotionByCoven(covens) >= 10) {

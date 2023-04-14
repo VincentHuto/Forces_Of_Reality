@@ -27,8 +27,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.Level.ExplosionInteraction;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -260,7 +260,7 @@ public class BlockOccularHeap extends Block implements IBlockDevotionStation, En
 								true);
 						worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 						worldIn.explode(null, pos.getX(), pos.getY(), pos.getZ(), 1.0F,
-								Explosion.BlockInteraction.NONE);
+								ExplosionInteraction.NONE);
 						EntityDarkYoung summon = new EntityDarkYoung(EntityInit.dark_young.get(), worldIn);
 						summon.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 						worldIn.addFreshEntity(summon);

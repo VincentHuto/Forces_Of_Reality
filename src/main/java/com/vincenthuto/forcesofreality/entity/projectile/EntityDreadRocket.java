@@ -12,10 +12,10 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -23,8 +23,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.Level.ExplosionInteraction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -109,7 +109,7 @@ public class EntityDreadRocket extends ThrowableProjectile {
 
 	@Nonnull
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -138,7 +138,7 @@ public class EntityDreadRocket extends ThrowableProjectile {
 			if (!(block instanceof BushBlock) && !(block instanceof LeavesBlock))
 				if (!level.isClientSide) {
 					this.level.explode(this, this.getX(), this.getY() + this.getBbHeight() / 16.0F,
-							this.getZ(), 1.0F, Explosion.BlockInteraction.NONE);
+							this.getZ(), 1.0F, ExplosionInteraction.NONE);
 				}
 			remove(RemovalReason.KILLED);
 			break;
@@ -208,7 +208,6 @@ public class EntityDreadRocket extends ThrowableProjectile {
 				lockY = target.getY();
 				lockZ = target.getZ();
 			}
-
 			Vector3 targetVec = evil ? new Vector3(lockX, lockY, lockZ) : Vector3.fromEntityCenter(target);
 			Vector3 diffVec = targetVec.subtract(thisVec);
 			Vector3 motionVec = diffVec.normalize().multiply(evil ? 0.5 : 0.6);
@@ -221,10 +220,10 @@ public class EntityDreadRocket extends ThrowableProjectile {
 				LivingEntity thrower = (LivingEntity) getOwner();
 				if (thrower != null) {
 					Player player = thrower instanceof Player ? (Player) thrower : null;
-					target.hurt(player == null ? DamageSource.mobAttack(thrower) : DamageSource.playerAttack(player),
+					target.hurt(player == null ? thrower.damageSources().mobAttack(thrower) : player.damageSources().playerAttack(player),
 							evil ? 12 : 7);
 				} else
-					target.hurt(DamageSource.GENERIC, evil ? 12 : 7);
+					target.hurt(target.damageSources().generic(), evil ? 12 : 7);
 
 				remove(RemovalReason.KILLED);
 			}

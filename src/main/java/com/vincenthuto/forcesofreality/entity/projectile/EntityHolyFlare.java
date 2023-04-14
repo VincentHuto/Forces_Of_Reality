@@ -10,7 +10,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -62,7 +61,7 @@ public class EntityHolyFlare extends Monster {
 		super.doPush(entityIn);
 		if (!(entityIn instanceof EntityHolyFlare || entityIn instanceof EntitySeraphim
 				|| entityIn instanceof EntityThrone)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 1.5f);
+			entityIn.hurt(entityIn.damageSources().mobAttack(this), 1.5f);
 			((LivingEntity) entityIn).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 2));
 
 		}

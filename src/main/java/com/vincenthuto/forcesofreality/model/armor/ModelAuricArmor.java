@@ -16,8 +16,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.common.util.Lazy;
 
 public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
@@ -42,10 +42,10 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 	public static final Lazy<ModelAuricArmor<LivingEntity>> boots = Lazy
 			.of(() -> new ModelAuricArmor<>(Minecraft.getInstance().getEntityModels().bakeLayer(AURIC_BOOTS_LAYER)));
 
-	public static LayerDefinition createBodyLayer(EquipmentSlot slot) {
+	public static LayerDefinition createBodyLayer(ArmorItem.Type slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
-		if (slot.equals(EquipmentSlot.CHEST)) {
+		if (slot.equals(ArmorItem.Type.CHESTPLATE)) {
 			PartDefinition body = partdefinition.addOrReplaceChild("body",
 					CubeListBuilder.create().texOffs(16, 16)
 							.addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(16, 104)
@@ -71,7 +71,7 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 
 		}
 
-		if (slot.equals(EquipmentSlot.LEGS)) {
+		if (slot.equals(ArmorItem.Type.LEGGINGS)) {
 
 			PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg",
 					CubeListBuilder.create().texOffs(0, 16)
@@ -87,7 +87,7 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 
 		}
 
-		if (slot.equals(EquipmentSlot.FEET)) {
+		if (slot.equals(ArmorItem.Type.BOOTS)) {
 			PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg",
 					CubeListBuilder.create().texOffs(0, 16)
 							.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.75F)).texOffs(154, 173)
@@ -106,10 +106,10 @@ public class ModelAuricArmor<T extends LivingEntity> extends HumanoidModel<T> {
 
 	}
 
-	public static LayerDefinition createHeadLayer(EquipmentSlot slot) {
+	public static LayerDefinition createHeadLayer(ArmorItem.Type slot) {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0);
 		PartDefinition partdefinition = meshdefinition.getRoot();
-		if (slot.equals(EquipmentSlot.HEAD)) {
+		if (slot.equals(ArmorItem.Type.HELMET)) {
 
 			PartDefinition head = partdefinition.addOrReplaceChild("head",
 					CubeListBuilder.create().texOffs(0, 0)

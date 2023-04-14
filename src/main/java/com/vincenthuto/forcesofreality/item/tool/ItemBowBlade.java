@@ -130,7 +130,8 @@ public class ItemBowBlade extends ProjectileWeaponItem {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		DamageSource bowBladeSource = DamageSource.playerAttack((Player) attacker);
+		DamageSource bowBladeSource = attacker.damageSources().playerAttack((Player) attacker);
+		
 		CompoundTag compound = stack.getTag();
 
 		int j = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentInit.bow_blade_fire_aspect.get(), stack);

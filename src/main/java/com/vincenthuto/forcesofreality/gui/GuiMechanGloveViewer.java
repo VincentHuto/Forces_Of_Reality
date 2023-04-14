@@ -50,6 +50,7 @@ public class GuiMechanGloveViewer extends Screen {
 		this.icon = currentBinderIn;
 		this.player = playerIn;
 	}
+
 	@Override
 	protected void init() {
 		left = width / 2 - guiWidth / 2;
@@ -214,9 +215,9 @@ public class GuiMechanGloveViewer extends Screen {
 					for (int i = 0; i < renderables.size(); i++) {
 						if (binderHandler.getStackInSlot(i).getItem() instanceof ItemMechanModuleBase) {
 							ItemMechanModuleBase pat = (ItemMechanModuleBase) binderHandler.getStackInSlot(i).getItem();
-							Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(new ItemStack(pat.asItem()),
-									((GuiButtonTextured) renderables.get(i)).x + 2,
-									((GuiButtonTextured) renderables.get(i)).y + 2);
+							Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(matrixStack,
+									new ItemStack(pat.asItem()), ((GuiButtonTextured) renderables.get(i)).getX() + 2,
+									((GuiButtonTextured) renderables.get(i)).getY() + 2);
 						}
 					}
 				}
@@ -224,7 +225,7 @@ public class GuiMechanGloveViewer extends Screen {
 		}
 
 		{
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(icon, -1, -1);
+			Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(matrixStack, icon, -1, -1);
 
 		}
 

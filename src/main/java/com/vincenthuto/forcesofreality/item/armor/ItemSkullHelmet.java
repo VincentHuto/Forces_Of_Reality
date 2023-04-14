@@ -1,12 +1,11 @@
 package com.vincenthuto.forcesofreality.item.armor;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class ItemSkullHelmet extends ArmorItem {
 
-	public ItemSkullHelmet(ArmorMaterial materialIn, EquipmentSlot slot, Properties builderIn) {
+	public ItemSkullHelmet(ArmorMaterial materialIn, ArmorItem.Type slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
 	}
 
@@ -14,11 +13,11 @@ public class ItemSkullHelmet extends ArmorItem {
 //	@Override
 //	@OnlyIn(Dist.CLIENT)
 //	public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//			EquipmentSlot armorSlot, A _default) {
+//			ArmorItem.Type armorSlot, A _default) {
 //		if (itemStack != ItemStack.EMPTY) {
 //			if (itemStack.getItem() instanceof ArmorItem) {
 //				ModelSkullHelmetNew model = new ModelSkullHelmetNew();
-//				model.head.visible = armorSlot == EquipmentSlot.HEAD;
+//				model.head.visible = armorSlot == ArmorItem.Type.HEAD;
 //				model.young = _default.young;
 //				model.crouching = _default.crouching;
 //				model.riding = _default.riding;

@@ -113,8 +113,8 @@ public class ItemDestructOrbContained extends Item {
 	 * inclusive of all positions in the AABB!
 	 */
 	public static Iterable<BlockPos> getPositionsFromBox(AABB box) {
-		return getPositionsFromBox(new BlockPos(box.minX, box.minY, box.minZ),
-				new BlockPos(box.maxX, box.maxY, box.maxZ));
+		return getPositionsFromBox(BlockPos.containing(box.minX, box.minY, box.minZ),
+				BlockPos.containing(box.maxX, box.maxY, box.maxZ));
 	}
 
 	/**

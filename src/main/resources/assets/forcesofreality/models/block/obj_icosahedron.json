@@ -3,6 +3,6 @@
   "loader": "forge:obj",
   "model": "forcesofreality:models/block/obj_icosahedron.obj",
   	"textures": {
-		"particle": "forcesofreality:blocks/virtuous_enchanting_table_bottom"
+		"particle": "forcesofreality:block/virtuous_enchanting_table_bottom"
 		}
 }

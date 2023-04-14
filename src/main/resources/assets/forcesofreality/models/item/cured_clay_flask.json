@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/cured_clay_flask"
+       "layer0": "forcesofreality:item/cured_clay_flask"
    }
 }

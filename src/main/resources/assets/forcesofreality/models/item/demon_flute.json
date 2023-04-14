@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "forcesofreality:blocks/bell_handle",
-		"1": "forcesofreality:blocks/end_portal",
-		"particle": "forcesofreality:blocks/bell_handle"
+		"0": "forcesofreality:block/bell_handle",
+		"1": "forcesofreality:block/end_portal",
+		"particle": "forcesofreality:block/bell_handle"
 	},
 	"elements": [
 		{

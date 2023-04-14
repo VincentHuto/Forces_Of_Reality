@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.vincenthuto.hutoslib.math.Quaternion;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -108,11 +108,11 @@ public class ItemBeastCrossbow extends CrossbowItem implements Vanishable {
 						projectileAngle);
 			} else {
 				Vec3 vector3d1 = shooter.getUpVector(1.0F);
-				Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), projectileAngle, true);
+				Quaternion quaternion = new Quaternion(new Vector3(vector3d1), projectileAngle, true);
 				Vec3 vector3d = shooter.getViewVector(1.0F);
-				Vector3f vector3f = new Vector3f(vector3d);
+				Vector3 vector3f = new Vector3(vector3d);
 				vector3f.transform(quaternion);
-				projecBlockEntity.shoot(vector3f.x(), vector3f.y(), vector3f.z(), velocity, inaccuracy);
+				projecBlockEntity.shoot(vector3f.x, vector3f.y, vector3f.z, velocity, inaccuracy);
 			}
 
 			crossbow.hurtAndBreak(flag ? 3 : 1, shooter, (p_220017_1_) -> {

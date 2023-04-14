@@ -3,12 +3,12 @@
   "parent" : "block/block",
   "render_type" : "translucent",
   "textures" : {
-    "2" : "forcesofreality:blocks/red_eye_blink",
-    "3" : "forcesofreality:blocks/eye2",
-    "4" : "forcesofreality:blocks/blue_eye_blink",
-    "5" : "forcesofreality:blocks/sphere_inside",
-    "6" : "forcesofreality:blocks/purple_eye_blink",
-    "particle" : "forcesofreality:blocks/sphere_inside"
+    "2" : "forcesofreality:block/red_eye_blink",
+    "3" : "forcesofreality:block/eye2",
+    "4" : "forcesofreality:block/blue_eye_blink",
+    "5" : "forcesofreality:block/sphere_inside",
+    "6" : "forcesofreality:block/purple_eye_blink",
+    "particle" : "forcesofreality:block/sphere_inside"
   },
   "elements" : [ {
     "from" : [ 7, 10, 7 ],

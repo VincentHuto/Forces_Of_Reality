@@ -2,12 +2,12 @@ package com.vincenthuto.forcesofreality.render.entity.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityHastur;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelHastur;
 import com.vincenthuto.forcesofreality.render.entity.guardians.BossColorMap;
+import com.vincenthuto.hutoslib.math.Quaternion;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -51,8 +51,8 @@ public class LayerHasturPortal extends RenderLayer<EntityHastur, ModelHastur> {
 			float scale = 0.35F;
 			double yOffset = -1.5;
 			matrix.translate(0, yOffset, 0);
-			matrix.mulPose(new Quaternion(new Vector3f(0, 1, 0), 90, true));
-			matrix.mulPose(new Quaternion(new Vector3f(0, 1, 0), 180F - (float) angleOf(portal, playerV), true));
+			matrix.mulPose(new Quaternion(new Vector3(0, 1, 0), 90, true).toMoj());
+			matrix.mulPose(new Quaternion(new Vector3(0, 1, 0), 180F - (float) angleOf(portal, playerV), true).toMoj());
 
 			float progress = ((entity.tickCount + partialTicks) % 90) / 90F;
 			scale += (float) Math.cos(2 * Math.PI * progress) / 6F;

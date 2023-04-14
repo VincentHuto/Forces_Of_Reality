@@ -1,6 +1,6 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "forcesofreality:items/discordant_bell"
+       "layer0": "forcesofreality:item/discordant_bell"
    }
 }

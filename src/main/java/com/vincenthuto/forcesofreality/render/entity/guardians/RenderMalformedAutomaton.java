@@ -2,7 +2,6 @@ package com.vincenthuto.forcesofreality.render.entity.guardians;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityMalformedAutomaton;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelMalformedAutomaton;
@@ -63,10 +62,10 @@ public class RenderMalformedAutomaton extends MobRenderer<EntityMalformedAutomat
 	protected void setupRotations(EntityMalformedAutomaton entityLiving, PoseStack matrixStackIn, float ageInTicks,
 			float rotationYaw, float partialTicks) {
 		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-		if (!(entityLiving.animationSpeed < 0.01D)) {
-			float f1 = entityLiving.animationPosition - entityLiving.animationSpeed * (1.0F - partialTicks) + 6.0F;
-			float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
-			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(3.5F * f2));
-		}
+//		if (!(entityLiving.animationSpeed < 0.01D)) {
+//			float f1 = entityLiving.pos - entityLiving.animationSpeed * (1.0F - partialTicks) + 6.0F;
+//			float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
+//			matrixStackIn.mulPose(Vector3.XP.rotationDegrees(3.5F * f2).toMoj());
+//		}
 	}
 }

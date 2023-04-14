@@ -2,10 +2,10 @@ package com.vincenthuto.forcesofreality.render.entity.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.entity.guardian.EntityDarkYoung;
 import com.vincenthuto.forcesofreality.model.entity.guardian.ModelDarkYoung;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 public class LayerDarkYoungDeath extends RenderLayer<EntityDarkYoung, ModelDarkYoung> {
 
 	public static final ResourceLocation GLASSTEXTURE = new ResourceLocation(ForcesOfReality.MOD_ID,
-			"textures/blocks/end_portal_circle.png");
+			"textures/block/end_portal_circle.png");
 
 	public LayerDarkYoungDeath(RenderLayerParent<EntityDarkYoung, ModelDarkYoung> entityRendererIn) {
 		super(entityRendererIn);
@@ -41,7 +41,7 @@ public class LayerDarkYoungDeath extends RenderLayer<EntityDarkYoung, ModelDarkY
 				scale += 0.08f;
 				matrix.scale(scale, scale, scale);
 			}
-			matrix.mulPose(Vector3f.YP.rotation(d * scale * 0.3f));
+			matrix.mulPose(Vector3.YP.rotation(d * scale * 0.3f).toMoj());
 			VertexConsumer builder = buf.getBuffer(RenderType.entityTranslucent(GLASSTEXTURE));
 			int color = 0xB6B900;
 			int r = color >> 16 & 255, g = color & 255, b = color >> 16 & 255;

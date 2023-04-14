@@ -61,13 +61,13 @@ public class ItemCrossedKeys extends Item /* implements IAdornment, IRenderAdorn
 //			RenderType type, float partialTicks) {
 //		if (type == RenderType.HEAD) {
 //			// boolean armor =
-//			// !player.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty();
+//			// !player.getItemStackFromSlot(ArmorItem.TypeType.HEAD).isEmpty();
 //			Lighting.turnBackOn();
-//			matrix.mulPose(Vector3f.XN.rotationDegrees(180f));
+//			matrix.mulPose(Vector3.XN.rotationDegrees(180f).toMoj());
 //			matrix.scale(0.5f, 0.5f, 0.5f);
 //			matrix.translate(0, 1, 0.5);
 //			Minecraft.getInstance().getItemRenderer().renderStatic(new ItemStack(ItemInit.crossed_keys.get()),
-//					TransformType.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
+//					ItemDisplayContext.FIXED, packedLightIn, OverlayTexture.NO_OVERLAY, matrix, buffer);
 //
 //		}
 //	}

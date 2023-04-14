@@ -5,44 +5,29 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-version = '4.10'
+version = '4.2.0'
 group = 'com.vincenthuto.forcesofreality' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'forcesofreality'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
- 
-    mappings channel: 'parchment', version: "2022.10.16-1.19.2"
+    mappings channel: 'official', version: '1.19.4'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
-
-
+ 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            // The markers can be added/remove as needed separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
             property 'forge.logging.markers', 'REGISTRIES'
-
-            // Recommended logging level for the console
-            // You can set various levels here.
-            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
-
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
+            property 'forge.enabledGameTestNamespaces', 'forcesofreality'
 
             mods {
-                examplemod {
+                forcesofreality {
                     source sourceSets.main
                 }
             }
@@ -50,34 +35,22 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-
+            property 'forge.enabledGameTestNamespaces', 'forcesofreality'
             mods {
-                examplemod {
+                forcesofreality {
                     source sourceSets.main
                 }
             }
         }
-
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-
+            property 'forge.enabledGameTestNamespaces', 'forcesofreality'
             mods {
-                examplemod {
+                forcesofreality {
                     source sourceSets.main
                 }
             }
@@ -86,11 +59,8 @@ minecraft {
       data {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             args '--mod', 'forcesofreality', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
             mods {
                 forcesofreality {
                     source sourceSets.main
@@ -124,13 +94,13 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.4'
+
+    minecraft 'net.minecraftforge:forge:1.19.4-45.0.43'
      implementation fg.deobf("curse.maven:hutoslib-478643:${hutoslib_version}")
- 	//implementation fg.deobf("com.vincenthuto:hutoslib:4.2.1")
-   compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
-   runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
-
-
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+  compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+  runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+  runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 }
 
 
@@ -138,12 +108,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "examplemod",
-                "Specification-Vendor"    : "examplemodsareus",
+                "Specification-Title"     : "forcesofreality",
+                "Specification-Vendor"    : "forcesofrealitysareus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "examplemodsareus",
+                "Implementation-Vendor"   : "forcesofrealitysareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -153,20 +123,14 @@ task srcJar(type: Jar) {
     from(sourceSets.main.output)
     classifier = 'srcs'
 }
-
-
 jar.finalizedBy('reobfJar')
-
-//This area as well as the spot in the mavenJava publish is what generates the source jar to use in other projects
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
     classifier = 'sources'
 }
-
 artifacts {
     archives sourcesJar
 }
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -182,5 +146,5 @@ publishing {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8' 
 }

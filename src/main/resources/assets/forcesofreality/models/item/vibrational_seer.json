@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/vibrational_seer"
+       "layer0": "forcesofreality:item/vibrational_seer"
    }
 }

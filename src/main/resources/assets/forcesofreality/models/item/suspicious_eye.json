@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/suspicious_eye"
+       "layer0": "forcesofreality:item/suspicious_eye"
    }
 }

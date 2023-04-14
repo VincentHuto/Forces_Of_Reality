@@ -3,15 +3,15 @@
   "parent" : "block/block",
   "render_type" : "cutout",
   "textures" : {
-    "3" : "forcesofreality:blocks/grasstop",
-    "4" : "forcesofreality:blocks/log_oak",
-    "5" : "forcesofreality:blocks/log_oak_top",
-    "6" : "forcesofreality:blocks/hardened_clay",
-    "7" : "forcesofreality:blocks/hardened_clay_stained_orange",
-    "8" : "forcesofreality:blocks/hardened_clay_stained_red",
-    "9" : "forcesofreality:blocks/leaves_big_oak",
-    "10" : "forcesofreality:blocks/plantgrass",
-    "particle" : "forcesofreality:blocks/grasstop"
+    "3" : "forcesofreality:block/grasstop",
+    "4" : "forcesofreality:block/log_oak",
+    "5" : "forcesofreality:block/log_oak_top",
+    "6" : "forcesofreality:block/hardened_clay",
+    "7" : "forcesofreality:block/hardened_clay_stained_orange",
+    "8" : "forcesofreality:block/hardened_clay_stained_red",
+    "9" : "forcesofreality:block/leaves_big_oak",
+    "10" : "forcesofreality:block/plantgrass",
+    "particle" : "forcesofreality:block/grasstop"
   },
   "elements" : [ {
     "from" : [ 1.99999, 0, 3.99999 ],

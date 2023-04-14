@@ -113,9 +113,9 @@ public class EntityHasturVassal extends Monster {
 					if (this.guardian.level.getDifficulty() == Difficulty.HARD) {
 						f += 2.0F;
 					}
-
-					livingentity.hurt(DamageSource.indirectMagic(this.guardian, this.guardian), f);
-					livingentity.hurt(DamageSource.mobAttack(this.guardian),
+					
+					livingentity.hurt(livingentity.damageSources().indirectMagic(this.guardian, this.guardian), f);
+					livingentity.hurt(livingentity.damageSources().mobAttack(this.guardian),
 							(float) this.guardian.getAttributeValue(Attributes.ATTACK_DAMAGE));
 					this.guardian.setTarget((LivingEntity) null);
 				}
@@ -164,10 +164,10 @@ public class EntityHasturVassal extends Monster {
 				Vec3 vector3d = new Vec3(EntityHasturVassal.this.getX() - livingentity.getX(),
 						EntityHasturVassal.this.getY() - livingentity.getY(),
 						EntityHasturVassal.this.getZ() - livingentity.getZ());
-				BlockState blockstate = EntityHasturVassal.this.level.getBlockState(new BlockPos(
+				BlockState blockstate = EntityHasturVassal.this.level.getBlockState(BlockPos.containing(
 						EntityHasturVassal.this.getX() + vector3d.x, EntityHasturVassal.this.getY() + vector3d.y,
 						EntityHasturVassal.this.getZ() + vector3d.z));
-				FluidState fluidstate = EntityHasturVassal.this.level.getFluidState(new BlockPos(
+				FluidState fluidstate = EntityHasturVassal.this.level.getFluidState(BlockPos.containing(
 						EntityHasturVassal.this.getX() + vector3d.x, EntityHasturVassal.this.getY() + vector3d.y,
 						EntityHasturVassal.this.getZ() + vector3d.z));
 				if (fluidstate.is(FluidTags.WATER) || blockstate.isAir()) {

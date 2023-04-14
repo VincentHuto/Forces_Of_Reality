@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "forcesofreality:items/destabilization_charm"
+		"layer0": "forcesofreality:item/destabilization_charm"
 	},
 	"overrides": [
 		{

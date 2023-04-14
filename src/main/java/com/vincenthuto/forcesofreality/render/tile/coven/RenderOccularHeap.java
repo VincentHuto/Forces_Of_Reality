@@ -2,9 +2,9 @@ package com.vincenthuto.forcesofreality.render.tile.coven;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Vector3f;
 import com.vincenthuto.forcesofreality.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.tile.coven.BlockEntityOccularHeap;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -45,11 +45,11 @@ public class RenderOccularHeap implements BlockEntityRenderer<BlockEntityOccular
 			matrixStackIn.pushPose();
 			matrixStackIn.translate(x, y, z);
 			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.21F) / 2F + 0.5F);
-			matrixStackIn.mulPose(Vector3f.YP.rotation(yRotate));
+			matrixStackIn.mulPose(Vector3.YP.rotation(yRotate).toMoj());
 			MultiBufferSource.BufferSource irendertypebuffer$impl1 = MultiBufferSource
 					.immediate(Tesselator.getInstance().getBuilder());
 //			VertexConsumer ivertexbuilder1 = irendertypebuffer$impl1.getBuffer(magatamas
-//					.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/blocks/sky_texture_1.png")));
+//					.renderType(new ResourceLocation(ForcesOfReality.MOD_ID + ":textures/block/sky_texture_1.png")));
 //			magatamas.renderToBuffer(matrixStackIn, ivertexbuilder1, 15728880, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F,
 //					1.0F, 1.0F);
 			irendertypebuffer$impl1.endBatch();

@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/bucket_slug"
+       "layer0": "forcesofreality:item/bucket_slug"
    }
 }

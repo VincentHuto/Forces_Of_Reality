@@ -58,7 +58,7 @@ public class ItemDiscordantBell extends Item {
 						this.summomCorruptNote(worldIn, playerentity);
 					}
 				} else {
-					playerentity.playSound(SoundEvents.NOTE_BLOCK_BELL, 0.6F, 0.8F + (float) Math.random() * 0.2F);
+					playerentity.playSound(SoundEvents.NOTE_BLOCK_BELL.get(), 0.6F, 0.8F + (float) Math.random() * 0.2F);
 				}
 				stack.hurtAndBreak(1, playerentity, (p_220009_1_) -> {
 					p_220009_1_.broadcastBreakEvent(playerentity.getUsedItemHand());

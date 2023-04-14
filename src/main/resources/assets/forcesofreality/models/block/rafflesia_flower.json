@@ -2,6 +2,6 @@
     "parent": "block/cross",
     "render_type": "cutout",
     "textures": {
-        "cross": "forcesofreality:blocks/rafflesia_flower"
+        "cross": "forcesofreality:block/rafflesia_flower"
     }
 }

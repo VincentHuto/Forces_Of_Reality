@@ -1,7 +1,7 @@
 {
     "parent": "builtin/entity",
 	"textures": {
-       "layer0": "forcesofreality:items/coven_tome_adv"
+       "layer0": "forcesofreality:item/coven_tome_adv"
 	},
 	"gui_light":"front",
 	 "display": {

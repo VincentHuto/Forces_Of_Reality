@@ -77,13 +77,13 @@ public class EntityPlayerTentacle extends Mob {
 	protected void doPush(Entity entityIn) {
 		super.doPush(entityIn);
 		if (!(entityIn instanceof EntityPlayerTentacle) && !(entityIn instanceof Player)) {
-			entityIn.hurt(DamageSource.mobAttack(this), 4.5f);
+			entityIn.hurt(entityIn.damageSources().mobAttack(this), 4.5f);
 		}
 
 		if (entityIn instanceof Player) {
 			Player playerENt = (Player) entityIn;
 			if (caster != null && playerENt.getUUID() != caster.getUUID()) {
-				entityIn.hurt(new DamageSource("tentacle"), 4.5f);
+				entityIn.hurt(entityIn.damageSources().generic(), 4.5f);
 			}
 		}
 	}

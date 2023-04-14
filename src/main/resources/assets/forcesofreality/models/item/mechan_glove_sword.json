@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "forcesofreality:blocks/auric_block",
-		"1": "forcesofreality:blocks/anointed_iron",
-		"2": "forcesofreality:blocks/anointed_iron_block",
-		"3": "forcesofreality:blocks/glove_salvo",
-		"particle": "forcesofreality:blocks/auric_block"
+		"0": "forcesofreality:block/auric_block",
+		"1": "forcesofreality:block/anointed_iron",
+		"2": "forcesofreality:block/anointed_iron_block",
+		"3": "forcesofreality:block/glove_salvo",
+		"particle": "forcesofreality:block/auric_block"
 	},
 	"elements": [
 		{

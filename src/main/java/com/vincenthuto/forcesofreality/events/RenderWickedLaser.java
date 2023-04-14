@@ -1,15 +1,17 @@
 package com.vincenthuto.forcesofreality.events;
 
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
-import com.mojang.math.Vector4f;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.init.RenderTypeInit;
 import com.vincenthuto.forcesofreality.item.coven.tool.ItemMechanGlove;
+import com.vincenthuto.hutoslib.math.Vector3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -34,7 +36,7 @@ public class RenderWickedLaser {
 	private static void drawBeam(double xOffset, double yOffset, double zOffset, VertexConsumer builder,
 			Matrix4f positionMatrix, Matrix3f matrixNormalIn, float thickness, InteractionHand hand, double distance,
 			double v1, double v2, float ticks, float r, float g, float b, float alpha) {
-		Vector3f vector3f = new Vector3f(0.0f, 1.0f, 0.0f);
+		Vector3 vector3f = new Vector3(0.0f, 1.0f, 0.0f);
 		vector3f.transform(matrixNormalIn);
 		LocalPlayer player = Minecraft.getInstance().player;
 		// Support for hand sides remembering to take into account of Skin options
@@ -53,54 +55,54 @@ public class RenderWickedLaser {
 		startYOffset = startYOffset + (f / 750);
 
 		Vector4f vec1 = new Vector4f(startXOffset, -thickness + startYOffset, startZOffset, 1.0F);
-		vec1.transform(positionMatrix);
+		//vec1.transform(positionMatrix);
 		Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset,
 				1.0F);
-		vec2.transform(positionMatrix);
+		//vec2.transform(positionMatrix);
 		Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset,
 				1.0F);
-		vec3.transform(positionMatrix);
+		//vec3.transform(positionMatrix);
 		Vector4f vec4 = new Vector4f(startXOffset, thickness + startYOffset, startZOffset, 1.0F);
-		vec4.transform(positionMatrix);
+		//vec4.transform(positionMatrix);
 
 		if (hand == InteractionHand.MAIN_HAND) {
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec4.x, vec4.y, vec4.z, r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec3.x, vec3.y, vec3.z, r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec2.x, vec2.y, vec2.z, r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec1.x, vec1.y, vec1.z, r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
 			// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
 			// be necessary with culling disabled but here we are....
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec1.x, vec1.y, vec1.z, r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec2.x, vec2.y, vec2.z, r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec3.x, vec3.y, vec3.z, r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec4.x, vec4.y, vec4.z, r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
 		} else {
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec1.x, vec1.y, vec1.z, r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec2.x, vec2.y, vec2.z, r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec3.x, vec3.y, vec3.z, r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec4.x, vec4.y, vec4.z, r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
 			// Rendering a 2nd time to allow you to see both sides in multiplayer, shouldn't
 			// be necessary with culling disabled but here we are....
-			builder.vertex(vec4.x(), vec4.y(), vec4.z(), r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec3.x(), vec3.y(), vec3.z(), r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec2.x(), vec2.y(), vec2.z(), r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
-			builder.vertex(vec1.x(), vec1.y(), vec1.z(), r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
-					15728880, vector3f.x(), vector3f.y(), vector3f.z());
+			builder.vertex(vec4.x, vec4.y, vec4.z, r, g, b, alpha, 0, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec3.x, vec3.y, vec3.z, r, g, b, alpha, 0, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec2.x, vec2.y, vec2.z, r, g, b, alpha, 1, (float) v2, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
+			builder.vertex(vec1.x, vec1.y, vec1.z, r, g, b, alpha, 1, (float) v1, OverlayTexture.NO_OVERLAY,
+					15728880, vector3f.x, vector3f.y, vector3f.z);
 		}
 	}
 
@@ -132,10 +134,10 @@ public class RenderWickedLaser {
 
 				matrix.pushPose();
 
-				matrix.translate(-view.x(), -view.y(), -view.z());
+				matrix.translate(-view.x, -view.y, -view.z);
 				matrix.translate(from.x, from.y, from.z);
-				matrix.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(ticks, -player.getYRot(), -player.yRotO)));
-				matrix.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(ticks, player.getXRot(), player.xRotO)));
+				matrix.mulPose(Vector3.YP.rotationDegrees(Mth.lerp(ticks, -player.getYRot(), -player.yRotO)).toMoj());
+				matrix.mulPose(Vector3.XP.rotationDegrees(Mth.lerp(ticks, player.getXRot(), player.xRotO)).toMoj());
 
 				PoseStack.Pose matrixstack$entry = matrix.last();
 				Matrix3f matrixNormal = matrixstack$entry.normal();
@@ -182,10 +184,10 @@ public class RenderWickedLaser {
 
 				matrix.pushPose();
 
-				matrix.translate(-view.x(), -view.y(), -view.z());
+				matrix.translate(-view.x, -view.y, -view.z);
 				matrix.translate(from.x, from.y, from.z);
-				matrix.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(ticks, -player.getYRot(), -player.yRotO)));
-				matrix.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(ticks, player.getXRot(), player.xRotO)));
+				matrix.mulPose(Vector3.YP.rotationDegrees(Mth.lerp(ticks, -player.getYRot(), -player.yRotO)).toMoj());
+				matrix.mulPose(Vector3.XP.rotationDegrees(Mth.lerp(ticks, player.getXRot(), player.xRotO)).toMoj());
 
 				PoseStack.Pose matrixstack$entry = matrix.last();
 				Matrix3f matrixNormal = matrixstack$entry.normal();

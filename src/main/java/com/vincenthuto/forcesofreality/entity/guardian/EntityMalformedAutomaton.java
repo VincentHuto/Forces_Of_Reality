@@ -19,6 +19,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -171,7 +172,7 @@ public class EntityMalformedAutomaton extends Monster implements IEntityAddition
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -324,7 +325,7 @@ public class EntityMalformedAutomaton extends Monster implements IEntityAddition
 		HLPacketHandler.sendLightningSpawn(this.position().add(0.5, 0.5, 0.5), speedVec, 64.0f,
 				this.level.dimension(), ParticleColor.YELLOW, 2, 10, 9, 0.2f);
 
-		target.hurt(DamageSource.LIGHTNING_BOLT, 4f);
+		target.hurt(target.damageSources().lightningBolt(), 4f);
 	}
 
 	@SuppressWarnings("unused")

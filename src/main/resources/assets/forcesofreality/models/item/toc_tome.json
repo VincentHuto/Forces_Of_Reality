@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/toc_tome"
+       "layer0": "forcesofreality:item/toc_tome"
    }
 }

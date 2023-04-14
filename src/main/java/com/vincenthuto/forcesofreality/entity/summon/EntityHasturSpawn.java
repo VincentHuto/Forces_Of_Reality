@@ -239,7 +239,7 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 			EntityHasturSpawn.this.orbitPosition = EntityHasturSpawn.this.getTarget().blockPosition()
 					.above(5 /* + EntityHasturSpawn.this.rand.nextInt(5) */);
 			if (EntityHasturSpawn.this.orbitPosition.getY() < EntityHasturSpawn.this.level.getSeaLevel()) {
-				EntityHasturSpawn.this.orbitPosition = new BlockPos(EntityHasturSpawn.this.orbitPosition.getX(),
+				EntityHasturSpawn.this.orbitPosition = BlockPos.containing(EntityHasturSpawn.this.orbitPosition.getX(),
 						EntityHasturSpawn.this.getTarget().getY() + 13, EntityHasturSpawn.this.orbitPosition.getZ());
 			}
 
@@ -364,7 +364,7 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 					livingentity.getZ());
 			if (EntityHasturSpawn.this.getBoundingBox().inflate(0.2F).intersects(livingentity.getBoundingBox())) {
 				// EntityHasturSpawn.this.attackEntityAsMob(livingentity);
-				livingentity.hurt(DamageSource.mobAttack(EntityHasturSpawn.this), 1.5f);
+				livingentity.hurt(livingentity.damageSources().generic(), 1.5f);
 
 				EntityHasturSpawn.this.attackPhase = EntityHasturSpawn.AttackPhase.CIRCLE;
 				if (!EntityHasturSpawn.this.isSilent()) {
@@ -514,11 +514,12 @@ public class EntityHasturSpawn extends FlyingMob implements Enemy {
 	protected float getSoundVolume() {
 		return 0.3F;
 	}
-
-	public int getSpawnType() {
-		return this.entityData.get(SPAWN_TYPE);
-	}
-
+	
+	
+//	public int getSpawnType() {
+//		return this.entityData.get(SPAWN_TYPE).va;
+//	} 
+	
 	public ResourceLocation getSpawnTypeName() {
 		return TEXTURE_BY_ID.getOrDefault(this.getSpawnType(), TEXTURE_BY_ID.get(0));
 	}

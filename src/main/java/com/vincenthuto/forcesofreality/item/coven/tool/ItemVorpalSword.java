@@ -6,7 +6,6 @@ import com.vincenthuto.forcesofreality.entity.util.ModEntityPredicates;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.Level;
 
 public class ItemVorpalSword extends SwordItem {
 
-	public static DamageSource source = new DamageSource("vorpal");
+	//public static DamageSource source = new DamageSource("vorpal");
 
 	public ItemVorpalSword(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
@@ -38,7 +37,7 @@ public class ItemVorpalSword extends SwordItem {
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if (ModEntityPredicates.VORPAL.test(target)) {
-			target.hurt(source, target.getMaxHealth() * 0.15f);
+			target.hurt(target.damageSources().generic(), target.getMaxHealth() * 0.15f);
 		}
 		return super.hurtEnemy(stack, target, attacker);
 	}

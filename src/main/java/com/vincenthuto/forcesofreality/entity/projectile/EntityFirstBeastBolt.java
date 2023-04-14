@@ -9,11 +9,11 @@ import com.google.common.collect.Sets;
 import com.vincenthuto.forcesofreality.init.EntityInit;
 import com.vincenthuto.forcesofreality.init.ItemInit;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -64,9 +64,9 @@ public class EntityFirstBeastBolt extends AbstractArrow {
 	@SuppressWarnings("deprecation")
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
-		if (this.potion != Potions.EMPTY && this.potion != null) {
-			compound.putString("Potion", Registry.POTION.getKey(this.potion).toString());
-		}
+//		if (this.potion != Potions.EMPTY && this.potion != null) {
+//			compound.putString("Potion",Registries.POTION.g.getKey(this.potion).toString());
+//		}
 
 		if (this.fixedColor) {
 			compound.putInt("Color", this.getColor());
@@ -116,7 +116,7 @@ public class EntityFirstBeastBolt extends AbstractArrow {
 
 	@Nonnull
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "forcesofreality:items/null_bow_blade"
+		"layer0": "forcesofreality:item/null_bow_blade"
 	},
 	"overrides": [
 		{

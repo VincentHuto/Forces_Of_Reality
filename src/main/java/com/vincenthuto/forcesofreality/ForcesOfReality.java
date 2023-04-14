@@ -21,17 +21,18 @@ import com.vincenthuto.forcesofreality.init.SoundInit;
 import com.vincenthuto.forcesofreality.item.coven.tool.ItemMechanGlove;
 import com.vincenthuto.forcesofreality.network.PacketHandler;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -50,20 +51,43 @@ import net.minecraftforge.registries.RegisterEvent;
 @Mod("forcesofreality")
 @Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD)
 public class ForcesOfReality {
-	// Creative Tab
-	public static class ForcesOfRealityItemGroup extends CreativeModeTab {
-		public static final ForcesOfRealityItemGroup instance = new ForcesOfRealityItemGroup(
-				CreativeModeTab.TABS.length, "forcesofrealitytab");
+//	// Creative Tab
+//	public static class ForcesOfRealityItemGroup extends CreativeModeTab {
+//		public static final ForcesOfRealityItemGroup instance = new ForcesOfRealityItemGroup(
+//				CreativeModeTab.TABS.length, "forcesofrealitytab");
+//
+//		public ForcesOfRealityItemGroup(int index, String label) {
+//			super(index, label);
+//		}
+//
+//		@Override
+//		public ItemStack makeIcon() {
+//			return new ItemStack(ItemInit.allegiance_identifier.get());
+//		}
+//	}
+	
+	private void buildCreativeTabs(CreativeModeTabEvent.Register event) {
+		event.registerCreativeModeTab(new ResourceLocation(MOD_ID, "forcesofrealitytab"), builder ->
+		// Set name of tab to display
+		builder.title(Component.translatable("item_group." + MOD_ID + ".forcesofrealitytab"))
+				// Set icon of creative tab
+				.icon(() -> new ItemStack(ItemInit.allegiance_identifier.get()))
+				.displayItems((enabledFlags, populator) -> {
+					// Items
+					ItemInit.ITEMS.getEntries().forEach(i -> populator.accept(i.get()));
+					ItemInit.ADVITEMS.getEntries().forEach(i -> populator.accept(i.get()));
+					ItemInit.MODELEDITEMS.getEntries().forEach(i -> populator.accept(i.get()));
+					ItemInit.HANDHELDITEMS.getEntries().forEach(i -> populator.accept(i.get()));
+				//	ItemInit.SPAWNEGGS.getEntries().forEach(i -> populator.accept(i.get()));
 
-		public ForcesOfRealityItemGroup(int index, String label) {
-			super(index, label);
-		}
+					// Blocks
+					BlockInit.BLOCKS.getEntries().forEach(i -> populator.accept(i.get()));
+					BlockInit.SPECIALBLOCKS.getEntries().forEach(i -> populator.accept(i.get()));
 
-		@Override
-		public ItemStack makeIcon() {
-			return new ItemStack(ItemInit.allegiance_identifier.get());
-		}
+				}));
 	}
+	
+	
 
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "forcesofreality";
@@ -75,7 +99,7 @@ public class ForcesOfReality {
 
 	public static Pair<ResourceLocation, BlockItem> createItemBlock(Pair<Block, ResourceLocation> block) {
 		return Pair.of(block.getSecond(),
-				new BlockItem(block.getFirst(), new Item.Properties().tab(ForcesOfRealityItemGroup.instance)));
+				new BlockItem(block.getFirst(), new Item.Properties()));
 	}
 
 
@@ -152,6 +176,7 @@ public class ForcesOfReality {
 		forgeBus.register(CovenantEvents.class);
 		forgeBus.register(DevotionEvents.class);
 		forgeBus.addListener(MechanGloveEvents::onClientTick);
+		modEventBus.addListener(this::buildCreativeTabs);
 
 
 	}

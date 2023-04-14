@@ -1,7 +1,7 @@
 {
     "parent": "builtin/entity",
 	"textures": {
-       "layer0": "forcesofreality:items/elder_tome"
+       "layer0": "forcesofreality:item/elder_tome"
 	},
 	"gui_light":"front",
 	 "display": {

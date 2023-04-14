@@ -3,8 +3,8 @@
   "parent" : "block/block",
   "render_type" : "cutout",
   "textures" : {
-    "0" : "forcesofreality:blocks/stone",
-    "particle" : "forcesofreality:blocks/stone"
+    "0" : "forcesofreality:block/stone",
+    "particle" : "forcesofreality:block/stone"
   },
   "elements" : [ {
     "from" : [ 3, 8, 6.5 ],

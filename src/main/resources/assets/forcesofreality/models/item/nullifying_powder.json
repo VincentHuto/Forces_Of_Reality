@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/nullifying_powder"
+       "layer0": "forcesofreality:item/nullifying_powder"
    }
 }

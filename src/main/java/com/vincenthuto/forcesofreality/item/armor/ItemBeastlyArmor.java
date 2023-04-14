@@ -2,7 +2,8 @@ package com.vincenthuto.forcesofreality.item.armor;
 
 import java.util.function.Consumer;
 
-import com.vincenthuto.forcesofreality.ForcesOfReality.ForcesOfRealityItemGroup;
+import org.jetbrains.annotations.NotNull;
+
 import com.vincenthuto.forcesofreality.init.ItemInit;
 import com.vincenthuto.forcesofreality.model.armor.ModelBeastlyArmor;
 
@@ -17,16 +18,16 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class ItemBeastlyArmor extends ArmorItem {
 
-	public ItemBeastlyArmor(ArmorMaterial materialIn, EquipmentSlot slot) {
-		super(materialIn, slot, new Item.Properties().tab(ForcesOfRealityItemGroup.instance).fireResistant());
+	public ItemBeastlyArmor(ArmorMaterial materialIn, ArmorItem.Type slot) {
+		super(materialIn, slot, new Item.Properties());
 	}
 
 	@Override
 	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
 		consumer.accept(new IClientItemExtensions() {
 			@Override
-			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+			public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack,
+					EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
 				if (itemStack.getItem() == ItemInit.skull_helmet.get()) {
 					return ModelBeastlyArmor.helmet.get();
 				} else if (itemStack.getItem() == ItemInit.enticing_mantle.get()) {
@@ -36,7 +37,8 @@ public class ItemBeastlyArmor extends ArmorItem {
 				} else if (itemStack.getItem() == ItemInit.cloven_hooves.get()) {
 					return ModelBeastlyArmor.boots.get();
 				}
-				return IClientItemExtensions.super.getHumanoidArmorModel(entityLiving, itemStack, armorSlot, _default);
+				return IClientItemExtensions.super.getHumanoidArmorModel(livingEntity, itemStack, equipmentSlot,
+						original);
 			}
 		});
 	}

@@ -41,7 +41,7 @@ public class BlockEntityHunterEffigy extends BlockEntity {
 //							level.playLocalSound(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(),
 //									SoundEvents.WOLF_GROWL, SoundSource.BLOCKS, 1, 1, false);
 //							level.explode(null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 1.0F,
-//									Explosion.BlockInteraction.NONE);
+//									ExplosionInteraction.NONE);
 //							EntityTheFirstBeast summon = new EntityTheFirstBeast(EntityInit.the_first_beast.get(),
 //									level);
 //							summon.setPos(worldPosition.getX() + 0.5, worldPosition.getY() + 1.5,

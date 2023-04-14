@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/legs_of_fawn"
+       "layer0": "forcesofreality:item/legs_of_fawn"
    }
 }

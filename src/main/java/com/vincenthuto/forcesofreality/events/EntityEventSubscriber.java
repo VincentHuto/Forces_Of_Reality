@@ -76,7 +76,7 @@ import com.vincenthuto.forcesofreality.render.entity.summons.RenderTentacle;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -91,31 +91,31 @@ public class EntityEventSubscriber {
 
 		// Armor
 		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_HEAD_LAYER,
-				() -> ModelBeastlyArmor.createHeadLayer(EquipmentSlot.HEAD));
+				() -> ModelBeastlyArmor.createHeadLayer(ArmorItem.Type.HELMET));
 		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_CHEST_LAYER,
-				() -> ModelBeastlyArmor.createBodyLayer(EquipmentSlot.CHEST));
+				() -> ModelBeastlyArmor.createBodyLayer(ArmorItem.Type.CHESTPLATE));
 		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_LEGS_LAYER,
-				() -> ModelBeastlyArmor.createBodyLayer(EquipmentSlot.LEGS));
+				() -> ModelBeastlyArmor.createBodyLayer(ArmorItem.Type.LEGGINGS));
 		event.registerLayerDefinition(ModelBeastlyArmor.BEASTLY_BOOTS_LAYER,
-				() -> ModelBeastlyArmor.createBodyLayer(EquipmentSlot.FEET));
+				() -> ModelBeastlyArmor.createBodyLayer(ArmorItem.Type.BOOTS));
 
 		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_HEAD_LAYER,
-				() -> ModelWrithingArmor.createHeadLayer(EquipmentSlot.HEAD));
+				() -> ModelWrithingArmor.createHeadLayer(ArmorItem.Type.HELMET));
 		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_CHEST_LAYER,
-				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.CHEST));
+				() -> ModelWrithingArmor.createBodyLayer(ArmorItem.Type.CHESTPLATE));
 		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_LEGS_LAYER,
-				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.LEGS));
+				() -> ModelWrithingArmor.createBodyLayer(ArmorItem.Type.LEGGINGS));
 		event.registerLayerDefinition(ModelWrithingArmor.WRITHING_BOOTS_LAYER,
-				() -> ModelWrithingArmor.createBodyLayer(EquipmentSlot.FEET));
+				() -> ModelWrithingArmor.createBodyLayer(ArmorItem.Type.BOOTS));
 
 		event.registerLayerDefinition(ModelAuricArmor.AURIC_HEAD_LAYER,
-				() -> ModelAuricArmor.createHeadLayer(EquipmentSlot.HEAD));
+				() -> ModelAuricArmor.createHeadLayer(ArmorItem.Type.HELMET));
 		event.registerLayerDefinition(ModelAuricArmor.AURIC_CHEST_LAYER,
-				() -> ModelAuricArmor.createBodyLayer(EquipmentSlot.CHEST));
+				() -> ModelAuricArmor.createBodyLayer(ArmorItem.Type.CHESTPLATE));
 		event.registerLayerDefinition(ModelAuricArmor.AURIC_LEGS_LAYER,
-				() -> ModelAuricArmor.createBodyLayer(EquipmentSlot.LEGS));
+				() -> ModelAuricArmor.createBodyLayer(ArmorItem.Type.LEGGINGS));
 		event.registerLayerDefinition(ModelAuricArmor.AURIC_BOOTS_LAYER,
-				() -> ModelAuricArmor.createBodyLayer(EquipmentSlot.FEET));
+				() -> ModelAuricArmor.createBodyLayer(ArmorItem.Type.BOOTS));
 		// Blocks
 		event.registerLayerDefinition(ModelHasturPylon.LAYER_LOCATION, ModelHasturPylon::createBodyLayer);
 

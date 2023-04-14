@@ -52,7 +52,7 @@
 //		// Spheres
 //		matrixStackIn.pushPose();
 //		matrixStackIn.translate(0.5, 0.5, 0.5);
-//		matrixStackIn.mulPose(Vector3f.YP.rotation(rotationRate));
+//		matrixStackIn.mulPose(Vector3.YP.rotation(rotationRate));
 //
 //		matrixStackIn.scale(5, 5, 5);
 //		modelSphereInside.get().render(bufferIn, RenderTypeInit.SPHEREIN, matrixStackIn, 0x00F000F0, 0x8f8f8f);

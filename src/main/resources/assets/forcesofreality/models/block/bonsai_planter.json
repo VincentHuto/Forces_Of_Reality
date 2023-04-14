@@ -3,11 +3,11 @@
   "parent" : "block/block",
   "render_type" : "translucent",
   "textures" : {
-    "6" : "forcesofreality:blocks/hardened_clay",
-    "7" : "forcesofreality:blocks/hardened_clay_stained_orange",
-    "8" : "forcesofreality:blocks/hardened_clay_stained_red",
-    "11" : "forcesofreality:blocks/dirt",
-    "particle" : "forcesofreality:blocks/hardened_clay"
+    "6" : "forcesofreality:block/hardened_clay",
+    "7" : "forcesofreality:block/hardened_clay_stained_orange",
+    "8" : "forcesofreality:block/hardened_clay_stained_red",
+    "11" : "forcesofreality:block/dirt",
+    "particle" : "forcesofreality:block/hardened_clay"
   },
   "elements" : [ {
     "from" : [ 1.99999, 0, 3.99999 ],

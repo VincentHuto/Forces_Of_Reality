@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "forcesofreality:items/elder_helmet"
+       "layer0": "forcesofreality:item/elder_helmet"
    }
 }

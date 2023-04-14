@@ -2,6 +2,6 @@
   "parent" : "minecraft:block/template_fire_side",
   "render_type" : "translucent",
   "textures" : {
-    "fire" : "forcesofreality:blocks/beyond_flames"
+    "fire" : "forcesofreality:block/beyond_flames"
   }
 }

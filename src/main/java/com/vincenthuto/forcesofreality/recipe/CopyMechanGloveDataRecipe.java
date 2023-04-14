@@ -7,6 +7,7 @@ import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.item.coven.tool.ItemMechanGlove;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -46,17 +47,17 @@ public class CopyMechanGloveDataRecipe extends ShapedRecipe {
 
 	public CopyMechanGloveDataRecipe(final ResourceLocation id, final String group, final int recipeWidth,
 			final int recipeHeight, final NonNullList<Ingredient> ingredients, final ItemStack recipeOutput) {
-		super(id, group, recipeWidth, recipeHeight, ingredients, recipeOutput);
+		super(id, group, null, recipeWidth, recipeHeight, ingredients, recipeOutput);
 	}
 
 	public CopyMechanGloveDataRecipe(ShapedRecipe shapedRecipe) {
-		super(shapedRecipe.getId(), shapedRecipe.getGroup(), shapedRecipe.getRecipeWidth(),
-				shapedRecipe.getRecipeHeight(), shapedRecipe.getIngredients(), shapedRecipe.getResultItem());
+		super(shapedRecipe.getId(), shapedRecipe.getGroup(), null, shapedRecipe.getRecipeWidth(),
+				shapedRecipe.getRecipeHeight(), shapedRecipe.getIngredients(), shapedRecipe.getResultItem(null));
 	}
 
 	@Override
-	public ItemStack assemble(CraftingContainer inv) {
-		final ItemStack craftingResult = super.assemble(inv);
+	public ItemStack assemble(CraftingContainer inv, RegistryAccess p_266725_) {
+		final ItemStack craftingResult = super.assemble(inv, p_266725_);
 		ItemStack dataSource = ItemStack.EMPTY;
 
 		if (!craftingResult.isEmpty()) {
