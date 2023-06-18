@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R",
+    "R",
+    "N"
+  ],
+  "key": {
+    "R": {
+      "item": "forcesofreality:anointed_iron_scrap"
+    },
+    "N": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:anointed_iron_sword"
+  }
+}

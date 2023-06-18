@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/self_reflection_station"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/self_reflection_station",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/self_reflection_station",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/self_reflection_station",
+			"y": 90
+		}
+	}
+}

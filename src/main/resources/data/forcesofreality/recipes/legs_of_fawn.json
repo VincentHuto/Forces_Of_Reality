@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BFB",
+    "F F",
+    "F F"
+  ],
+  "key": {
+    "B": {
+      "item": "forcesofreality:beastly_bone"
+    },
+    "F": {
+      "item": "forcesofreality:unkept_hide"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:legs_of_fawn"
+  }
+}

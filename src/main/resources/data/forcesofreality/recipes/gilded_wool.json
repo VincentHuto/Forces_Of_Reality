@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SKS",
+    "SSS"
+  ],
+  "key": {
+    "K": {
+      "item": "minecraft:red_wool"
+    },
+    "S": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:gilded_wool"
+  }
+}

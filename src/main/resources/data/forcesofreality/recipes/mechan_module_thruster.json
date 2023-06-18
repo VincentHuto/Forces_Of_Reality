@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GKG",
+    "FMF",
+    "SGS"
+  ],
+  "key": {
+    "M": {
+      "item": "forcesofreality:mechan_module"
+    },
+    "K": {
+      "item": "forcesofreality:machina_cage"
+    },
+    "G": {
+      "item": "minecraft:fire_charge"
+    },
+    "S": {
+      "item": "forcesofreality:machina_soul"
+    },
+    "F": {
+      "item": "forcesofreality:destruction_orb_contained"
+    }
+  },
+  "result": {
+    "item": "forcesofreality:mechan_module_thruster"
+  }
+}

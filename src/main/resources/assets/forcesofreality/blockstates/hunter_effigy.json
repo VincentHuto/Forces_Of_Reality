@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "forcesofreality:block/hunter_effigy"
+		},
+		"facing=south": {
+			"model": "forcesofreality:block/hunter_effigy",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "forcesofreality:block/hunter_effigy",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "forcesofreality:block/hunter_effigy",
+			"y": 90
+		}
+	}
+}

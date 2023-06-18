@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "forcesofreality:enticing_mantle"
+    ]
+  },
+  "criteria": {
+    "has_beastly_bone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "forcesofreality:beastly_bone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "forcesofreality:enticing_mantle"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beastly_bone",
+      "has_the_recipe"
+    ]
+  ]
+}
