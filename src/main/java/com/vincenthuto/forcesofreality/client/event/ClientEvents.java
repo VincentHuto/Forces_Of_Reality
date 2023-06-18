@@ -13,6 +13,7 @@ import com.vincenthuto.forcesofreality.client.render.tile.coven.RenderRafflesiaO
 import com.vincenthuto.forcesofreality.client.render.tile.coven.RenderSacrificialPyre;
 import com.vincenthuto.forcesofreality.client.render.tile.coven.RenderUntoldEasel;
 import com.vincenthuto.forcesofreality.client.screen.GuiMechanGlove;
+import com.vincenthuto.forcesofreality.client.screen.guide.ForcesLib;
 import com.vincenthuto.forcesofreality.registry.BlockEntityInit;
 import com.vincenthuto.forcesofreality.registry.ContainerInit;
 
@@ -29,8 +30,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventSubscriber {
+@Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
+public class ClientEvents {
 
 	public static NonNullList<KeyMapping> keyBinds = NonNullList.create();
 	public static KeyMapping mechanglovemode;
@@ -62,12 +63,24 @@ public class ClientEventSubscriber {
 		MenuScreens.register(ContainerInit.mechan_glove_container.get(), GuiMechanGlove::new);
 	}
 
-	public static void initKeybinds(RegisterKeyMappingsEvent ev) {
-		ev.register(mechanglovemode= new KeyMapping("key.forcesofreality.mechanglovemode.desc",
-				GLFW.GLFW_KEY_N, "key.forcesofreality.category"));
-		ev.register(sparkdirector  = new KeyMapping("key.forcesofreality.sparkdirector.desc",
-				GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
+	@Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
+	public static class ClientModBusEvents {
+		@SubscribeEvent
+		public void clientSetup(final FMLClientSetupEvent event) {
+//			MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
+			// this.addLayers();
+			ForcesLib forces = new ForcesLib();
+			forces.registerTome();
+		}
 
+		@SubscribeEvent
+		public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+			event.register(ClientEvents.mechanglovemode = new KeyMapping("key.forcesofreality.mechanglovemode.desc",
+					GLFW.GLFW_KEY_N, "key.forcesofreality.category"));
+			event.register(ClientEvents.sparkdirector = new KeyMapping("key.forcesofreality.sparkdirector.desc",
+					GLFW.GLFW_KEY_M, "key.forcesofreality.category"));
+
+		}
 	}
 
 }

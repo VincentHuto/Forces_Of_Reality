@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mojang.datafixers.util.Pair;
-import com.vincenthuto.forcesofreality.client.event.ClientEventSubscriber;
+import com.vincenthuto.forcesofreality.client.event.ClientEvents;
 import com.vincenthuto.forcesofreality.client.event.MechanGloveEvents;
 import com.vincenthuto.forcesofreality.client.screen.guide.ForcesLib;
 import com.vincenthuto.forcesofreality.common.capability.covenant.CovenantEvents;
@@ -86,8 +86,6 @@ public class ForcesOfReality {
 		EnchantmentInit.ENCHANTS.register(modEventBus);
 		SoundInit.SOUND_EVENTS.register(modEventBus);
 		modEventBus.addListener(this::commonSetup);
-		modEventBus.addListener(this::clientSetup);
-		modEventBus.addListener(ClientEventSubscriber::initKeybinds);
 		forgeBus.register(CovenantEvents.class);
 		forgeBus.register(DevotionEvents.class);
 		forgeBus.addListener(MechanGloveEvents::onClientTick);
@@ -95,12 +93,7 @@ public class ForcesOfReality {
 
 	}
 
-	private void clientSetup(final FMLClientSetupEvent event) {
-//		MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
-		// this.addLayers();
-		ForcesLib forces = new ForcesLib();
-		forces.registerTome();
-	}
+	
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
 //		CapabilityInit.init();

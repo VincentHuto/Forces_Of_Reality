@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 @Mod.EventBusSubscriber(modid = ForcesOfReality.MOD_ID, bus = Bus.MOD)
 public class MechanGloveEvents {
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.mechanglovemode.consumeClick()) {
+		if (ClientEvents.mechanglovemode.consumeClick()) {
 			if (ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != ItemStack.EMPTY
 					&& ForcesOfReality.findMechanGlove(HLClientUtils.getClientPlayer()) != null)
 				GuiMechanGloveViewer.openScreenViaItem();

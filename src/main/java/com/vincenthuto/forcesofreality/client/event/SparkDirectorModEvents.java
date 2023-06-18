@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class SparkDirectorModEvents {
 
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (ClientEventSubscriber.keyBinds.get(1).consumeClick()) {
+		if (ClientEvents.keyBinds.get(1).consumeClick()) {
 			PacketHandler.MECHANGLOVE.sendToServer(new PacketDirectorToggleFlightMode());
 		}
 
