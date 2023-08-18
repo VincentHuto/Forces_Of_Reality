@@ -6,7 +6,7 @@ package com.vincenthuto.forcesofreality.client.screen;
  *
  * import com.vincenthuto.forcesofreality.ForcesOfReality; import
  * com.vincenthuto.forcesofreality.containers.AdornmentBinderItemHandler; import
- * com.vincenthuto.forcesofreality.gui.pages.GuiButtonTextured; import
+ * com.vincenthuto.forcesofreality.gui.pages.HLButtonTextured; import
  * com.vincenthuto.forcesofreality.gui.pages.GuiUtil; import
  * com.vincenthuto.forcesofreality.objects.items.runes.patterns.
  * ItemAdornmentPattern; import com.mojang.blaze3d.matrix.MatrixStack; import
@@ -107,36 +107,36 @@ package com.vincenthuto.forcesofreality.client.screen;
  * (AdornmentBinderItemHandler) binderHandler; handler.load(); slotcount =
  * handler.getSlots(); itemKey = stack.getTranslationKey(); for (int i = 0; i <
  * binderHandler.getSlots(); i++) { if (i < 9) { this.addButton(new
- * GuiButtonTextured(texture, i, sideLoc - (guiWidth - 18), (verticalLoc - 203)
+ * HLButtonTextured(texture, i, sideLoc - (guiWidth - 18), (verticalLoc - 203)
  * + (i * 22), 20, 20, 174, 98, null, new IPressable() {
  *
  * @Override public void onPress(Button press) { if (press instanceof
- * GuiButtonTextured) { player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f,
- * 1F); if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
+ * HLButtonTextured) { player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f,
+ * 1F); if (binderHandler.getStackInSlot(((HLButtonTextured) press).getId())
  * .getItem() instanceof ItemAdornmentPattern) { ItemAdornmentPattern pat =
- * (ItemAdornmentPattern) binderHandler .getStackInSlot(((GuiButtonTextured)
+ * (ItemAdornmentPattern) binderHandler .getStackInSlot(((HLButtonTextured)
  * press).getId()).getItem();
  * Minecraft.getInstance().displayGuiScreen(pat.getPatternGui()); } } } })); }
- * else if (i < 18) { this.addButton(new GuiButtonTextured(texture, i, sideLoc -
+ * else if (i < 18) { this.addButton(new HLButtonTextured(texture, i, sideLoc -
  * (guiWidth - (5 + 55)), (verticalLoc - 401) + (i * 22), 20, 20, 174, 98, null,
  * new IPressable() {
  *
  * @Override public void onPress(Button press) { if (press instanceof
- * GuiButtonTextured) { player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f,
- * 1F); if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
+ * HLButtonTextured) { player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f,
+ * 1F); if (binderHandler.getStackInSlot(((HLButtonTextured) press).getId())
  * .getItem() instanceof ItemAdornmentPattern) { ItemAdornmentPattern pat =
- * (ItemAdornmentPattern) binderHandler .getStackInSlot(((GuiButtonTextured)
+ * (ItemAdornmentPattern) binderHandler .getStackInSlot(((HLButtonTextured)
  * press).getId()).getItem();
  * Minecraft.getInstance().displayGuiScreen(pat.getPatternGui()); } } } })); }
- * else if (i < 27) { this.addButton(new GuiButtonTextured(texture, i, sideLoc -
+ * else if (i < 27) { this.addButton(new HLButtonTextured(texture, i, sideLoc -
  * (guiWidth - 115), (verticalLoc - 599) + (i * 22), 20, 20, 174, 98, null, new
  * IPressable() {
  *
  * @Override public void onPress(Button press) { if (press instanceof
- * GuiButtonTextured) { player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f,
- * 1F); if (binderHandler.getStackInSlot(((GuiButtonTextured) press).getId())
+ * HLButtonTextured) { player.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 0.40f,
+ * 1F); if (binderHandler.getStackInSlot(((HLButtonTextured) press).getId())
  * .getItem() instanceof ItemAdornmentPattern) { ItemAdornmentPattern pat =
- * (ItemAdornmentPattern) binderHandler .getStackInSlot(((GuiButtonTextured)
+ * (ItemAdornmentPattern) binderHandler .getStackInSlot(((HLButtonTextured)
  * press).getId()).getItem();
  * Minecraft.getInstance().displayGuiScreen(pat.getPatternGui()); } } } })); } }
  * } super.init(); }

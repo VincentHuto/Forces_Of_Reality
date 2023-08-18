@@ -13,7 +13,6 @@ import com.vincenthuto.forcesofreality.client.render.tile.coven.RenderRafflesiaO
 import com.vincenthuto.forcesofreality.client.render.tile.coven.RenderSacrificialPyre;
 import com.vincenthuto.forcesofreality.client.render.tile.coven.RenderUntoldEasel;
 import com.vincenthuto.forcesofreality.client.screen.GuiMechanGlove;
-import com.vincenthuto.forcesofreality.client.screen.guide.ForcesLib;
 import com.vincenthuto.forcesofreality.registry.BlockEntityInit;
 import com.vincenthuto.forcesofreality.registry.ContainerInit;
 
@@ -69,8 +68,8 @@ public class ClientEvents {
 		public void clientSetup(final FMLClientSetupEvent event) {
 //			MinecraftForge.EVENT_BUS.register(RenderLaserEvent.class);
 			// this.addLayers();
-			ForcesLib forces = new ForcesLib();
-			forces.registerTome();
+//			ForcesLib forces = new ForcesLib();
+//			forces.registerTome();
 		}
 
 		@SubscribeEvent

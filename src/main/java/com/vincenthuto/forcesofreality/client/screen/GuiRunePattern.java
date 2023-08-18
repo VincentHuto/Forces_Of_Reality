@@ -6,7 +6,7 @@ package com.vincenthuto.forcesofreality.client.screen;
  *
  * import com.google.common.collect.Lists; import
  * com.vincenthuto.forcesofreality.ForcesOfReality; import
- * com.vincenthuto.forcesofreality.gui.pages.GuiButtonTextured; import
+ * com.vincenthuto.forcesofreality.gui.pages.HLButtonTextured; import
  * com.vincenthuto.forcesofreality.gui.pages.GuiUtil; import
  * com.vincenthuto.forcesofreality.recipes.RecipeChiselStation; import
  * com.mojang.blaze3d.matrix.MatrixStack; import
@@ -32,8 +32,8 @@ package com.vincenthuto.forcesofreality.client.screen;
  *
  * static StringTextComponent titleComponent = new StringTextComponent("");
  * ItemStack icon; Minecraft mc = Minecraft.getInstance(); RecipeChiselStation
- * recipe; public GuiButtonTextured[][] runeButtonArray = new
- * GuiButtonTextured[8][8]; protected List<Button> buttonList =
+ * recipe; public HLButtonTextured[][] runeButtonArray = new
+ * HLButtonTextured[8][8]; protected List<Button> buttonList =
  * Lists.<Button>newArrayList();
  *
  * @OnlyIn(Dist.CLIENT) public GuiAdornmentPattern(ItemStack iconIn,
@@ -103,7 +103,7 @@ package com.vincenthuto.forcesofreality.client.screen;
  * height / 2 - guiHeight / 2; buttonList.clear(); int inc = 0; for (int i = 0;
  * i < runeButtonArray.length; i++) { for (int j = 0; j <
  * runeButtonArray.length; j++) { buttonList.add(runeButtonArray[i][j] = new
- * GuiButtonTextured(GUI_Chisel, inc, left + guiWidth - (guiWidth - 75 - (i *
+ * HLButtonTextured(GUI_Chisel, inc, left + guiWidth - (guiWidth - 75 - (i *
  * 8)), top + guiHeight - (163 - (j * 8)), 8, 8, 176, 0, false, null, null));
  * inc++; } } for (int l = 0; l < runeButtonArray.length; l++) { for (int m = 0;
  * m < runeButtonArray.length; m++) { for (int k = 0; k <
