@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.common.entity.lord.EntityXanthousKing;
+import com.vincenthuto.hutoslib.client.HLClientUtils;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -15,6 +16,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 // Made with Blockbench 4.2.5
 // Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
@@ -600,11 +602,63 @@ public class ModelXanthousKing extends EntityModel<EntityXanthousKing> {
 	private final ModelPart upperBody;
 
 	private final ModelPart lowerBody;
+	private final ModelPart head;
+	private final ModelPart fLLeg;
+	private final ModelPart fLTibia;
+	private final ModelPart bLLeg;
+	private final ModelPart bLTibia;
+	private final ModelPart fRLeg;
+	private final ModelPart fRTibia;
+	private final ModelPart bRLeg;
+	private final ModelPart bRTibia;
+	private final ModelPart bLFemur;
+	private final ModelPart bRFemur;
+	private final ModelPart fLFemur;
+	private final ModelPart fRFemur;
+	private final ModelPart topJaw;
+	private final ModelPart bottomJaw;
+	private final ModelPart tail;
+	private final ModelPart tail2;
+	private final ModelPart tail3;
+	private final ModelPart tail4;
+	private final ModelPart tail5;
 
 	public ModelXanthousKing(ModelPart root) {
 		this.whole = root.getChild("whole");
 		this.upperBody = root.getChild("upperBody");
 		this.lowerBody = root.getChild("lowerBody");
+		ModelPart hasturForm = this.upperBody.getChild("hasturForm");
+		this.head = hasturForm.getChild("head");
+
+		this.fLLeg = this.lowerBody.getChild("fLLeg");
+		ModelPart fLHip = this.fLLeg.getChild("fLHip");
+		this.fLFemur = fLHip.getChild("fLFemur");
+		this.fLTibia = this.fLFemur.getChild("fLTibia");
+
+		this.bLLeg = this.lowerBody.getChild("bLLeg");
+		ModelPart bLHip = this.bLLeg.getChild("bLHip");
+		this.bLFemur = bLHip.getChild("bLFemur");
+		this.bLTibia = this.bLFemur.getChild("bLTibia");
+
+		this.fRLeg = this.lowerBody.getChild("fRLeg");
+		ModelPart fRHip = this.fRLeg.getChild("fRHip");
+		this.fRFemur = fRHip.getChild("fRFemur");
+		this.fRTibia = this.fRFemur.getChild("fRTibia");
+
+		this.bRLeg = this.lowerBody.getChild("bRLeg");
+		ModelPart bRHip = this.bRLeg.getChild("bRHip");
+		this.bRFemur = bRHip.getChild("bRFemur");
+		this.bRTibia = this.bRFemur.getChild("bRTibia");
+
+		ModelPart jaw2 = this.lowerBody.getChild("jaw2");
+		this.topJaw = jaw2.getChild("topJaw");
+		this.bottomJaw = jaw2.getChild("bottomJaw");
+
+		this.tail = this.lowerBody.getChild("tail");
+		this.tail2 = this.tail.getChild("tail2");
+		this.tail3 = this.tail2.getChild("tail3");
+		this.tail4 = this.tail3.getChild("tail4");
+		this.tail5 = this.tail4.getChild("tail5");
 	}
 
 	@Override
@@ -616,6 +670,39 @@ public class ModelXanthousKing extends EntityModel<EntityXanthousKing> {
 
 	@Override
 	public void setupAnim(EntityXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		netHeadYaw = Mth.wrapDegrees(netHeadYaw);
+		float frame = entity.tickCount + HLClientUtils.getPartialTicks();
+		this.head.xRot = headPitch * ((float) Math.PI / 180F) * 0.5f;
+		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F) * 0.5f;
 
+		this.fLLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.fLTibia.xRot = Math
+				.abs(Mth.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.bLLeg.xRot = Mth.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.bLTibia.xRot = Math
+				.abs(Mth.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.fRLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.fRTibia.xRot = Math
+				.abs(Mth.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.bRLeg.xRot = Mth.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 2;
+		this.bRTibia.xRot = Math
+				.abs(Mth.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+/*
+		this.fLArm.rotateAngleX = -(float) (Math.cos((frame) * 0.13f) * 0.0325);
+		this.fRArm.rotateAngleX = -(float) (Math.sin((frame) * 0.13f) * 0.0325);*/
+
+		this.bLFemur.xRot = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.bRFemur.xRot = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.fLFemur.xRot = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.fRFemur.xRot = -(float) (Math.sin((frame) * 0.13f) * 0.0325);
+
+		this.topJaw.xRot = -(float) (Math.sin((frame) * 0.13f) * 0.0725);
+		this.bottomJaw.xRot = (float) (Math.sin((frame) * 0.13f) * 0.0725);
+
+		this.tail.yRot = (float) (Math.sin((frame) * 0.13f) * 0.0325);
+		this.tail2.yRot = -(float) (Math.sin((frame) * 0.13f) * 0.12325);
+		this.tail3.yRot = (float) (Math.sin((frame) * 0.13f) * 0.1225);
+		this.tail4.yRot = -(float) (Math.sin((frame) * 0.13f) * 0.1325) + 45;
+		this.tail5.yRot = -(float) (Math.sin((frame) * 0.13f) * 0.12325) + 45;
 	}
 }

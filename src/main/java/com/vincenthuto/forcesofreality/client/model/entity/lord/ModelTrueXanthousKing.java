@@ -8,8 +8,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
 import com.vincenthuto.forcesofreality.common.entity.lord.EntityTrueXanthousKing;
+import com.vincenthuto.hutoslib.client.HLClientUtils;
 
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.util.Mth;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -241,12 +243,36 @@ public class ModelTrueXanthousKing extends EntityModel<EntityTrueXanthousKing> {
 		return LayerDefinition.create(meshdefinition, 512, 512);
 	}
 	private final ModelPart whole;
-
 	private final ModelPart upperBody;
+	private final ModelPart head;
+	private final ModelPart body;
+	private final ModelPart rightArm;
+	private final ModelPart leftArm;
+	private final ModelPart rightLeg;
+	private final ModelPart rightLeg2;
+	private final ModelPart leftLeg;
+	private final ModelPart leftLeg2;
+	private final ModelPart cape;
+	private final ModelPart bone3;
+	private final ModelPart cape2;
+	private final ModelPart bone2;
 
 	public ModelTrueXanthousKing(ModelPart root) {
 		this.whole = root.getChild("whole");
 		this.upperBody = root.getChild("upperBody");
+		ModelPart hasturForm = this.upperBody.getChild("hasturForm");
+		this.head = hasturForm.getChild("head");
+		this.body = hasturForm.getChild("body");
+		this.rightArm = this.body.getChild("rightArm");
+		this.leftArm = this.body.getChild("leftArm");
+		this.rightLeg = this.body.getChild("rightLeg");
+		this.rightLeg2 = this.rightLeg.getChild("rightLeg2");
+		this.leftLeg = this.body.getChild("leftLeg");
+		this.leftLeg2 = this.leftLeg.getChild("leftLeg2");
+		this.cape = this.body.getChild("cape");
+		this.bone3 = this.cape.getChild("bone3");
+		this.cape2 = this.bone3.getChild("cape2");
+		this.bone2 = this.cape2.getChild("bone2");
 	}
 
 	@Override
@@ -259,6 +285,31 @@ public class ModelTrueXanthousKing extends EntityModel<EntityTrueXanthousKing> {
 	@Override
 	public void setupAnim(EntityTrueXanthousKing entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
 			float headPitch) {
+		netHeadYaw = Mth.wrapDegrees(netHeadYaw);
+		float frame = entity.tickCount + HLClientUtils.getPartialTicks();
 
+		// Head
+		this.head.xRot = headPitch * ((float) Math.PI / 180F) * 0.75f;
+		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F) * 0.75f;
+
+		// Arms
+		this.rightArm.xRot = (float) (Math.sin((frame) * 0.04f) * 0.0325)
+				+ Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F;
+		this.leftArm.xRot = Mth.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F;
+		this.rightArm.zRot = (float) Math.abs(((Math.cos((frame) * 0.04f) * 0.0525) + Math.toRadians(22.5)));
+		this.leftArm.zRot = (float) -Math.abs(((Math.sin((frame) * 0.04f) * 0.0525) + Math.toRadians(-22.5)));
+
+		// Legs
+		this.rightLeg.xRot = Mth.cos(limbSwing * 0.9662F) * 1.4F * limbSwingAmount / 2;
+		this.rightLeg2.xRot = Math
+				.abs(Mth.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.leftLeg.xRot = Mth.cos(limbSwing * 0.9662F + (float) Math.PI) * 1.4F * limbSwingAmount / 2;
+		this.leftLeg2.xRot = Math
+				.abs(Mth.sin(limbSwing * 0.1662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		// Cape
+		this.cape.xRot = (float) Math.sin((frame) * 0.3f) * 0.05f + 05.75f;
+		this.bone3.xRot = (float) Math.sin((frame) * 0.5f) * 0.1f + 25.25f;
+		this.cape2.xRot = (float) Math.sin((frame) * 0.7f) * 0.15f + 25.25f;
+		this.bone2.xRot = (float) Math.sin((frame) * 0.8f) * 0.25f + 25.5f;
 	}
 }

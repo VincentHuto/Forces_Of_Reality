@@ -3,7 +3,9 @@ package com.vincenthuto.forcesofreality.client.model.entity.lord;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.vincenthuto.forcesofreality.ForcesOfReality;
+import com.vincenthuto.forcesofreality.client.event.ClientEvents;
 import com.vincenthuto.forcesofreality.client.model.entity.mob.anim.UzouthrhixAnimations;
+import com.vincenthuto.forcesofreality.client.render.tile.ClientTickHandler;
 import com.vincenthuto.forcesofreality.common.entity.lord.EntityUzouthrhix;
 
 import net.minecraft.client.model.HierarchicalModel;
@@ -1022,5 +1024,255 @@ public class ModelUzouthrhix extends HierarchicalModel<EntityUzouthrhix> {
 			float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 		this.animate(entity.idleAnimationState, UzouthrhixAnimations.IDLE, ageInTicks);
+		double frame = entity.tickCount + ClientTickHandler.partialTicks;
+
+		ModelPart wholeBody = this.root.getChild("wholeBody");
+		ModelPart lowerColumn = wholeBody.getChild("lowerColumn");
+		ModelPart upperColumn = lowerColumn.getChild("upperColumn");
+		ModelPart upperTorso = upperColumn.getChild("upperTorso");
+		ModelPart neck = upperTorso.getChild("neck");
+		ModelPart neck2 = neck.getChild("neck2");
+		ModelPart neck1 = neck2.getChild("neck1");
+		ModelPart lGills = neck1.getChild("lGills");
+		ModelPart rGills = neck1.getChild("rGills");
+
+		ModelPart face = neck1.getChild("face");
+		ModelPart eyes = face.getChild("eyes");
+		ModelPart eye = eyes.getChild("eye");
+		ModelPart eye2 = eyes.getChild("eye2");
+		ModelPart eye3 = eyes.getChild("eye3");
+		ModelPart eye4 = eyes.getChild("eye4");
+		ModelPart eye5 = eyes.getChild("eye5");
+		ModelPart eye6 = eyes.getChild("eye6");
+		ModelPart eye7 = eyes.getChild("eye7");
+		ModelPart eye8 = eyes.getChild("eye8");
+		ModelPart eye9 = eyes.getChild("eye9");
+		ModelPart eye10 = eyes.getChild("eye10");
+		ModelPart eye11 = eyes.getChild("eye11");
+		ModelPart eye12 = eyes.getChild("eye12");
+
+		ModelPart tentacles = face.getChild("tentacles");
+		ModelPart tent6 = tentacles.getChild("tent6");
+		ModelPart tent7 = tent6.getChild("tent7");
+		ModelPart tent8 = tent7.getChild("tent8");
+		ModelPart tent9 = tent8.getChild("tent9");
+		ModelPart tent10 = tent9.getChild("tent10");
+		ModelPart tent22 = tentacles.getChild("tent22");
+		ModelPart tent23 = tent22.getChild("tent23");
+		ModelPart tent24 = tent23.getChild("tent24");
+		ModelPart tent25 = tent24.getChild("tent25");
+		ModelPart tent26 = tent25.getChild("tent26");
+		ModelPart tent2 = tentacles.getChild("tent2");
+		ModelPart tent3 = tent2.getChild("tent3");
+		ModelPart tent4 = tent3.getChild("tent4");
+		ModelPart tent5 = tent4.getChild("tent5");
+		ModelPart tent11 = tent5.getChild("tent11");
+		ModelPart tent12 = tentacles.getChild("tent12");
+		ModelPart tent13 = tent12.getChild("tent13");
+		ModelPart tent14 = tent13.getChild("tent14");
+		ModelPart tent15 = tent14.getChild("tent15");
+		ModelPart tent16 = tent15.getChild("tent16");
+		ModelPart tent17 = tentacles.getChild("tent17");
+		ModelPart tent18 = tent17.getChild("tent18");
+		ModelPart tent19 = tent18.getChild("tent19");
+		ModelPart tent20 = tent19.getChild("tent20");
+		ModelPart tent21 = tent20.getChild("tent21");
+
+		ModelPart body = upperTorso.getChild("body");
+		ModelPart backEye = body.getChild("backEye");
+		ModelPart backEye2 = body.getChild("backEye2");
+		ModelPart backEye3 = body.getChild("backEye3");
+		ModelPart backEye4 = body.getChild("backEye4");
+		ModelPart backEye5 = body.getChild("backEye5");
+		ModelPart backEye6 = body.getChild("backEye6");
+
+		ModelPart leftArm = body.getChild("leftArm");
+		ModelPart lShoulder = leftArm.getChild("lShoulder");
+		ModelPart lBicep = lShoulder.getChild("lBicep");
+		ModelPart lElbow = lBicep.getChild("lElbow");
+		ModelPart lFore = lElbow.getChild("lFore");
+		ModelPart lHand = lFore.getChild("lHand");
+		ModelPart lLowerClaw = lHand.getChild("lLowerClaw");
+
+		ModelPart rightArm = body.getChild("rightArm");
+		ModelPart rShoulder = rightArm.getChild("rShoulder");
+		ModelPart rBicep = rShoulder.getChild("rBicep");
+		ModelPart rElbow = rBicep.getChild("rElbow");
+		ModelPart rFore = rElbow.getChild("rFore");
+		ModelPart rHand = rFore.getChild("rHand");
+		ModelPart rHTent1 = rHand.getChild("rHTent1");
+		ModelPart rHTent2 = rHand.getChild("rHTent2");
+		ModelPart rHTent3 = rHand.getChild("rHTent3");
+		ModelPart rHTent4 = rHand.getChild("rHTent4");
+
+		ModelPart tail = wholeBody.getChild("tail");
+		ModelPart foot = tail.getChild("foot");
+		ModelPart bone5 = foot.getChild("bone5");
+		ModelPart bone = bone5.getChild("bone");
+		ModelPart seg10 = bone.getChild("seg10");
+		ModelPart endSeg = seg10.getChild("endSeg");
+
+		ModelPart armTent = upperTorso.getChild("armTent");
+		ModelPart shoulder = armTent.getChild("shoulder");
+		ModelPart seg3 = shoulder.getChild("seg3");
+		ModelPart bone3 = seg3.getChild("bone3");
+		ModelPart seg2 = bone3.getChild("seg2");
+		ModelPart seg1 = seg2.getChild("seg1");
+		ModelPart hand = seg1.getChild("hand");
+
+		ModelPart armTent2 = upperTorso.getChild("armTent2");
+		ModelPart shoulder2 = armTent2.getChild("shoulder2");
+		ModelPart seg4 = shoulder2.getChild("seg4");
+		ModelPart bone2 = seg4.getChild("bone2");
+		ModelPart seg5 = bone2.getChild("seg5");
+		ModelPart seg6 = seg5.getChild("seg6");
+		ModelPart hand2 = seg6.getChild("hand2");
+
+		ModelPart armTent3 = upperTorso.getChild("armTent3");
+		ModelPart shoulder3 = armTent3.getChild("shoulder3");
+		ModelPart seg7 = shoulder3.getChild("seg7");
+		ModelPart bone4 = seg7.getChild("bone4");
+		ModelPart seg8 = bone4.getChild("seg8");
+		ModelPart seg9 = seg8.getChild("seg9");
+		ModelPart hand3 = seg9.getChild("hand3");
+
+		ModelPart armTent4 = upperTorso.getChild("armTent4");
+		ModelPart shoulder4 = armTent4.getChild("shoulder4");
+		ModelPart seg11 = shoulder4.getChild("seg11");
+		ModelPart bone6 = seg11.getChild("bone6");
+		ModelPart seg12 = bone6.getChild("seg12");
+		ModelPart seg13 = seg12.getChild("seg13");
+		ModelPart hand4 = seg13.getChild("hand4");
+
+		lGills.yRot = (float) Math.abs((Math.cos((frame) * 0.5f) * 0.1325));
+		rGills.yRot = (float) Math.abs((Math.cos((frame) * 0.5f) * 0.1325));
+		lGills.xRot = (float) Math.abs((Math.cos((frame) * 0.5f) * 0.1325));
+		rGills.xRot = (float) Math.abs((Math.cos((frame) * 0.5f) * 0.1325));
+		// Upper Body
+		// this.upperTorso.rotateAngleX = (float) (Math.sin((frame) * 0.13f) * 0.0325);
+
+		// Eyes
+		eye.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye2.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye2.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye3.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye3.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye4.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye4.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye5.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye5.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye6.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye6.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye7.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye7.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye8.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye8.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye9.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye9.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye10.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye10.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye11.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye11.yRot = (float) (Math.cos((frame)) * 0.0325);
+		eye12.zRot = (float) (Math.sin((frame)) * 0.0325);
+		eye12.yRot = (float) (Math.cos((frame)) * 0.0325);
+		// cheese monke
+		// Body Eyes
+		backEye.zRot = (float) (Math.sin((frame)) * 0.0325);
+		backEye.yRot = (float) (Math.cos((frame)) * 0.0325);
+		backEye2.zRot = (float) (Math.sin((frame)) * 0.0325);
+		backEye2.yRot = (float) (Math.cos((frame)) * 0.0325);
+		backEye3.zRot = (float) (Math.sin((frame)) * 0.0325);
+		backEye3.yRot = (float) (Math.cos((frame)) * 0.0325);
+		backEye4.zRot = (float) (Math.sin((frame)) * 0.0325);
+		backEye4.yRot = (float) (Math.cos((frame)) * 0.0325);
+		backEye5.zRot = (float) (Math.sin((frame)) * 0.0325);
+		backEye5.yRot = (float) (Math.cos((frame)) * 0.0325);
+		backEye6.zRot = (float) (Math.sin((frame)) * 0.0325);
+		backEye6.yRot = (float) (Math.cos((frame)) * 0.0325);
+
+		/*
+		 * * // Left Arm this.leftArm.rotateAngleX = MathHelper.sin(limbSwing * 0.1662F
+		 * + (float) Math.PI) * 1.2F * limbSwingAmount; this.lFore.rotateAngleX =
+		 * MathHelper.cos(limbSwing * 0.1662F) * 1.2F * limbSwingAmount;
+		 * this.lHand.rotateAngleX = -Math .abs(MathHelper.sin(limbSwing * 0.1662F +
+		 * (float) Math.PI) * 1.2F * limbSwingAmount); // Claw
+		 * this.lLowerClaw.rotateAngleY = (float) -Math.abs((Math.cos((frame) * 0.2f) *
+		 * 0.2325));
+		 *
+		 * // Right Arm this.rightArm.rotateAngleX = -MathHelper.cos(limbSwing *
+		 * 0.1662F) * 1.2F * limbSwingAmount; this.rFore.rotateAngleX =
+		 * MathHelper.cos(limbSwing * 0.1662F) * 1.2F * limbSwingAmount;
+		 * this.rHand.rotateAngleX = -Math.abs(MathHelper.cos(limbSwing * 0.1662F) *
+		 * 1.2F * limbSwingAmount);
+		 */
+		lLowerClaw.yRot = (float) -Math.abs((Math.cos((frame) * 0.2f) * 0.2325));
+		// Right Hand Tentacles
+		rHTent1.xRot = (float) (Math.sin((frame) * 0.53f) * 0.0325) - 0.75f;
+		rHTent2.xRot = (float) (Math.sin((frame) * 0.53f) * 0.0325) - 5.5f;
+		rHTent3.xRot = (float) (Math.sin((frame) * 0.53f) * 0.0325) - 1.5f;
+		rHTent4.xRot = (float) (Math.sin((frame) * 0.53f) * 0.0325) - 2.5f;
+
+		// Foot
+		bone5.yRot = (float) Math.sin((frame) * 0.3f) * 0.05f;
+		bone.yRot = (float) Math.cos((frame) * 0.5f) * 0.1f - 44.0f;
+		seg10.yRot = (float) Math.sin((frame) * 0.6f) * 0.15f;
+		endSeg.yRot = (float) Math.cos((frame) * 0.7f) * 0.25f;
+
+		// Tentacles
+		// Face
+		tent6.xRot = (float) Math.sin((frame) * 0.3f) * 0.05f + 25.5f;
+		tent7.xRot = (float) Math.cos((frame) * 0.5f) * 0.1f + 25.7f;
+		tent8.xRot = (float) Math.sin((frame) * 0.6f) * 0.15f + 25.5f;
+		tent9.xRot = (float) Math.cos((frame) * 0.7f) * 0.25f + 25.5f;
+		tent10.xRot = (float) Math.sin((frame) * 0.8f) * 0.35f + 25.5f;
+
+		tent22.xRot = (float) Math.cos((frame) * 0.3f) * 0.05f + 25.5f;
+		tent23.xRot = (float) Math.cos((frame) * 0.5f) * 0.1f + 25.7f;
+		tent24.xRot = (float) Math.cos((frame) * 0.6f) * 0.15f + 25.5f;
+		tent25.xRot = (float) Math.cos((frame) * 0.7f) * 0.25f + 25.5f;
+		tent26.xRot = (float) Math.cos((frame) * 0.8f) * 0.35f + 25.5f;
+
+		tent2.xRot = (float) Math.sin((frame) * 0.3f) * 0.05f + 25.5f;
+		tent3.xRot = (float) Math.sin((frame) * 0.5f) * 0.1f + 25.7f;
+		tent4.xRot = (float) Math.sin((frame) * 0.6f) * 0.15f + 25.5f;
+		tent5.xRot = (float) Math.sin((frame) * 0.7f) * 0.25f + 25.5f;
+		tent11.xRot = (float) Math.sin((frame) * 0.8f) * 0.35f + 25.5f;
+
+		tent12.xRot = (float) Math.cos((frame) * 0.3f) * 0.05f + 25.5f;
+		tent13.xRot = (float) Math.sin((frame) * 0.5f) * 0.1f + 25.7f;
+		tent14.xRot = (float) Math.cos((frame) * 0.6f) * 0.15f + 25.5f;
+		tent15.xRot = (float) Math.sin((frame) * 0.7f) * 0.25f + 25.5f;
+		tent16.xRot = (float) Math.cos((frame) * 0.8f) * 0.35f + 25.5f;
+
+		tent17.xRot = (float) Math.cos((frame) * 0.3f) * 0.05f + 25.5f;
+		tent18.xRot = (float) Math.cos((frame) * 0.5f) * 0.1f + 25.7f;
+		tent19.xRot = (float) Math.sin((frame) * 0.6f) * 0.15f + 25.5f;
+		tent20.xRot = (float) Math.sin((frame) * 0.7f) * 0.25f + 25.5f;
+		tent21.xRot = (float) Math.sin((frame) * 0.8f) * 0.35f + 25.5f;
+		// Body
+		armTent.xRot = (float) Math.sin((frame) * 0.3f) * 0.05f;
+		seg3.xRot = (float) Math.sin((frame) * 0.5f) * 0.1f;
+		seg2.xRot = (float) Math.sin((frame) * 0.6f) * 0.15f;
+		seg1.xRot = (float) Math.sin((frame) * 0.7f) * 0.25f;
+		hand.xRot = (float) Math.sin((frame) * 0.8f) * 0.35f;
+
+		armTent2.xRot = (float) Math.cos((frame) * 0.3f) * 0.05f;
+		seg4.xRot = (float) Math.cos((frame) * 0.5f) * 0.1f;
+		seg5.xRot = (float) Math.cos((frame) * 0.6f) * 0.15f;
+		seg6.xRot = (float) Math.cos((frame) * 0.7f) * 0.25f;
+		hand2.xRot = (float) Math.cos((frame) * 0.8f) * 0.35f;
+
+		armTent3.xRot = (float) Math.sin((frame) * 0.3f) * 0.05f;
+		seg7.xRot = (float) Math.cos((frame) * 0.5f) * 0.1f;
+		bone4.xRot = (float) Math.sin((frame) * 0.6f) * 0.15f;
+		seg9.xRot = (float) Math.cos((frame) * 0.7f) * 0.25f;
+		hand3.xRot = (float) Math.sin((frame) * 0.8f) * 0.35f;
+
+		armTent4.xRot = (float) Math.cos((frame) * 0.3f) * 0.05f;
+		seg11.xRot = (float) Math.sin((frame) * 0.5f) * 0.1f;
+		seg12.xRot = (float) Math.cos((frame) * 0.6f) * 0.15f;
+		seg13.xRot = (float) Math.sin((frame) * 0.7f) * 0.25f;
+		hand4.xRot = (float) Math.cos((frame) * 0.8f) * 0.35f;
 	}
 }

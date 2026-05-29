@@ -16,6 +16,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class ModelLordOfTheWild extends HierarchicalModel<EntityLordOfTheWild> {
 	// This layer location should be baked with EntityRendererProvider.Context in
@@ -511,9 +512,65 @@ public class ModelLordOfTheWild extends HierarchicalModel<EntityLordOfTheWild> {
 	}
 
 	private final ModelPart wholebody;
+	private final ModelPart head;
+	private final ModelPart neck;
+	private final ModelPart bottomJaw;
+	private final ModelPart centerMane;
+	private final ModelPart mane;
+	private final ModelPart mane2;
+	private final ModelPart mane3;
+	private final ModelPart mane4;
+	private final ModelPart leftMane;
+	private final ModelPart mane5;
+	private final ModelPart mane6;
+	private final ModelPart mane7;
+	private final ModelPart mane8;
+	private final ModelPart rightMane;
+	private final ModelPart mane9;
+	private final ModelPart mane10;
+	private final ModelPart mane11;
+	private final ModelPart mane12;
+	private final ModelPart bLLeg;
+	private final ModelPart bRLeg;
+	private final ModelPart bLTibia;
+	private final ModelPart bRTibia;
 
 	public ModelLordOfTheWild(ModelPart root) {
 		this.wholebody = root.getChild("wholebody");
+
+		ModelPart neck = this.wholebody.getChild("neck");
+		this.neck = neck;
+		this.head = neck.getChild("head");
+
+		this.centerMane = this.head.getChild("centerMane");
+		this.mane = this.centerMane.getChild("mane");
+		this.mane2 = this.mane.getChild("mane2");
+		this.mane3 = this.mane2.getChild("mane3");
+		this.mane4 = this.mane3.getChild("mane4");
+
+		this.leftMane = this.head.getChild("leftMane");
+		this.mane5 = this.leftMane.getChild("mane5");
+		this.mane6 = this.mane5.getChild("mane6");
+		this.mane7 = this.mane6.getChild("mane7");
+		this.mane8 = this.mane7.getChild("mane8");
+
+		this.rightMane = this.head.getChild("rightMane");
+		this.mane9 = this.rightMane.getChild("mane9");
+		this.mane10 = this.mane9.getChild("mane10");
+		this.mane11 = this.mane10.getChild("mane11");
+		this.mane12 = this.mane11.getChild("mane12");
+
+		this.bottomJaw = this.head.getChild("bottomJaw");
+
+		// Back legs
+		this.bLLeg = this.wholebody.getChild("bLLeg");
+		ModelPart bLHip = this.bLLeg.getChild("bLHip");
+		ModelPart bLFemur = bLHip.getChild("femur");
+		this.bLTibia = bLFemur.getChild("bLTibia");
+
+		this.bRLeg = this.wholebody.getChild("bRLeg");
+		ModelPart bRHip = this.bRLeg.getChild("bRHip");
+		this.bRTibia = bRHip.getChild("bRTibia");
 	}
 
 	@Override
@@ -531,6 +588,38 @@ public class ModelLordOfTheWild extends HierarchicalModel<EntityLordOfTheWild> {
 	public void setupAnim(EntityLordOfTheWild entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.idleAnimationState, LordOfTheWildAnimations.IDLE, ageInTicks);
+//		this.animate(entity.idleAnimationState, LordOfTheWildAnimations.IDLE, ageInTicks);
+
+		float parTicks = ageInTicks;
+
+		this.head.xRot = headPitch * ((float) Math.PI / 180F);
+		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F)/1.5f;
+		this.neck.yRot = netHeadYaw * ((float) Math.PI / 180F)/1.5f;
+		this.bottomJaw.xRot = limbSwingAmount * 0.73f;
+
+		this.centerMane.xRot = (float) Math.cos((parTicks)*0.3f) *0.05f;
+		this.mane.xRot = (float) Math.sin((parTicks)*0.5f) *0.1f -44.5f;
+		this.mane2.xRot = (float) Math.cos((parTicks)*0.6f) *0.15f;
+		this.mane3.xRot = (float) Math.sin((parTicks)*0.7f) *0.25f;
+		this.mane4.xRot = (float) Math.cos((parTicks)*0.8f) *0.35f;
+
+		this.leftMane.xRot = (float) Math.sin((parTicks)*0.3f) *0.05f;
+		this.mane5.xRot = (float) Math.cos((parTicks)*0.5f) *0.1f -44.0f;
+		this.mane6.xRot = (float) Math.sin((parTicks)*0.6f) *0.15f;
+		this.mane7.xRot = (float) Math.sin((parTicks)*0.7f) *0.25f;
+		this.mane8.xRot = (float) Math.cos((parTicks)*0.8f) *0.25f;
+
+		this.rightMane.xRot = (float) Math.sin((parTicks)*0.3f) *0.05f;
+		this.mane9.xRot = (float) Math.cos((parTicks)*0.5f) *0.1f -44.0f;
+		this.mane10.xRot = (float) Math.sin((parTicks)*0.6f) *0.15f;
+		this.mane11.xRot = (float) Math.cos((parTicks)*0.7f) *0.25f;
+		this.mane12.xRot = (float) Math.sin((parTicks)*0.8f) *0.35f;
+
+		// Back legs
+		this.bLLeg.xRot = -Mth.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.2F * limbSwingAmount;
+		this.bRLeg.xRot = Mth.sin(limbSwing * 0.1662F) * 1.2F * limbSwingAmount;
+		//ABS makes it so the Knees dont swing forward
+		this.bLTibia.xRot = Math.abs(Mth.cos(limbSwing * 0.1662F + (float) Math.PI) * 1.5F * limbSwingAmount);
+		this.bRTibia.xRot = Math.abs(Mth.cos(limbSwing * 0.1662F) * 1.5F * limbSwingAmount);
 	}
 }
